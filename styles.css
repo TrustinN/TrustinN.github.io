@@ -1,3 +1,23 @@
+.links-list a {
+    background-color: #6baefa;
+    color: #fff;
+    padding: 1em 2em;
+    text-decoration: none;
+    display: inline-flex;
+}
+
+.links-list a:hover {
+    background-color: #42aefa;
+    color: #fff;
+}
+
+nav ul li {
+    float: left;
+    margin: 10px;
+    list-style: none;
+}
+
+
 
 
 
