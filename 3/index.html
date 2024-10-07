@@ -14,12 +14,15 @@
                 <img src="./media/KeyPointsPart1.png" alt="keypoints" width="600"></img>
             </p>
             <p>
-                In selecting the keypoints, I had to make sure that close keypoints were not colinear to ensure that there was a triangulation. Also important was ensuring that the resulting triangles would not contain more than two elements. For example, if a triangle corresponding to the first image captured some of the hair and the background while the other did not, a fragment of the hair would morph inconsitantly with the rest of the hair. Finally, keypoints were set in the corners to ensure that the entire image was morphed and not just the head.
+                In selecting the keypoints, I had to make sure that close keypoints were not colinear to ensure that there was a triangulation. Also important was ensuring that the resulting triangles well partitioned the image such that no two different elements were in the same triangle. For example, if a triangle corresponding to the first image captured some of the hair and the background while the other did not, a fragment of the hair would morph inconsitantly with the rest of the hair. Finally, keypoints were set in the corners to ensure that the entire image was morphed and not just the head.
+            </p>
+            <p>
+                <img src="./media/morphDelaunay.png" alt="keypoints" width="600"></img>
             </p>
         </div>
         <div class="centered">
             <h2>Computing the Midway Face</h2>
-            <div style="display:inline-block; float:left; width:60%">
+            <div>
                 <p>
                     To get the midway face, the average of the keypoints were first calculated to determine the keypoints on the midway face. Delauney triangulation gave triangles that indexed into both the keypoints for the midway face along with the keypoints for the two images to be morphed. Using this, the affine transformation for mapping the midway triangle's vertices on each of the two image's triangle's vertices could be computed. This allowed me to pull the rgb pixel values from both the source images, interpolated, to set in the midway image's triangle.
 
@@ -27,10 +30,7 @@
                 </p>
             </div>
             <div>
-                <p>
-                    <img src="./media/MidwayFace.png" alt="midwayFace" width="40%"></img>
-                </p>
-                <br/>
+                <img src="./media/MidwayFace.png" alt="midwayFace"></img>
             </div>
         </div>
 
@@ -59,19 +59,19 @@
                 <img src="./media/AverageSmilingFace.png" alt="AverageSmilingFace" width="45%"></img>
             </p>
             <p>
-                To morph a given face, f, and its keypoints, f_k, to the average face, I used the same method for computing the midway face. Using the average keypoints computed for the average face, I got data for it by interpolating from the data given on the triangles <code>f[f_k[simplex]]</code>. Here are some results:
+                To morph a given face, f, and its keypoints, f_k, to the average face, I used the same method for computing the midway face. Using the average keypoints computed for the average face, I got data for it by interpolating from the data given on the triangles <code>f[f_k[simplex]]</code>. Here are some results, where the images are shown in pairs. The left image is the original and the right is the image morphed to the average:
             </p>
             <p>
-                <img src="./media/SampleNeutralFace.png" alt="SampleNeutralFace" width="45%"></img>
-                <img src="./media/SampleFaceMorphedToAverage.png" alt="SampleFaceMorphedToAverage" width="45%"></img>
+                <img src="./media/SampleMorphedToAvg.png" alt="SampleMorphs"></img>
             </p>
             <p>
-                Here is an example of my face morphed to the average and the average morphed to my face:
+                Using the annotatations for the image, I labelled my face with keypoints in the same order. I noticed that there were some keypoints missing for the top of the forehead, so I added them to get more accurate results. Here are pictures of my face morphed to the average and the average morphed to my face:
             <p>
             <p>
-                <img src="./media/KeyPointsPart2.png" alt="Keypoints2" width="45%"></img>
-                <img src="./media/AverageToMyFace.png" alt="MeanFaceMorphedToMyFace" width="45%"></img>
-                <img src="./media/MyFaceToAverage.png" alt="MyFaceMorphedToAverage" width="45%"></img>
+                <img src="./media/AvgAndMyFaceKp.png" alt="AverageAnyMyFaceKp" width="45%"></img>
+                <img src="./media/NewAvgAndMyFaceKp.png" alt="NewAverageAnyMyFaceKp" width="45%"></img>
+                <img src="./media/NewAvgAndMyFaceDelaunay.png" alt="NewAverageAnyMyFaceDelaunay" width="45%"></img>
+                <img src="./media/MyFaceAvgMorphs.png" alt="MyFaceAvgMorphs" width="45%"></img>
             </p>
 
         </div>
@@ -79,11 +79,10 @@
         <div class="centered">
             <h2>Caricature</h2>
             <p>
-                To get a caricature I extrapolated data from the mean. I took a difference <code>myface - mean = diff</code> and for <code>alpha > 1</code> or <code>alpha <0 </code>, I computed <code> alpha * mean + (1 - alpha) * myface</code>. Here are two results:
+                To get a caricature I extrapolated data from the mean. I took a difference <code>myface - mean = diff</code> and for <code>alpha > 1</code> or <code>alpha <0 </code>, I computed <code> alpha * mean + (1 - alpha) * myface</code>.
             </p>
             <p>
-                <img src="./media/Caricature1K2dot0.png" alt="Caricature1" width="45%"></img>
-                <img src="./media/Caricature2K1dot2.png" alt="Caricature2" width="45%"></img>
+                <img src="./media/Caricature1.png" alt="Caricature1"></img>
             </p>
         </div>
     </body>
