@@ -91,6 +91,43 @@
           />
         </div>
       </div>
+      <div>
+        <h2>Rectification</h2>
+        <p>
+          One interesting application of image warping by homography is to
+          emulate a snapshot of the image from a different perspective. In
+          changing the camera angle via homography, we attempt to capture the
+          pixels outside the image, and therefore, the image is shifted further
+          to the peripheral making it seem distorted. This is why rectification
+          will work well when dealing with small shifts in the perspective. Here
+          are some examples that I ran my code on:
+        </p>
+        <p>Here is a change in perspective for a top down view of the book:</p>
+        <div>
+          <img
+            src="./media/Part1/rectified/book_original.png"
+            style="width: 49%"
+          />
+          <img
+            src="./media/Part1/rectified/book_rectified.png"
+            style="width: 49%"
+          />
+        </div>
+        <p>
+          This is an attempt at seeing what the other street name was on the
+          stop sign
+        </p>
+        <div>
+          <img
+            src="./media/Part1/rectified/sign_original.png"
+            style="width: 49%"
+          />
+          <img
+            src="./media/Part1/rectified/sign_rectified.png"
+            style="width: 49%"
+          />
+        </div>
+      </div>
 
       <div>
         <h2>Image Mosaic</h2>
@@ -131,31 +168,32 @@
           Then for the blending, notice that image \(A\) captures the scene more
           accurately the closer the pixels are to the center of image \(A\). The
           same goes for image \(B\). So to get a blend, a linear interpolation
-          between their centers can be calculated through a mask. The output
-          image is given by \begin{equation*} \text{mosaic} = \text{mask} \cdot
-          \text{dominantA} + (1 - \text{mask}) \cdot \text{dominantB}
-          \end{equation*} Here is an iterative approach to the blending:
+          between their centers can be calculated (through griddata) and put
+          into a mask. The output image is given by \begin{equation*}
+          \text{mosaic} = \text{mask} \cdot \text{dominantA} + (1 - \text{mask})
+          \cdot \text{dominantB} \end{equation*} Here is an iterative approach
+          to the blending:
         </p>
         <div>
           <img
-            src="./media/Part1/blending/blend0.png"
+            src="./media/Part1/blending/blend0.jpeg"
             alt="blend0"
             style="width: 45%"
           />
           <img
-            src="./media/Part1/blending/blend1.png"
+            src="./media/Part1/blending/blend1.jpeg"
             alt="blend1"
             style="width: 45%"
           />
         </div>
         <div>
           <img
-            src="./media/Part1/blending/blend2.png"
+            src="./media/Part1/blending/blend2.jpeg"
             alt="blend2"
             style="width: 45%"
           />
           <img
-            src="./media/Part1/blending/blend3.png"
+            src="./media/Part1/blending/blend3.jpeg"
             alt="blend3"
             style="width: 45%"
           />
