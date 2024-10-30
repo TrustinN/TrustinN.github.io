@@ -18,14 +18,24 @@ img {
   height: auto;
 }
 
-aside img {
-  width: 49%;
-  display: inline-block;
+.centered {
+  display: flex;
+  justify-content: space-evenly;
+  width: 90%;
+  height: auto;
+  margin: 2rem auto;
 }
 
-aside video {
-  width: 49%;
-  display: inline-block;
+.centered__img--single img,
+.centered__img--single video {
+  max-width: 80%;
+  height: auto;
+}
+
+.centered__img--pair img,
+.centered__img--pair video {
+  max-width: 49%;
+  height: auto;
 }
 
 body {
@@ -88,6 +98,32 @@ section {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
+aside {
+  padding: 0.5rem;
+}
+
+details {
+  font-style: normal;
+}
+
+details summary {
+  color: #333;
+  transition: all 0.25s ease-in-out;
+  font-style: italic;
+}
+
+details summary:hover {
+  color: #0056b3;
+}
+
+details[open] summary {
+  color: #0056b3;
+}
+
+details > *:not(summary) {
+  padding-left: 1rem;
+}
+
 @media screen and (min-width: 768px) {
   .header-title {
     display: none;
@@ -143,7 +179,6 @@ section {
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
-    margin-right: auto;
     margin-bottom: 1rem;
   }
 
@@ -158,7 +193,6 @@ section {
   .sidebar-nav {
     position: sticky;
     top: 30%;
-    margin-right: auto;
     padding: 1rem;
     border: 1px solid black;
     border-radius: 1rem;
@@ -173,6 +207,7 @@ section {
     display: flex;
     flex-flow: column nowrap;
     transition-duration: 0.05s;
+    list-style-type: none;
   }
 
   .sidebar-nav a {
@@ -183,8 +218,7 @@ section {
 
   .sidebar-nav a:hover,
   .sidebar-nav a:focus {
-    width: 100%;
-    height: 100%;
+    transform: scale(1.05);
   }
 
   .overview {
@@ -373,18 +407,6 @@ section {
     margin-bottom: 1rem;
     margin-inline: 2rem;
   }
-}
-
-.centered {
-  display: flex;
-  justify-content: space-evenly;
-  width: 100%;
-  height: auto;
-}
-
-.centered img {
-  max-width: 40%;
-  height: auto;
 }
 
 .figure-descriptor {

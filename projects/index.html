@@ -66,10 +66,12 @@
                 a chosen step size. Over many iterations, the tree will flood
                 the free space and a solution will be found.
               </p>
-              <img
-                src="../media/projects/rrt/RRT_extend.svg"
-                alt="rrt_extend"
-              />
+              <div class="centered centered__img--single">
+                <img
+                  src="../media/projects/rrt/RRT_extend.svg"
+                  alt="rrt_extend"
+                />
+              </div>
               <p>
                 The algorithm makes heavy use of finding the nearest neighbor to
                 the sampled point, and so spatial indexing is often used as a
@@ -79,7 +81,7 @@
                 becomes handy when dealing with meshes for fast obstacle
                 collision detection.
               </p>
-              <div class="centered">
+              <div class="centered centered__img--pair">
                 <img
                   src="../media/projects/rtree/RTree-Visualization-3D.svg.png"
                   alt="RTree Wikipedia"
@@ -92,7 +94,7 @@
                 path is not optimal in terms of length. It is also not effective
                 in maneuvering small spaces:
               </p>
-              <div class="centered">
+              <div class="centered centered__img--pair">
                 <img src="../media/projects/rrt/rrt_basic.png" alt="rrt" />
                 <img src="../media/projects/rrt/rrt_maze.png" alt="rrt_maze" />
               </div>
@@ -105,26 +107,25 @@
                 determing the parent node, and the metric used is the distance
                 from the sampled node to the root of the tree,
               </p>
-              <img
-                src="../media/projects/rrt/RRT_star_intro.svg"
-                alt="rrt_rewire"
-              />
+              <div class="centered centered__img--single">
+                <img
+                  src="../media/projects/rrt/RRT_star_intro.svg"
+                  alt="rrt_rewire"
+                />
+              </div>
               <p>
-                Overall, it was a very fun and rewarding project to work on:
+                We can see that the distance from the root to the leaf nodes are
+                shortened substantially.
               </p>
-              <div class="centered">
-                <video width="48%" autoplay muted loop playsinline>
-                  <source
-                    src="../media/projects/rrt/bto_maze_tracked.mp4"
-                    type="video/mp4"
-                  />
-                </video>
-                <video width="48%" autoplay muted loop playsinline>
-                  <source
-                    src="../media/projects/rrt/bto_rom_tracked.mp4"
-                    type="video/mp4"
-                  />
-                </video>
+              <div class="centered centered__img--pair">
+                <img
+                  src="../media/projects/rrt/rrt_star_rom.png"
+                  alt="rrt star"
+                />
+                <img
+                  src="../media/projects/rrt/rrt_star_maze.png"
+                  alt="rrt star"
+                />
               </div>
               <p>
                 There are many other variants, and here is a list and some
@@ -180,6 +181,24 @@
                   </p>
                 </details>
               </aside>
+              <p>
+                Overall, it was a very fun and rewarding project to work on.
+                Here are some cool animations of visualizing the solution path.
+              </p>
+              <div class="centered centered__img--pair">
+                <video width="48%" autoplay muted loop playsinline>
+                  <source
+                    src="../media/projects/rrt/bto_maze_tracked.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+                <video width="48%" autoplay muted loop playsinline>
+                  <source
+                    src="../media/projects/rrt/bto_rom_tracked.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
               <p>
                 I also built a GUI for visualization of the solution path,
                 obstacles, and underlying data structures, which can be found on
