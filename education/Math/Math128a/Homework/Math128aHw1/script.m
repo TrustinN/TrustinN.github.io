@@ -1,0 +1,1 @@
+a = vpa(bisection(@myfunc, 0, 0.5, 0.00001));

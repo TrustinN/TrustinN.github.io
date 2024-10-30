@@ -1,0 +1,144 @@
+%! TeX root = Downloads/Berkeley/Math/Math104/Homework/Math104Hw12/Math104Hw12.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math104Hw12}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Let $f(x) = \lvert x \rvert + \lvert x - 2 \rvert, x \in \mathbb{R}$. Find points where $f$ is not differentiable.
+    \begin{proof}
+        Notice that $f(x)$ is not differentiable at $0$ or $2$. This is because $f(x)$ on the domain $x \in \{ 0\}$ has the property:
+            \begin{equation*}
+                f(x) = \lvert x - 2\rvert
+            \end{equation*}
+        and $f(x)$ restricted to the domain $x \in \{ 2\}$ is just $\lvert x \rvert$.
+
+        Furthermore, we know that $\lvert x \rvert$ is differentiable everywhere else besides $0$ and $\lvert x - 2 \rvert$ is differentiable everywhere else but $2$. The sum of two differentiable functions is differentiable, so $f(x)$ is differentiable on $\mathbb{R}\backslash \{ 0, 2\}$.
+    \end{proof}
+
+\textbf{Exercise 2}: Let $f(x) = x^{2}\sin{1/x}$ when $x \neq 0$, $f(0) = 0$. For any $a \neq 0$, find $f^{\prime}(a)$.
+    \begin{proof}
+        Let $g(x) = x^{2}$ and $h(x) = \sin{\frac{1}{x}}$. Then use the product rule:
+            \begin{equation*}
+                f^{\prime}(x) = g^{\prime}(x)h(x) + g(x)h^{\prime}(x)
+            \end{equation*}
+        Then use chain rule on $h(x)$:
+            \begin{equation*}
+                h^{\prime}(x) = -\dfrac{1}{x^{2}}\cos{\dfrac{1}{x}}
+            \end{equation*}
+        So we have:
+            \begin{equation*}
+                f^{\prime}(x) = 2x\sin{\dfrac{1}{x}} - \cos{\dfrac{1}{x}}
+            \end{equation*}
+        and then we evaluate at $a$:
+            \begin{equation*}
+                f^{\prime}(a) = 2a\sin{\dfrac{1}{a}} - \cos{\dfrac{1}{a}}
+            \end{equation*}
+        so we are done.
+    \end{proof}
+
+\textbf{Exercise 3}: In $Q2$, use the definition to find $f^{\prime}(0)$ and show that $f^{\prime}$ is not continuous at $0$.
+    \begin{proof}
+        We need to see if
+            \begin{equation*}
+                \lim\limits_{x \to 0^{+}}\dfrac{f(x) - f(0)}{x - 0} = \lim\limits_{x \to 0^{-}} \dfrac{f(x) - f(0)}{x - 0}
+            \end{equation*}
+        with
+            \begin{equation*}
+                \dfrac{f(x) - f(0)}{x - 0} = \dfrac{f(x)}{x} = \dfrac{x^{2}\sin{1/x}}{x} = x\sin{\dfrac{1}{x}}
+            \end{equation*}
+        Then the derivative is $0$ because that is the left side and right side limit and $-1 \leq \sin{\frac{1}{x}} \leq 1$. But it is not continuous because we require:
+            \begin{equation*}
+                \lim\limits_{x \to 0}x\sin{\dfrac{1}{x}} \neq 0\sin{\dfrac{1}{0}}
+            \end{equation*}
+        where $\frac{1}{0}$ is undefined.
+    \end{proof}
+
+\textbf{Exercise 4}: Prove that $\lvert \cos{x} - \cos{y}  \rvert \leq \lvert x - y \rvert$ for any $x, y$.
+    \begin{proof}
+        We first make a change of variables $y = x + a$:
+            \begin{equation*}
+                \lvert \cos{x} - \cos{(x + a)} \rvert \leq  \lvert  a \rvert
+            \end{equation*}
+        is what we want to prove. In other words, the function $f_{a}(x) = \cos{x} - \cos{x + a}$ is bounded by $a$:
+            \begin{equation*}
+                -a \leq f_{a}(x) \leq a
+            \end{equation*}
+        Take the derivative:
+            \begin{equation*}
+                f^{\prime}_{a}(x) = \sin{(x + a)} - \sin{x}
+            \end{equation*}
+        We see that
+            \begin{equation*}
+                f^{\prime}_{a}(x) = 0
+            \end{equation*}
+        when 
+            \begin{equation*}
+                \sin{(x + a)} = \sin{x}
+            \end{equation*}
+        or $(2n + 1)\pi = x + (x + a) = 2x + a$ for $n \in \mathbb{ Z}$. So we know that the maximum and minimum values are at $x = \frac{(2n + 1)\pi - a}{2}$. So we plug this back into $f_{a}(x)$:
+            \begin{align*}
+                f_{a}\left(\dfrac{(2n + 1)\pi - a}{2}\right) &= \cos{\left(\dfrac{(2n + 1)\pi}{2} - \dfrac{a}{2}\right)} - \cos{\left(\dfrac{(2n - 1)\pi}{2} + \dfrac{a}{2}\right)} \\
+                                                             &= \sin{\left(\dfrac{-a}{2}\right)} - \sin{\left(\dfrac{a}{2}\right)} \\
+                                                             &= -2\sin{\left(\dfrac{a}{2}\right)} \\
+                                                             &= -4 \sin{\left(\dfrac{a}{4}\right)} \cos{\left(\dfrac{a}{4}\right)}
+            \end{align*}
+        With $\lvert \sin{x} \rvert \leq  \lvert  x \rvert$, we have 
+            \begin{equation*}
+                \lvert f_{a}(x) \rvert \leq  4 \left\lvert \sin{\left(\dfrac{a}{4}\right)} \right\rvert \left\lvert  \cos{\left(\dfrac{a}{4}\right)} \right\rvert \leq  4 \left\lvert \dfrac{a}{4} \right\rvert \leq  \lvert a \rvert
+            \end{equation*}
+        which concludes the proof.
+    \end{proof}
+
+\textbf{Exercise 5}: Assume that $f$ is differentiable on $\mathbb{R}$ such that $f(0) = 0$, $f(1) = 1$, $f(2) = 1$. Show that $\exists x \in (0, 2)$ such that $f^{\prime}(x) = \frac{1}{10}$. 
+    \begin{proof}
+        By the MVT, we know that there exists an $a_{1} \in ( 0, 1)$ such that 
+            \begin{equation*}
+                f^{\prime}(a_{1}) = \dfrac{f(1) - f(0)}{1 - 0} = 1
+            \end{equation*}
+        We also know that there is an $a_{2} \in ( 1, 2)$ such that 
+            \begin{equation*}
+                f^{\prime}(a_{2}) = \dfrac{f(2) - f(1)}{2 - 1} = 0
+            \end{equation*}
+        Since $f^{\prime}(a_{2}) < \frac{1}{10} < f^{\prime}(a_{1})$ by the IVT for derivatives, there is some $a_{1} < x <  a_{ 2}$ such that $f^{\prime}(x) = \frac{1}{10}$.
+    \end{proof}
+
+\textbf{Exercise 6}: Show that $\frac{x}{\sin{x}}$ is strictly increasing on $(0, \pi/2)$.
+    \begin{proof}
+        We take the derivative, which is possible because $x, \sin{x}$ are differentiable. Since $\sin{x} \neq 0$ for $x \in ( 0, \pi/2)$, we have:
+            \begin{equation*}
+                \left(\dfrac{x}{\sin{x}}\right)^{\prime} = \dfrac{\sin{x} - x\cos{x}}{\sin^{2}{x}}
+            \end{equation*}
+        Now, $\sin^{2}{x} > 0$. We require that $\sin{x} - x\cos{x} \geq 0$. Consider the derivative:
+            \begin{equation*}
+                \cos{x} - (\cos{x} -x\sin{x}) = x\sin{x}
+            \end{equation*}
+        This is positive on $(0, \pi/2)$, then since $\sin{x} - x\cos{x}$ is $0$ at $x = 0$, we have that $\sin{x} - x\cos{x} > 0$ for $x \in  ( 0, \pi/2)$. So the derivative of $\frac{x}{\sin{x}}$ is greater than $0$, which shows that it is strictly increasing on $(0, \pi/2)$.
+    \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

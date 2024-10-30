@@ -1,0 +1,182 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math104/Homework/Math104Hw8/Math104Hw8.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math104Hw8}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Use the $\varepsilon-\delta$ definition to show that $f(x) = x^{2}$ is uniformly continuous on $[0, 1]$.
+    \begin{proof}
+        We want to show that $\forall \varepsilon> 0$, there $\exists \delta> 0$ such that if
+            \begin{equation*}
+                \lvert x - y \rvert< \delta
+            \end{equation*}
+        then
+            \begin{equation*}
+                \lvert f(x) - f(y) \rvert< \varepsilon
+            \end{equation*}
+        Then we have
+            \begin{align*}
+                \lvert f(x) - f(y) \rvert &=     \lvert x^{2} - y^{2} \rvert              \\
+                                          &=     \lvert  x - y \rvert \lvert x + y \rvert \\
+                                          & \leq  2\lvert x - y \rvert                      
+            \end{align*}
+        which we want to be 
+            \begin{equation*}
+                2\lvert x - y \rvert < \varepsilon
+            \end{equation*}
+        So 
+            \begin{equation*}
+                \lvert x -y  \rvert< \dfrac{\varepsilon}{ 2}
+            \end{equation*}
+        and we can choose $\delta = \frac{\varepsilon}{2}$. Therefore, on the interval $[0, 1]$, we have that $\lvert f(x) - f(y) \rvert \leq 2\lvert x - y \rvert < \frac{2\varepsilon}{ 2} = \varepsilon$. Since $\delta$ does not depend on our choice of $x$, we are done.
+    \end{proof}
+
+\textbf{Exercise 2}: Show that $f(x) = x^{2}$ is not uniformly continuous on $[0, \infty)$.
+    \begin{proof}
+        Suppose for contradiction that $f$ is uniformly continuous on $[0, \infty)$. Then that means that $\forall \varepsilon> 0$, $\exists \delta > 0$ such that $\forall x, y$ where
+            \begin{equation*}
+                \lvert x - y \rvert < \delta
+            \end{equation*}
+        we have
+            \begin{equation*}
+                \lvert f(x) - f(y) \rvert < \varepsilon
+            \end{equation*}
+        Take $\varepsilon = 1$. Then there is a $\delta$ such that
+            \begin{equation*}
+                \lvert x^{2} - y^{2} \rvert < 1 
+            \end{equation*}
+        Take $y = x + \frac{\delta}{ 2}$. Then
+            \begin{equation*}
+                \lvert x - y \rvert = \lvert x - (x + \dfrac{\delta}{ 2}) \rvert = \dfrac{\delta}{ 2} < \delta
+            \end{equation*}
+        Then because it is uniformly continuous, we know that
+            \begin{equation*}
+                \lvert x^{2} - y^{2} \rvert = \lvert x^{2} - (x^{2} + \delta x + \dfrac{ \delta^{2}}{4}) \rvert  = \lvert -\delta x - \dfrac{\delta^{2}}{4} \rvert = \delta x + \dfrac{\delta^{2}}{4} < 1
+            \end{equation*}
+        But if we take
+            \begin{equation*}
+                x = \dfrac{1}{\delta}
+            \end{equation*}
+        we have a contradiction because
+            \begin{equation*}
+                \delta x + \dfrac{\delta^{2}}{4} = 1 + \dfrac{\delta^{2}}{4}  \not< 1
+            \end{equation*}
+        Since $x, y \in [0, \infty)$, $f$ is not uniformly continuous on $[0, \infty)$
+    \end{proof}
+
+\textbf{Exercise 3}: Assume that $f$ is uniformly continuous on a bounded set $S$, prove that $f(S)$ is bounded.
+    \begin{proof}
+        Pick any sequence $(s_{n}) \subseteq S$. Since the sequence is bounded, we know that it has a convergent subsequence. Then the subsequence is cauchy because it is convergent. Say that $(s_{n_{k}})$ converges to $s$. Then we know that $(f(s_{n_{k}}))$ is cauchy also by theorem $19.4$. That means that for any $\varepsilon> 0$, there is an $N$ such that $n_{k}, n_{j} > N$ for some $N$, 
+            \begin{equation*}
+                \lvert f(s_{n_{k}}) - f(s_{n_{j}}) \rvert < \varepsilon
+            \end{equation*}
+        This means that $f$ is bounded by $\varepsilon$ for elements of our sequence. Since it converges, we know that $f$ has an extension at the supremum and infimum of $S$. And therefore, for other sequences converging to elements of $s_{n_{k}}$, we know that their image is also bounded. Therefore, $f(S)$ is bounded.
+    \end{proof}
+
+\textbf{Exercise 4}: Let $f(x) = \frac{1}{(x - 1)(x - 3)^{2}}$, determine $\lim\limits_{x \to 1}f(x), \lim\limits_{x \to 2}f(x)$, $\lim\limits_{x \to 3}f(x)$.
+    \begin{proof}
+        Suppose we have a sequence $(s_{n}) \in (-\infty, 1)$ converging to $1$. Then 
+            \begin{equation*}
+                \lim\limits_{x \to 1^{-}}f(x) = \lim\limits_{n \to \infty}\dfrac{1}{(s_{n} - 1)(s_{n} - 3)^{2}}
+            \end{equation*}
+        We know that $s_{n} - 1$ as a sequence converges to $0$ and $(s_{n} - 3)$ converges to $4$. Then the denominator converges to $0$ and therefore, the fraction diverges to $-\infty$. Now if we take the interval $(1, 3)$, we see that
+            \begin{equation*}
+                \lim\limits_{x \to 1^{+}}f(x) = \lim\limits_{n \to \infty}\dfrac{1}{(t_{n} - 1)(t_{n} - 3)^{2}}
+            \end{equation*}
+        for $(t_{n}) \in (1, 3)$ converging to $1$, by similar reasoning, we get that it diverges to $\infty$. So the limit $\lim\limits_{x \to 1}f(x)$ does not exist. Now for $\lim\limits_{x \to 2}$, we see that the limit is $\frac{1}{2}$. To prove this, we need to show that for all $\varepsilon> 0$, there is a $\delta> 0$ such that if
+            \begin{equation*}
+                \lvert x - 2 \rvert< \delta
+            \end{equation*}
+        we have
+            \begin{equation*}
+                \lvert f(x) - \dfrac{1}{2} \rvert< \varepsilon
+            \end{equation*} 
+        So we have:
+            \begin{equation*}
+                \lvert \dfrac{1}{(x - 1)(x - 3)^{2}} - \dfrac{1}{2} \rvert< \varepsilon
+            \end{equation*}
+        means that
+            \begin{equation*}
+                \lvert \dfrac{2 - (x - 1)(x - 3)^{2}}{2(x - 1)(x - 3)^{2}} \rvert = \lvert \dfrac{x^{3} - 7x^{2} + 15x - 11}{2(x - 1)(x - 3)^{2}} \rvert< \varepsilon
+            \end{equation*}
+        But notice that $(x - 2)^{3} = x^{3} -2x^{2} + 4x - 8 > x^{3} - 7x^{2} + 15x - 11$ since
+            \begin{equation*}
+                5x^{2}  - 11x + 3 > 0
+            \end{equation*}
+        (Moved everything to the RHS) for when $x \geq \frac{19}{10}$. So we say that $\delta \leq\frac{19}{10}$. Then take 
+            \begin{equation*}
+                \lvert \dfrac{x^{3} - 7x^{2} + 15x - 11}{2(x - 1)(x - 3)^{2}} \rvert < \lvert \dfrac{(x - 2)^{3}}{2(x - 1)(x - 3)^{2}} \rvert < \varepsilon
+            \end{equation*}
+        Now notice that
+            \begin{equation*}
+                \lvert x - 1 \rvert \leq \lvert x - 2 \rvert + 1
+            \end{equation*}
+        and
+            \begin{equation*}
+                \lvert x - 3 \rvert \leq \lvert x - 2 \rvert + 1
+            \end{equation*}
+        by triangle inequality. So
+            \begin{equation*}
+                \lvert \dfrac{1}{(x - 1)(x - 3)^{2}} - \dfrac{1}{2} \rvert < \lvert \dfrac{(x - 2)^{3}}{2(\lvert x - 2 \rvert + 1)^{2}} \rvert < \lvert \dfrac{(x - 2)^{3}}{2(x - 2)^{2}} \rvert = \lvert \dfrac{x - 2}{2} \rvert < \varepsilon
+            \end{equation*}
+        if we have $\delta < 2\varepsilon$. So we just require $\delta < \min(\frac{19}{10}, 2\varepsilon)$. This show that the limit as $x \rightarrow 2$ is $\frac{1}{2}$ by epsilon delta property. As for the last one, we have:
+            \begin{equation*}
+                \lim\limits_{x \to 3^{-}}\dfrac{1}{(x - 1)(x - 3)^{2}} = -\infty
+            \end{equation*}
+        while 
+            \begin{equation*}
+                \lim\limits_{x \to 3^{+}}\dfrac{1}{(x - 1)(x - 3)^{2}} = \infty
+            \end{equation*}
+        because the denominator shrinks. But because the limits are not equal, the limit does not exist.
+    \end{proof}
+
+\textbf{Exercise 5}: Let $f(x) = \frac{x^{2} + 1}{x - 1}$ when $x > 0$, and $f(x) = -\cos{x}$ when $x < 0$. Does $f$ admit an extension $\tilde{f}$ on $\mathbb{R}$, which is continuous at $x = 0$? Explain why.
+    \begin{proof}
+        It admits the extension, $\tilde{f}(0) = -1$. This is because we have the limit of $\frac{x^{2} + 1}{x - 1}$ as $x \rightarrow 0^{+}$ is $-1$ while the limit as $-\cos{x}$ as $x \rightarrow 0^{-}$ is $-1$. Then since the limits from the left equals the limit from the right, we can take $\tilde{f}(0)$ to be $-1$. Since all three limits match up, $\tilde{f}$ is continuous at $0$.
+    \end{proof}
+
+\textbf{Exercise 6}: Let $f, g$ be two continuous functions on $\mathbb{R}$ so that $\lim\limits_{x \to 0^{-}}f(x) = 1$, $g(0) = 10$, $\lim\limits_{x \to 1}g(x) = 2$. Decide the value of $\lim\limits_{x \to 0}g \circ f(x)$ if it exists.
+    \begin{proof}
+        Since $f$ is continuous at $0$, we know that
+            \begin{equation*}
+                \lim\limits_{x \to 0}f(x) = f(0)
+            \end{equation*}
+        Since the limit exists, and $f$ is continuous on all of $\mathbb{R}$, we know that $f$ is defined everywhere on $\mathbb{R}$, so
+            \begin{equation*}
+                \lim\limits_{x \to 0^{-}}f(x) = \lim\limits_{x \to 0^{+}}f(x) = \lim\limits_{x \to 0}f(x) = f(0) = 1
+            \end{equation*}
+        It was proved in class that if $g$ is continuous at $f(a)$ and $\lim\limits_{x \to a}f(x)$ is finite, then
+            \begin{equation*}
+                \lim\limits_{x \to a}g \circ f(x) = g(f(a))
+            \end{equation*}
+        Since this is the case, we have
+            \begin{equation*}
+                \lim\limits_{x \to 0}g(f(x)) = g(f(0)) = g(1) = 2
+            \end{equation*}
+    \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

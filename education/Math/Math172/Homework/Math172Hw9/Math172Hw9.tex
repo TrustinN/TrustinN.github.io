@@ -1,0 +1,116 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math172/Homework/Math172Hw9/Math172Hw9.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math172Hw9}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Show that for any $n \geq 1$ there exists a set $T$ of $p(n)$ simple graphs on vertex set $[n]$ so that no two elements of $T$ are isomorphic.
+    \begin{proof}
+        We know that $p(n)$ is the number of partitions of $n$. We will show that there exists $p(n)$ graphs that are not isomorphic for a given $n$ by suggesting constructions. 
+
+        Given a partition of $n$, it is ordered $(\lambda_{1}, \lambda_{2}, \ldots, \lambda_{n})$ such that $\lambda_{i}  \geq \lambda_{i + 1}$ and that $\lambda_{1} + \lambda_{2} + \cdots + \lambda_{n} = n$. Where $\lambda_{i} \geq 0$.
+
+        Let $\lambda_{j}$ be the first index where its value is $0$. Let our graph have $j - 1$ connected components then. For the first connected component, it has $\lambda_{1}$ vertices, for the second, it has $\lambda_{2}$ vertices, $\ldots$ and so on. We connect the vertices of each connected component. If a connected component has vertices $v_{1}, v_{2}, \ldots, v_{m}$, then we consider the cycle $v_{1}, v_{2}, \ldots, v_{m}, v_{1}$. Here is an example:
+            \begin{fixedfigure}
+                \incfig{exercise1}
+            \end{fixedfigure}
+        Now we need to show that given two different partitions, they do not result in isomorphic graphs. 
+
+        Suppose that one partition $P_{1}(n)$ has more non-zero parts than another $P_{2}(n)$. Then the number of connected components in $P_{1}$ is greater than that of $P_{2}$. This makes them non-isomorphic because when constructing our bijection, we will run to a point where one cycle in one of the graphs will not correspond with another in the other graph.
+
+        If both partition has the same number of non-zero parts, but of different size, we still run into the problem that after matching as many cycles as we can, one cycle will not match with another, because they are of unequal length.
+    \end{proof}
+
+\textbf{Exercise 2}: Prove that in any simple graph with at least two vertices there are two vertices with the same degree.
+    \begin{proof}
+        Suppose that our graph has $n$ vertices. Notice that there are $n$ total possible degrees to choose from: $0, 1,  2, 3, \ldots, n - 1$, because at the very least, a vertex is connected to nothing: $\deg = 0$ or it is connected to all other vertices $\deg = n - 1$. Now we can define our graph as one of the two following.
+            \begin{itemize}
+                \item The graph has a vertex with $n - 1$ degree. Then there is no $0$ degree vertex because one vertex is connected to every other. So every vertex is of degree at least $1$. Then each vertex can be of degree $1, \ldots, n - 1$. There are are $n - 1$ possible vertices but we have $n$ vertices. Then by pigeonhole principle two vertices must share the same degree.
+
+                \item The graph has a vertex with degree $0$. Then no vertex has degree $n - 1$. So the possible degrees our vertex can take is
+                    \begin{equation*}
+                        0, 1, 2, \ldots, n - 2
+                    \end{equation*}
+                There are $n - 1$ possible degrees but $n$ vertices. By pigeonhole principle, at least two vertices share the same degree.
+            \end{itemize}
+        We have covered all cases. In each two vertices share the same degree, so we are done.
+    \end{proof}
+
+\textbf{Exercise 3}: Prove that in a simple graph $G$ there is a walk from $u$ to $v$ if and only if there is path from $u$ to $v$ (in particular, in the definition of $G$ being connected you can use paths or walks interchangeably).
+    \begin{proof}
+        ($\rightarrow$) Suppose that there is a walk $(u = v_{1}, v_{2}, \ldots, v_{n} = v)$ from $u$ to $v$. We will show that there is a path from $u$ to $v$. Suppose that there was a repeated vertex. Then let $v_{i}$ be the least index of the repeated vertex and $v_{j}$ be the largest index of our repeated vertex. Then we can cut out all the vertices in between while still maintaining a walk between $u, v$:
+            \begin{equation*}
+                (u = v_{1}, v_{2}, \ldots, v_{i}, v_{j + 1}, \ldots, v_{n} = v)
+            \end{equation*}
+        Because $v_{i} = v_{j}$, we indeed know there is an edge $\{v_{i}, v_{j + 1}\}$. Then we will only have one instance of every vertex after this process repeated on all vertices. Because all vertices are distinct, none of the edges are repeated. If an edge was repeated, say $\{v_{i}, v_{j}\}$, then we would be visiting one vertex at least twice, which is impossible, because we had already reduced the vertex sequence to only one copy of the necessary vertices. So the new sequence of vertices is a path.
+
+        ($\leftarrow$) If there is a path between $u$, $v$, then there is a walk between $u, v$. This is because if our path $P$ is $(u = v_{1}, v_{2}, \ldots, v_{n} = v)$, such that we do not use any edge or vertex more than once, then indeed, this is also a walk because it is a set of vertices and edges connecting $u, v$.
+    \end{proof}
+
+\textbf{Exercise 4}: Find all non-isomorphic simple graphs on $4$ vertices.
+    \begin{proof}
+        First we notice that at most, a graph can have total degree of $12$, because a complete graph has $6$ edges and each edge contributes to the total degree by $2$. So the types of graphs we have will have one of the total degrees: $0, 2, 4, 6, 8, 10, 12$. 
+
+        Notice that there is also a bijection between the number of graphs with total degree $k$ and graphs with total degree $12 - k$ given by taking the complement graph. So we start counting the number of graphs with degree $k$:
+            \begin{itemize}
+                \item There is $1$ graph of degree $0$ because it is the graph of no edges and all graphs with no edges are isomorphic to all other graphs with no edges.
+
+                \item There is $1$ graph of degree $2$ because we have exactly one edge. All graphs on one edge are the same as other graphs on $1$ edge. By problem $2$, we have that two vertices must have the same degree. Then there are two vertices of degree $0$ and two of degree $1$. We see there is only one such graph up to isomorphism.
+
+                \item For a graph with degree $4$, at least two vertices have the same degree, so our options are all vertices have degree $1$, two vertices have degree $2$, or one vertex has degree $2$ and two have degree $1$. Only the first and the third are valid. So there are two such graphs.
+
+                \item For a graph with degree $6$, we have a couple options. If we order the vertices by descending degree, we have:
+                    \begin{align*}
+                        1  &: 1, 1, 1, 1, 1, 1 \\
+                        2  &: 2, 1, 1, 1, 1    \\
+                        3  &: 2, 2, 1, 1       \\
+                        4  &: 2, 2, 2          \\
+                        5  &: 3, 1, 1, 1       \\
+                        6  &: 3, 2, 1          \\
+                        7  &: 3, 3             \\
+                        8  &: 4, 1, 1          \\
+                        9  &: 4, 2             \\
+                        10 &: 5, 1             \\
+                        11 &: 6                  
+                    \end{align*}
+                We can eliminate the ones that don't have at least two with the same degree:
+                    \begin{align*}
+                        1 &: 1, 1, 1, 1, 1, 1 \\
+                        2 &: 2, 1, 1, 1, 1    \\
+                        3 &: 2, 2, 1, 1       \\
+                        4 &: 2, 2, 2          \\
+                        5 &: 3, 1, 1, 1       \\
+                        6 &: 3, 3             \\
+                        7 &: 4, 1, 1            
+                    \end{align*}
+                The first two are impossible because we only have $4$ vertices. We cannot have the $6$-th one because our graph is simple. We cannot have the $7$-th because the degree of a vertex is at most $3$.  So we only have $3$ possible graphs up to isomorphism. Then the number of non-isomorphic graphs is $1 + 1 + 2 + 3 + 2 + 1 + 1 = 11$. Below is a picture of all the graphs:
+            \end{itemize}
+        \begin{fixedfigure} 
+            \incfig{exercise4}
+        \end{fixedfigure}
+    \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+

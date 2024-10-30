@@ -1,0 +1,840 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math250a/Bookwork/Algebra.tex
+
+\documentclass{report}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/report}
+
+\title{Math250a}
+\author{Trustin Nguyen}
+
+\begin{document}
+\newgeometry{
+    total={150mm,235mm},
+}
+
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+\tableofcontents
+\restoregeometry
+
+\reversemarginpar
+
+\chapter{Rings}
+
+\begin{topic}
+    \section{Rings and Homomorphisms}
+\end{topic}
+
+\begin{definition}{Rings}
+    Rings are sets that satisfy the properties:
+        \begin{itemize}
+            \item With respect to addition, $R$ is a commutative group.
+
+            \item Multiplication is associative and has a unit element.
+
+            \item For all $x, y, z$, 
+                \begin{equation*}
+                    (x + y)z = xz + yz \hspace{30pt} \text{ and } \hspace{30pt} z(x + y) = zx + zy
+                \end{equation*}
+        \end{itemize}
+\end{definition}
+
+We have that $0$ is the unit element for addition and $1$ is the unit element for multiplication. We also assume that $1 \neq 0$ and notice that $0x = 0$ for all $x \in R$, since we have $0x$ as the identity element for addition:
+    \begin{equation*}
+        0x + x = (0 + 1)x = x
+    \end{equation*}
+
+We can look at other properties such as $(-x)y = -(xy)$ which indicates additive inverses:
+    \begin{equation*}
+        (-x)y + xy = (0)y = 0 \hspace{30pt} \text{ and } \hspace{30pt} -(xy) + xy = 0
+    \end{equation*}
+
+We can also look at multiplicative inverses now. Let $U$ be the set of elements of $A$ which have right and left inverses. We note that $U$ is a multiplicative group. This is because if $b$ is a left-sided inverse and $c$ is a right-sided inverse, then we have $cab$ for any $a$ with both inverses to be: $cab = b$ and therefore, $c = b$. This is a multiplicative group where both $c, b$ are two-sided inverses and $c$ has a two-sided inverse which is $a$. This is called the group of units of $A$ or $A^{*}$. If $1 \neq 0$, and $a \in A$ is invertible, we have the division ring.
+
+Elements of a ring that are only left-invertible might not form a group.
+
+\begin{examples}
+    \begin{example}
+        \textbf{(The Shift Operator)}. Let $E$ be the set of all sequences
+            \begin{equation*}
+                a = (a_{1}, a_{2}, a_{3}, \ldots)
+            \end{equation*}
+        We define addition component wise. If $R$ is the set of all mappings $f : E \rightarrow E$, where $f(a + b) = f(a) + f(b)$, and the composition is the composition of mappings, then $R$ is a ring. 
+                \begin{proof}
+                    We should verify the properties of a ring using the fact that $f(a + b) =  f(a) + f(b)$.
+                \end{proof}
+    \end{example}
+\end{examples}
+
+\begin{definition}{Field}
+    A ring is commutative if $xy = yx$ for all $x, y \in A$. A division ring is a ring where all elements that are non-zero are invertible. So we will call a commutative division ring a field.
+\end{definition}
+
+\begin{definition}{Subring}
+     A subring is an additive subgroup of our ring that contains a multiplicative unit, closed under multiplication, addition, and is a ring. The properties of the operations is inherited from the parent ring. 
+\end{definition}
+
+\begin{definition}{Center}
+    The center of a ring $A$ is the set of $a \in A$ that commute with all other elements in $A$. In short this is:
+    \begin{equation*}
+        ar = ra \hspace{30pt} \forall r \in A
+    \end{equation*}
+\end{definition}
+
+We can try and check that this is a subring. Notice that it is closed under addition. If $a, b \in C$ where $C$ is the center of $A$:
+    \begin{equation*}
+        (a + b)r = ar + br = ra + rb = r(a + b)
+    \end{equation*}
+So $a + b \in C$. Now for multiplication:
+    \begin{equation*}
+        ab(r) = a(br) = a(rb) = (ar)b = rab = r(ab)
+    \end{equation*}
+So it is closed under multiplication. Now we just check that the units for multiplication and addition are in the center. Clearly this is true as:
+    \begin{equation*}
+        1r = r1 \hspace{30pt} \text{ and } \hspace{30pt} 0r = r0
+    \end{equation*}
+
+Two important methods in proving that a set is a subring is to show that it is associative and distributive in a general sense. We can use induction for distributivity:
+    \begin{proof}
+        Base case: We have that $x(y_1 + y_{2}) = xy_{1} + xy_{2}$.
+
+        Inductive case: Suppose that this holds for $y_{1}, \ldots, y_{n}$. We will show that this holds for $y_{n + 1}$. Note that:
+            \begin{equation*}
+                x(y_{1} + \ldots + y_{n}) = xy_{1} + \ldots + xy_{n}
+            \end{equation*}
+        Now observe that by the distributive property:
+            \begin{equation*}
+                x((y_{1} + \ldots + y_{n}) + (y_{n + 1})) = x(y_{1} + \ldots + y_{n}) + xy_{n + 1}
+            \end{equation*}
+        But we have that the first part is already calculated. Therefore:
+            \begin{equation*}
+                x(y_{1} + \ldots + y_{n} + y_{n + 1}) = xy_{1} + \ldots + xy_{n + 1}
+            \end{equation*}
+    \end{proof}
+
+The other thing to prove is that if $x_{i} (i = 1, \ldots, n)$ and $y_{j}(j = 1, \ldots, m)$ are elements of $A$, then:
+    \begin{equation*}
+        \left(\sum_{i = 1}^{n} x_{i}\right)\left(\sum_{j = 1}^{m} y_{j}\right) = \sum_{i = 1}^{n} \sum_{j = 1}^{m} x_{i}y_{j}
+    \end{equation*}
+    \begin{proof}
+        By the distributive property shown above, we have:
+            \begin{equation*}
+                \sum_{i = 1}^{n} x_{i}(y_{1} + \ldots y_{n}) = \sum_{i = 1}^{n} x_{i}y_{1} + \ldots + x_{i}y_{m}
+            \end{equation*}
+        Now we recollapse the summation to get what is desired:
+           \begin{equation*}
+                \sum_{i = 1}^{n} x_{i}y_{1} + \ldots + x_{i}y_{m} = \sum_{i = 1}^{n} \sum_{j = 1}^{m}  x_{i}y_{j}
+            \end{equation*}
+    \end{proof}
+
+We also note that distributivity holds for subtraction:
+    \begin{equation*}
+        x(y_{1} - y_{2}) = xy_{1} - xy_{2}
+    \end{equation*}
+
+\begin{examples}
+    \begin{example}
+        Let $S$ be a set and $A$ a ring. Let $\text{Map}(S, A)$ be the set of mappings of $S$ into $A$. Then $\text{Map}(S, A)$ is a ring if for $f, g \in \text{Map}(S, A)$ we define
+            \begin{equation*}
+                (fg)(x) = f(x)g(x) \hspace{30pt} \text{ and } \hspace{30pt} (f + g)(x) = f(x) + g(x)
+            \end{equation*}
+        for all $x \in S$.
+            \begin{proof}
+                Observe that by the second property:
+                    \begin{equation*}
+                        (f + g)(x) = f(x) + g(x)
+                    \end{equation*}
+                we have that the sum of two mappings takes an input $x \in A$ and gives us an output $f(x) + g(x)$ where $f(x), g(x) \in A$. Since $A$ is closed under addition, this output is also in $A$, therefore, $f + g \in A$. The same can be said for the product closure. The additive identity would be the zero map because if $f(x) = 0$ then for all $g(x) \in \text{Map}(S, A)$, we have:
+                    \begin{equation*}
+                        (f + g)(x) = f(x) + g(x) = 0 + g(x) = g(x) = (g)(x)
+                    \end{equation*}
+                similarly, we see that the product identity is just the mapping to the constant $1$ or whatever the multiplicative identity is in $A$. This is because:
+                    \begin{equation*}
+                        (fg)(x) = f(x)g(x) = 1g(x) = g(x)
+                    \end{equation*}
+                Associativity, like closure under multiplication, addition is inherited from $A$. Distributivity is trivial.
+            \end{proof}
+    \end{example}
+
+    \begin{example}
+        Let $M$ be an additive abelian group, and let $A$ be the set $\text{End}(M)$ of group-homomorphisms of $M$ into itself. If addition in $A$ is the addition of mappings and multiplication is the composition of mappings, then we have that $A$ is a ring. This can also be verified like the last exercise.
+    \end{example}
+
+    \begin{example}
+        Another example of a ring is the polynomial ring over a field with one variable.
+    \end{example}
+
+    \begin{example}
+        We also have the set of $n \times n$ matrices with components that are in a field. The units are the invertible matrices.
+    \end{example}
+
+    \begin{example}
+        If $S$ is a set and $R$ is a set of real-valued functions on $S$, then $R$ is a commutative ring. The units are functions that are nowhere 0.
+    \end{example}
+\end{examples}
+
+\begin{definition}{Convolution Product}
+    There are rings which are given by convolution. If $G$ is a group and $K$ is a field, then suppose that $K[G]$ is the set of formal linear combinations:
+        \begin{equation*}
+            \alpha = \sum_{}^{} a_{x}x
+        \end{equation*}
+    with $x \in G$ and $a_{x} \in K$, where all but a finite number of $a_{x}$ are equal to $0$. If we have a similar one:
+        \begin{equation*}
+            \beta = \sum_{}^{} b_{x}x \in K[G]
+        \end{equation*}
+    then our product is :
+        \begin{equation*}
+            \alpha\beta = \sum_{a \in G}^{} \sum_{y \in G}^{} a_{x}b_{y}xy =\sum_{z \in G}^{} \left(\sum_{xy = z}^{} a_{x}b_{y}\right)z
+        \end{equation*}
+    This makes $Z[G]$ into a group ring which is a ring. Note that $K[G]$ is commutative if and only if $G$ is commutative. In the context of functions, we have the convolution $f * g$ to be:
+        \begin{equation*}
+            (f * g)(z) = \sum_{xy = z}^{} f(x)g(y)
+        \end{equation*}
+\end{definition}
+
+\begin{definition}{Ideals}
+    A left ideal $\alpha$ of a ring $A$ is a subset that is an additive subgroup of $A$ where $A\alpha\subseteq \alpha$ or $A\alpha = \alpha$. A right ideal is defined similarly. A two-sided ideal is one that is both left and right. Consider the fact that all ideals in a commutative rings are two sided. Since we are working with commutative rings, we will just call all ideals as ideals.
+\end{definition}
+
+\begin{definition}{Principal Ideals}
+    A principal ideal is one that is generated by exactly one element.
+\end{definition}
+
+If $a_{1}, \ldots, a_{n} \in A$, then we can denote an ideal to be $(a_{1}, \ldots, a_{n})$ which by definition is:
+    \begin{equation*}
+        \{x_{1}a_{1} + \cdots + x_{n}a_{n}\} \hspace{30pt} \text{ with } \hspace{30pt} x_{i} \in A
+    \end{equation*}
+
+If $\{a_{i}\}_{i \in I}$ is a family of ideals, then the intersection is also an ideal:
+    \begin{equation*}
+        \bigcap_{i \in I}^{} a_{i}
+    \end{equation*}
+    \begin{proof}
+        This will be proved by induction. For base case, we say that the intersection of two ideals is an ideal:
+
+            We will first prove additive closure as a subgroup. Suppose that $r_{1}, r_{2} \in I_{1} \cap I_{2}$, where $I_{1}, I_{2}$ are ideals. This means that:
+                \begin{equation*}
+                    r_{1} + r_{2} \in I_{1} \hspace{30pt} \text{ and } \hspace{30pt} r_{1} + r_{2} \in I_{2}
+                \end{equation*}
+            Therefore, the sum is in the ideal $I_{1} \cap I_{2}$. As for the product, we have:
+                \begin{equation*}
+                    r_{1}r_{2} \in I_{1} \hspace{30pt} \text{ and } \hspace{30pt} r_{1}r_{2} \in I_{2}
+                \end{equation*}
+            So is is multiplicativily closed also. This is all from the property of ideals. Now suppose that we have an arbitrary $r \in R$, the parent ring. If $r_{1} \in I_{1} \cap  I_{2}$, we can say that $r_{1}r \in I_{1} \cap I_{2}$ by the property of ideals. So we have finished.
+
+            Inductive Case: Suppose we have $n$ unions of ideals. We will show that the union of $n + 1$ ideals is an ideal also. But the union of two ideals is an ideal. So by the associativity of the union operator, we are done.
+    \end{proof}
+
+Another thing to verify is that if $\alpha = (a_{1}, \ldots, a_{n})$, then $\alpha$ is the intersection of all ideals containing the elements $a_{1}, \ldots, a_{n}$.
+
+\begin{definition}{Principle Ring}
+    A principal ring is a ring where every ideal is principal.
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        Let $\mathbb{Z}$ be the ring we are working with and $\alpha$ be a proper ideal. Let $d$ be the smallest positive integer in $\alpha$. If $n \in \alpha$, then there are integers:
+            \begin{equation*}
+                n = dq + r
+            \end{equation*}
+        which gives us the division algorithm. Since $r$ is in $\alpha$, we must have that $r = 0$. So all ideals of $\mathbb{Z}$ are multiples of some integer.
+    \end{example}
+\end{examples}
+
+\begin{definition}{Product of Ideals}
+    Let $\alpha, \beta$ be ideals of $A$, then the product $\alpha\beta$ is:
+        \begin{equation*}
+            x_{1}y_{1} + \cdots + x_{n}y_{n}
+        \end{equation*}
+    the set of all sums where $x_{i} \in \alpha$ and $y_{i} \in \beta$.
+\end{definition}
+
+Another idea: Let $\alpha, \beta$ be ideals of $A$. We will say that $\alpha\beta$ is the set of all sums
+    \begin{equation*}
+        x_{1}y_{1} + \cdots + x_{n}y_{n}
+    \end{equation*} 
+for $x_{i} \in \alpha$ and $y_{i} \in \beta$. We see that $\alpha\beta$ is an ideal, because it is just the intersection of $\alpha\beta$. Clearly, all elements of that form lie in both $\alpha$ and $\beta$. Now what about the converse? Suppose $r_{1} \in \alpha, \beta$. This actually does not seem true. Perhaps only when both $\alpha$ and $\beta$ are prime ideals. Anyway, the set of these ideals is the entire ring with its unit element as the ideal $(1)$. We define the product as above if both are left ideals and associativity as the standard: $(\alpha\beta)\psi = \alpha(\beta\psi)$
+
+For the sum, we have $\alpha + \beta$ is a left ideal if both fare left ideals. Distributivity is held. Let $\alpha$ be a left ideal. Then $\alpha A$ is the set of sums $a_{1}x_{1} + \cdots + a_{n}x_{n}$. Furthermore, if $A$ is commutative, let $\alpha, \beta$ be ideals. Then:
+    \begin{equation*}
+        \alpha\beta \subseteq \alpha \cap \beta,
+    \end{equation*}
+But not necessarily equality. We showed this above. But now try and prove that if $\alpha + \beta = A$, then $\alpha\beta = \alpha \cap \beta$.
+
+\begin{definition}{Ring Homomorphisms}
+    A ring homomorphism must satisfy two properties for multiplication and addition:
+        \begin{equation*}
+            f(a + a^{\prime}) = f(a) + f(a^{\prime}) \hspace{30pt} f(aa^{\prime}) = f(a)f(a^{\prime})
+        \end{equation*}
+    This means that $f(0) = 0$ and $f(1) = 1$.
+\end{definition}
+
+\begin{definition}{Kernel}
+    The kernel of the ring homomorphism is from an additive standpoint. The kernel is an ideal.
+\end{definition} 
+
+\begin{definition}{Factor Ring}
+    The factor ring is $A/\alpha$ where $\alpha $ is an ideal. With $A$, $\alpha$ as additive rings, we have that $A/\alpha$ as the factor group. The multiplicative law for composition on $A/\alpha$ where if $x + \alpha$ and $y + \alpha$ are two cosets, then $(x + \alpha)(y + \alpha)$ would be $(xy + \alpha)$. This is well defined. To check, suppose that $x_{1}, y_{1}$ are in the same coset as $x, y$. Then we must show that $x_{1}y_{1}$ is in the same coset as $xy$. The $1 + \alpha$ is the identity coset. So we have the canonical map.
+        \begin{equation*}
+            f : A \rightarrow A/\alpha
+        \end{equation*}
+    is a ring-homomorphism.
+\end{definition}
+
+If $g : A \rightarrow A^{\prime}$ is a ring-homomorphism whose kernel contains $\alpha$, then there exists a unique ring-homomorphism $g_{*} : A/\alpha \rightarrow A^{\prime}$ making the following diagram commutative:
+    \begin{center}
+        \begin{tikzcd}
+            A \ar[rr, "g"]\ar[dr, "f"] &                           & A^{\prime} \\
+                                       & A/\alpha \ar[ur, "g_{*}"] &              
+        \end{tikzcd}
+    \end{center}
+
+Here is the proof
+    \begin{proof}
+        If $x \in A$, then $g(x) = g_{*}f(x)$. Hence for $x, y \in A$,
+            \begin{align*}
+                g_{*}(f(x)f(y)) &= g_{*}(f(xy)) = g(xy) = g(x)g(y) \\
+                                &= g_{*}f(x)g_{*}f(y)                
+            \end{align*}
+        Given $\mathcal{E}, \nu \in A/\alpha$, there is an $x, y \in A$ such that $\mathcal{E} = f(x)$ and $\nu = f(y)$. Since $f(1) = 1$, we have $g_{*}f(1) = g(1) = 1$, and so it is a multiplicative monoid-homomorphism.
+
+        So we have that $f: A \rightarrow A/\alpha$ is universal in the category of homomorphisms that has the kernel as $\alpha$. 
+    \end{proof}
+
+If $A$ is a ring and $e$ is the identity element, then:
+    \begin{equation*}
+        \lambda: \mathbb{Z} \rightarrow A
+    \end{equation*}
+
+where $\lambda(n) = ne$ is a ring homomorphism, with the kernel as the ideal $(n)$ generated by $n$. There is the injective homomorphism $\mathbb{Z}/n\mathbb{Z} \rightarrow A$, which is an isomorphism between the ring $\mathbb{Z}/n\mathbb{Z}$ and a subring of $A$. If $n \mathbb{Z}$ is a prime ideal, then $n = 0$ or $n = p$. For the first case, $A$ contains a subring isomorphic to $\mathbb{Z}$ where this subring has characteristic $0$. Otherwise, we say that it has characteristic $p$. We say that $\mathbb{Z}/p\mathbb{Z} = \mathbb{F}_{p}$.
+
+If $K$ is a field, then it has characteristic $0$ or $p > 0$. In the first case, it has a subfield that is isomorphic to the rational numbers and for the second case, it has an isomorphic image to $\mathbb{F}_{p}$. This subfield will be called a prime field. Prime fields are the smallest subfield of $K$ containing $1$ with no automorphism except for the identity. We can identify it with $\mathbb{Q}$ or $\mathbb{F}_{p}$. What we mean by prime ring is the integers $\mathbb{Z}$ if $K$ has characteristic $0$ or $\mathbb{F}_{p}$ if $K$ has characteristic $p$.
+
+If $A$ is a subring of $R$ and $S$ is a subset of $B$ that commutes with $A$, $as = sa$ for all $a\in A$ and $s \in S$, then consider $A[S]$ as the set of elements:
+    \begin{equation*}
+        \sum_{}^{} a_{i_{1} \cdots i_{n}}s_{1}^{i_{1}}\cdots s_{n}^{i_{n}}
+    \end{equation*}
+The sum ranges over a finite number of tuples: $(i_{1}, \ldots, i_{n})$ of integers, and $a_{i_{1} \ldots} \in A$, $s_{1}, \ldots, s_{n} \in S$. If $B = A[S]$, we say that $S$ is the set of generators or ring generators for $B$ over $A$. If $S$ is finite, then $B$ is finitely generated as a ring over $A$.
+ We also have that $A[S]$ consists of not necessarily commutative polynomials in elements of $S$ with coefficients in $A$. Elements of $S$ may not commute with each other.
+
+\begin{examples}
+    \begin{example}
+        The ring of matrices is finitely generated over a field but matrices don't commute.
+    \end{example} 
+\end{examples}
+
+With all homomorphisms, they are determined by their action on the generators. So if $f: A \rightarrow A^{\prime}$ is a ring homomorphism and $B = A[S]$, then there is an extension of $f$ to a ring homomorphism of $B$ by the values of $S$.
+
+Let $A$ be a ring, $\alpha$ be an ideal, and $S$ be a subset of $A$. Then:
+    \begin{equation*}
+        S \equiv 0 \pmod{\alpha}
+    \end{equation*}
+if $S \subseteq \alpha$. If $x, y \in A$, then:
+    \begin{equation*}
+        x \equiv y \pmod{\alpha}
+    \end{equation*}
+if $x - y \in \alpha$. If $\alpha$ is principal, equal to $(\alpha)$, then:
+    \begin{equation*}
+        x \equiv y \pmod{\alpha}
+    \end{equation*}
+If $f: A \rightarrow A/\alpha$ is the canonical homomorphism, then $x \equiv y \pmod{\alpha}$ or $f(x) = f(y)$. The factor ring $A/\alpha$ is called the residue class ring. Cosets of $\alpha$ are called residue classes modulo $\alpha$ and if $x \in A$, then $x + \alpha$ is called the residue class of $x$ modulo $\alpha$.
+
+We have that a ring homomorphism which is bijective is a ring-isomorphism. So there is an inverse which would be verified to be a homomorphism.
+    
+Let $f: A \rightarrow B$ be a ring homomorphism. Then the image $f(A)$ of $f$ is a subring of $B$
+
+An injective ring-homomorphism $f: A \rightarrow B$ establishes an isomorphism between $A$
+ and its image. This homomorphism will be called an embedding.
+
+Let $f: A \rightarrow A^{\prime}$ be a ring-homomorphism, and $a^{\prime}$ be an ideal of $A^{\prime}$. Then $f^{-1}(a^{\prime})$ is an ideal $\alpha$ in $A$, and there is the injective homomorphism:
+    \begin{equation*}
+        A/\alpha \rightarrow A^{\prime}/\alpha^{\prime}
+    \end{equation*}
+
+\textbf{Proposition 1.1}: Products exist in the category of rings.
+
+\begin{definition}{Zero divisors}
+    Elements are zero divisors if $x, y \neq 0$ but $xy = 0$. A ring is an integral domain if it does not have zero divisors and is commutative.
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        The ring of integers $\mathbb{Z}$ does not have zero divisors and will be an integral domain. Also, if a set $S$ has at least two elements and $A$ is a ring with $1 \neq 0$, then the ring of mappings $\text{Map}(S, A)$ has zero divisors. (Proof?)
+            \begin{proof}
+                We have that all fields are integral domains. This is because if $ab = 0$, we can divide on both sides to get that $b = 0$ (possible only in fields where every element is a unit). We know that $\mathbb{Q}$ is a field. Since $\mathbb{Z}$ is a subring of it, it is an integral domain. If a ring has no zero divisors, then its subset has no zero divisors. For the second one, just take one map to map an element $s_{1}$ to 0 and $s_{i > 0}$ to any other non-zero elements in the ring. Then we take $s_{0}$ and map it to any non-zero element and $s_{i > 0}$ to zeros. This works.
+            \end{proof}
+    \end{example}
+
+    \begin{example}
+        Let $m$ be a positive integer $\neq 1$. The ring $\mathbb{Z}/m\mathbb{Z}$ has zero divisors if and only if $m$ is not a prime number. The ring of $n \times n$ matrices over a field has zero divisors if $n \geq 2$.
+            \begin{proof}
+                We know that if $m$ is a prime number, then $\mathbb{Z}/m\mathbb{Z}$ is a field. This means that it has no zero divisors. Now we need to show that if $m$ is not prime, then $\mathbb{Z}/m\mathbb{Z}$ has zero divisors. We know that $m = ab$ for two non-zero elements neither are multiples of $m$: $a, b$. But $ab \mod{m} = 0$ So $ab = 0$ in $\mathbb{Z}/m\mathbb{Z}$. We are done.
+            \end{proof}
+    \end{example}
+\end{examples}
+
+An idea to consider: If $R$ is an integral domain, then if $a, b$ generate the same ideal, then there is a unit $u$ such that $au = b$. The converse also holds.
+    \begin{proof}
+        If we have that unit, then $(b) \subseteq (a)$. But we also have $a = bu^{-1}$ which means that $(a) \subseteq (b)$. Therefore, $(a) = (b)$. Suppose that $(a) = (b)$. By the definition of ideals as the set of linear combinations of generators with coefficients as elements in the ring, we have that $a = bc$, $b = ad$. But $a = adc$ so $a(1 - dc) = 0$. Since we are in an ID, we have that $1 - dc = 0$ and $1 = dc$.
+    \end{proof}
+
+\begin{topic}
+    \section{Commutative Rings}
+\end{topic}
+
+\begin{definition}{Prime Ideal}
+    A prime ideal is an ideal $p \neq A$ such that $A/p$ is an integral domain. This means that if $a_{1} + p$ and $a_{2} + p$ are two cosets of $p$ and $a_{1}a_{2} + p = p$, since $A/p$ is an integral domain, and $a_{1}a_{2} = 0$, then either $a_{1}$ or $a_{2}$ are in $p$. In other words, the alternate definition is that whenever $xy \in p$, then either $x \in p$ or $y \in p$.
+\end{definition}
+
+\begin{definition}{Maximal Ideal}
+    Let $m$ be an ideal. We say that $m$ is a maximal ideal if $m \neq A$ and if there is no ideal $\alpha \neq A$ containing $m$ and $\neq mj$.
+\end{definition}
+
+We claim that every maximal ideal is prime.
+    \begin{proof}
+        We first suppose that $xy = 0$ and $x \notin m$ for $m$ maximal ideal in $A$. Then we notice that since $m$ is maximal, then appending $x$ to our ideal gives the whole ring. In other words, we have that $m + Ax = A$. So we actually can write the identity of $A$ as a useful sum:
+            \begin{equation*}
+                1 = u + ax
+            \end{equation*}
+        for $u \in m$. Then we multiply both sides by $y$:
+            \begin{equation*}
+                y = uy + axy
+            \end{equation*}
+        to show that $y \in m$ since $uy \in m$ and $axy \in m$. This proves that all maximal ideals are prime.
+    \end{proof}
+
+Let $\alpha$ be an ideal $\neq A$. Then $\alpha$ is contained in some maximal ideal $m$.
+    \begin{proof}
+        Observe that if $\alpha \subseteq \beta$, for all ideals $\beta$, then either $\alpha = \beta$for all, in which case $\alpha$ is maximal, or $\alpha$ is a proper subset of one of the $\beta$. We realize that this chain of inclusions can be continued. We have that $1 \notin \alpha_{i}$ so the union is a maximal ideal.
+    \end{proof}
+
+The ideal $\{0\}$ is a prime ideal of $A$ if an d only if $A$ is an ID. Verified by definition.
+
+\begin{definition}{field}
+    We say that a field $K$ is a commutative ring where $1 \neq 0$ and the multiplicative monoid of non-zero elements of $K$ is a group. Essentially, every element has an inverse. The only ideals of $K$ are the field $K$ and the ideal $\{0\}$.
+\end{definition}
+
+If $m$ is a maximal ideal of $A$, then $A/m$ is a field.
+    \begin{proof}
+        If $x \in A$ and $\overline{x}$ is its residue class mod $m$, then suppose that $x \notin m$. Then by the previous idea, we say that:
+            \begin{equation*}
+                1 = u + yx
+            \end{equation*}
+        for some $y \in A$ and $u \in m$. This means that the residue class of $yx$ mod $m$ is the multiplicative identity. Therefore, we have that $y$ is the inverse of $x$.
+    \end{proof}
+
+The converse is also true: If $m$ is an ideal of $A$ such that $A/m$ is a field, then $m$ is maximal.
+    \begin{proof}
+        Suppose that $x + m$ is some element of $A/m$, the field. Then it must have an inverse $y + m$ such that $xy + m = 1 + m$. This means that $xy + u_{1} = 1 + u_{2}$. But this means that $xy + u^{\prime} = 1$. For $u^{\prime} \in m$. Therefore, adding an arbitrary element $x \notin m$ would make the ideal into the entire ring. So $m$ is maximal.
+    \end{proof}
+
+Let $f : A \rightarrow A^{\prime}$ be a homomorphism of commutative rings. Let $p^{\prime}$ be a prime ideal of $A^{\prime}$, and let $p = f^{-1}(p^{\prime})$. Then $p$ is prime.
+    \begin{proof}
+        Suppose that $x, y \in A$, and that $x \notin p$, Then we see that $f(x) \notin p^{\prime}$. This means that $f(x)f(y) = f(xy) \in p^{\prime}$ therefore, $f(y) \in p^{\prime}$ so $f^{-1}(f(y)) = y \in p$, so $p$ is prime.
+    \end{proof}
+
+(Revisit) An exercise would be to prove that if $f$ is surjective and if $m^{\prime}$ is maximal in $A^{\prime}$, then $f^{-1}(m^{\prime})$ is maximal in $A$.
+
+\begin{examples}
+    \begin{example}
+        Let $\mathbb{Z}$ be the ring of integers. Since an idela is also an additive subgroup of $\mathbb{Z}$, every ideal $\neq \{0\}$ is principal. Let $p$ be a prime ideal $\neq \{0\}$ $p = n\mathbb{Z}$. Then $n$ is a prime number, by the definition of prime ideal. As for the converse, if $p$ is a prime number, then $p\mathbb{Z}$ is a prime ideal. Furthermore, $p\mathbb{Zj}$. is a maximal ideal. If $p\mathbb{Z}$ is contained in an ideal $n\mathbb{Z}$, then $p = nm$ for some $m$. This means that either $n = 1$ or $n = p$. So $p\mathbb{Z}$ is maximal.
+    \end{example}
+\end{examples}
+
+If $n$ is an integer, the factor ring $\mathbb{Z}/n\mathbb{Z}$ is the ring of integers modulo $n$ which is shown as:
+    \begin{equation*}
+        \mathbb{Z}/n\mathbb{Z} = \mathbb{Z}(n)
+    \end{equation*}
+and if $n$ is prime, then this is a field which is $\mathbb{F}_{p}$. Due to the property of groups, we have that if $x \not\equiv 0 \pmod{p}$, then $x^{p - 1} \equiv 1 \pmod{p}$. We usually write $\mod{p}$ instead of $\mod{p\mathbb{Z}}$. The units of the ring are the elements that are relatively prime to $n$. The order of this group of elements in $\mathbb{Z}/n\mathbb{Z}$ is called $\varphi(n)$ which is the Euler phi-function. So we say that if $x$ is relatively prime to $n$, then $x^{\varphi(n)} \equiv 1\pmod{n}$.
+
+\begin{theorem}{Chinese Remainder Theorem}
+    Let $\alpha_{1}, \ldots, \alpha_{n}$ be ideals of $A$ such that $\alpha_{i} + \alpha_{j} = A$ for all $i \neq j$. Give elements $x_{1}, \ldots, x_{n} \in A$, there exists $x \in A$ such that $x \equiv x_{i} \pmod{\alpha_{i}}$ for all $i$.
+\end{theorem}
+    \begin{proof}
+        If $n = 2$, then we have:
+            \begin{equation*}
+                1 = a_{1} + a_{2}
+            \end{equation*}
+        for two elements $a_{i} \in \alpha_{i}$. Then we have that:
+            \begin{equation*}
+                x = x_{2}a_{1} + x_{1}a_{2}
+            \end{equation*}
+        
+        Now if $i > 2$, we have elements $a_{i} \in \alpha_{1}$ and $b_{i} \in \alpha_{i}$ such that:
+            \begin{equation*}
+                a_{i} + b_{i} = 1
+            \end{equation*}
+        We say that the product $\prod_{i = 2}^{n} (a_{i} + b_{i}) = 1$ and lies in 
+            \begin{equation*}
+                \alpha_{1} + \prod_{i = 2}^{n} \alpha_{i}
+            \end{equation*}
+        Now we have:
+            \begin{equation*}
+                \alpha_{1} + \prod_{i = 2}^{n} \alpha_{i} = A
+            \end{equation*}
+        So by $n = 2$ case, we have an element $y_{1} \in A$ where:
+            \begin{align*}
+                y_{1} &\equiv  \pmod{\alpha_{1}}                     \\
+                y_{1} &=       0 \pmod{\prod_{i = 2}^{n} \alpha_{i}}   
+            \end{align*}
+        We repeat this process to get other elements $y_{2}, \ldots, y_{n}$. Then we say that: $x = x_{1}y_{1} + \ldots + x_{n}y_{n}$.
+    \end{proof}
+We note that if $\alpha_{1}, \alpha_{2}, \ldots, \alpha_{n}$ are ideals of a ring $A$ such that 
+    \begin{equation*}
+        \alpha_{1} + \cdots + \alpha_{n} = A
+    \end{equation*}
+then if $v_{1}, \ldots, v_{n}$ are positive integers, then 
+    \begin{equation*}
+        q\alpha_{1}^{v_{1}} + \cdots + \alpha_{n}^{v_{n}} = A
+    \end{equation*}
+\textbf{Corollary 2.2} Let $\alpha_{1}, \ldots, \alpha_{n}$l be ideals of $A$. Assume that $\alpha_{i} + \alpha_{j} = A$ where $i \neq j$. Let
+    \begin{equation*}
+        f: A \rightarrow \prod_{i = 1}^{n}  A/\alpha_{i} = (A/\alpha_{1}) \times \cdots \times (A/\alpha_{n})
+    \end{equation*}
+be the map of $A$ into the product induced by the canonical map of $A$ onto $A/\alpha_{i}$ for each factor. Then the kernel of $f$ is $\bigcap_{i = 1}^{n} \alpha_{i}$, and $f$ is surjective, which gives the isomorphism:
+    \begin{equation*}
+        A/\bigcap \alpha_{i} \rightarrow \prod_{}^{} A/\alpha_{i}
+    \end{equation*}
+    \begin{proof}
+        We note that if $a \in A$ lies in all of the quotient sets, then it is in the kernel. So $a \in \bigcap_{i = 1}^{n} \alpha_{i}$. By the Chinese Remainder Theorem, we have that we can always find an $x \in A$ such that it is equivalent to a chosen set of $x_{i}$'s modulo $\alpha_{i}$, which means that we can always choose what element in each component of the tuple that $x$ is mapped to.
+    \end{proof}
+
+The theorem and the corollary are used frequently on the integers $\mathbb{Z}$ and to distinct prime ideals $(p_{1}), \ldots,, (p_{n})$. These work because they are maximal. You could also take integers $m_{1}, \ldots, m_{n}$ which are relatively prime in pairs and use the theorem on principal ideals $(m_{1}) = m_{1}\mathbb{Z}, \ldots, (m_{n} = m_{n}\mathbb{Z})$. This is the classical example of the Chinese Remainder Theorem: where you can choose an integer such that it is equivalent to $x_{i}$ $\mod{p_{i}}$.`
+
+In particular, let $m$ be an integer $> 1$ and let
+    \begin{equation*}
+        m = \prod_{i}^{} p_{i}^{r_{i}}
+    \end{equation*}
+be the factorization of $m$ into primes, with exponents $r_{i} \geq 1$. Then there is the ring isomorphism:
+    \begin{equation*}
+        \mathbb{Z}/m\mathbb{Z} \approx \prod_{i}^{} \mathbb{Z}/p_{i}^{r_{i}}\mathbb{Z}
+    \end{equation*}
+This is just saying that:
+    \begin{equation*}
+        \mathbb{Z}/\bigcap_{i}^{} p_{i}^{r_{i}} \approx \prod_{i}^{} \mathbb{Z}/p_{i}^{r_{i}}\mathbb{Z}
+    \end{equation*}
+If $A$ is a ring, we have that $A^{*}$ is the multiplicative group of invertible elements of $A$. The following assertions are exercises:
+
+(Revisit) The ring-isomorphism of $\mathbb{Z}/m\mathbb{Z}$ onto the product induces a group isomorphism:
+    \begin{equation*}
+        (\mathbb{Z}/m\mathbb{Z})^{*} \approx \prod_{i}^{} (\mathbb{Z}/p_{i}^{r_{i}}\mathbb{Z})^{*}
+    \end{equation*}
+From our isomorphism, we have:
+    \begin{equation*}
+        \varphi(m) = \prod_{i}^{} \varphi(p_{i}^{r_{i}})
+    \end{equation*}
+And finally, if $p$ is a prime number and $r$ is an integer $\geq 1$, then 
+    \begin{equation*}
+        \varphi(p^{r}) = (p - 1)p^{r - 1}
+    \end{equation*}
+    \begin{proof}
+        For the last formula, we go by induction. For $r = 1$, we have that $\mathbb{Z}/p\mathbb{Z}$ is a field and the group has order $p - 1$. Now let $r \geq 1$ and consider the homomorphism:
+            \begin{equation*}
+                \mathbb{Z}/p^{r + 1}\mathbb{Z} \rightarrow \mathbb{Z}/p^{r}\mathbb{Z}
+            \end{equation*}
+        which we get from the inclusion of ideas $(p^{r + 1}) \subseteq (p^{r})$. So now there is the group homomorphism:
+            \begin{equation*}
+                \lambda : (\mathbb{Z}/p^{r + 1}\mathbb{Z})^{*} \rightarrow (\mathbb{Z}/p^{r}\mathbb{Z})^{*}
+            \end{equation*}
+        which is surjective because any element of $\mathbb{Z}/p^{r}\mathbb{Z}$ is prime to $p$ and will represent an element of $(\mathbb{Z}/p^{r + 1}\mathbb{Z})^{*}$. Let $a$ be an integer representing an element of $(\mathbb{Z}/p^{r + 1}\mathbb{Z})^{*}$ where $\lambda(a) = 1$. Then we have:
+            \begin{equation*}
+                a \equiv 1 \pmod{p^{r}\mathbb{Z}}
+            \end{equation*}
+        so we have 
+            \begin{equation*}
+                a \equiv 1 + xp^{r} \pmod{p^{r + 1}\mathbb{Z}}
+            \end{equation*}
+        we see that letting $x = 0, 1, \ldots, p - 1$ gives vales that are distinct in $\mathbb{Z}/p^{r + 1}\mathbb{Z}$ which are in the kernel of $\lambda$. We also have that the element $x$ can be one of the $p$ integers because every integer is congruent to one of the $p$ integers mod $(p)$. So the kernel has order $p$ which proves the formula. The kernel of $\lambda$ is isomorphic to $\mathbb{Z}/p\mathbb{Z}$. (Proof?)
+    \end{proof}
+
+\begin{topic}
+    \section{Polynomials and Group Rings}
+\end{topic}
+
+We define polynomials by considering the infinite cyclic group generated by $X$ and with $S$ as a subset with the powers of $X$. Then the set of polynomials $A[X]$ is defined by the set of mappings: $S \rightarrow A$ where all but a finite number of elements are sent to a non-zero element in $a$. So our polynomials look like:
+    \begin{equation*}
+        f(X) = \sum_{i= 0}^{n} a_{i}X^{i}
+    \end{equation*}
+and by the convolution rule:
+    \begin{equation*}
+        f(X)g(X) = \sum_{k = 1}^{m + n}\left(\sum_{i + j = k}^{} a_{i}b_{j}\right)X^{k}
+    \end{equation*}
+Notice that we have the unit element $1$ and the embedding:
+    \begin{equation*}
+        A \rightarrow A[X] \hspace{30pt} \text{by} \hspace{30pt} a \mapsto aX^{0}
+    \end{equation*}
+Let $A$ be a sub ring of a commutative ring $B$. Let $x \in B$. If $f \in A[X]$ is a polynomial, we have the polynomial function:
+    \begin{equation*}
+        f_{B} : B \rightarrow B
+    \end{equation*}
+by:
+    \begin{equation*}
+        f_{B}(x) = f(x) = a_{0} + a_{1}x + \ldots + a_{n}x^{n}
+    \end{equation*}
+We have:   
+    \begin{equation*}
+        ev_{b}: f \mapsto f(b)
+    \end{equation*}
+as a ring homomorphism of $A[X]$ into $B$. This is called the evaluation homomorphism. Let $x \in B$. So the subring $A[x]$ of $B$ generated by $x$ over $A$ is the ring of all polynomial values. If there is an isomorphism by evaluation from $A[X]$ to $A[x]$, then we have that $x$ is transcendental over $A$ or that $x$ is a variable over $A$. 
+
+\begin{examples}
+    \begin{example}
+        Let $\alpha = \sqrt{2}$. Then the set of real numbers of the for $a + b\alpha$ where $a, b \in \mathbb{Z}$ is a subring of the real numbers generated by $\sqrt{2}$. But we have that $\alpha$ is not transcendental over $\mathbb{Z}$, because $x^{2} - 2$ is in the kernel of the map $f \mapsto f(\sqrt{2})$. But we do have that $e = 2.718 \ldots$ and $\pi$ are transcendental over $\mathbb{Q}$. We require the kernel to be trivial, or that the value is not a root of any polynomial in the given ring.
+    \end{example}
+    
+    \begin{example}
+        Let $p$ be a prime number and $K = \mathbb{Z}/p\mathbb{Z}$. Then $K$ is a field. Let $f(X) = X^{p} - X \in K[X]$. Then $f$ is not 0, but it is the 0 function. Since every element has order $p - 1$, we have that $x^{p - 1} = 0$. So a non-zero polynomial gives us a 0 function.
+    \end{example}
+\end{examples}
+
+We can look at other homomorphisms such as:
+    \begin{equation*}
+        \varphi: A \rightarrow B
+    \end{equation*}
+for two commutative rings and the homomorphism of polynomial rings $A[X] \rightarrow B[X]$ as 
+    \begin{equation*}
+        f(X) = \sum_{}^{} a_{i}X^{i} \mapsto \sum_{}^{} \varphi(a_{i})X^{i} = (\varphi f)(X).
+    \end{equation*}
+We call that $f \mapsto \varphi f$ is a reduction map.
+
+\begin{examples}
+    \begin{example}
+        The map $\varphi$ could be an isomorphism such as if $f(X)$ has complex coefficients. Then the complex conjugate is a reduction map on the coefficients.
+    \end{example}
+
+    \begin{example}
+        Let $p$ be a prime ideal of $A$. Let $\varphi: A \rightarrow A^{\prime}$ be the canonical homomorphism of $A$ onto $A/p$. If $f(X)$ is a polynomial in $A[X]$, then $\varphi f$ wil be called the reduction of $f$ modulo $p$. So we are taking all coefficients $\mod{p}$.
+    \end{example}
+
+    \begin{example}
+        If we have $A = \mathbb{Z}$ and $p = (p)$ where $p$ is prime, we have that the polynomial $3X^{4} - X + 2$ is a polynomial mod $5$ where the coefficients $3, -1, 2$ are integers $\mod{5}$ or elements in $\mathbb{Z}/5\mathbb{Z}$.
+    \end{example}
+\end{examples}
+
+So now, we can look at evaluation maps and reduction maps together to generalize:
+
+Let $\varphi: A \rightarrow B$ be a homomorphism of commutative rings. Let $x \in B$. Then there is a unique homomorphism extending $\varphi$:
+    \begin{equation*}
+        A[X] \rightarrow B \hspace{30pt} \text{such that} \hspace{30pt} X \mapsto x
+    \end{equation*}
+and this homomorphism is $\sum_{}^{} a_{i}X^{i} \mapsto \sum_{}^{} \varphi(a_{i})x^{i}$. The statement says that we have a composition:
+    \begin{center}
+        \begin{tikzcd}
+            A[X]\ar[r, ""] & B[X]\ar[r, "\text{ev}_{x}"] & B   
+        \end{tikzcd}
+    \end{center}
+where the first map changes the coefficients of $A[X]$ and the second evaluates to an element of $B$. 
+
+\chapter{Modules}
+
+\begin{topic}
+    \section{Basic Definitions}
+\end{topic}
+
+Let $A$ be a ring. A left module over $A$ or a left $A$-module $M$ is an abelian group where for $a, b \in A$ and $x, y \in M$, we have:
+    \begin{equation*}
+        (a + b)x = ax + bx \text{ and } a(x + y) = ax + ay
+    \end{equation*}
+we leave it to the reader to show that $a(-x) = -(ax)$ and $0x = 0$. By definition of an operation, we have $1x = x$. We can also define a right $A-$ module. We will only look at left modules. 
+
+\begin{definition}{Submodules}
+    Let $M$ be an $A$-module. A submodule $N$ of $M$ is an additive subgroup such that $AN \subseteq N$. So $N$ is a module with the operation same as $A$ on $M$.
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        We have that $A$ is a module over itself, any commutative group is a $\mathbb{Z}$ module, an additive group consisting of $0$ alone is a module over any ring, and any left ideal of $A$ is a module over $A$.
+    \end{example}
+\end{examples}
+
+Let $J$ be a two-sided ideal of $A$. Then the factor ring $A/J$ is actually a module over $A$. If $a \in A$ and $x + J$ is a coset of $J$ in $A$, then there is the operation $a(x + J) = ax + j$. Furthermore, if $M$ is a module and $N$ is a submodule, we have the factor module. If $L$ is a left ideal of $A$, then $A/L$ is also a module.
+
+\begin{definition}{Vector Space}
+    A module over a field is a vector space. Let $V$ is a vector space over the field $k$. Let $R$ be the ring of all linear maps of $V$ onto itself. Then $V$ is a module over $R$. Similarly, if $V = K^{n}$ is the vector space of $n$ tuples of elements of $K$, and $R$ is the ring of $n \times n$ matrices with components in $K$, then $V$ is a module over $R$.
+\end{definition}  
+
+\begin{definition}{Torsion Submodules}
+    Let $A$ be an integral domain and let $M$ be an $A$-module. We say that the torsion submodule $M_{\text{tor}}$ is the subset of elements $x \in M$ such that there is an $a \in A$, $a \neq 0$, such that $ax = 0$. We can see that $M_{\text{tor}}$ is a submodule. This is because we only need to check closure of addition and multiplication. Notice that if $r, s$ kill $a, b$ respectively, then $rs$ kills their sum and $r$ kills their product.
+\end{definition}
+
+Let $\alpha$ be a left ideal and $M$ a module. We define $\alpha M$ as the set of all elements:
+    \begin{equation*}
+        a_{1}x_{1} + \ldots + a_{n} x_{n}
+    \end{equation*}
+where $a_{i} \in \alpha$ and $x_{i} \in M$. This is a submodule of $M$. If $\alpha, \beta$ are left ideals, then there is associativity:
+    \begin{equation*}
+        \alpha(\beta M) = (\alpha\beta)M
+    \end{equation*}
+
+There are also other facts such as $(\alpha + \beta)M = \alpha M + \beta M$. If $N, N^{\prime}$ are submodules of $M$, then $\alpha(N + N^{\prime}) = \alpha N + \alpha N^{\prime}$.
+
+Let $M$ be an $A$-module, and $N$ a submodule. We have a module structure on the factor group $M/N$. Let $x + N$ be a coset of $N$ in $M$ and let $a \in A$. We define $a(x + N)$ to be the coset $ax + N$. We know that this is well-defined because if we also have a coset $y + N$ which is equal to $x + N$, we know that $ax \in ay + N$. So we have an operation of $A$ on $M/N$ which means that $M/N$ is a module. We call this the factor module of $M$ by $N$.
+
+\begin{definition}{Module-Homomorphism}
+    A module homomorphism is a map:
+        \begin{equation*}
+            f : M \rightarrow M^{\prime}
+        \end{equation*}
+    which sends stuff from one module to another. This is a group homomorphism:
+        \begin{equation*}
+            f(ax) = af(x)
+        \end{equation*}
+    for all $a \in A$ and $x \in M$.
+\end{definition}
+
+The collection of $A$-modules is a category with morphisms as the module homomorphisms. The identity map is a homomorphism such as for any module $M^{\prime}$, the map $\zeta : M \rightarrow M^{\prime}$ where $\zeta(x) = 0$ for all $x \in M$ is the zero homomorphism.
+
+Let $M$ be a module and $N$ a submodule. We have the group homomorphism:
+    \begin{equation*}
+        f: M \rightarrow M/N
+    \end{equation*}
+which is a module homomorphism. We have the mapping
+    \begin{equation*}
+        f:= m \in m + N
+    \end{equation*}
+We see that this is a group homomorphism. Now we just check the other condition:
+    \begin{equation*}
+        f(ax) = ax + N = a(x + N) = af(x)
+    \end{equation*}
+We can say that $f$ is universal in the category of homomorphisms of $M$ whose kernel contains $N$. We have the following diagram:
+    \begin{center}
+        \begin{tikzcd}
+            M \ar[dr, "\varphi"]\ar[rr, "f"] &   & M/N \ar[dl, "\pi"] \\
+                                             & M &                      
+        \end{tikzcd}
+    \end{center}
+(Revisit) Where $\pi$ is injective, $\varphi$ is a mapping from $M \rightarrow M$. We see that $f$ is the unique mapping because 
+
+If $f: M \rightarrow M^{\prime}$ is a module homomorphism, then the kernel and image are submodules of $M$ and $M^{\prime}$ respectively. We prove the first by noting that if $k_{1}, k_{2} \in \ker{f}$, then
+    \begin{equation*}
+        f(k_{1}) = 0 \land f(k_{2}) = 0 \implies f(k_{1} + k_{2}) = 0
+    \end{equation*}
+and we have to show that if $a \in A$, then $ak \in \ker{f}$:
+    \begin{equation*}
+        f(ak) = af(k) \text{Since we have a module homomorphism} \implies ak \in \ker{f}
+    \end{equation*}
+Now to show that the image is a module, we have if $k_{1}, k_{2} \in \Im{f}$:
+    \begin{equation*}
+        f(g_{1}) = k_{1}, f(g_{2}) = k_{2} \implies f(g_{1} + g_{2}) = k_{1} + k_{2}
+    \end{equation*}
+which shows that $k_{1} + k_{2} \in \Im{f}$. For the added property of modules:
+    \begin{equation*}
+        af(g_{1}) = ak_{1} \implies f(ag_{1}) = ak_{1}
+    \end{equation*}
+which means that $ak_{1} \in \Im{f}$.
+
+\begin{definition}{Cokernel}
+    Let $f : M \rightarrow M^{\prime}$ be a homomorphism. By the cokernel of $f$, we mean the factor module $M^{\prime}/\Im{f} = M^{\prime}/f(M)$. You can also mean the homomorphism $M^{\prime} \rightarrow M^{\prime}/f(M)$. Overall, the cokernel is the factor module of $M^{\prime}$.
+\end{definition}
+
+We have canonical homomorphisms applying to modules:
+    \begin{itemize}
+        \item Let $N, N^{\prime}$ be two submodules of a module $M$. Then $N + N^{\prime}$ is a submodule and we have the isomorphism
+            \begin{equation*}
+                N/(N \cap N^{\prime}) \approx (N + N^{\prime})/N^{\prime}
+            \end{equation*}
+
+        \item If $M \supseteq M^{\prime} \supseteq M^{\prime\prime}$are modules, then 
+            \begin{equation*}
+                (M/M^{\prime\prime})/(M^{\prime}/M^{\prime\prime}) \approx M/M^{\prime}
+            \end{equation*}
+
+        \item If $f : M \rightarrow M^{\prime}$ is a module homomorphism, and $N^{\prime}$ is a submodule of $M^{\prime}$, then $f^{-1}(N^{\prime})$ is a submodule of $M$ and we have a canonical injective homomorphism
+            \begin{equation*}
+                \overline{f} : M/f^{-1}(N^{\prime}) \rightarrow M^{\prime}/N^{\prime}
+            \end{equation*}
+
+        \item If $f$ is surjective, then $\overline{f}$ is a module-isomorphism. 
+    \end{itemize}
+The proofs are from confirming that all homomorphisms from abelian groups are $A$-homomorphisms of modules.
+
+We see that a homomorphism which is bijective is a module isomorphism. The proof is the same for groups. We need to show that the inverse map is a module homomorphism.
+
+We define a sequence of module homomorphisms:
+    \begin{center}
+        \begin{tikzcd}
+            M^{\prime}\ar[r, "f"] & M\ar[r, "g"] & M^{\prime\prime}   
+        \end{tikzcd}
+    \end{center}
+If $\Im{f} = \ker{g}$. We have an exact sequence with the submodule $N$ of a module $M$ which is 
+    \begin{equation*}
+        0 \rightarrow N \rightarrow M \rightarrow M/N \rightarrow 0
+    \end{equation*}
+If a homomorphism $u : N \rightarrow M$ satisfies:
+    \begin{center}
+        \begin{tikzcd}
+            0 \ar[r, ""] & N \ar[r, "u"] & M   
+        \end{tikzcd}
+    \end{center}
+is exact, then we say that $u$ is a monomorphism/injective/ an embedding. And if 
+    \begin{center}
+        \begin{tikzcd}
+            N \ar[r, "u"] & M \ar[r, ""] & 0   
+        \end{tikzcd}
+    \end{center}
+is exact, then it is an epimorphism/surjective.
+
+\begin{topic}
+    \section{Algebras}
+\end{topic}
+
+There are objects in math that satisfy the properties of rings except for the existence of a unit element. We can also see objects that don't satisfy associativity but do for distributivity. Let $R$ be a ring and $x, y \in R$ with the bracket product as:
+    \begin{equation*}
+        [x, y] = xy - yx
+    \end{equation*}
+This is not associative but is distributive.
+
+We can consider more general objects than a ring. Let $A$ be a commutative ring. Let $E, F$ be modules and consider a bilinear map:
+    \begin{equation*}
+        g : E \times E \rightarrow F
+    \end{equation*}
+where for $x \in E$, there is a map $y \mapsto g(x, y)$ that is $A$- linear and for a $y \in E$, the map $x \mapsto g(x, y)$ is also $A$-linear. An $A$-algebra is a module with a bilinear map $g: E \times E \rightarrow E$. This map is a law of composition on the module $E$. Assume that the algebras are associative and have a unit. One example of an algebra is $A[G]$ in which it is a module and we can look at the bilinear map:
+    \begin{equation*}
+        f(x, y) = xy
+    \end{equation*}
+We can view the group algebra as a special case of the situation below:
+
+Let $f: A \rightarrow B$ be a ring-homomorphism such that $f(A)$ is contained in the center of $B$ or $f(a)$ commutes with every element of $B$ for every $a \in A$. Then we can see that $B$ is an $A$-module with the operation of $A$ on $B$ by the map
+    \begin{equation*}
+        (a, b) \mapsto f(a)b
+    \end{equation*}
+for all $a \in A$ and $b \in B$. An algebra over $A$ will be reference to the above ring homomorphism. The algebra is finitely generated if $B$ is finitely generated as a ring over $f(A)$.
+
+\begin{topic}
+    \section{The Group of Homomorphisms}
+\end{topic}
+
+Let $A$ be a ring and let $X$, $X^{\prime}$ be $A$-modules. We say that $\text{Hom}_{A}(X^{\prime}, X)$ is the set of $A-$homomorphisms of $X^{\prime}$ into $X$. Then $\text{Hom}_{A}(X^{\prime}, X)$ is an abelian group.
+
+If $A$ is commutative then we can make $\text{Hom}_{A}(X^{\prime}, X)$ into an $A-$module by defining $af$ for $a\in A$ and $f \in \text{Hom}_{A}(X^{\prime}, X)$ with the map:
+    \begin{equation*}
+        (af)(x) = af(x)
+    \end{equation*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

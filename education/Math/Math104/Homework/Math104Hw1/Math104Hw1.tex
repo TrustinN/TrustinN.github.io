@@ -1,0 +1,213 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math104/Homework/Math104Hw1/Math104Hw1.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+
+\title{Math104Hw1}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Prove that $\forall a, b, c \in \mathbb{R}$, $\lvert a + b + c \rvert \leq \lvert a \rvert + \lvert b \rvert + \lvert c \rvert$. (Hint: Use the triangle inequality twice).
+    \begin{proof}
+        We have by triangle inequality:
+            \begin{equation*}
+                \lvert (a + b) + c \rvert \leq \lvert a + b \rvert + \lvert c \rvert
+            \end{equation*}
+        and by triangle inequality again,
+            \begin{equation*}
+                \lvert a + b \rvert + \lvert c \rvert \leq \lvert a \rvert + \lvert b \rvert + \lvert c \rvert
+            \end{equation*}
+    \end{proof}
+
+\textbf{Exercise 2}: $\forall a, b \in \mathbb{R}$ and $c > 0$, prove that
+    \begin{equation*}
+        \lvert a - b \rvert \leq c \iff b - c \leq a \leq b + c
+    \end{equation*}
+    \begin{proof}
+        ($\rightarrow $) We note that there are two cases. 
+            \begin{itemize}
+                \item $a - b \geq 0$. Then $\lvert a - b \rvert = a - b$ and so we get
+                    \begin{equation*}
+                        a - b \leq c
+                    \end{equation*}
+                So we get
+                    \begin{equation*}
+                        a \leq b + c
+                    \end{equation*}
+
+                \item $a - b < 0$. Then we have that $\lvert a - b \rvert = b - a$ and so
+                    \begin{equation*}
+                        b - a \leq c
+                    \end{equation*}
+                or in other words,
+                    \begin{equation*}
+                        b - c \leq a
+                    \end{equation*}
+            \end{itemize}
+        If we consider both cases, we have that:
+            \begin{equation*}
+                b - c \leq a \leq b + c
+            \end{equation*}
+        which is possible since $c > 0$.
+    \end{proof}
+
+\textbf{Exercise 3}: 
+    \begin{itemize}
+        \item Construct a set $S_{1} \subseteq  \mathbb{R}$ so that $\text{sup}S_{1}$ exists and $\text{sup}S_{1} \notin S_{1}$:
+            \begin{proof}
+                Take the set $S_{1} = \{a \in \mathbb{R}: 0 < a < 1\}$. We see that an upper bound is $1$ since $1 > s$ if $s \in S_{1}$. We will prove that an upper bound less than $1$ does not exist. Suppose that $s_{u}$ is an upper bound such that $s_{u} < 1$. Then we have two cases:
+                    \begin{itemize}
+                        \item $s_{u} \leq 0$. Then we notice that clearly, $.5 \in S_{1}$ but $s_{u} < .5$ so this is not an upper bound.
+
+                        \item $s_{u} > 0$. Then $s_{u} \in S_{1}$. But then there is always a rational number between any two real numbers, which was proved in class. This means that there is a $q \in \mathbb{Q}$ such that $s_{u} <  q < 1$. Then $q \in S_{1}$ but $q > s_{u}$. Therefore, $s_{u}$ is not an upper bound. Therefore, $1$ is the supremum and $1 \notin S_{1}$.
+                    \end{itemize}
+                So our construction $S_{1}$ satisfies the qualities.
+            \end{proof}
+
+        \item Construct a set $S_{2} \subseteq \mathbb{R}$ so that $S_{2}$ is bounded above but not bounded below. 
+            \begin{proof}
+                Take the set $S = \{a \in \mathbb{R}: a < 0\}$. This is bounded above by $0$ because for an arbitrary $s \in S$, then we have $s < 0$ and therefore, $s < 0$. So $0$ is an upper bound. Now we show that it is not bounded below. Suppose it is bounded below by $s_{b} < 0$. Then we note that $s_{b} - 1 \in \mathbb{R}$ and $s_{b} - 1 <  s_{b}$. So $s_{b}$ is not a lower bound. Contradiction. So our construction $S$ satisfies the requirements.
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 4}: Assume that $S, T \subseteq \mathbb{R}$ be two non-empty bounded sets. Prove that:
+    \begin{itemize}
+        \item $S \cup T$ is a bounded set
+            \begin{proof}
+                (Lower Bound) Since $S, T$ are bounded, we have $s_{b}$ and $t_{b}$ are lower bounds of $S, T$ respectively. Then we take $l = \min(s_{b}, t_{b})$. We claim that this is the lower bound of $S \cup T$. Suppose that $x \in S \cup T$. Then $x \in S$ or $x \in T$. In either case, we see that $l < x$ because $l$ is a lower bound of $S$ and $T$.
+
+                (Upper Bound) The upper bound is the same case, but for completion, say that $s_{u}, t_{u}$ are upper bounds of $S, T$ respectively. Then we take $u = \max(s_{u}, t_{u})$. We see that for an arbitrary $x \in S \cup T$, $x \in S$ or $x \in T$. Since $u$ is the upper bound of both $S$ and $T$, we have that $u > x$.
+           \end{proof}
+
+        \item $\text{inf}(S \cup T) = \min(\text{inf}S, \text{inf}T)$ 
+            \begin{proof}
+                Suppose that $i_{t} = \text{inf}T$ and $i_{s} = \text{inf}S$. Let $i = \min(i_{s}, i_{t})$. Wlog, suppose that $i = i_{t}$. Then that means that $i_{t} \leq i_{s}$. Suppose that $x \in S \cup T$. Then $x \in S$ or $x \in T$. We have three cases:
+                    \begin{itemize}
+                        \item $x \in S$. So
+                            \begin{equation*}
+                                i = i_{t} \leq i_{s} \leq x
+                            \end{equation*}
+                        so we are done
+
+                        \item $x \in T$. So 
+                            \begin{equation*}
+                                i = i_{t} \leq x
+                            \end{equation*}
+                        so we are done
+
+                        \item $x \in S \land x \in T$. We reduce this to the previous two cases. 
+                    \end{itemize}
+                We can conclude that $i \leq x$ for all $x \in S \cup T$. So $i = \text{inf} S \cup T$.
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 5}: Let $S = \{r \in \mathbb{Q} : \sqrt{2} \geq r \geq 0\}$. Show that $\text{sup}S = \sqrt{2}$.
+    \begin{proof}
+        Clearly, by definition of our set $S$, $\sqrt{2}$ is an upper bound. Suppose for contradiction there exists an upper bound $s_{u} < \sqrt{2}$. Then we are reduced to two cases:
+            \begin{itemize}
+                \item $s_{u} < 0$. Then we see that $0 \in S$ but $0 > s_{u}$. This means that $s_{u}$ is not an upper bound.
+
+                \item $s_{u} \geq 0$. Then we note that $s_{u} \in S$. But by the fact that $\mathbb{Q}$ is dense in $\mathbb{R}$, we have that there is a $q \in \mathbb{Q}$ such that
+                    \begin{equation*}
+                        s_{u} <  q < \sqrt{2}
+                    \end{equation*}
+                But since $q < \sqrt{2}$, $q \in S$ but $q > s_{u}$. Therefore, $s_{u}$ is not an upper bound.
+            \end{itemize}
+        Since $s_{u}$ is not an upper bound in either case, we conclude that there is not upper bound less than $\sqrt{2}$. So $\text{sup}(S) = \sqrt{2}$.
+    \end{proof}
+
+\textbf{Exercise 6}: Decide whether the following sequences converge or diverge, find the limit if it converges. No proof required.
+    \begin{itemize}
+        \item $s_{n} = \sqrt{n}, n \in \mathbb{N}$;
+            \begin{answer}
+                Diverges. We need to show that there is an $\varepsilon > 0$ such that for any $N$ there is an $n > N$ where it is not true that
+                    \begin{equation*}
+                        \lvert \sqrt{n} - L \rvert < \varepsilon
+                    \end{equation*}
+                Let $\varepsilon = \frac{1}{2}$. We have two cases:
+                    \begin{itemize}
+                        \item $\sqrt{n} - L \geq 0$. Then we have $\sqrt{n} - L < \frac{1}{2}$ or $\sqrt{n} < \varepsilon + L$ or $n < (\frac{1}{2} + L)^{2}$. But this means that $n$ has an upper bound. This means that there is no $N$ such that all $n > N$ works.
+
+                        \item $\sqrt{n} - L < 0$. Then we have $L - \sqrt{n} < \frac{1}{2}$ or $n > (L - \frac{1}{2})^{2}$. But it does not matter because first case failed. We note that the first case is possible because we can choose $n \geq L^{2}$
+                    \end{itemize}
+                So there is an upper bound on our interval of convergence, and therefore, the series diverges.
+            \end{answer}
+
+        \item $a_{n} = \sin{n\pi}, n \in \mathbb{N}$;
+            \begin{answer}
+                Diverges. We need to show that there is an $\varepsilon >  0$ such that for any $N$ there is an $n > N$ where it is not true that
+                    \begin{equation*}
+                        \left\lvert a_{n} - L \right\rvert < \varepsilon
+                    \end{equation*}
+                We choose $\varepsilon$ to be $\frac{1}{10}$. Suppose that for contradiction we have an $N$ such that for all $n >  N$, 
+                    \begin{equation*}
+                        \lvert \sin{n\pi} - L \rvert < \frac{1}{10}
+                    \end{equation*}
+                So 
+                    \begin{equation*}
+                        \frac{-1}{10} < \sin{n\pi} - L < \frac{1}{10} \implies \frac{-1}{10} + L < \sin{n\pi} <  \frac{1}{10} + L
+                    \end{equation*}
+                We notice that $-1 \leq \sin{n\pi} \leq 1$, so we have conditions on $L$:
+                    \begin{align*}
+                        \frac{1}{10} + L   &>               1             \\
+                        L                  &> \frac{9}{10}               \\
+                        \dfrac{-1}{10} + L &<              -1            \\
+                        L                  &<              \frac{-9}{10}   
+                    \end{align*}
+                But that is a contradiction. So the limit does not exist.
+            \end{answer}
+
+        \item $b_{n} = \cos{n\pi}, n \in \mathbb{N}$;
+            \begin{answer}
+                Diverges. We need to show that there is an $\varepsilon >  0$ such that for any $N$ there is an $n > N$ where it is not true that
+                    \begin{equation*}
+                        \left\lvert b_{n} - L \right\rvert < \varepsilon
+                    \end{equation*}
+                We choose $\varepsilon$ to be $\frac{1}{10}$. Suppose that for contradiction we have an $N$ such that for all $n >  N$, 
+                    \begin{equation*}
+                        \lvert \cos{n\pi} - L \rvert < \frac{1}{10}
+                    \end{equation*}
+                So 
+                    \begin{equation*}
+                        \frac{-1}{10} < \cos{n\pi} - L < \frac{1}{10} \implies \frac{-1}{10} + L < \cos{n\pi} <  \frac{1}{10} + L
+                    \end{equation*}
+                We notice that $-1 \leq \cos{n\pi} \leq 1$, so we have conditions on $L$:
+                    \begin{align*}
+                        \frac{1}{10} + L   &>               1             \\
+                        L                  &> \frac{9}{10}               \\
+                        \dfrac{-1}{10} + L &<              -1            \\
+                        L                  &<              \frac{-9}{10}   
+                    \end{align*}
+                But that is a contradiction. So the limit does not exist.
+            \end{answer}
+
+        \item $c(n) = \frac{10^{20}}{n}, n \in \mathbb{N}$. 
+            \begin{answer}
+                This converges. As $n \rightarrow \infty$, $10^{2}/n \rightarrow 0$. We want that $\forall \varepsilon > 0$, there should be an $N$ such that $\forall n > N$, 
+                    \begin{equation*}
+                        \left\lvert \dfrac{10^{20}}{n} - 0 \right\rvert < \varepsilon
+                    \end{equation*}
+                So we need
+                    \begin{equation*}
+                        \dfrac{10^{20}}{n} < \varepsilon
+                    \end{equation*}
+                or
+                    \begin{equation*}
+                        n > \dfrac{10^{20}}{\varepsilon}
+                    \end{equation*}
+                The limit is $0$.
+            \end{answer}
+    \end{itemize}
+
+
+
+
+\end{document}
+

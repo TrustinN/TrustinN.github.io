@@ -1,0 +1,138 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math143/Homework/Math143Hw1/Math143Hw1.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+
+\title{Math143Hw1}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: What is the degree of each of the following polynomials? (No justification necessary.)
+    \begin{itemize}
+        \item [(a)] $x^{5} + 15x^{3}y^{3} + 8y^{2}x$ 
+
+            $\text{deg}(p) = \max(5, 3 + 3, 2 + 1) = \max(5, 6, 3) = 6$
+
+        \item [(b)] $x^{2}yz^{4} + z^{9} + 10xy$
+
+            $\text{deg}(p) = \max(2 + 1 + 4, 9, 1 + 1) = \max(6, 9, 2) = 9$
+    \end{itemize}
+
+\textbf{Exercise 2}: Let $f \in k[x, y]$ be a polynomial of degree $d$ and let $C = V(f) \subseteq \mathbb{A}^{2}$. Let $L \subseteq \mathbb{A}^{2}$ be any line with $L \not\subseteq C$. Show that $L \cap  C$ is a finite set of no more than $d$ points. (Hint: Suppose $L = V(y - (ax + b))$, and consider $f(x, ax + b) \in k[x]$.)
+    \begin{proof}
+        Consider the fact that a line can be written in the form $y = ax + b$. We can perform a change of variables using this substitution. This means that our line will lie on the set of points:
+            \begin{equation*}
+                V(y - (ax + b))
+            \end{equation*}
+
+        and our new function will be
+            \begin{equation*}
+                f(x, ax + b) \in k[x]
+            \end{equation*}
+
+        or
+            \begin{equation*}
+                y = f(x, ax + b).
+            \end{equation*}
+
+        Now we are looking for the intersection of these two sets of points. First, the set of points on $\mathbb{A}^{2}$ will look like $V(y - f(x, ax + b))$. The intersection will be when the difference of the function for the line and polynomial becomes 0, so the set of solutions is
+            \begin{equation*}
+                V(y - (ax + b) - (y - f(x, ax + b))) = V(f(x, ax + b) - (ax + b))
+            \end{equation*}
+
+        The degree of the polynomial inside is at most $d$, therefore, the polynomial can have at most $d$ roots. We also notice that the degree is at least $1$, so we are bounded by $1$ and $d$. Therefore, the line can intersect the polynomial at most 
+            \begin{equation*}
+                \text{$i =$ number of intersections} \leq d
+            \end{equation*}
+        times.
+    \end{proof}
+
+\textbf{Exercise 3}: Determine if each of the following sets is an algebraic set or not. Justify your answer. Optional: draw a picture.
+    \begin{itemize}
+        \item [(a)] $\{(t, \sin{t}): t \in \mathbb{R}\} \subseteq \mathbb{A}_{\mathbb{R}}^{2}$
+            \begin{answer}
+                We observe that since the solution set of a polynomial and a line is finite, as given by the last proof, or infinite if the polynomial lies exactly on a line, then the set given in this problem is not an algebraic set. Suppose for contradiction that this is an algebraic set. This means that there is a polynomial $f_{1} \in k[x, y]$ degree $> 1$ such that
+                    \begin{equation*}
+                        V(f_{1}) = \{(t, \sin{t}) : t \in \mathbb{R}\}
+                    \end{equation*}
+                We can take the horizontal line $y = 0$ which intersects the curve $y = \sin{x}$ in at least one location and find that the number of intersections is infinite. But if we take the same line $y = 0$ and intersect it at the right hand side:
+                    \begin{equation*}
+                        f_{1} = 0,
+                    \end{equation*}
+                We have a contradiction, because by exercise 2, there are at most $d$ intersections for a given polynomial of degree $> 1$.
+            \end{answer}
+
+        \item [(b)] $\{(x, y) \in \mathbb{A}^{2}_{\mathbb{C}}: x = 0, y \neq 0\}$
+            \begin{answer}
+                Since $x = 0$, we can focus solely on the $y$ axis. But this means that the solution set is a subset of $\mathbb{A}^{1}_{\mathbb{C}} \cong \mathbb{R} \times \mathbb{R}$. But since $y \neq 0$, the solution set is not all of $\mathbb{A}_{\mathbb{C}}$. Now if we have a polynomial $f \in k[y]$, if it is equal to $0$, then the solution set is the whole space which is not what we want. If our polynomial has degree $ = 0$, we note that it is of the form $f = a + bi$. So:
+                    \begin{equation*}
+                        V(f) = \emptyset
+                    \end{equation*}
+                If $f$ has degree $1$, then it is of the form $a + bi + (c + di)y$ in which case, we can find a non-zero element of $\mathbb{C}$ that does not give us $a + bi + (c + di)y = 0$, namely:
+                    \begin{equation*}
+                        \dfrac{-(a + bi) + 1}{c + di}
+                    \end{equation*}
+                since:
+                    \begin{equation*}
+                        f\left(\dfrac{-(a + bi) + 1}{c + di}\right) = a + bi + (-(a + bi) + 1) = 1
+                    \end{equation*}
+                So our polynomial is of degree $\geq 2$. But now using the same technique in part $(a)$, we find that any line intersected with the desired solution set has infinite intersections while the polynomial intersected with this line will only have finitely many intersections. So contradiction. There is no polynomial such that:
+                    \begin{equation*}
+                        V(f) = \{(x, y) \in \mathbb{A}^{2}_{\mathbb{C}}: x = 0, y \neq 0\}
+                    \end{equation*}
+                So this is not an algebraic set.
+            \end{answer}
+
+        \item [(c)] $\{(x, y) \in \mathbb{A}_{\mathbb{R}}^{2}: y = \lvert x \rvert\}$
+            \begin{answer}
+                By the same reasoning as in part $(a)$, we suppose for contradiction that there is a degree > 1 polynomial such that:
+                    \begin{equation*}
+                        V(f_{1}) = \{(x, y) \in \mathbb{A}_{\mathbb{R}}^{2}: y = \lvert x \rvert\}
+                    \end{equation*}
+                But we observe that we have a line $y = x$ such that it intersects with our solution set on the RHS an infinite number of times. And the intersection of the line $y = x$ with our solution set on the LHS is finite. So we are at a contradiction. This is not an algebraic set.
+            \end{answer}
+
+        \item [(d)] $\{(t, t^{2}, t^{3}) \in \mathbb{A}^{3}_{k}: t \in k\}$
+            \begin{answer}
+                We can create a system of equations:
+                    \begin{align*}
+                        y &= x^{2} \\
+                        z &= x^{3}   
+                    \end{align*}
+                or 
+                    \begin{align*}
+                        y - x^{2} &= 0 \\
+                        z - x^{3} &= 0   
+                    \end{align*}
+                So we have that:
+                    \begin{equation*}
+                        \{(t, t^{2}, t^{3}) \in \mathbb{A}^{3}_{k}: t \in k\} \subseteq V(f_{1})
+                    \end{equation*}
+                for
+                    \begin{equation*}
+                        f_{1} = (y - x^{2})^{2} + (z - x^{3})^{2}
+                    \end{equation*}
+                To show that 
+                    \begin{equation*}
+                        V(f_{1}) \subseteq \{(t, t^{2}, t^{3}) \in \mathbb{A}^{3}_{k}: t \in k\}
+                   \end{equation*}
+                We can clearly say that
+                    \begin{align*}
+                        y &= x^{2} \\
+                        z &= x^{3}   
+                    \end{align*}
+                because both $(y - x^{2})^{2} = 0$ and $(z - x^{3})^{2} = 0$ and $k$ is a field. So indeed this set of points is just of the form $(x, x^{2}, x^{3})$. So this is an algebraic set.
+            \end{answer}
+    \end{itemize}
+
+
+
+\end{document}
+

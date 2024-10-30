@@ -1,0 +1,181 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math172/Homework/Math172Hw3/Math172Hw3.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+
+\title{Math172Hw3}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: What is the largest possible multinomial coefficient of the form $\binom{6}{a_{1}, a_{2}, a_{3}, a_{4}}$? (Here $a_{1}, a_{2}, a_{3}, a_{4}$ are non-negative integers summing up to $6$.)
+    \begin{answer}
+        The largest multinomial coefficient of the form $\binom{6}{a_{1}, a_{2}, a_{3}, a_{4}}$ is $\binom{6}{2, 2, 1, 1}$. This is because we start with:
+            \begin{equation*}
+                \dfrac{6}{0!0!0!0!}
+            \end{equation*}
+        and notice that as we increase one of the factorials in the denominator, the value either stays the same or decreases. So since $0! = 1!,$ we can increase each factorial by $1$ without decreasing the value:
+            \begin{equation*}
+                \dfrac{6}{1!1!1!1!}
+            \end{equation*}
+        Now we can only increase two more times, since $a_{1} + a_{2} + a_{3} + a_{4} = 6$. If we increase the same factorial twice, it will be less than increasing two factorial components each by $1$:
+            \begin{equation*}
+                \dfrac{6}{3!1!1!1!} = \dfrac{6}{1!1!1!1!} \cdot \dfrac{1}{2} \cdot \dfrac{1}{3} < \dfrac{6}{1!1!2!2!} = \dfrac{6}{1!1!1!1!} \cdot \dfrac{1}{2} \cdot \dfrac{1}{2}
+            \end{equation*}
+        Therefore, the largest one is
+            \begin{equation*}
+                \dbinom{6}{2, 2, 1, 1} = \dfrac{6}{1!1!2!2!} = 6 \cdot 5 \cdot 3 \cdot 2 \cdot 1 = 180
+            \end{equation*}
+    \end{answer}
+
+\textbf{Exercise 2}: Let $n \geq 0$ and $k \geq 2$ be integers. Consider the expression for $(x_{1} + \cdots + x_{k})^{n}$ given by the multinomial theorem
+    \begin{equation*}
+        (x_{1} + \cdots + x_{k})^{n}
+    \end{equation*}
+    \begin{itemize}
+        \item [(a)] Assume that some positive integer appears exactly once as a coefficient in the expression above. What are all possible values of $n$ and $k$? (Example: $2$ appears once in $(x_{1} + x_{2})^{2} = x_{1}^{2} + x_{2}^{2} + 2x_{1}x_{2}$, so $n = 2, k = 2$ is possible. On the other hand in $(x_{1} + x_{2})^{3} = x_{1}^{3} + x_{2}^{3} + 3x_{1}^{2}x_{2} + x_{2}^{2}x_{1}$ both $1$ and $3$ appear twice as coefficients so $(n, k)$ cannot be equal to $(3, 2)$).
+            \begin{answer}
+                All possible values of $n$ and $k$ ones such that $k \divides n$. This is because we would then have
+                    \begin{equation*}
+                        ak = n
+                    \end{equation*}
+                which means that there is a coefficient of the form
+                    \begin{equation*}
+                        \dbinom{n}{\underbrace{a, a, \ldots, a}_{k \text{ times}}}
+                    \end{equation*}
+                We know there is only one of this form, because there is only one way to represent $k$ groups of the same size, namely:
+                    \begin{equation*}
+                        cx_{1}^{a}\ldots x_{k}^{a}
+                    \end{equation*}
+                were $c$ is the coefficient and the $x_{i}$'s are part of $(x_{1} + x_{2} + \ldots + x_{k})^{n}$.
+            \end{answer}
+
+        \item [(b)] Is it possible for two different integers to appear exactly once as coefficients of the expression above? 
+            \begin{proof}
+                No it is not. We have that 
+                    \begin{equation*}
+                        \dbinom{n}{\underbrace{a, a, \ldots, a}_{k \text{ times}}}
+                    \end{equation*}
+                appears exactly once. All other coefficients are of the form
+                    \begin{equation*}
+                        \dbinom{n}{a_{1}, a_{2}, \ldots, a_{k}}
+                    \end{equation*}
+                where at least one $a_{i} \neq a_{j}$ for $i \neq j$. This means that we can swap the places of these values to still get the same coefficient:
+                    \begin{equation*}
+                        \dbinom{n}{a_{1}, \ldots, a_{i}, \ldots, a_{j}, \ldots, a_{k}} \rightarrow \dbinom{n}{a_{1}, \ldots, a_{j}, \ldots , a_{i}, \ldots , a_{k}}
+                    \end{equation*}
+                We can always do this as long as $k \geq  2$. If $k = 1$, we have that case: $(a_{1})^{n}$, in which there is only one coefficient.
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 3}: Find the number of compositions of $n$ with even parts.
+    \begin{answer}
+        Using the formula for the number of compositions of $n$ with $k$-parts, isn't it just
+            \begin{equation*}
+                \sum_{k \text{ is even }}^{n} \dbinom{n - 1}{k - 1}
+            \end{equation*}
+        Notice that if we take the sum over all $k$ both even and odd, we get:
+            \begin{equation*}
+                \sum_{k = 0}^{n} \dbinom{n - 1}{k - 1} = 2^{n - 1}
+            \end{equation*}
+        And by the fact that the sum coefficients where $k$ is odd is equal to the sum where $k$ is even, we have a bijection between the number of compositions of $n$ with even parts and the number with odd parts. So the number of compositions with even parts is $2^{n - 2}$.
+    \end{answer}
+
+\textbf{Exercise 4}: A student needs to choose $12$ hours of classes per week (5 days, no classes on Sunday and Saturday). In how many ways can she choose an (integer) number of hours for each weekday if she wants to have \textit{at least} $3$ hours on Monday, \textit{at least} $2$ hours on Tuesday and \textit{no more} than $1$ hour on Friday?
+    \begin{proof}
+        We first assign $3$ hours to Monday and $2$ hours to Tuesday. So we will have $7$ hours left. Now we have two cases.
+            \begin{itemize}
+                \item We can give Friday $1$ hour. This means that we have $6$ hours left to  distribute to $4$ days. We have $\binom{9}{3}$ choices.
+
+                \item We can have $0$ hours on Friday. This means that we have $7$ hours left to distribute to $4$ days. We have $\binom{10}{3}$ choices.
+            \end{itemize}
+        By both cases, they are non-overlapping, therefore, there are $\binom{9}{3} + \binom{10}{3}$ choices.
+    \end{proof}
+
+\textbf{Exercise 5}: A student needs to choose $8$ hours of classes per week ($5$ days, no classes on Sunday and Saturday). In how many ways can he choose an (integer) number of hours for each weekday if he wants to have strictly fewer hours on Friday than on Thursday?
+    \begin{proof}
+        We first choose the number of ways to split $8$ hours among $5$ classes. This is just $\binom{12}{4}$. Notice that we have conjugates in this set of choices, given by the bijection between a choice where more hours are given to Friday than Thursday, and the choice where the number of hours in Friday and Thursday are swapped. We first need to subtract out the number of choices where the number of hours in Friday and Thursday are equal:
+            \begin{equation*}
+                \dbinom{12}{4} - \dbinom{10}{2} - \dbinom{8}{2} - \dbinom{6}{2} - \dbinom{4}{2} - \dbinom{2}{2}
+            \end{equation*}
+        This is 
+            \begin{equation*}
+                99 \cdot 5 - 9 \cdot 5 - 4 \cdot 7 - 3 \cdot 5 - 2 \cdot 3 - 1 = 450 - 28 - 15 - 7
+            \end{equation*}
+        So we have $400$ choices with asymmetric number of hours on Friday and Thursday. Now divide by $2$ and that is our answer: $200$.
+    \end{proof}
+
+\textbf{Exercise 6}: Let $n$ be a positive integer. Prove that the sum of the first parts $a_{1}$ of all compositions of $n$ is equal to $2^{n} - 1$ (for $n = 2$ we have compositions $(2)$ and $(1, 1),$ the sum of the first parts is $1 + 2 = 3$).
+    \begin{proof}
+        We can count this by:
+            \begin{itemize}
+                \item Choose the size of the first part to be $1$. Then we are counting the number of compositions of size $n - 1$ and the sum of the first parts is $1 \cdot \sum_{k = 0}^{n - 1} \binom{n - 2}{k - 1} = 1 \cdot 2^{n - 2}$.
+
+                \item Choose the size of the first part to be $2$. The we are counting the number of compositions of size $n - 2$ and the sum of the first parts will be $2 \cdot \sum_{k = 0}^{n - 1} \binom{n - 3}{k - 1} = 2 \cdot 2^{n - 3}$.
+
+                \item $\vdots $
+
+                \item Choose the size of the first part to be $n$. Then we have the sum of the first parts is $n$ 
+            \end{itemize}
+        So our formula is 
+            \begin{equation*}
+                n + \sum_{k = 1}^{n - 1} k \cdot 2^{n - (k + 1)} 
+            \end{equation*}
+        We will prove that
+            \begin{equation*}
+                2^{n} - 1 = n + \sum_{k = 1}^{n - 1} k \cdot 2^{n - (k + 1)} 
+            \end{equation*}
+        by induction.
+
+        Base Case: For $n = 1$, we have that $2^{1} - 1 = 1$ and $1 + \sum_{k = 1}^{0} k \cdot 2^{n - (k + 1)} = 1 + 0 = 1$
+
+        Inductive Case: Suppose that $n + \sum_{k}^{n - 1} k \cdot 2^{n - (k + 1)} = 2^{n} - 1$ for $n \geq 1$. Then we will show that it holds for $n + 1$:
+            \begin{align*}
+                n + \sum_{k = 0}^{n - 1} k \cdot 2^{n - (k + 1)}          &= 2^{n} - 1     \\
+                n + 1  + \sum_{k = 0}^{n - 1} k \cdot 2^{n - (k + 1)}     &= 2^{n}         \\
+                2n + 2 + \sum_{k = 0}^{n - 1} k \cdot 2^{n + 1 - (k + 1)} &= 2^{n + 1}     \\
+                2n + 1 + \sum_{k = 0}^{n - 1} k \cdot 2^{n + 1 - (k + 1)} &= 2^{n + 1} - 1 \\
+                n + 1 + \sum_{k = 0}^{n} k \cdot 2^{n + 1 - (k + 1)}      &= 2^{n + 1} - 1   
+            \end{align*}
+        which shows that the formula we found was equivalent to $2^{n} - 1$. So we are done.
+    \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,517 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math143/Homework/Math143Practice/Math143Practice.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math143Practice}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Let $F = x^{3} + y^{3} - 2xyz$, and consider $\mathbb{V}(F) \subseteq\mathbb{P}_{\mathbb{C}}^{2}$.
+    \begin{itemize}
+        \item [(a)] What is the tangent line to $\mathbb{V}(F)$ at $[1 : 1 : 1]$?
+            \begin{proof}
+                Recall from the homework that given a smooth point, the tangent line at $P$ is 
+                    \begin{equation*}
+                        \mathbb{V}(xF_{x}(P) + yF_{y}(P) + zF_{z}(P))
+                    \end{equation*}
+                So we need to check that $[1 : 1 : 1]$ is a smooth point of $F$. So that means we check that $(1, 1)$ is a smooth point of
+                    \begin{equation*}
+                        f(y, z) = F(1, y, z) = 1 + y^{3} - 2yz
+                    \end{equation*}
+                Taking the partials:
+                    \begin{align*}
+                        f_{y} &= 3y^{2} - 2z & f_{y}(1, 1) &= 1 \\
+                        f_{z} &= -2y         & f_{z}(1, 1) &= -2  
+                    \end{align*}
+                Since the partial derivatives do not vanish at that point, then the point is smooth. So we have 
+                    \begin{align*}
+                        F_{x} &= 3x^{2} - 2yz & F_{x}(P) &= 3 - 2 = 1 \\
+                        F_{y} &= 3y^{2} - 2xz & F_{y}(P) &= 3 - 2 = 1 \\
+                        F_{z} &= -2xy         & F_{z}(P) &= -2          
+                    \end{align*}
+                Then the tangent line is given by
+                    \begin{equation*}
+                        \mathbb{V}(x + y - 2z)
+                    \end{equation*}
+                so we are done.
+            \end{proof}
+
+        \item [(b)] Find the singular points of $\mathbb{V}(F) \subseteq\mathbb{P}^{2}_{\mathbb{C}}$. 
+            \begin{proof}
+                From the homework, $F$ is singular iff $F(P) = F_{x}(P) = F_{y}(P) = F_{z}(P) = 0$. From the previous problem:
+                    \begin{align*}
+                        F     &= x^{3} + y^{3} - 2xyz \\
+                        F_{x} &= 3x^{2} - 2yz         \\
+                        F_{y} &= 3y^{2} - 2xz         \\
+                        F_{z} &= -2xy                   
+                    \end{align*}
+                From the last equation, we have two cases:
+                    \begin{itemize}
+                        \item If $-2xy = 0$ and $x = 0$, from the second equation:
+                            \begin{equation*}
+                                F_{y}(0, y, z) = 3y^{2} = 0
+                            \end{equation*}
+                        so $y = 0$. We see that $x = 0, y = 0$ automatically makes the other two equations $0$. So a singular point is $[0 : 0 : 1]$.
+
+                        \item If $y = 0$, by the second equation:
+                            \begin{equation*}
+                                F_{x}(x, 0, z) = x^{2} = 0
+                            \end{equation*}
+                        So $x = 0$, we still get the same singular point.
+                    \end{itemize}
+            \end{proof}
+
+        \item [(c)] For each singular point, find its multiplicity and tangent cone. 
+            \begin{proof}
+                So the multiplicity is the degree of the form of lowest degree at $0$ in the dehomogenization. Since $[0 : 0 : 1] \in U_{3}$, take the dehomogenization on $U_{3}$:
+                    \begin{equation*}
+                        f(x, y) = F(x, y, 1) = x^{3} + y^{3} - 2xy
+                    \end{equation*}
+                Then $[0 : 0 : 1]$ in $U_{3}$ is the origin. So $-2xy$ is of lowest degree so the multiplicity is $2$. The tangent cone is the form of lowest degree so we have $\mathbb{T}C_{P}(\mathbb{V}(F)) = \mathbb{V}(-2xy)$.
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 2}: Let $f = y^{4} + y^{3} - x^{2}$, and consider $V(f) \subseteq\mathbb{A}_{\mathbb{C}^{2}}$.
+    \begin{itemize}
+        \item [(a)] Find the projective closure $\mathbb{V}(F) \subseteq\mathbb{P}^{2}_{\mathbb{C}}$ for some $F \in k[x, y, z]$.
+            \begin{proof}
+                The closure of $X$ is defined as 
+                    \begin{equation*}
+                        \mathbb{V}(H(I(X)))
+                    \end{equation*}
+                Then
+                    \begin{equation*}
+                        \mathbb{V}(H(I(V(f)))) = \mathbb{V}(H(y^{4} + y^{3} - x^{2}))
+                    \end{equation*}
+                Homogenize all generators:
+                    \begin{equation*}
+                        \mathbb{V}(y^{4} + zy^{3} -x^{2}z^{2})
+                    \end{equation*}
+                which is the closure.
+            \end{proof}
+
+        \item [(b)] Find the singular points of $\mathbb{V}(F) \subseteq \mathbb{P}_{\mathbb{C}}^{2}$.
+            \begin{proof}
+                We know that a point is singular iff $F(P) = F_{x}(P) = F_{y}(P) = F_{z}(P) = 0$. So take the partial derivatives:
+                    \begin{align*}
+                        F_{x} &= -2xz^{2}         \\
+                        F_{y} &= 4y^{3} + 3y^{2}z \\
+                        F_{z} &= y^{3} - 2x^{2}z    
+                    \end{align*}
+                Then we have cases:
+                    \begin{itemize}
+                        \item From $F_{x} = 0$, we have that either $x = 0$ or $z = 0$. If $x = 0$, then
+                            \begin{equation*}
+                                F_{z}(0, y, z) = y^{3} = 0
+                            \end{equation*}
+                        so $y = 0$. This causes all other equations to be $0$, so a singular point is $[0 : 0 : 1]$.
+
+                        \item If from $F_{x} = 0$, we get $z = 0$, then 
+                            \begin{equation*}
+                                F_{z}(x, y, 0) = y^{3} = 0
+                            \end{equation*}
+                        so $y  = 0$ also. Then the singular point is $[1 : 0 : 0]$. Notice that both $x = z = 0$ cannot be the case, because then we would get $x = y = z = 0$ which is not a point.
+                    \end{itemize}
+                So the singular points of $\mathbb{V}(F)$ are $[0 : 0 : 1]$ and $[1 : 0 : 0]$.
+            \end{proof}
+
+        \item [(c)] For each singular point, find its multiplicity and tangent cone. 
+            \begin{proof}
+                \begin{itemize}
+                    \item For $[1 : 0 : 0]$, dehomogenize on the first coordinate:
+                        \begin{equation*}
+                            f = F(1, y, z) = y^{4} + zy^{3} - z^{2}
+                        \end{equation*}
+                    Then since on $U_{1}$, the point is $(0, 0)$, take the lowest degree term $z^{2}$ and the multiplicity is $2$. The tangent cone is $\mathbb{V}(z^{2})$.
+
+                    \item For $[0 :0 : 1]$, dehomogenize on the last coordinate:
+                        \begin{equation*}
+                            f = F(x, y, 1) = y^{4} + y^{3} - x^{2}
+                        \end{equation*}
+                    and since $P \in U_{3}$ is the origin, take the lowest degree term, and that is the tangent cone: $\mathbb{V}(-x^{2})$ while the multiplicity is $2$. 
+                \end{itemize}
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 3}: Let $P = (0, 0)$. Compute the following intersection multiplicities
+    \begin{itemize}
+        \item [(a)] $I_{P}(xy + y^{3}, x^{2} + 2xy + y^{3})$
+            \begin{proof}
+                Using the intersection multiplicity properties:
+                    \begin{align*}
+                        I_{P}(xy + y^{3}, x^{2} + 2xy + y^{3}) &= I_{P}(y, x^{2} + 2xy + y^{3}) + I_{P}(x + y^{2}, x^{2} + 2xy + y^{3}) \\
+                         &= I_{P}(y, x^{2}) + I_{P}(x + y^{2}, x^{2} + xy) \\
+                         &= 2 + I_{P}(x + y^{2}, x) + I_{P}(x + y^{2}, x + y) \\
+                         &= 2 + 2 + I_{P}(x + y, y - y^{2}) \\
+                         &= 2 + 2 + I_{P}(x + y, y) + I_{P}(x + y, 1 - y) \\
+                         &= 5   
+                    \end{align*}
+            \end{proof}
+
+        \item [(b)] $I_{P}(y^{2} - x^{3}, xy + x^{4} + y^{4})$
+            \begin{proof}
+            \end{proof}
+
+        \item [(c)] $I_{P}(x^{2} + y^{2} + x^{4}y^{4}, x^{3} - y^{3} + 3xy^{5})$ 
+            \begin{proof}
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 4}: Let $\alpha = \frac{x^{2} + xy}{3y^{2}} \in k(\mathbb{P}^{1})$. What is the value of $\alpha$ at $[1 : 3] \in\mathbb{P}^{1}$? Where is $\alpha$ defined?
+    \begin{proof}
+        This is well-defined because the numerator is homogeneous of same degree as the denominator. Then
+            \begin{equation*}
+                \alpha([1 : 3]) = \dfrac{1 + 3}{27} = \dfrac{4}{27}
+            \end{equation*}
+        $\alpha$ is defined when the denominator does not vanish. So it is defined in $\mathbb{P}^{1} \backslash \mathbb{V}(y)$, or just some space isomorphic to $\mathbb{A}^{1}$.
+    \end{proof}
+
+\textbf{Exercise 5}: Suppose $\varphi : \mathbb{A}^{n} \rightarrow\mathbb{A}^{m}$ is a morphism and $X \subseteq \mathbb{A}^{n}$ is an irreducible algebraic set. Prove that $\overline{\varphi(X)}$ is an irreducible algebraic set.
+    \begin{proof}
+        If $\varphi(X) = \overline{\varphi(X)}$, then this is true, because the image of an irreducible algebraic set is an irreducible algebraic set, if the image is an algebraic set. Otherwise, we say that $\varphi(X) \subseteq \overline{\varphi(X)}$. Suppose for contradiction that $\overline{\varphi(X)}$ is reducible:
+            \begin{equation*}
+                \overline{\varphi(X)} = A \cup B
+            \end{equation*}
+        where $A \neq B \neq \overline{\varphi(X)}$, and $A \neq B \neq \varphi(X)$, otherwise, $\varphi(X)$ was algebraic and $\overline{\varphi(X)} = \varphi(X)$. Then since there are no intermediate algebraic sets between $\varphi(X)$ and $\overline{\varphi(X)}$, then 
+            \begin{equation*}
+                A, B \subseteq \varphi(X)
+            \end{equation*}
+        But this means that 
+            \begin{equation*}
+                \varphi^{-1}(A \cup B) = \varphi^{-1}(A) \cup \varphi^{-1}(B) \subseteq X
+            \end{equation*}
+        Because $A \cup B = \overline{\varphi(X)}$,
+            \begin{equation*}
+                X \subseteq \varphi^{-1}(A \cup B) = \varphi^{-1}(A) \cup \varphi^{-1}(B)
+            \end{equation*}
+        So
+            \begin{equation*}
+                \varphi^{-1}(A) \cup \varphi^{-1}(B) = X
+            \end{equation*}
+        and $X$ is reducible. So we have proven it by contrapositive.
+    \end{proof}
+\textbf{Note}: This was a difficult problem. Some intuition that would help going into this is that proving the contrapositive is easier, because that gives something to work with. Reducing the problem by immediately considering the case where the closure is the image. Using the fact that we have removed that case to get more info about the new case: $A, B \neq \varphi(X)$ was key, because we really wanted that $\varphi^{-1}(A), \varphi^{-1}(B)$ were subsets of $X$.
+
+\textbf{Exercise 6}: Consider the morphism $\varphi : \mathbb{A}^{1} \rightarrow\mathbb{A}^{3}$ defined by $t \mapsto (t, t^{2}, t^{3})$. Let $x, y, z$ be the coordinates on $\mathbb{A}^{3}$.
+    \begin{itemize}
+        \item [(a)] What is the pullback map $\varphi^{*} : \Gamma(\mathbb{A}^{3}) \rightarrow \Gamma(\mathbb{A}^{1})$?
+            \begin{proof}
+                The pullback map is 
+                    \begin{equation*}
+                        f(x, y, z) \mapsto f(x, x^{2}, x^{3})
+                    \end{equation*}
+            \end{proof}
+
+        \item [(b)] Is the image of $\varphi$ closed? Justify your answer.
+            \begin{proof}
+                Yes, because we have the following relations:
+                    \begin{equation*}
+                        x^{3} = z \text{ and } x^{2} = y
+                    \end{equation*}
+                Then $\varphi(\mathbb{A}^{1}) = V(x^{3} - z, x^{2} - y)$. Since the image is an algebraic set, it is closed in the Zariski topology.
+            \end{proof}
+
+        \item [(c)] Prove that $\varphi$ is an isomorphism onto its image.
+            \begin{proof}
+                We just need an inverse morphism such that composition both ways gives the identity. Consider:
+                    \begin{align*}
+                        \psi            &: V(x^{3} - z, x^{2} - y) \rightarrow \mathbb{A}^{1} \\
+                        \psi((x, y, z)) &= x                                      
+                    \end{align*}
+                Suppose we have a $t \in \mathbb{A}^{1}$. Then
+                    \begin{align*}
+                        \psi(\varphi(t)) &= \psi((t, t^{2}, t^{3})) \\
+                                         &= t                         
+                    \end{align*}
+                Now if we have $p \in V(x^{3} - z, x^{2} - y)$, then 
+                    \begin{align*}
+                        x^{2} - y &= 0 & x^{3} - z &= 0 \\
+                        x^{2}     &= y & x^{3}     &= z   
+                    \end{align*}
+                So 
+                    \begin{equation*}
+                        p = (x, x^{2}, x^{3})
+                    \end{equation*}
+                Now
+                    \begin{align*}
+                        \varphi(\psi(p)) &= \varphi(x)        \\
+                                         &= (x, x^{2}, x^{3})   
+                    \end{align*}
+                which completes the proof.
+            \end{proof}
+
+        \item [(d)] What is the preimage $\varphi^{-1}(V(yz - x^{5}))$? 
+            \begin{proof}
+                The preimage is the vanishing of the pullback:
+                    \begin{equation*}
+                        V(\varphi^{*}(yz - x^{5})) = V(0) = \mathbb{A}^{1}
+                    \end{equation*}
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 7}: Let $X = V(x^{2}z, x^{2} + xz + yz + y^{2}) \subseteq \mathbb{A}_{\mathbb{C}}^{3}$. Decompose $X$ into irreducible components. Make sure to justify that each component is irreducible.
+    \begin{proof}
+        We have that if 
+            \begin{equation*}
+                x^{2}z = 0
+            \end{equation*}
+        then $x = 0$ or $z = 0$. If $x = 0$, we have 
+            \begin{equation*}
+                x^{2} + xz + yz + y^{2} = yz + y^{2} = 0
+            \end{equation*}
+        But if $z = 0$, then
+            \begin{equation*}
+                x^{2} + xz + yz + y^{2} = x^{2} + y^{2} = 0
+            \end{equation*}
+        So we have the union:
+            \begin{equation*}
+                V(x, yz + y^{2}) \cup V(z, x^{2} + y^{2})
+            \end{equation*}
+        We see that the left and right one can be decomposed further:
+            \begin{equation*}
+                V(x, y) \cup V(x, z + y) \cup V(z, x - iy) \cup V(z, x + iy)
+            \end{equation*}
+        Finally, $V(x, y) \subseteq V(x, z + y)$, so we just have
+            \begin{equation*}
+                V(x, z + y) \cup V(z, x - iy) \cup V(z, x + iy)
+            \end{equation*}
+    \end{proof}
+
+\textbf{Exercise 8}: Let $J = (y^{2} - x^{2}, y^{2} + x^{2}) \subseteq \mathbb{C}[x, y]$.
+    \begin{itemize}
+        \item [(a)] What is $V(J) \subseteq \mathbb{A}^{2}$?
+            \begin{proof}
+                We notice that $J = (y^{2} - x^{2}, y^{2} + x^{2}) = (y^{2}, x^{2})$. Then 
+                    \begin{equation*}
+                        V(y^{2}, x^{2}) = \{(0, 0)\}
+                    \end{equation*}
+            \end{proof}
+
+        \item [(b)] Find the dimension $\dim_{\mathbb{C}}\mathbb{C}[x, y]/J$.
+            \begin{proof}
+                The dimension is $4$, because the basis is $\{1, x, y\}$. We see this from
+                    \begin{equation*}
+                        \dfrac{\mathbb{C}[x, y]}{J} = \dfrac{\mathbb{C}[x, y]}{(x^{2}, y^{2})}
+                    \end{equation*}
+                So every element of $\mathbb{C}[x, y]/(x^{2}, y^{2})$ is of degree $\leq 1$, which is how we got the basis.
+            \end{proof}
+
+        \item [(c)] Find $I_{(0, 0)}(y^{2} - x^{2}, y^{2} + x^{2})$.
+            \begin{proof}
+                We want
+                    \begin{equation*}
+                        I_{P}(x^{2}, y^{2}) = I_{P}(x^{2}, y) + I_{P}(x^{2}, y) = 4
+                    \end{equation*}
+            \end{proof}
+
+        \item [(d)] What is $\mathbb{V}(J) \subseteq \mathbb{P}^{1}$? 
+            \begin{proof}
+                It is the empty set, because $[0 : 0] \notin \mathbb{P}^{1}$.
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 9}: Find the projective closure of $V(x + y^{3} + z) \subseteq \mathbb{A}^{3}$ in $\mathbb{P}^{3}$. Is it smooth?
+    \begin{proof}
+        The projective closure is $\mathbb{V}(xw^{2} + y^{3} + zw^{2})$. We just need to see if $V(x + y^{3} + z)$ is singular. Take the partial derivatives:
+            \begin{align*}
+                f_{x} &= 1      \\
+                f_{y} &= 3y^{2} \\
+                f_{z} &= 1        
+            \end{align*}
+        So the partials are never $0$, so the projective closure is smooth.
+    \end{proof}
+
+\textbf{Exercise 10}: Determine if each of the following statements is true or false. If false, give a counterexample. If true, no justification is required.
+    \begin{itemize}
+        \item [(1)] If $L$ is a finite extension of $k$ then $L$ is an algebraic extension of $k$.
+            \begin{answer}
+                This is true.
+            \end{answer}
+
+        \item [(2)] If $L$ is an algebraic extension of $k$ then $L$ is a finite extension of $k$.
+            \begin{answer}
+                This is false. One counterexample is $\mathbb{Q}(\sqrt{p_{1}}, \sqrt{p_{2}}, \ldots)$ for all $p_{i}$ prime.
+            \end{answer}
+
+        \item [(3)] If $\varphi: X \rightarrow Y$ is an isomorphism, then $\varphi$ is a bijection on points.
+            \begin{answer}
+                This is true.
+            \end{answer}
+
+        \item [(4)] If $\varphi : X \rightarrow Y$ is a morphism that is bijective on points, then $\varphi$ is an isomorphism.
+            \begin{answer}
+                This is false. Consider $\mathbb{A}^{1} \rightarrow V(x^{3} - y^{2})$.
+            \end{answer}
+
+        \item [(5)] Every set that is closed in the classical topology is closed in the Zariski topology.
+            \begin{answer}
+                False. We have that $\mathbb{N}$ is closed in $\mathbb{R}$, but this is not true for the Zariski topology because any infinite algebraic subset of $\mathbb{A}^{1}$ must be all of $\mathbb{A}^{1}$.
+            \end{answer}
+
+        \item [(6)] Every set that is closed in the Zariski topology is closed in the classical  topology.
+            \begin{answer}
+                
+            \end{answer}
+
+        \item [(7)] If $I \subseteq J$ are ideals, then $V(I) \subseteq V(J)$.
+
+        \item [(8)] If $X \subseteq Y$ are projective algebraic sets, then $\mathbb{I}(Y) \subseteq \mathbb{I}(X)$.
+
+        \item [(9)] If $X \subseteq Y$ are projective algebraic sets, then $C(Y) \subseteq C(X)$.
+
+        \item [(10)] If $X$ and $Y$ are projective algebraic sets, then $\mathbb{I}(X \cup Y) = \mathbb{I}(X) + \mathbb{I}(Y)$.
+
+        \item [(11)] If $X$ is a projective algebraic set, $\mathbb{I}(X) = I(C(X))$.
+
+        \item [(12)] If $J$ is a homogeneous ideal, then $\mathbb{I}(\mathbb{V}(J)) = J$.
+
+        \item [(13)] The tangent cone of an algebraic set is contained in its tangent space.
+
+        \item [(14)] The tangent space of an algebraic set is contained in tangent cone.
+
+        \item [(15)] Every prime ideal is radical.
+
+        \item [(16)] Every radical ideal is prime. 
+    \end{itemize}
+
+\textbf{Exercise 11}: Let $C = V((x - x_{0})^{2} + (y - y_{0})^{2} - r^{2}) \subseteq \mathbb{A}_{\mathbb{C}}^{2}$ be a circle with center $(x_{0}, y_{0})$ and radius $r$. 
+    \begin{itemize}
+        \item [(a)] Let $\overline{C} \subseteq \mathbb{P}_{\mathbb{C}}^{2}$ be the projective closure of $C$. What is the tangent line to $\overline{C}$ at $[1 : i : 0]$ and at $[1 : -i : 0]$?
+            \begin{proof}
+                The projective closure is
+                    \begin{equation*}
+                        \mathbb{V}((x - x_{0}z)^{2} + (y - y_{0}z)^{2} - r^{2}z^{2})
+                    \end{equation*}
+                It was proved on the homework that the tangent line is the vanishing of
+                    \begin{equation*}
+                        xF_{x}(P) + yF_{y}(P) + zF_{z}(P)
+                    \end{equation*}
+                So we have:
+                    \begin{align*}
+                        F_{x} &= 2x - 2x_{0}z                                           & F_{x}([1 : i : 0]) &= 2                & F_{x}([1 : -i : 0]) &= 2                 \\
+                        F_{y} &= 2y - 2y_{0}z                                           & F_{y}([1 : i : 0]) &= 2i               & F_{y}([1 : -i : 0]) &= -2i               \\
+                        F_{z} &= -2x_{0}x - 2y_{0}y + 2(x_{0}^{2} + y_{0}^{2} - r^{2})z & F_{z}([1 : i : 0]) &= -2x_{0} -2iy_{0} & F_{z}([1 : -i : 0]) &= -2x_{0} + 2iy_{0}   
+                    \end{align*}
+                So now the tangent line is given by
+                    \begin{align*}
+                        \mathbb{T}C_{[1 : i : 0]}(\overline{C})  &= \mathbb{V}(2x - 2iy + (-2x_{0} + 2iy_{0})z) \\
+                        \mathbb{T}C_{[1 : -i : 0]}(\overline{C}) &= \mathbb{V}(2x + 2iy + (-2x_{0} + 2iy_{0})z)   
+                    \end{align*}
+            \end{proof}
+
+        \item [(b)] Let $C_{1}$ and $C_{2}$ be circles with the same center. Prove that $\overline{C_{1}}$ and $\overline{C_{2}}$ are tangent at $[1 : i : 0]$ and $[1 : -i : 0]$. 
+            \begin{proof}
+                By the previous problem, we see that the tangent line formula is given by
+                    \begin{align*}
+                        \mathbb{T}C_{[1 : i : 0]}(\overline{C})  &= \mathbb{V}(2x - 2iy + (-2x_{0} + 2iy_{0})z) \\
+                        \mathbb{T}C_{[1 : -i : 0]}(\overline{C}) &= \mathbb{V}(2x + 2iy + (-2x_{0} + 2iy_{0})z)   
+                    \end{align*}
+                Now if the circles have the same radius, then $x_{0}$ and $y_{0}$ are the same for both. So they have the same tangent line on the corresponding point. So the circles are tangent in $[1 : i : 0]$, $[1 : -i : 0]$.
+            \end{proof}
+
+        \item [(c)] Prove, using Bezout's Theorem, that the intersection of $C_{1}$ and $C_{2}$ in $\mathbb{A}_{\mathbb{C}}^{2}$ is empty. 
+            \begin{proof}
+                Suppose the circles do not have infinite intersection. By Bezout's theorem, we have that 
+                    \begin{equation*}
+                        \sum_{P \in \mathbb{P}^{2}_{\mathbb{C}}}I_{P}(C_{1}, C_{2}) = 4
+                    \end{equation*}
+                This is 
+                    \begin{equation*}
+                        \sum_{P \in \mathbb{A}_{\mathbb{C}}^{2}} I_{P}(C_{1}, C_{2}) + I_{[1 : i : 0]}(C_{1}, C_{2}) + I_{[1 : -i : 0]}(C_{1}, C_{2}) + \cdots
+                    \end{equation*}
+                But we see that the intersection multiplicity at $[1 : -i : 0]$, $[1 : i : 0]$ is at least, $2$, because the tangent lines are shared. So the circles do not intersect in $\mathbb{A}_{\mathbb{C}}^{2}$.
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 12}: Let 
+    \begin{equation*}
+        F = a(x^{2} + y^{2}) + cxz + eyz + fz^{2} \in k[x, y, z]
+    \end{equation*}
+Let $x^{\prime} = x + \alpha z$ and $y^{\prime} = y + \beta z$ and $z^{\prime} = rz$ for constants $\alpha, \beta, r$. Write
+    \begin{equation*}
+        F = a^{\prime}(x^{\prime2} + y^{\prime2}) + c^{\prime}x^{\prime}z^{\prime} + e^{\prime}y^{\prime}z^{\prime} + f^{\prime}z^{\prime2}
+    \end{equation*}
+for coefficients $a^{\prime}, c^{\prime}, e^{\prime}, f^{\prime}$ (which are themselves polynomials in $a, c, e, f$). Prove that the map $[a : c : e : f] \mapsto [a^{\prime} : c^{\prime} : e^{\prime} : f^{\prime}]$ is a projective change of coordinates.
+    \begin{proof}
+        We have 
+            \begin{align*}
+                x &= x^{\prime} - \dfrac{\alpha z^{\prime}}{r} \\
+                y &= y^{\prime} - \dfrac{\beta z^{\prime}}{r}  \\
+                z &= \dfrac{z^{\prime}}{r}                       
+            \end{align*}
+        Now we plug in:
+            \begin{align*}
+                F &= a((x^{\prime} - \dfrac{\alpha z^{\prime}}{r})^{2} + (y^{\prime} - \dfrac{\beta z^{\prime}}{r})^{2}) + c(x^{\prime} - \dfrac{\alpha z^{\prime}}{r})(\dfrac{z^{\prime}}{r}) + e(y^{\prime} - \dfrac{\beta z^{\prime}}{r})\dfrac{z^{\prime}}{r} + f(\dfrac{z^{\prime}}{r})^{2}             \\
+                  &= a(x^{\prime2} - \dfrac{2\alpha x^{\prime}z^{\prime}}{r} + \dfrac{\alpha^{2}z^{\prime2}}{r^{2}} + y^{\prime2} - \dfrac{2\beta y^{\prime}z^{\prime}}{r} + \dfrac{\beta^{2}z^{\prime2}}{r^{2}})                                                                                            \\
+                  &  +c\dfrac{xz^{\prime}}{r} - \dfrac{c\alpha z^{\prime2}}{r^{2}}                                                                                                                                                                                                                           \\
+                  &  + e\dfrac{y^{\prime} z^{\prime}}{r} - \dfrac{e \beta z^{\prime2}}{r^{2}}                                                                                                                                                                                                                \\
+                  &  + \dfrac{fz^{\prime2}}{r^{2}}                                                                                                                                                                                                                                                           \\
+                  &= a(x^{\prime2} + y^{\prime2}) + (\dfrac{c}{r} - \dfrac{2a\alpha}{r})x^{\prime}z^{\prime} + (\dfrac{e}{r} - \dfrac{2a\beta}{r})y^{\prime}z^{\prime} + (\dfrac{a\alpha^{2}}{r^{2}} + \dfrac{a\beta^{2}}{r^{2}} - \dfrac{c\alpha}{r^{2}} - \dfrac{e\beta}{r^{2}} + \dfrac{f}{r^{2}})z^{\prime2}   
+            \end{align*}
+        So now we show that
+            \begin{equation*}
+                \begin{bmatrix}
+                    a \\
+                    c \\
+                    e \\
+                    f   
+                \end{bmatrix} \mapsto \begin{bmatrix}
+                    a                                                               \\
+                    \dfrac{c}{r} - \dfrac{2a\alpha}{r}                              \\
+                    \dfrac{e}{r} - \dfrac{2a\beta}{r}                               \\
+                    \dfrac{a(\alpha^{2} + \beta^{2}) - c\alpha - e\beta + f}{r^{2}}   
+                \end{bmatrix}
+            \end{equation*}
+        is a change of coordinates. It is given by the matrix:
+            \begin{equation*}
+                \begin{bmatrix}
+                    1                                       & 0                      & 0                     & 0                \\
+                    \dfrac{2\alpha}{r}                      & \dfrac{1}{r}           & 0                     & 0                \\
+                    -\dfrac{2\beta}{r}                      & 0                      & \dfrac{1}{r}          & 0                \\
+                    \dfrac{(\alpha^{2} + \beta^{2})}{r^{2}} & -\dfrac{\alpha}{r^{2}} & -\dfrac{\beta}{r^{2}} & \dfrac{1}{r^{2}}   
+                \end{bmatrix}
+            \end{equation*}
+        which is invertible because the determinant is $\frac{1}{r^{4}} \neq 0$.
+    \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

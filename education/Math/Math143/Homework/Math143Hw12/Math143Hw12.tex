@@ -1,0 +1,786 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math143/Homework/Math143Hw12/Math143Hw12.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math143Hw12}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Segre embeddings.
+    \begin{itemize}
+        \item [(a)] Let $\sigma_{1, 1} : \mathbb{P}^{1} \times \mathbb{P}^{1} \rightarrow \mathbb{P}^{3}$ be the morphism given by
+            \begin{equation*}
+                [x_{1} : x_{2}] \times [y_{1} : y_{2}] \mapsto [x_{1}y_{1} : x_{1}y_{2} : x_{2}y_{1} : x_{2}y_{2}]
+            \end{equation*}
+        Let $[z_{1} : \cdots : z_{4}]$ be the coordinates on $\mathbb{P}^{3}$. Prove that $\sigma_{1, 1}(\mathbb{P}^{1} \times \mathbb{P}^{1}) = \mathbb{V}(z_{1}z_{4} - z_{2}z_{3})$.
+            \begin{proof}
+                We have $\Im{\sigma_{ 1, 1}} \subseteq \mathbb{ V}(z_{1}z_{4} - z_{2}z_{3})$ because
+                    \begin{align*}
+                        [x_{1}y_{1} : x_{1}y_{2} : x_{2}y_{1} : x_{2}y_{2}] &\in  \Im{\sigma_{ 1, 1}} \\
+                        x_{1}y_{1}x_{2}y_{2} - x_{1}y_{2}x_{2}y_{1}                             &=   0                      
+                    \end{align*}
+                Now for the other containment, we need that $\mathbb{V}(z_{1}z_{4} - z_{2}z_{3}) \subseteq \Im{\sigma_{ 1, 1}}$. Suppose that $[z_{1} : z_{2} : z_{3} : z_{4}] \in \mathbb{ V}(z_{1}z_{4} - z_{2}z_{3})$. Then we have two cases:
+                    \begin{itemize}
+                        \item $z_{1} = 0$. Then $z_{2}z_{3} = 0$ and either $z_{2}, z_{3}$ is $0$. If $z_{2} = 0$, we have:
+                            \begin{align*}
+                                \sigma_{1, 1}([0 : x_{2}] \times [ y_{1} : y_{2}]) &= [0 : 0 : y_{1} : y_{2}] \\
+                                \sigma_{1, 1}([0 :  1] \times [z_{3} : z_{4}]) &= [ 0 : 0 : z_{3} : z_{4}]
+                            \end{align*}
+                        If $z_{3} = 0$, we have
+                            \begin{align*}
+                                \sigma_{ 1, 1}([x_{1} : x_{2}] \times [ 0 : y_{2}]) &= [0 : x_{1}y_{2} : 0 : x_{2}y_{2}] \\
+                                \sigma_{ 1, 1}([z_{2} : z_{4}] \times [ 0 : 1])                                               &= [0 : z_{2} : 0 : z_{4}]             
+                            \end{align*}
+                        and if $z_{2}, z_{3} = 0$, 
+                            \begin{align*}
+                                \sigma_{1, 1}([0 : x_{2}] \times [ 0 : y_{2}]) &= [0 : 0 : 0 : x_{2}y_{2}] \\
+                                \sigma_{1, 1}([0 : z_{4}] \times [ 0 : 1]) &= [0 : 0 : 0 : z_{4}]
+                            \end{align*}
+                        so we have that in all cases, there is an element in the preimage that gets mapped to the element in $\mathbb{V}(z_{1}z_{4} - z_{2}z_{3})$.
+
+                        \item If $z_{1} \neq 0$, we have
+                            \begin{equation*}
+                                z_{1}z_{4} - z_{2}z_{3} = 0 \implies z_{ 4} = \dfrac{z_{2}z_{3}}{z_{1}}
+                            \end{equation*}
+                        Now if $[z_{1} : z_{2} : z_{3} : z_{4}] \in \mathbb{ V}(z_{1}z_{4} - z_{2}z_{3})$, then:
+                            \begin{align*}
+                                [z_{1} : z_{2} : z_{3} : z_{4}] &= [1 : \dfrac{z_{2}}{z_{1}} : \dfrac{z_{3}}{z_{1}} : \dfrac{z_{4}}{z_{1}}] \\
+                                                                &= [1 : \dfrac{z_{2}}{z_{1}} : \dfrac{z_{3}}{z_{1}} : \dfrac{z_{2}z_{3}}{z_{1}^{2}}] \\
+                                                                &= \sigma_{1, 1}([1 : \dfrac{z_{3}}{z_{1}}] \times [ 1 : \dfrac{z_{2}}{z_{1}}])
+                            \end{align*}
+                        which completes the proof.
+
+                    \end{itemize}
+            \end{proof}
+
+        \item [(b)] Let $\sigma_{1, 2} : \mathbb{P}^{1} \times \mathbb{P}^{2} \rightarrow \mathbb{P}^{5}$ be the morphism given by
+            \begin{equation*}
+                [x_{1} : x_{2}] \times [y_{1} : y_{2} : y_{3}] \mapsto [x_{1}y_{1} : x_{1}y_{2} : x_{1}y_{3} : x_{2}y_{1} : x_{2}y_{2} : x_{2}y_{3}]
+            \end{equation*}
+        Let $[z_{1} : \cdots : z_{6}]$ be the coordinates on $\mathbb{P}^{5}$. Find a matrix $M$ whose entries are polynomials in $z_{i}$ and an integer $k$ so that $\sigma_{1, 2} (\mathbb{P}^{1} \times \mathbb{P}^{2}) \subseteq \mathbb{P}^{5}$ is the set of points where $\mathop{rank}M \leq k$. Prove that $\sigma_{1, 2}(\mathbb{P}^{1}\times \mathbb{P}^{2}) = \{[z_{1} : \cdots : z_{6}] : \mathop{rank}M \leq k\}$ for your chose $M$ and $k$. (This implies that $\sigma_{1, 2}(\mathbb{P}^{1} \times \mathbb{P}^{2})$ is the vanishing of the $(k + 1) \times (k + 1)$ minors of $M$.)
+            \begin{proof}
+                The matrix is
+                    \begin{equation*}
+                        M = \begin{bmatrix}
+                            z_{1} & z_{2} & z_{3} \\
+                            z_{4} & z_{5} & z_{6}   
+                        \end{bmatrix}
+                    \end{equation*}
+                Let $k = 1$. Then what is to be proved is that:
+                    \begin{equation*}
+                        \sigma_{ 1, 2}(\mathbb{P}^{1} \times \mathbb{ P}^{2}) = \left\{[z_{1} : z_{2} : \cdots : z_{ 6}] : \mathop{rank} \left(\begin{bmatrix}
+                            z_{1} & z_{2} & z_{3} \\
+                            z_{4} & z_{5} & z_{6}   
+                        \end{bmatrix}\right) \leq 1\right\} = J
+                    \end{equation*}
+                ($\Im{\sigma_{ 1, 2}} \subseteq J$) If we have a point 
+                    \begin{equation*}
+                        [x_{1}y_{1} : x_{1}y_{2} : x_{1}y_{3} : x_{2}y_{1} : x_{2}y_{2} : x_{2}y_{3}]
+                    \end{equation*}
+                in the image, then we check that:
+                    \begin{equation*}
+                        \begin{bmatrix}
+                            x_{1}y_{1} & x_{1}y_{2} & x_{1}y_{3} \\
+                            x_{2}y_{1} & x_{2}y_{2} & x_{2}y_{3}   
+                        \end{bmatrix}
+                    \end{equation*}
+                has rank $ \leq 1$. This is true because, either $x_{1}, x_{2} \neq 0$, we can divide wlog the top row by $x_{1}$ and multiply by $x_{2}$ to get a rank of $\leq 1$. 
+
+                ($J \subseteq \Im{\sigma_{1, 2}}$) The rank cannot be $0$ because there is no origin in $\mathbb{P}^{5}$. Then if we have rank $1$, one row is a scalar multiple of the other. So we have the set of points in $J$ as
+                    \begin{equation*}
+                        [z_{1} : z_{2} : z_{3} : rz_{1} : rz_{2} : rz_{3}]
+                    \end{equation*}
+                where $z_{1}, z_{2}, z_{3}, r$ not all $0$. But this is just in the image of $\sigma_{ 1, 2}$ as
+                    \begin{equation*}
+                        \sigma_{ 1, 2}([1 : r] \times [ z_{1} : z_{2} : z_{3}]) = [z_{1} : z_{2} : z_{3} : rz_{1} : rz_{2} : rz_{3}]
+                    \end{equation*}
+                which completes the proof.
+            \end{proof}
+
+        \item [(c)] (Optional) Do you see how to generalize this to $\sigma_{m, n}$? 
+            \begin{proof}
+                In general, for the mapping:
+                    \begin{equation*}
+                        \sigma_{m, n}([x_{1} : x_{2} : \cdots : x_{m}] \times[y_{1} : y_{2} : \cdots : y_{n}]) = [z_{1} : z_{2} : \cdots : z_{mn}]
+                    \end{equation*}
+                we will have a matrix:
+                    \begin{equation*}
+                        \begin{bmatrix}
+                            z_{1}            & z_{2}            & \ldots & z_{n}  \\
+                            z_{n + 1}        & z_{n + 2}        & \ldots & z_{2n} \\
+                            \vdots           & \vdots           & \ddots & \vdots \\
+                            z_{(m - 1)n + 1} & z_{(m - 1)n + 2} & \ldots & z_{mn}   
+                        \end{bmatrix}
+                    \end{equation*}
+                and the image will be given by when the rank is $1$.
+            \end{proof}
+    \end{itemize}
+
+\newpage
+
+\textbf{Exercise 2}: Function fields.
+    \begin{itemize}
+        \item [(a)] Prove from the definition that the map $k(\mathbb{P}^{1}) \rightarrow k(x)$ defined by $F/G \mapsto F(x, 1)/G(x, 1)$ is an isomorphism of fields. (Check that it is one-to-one and onto.)
+            \begin{proof}
+                (Injectivity) Suppose that $F/G \mapsto \frac{F(x, 1)}{G(x, 1)} = 0$. Then $F(x, 1) = 0$. We also know that $F \in \Gamma( \mathbb{P}^{1}) = k[x, y]$. So we have that
+                    \begin{equation*}
+                        F(x, y) = a_{0}x^{d} + a_{1}x^{d - 1}y + a_{2}x^{d - 2}y^{2} + \cdots + a_{ d - 1}xy^{d - 1} + a_{d}xy^{d}
+                    \end{equation*}
+                And therefore,
+                    \begin{equation*}
+                        F(x, 1) = a_{0}x^{d} + a_{1}x^{d - 1} + \cdots + a_{ d} = 0
+                    \end{equation*}
+                and all $a_{i} = 0$. So when we rehomogenize, all the coefficients are still $0$ and $F = 0$ so it is injective.
+
+                (Surjectivity) Suppose that 
+                    \begin{equation*}
+                        \dfrac{a_{0} + a_{1}x + \cdots + a_{ d}x^{d}}{b_{0} + b_{1}x + \cdots + b_{ e}x^{e}} \in k( x)
+                    \end{equation*}
+                We can homogenize the denominator and numerator:
+                    \begin{equation*}
+                        F^{\prime}(x, y) = a_{0}y^{d} + a_{1}xy^{d - 1} + \cdots + a_{ d}x^{d}
+                    \end{equation*}
+                and
+                    \begin{equation*}
+                        G^{\prime}(x, y) = b_{0}y^{e} + b_{1}xy^{e - 1} + \cdots + b_{ e}x^{e}
+                    \end{equation*}
+                If the degree of $G^{\prime}$ is greater than that of $F^{\prime}$, we just multiply $F^{\prime}$ by $y^{e - d}$. So $y^{e - d}F(x, y)$ has the same degree as $G^{\prime}$. Then
+                    \begin{equation*}
+                        \varphi \left(\dfrac{y^{e - d}F^{\prime}(x, y)}{G^{\prime}(x, y)}\right) = \dfrac{F^{\prime}(x, 1)}{G^{\prime}(x, 1)} = \dfrac{a_{0} + a_{1}x + \cdots + a_{ d}x^{d}}{b_{0} + b_{1}x + \cdots + b_{ e}x^{e}}
+                    \end{equation*}
+                On the other hand if the degree of $G^{\prime}$ is less than that of $F^{\prime}$, then we can multiply $G^{\prime}(x, y)$ by $y^{d - e}$ to get:
+                    \begin{equation*}
+                        \varphi \left(\dfrac{F^{\prime}(x, y)}{y^{d - e}G^{\prime}(x, y)}\right) = \dfrac{F^{\prime}(x, y)}{G^{\prime}(x, y)} = \dfrac{a_{0} + a_{1}x + \cdots + a_{ d}x^{d}}{b_{0} + b_{1}x + \cdots + b_{ e}x^{e}}
+                    \end{equation*}
+                So we have an element of the preimage.
+            \end{proof}
+
+        Optional: generalize this to an isomorphism $k(\mathbb{P}^{n}) \rightarrow k(x_{1}, \ldots, x_{n})$.
+
+        \item [(b)] Suppose $\varphi : X \rightarrow Y$ is a dominant morphism of projective algebraic sets and $U \subseteq Y$ is a non-empty open subset. Prove that $\varphi^{-1}(U)$ is a non-empty open subset.
+            \begin{proof}
+                Suppose for contradiction that $U \cap \varphi  ( X) = \emptyset$. Since $U$ is non-empty, we have $U^{c}$ is not all of $Y$ and it is a closed set. Furthermore, if $y \in \varphi  ( X)$, then $y \notin U$, therefore, $y \in U^{ c}$. So $\varphi ( X) \subseteq U^{ c}$. Since $U^{c}$ is closed, then the closure of $\overline{\varphi ( X)} = U^{c} \neq Y$, contradiction. So there is an element of $U \cap \varphi  ( X)$. So there is an element $x \in X$ such that $\varphi ( X) \in U$, and therefore, the preimage is non-empty.
+            \end{proof}
+    \end{itemize}
+
+\newpage
+
+\textbf{Exercise 3}: Local rings.
+    \begin{itemize}
+        \item [(a)] Suppose $\varphi : X \rightarrow Y$ is an isomorphism and $\varphi (P) = Q$. Prove that the pullback on function fields induces an isomorphism on local rings $\mathcal{O}_{Q}(Y) \rightarrow \mathcal{O}_{P}(X)$.
+
+        Recall that we can view ideals $m_{Q}(Y) \subseteq \mathcal{O}_{Q}(Y)$ and $m_{P}(X) \subseteq \mathcal{O}_{P}(X)$ as abelian subgroups. Show that the isomorphism $\mathcal{O}_{Q}(Y) \rightarrow \mathcal{O}_{P}(X)$ induces an isomorphism $m_{Q}(Y) \rightarrow m_{P}(X)$ (as abelian groups).
+            \begin{proof}
+                It was show that since $\varphi: X \rightarrow  Y$ is an isomorphism, there is an isomorphism $\varphi^{*}$ on $k(Y) \rightarrow k(X)$. Consider $\varphi^{*\prime} = \varphi^{*}_{\mid_{ \mathcal{O}_{Q}(Y)}}$ and $\psi^{* \prime} = \psi^{*}_{\mid_{ \mathcal{O}_{P}(X)}}$. And $\psi^{*} = (\varphi^{*})^{-1}$. We need to show that $\varphi^{*\prime}\psi^{* \prime}$ is the identity on $\mathcal{O}_{P}(X)$ and $\psi^{* \prime}\varphi^{* \prime}$ is the identity on $\mathcal{O}_{Q}(Y)$.
+
+                (Part I) If $(U, \alpha) \in \mathcal{ O}_{P}(X)$, then $\alpha ( P)$ is defined, we have
+                    \begin{equation*}
+                        \psi^{*\prime}(U, \alpha) = (U^{\prime}, \alpha \circ \psi)
+                    \end{equation*}
+                We see that indeed the RHS is in $ \mathcal{O}_{Q}(Y)$ because $(\alpha \circ \psi) (Q) = \alpha ( P)$ which is defined. So $\alpha \circ \psi$ is defined at $Q$. Then with the last composition:
+                    \begin{equation*}
+                        \varphi^{* \prime}(U^{\prime}, \alpha \circ  \psi) = (U^{\prime\prime}, \alpha \circ \psi \circ \varphi)
+                    \end{equation*}
+                We see that $\alpha \circ \psi \circ \varphi$ is defined again at $P$ because $(\alpha \circ \psi \circ \varphi) (P) = \alpha ( P)$ which is by definition, defined at $P$. Lastly, $(U^{\prime\prime}, \alpha \circ \psi \circ \varphi) = (U, \alpha)$ because $\alpha, \alpha \circ \psi \circ \varphi$ are defined in $U \cap U^{\prime\prime}$ by definition, and $\psi \circ \varphi$ is the identity on $X$. The same proof works for the composition $\psi^{* \prime}\varphi^{* \prime}$.
+
+                (Part II) We just need to show that the isomorphism on $\pi : \mathcal{O}_{Q}(Y) \rightarrow \mathcal{ O}_{P}(X)$ restricts to a mapping of non-units to non-units. This is because if a non-unit maps to a unit:
+                    \begin{equation*}
+                         \pi ( a) = b
+                    \end{equation*}
+                Then $b$ has an inverse, $\pi$ is surjective, so
+                    \begin{equation*}
+                        \pi ( c) = b^{-1}
+                    \end{equation*}
+                and therefore,
+                    \begin{equation*}
+                        \pi ( a)\pi ( c) = 1 = \pi ( ac)
+                    \end{equation*}
+                Since $\pi$ is injective, $ac = 1$, so $a$ was a unit, contradiction. So non-units map to non-units.
+
+                Then this sends $m_{Q}(Y)$ to some subset of $m_{P}(X)$ in $\mathcal{O}_{P}(X)$. Since there is an isomorphism on the local rings, we also know that there is a mapping $\mathcal{O}_{P}(X) \rightarrow \mathcal{O}_{Q}(Y)$ that restricts to sending non-units to non-units. So it sends $m_{P}(X)$ to some subset of $m_{Q}(Y)$. But the mappings are injective, which shows an isomorphism of $m_{P}(X) \cong m_{ Q}(Y)$.
+            \end{proof}
+
+        \item [(b)] (Extra credit - you may use this in the subsequent parts even if you do not solve it) Suppose $X$ and $Y$ are isomorphic. Prove that $X$ is smooth if and only if $Y$ is smooth. (Hint: Use the following alternate characterization of snoothness: $X$ is smooth at $P$ if and only if $\dim X = \dim_{ k}m_{P}(X)/m_{P}(X)^{2}$. Here, $m_{P}(X)^{2}$ is the ideal generated by products $ab$ with $a \in m_{ P}(X)$ and $b \in m_{ P}(X)$. We then view this as a subgroup of $m_{P}(X)$ and take the quotient as groups. This group has the structure of a vector space over $k$ and is called the \textit{Zariski tangent space}. You may assume without proof that $\dim X = \dim  Y$.) Note that this implies that $P$ is a smooth point of $X$ if and only if $Q$ is a smooth point of $Y$.
+            \begin{proof}
+                We want to show that $X$ smooth $\implies$ $Y$ smooth. Using the previous question, an isomorphism on $X, Y$ induces an isomorphism on $m_{P}(X)$ and $m_{Q}(Y)$ for $P \in X$, $\varphi ( P) = Q \in Y$. Let this isomorphism be $\pi$. We will prove that $m_{P}(X)^{2} \cong m_{ Q}(Y)^{2}$. 
+
+                (Surjectivity) Suppose that we had
+                    \begin{equation*}
+                        fg \in m_{ Q}(Y)^{2}
+                    \end{equation*}
+                for $f, g \in m_{ Q}(Y)$. We have that $\pi ( f^{\prime}) = f$, $\pi ( g^{\prime}) = g$. Then $ \pi ( f^{\prime}g^{\prime}) = fg$. 
+
+                (Injectivity) We have that if $\pi ( fg) = 0$, either $f = 0, g = 0$. Then $\pi$ restricts to an isomorphism on $m_{Q}(Y)^{2} \cong m_{ P}(X)^{2}$.
+
+                As abelian groups, we have that there is a mapping obtained from $\pi$:
+                    \begin{align*}
+                        \pi^{\prime} : m_{P}(X) &\rightarrow\dfrac{ m_{Q}(Y)}{m_{Q}(Y)^{2}} \\
+                        f        &\mapsto \pi  ( f) + m_{ Q}(Y)^{2}
+                    \end{align*}
+                Clearly, $m_{P}(X)^{2} \subseteq \ker{ \pi^{\prime}}$. Suppose that an element of $f \in m_{P}(X)$ is mapped to a product in $m_{Q}(Y)$. So
+                    \begin{equation*}
+                        \pi ( f) = f_{1}f_{2}
+                    \end{equation*}
+                Recall that $\pi$ restricts to an isomorphism on $m_{P}(X)^{2} \cong m_{ Q}(Y)^{2}$. Then there is a backwards mapping showing that 
+                    \begin{equation*}
+                        \pi^{-1}(\pi ( f)) = \pi^{-1}(f_{1}f_{2}) = \pi^{-1}(f_{1})\pi^{-1}(f_{2}) = f
+                    \end{equation*}
+                So $f$ is a product. So we get $\ker{\pi^{\prime}} = m_{P}(X)^{2}$. We conclude that by the first isomorphism theorem, 
+                    \begin{equation*}
+                        \dfrac{m_{P}(X)}{m_{P}(X)^{2}} \cong\dfrac{ m_{Q}(Y)}{m_{Q}(Y)^{2}}
+                    \end{equation*}
+
+                Since $X$ is smooth, $\dim X = \dim\frac{ m_{P}(X)}{m_{P}(X)^{2}}$. It has a dimension over $k$, so we can find a basis $\{\overline{ \lambda_{ 1}}, \ldots, \overline{ \lambda_{ j}}\}$. Where
+                    \begin{equation*}
+                        \overline{\lambda_{ i}} = \lambda_{ i} + m_{P}(X)^{2}
+                    \end{equation*}
+                Every element of $\frac{m_{P}(X)}{m_{P}(X)^{2}}$ can be uniquely expressed as
+                    \begin{equation*}
+                        a_{1}\overline{\lambda_{1}} + \cdots + a_{j}\overline{\lambda_{j}}
+                    \end{equation*}
+                We have shown an isomorphism of $\frac{m_{P}(X)}{m_{P}(X)^{2}} \cong\frac{ m_{Q}(Y)}{m_{Q}(Y)^{2}}$. Let this mapping be given by $\varphi$. Let $\varphi$ have an additional action on $k$ as the identity such that:
+                    \begin{equation*}
+                        \varphi ( a_{1} \overline{\lambda_{ 1}} + \cdots + a_{ j}\overline{\lambda_{j}}) = a_{1}\varphi ( \overline{\lambda_{ 1}}) + \cdots + a_{j}\varphi ( \overline{\lambda_{j}})
+                    \end{equation*}
+                We need to show that $\varphi ( \overline{\lambda_{ i}})$ are linearly independent. If the RHS is $0$, suppose there is a nontrivial relation, where some $a_{i} \neq 0$. Then
+                    \begin{equation*}
+                        \varphi ( a_{1}\overline{\lambda_{1}} + \cdots + a_{ j}\overline{\lambda_{j}}) = 0
+                    \end{equation*}
+                where
+                    \begin{equation*}
+                        a_{1}\overline{\lambda_{1}} + \cdots + a_{ j}\overline{\lambda_{j}} \neq 0
+                    \end{equation*}
+                But $a_{1}\overline{\lambda_{1}} + \cdots + a_{j}\overline{ \lambda_{j}} \in\frac{ m_{P}(X)}{m_{P}(X)^{2}}$, and $\varphi$ is an isomorphism. So the kernel of $\varphi$ with its regular action (without acting as identity on $k$) is nontrivial which is a contradiction. 
+
+                Because $\varphi ( \overline{\lambda_{ i}})$ are linearly independent, $\varphi$ is injective. We also have an inverse map $\varphi^{-1}$ which is also injective by the same reason above. So we actually get an isomorphism of vector spaces. We have the equality:
+                    \begin{equation*}
+                        \dim X = \dim\dfrac{ m_{P}(X)}{m_{P}(X)^{2}} = \dim\dfrac{ m_{Q}(Y)}{m_{Q}(Y)^{2}}
+                    \end{equation*}
+                and since $\dim X = \dim  Y$, we have
+                    \begin{equation*}
+                        \dim\dfrac{ m_{Q}(Y)}{m_{Q}(Y)^{2}} = \dim Y
+                    \end{equation*}
+                So that means that $Y$ is smooth. The direction that $Y$ is smooth $\implies$ $X$ is smooth is symmetric, so we are done.
+            \end{proof}
+
+        \item [(c)] Prove that $V(y)$ and $V(y - x^{3})$ are isomorphic affine varieties.
+            \begin{proof}
+                We need to show that there is a morphism and inverse morphism:
+                    \begin{align*}
+                        \varphi &: V(y) \rightarrow V(y - x^{3}) \\
+                        \psi    &: V(y - x^{3}) \rightarrow V(y) \\
+                        \varphi \circ \psi &= id_{V(y - x^{3})} \\
+                        \psi \circ \varphi &= id_{V(y)}
+                    \end{align*}
+                Define:
+                    \begin{equation*}
+                        \varphi( x, y) = (\varphi_{ 1}(x, y), \varphi_{ 2}(x, y))
+                    \end{equation*}
+                where
+                    \begin{align*}
+                        \varphi_{ 1}(x, y) &= x \\
+                        \varphi_{ 2}(x, y) &= y^{3}
+                    \end{align*}
+                $\varphi $ is a polynomial map because $\varphi_{ 1}, \varphi_{ 2} \in k[ x, y]$. Similarly, define
+                    \begin{equation*}
+                        \psi (x, y) = (x, 0)
+                    \end{equation*}
+                Suppose that $P = (x, 0) \in V( y)$. Then
+                    \begin{equation*}
+                        \psi  ( \varphi ( P)) = \psi ( x, 0) = (x, 0)
+                    \end{equation*}
+                and if $Q = (x, x^{3}) \in V( y - x^{3})$,
+                    \begin{equation*}
+                        \varphi ( \psi ( Q)) = \varphi ( x) = \varphi ( x, 0) = (x, x^{3})
+                    \end{equation*}
+                which shows that they are isomorphic.
+            \end{proof}
+
+        \item [(d)] Prove that the projective closures of $V(y)$ and $V(y - x^{3})$ are not isomorphic. Do you see why this happens geometrically?
+            \begin{proof}
+                Check that $V(y)$ is smooth:
+                    \begin{align*}
+                        f_{x} &= 0 \\
+                        f_{y} &= 1   
+                    \end{align*}
+                So $f_{x} \neq f_{y} \neq 0$, and there are no singular points. In the last question, we proved an isomorphism, and since $V(y)$ is smooth, $V(y - x^{3})$ is smooth also. By definition, the projective closures $\mathbb{V}(y)$ and $\mathbb{V}(z^{2}y - x^{3})$ are smooth also. Check for singular points on $\mathbb{V}(z^{2}y - x^{3})$:
+                    \begin{align*}
+                        F_{x} &= 3x^{2} \\
+                        F_{y} &= z^{2}  \\
+                        F_{z} &= 2yz      
+                    \end{align*}
+                We see that $[0 : 1 : 0]$ makes all of them $0$. And for $F = z^{2}y - x^{3}$, $F([0 : 1 : 0]) = 0$ also. So $\mathbb{V}(z^{2}y - x^{3})$ is not smooth, contradiction. This happens because the projective closure of $y - x^{3}$ looks like $z^{2} - x^{3}$ which is a cusp at $[0 : 1 : 0]$.
+            \end{proof}
+    \end{itemize}
+
+\newpage
+
+\textbf{Exercise 4}: Let $F \in k[x, y, z]$ be a homogeneous polynomial of degree $n$.
+    \begin{itemize}
+        \item [(a)] Show that $xF_{x} + yF_{y} + zF_{z} = nF$ where $F_{x}, F_{y}, F_{z}$ denote the partial derivatives of $F$ with respect to $x, y, z$ respectively
+            \begin{proof}
+                We have that
+                    \begin{equation*}
+                        F = \sum F_{ i}
+                    \end{equation*}
+                where each $F_{i}$ are of the form $a_{i}x^{r_{1}}y^{r_{2}}z^{r_{3}}$ and $r_{1} + r_{2} + r_{3} = n$. Then
+                    \begin{equation*}
+                        F_{x} = \sum F_{ix} 
+                    \end{equation*}
+                and
+                    \begin{equation*}
+                        xF_{x} + yF_{y} + zF_{z} = \sum xF_{ ix} + yF_{iy} + zF_{iz}
+                    \end{equation*}
+                We have:
+                    \begin{align*}
+                        xF_{ix} &= r_{1}a_{i}x^{r_{1}}y^{r_{2}}z^{r_{3}} \\
+                        yF_{iy} &= r_{2}a_{i}x^{r_{1}}y^{r_{2}}z^{r_{3}} \\
+                        zF_{iz} &= r_{3}a_{i}x^{r_{1}}y^{r_{2}}z^{r_{3}}                     
+                    \end{align*}
+                and therefore,
+                    \begin{align*}
+                        xF_{ix} + yF_{iy} + zF_{iz} &= a_{i}(r_{1} + r_{2} + r_{3})x^{r_{1}}y^{r_{2}}z^{r_{3}} \\
+                                                    &= a_{i}(n)x^{r_{1}}y^{r_{2}}z^{r_{3}} \\
+                                                    &= nF_{i} 
+                    \end{align*}
+                Therefore
+                    \begin{align*}
+                        xF_{x} + yF_{y} + zF_{z} &= \sum nF_{ i} \\
+                                                 &= n\sum F_{ i} \\
+                                                 &= nF             
+                    \end{align*}
+                and we're done.
+            \end{proof}
+
+        \item [(b)] Now suppose $F$ has no repeated factors. Let $P \in U_{i} \subseteq \mathbb{P}^{2}$. Recall that we say $\mathbb{V}(F)$ is singular at $P$ if $V(f)$ is singular at $P$ where $f$ is the dehomogenization of $F$ with respect to the $i$-th coordinate. Show that a point $P \in \mathbb{P}^{2}$ is a singular point of $\mathbb{V}(F)$ if and only if $F(P) = F_{x}(P) = F_{y}(P) = F_{z}(P) = 0$.
+            \begin{proof}
+                The operation of taking the partial derivative and dehomogenization on a variable other than the derivative commutes. So that means $f_{x}(P) = 0 \iff  F_{ x}(P) = 0$.
+
+                ($\rightarrow$) Since $P$ is singular in $\mathbb{V}(F)$, we have $f_{x}(P) = f_{y}(P) = f(P) = 0$. And $f_{x}(P) = 0 \iff F_{ x}(P) = 0$. Also, $f(P) = 0 \implies F( P) = 0$ because $F([x: y: 1]) = f(x, y)$. By the previous problem, we have
+                    \begin{equation*}
+                        xF_{x}(P) + yF_{y}(P) + zF_{z}(P) = nF(P)
+                    \end{equation*}
+                and therefore,
+                    \begin{equation*}
+                        zF_{z}(P) = 0
+                    \end{equation*}
+                so $F_{z}(P) = 0$. If the point does not lie in $U_{3}$, we can use another affine chart with the same result. So we are done here.
+
+                ($\leftarrow$) $P \in \mathbb{ P}^{2}$, it is in one of $U_{i}$ wlog say $U_{1}$. Then $F(P) = F(1, P_{2}, P_{3}) = f(P_{2}, P_{3}) = 0$ or in other words, $P \in V( f)$. 
+
+                Now we need to show $f_{y}(P) = f_{z}(P) = 0$. But that comes from the fact proved earlier that dehomogenization and partial differentiation commutes. So 
+                    \begin{equation*}
+                        F_{y}([1 : P_{2}: P_{3}]) = (F(1, y, z))_{y}(P_{2}, P_{3}) = f_{y}(P_{2}, P_{3}) = 0
+                    \end{equation*}
+                We conclude both $f_{y}(P) = f_{z}(P) = 0$. So $P$ is singular on $V(f)$ and therefore on $\mathbb{V}(F)$.
+            \end{proof}
+
+        \item [(c)] Suppose that $P \in U_{i}$ is a smooth point of $\mathbb{V}(F)$. Recall that the projective tangent line at $P$ is the projective closure of the tangent line of $V(f)$, where $f$ is the dehomogenization of $F$ with respect to the $i$-th coordinate. Prove that the projective tangent space at $P$ is the vanishing of 
+            \begin{equation*}
+                xF_{x}(P) + yF_{y}(P) + zF_{z}(P)
+            \end{equation*}
+                \begin{proof}
+                    Since $P$ is smooth in $\mathbb{V}(F)$, then $P$ is smooth in $V(f)$. Suppose wlog that $P = [P_{1} : P_{2} : 1] \in U_{3}$. Then we can dehomogenize $F$:
+                        \begin{align*}
+                            F &\rightarrow F(x, y, 1) = F_{d} \\
+                            F &= a_{0} + a_{1}x + a_{2}y + a_{3}z + z_{4}x^{2} + \cdots \\
+                            F_{d} &= a_{0} + a_{3} + a_{1}x + a_{2}y + \cdots
+                        \end{align*}
+                    Now we want to find $T_{(P_{1}, P_{2})}(F_{d})$. Compute the translation, $x \mapsto x + P_{1}$, $y \mapsto y + P_{2}$. So we have that the tangent space is the vanishing of the degree $1$ terms in 
+                        \begin{equation*}
+                            F_{d}(x + P_{1}, y + P_{2}) = c + F_{dx}(0, 0)x + F_{dy}(0, 0)y + \{\text{higher degree terms}\}
+                        \end{equation*}
+                    Then the tangent space is $\mathbb{V}(F_{dx}(0, 0)x + F_{dy}(0, 0)y)$. Undoing our change of variables, we have $\mathbb{V}(F_{dx}(0, 0)x + F_{dy}(0, 0)y - F_{dx}(0, 0)P_{1}z - F_{dy}(0, 0)P_{2}z)$. Since $F_{x}(P) = F_{dx}(0, 0)$, and so on, then this can be changed to 
+                        \begin{equation*}
+                            \mathbb{V}(F_{x}(P)x + F_{y}(P)y + (- F_{x}(P)P_{1} - F_{y}(P)P_{2})z)
+                        \end{equation*}
+                    Using the fact that
+                        \begin{equation*}
+                            nF = xF_{x} + yF_{y} + zF_{z}
+                        \end{equation*}
+                    then
+                        \begin{equation*}
+                            nF(P) = 0 = P_{1}F_{x}(P) + P_{2}F_{y}(P) + F_{z}(P)
+                        \end{equation*}
+                    or
+                        \begin{equation*}
+                            -P_{1}F_{x}(P) - P_{2}F_{y}(P) = F_{z}(P)
+                        \end{equation*}
+                    So 
+                        \begin{gather*}
+                            \mathbb{V}(F_{x}(P)x + F_{y}(P)y + (- F_{x}(P)P_{1} - F_{y}(P)P_{2})z) \\ = \mathbb{V}(xF_{x}(P) + yF_{y}(P) + zF_{z}(P))
+                        \end{gather*}
+                    Since it does not matter what affine chart we started with, we will always get the same result. So we are done.
+                \end{proof}
+    \end{itemize}
+
+\newpage
+
+\textbf{Exercise 5}: For each of the following projective plane curves, find their singular points and the multiplicities and tangent cone at each of the singular points.
+    \begin{itemize}
+        \item [(a)] $x^{2}y^{3} + x^{2}z^{3} + y^{2}z^{3}$
+            \begin{proof}
+                By the previous problem, the singular points are when 
+                    \begin{equation*}
+                        x^{2}y^{3} + x^{2}z^{3} + y^{2}z^{3} = 0
+                    \end{equation*}
+                and
+                    \begin{align*}
+                        F_{x}(P) &= 0 \\
+                        F_{y}(P) &= 0 \\
+                        F_{z}(P) &= 0   
+                    \end{align*}
+                We have
+                    \begin{align*}
+                        F_{x} &= 2xy^{3} + 2xz^{3}     \\
+                        F_{y} &= 3x^{2}y^{2} + 2yz^{3} \\
+                        F_{z} &= 3x^{2}z^{2} + 3y^{2}z^{2}    
+                    \end{align*}
+                Now we simultaneously solve for the $0$'s:
+                    \begin{align*}
+                        2xy^{3} + 2xz^{3} &= 0 & 3x^{2}y^{2} + 2yz^{3} &= 0 & 3x^{2}z^{2} + 3y^{2}z^{2} &= 0 \\
+                        2x(y^{3} - z^{3}) &= 0 & y(3x^{2}y + 2z^{3})   &= 0 & 3z^{2}(x^{2} + y^{2})     &= 0   
+                    \end{align*}
+                From the first equation, we require $x = 0$, or $y^{3} = z^{3}$. For the second, we require $y = 0$ or $3x^{2}y + 2z^{3} = 0$. For the third, we require $3z^{2} = 0$ or $(x^{2} + y^{2}) = 0$. Go through the cases:
+                    \begin{itemize}
+                        \item $x = 0$. Then by the second equation, $y = 0$ or $2z^{3} = 0$. In either case, the last equation is $0$ also and $[0 : 0 : 1], [0 : 1 : 0] \in \mathbb{ V}(F)$.
+
+                        \item $y^{3} = z^{3}$. By the third equation, either $x = y = 0$ or $z = 0$. If $x = y = 0$, we have $x = y = z = 0$ which is impossible. If $z = 0, y = 0$, then $F_{y}(P) = 0$. So $[1 : 0 : 0]$ is another possible solution.
+                    \end{itemize}
+                These are the singular points. 
+
+                (Multiplicities) We see that each singular point is $0$ in their affine chart. So we dehomogenize and find the lowest degree:
+                    \begin{itemize}
+                        \item $[1 : 0 : 0]$. We have
+                            \begin{equation*}
+                                F(1, y, z) = y^{3} + z^{3} + y^{2}z^{3}
+                            \end{equation*}
+                        The lowest degree is $3$ which is the multiplicity of $\mathbb{V}(F)$ at $[1 : 0 : 0]$.
+
+                        \item $[0 : 1 : 0]$. We have
+                            \begin{equation*}
+                                F(x, 1, z) = x^{2} + x^{2}z^{3} + z^{3}
+                            \end{equation*}
+                        The lowest degree is $2$ so the multiplicity is $2$.
+
+                        \item $[0 : 0 : 1]$. We have 
+                            \begin{equation*}
+                                F(x, y, 1) = x^{2}y^{3} + x^{2} + y^{2}
+                            \end{equation*}
+                        and the lowest degree is $2$.
+                    \end{itemize}
+                (Tangent Cones) Take the lowest degree terms of the previous dehomogenizations:
+                    \begin{itemize}
+                        \item $\mathbb{T}C_{[1 : 0 : 0]}(\mathbb{V}(F)) = y^{3} + z^{3}$.
+
+                        \item $\mathbb{T}C_{[0 : 1 : 0]}(\mathbb{V}(F)) = x^{2}$.
+
+                        \item $\mathbb{T}C_{[1 : 0 : 0]}(\mathbb{V}(F)) = x^{2} + y^{2}$. 
+                    \end{itemize}
+                so we are done.
+            \end{proof}
+
+        \item [(b)] $y^{2}z - x(x - z)(x - \lambda z), \lambda \in k$
+            \begin{proof}
+                We require $F(P) = F_{x}(P) = F_{y}(P) = F_{z}(P) = 0$. So calculate the derivatives:
+                    \begin{align*}
+                        y^{2}z - x(x - z)(x - \lambda z) &= y^{2}z - x(x^{2} - (\lambda + 1)xz + \lambda z^{2}) \\
+                                                         &= y^{2}z - x^{3} + (\lambda + 1)x^{2}z + \lambda xz^{2}
+                    \end{align*}
+                We have
+                    \begin{align*}
+                        F_{x} &= -3x^{2} + 2(\lambda + 1)xz + \lambda z^{ 2} \\
+                        F_{y} &= 2yz                                         \\
+                        F_{z} &= y^{2} + (\lambda + 1)x^{2} + 2\lambda xz
+                    \end{align*}
+                    \begin{itemize}
+                        \item Case 1: $F_{y} = 0 \implies y = 0$. Then 
+                            \begin{equation*}
+                                F(x, 0, z) = 0 \implies x( x - z)(x - \lambda z) = 0
+                            \end{equation*}
+                                \begin{itemize}
+                                    \item $x = 0$. This means that $F_{x}(0, 0, z)$ implies $z = 0$ which is impossible.
+
+                                    \item $x = \lambda z$. Then
+                                        \begin{equation*}
+                                            F_{z}(\lambda z, 0, z) = (\lambda^{ 3} + 3\lambda^{ 2})z^{2}
+                                        \end{equation*}
+                                    $z \neq 0$ so $\lambda = 0, -3$. Also,
+                                        \begin{equation*}
+                                            F_{x}(\lambda z, 0, z) = (-\lambda^{ 2} + 3\lambda)z^{2}
+                                        \end{equation*}
+                                    So $\lambda = 0, 3$. Then $\lambda = 0$, $x = 0 = z$, contradiction.
+                                \end{itemize}
+
+                        \item Case 2: $F_{y} = 0 \implies z = 0$. Then
+                            \begin{equation*}
+                                F_{x}(x, y, 0) = -3x^{2}
+                            \end{equation*}
+                        So $x = 0$. Now plug this into $F_{z}$ to get:
+                            \begin{equation*}
+                                F_{z}(0, y, 0) = y^{2}
+                            \end{equation*}
+                        So $y = 0$, which is impossible.
+
+                        \item $z = y = 0$. This is impossible since $F_{x}(x, 0, 0) = 0$ implies that $x = 0$.
+                    \end{itemize}
+                None of the cases work out, so there are no singular points.
+            \end{proof}
+
+        \item [(c)] $x^{n} + y^{n} + z^{n}, n > 0$. 
+            \begin{proof}
+                We need $x^{n} + y^{n} + z^{n} = 0$ and 
+                    \begin{align*}
+                        F_{x} &= nx^{n - 1} \\
+                        F_{y} &= ny^{n - 1} \\
+                        F_{z} &= nz^{n - 1}   
+                    \end{align*}
+                To be $0$ at $P$. This is true when $P = [0 : 0 : 0] \notin \mathbb{ P}^{2}$. So there are no singular points.
+            \end{proof}
+    \end{itemize}
+
+\newpage
+
+\textbf{Exercise 6}: For each point $[a : b : c : d : e : f] \in \mathbb{P}^{5}$, we can associate the degree $2$ plane curve
+    \begin{equation*}
+        C = \mathbb{V}(ax^{2} + bxy + cxz + dy^{2} + eyz + fz^{2}) \subseteq \mathbb{P}^{2}
+    \end{equation*}
+given $C \subseteq \mathbb{P}^{2}$, we write $[C] \in \mathbb{P}^{5}$ for the point $[a : b : c : d : e : f]$ corresponding to the coefficients. (Note: this is well-defined because if we rescale the coefficients $a, b, c, d, e, f$ it does not change the vanishing set.) This problem is about relating degree $2$ curves with certain properties to algebraic subsets of $\mathbb{P}^{5}$.
+    \begin{itemize}
+        \item [(a)] Fix a point $P = [x_{0} : y_{0} : z_{0}] \in \mathbb{P}^{2}$. Prove that the set $\{[C] \in \mathbb{P}^{5} : P \in C\}$ is a hyperplane in $\mathbb{P}^{5}$. (In fact, you should find it is the hyperplane $\nu_{2, 2}(P)^{*}$.)
+            \begin{proof}
+                We have that the $a, b, c, d, e, f$ that make
+                    \begin{equation*}
+                        ax_{0}^{2} + bx_{0}y_{0} + cx_{0}z_{0} + dy_{0}^{2} + ey_{0}z_{0} + fz_{0}^{2} = 0
+                    \end{equation*}
+                can be seen as variables of the hyperplane with coefficients $x_{0}^{2}, x_{0}y_{0}, \ldots, z_{ 0}^{2}$ because they are fixed:
+                    \begin{equation*}
+                        x_{0}^{2}a + x_{0}y_{0}b + x_{0}z_{0}c + y_{0}^{2}d + y_{0}z_{0}e + z_{0}^{2}f = 0
+                    \end{equation*}
+                So the set
+                    \begin{equation*}
+                        \{[C] \in \mathbb{P}^{5} : P \in C\} = \mathbb{V}(x_{0}^{2}a + x_{0}y_{0}b + x_{0}z_{0}c + y_{0}^{2}d + y_{0}z_{0}e + z_{0}^{2}f)
+                    \end{equation*}
+                as desired.
+            \end{proof}
+
+        \item [(b)] Prove that there exists a curve $C = \mathbb{V}(ax^{2} + bxy + cxz + dy^{2} + eyz + fz^{2})$ through any $5$ points $P_{1}, \ldots, P_{5} \in \mathbb{P}^{2}$.
+            \begin{proof}
+                We can use a matrix argument:
+                    \begin{equation*}
+                        \begin{bmatrix}
+                            x_{1}^{2}  & x_{1}y_{1} & x_{1}z_{1} & y_{1}^{2} & y_{1}z_{1} & z_{1}^{2} \\
+                            \vdots     &  \vdots    &  \vdots    &  \vdots   &  \vdots    &  \vdots   \\
+                             x_{5}^{2} & x_{5}y_{5} & x_{5}z_{5} & y_{5}^{2} & y_{5}z_{5} & z_{5}^{2}   
+                        \end{bmatrix}\begin{bmatrix}
+                            a \\
+                            b \\
+                            c \\
+                            d \\
+                            e \\
+                            f   
+                        \end{bmatrix} = \begin{bmatrix}
+                            0 \\
+                            0 \\
+                            0 \\
+                            0 \\
+                            0 
+                        \end{bmatrix}
+                    \end{equation*}
+                has non-trivial $0$'s because this is a mapping from a $6$ dimensional vector space to one of $5$ dimensions. So there exists $a, b, c, d, e, f$ not all $0$ such that the curve $C$ passes through $P_{1}, \ldots, P_{ 5}$.
+            \end{proof}
+
+        \item [(c)] Prove that the set 
+            \begin{equation*}
+                \{[a : b : c : d : e : f] \in \mathbb{P}^{5} :  \mult_{P}(ax^{2} + bxy + cxz + dy^{2} + eyz + fz^{2}) \geq 2\}
+            \end{equation*}
+        is isomorphic to $\mathbb{P}^{2}$. (Hint: you might want to perform a change of coordinates to reduce to the case $P = [0 : 0 : 1]$.)
+            \begin{proof}
+                Perform a change of coordinates so that $P \rightarrow [0 : 0 : 1]$. This corresponds to some rotation.
+
+                Then we get some new vanishing $\mathbb{V}(ax^{2{\prime}} + bx^{\prime}y^{\prime} + cx^{\prime}z^{\prime} + dy^{2\prime} + ey^{\prime}z^{\prime} + fz^{2\prime})$. So dehomogenize:
+                \begin{equation*}
+                        \mathbb{V}(ax^{2{\prime}} + bx^{\prime}y^{\prime} + cx^{\prime} + dy^{2{\prime}} + ey^{\prime} + f)
+                    \end{equation*}
+                So the multiplicity is $\geq2$ when 
+                    \begin{equation*}
+                        c = e = f = 0
+                    \end{equation*}
+                and this is isomorphic to $\mathbb{P}^{2}$ because we just have 
+                    \begin{equation*}
+                        \{[a : b : d] : a, b, d \in k \text{ not all $0$}\}
+                    \end{equation*}
+            \end{proof}
+
+        \item [(d)] Prove that the set $\{[C] \in \mathbb{P}^{5} : C \text{ is a line}\}$ is projectively equivalent to $\nu_{2, 2}(\mathbb{P}^{2}) \subseteq \mathbb{P}^{5}$. 
+            \begin{proof}
+                We have that 
+                    \begin{equation*}
+                        C = \mathbb{V}(ax^{2} + bxy + cxz + dy^{2} + eyz + fz^{2})
+                    \end{equation*}
+                is the vanishing of a degree $2$ polynomial in $\mathbb{P}^{2}$, so it splits into two lines. Then we require that it splits into a product of two lines that are the same, so
+                    \begin{equation*}
+                        C = \mathbb{V}((ux + vy + wz)^{2})
+                    \end{equation*}
+                Then
+                    \begin{equation*}
+                        (ux + vy + wz)^{2} = u^{2}x + v^{2}y^{2} + w^{2}z^{2} + 2uvxy + 2vwyz + 2uwxz
+                    \end{equation*}
+                So we get 
+                    \begin{equation*}
+                        [a : b : c : d : e : f] = [u^{2} : 2uv : 2uw : v^{2} : 2vw : w^{2}]
+                    \end{equation*}
+                and therefore, we take the set of all such points for $u, v, w$ varied over $k$:
+                    \begin{equation*}
+                        \{[C] \in\mathbb{P}^{5} : C \text{ is a line}\} =  \{[u^{2} : 2uv : 2uw : v^{2} : 2vw : w^{2}] : u, v, w \in k \text{ not all $0$}\}
+                    \end{equation*}
+                Now $\nu_{2, 2} : \mathbb{P}^{2} \rightarrow\mathbb{P}^{5}$ is
+                    \begin{equation*}
+                        [x : y : z] \mapsto[x^{2} : xy : xz : y^{2} : yz : z^{2}]
+                    \end{equation*}
+                So there is a change of coordinates given by the invertible matrix:
+                    \begin{equation*}
+                        \begin{bmatrix}
+                            1 &   &   &   &   &   \\
+                              & 2 &   &   &   &   \\
+                              &   & 2 &   &   &   \\
+                              &   &   & 1 &   &   \\
+                              &   &   &   & 2 &   \\
+                              &   &   &   &   & 1   
+                        \end{bmatrix} \begin{bmatrix}
+                            x^{2} \\
+                            xy    \\
+                            xz    \\
+                            y^{2} \\
+                            yz    \\
+                            z^{2}   
+                        \end{bmatrix} = \begin{bmatrix}
+                            u^{2} \\
+                            2uv   \\
+                            2uw   \\
+                            v^{2} \\
+                            2vw    \\
+                            w^{2}   
+                        \end{bmatrix}
+                    \end{equation*}
+                So we have $\{[C] : C \text{ is a line}\}$ is projectively equivalent to $\nu_{2, 2}(\mathbb{P}^{2})$.
+            \end{proof}
+    \end{itemize}
+
+\newpage
+
+\textbf{Exercise 7}: Suppose $k$ is algebraically closed. Let $F \in k[x, y, z]$ be an irreducible homogeneous polynomial of degree $2$. Prove that $ \mathbb{V}(F)$ is projectively equivalent to $\mathbb{V}(yz - x^{2})$. In other words, all irreducible conics are projectively equivalent. 
+
+(Hint: Let $P$ be a point in $\mathbb{V}(F)$. There is a change of coordinates that takes $P$ to $[0 : 1 : 0]$. In these coordinates, if we write $F = ax^{2} + bxy + cxz + dy^{2} + eyz + fz^{2}$, then what do you know about $d$? Can $b$ and $e$ both vanish? Find a change of coordinates so that $F = a^{\prime}x^{2} + c^{\prime}xz + yz + f^{\prime}z^{2} = a^{\prime}x^{2} + (c^{\prime}x + y + f^{\prime}z)z$. Can $a^{\prime}$ vanish?)
+    \begin{proof}
+        If we do a change of coordinates so that $P \rightarrow[0 : 1 : 0]$ and write 
+            \begin{equation*}
+                F = ax^{2} + bxy + cxz + dy^{2} + eyz + fz^{2}
+            \end{equation*}
+        then $[0 : 1 : 0]$ must vanish on this so
+            \begin{equation*}
+                0 = d
+            \end{equation*}
+        and so
+            \begin{equation*}
+                F = ax^{2} + bxy + cxz + eyz + fz^{2}
+            \end{equation*}
+        Suppose for contradiction that $b = e = 0$. Then we have
+            \begin{equation*}
+                F = ax^{2} + cxz + fz^{2}
+            \end{equation*}
+        Notice that when we dehomogenize, the polynomial becomes reducible:
+            \begin{equation*}
+                F(x, 1) = ax^{2} + cx + f = gh
+            \end{equation*}
+        So when we rehomogenize, the polynomial becomes reducible, which is a contradiction. Then we have
+            \begin{equation*}
+                F = ax^{2} + cxz + fz^{2} + bxy + eyz
+            \end{equation*}
+        Wlog, suppose that $e \neq 0$. Then we have the change of coordinates
+            \begin{align*}
+                x       &\mapsto x \\
+                y       &\mapsto y \\
+                bx + ez &\mapsto z   
+            \end{align*}
+        Then the inverse of this change of coordinates is given by the matrix $\begin{bmatrix}
+            1 & 0 & 0 \\
+            0 & 1 & 0 \\
+            b & 0 & e   
+        \end{bmatrix}$, and since $e \neq 0$, we have that this is invertible. If instead, $e = 0, b \neq 0$, then we can modify the map to $bx + ez \mapsto x$. So under this change of coordinates, we have $F$ goes to
+            \begin{align*}
+                ax^{2} + cxz + fz^{2} + y(bx + ez) &\mapsto a^{\prime}x^{2} + c^{\prime}xz + f^{\prime}z^{2} + yz \\
+                                                   &= a^{\prime}x^{2} + (c^{\prime}x + y + f^{\prime}z)z
+            \end{align*}
+        We have that $a^{\prime}$ cannot vanish, otherwise, we have that $F$ was not irreducible as we get $(c^{\prime}x + y + f^{\prime}z)z$. Now we have a change of coordinates $c^{\prime}x + y + f^{\prime}z \mapsto a^{\prime}y$. The inverse of this is given by the matrix $\begin{bmatrix}
+            1          & 0          & 0          \\
+            c^{\prime} & a^{\prime} & f^{\prime} \\
+            0          & 0          & 1            
+        \end{bmatrix}$ which is invertible. Under this mapping, we have
+            \begin{equation*}
+                F \mapsto a^{\prime}x^{2} + a^{\prime}yz
+            \end{equation*}
+        Rescaling, we see that $\mathbb{V}(F)$ is projectively equivalent to $\mathbb{V}(x^{2} + yz)$ because there is a change of coordinates by composition. So all irreducible conics are projectively equivalent.
+    \end{proof}
+
+\newpage
+
+\textbf{Exercise 8}: (Extra Credit) Recall that given a point $P = [a_{1} : \cdots : a_{n + 1}] \in \mathbb{P}^{n}$, we write
+    \begin{equation*}
+        P^{*} = \mathbb{V}(a_{1}x_{1} + \cdots + a_{n + 1}x_{n + 1}) \subseteq \mathbb{P}^{n}
+    \end{equation*}
+for the corresponding hyperplane in $\mathbb{P}^{n}$. Let $P \in \mathbb{P}^{m}$ and $Q \in \mathbb{P}^{n}$. Prove that
+    \begin{equation*}
+        \sigma_{m, n}^{-1} (\sigma_{m, n}(P \times Q)^{*}) = P^{*} \times \mathbb{P}^{n} \cup \mathbb{P}^{m} \times Q^{*} \subseteq \mathbb{P}^{m} \times \mathbb{P}^{n}
+    \end{equation*}
+        \begin{proof}
+            
+        \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

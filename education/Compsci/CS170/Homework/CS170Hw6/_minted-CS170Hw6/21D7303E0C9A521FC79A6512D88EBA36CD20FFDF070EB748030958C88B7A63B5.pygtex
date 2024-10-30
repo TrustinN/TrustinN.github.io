@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+    \PYG{k}{def} \PYG{n+nf}{maxGain}\PYG{p}{(}\PYG{n}{prices}\PYG{p}{)}\PYG{p}{:}
+        \PYG{c+c1}{\PYGZsh{} the price for a pipe of length 0 is 0}
+        \PYG{n}{m\PYGZus{}prices} \PYG{o}{=} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{+} \PYG{n}{prices}
+
+        \PYG{n}{dp} \PYG{esc}{$\leftarrow$} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{+} \PYG{n}{prices}
+        \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{prices}\PYG{p}{)} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{:}
+            \PYG{k}{for} \PYG{n}{j} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)}\PYG{p}{:}
+                \PYG{n}{dp}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{n+nb}{max}\PYG{p}{(}\PYG{n}{dp}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{,} \PYG{n}{dp}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]} \PYG{o}{+} \PYG{n}{dp}\PYG{p}{[}\PYG{n}{i} \PYG{o}{\PYGZhy{}} \PYG{n}{j}\PYG{p}{]}\PYG{p}{)}
+
+        \PYG{k}{return} \PYG{n}{dp}
+\end{Verbatim}

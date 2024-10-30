@@ -1,0 +1,332 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math172/Practice/Final.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Final}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: A tournament has $n$ participants, and any two players play one game against each other. Show that at any point of the tournament there are two players with the same number of games finished.
+    \begin{proof}
+        This comes from the fact that any graph has two vertices with the same degree. Suppose that our graph has $n$ vertices. Then the maximal degree of a vertex is $n - 1$. The possible degrees are therefore
+            \begin{equation*}
+                0, 1, \ldots, n - 1
+            \end{equation*}
+        If there is a vertex with $n - 1$ degree, then there is no vertex with degree $0$, because one vertex is connected to every vertex. If there is a vertex of degree $0$, there is no vertex of degree $n - 1$. So we actually have $n - 1$ possible degrees in a graph. But there are $n$ vertices, and by the pigeonhole principle, two vertices have the same degree. 
+
+        Now this is in bijection with this problem. We draw an edge between two vertices representing two players if those players have played a game. The degree now represents the number of games they have played.
+
+        This statement is not true however, if two players have played multiple games with each other.
+    \end{proof}
+
+\textbf{Exercise 2}: Let $a_{0} = 1$, and let 
+    \begin{equation*}
+        a_{n} = 3(a_{0} + a_{1} + \cdots + a_{n - 1}) + 1
+    \end{equation*}
+for $n > 0$. Find an explicit formula for $a_{n}$.
+    \begin{proof}
+        Notice that
+            \begin{equation*}
+                a_{n + 1} - a_{n} = 3a_{n}
+            \end{equation*}
+        and therefore,
+            \begin{equation*}
+                a_{n + 1} = 4a_{n}
+            \end{equation*}
+        Since $a_{0} = 1$, we have
+            \begin{equation*}
+                a_{0} = 1, a_{1} = 4, a_{2} = 16, \ldots
+            \end{equation*}
+        so the formula for $a_{n}$ is $4^{n}$.
+    \end{proof}
+
+\textbf{Exercise 3}: How many permutations of $\sigma$ of $[8]$ are there such that $\sigma(1) + \sigma(2)$ is odd?
+    \begin{proof}
+        If $\sigma(1) + \sigma(2)$ is odd, then either $\sigma(1)$ is odd and $\sigma(2)$ is even or $\sigma(1)$ is even and $\sigma(2)$ is odd. So these are two cases:
+            \begin{itemize}
+                \item $\sigma(1)$ is odd and $\sigma(2)$ is even. Then we can map $1$ to any of $3, 5, 7$ and $2$ to any of $4, 6, 8$. There are $9$ ways to do so. Now we have $6$ number left to map, and there are $6!$ ways to do so. So there are $9 \cdot 6!$ permutations.
+
+                \item $\sigma(1)$ is even and $\sigma(2)$ is odd. Then we can map $1$ to any of $2, 4, 6, 8$ and $2$ to any of $1, 3, 5, 7$. There are $16$ ways to do so. There are also $6$ numbers left to map to the remaining numbers. So there are $16 \cdot 6!$ total ways.
+            \end{itemize}
+        Adding up both cases, we get $25 \cdot 6!$.
+    \end{proof}
+
+\textbf{Exercise 4}: How many ways there are to list digits $\{1, 1, 2, 2, 3, 3, 3, 5\}$ in a way that the first and the last digits are different?
+    \begin{proof}
+        We can count the number of ways to list the digits and subtract off the number of listings where the first and last digits are the same. We have that there are $\binom{8}{2, 2, 3, 1}$ listings. Here are the cases:
+            \begin{itemize}
+                \item Starts and ends with $1$. Then we find number of ways to list remaining numbers which is $\binom{6}{2, 3, 1}$.
+
+                \item Starts and ends with $2$. Then we find the number of ways to list the remaining numbers which is $\binom{6}{2, 3, 1}$.
+
+                \item Starts and ends with $3$. Then we find the number of ways to list the remaining numbers which is $\binom{6}{2, 2, 1, 1}$
+
+                \item Cannot start and end with $5$.
+            \end{itemize}
+        So the total number of ways is
+            \begin{equation*}
+                \dbinom{8}{2, 2, 3, 1} - 2\dbinom{6}{2, 3, 1} - \dbinom{6}{2, 2, 1, 1}
+            \end{equation*}
+    \end{proof}
+
+\textbf{Exercise 5}: A student organization wants to arrange a committee consisting of $3$ graduate and $4$ undergraduate students. How many ways there are to do so if there are $15$ undergrad candidates and $10$ grad candidates?
+    \begin{proof}
+        Choose $4$ out of the $15$ candidates and $3$ out of the $10$ graduates. We get $\binom{15}{4} + \binom{10}{3}$.
+    \end{proof}
+
+\textbf{Exercise 6}: How many $6$-digits positive integers are there in which the sum of the digits is at most $51$?
+    \begin{proof}
+        Instead, consider the largest sum we can create. This would be $54$. So we want to subtract off the number of $6$-digit numbers that sum to $54, 53, 52$. There is $1$ number that sums to $54$. For $53$, we choose one of the $6$ positions to subtract $1$ from. This gives $6$ numbers that sum to $53$. For $52$, this is the number of ways to put $6$ objects into $6$ labeled boxes. So we have $\binom{5 + 2}{2} = \binom{7}{2} = 21$. So in total, there are 
+            \begin{equation*}
+                999999 - 1 - 6 - 21 = 999999 - 28 = 999971
+            \end{equation*}
+        such numbers.
+    \end{proof}
+
+\textbf{Exercise 7}: Compute the Stirling numbers $S(6, 3), c(6, 3), s(6, 3)$. Also mention what counting problems correspond to these numbers.
+    \begin{proof}
+        Recall that $k!S(n, k)$ represents the number of surjections from $[n] \rightarrow [k]$. Then we have that $k^{n}$ is the number of maps that we have total, and 
+            \begin{equation*}
+                k^{n} - \lvert A_{1} \cup \cdots A_{k} \rvert
+            \end{equation*}
+        represents the number of surjections that we have. We define:
+            \begin{equation*}
+                A_{i} = \{\text{maps where $i$ is not in the image}\}
+            \end{equation*}
+        By inclusion exclusion principle, we have:
+            \begin{align*}
+                \lvert A_{1} \cup \cdots \cup A_{k} \rvert &=      \lvert A_{1} \rvert + \lvert A_{2} \rvert + \cdots + \lvert A_{k} \rvert   \\
+                                                           &-      (\lvert A_{1} \cap A_{2} \rvert + \lvert A_{2} \cap A_{3} \rvert + \cdots) \\
+                                                           &+      \lvert A_{1} \cap A_{2} \cap A_{3} \rvert + \cdots                         \\
+                                                           &\vdots                                                                              
+            \end{align*}
+        Then we want to calculate:
+            \begin{equation*}
+                \lvert A_{1} \cap \cdots \cap A_{j} \rvert = \{\text{number of maps that miss $1, \ldots, j$}\}
+            \end{equation*}
+        Then we remove $1, \ldots, j$ from the codomain and get the number of maps there. We have that this number is $(k - j)^{n}$. Then we have
+            \begin{equation*}
+                \lvert A_{1} \cup \cdots \cup A_{k} \rvert = \sum_{i = 1}^{k - 1}\dbinom{k}{i}(k - i)^{n}
+            \end{equation*}
+        So now we have
+            \begin{equation*}
+                k!S(n, k) = k^{n} - \sum_{i = 1}^{k - 1}\dbinom{k}{i}(k - i)^{n}
+            \end{equation*}
+        We move the $k^{n}$ inside and $k!$ to the other side:
+            \begin{align*}
+                S(n, k) &= \dfrac{1}{k!}\sum_{i = 0}^{k - 1}\dbinom{k}{i}(k - i)^{n} \\
+                        &= \sum_{i = 0}^{k - 1}\dfrac{(k - i)^{n}}{(k - i)!i!}         
+            \end{align*}
+        So this is the formula. This represents the number of ways to partition $[n]$ into $k$ groups of size at least $1$. So then
+            \begin{align*}
+                S(6, 3) &= \sum_{i = 0}^{2}\dfrac{(3 - i)^{6}}{(3 - i)!i!} \\
+                        &= \dfrac{3^{6}}{3!} + \dfrac{2^{6}}{2!} + \dfrac{1}{2} \\
+            \end{align*}
+        Now $c(n, k)$ counts the number of permutations of $[n]$ with exactly $k$ cycles. We have the recursive formula given by
+            \begin{equation*}
+                c(n, k) = c(n - 1, k - 1) + (n - 1)c(n - 1, k)
+            \end{equation*}
+        For $s(n, k)$, that is the signed stirling numbers. We have 
+            \begin{equation*}
+                (-1)^{n - k}c(n, k) = s(n, k)
+            \end{equation*}
+    \end{proof}
+
+\textbf{Exercise 8}: Find a closed expression for 
+    \begin{equation*}
+        \sum_{k = 0}^{n}k^{2}\dbinom{n}{k}
+    \end{equation*}
+\begin{proof}
+    If we expand:
+        \begin{equation*}
+            0\dbinom{n}{0} + 1\dbinom{n}{1} + 4\dbinom{n}{2} + \cdots + (n - 1)^{2} \dbinom{n}{n - 1} + n^{2}\dbinom{n}{n}
+        \end{equation*}
+    We have that 
+        \begin{equation*}
+            (1 + x)^{n} = \sum_{k = 0}^{n}\dbinom{n}{k}x^{k}
+        \end{equation*}
+    and taking the derivative twice:
+        \begin{align*}
+            n(1 + x)^{n - 1}        &= \sum_{k = 1}^{n}\dbinom{n}{k}kx^{k - 1}        \\
+            n(n - 1)(1 + x)^{n - 2} &= \sum_{k = 2}^{n}\dbinom{n}{k}k(k - 1)x^{k - 2}   
+        \end{align*}
+    Plugging in $x = 1$ for both, we find:
+        \begin{align*}
+            n2^{n - 1}        &= \sum_{k = 1}^{n}\dbinom{n}{k}k        \\
+            n(n - 1)2^{n - 2} &= \sum_{k = 2}^{n}\dbinom{n}{k}k(k - 1)   
+        \end{align*}
+    and now adding them:
+        \begin{equation*}
+            n2^{n - 1} + n(n - 1)2^{n - 2} = \sum_{k = 1}^{n}\dbinom{n}{k}k^{2} = \sum_{k = 0}^{n}\dbinom{n}{k}k^{2}
+        \end{equation*}
+    as desired.
+\end{proof}
+
+\textbf{Exercise 9}: Find the coefficient of $x^{k}$ in the formal power series $\sqrt{\frac{1 + x}{1 - x}}$.
+    \begin{proof}
+        We have
+            \begin{equation*}
+                \sqrt{\dfrac{1 + x}{1 - x}} = (1 + x)^{\frac{1}{2}}(1 - x)^{-\frac{1}{2}}
+            \end{equation*}
+        Now for the generalized binomial theorem:
+            \begin{equation*}
+                (1 + x)^{\alpha} = \sum_{k \geq 0} \dfrac{\alpha(\alpha - 1)(\alpha - 2) \cdots (\alpha - k + 1)}{k!}x^{k}
+            \end{equation*}
+        
+    \end{proof}
+
+\textbf{Exercise 10}: How many permutations $\sigma$ of $[7]$ are there such that $\sigma^{2}$ is a permutation with $4$ fixed points and one $3$-cycle?
+    \begin{proof}
+        We want $\sigma$ to be made of disjoint cycles with order dividing $2$, and one cycle of order $3$. Then the possible cycle types are:
+            \begin{equation*}
+                (3, 2, 2), (3, 2, 1, 1), (3, 1, 1, 1, 1)
+            \end{equation*}
+        We want to count the number of cycles with cycle type corresponding to each. So by repeated application of the formula, let $m_{i}$ be the number of cycles of length $i$. Then we have that the number of permutations with a cycle type is given by
+            \begin{equation*}
+                \dfrac{n!}{\prod_{i \geq 1}i^{m_{i}} m_{i}!}
+            \end{equation*}
+        So we have
+            \begin{equation*}
+                \dfrac{7!}{2^{2}2!3^{1}1!}, \dfrac{7!}{3^{1}1!2^{1}1!2!}, \dfrac{7!}{3\cdot 4!}
+            \end{equation*}
+        When we take the sum, we get
+            \begin{equation*}
+                7!(\dfrac{1 + 2 + 2}{4!}) = 7 \cdot 6 \cdot 5 \cdot 5
+            \end{equation*}
+    \end{proof}
+
+\textbf{Exercise 11}: Prove that for positive integers $m \geq n$ we have
+    \begin{equation*}
+        S(m, n) = \sum_{i = 1}^{m}S(m - i, n - 1)n^{i - 1}
+    \end{equation*}
+    \begin{proof}
+        We can prove this by induction over $m$. We see that this holds for $m = n$:
+            \begin{equation*}
+                S(n, n) = \sum_{i = 1}^{n}S(n - i, n - 1)n^{i - 1} = S(n - 1, n - 1) = 1
+            \end{equation*}
+        Suppose that this holds for $n, n + 1, \ldots, m - 1$. We will show that this holds for $m$. We have 
+            \begin{align*}
+                S(m, n) &= S(m - 1, n - 1) + kS(m - 1, n) \\
+                        &= S(m - 1, n - 1) + k\sum_{i = 1}^{m - 1}S(m - 1 - i, n - 1)n^{i - 1} \\
+                        &= S(m - 1, n - 1) + \sum_{i = 2}^{m}S(m - i, n - 1)n^{i - 1} \\
+                        &= \sum_{i = 1}^{m}S(m - i, n - 1)n^{i - 1}
+            \end{align*}
+        which concludes the proof.
+    \end{proof}
+
+\textbf{Exercise 12}: Prove that for $n \geq 1$
+    \begin{equation*}
+        p(1) + p(2) + \cdots + p(n) < p(2n)
+    \end{equation*}
+    \begin{proof}
+        
+    \end{proof}
+
+\textbf{Exercise 18}: Let $a_{0} = 1, a_{1} = 1, a_{2} = 2$ and for $n \geq 3$
+    \begin{equation*}
+        a_{n} = 7a_{n - 2} - 6a_{n - 3}
+    \end{equation*}
+Find a closed expression for $a_{n}$.
+    \begin{proof}
+        We have that if $\sum_{n \geq 0}a_{n}x^{n} = F(x)$, then 
+            \begin{equation*}
+                F(x) = \dfrac{P(x)}{Q(x)} = \dfrac{1 + x - 5x^{2}}{1 - 7x^{2} + 6x^{3}}
+            \end{equation*}
+
+    \end{proof}
+
+\textbf{Exercise 19}: Let $G$ be a simple graph on $10$ vertices with $28$ edges. Prove that $G$ must contain a cycle length $4$.
+    \begin{proof}
+        
+    \end{proof}
+
+\textbf{Exercise 22}: Is there a simple graph $G$ with $6$ vertices of degrees $4, 4, 4, 2, 1, 1$?
+    \begin{proof}
+        No. First, remove the vertices that have degree $1$. These are the leaves of the graph. Then we are left with $4$ vertices of the corresponding degrees:
+            \begin{align*}
+                D_{1} &= 4, 4, 4, 0 \\
+                D_{2} &= 4, 4, 3, 1 \\
+                D_{3} &= 4, 3, 3, 2 \\
+                D_{4} &= 4, 4, 2, 2   
+            \end{align*}
+        But we see that all cases are impossible, because in each, we have $6$ edges. Then it must be the complete graph on $4$ vertices. But then the degree set should be $3, 3, 3, 3$, contradiction.
+    \end{proof}
+
+\textbf{Exercise 23}: Is there a simple graph $G$ on $10$ vertices which is not connected and which has only vertices of degree $5$ or more?
+    \begin{proof}
+        No because of $G$ is a graph with vertices of degree $\geq n/2$ where $n$ is the number of vertices, then there is a hamiltonian cycle. This means that there is a path of length $9$ which therefore goes through all the vertices.
+    \end{proof}
+
+\textbf{Exercise 25}: Let $G$ be a connected graph with $n$ vertices, $n$ edges and with no leaves. Prove that $G$ is a cycle on $n$ vertices. 
+    \begin{proof}
+        Suppose that we remove one edge from our graph. We need to show that it remains connected. Suppose for contradiction that this splits the graph into two connected components. Then we see that each connected component has at least $2$ vertices, because there are no leaves in our original graph. Let $G_{1}$ have $n - k$ vertices and $G_{2}$ have $k$ of them. Then $E_{1} \geq n - k - 1$ and $E_{2} \geq k - 1$. Then 
+            \begin{equation*}
+                E_{1} + E_{2} = n - 2 < n - 1
+            \end{equation*}
+        So either $E_{1}$ or $E_{2}$ has an extra edge. More importantly, we see that one of the connected components must be a tree. Then when we add in that edge that we had previously removed, we no longer have no leaves in our graph.
+    \end{proof}
+
+\textbf{Exercise 26}: Let $G$ be a bipartite graph with color classes $X, Y$, in which any vertex of $X$ has degree at least as large as the degree of any vertex of $Y$, and there is at least one edge in $G$. Prove that $X$ has a perfect matching into $Y$.
+    \begin{proof}
+        We need to show that
+            \begin{equation*}
+                \lvert S \rvert \leq \lvert N_{G}(S) \rvert
+            \end{equation*}
+        where $S$ is the set of vertices in $X$ and $N_{G}(S)$ is the set of neighbors of $S$ in $Y$. We have 
+            \begin{equation*}
+                \sum_{s \in S} \deg(s) = m
+            \end{equation*}
+        where $m$ is the number of edges from $S$ to $Y$. We also have that 
+            \begin{equation*}
+                m \leq \sum_{n \in N(S)} \deg(n)
+            \end{equation*}
+        because the edges from $X \rightarrow Y$ from the subset $S$ is a subset of the ones that go from the set of neighbors back to $X$: $N(S) \rightarrow X$. So we see that it has to be the case that 
+            \begin{equation*}
+                \lvert S \rvert \leq \lvert N(S) \rvert
+            \end{equation*}
+        for any $S \subseteq X$. This concludes the proof.
+    \end{proof}
+
+\textbf{Exercise 27}: Let $G$ be a graph obtained by removing an edge from $K_{n}$. Find the number of ways to color the vertices of $G$ into $k$ colors without creating a pair of vertices of the same color connected by an edge. 
+    \begin{proof}
+        
+    \end{proof}
+
+\textbf{Exercise 28}: Let $G$ be a planar graph with $k$ connected components, $V$ vertices, $E$ edges and $F$ faces. What is the value of $V + F - E$?
+    \begin{proof}
+        We have $k$ connected components, so we can connected them all with $k - 1$ edges. Notice that doing this does not create a new face. Then $G^{\prime}$ is a connected graph. We have 
+            \begin{equation*}
+                V + F - (E + k - 1) = 2
+            \end{equation*}
+        Then we have
+            \begin{equation*}
+                V + F - E = k + 1
+            \end{equation*}
+        so we are done.
+    \end{proof}
+
+\textbf{Exercise 29}: Prove that every convex polyhedron has a pair of faces with the same number of sides.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

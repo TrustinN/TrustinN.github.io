@@ -1,0 +1,234 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math172/Practice/Midterm1.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+
+\title{Math172Midterm1}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+The topics covered are:
+    \begin{itemize}
+        \item Pigeon-hole Principle,
+
+        \item Weak and Strong Induction,
+
+        \item Counting permutations, subsets, functions, strings, compositions, partitions and understanding how some of these are equivalent to placing identical/different objects into identical/different boxes,
+
+        \item Binomial coefficients and binomial theorem (for $(x + y)^{n}$ where $n$ is an integer); Multinomial generalizations,
+
+        \item Understanding permutations using their cycles,
+
+        \item Stirling numbers,
+
+        \item Inclusion-Exclusion Principle. 
+    \end{itemize}
+
+The midterm problems will be similar or easier than the homework problems, so to prepare make sure that you understand all material there. For additional practice, you can solve problems in chapters $1 - 7$ of the textbook (``Walk through combinatorics'' by Bona), also below is the list of some problems which are similar to what might appear in midterm.
+
+\textbf{Exercise 1}: The product of five given polynomials has degree 21. Show that you can pick two of these polynomials so that their product has degree at least 9.
+    \begin{proof}
+        Let $f(x_{1}, \ldots , x_{n})$ be a polynomial on $n$ variables with terms $t_{i}$ monomials such that:
+            \begin{equation*}
+                f = t_{n} + t_{n - 1} + \cdots +t_{0}
+            \end{equation*}
+        Then we define degree as the sum over the exponents of each $t_{i}$ and the degree of a polynomial $f$ as
+            \begin{equation*}
+                \max(\mathop{deg}(t_{0}), \ldots , \mathop{deg}(t_{n}))
+            \end{equation*}
+        By this, we know that the degree of the product of two polynomials is the product of each of their degrees. So let $f_{1}, f_{2}, \ldots , f_{5}$ be five polynomials. We have:
+            \begin{equation*}
+                \mathop{deg}(f_{1}f_{2}\cdots f_{5}) = \mathop{deg}(f_{1}) + \mathop{deg}(f_{2})  + \cdots + \mathop{deg}(f_{5}) = 21
+            \end{equation*}
+        By the generalized pigeonhole principle, we know that one of the polynomials must have degree at least $6$. Let that be $f_{1}$ wlog. Suppose that $\text{deg}(f_{1}) \geq 9$. Then we are done, as we can take $f_{1}f_{i}$ and each $f_{i}$ being non-zero means that we get a polynomial with degree $\geq 9$. 
+
+        On the other hand, 
+            \begin{equation*}
+                12 \leq \mathop{deg}(f_{2}) + \cdots + \mathop{deg}(f_{5}) \leq 15
+            \end{equation*}
+        And now by the pigeonhole principle, using the lower bound, we get that at least one polynomial has degree at least $3$. Call that $f_{2}$ wlog. Then $f_{1}f_{2}$ has degree $\geq 6 + 3 = 9$
+    \end{proof}
+
+\textbf{Exercise 2}: Show that
+    \begin{equation*}
+        1 + 2 + 4 + 8 + \cdots  + 2^{n} = 2^{n + 1} - 1
+    \end{equation*}
+        \begin{proof}
+            We will count the right hand side and then the left and show that they are equal. Suppose that we wanted to count the number of subsets of $[n + 1]$ of size less than $n + 1$. Then we have $2^{n + 1}$ subsets. The only subset that has size $\geq n + 1$ is just the entire set. Therefore, we remove that from the count and get:
+                \begin{equation*}
+                    2^{n + 1} - 1
+                \end{equation*}
+
+            Now for the RHS, we count the number of subsets of $[n + 1]$ that have size $<  n + 1$ by 
+                \begin{itemize}
+                    \item Counting the number of subsets of size $0$ : $2^{0}$
+
+                    \item Counting the number of subsets of size $1$ : $2^{1}$
+
+                    \item Counting the number of subsets of size $2$ : $2^{2}$
+
+                    \item $\vdots $
+
+                    \item Counting the number of subsets of size $n$ : $2^{n}$ 
+                \end{itemize}
+            This means that we have 
+                \begin{equation*}
+                    1 + 2 + 4 + \cdots + 2^{n}
+                \end{equation*}
+            such subsets. So we have proven equality.
+        \end{proof}
+
+\textbf{Exercise 3} : How many permutations of $\sigma$ of $[7]$ there are such that $\sigma(1)$ is even?
+    \begin{proof}
+        We wish to count the number of permutations where $1$ is next to $2$, $4$, or $6$. So we pair up $12$ as a block or single element in our permutation. Now we just count the number of permutations on $[6]$ which is $6!$. So we have $6!$ permutations where $1$ is sent to $2$. By symmetry, we can do this for $4$, $6$ also. This gives us $3 \cdot 6!$ permutations where $\sigma(1)$ is even.
+    \end{proof}
+
+\textbf{Exercise 4}: How many ways there are to list digits $\{1, 1, 2, 2, 3, 3, 4, 5\}$ in a way that the two $1$s are in consecutive position and the two $2$s are at least one digit apart from each other.
+    \begin{proof}
+        We just pair up the two $1$s into a block and count the number of permutations of $\{11, 2, 2, 3, 3, 4, 5\}$. Instead of counting the number of listings with the $2$s one digit apart, we count the number of permutations where they are stuck together. So we are then counting
+            \begin{equation*}
+                \{11, 22, 3, 3, 4, 5\}
+            \end{equation*}
+        Now to count this multiset, we just have:
+            \begin{equation*}
+                \dfrac{6!}{2!} = 6 \cdot 5 \cdot 4 \cdot 3 = 360
+            \end{equation*}
+        which is the number of permutations where the two $2$s are stuck together. And the number of permutations in total is of 
+            \begin{equation*}
+                \{11, 2, 2, 3, 3, 4, 5\}
+            \end{equation*}
+        which is 
+            \begin{equation*}
+                \dfrac{7!}{2!2!} = 7 \cdot 6 \cdot 5 \cdot 3 \cdot 2 = 1260
+            \end{equation*}
+        So we have the number of permutations where the $2$s are at least one digit apart plus the number where they are together is equal to the number of permutations:
+            \begin{equation*}
+                360 + p = 1260
+            \end{equation*}
+        so the answer is $1260 - 360 = 900$.
+    \end{proof}
+
+\textbf{Exercise 5}: A professor wants to schedule $3$ office hours during a $5$-day week. How many ways to do so?
+    \begin{proof}
+        This corresponds to the number of ways to put identical balls into distinct boxes. So we have by the stars and bars method:
+            \begin{equation*}
+                \divides \divides \divides \divides \cdot \cdot \cdot 
+            \end{equation*}
+        $4$ bars and $3$ stars. So we just count the number of permutations on these which is 
+            \begin{equation*}
+                \dbinom{7}{3} = \dfrac{7!}{3!4!} = 7 \cdot 5 = 35
+            \end{equation*}
+        So there are $35$ ways.
+    \end{proof}
+
+\textbf{Exercise 6}: How many functions $f : [n] \rightarrow [k]$ there are which have exactly one $i$ satisfying $f(i)= i$?
+    \begin{proof}
+        We will break this into cases. If $ n\geq k$, then we restrict the domain to $[k]$ and consider the functions $f : [k] \rightarrow [k]$. We have that for each element in the domain, we can choose $1$ to send to itself and for the others, we send them to one of the $k - 1$ other elements that is not equal to itself. So we have $k(k - 1)^{k - 1}$ ways to do this. Now for the elements in $[n] \backslash [k]$, we can send them to whatever. So we have $(n - k)^{k}$ Therefore, our total count for $n \geq k$ is
+            \begin{equation*}
+                k(k - 1)^{n - 1}(n - k)^{k}
+            \end{equation*}
+
+        Now when $n < k$, We just have that we choose one of the elements in $[n]$ to send to itself in $[k]$. Then we send the others to any other points in $[k]$ that is not itself. This gives us $n(k - 1)^{n - 1}$
+    \end{proof}
+
+\textbf{Exercise 7}: Compute the Stirling numbers $S(6, 2)$ and $c(6, 2)$. Also mention what counting problems correspond to these numbers.
+
+\textbf{Exercise 8}: Let $n \geq 7$. Show that the number of partitions of $n$ into four distinct parts is at least as large as the number of partitions of $n- 6$ into four parts.
+    \begin{proof}
+        Consider the Young diagram on $n$ with $4$ parts. The number of such is also equal to the number of partitions of $n - 4$ on $4$ parts, by subtracting out the leftmost column and considering the $n - 4$ blocks that are left. Now since $n - 4 >  1$, we must at least have one block at the very top left position. Otherwise, if we place a block anywhere else, then the $i$-th row will have more blocks the first row, which will have $0$. We have two cases after this. We can either place the next block on the same row as the first block or on the row below. So that means that we have $n - 6$ blocks left. But then that is the same as just counting the number of partitions of $n - 6$ on $4$ rows.
+    \end{proof}
+
+\textbf{Exercise 9}: Compute the coefficient of $x_{1}x_{2}x_{3}$ in $(x_{1} + 2x_{2} + 3x_{3})^{3}$.
+    \begin{proof}
+        We first use the substitution
+            \begin{align*}
+                x_{1}  &= y_{1} \\
+                2x_{2} &= y_{2} \\
+                3x_{3} &= y_{3}   
+            \end{align*}
+        Now we can apply the multinomial theorem to $(y_{1} + y_{2} + y_{3})^{3}$. The coefficient is just:
+            \begin{equation*}
+                \sum_{i, j, k} \dbinom{i + j + k}{i, j, k}
+            \end{equation*}
+        where $i+ j + k = 3$. So we have:
+            \begin{equation*}
+                \dbinom{3}{3, 0, 0} + \dbinom{3}{0, 3, 0} + \dbinom{3}{0, 0, 3} = 3
+            \end{equation*}
+        and
+            \begin{equation*}
+                3\left(\dbinom{3}{2, 1, 0} + \dbinom{3}{2, 0, 1}\right) = 3(3 + 3) = 18
+            \end{equation*}
+        and 
+            \begin{equation*}
+                \dbinom{3}{1, 1, 1} = 6
+            \end{equation*}
+        So this gives us $27y_{1}y_{2}y_{3}$. Now we substitute back in the $x_{i}^{\prime}s$ to get:
+            \begin{equation*}
+                27(x_{1})(2x_{2})(3x_{3}) = 162x_{1}x_{2}x_{3}
+            \end{equation*}
+        So it is $162$.
+    \end{proof}
+
+\textbf{Exercise 10}: Prove for positive integer $n$ that
+    \begin{equation*}
+        \sum_{i = 0}^{n}(-1)^{n - i}\dbinom{n}{i}2^{i} = 1
+    \end{equation*}
+        \begin{proof}
+            This comes as an immediate application of the binomial theorem:
+                \begin{equation*}
+                    (x + y)^{n} = \sum_{i = 0}^{n}\dbinom{n}{i}x^{i}y^{n -i}
+                \end{equation*}
+            We just make the substitution $x = 2, y = -1$ on both sides to get:
+                \begin{equation*}
+                    1 = (2 - 1)^{n} = \sum_{i = 0}^{n}\dbinom{n}{i}2^{i}(-1)^{n - i}
+                \end{equation*}
+            and we are done.
+        \end{proof}
+
+\textbf{Exercise 11}: How many permutations of $\sigma$ of $[6]$ have no fixed points $\sigma(i) = i$ and satisfy $\sigma^{3} = e$? Similar problem for $\sigma$ being a permutation of $[7]$.
+    \begin{proof}
+        We are looking for cycle types that contain only $3$. Then we wish to count the number of cycles with type $(3, 3)$. We have a formula for this. It is first the number of permutations of $[n]$ which is $n!$. Then we divide by our repeated counts. If $i$ is the cycle length, then we have $i$ number of ways to rotate the elements of each cycle. Furthermore, this can be applied a number of times based on the number of $i$ length cycles denoted $c_{i}$. So we have $i^{c_{i}}$. We can also rearrange the cycles. Since our cycles are sorted in descending order, we have $c_{i}!$ ways to do this. So the formula is
+            \begin{equation*}
+                \dfrac{n!}{\prod_{i \geq 1}^{} c_{i}! \cdot i^{c_{i}}}
+            \end{equation*}
+        So the number of such cycle types is 
+            \begin{equation*}
+                \dfrac{6!}{2! \cdot 3^{2}} = \dfrac{6 \cdot 5 \cdot 4 \cdot 3}{3^{2}} = 40
+            \end{equation*}
+
+        As for $[7]$, if we have a cycle type of just $3$'s, then we cannot add up to $7$ with just $3$. So we must have one fixed point. So there is no such cycle.
+    \end{proof}
+
+\textbf{Exercise 12}: How many ways there are to place $10$ identical balls into $4$ boxes numbered from $1$ to $4$ if no box can fit more than $3$ balls?
+    \begin{proof}
+        By pigeonhole principle, we know that if we just try to fit $10$ balls into $3$ boxes, then at least one box has $4$ balls. So therefore, we must have at least one ball in each box. So now we just need to find the number of ways to fit $6$ balls into $4$ boxes so that no box has more than $2$ balls.
+        \begin{itemize}
+            \item By repeated application of the pigeon hole principle, we see that if one box remains empty, then the only other arrangement is that each non-empty box has $2$ balls. This means there are $4$ such ways this can happen.
+
+            \item We see that the only other case is if two boxes have exactly one ball. There are $\binom{4}{2}$ ways this can happen or $12$. So we have $16$ ways in total.
+        \end{itemize}
+    \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

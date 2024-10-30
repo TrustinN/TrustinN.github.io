@@ -1,0 +1,113 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math172/Homework/Math172Hw9/Math172Ex9.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math172Ex9}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 5}: For which values of $k$ can the graph $K_{n}$ be decomposed into a union of Hamiltonian cycles (that is, the set of edges split into disjoint parts with each part corresponding to a Hamiltonian cycle.)
+    \begin{proof}
+        For $n = 0$, it is a union of Hamiltonian cycle vacuously.
+
+        For prime values of $n \geq 2$, the complete graph can be a union of Hamiltonian cycles. We will prove that this is not possible for $n$ even first. Notice that a hamiltonian cycle must visit every vertex exactly once and is a cycle. Then we have exactly the path given by $v_{1}, v_{2}, \ldots, v_{n}, v_{1}$ for $n$ vertices. Then we notice that this uses $n$ edges. 
+
+        (\textbf{Not even numbers}) Since our vertex set is even, we can write it as $2k$ vertices for some $k \in \mathbb{N}$. Our complete graph has $\frac{2k(2k - 1)}{2} = k(2k - 1) = 2k^{2} - k$ edges. Each hamiltonian cycle uses $2k$ vertices. Then we must have 
+            \begin{equation*}
+                2k \divides 2k^{2} - k
+            \end{equation*}
+        which is impossible. Then graphs with an even number of vertices cannot have a union of Hamiltonian cycles.
+
+        (\textbf{Proof for prime numbers}) Now to prove that every prime vertex graph $n \geq 2$ has a union of Hamiltonian cycles. If we have an odd number of vertices, a complete graph has
+            \begin{equation*}
+                \dfrac{(2k + 1)(2k)}{2} = k(2k + 1) \text{ edges}
+            \end{equation*}
+        And each hamiltonian cycle takes $2k + 1$ edges. Indeed, $2k + 1 \divides k(2k + 1)$.
+
+        We note that all the cycles of our union are isomorphic. This is because they are all hamiltonian cycles contain all vertices. No vertices are used twice, so each vertex has an edge going in and one going out. Then each vertex has degree $2$. So there is a bijection between these graphs. 
+
+        (\textbf{Skip if Unnecessary. Proof that Hamiltonian Cycles are Isomorphic}) We construct the bijection between two hamiltonian cycles $H_{1}, H_{2}$ by first labeling the vertices of one cycle, $H_{1}$, such that $v_{i}, v_{i + 1}$ are connected by an edge: $v_{1}, v_{2}, \ldots, v_{2k + 1}, v_{1}$. Label the other cycles with vertices, such that an edge connects $u_{i}, u_{i + 1}$: $u_{1}, u_{2}, \ldots, u_{2k + 1}, u_{1}$. Then the bijection is given by $v_{i} \mapsto u_{i}$. Indeed, $\{v_{i}, v_{i + 1}\}$ is an edge means that $\{f(v_{i}), f(v_{i + 1})\} = \{u_{i}, u_{i + 1}\}$ is an edge and vice versa. So the graphs are isomorphic.
+
+        Then given a cycle, we can reformulate the problem where if we have a vertex set of $v_{0}, v_{1}, v_{2}, \ldots, v_{n - 1}$. Let $n = 2k + 1$.
+
+        By what was shown above, we must have a union of $k$ Hamiltonian cycles. If we construct $1, \ldots, k$ cycles, $H_{1}, \ldots, H_{k}$ where for the $i-th$ cycle, we take vertex $v_{0}$ and construct the walk: 
+            \begin{equation*}
+                (v_{0}, v_{(i \mod{n})}, v_{(2i\mod{n})}, v_{(3i\mod{n})}, \ldots, v_{((n - 1)i\mod{n})}, v_{0})
+            \end{equation*}
+        When is an edge shared between two different cycles or when does a cycle use exactly $n$ distinct vertices?
+
+        First, we have to find when this is a cycle with all $n$ vertices used. Suppose that $v_{(ci \mod{n})} = v_{(di \mod{n})}$ for $0 \leq c \neq d \leq n - 1$. Then
+            \begin{equation*}
+                ci \equiv di \pmod{n}
+            \end{equation*}
+        or
+            \begin{equation*}
+                (c - d)i \equiv 0 \pmod{n}
+            \end{equation*}
+        Refer to this equation for our two cases:
+            \begin{itemize}
+                \item Case 1: If $n$ is not prime, then $n = pq$. Then we can choose $i = p$ and $c = q, d = 0$. The $p-th$ cycle will therefore produce a cycle with repeated vertices. If $p > k$, then we can subtract $n$ from it:
+                    \begin{equation*}
+                        p - 2k - 1 > -k - 1 \implies 2k - p + 1 < k + 1 \implies 2k - p + 1 \leq k
+                    \end{equation*}
+                Notice that subtracting $n$ does not change the walk because we mod by $n$ in the subscript.
+
+                \item  Case 2: If $n$ is prime, this equation holds if $n \divides i$. If it does, our walk will be: $(v_{1}, v_{1}, \ldots, v_{1})$ which is impossible because our graph is simple. If $n \divides c - d$, since $0 \leq c < n$, $0 \leq d < n$, we have that $n \ndivides c$, $n \ndivides d$. We also have:
+                    \begin{align*}
+                        0  &\leq  c < n     \\
+                        0  &\leq d < n      \\
+                        n &<    -d \leq 0  \\
+                        n &<     c - d < n
+                    \end{align*}
+                So $c - d = 0$. But we said that $0 \leq c \neq d \leq n$. So this means that our walk uses all vertices exactly once if $n$ is prime.
+            \end{itemize}
+
+        Now we need to show that between two different cycles, they do not use the same edge twice. Recall we have $k$ number of cycles to create. Suppose that 
+            \begin{equation*}
+                \{v_{(ci \mod{n})}, v_{((c + 1)i \mod{n})}\} = \{v_{(dj \mod{n})}, v_{((d + 1)j \mod{n})}\}
+            \end{equation*}
+        This means that an edge is shared between cycle $i \neq j$. Then we have
+            \begin{equation*}
+                ci \equiv dj \pmod{n}
+            \end{equation*}
+        and
+            \begin{equation*}
+                (c + 1)i \equiv (d + 1)j \pmod{n}
+            \end{equation*}
+        If we subtract the top equation from the bottom one, we get:
+            \begin{equation*}
+                i \equiv j \pmod{2k + 1} \implies i - j \equiv 0 \pmod{2k + 1}
+            \end{equation*}
+        But $1 \leq i \neq j \leq k$. So we have:
+            \begin{align*}
+                1      &\leq   i \leq k         \\
+                1      & \leq  j \leq k         \\
+                -k     &\leq  -j \leq -1        \\
+                -k + 1 &\leq   i - j \leq k - 1   
+            \end{align*}
+        So $i - j = 0$ and therefore, $i = j$.
+
+        So because our cycles are hamiltonian cycles (visits exactly $n$ vertices once), and $H_{1}, \ldots, H_{k}$ do not share any edges, we know that the union of them contains $k(2k + 1)$ edges, which is exactly the number of edges of the complete graph on $n$. So this completes the proof that complete graphs on $n$ vertices for $n \geq 2$ prime or $n = 0$ can be decomposed into a union of Hamiltonian cycles.
+    \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

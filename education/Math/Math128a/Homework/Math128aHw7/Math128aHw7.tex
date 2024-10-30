@@ -1,0 +1,410 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math128a/Homework/Math128aHw7/Math128aHw7.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math128aHw7}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\section*{Exercise Set 4.3}
+\hrule
+
+\textbf{Exercise 2}: Approximate the following integrals using the Trapezoidal rule.
+    \begin{itemize}
+        \item [(b)] $\int_{-0.5}^{0} x \ln{x + 1} \, \dd{x}$
+    \end{itemize}
+    \begin{answer}
+        I got $\int_{-0.5}^{0} x \ln{x + 1} \, \dd{x} = 0.061301828313232886724648551535211$. Here is my code:
+        \inputminted{matlab}{./code/Integration/Trapezoid.m}
+        \inputminted{matlab}{./code/script1.m}
+    \end{answer}
+
+\textbf{Exercise 4}: Find a bound for the error in Exercise $2$ using the error formula and compare this to the actual error.
+    \begin{itemize}
+        \item [(b)] $\int_{-0.5}^{0} x \ln{x + 1} \, \dd{x}$
+    \end{itemize}
+    \begin{answer}
+        The error formula is given by
+            \begin{equation*}
+                \left\lvert \dfrac{h^{3}}{12}f^{\prime\prime}(\mathcal{E}) \right\rvert
+            \end{equation*}
+        We have that $h = 0.25$.
+            \begin{equation*}
+                f^{\prime}(x) = \ln{x + 1} + \dfrac{x}{x + 1}
+            \end{equation*}
+        Then the second derivative:
+            \begin{equation*}
+                f^{\prime\prime}(x) = \dfrac{1}{x + 1} + \dfrac{x + 1 - x}{(x + 1)^{2}} = \dfrac{1}{x + 1} + \dfrac{1}{(x + 1)^{2}} = (x + 1)^{-1} + (x + 1)^{-2}
+            \end{equation*}
+        Now we need to determine the maximum value of this function on the interval $[-0.5, 0]$. Clearly, it achieves its max when the denominator is small, so the max is at $x = -0.5$. Plugging this in, we get:
+            \begin{equation*}
+                f^{\prime\prime}(-0.5) = \dfrac{1}{0.5} + \dfrac{1}{0.5^{2}} = 2 + 4 = 6
+            \end{equation*}
+        Putting this all together, the error is at most:
+            \begin{equation*}
+                \left\lvert \dfrac{0.25^{3}}{12} \cdot 6 \right\rvert = \dfrac{0.015625}{2} = 0.0078125
+            \end{equation*}
+
+        The actual value is $0.05256980729$. Then the error is
+            \begin{equation*}
+                0.061301828313232886724648551535211 - 0.05256980729 = 0.0087320210232329
+            \end{equation*}
+        which is indeed less than the error bound we calculated.
+    \end{answer}
+
+\textbf{Exercise 6}: Repeat Exercise $2$ using Simpson's rule.
+    \begin{itemize}
+        \item [(b)] $\int_{-0.5}^{0} x \ln{x + 1} \, \dd{x}$
+    \end{itemize}
+    \begin{answer}
+        I got $\int_{-0.5}^{0} x \ln{x + 1} \, \dd{x} = 0.052854638560979466666012172026967$. Here is my code:
+        \inputminted{matlab}{./code/Integration/Simpson.m}
+        \inputminted{matlab}{./code/script2.m}
+    \end{answer}
+
+\textbf{Exercise 8}: Repeat Exercise $4$ using Simpson's rule and the results of Exercise $6$.
+    \begin{answer}
+        The error formula given is
+            \begin{equation*}
+                \dfrac{h^{5}}{90}f^{(4)}(\mathcal{E})
+            \end{equation*}
+        Then calculating the fourth derivative:
+            \begin{equation*}
+                f^{(2)}(x) = (x + 1)^{-1} + (x + 1)^{-2}
+            \end{equation*}
+        and therefore:
+            \begin{equation*}
+                f^{(3)}(x) = -(x + 1)^{-2} -2(x + 1)^{-3}
+            \end{equation*}
+        so
+            \begin{equation*}
+                f^{(4)}(x) = 2(x + 1)^{-3} + 6(x + 1)^{-4}
+            \end{equation*}
+        Then we see that the max on the interval is still at $x = -0.5$. Evaluating:
+            \begin{equation*}
+                f^{(4)}(-0.5) = 2(.5)^{-3} + 6(0.5)^{-4} = 2 \cdot 8 + 6 \cdot 16 = 16 + 96 = 112
+            \end{equation*}
+        Now $h = 0.25$. So putting this all together:
+            \begin{equation*}
+                \dfrac{0.25^{4}}{90} \cdot 112 = \dfrac{112}{256 \cdot 90} = \dfrac{112}{23040} = 0.0048611111111111
+            \end{equation*}
+
+        The actual value is $0.05256980729$. The value we got is $0.052854638560979466666012172026967$. Then the actual error is
+            \begin{equation*}
+                0.052854638560979466666012172026967 - 0.05256980729 = 0.00028483127097947
+            \end{equation*}
+        which we see is bounded by the error bound.
+    \end{answer}
+
+\textbf{Exercise 19}: Find the degree of precision of the quadrature formula
+    \begin{equation*}
+        \int_{-1}^{1} f(x) \, \dd{x} = f\left(-\dfrac{\sqrt{3}}{3}\right) + f\left(\dfrac{\sqrt{3}}{3}\right)
+    \end{equation*}
+    \begin{answer}
+        If $f(x)$ is linear:
+            \begin{equation*}
+                f(x) = ax + b
+            \end{equation*}
+        and 
+            \begin{equation*}
+                \int_{-1}^{1} f(x) \, \dd{x} = \int_{-1}^{1} ax + b \, \dd{x} = \left(\dfrac{a}{2}x^{2} + bx\right) \eval_{-1}^{1}
+            \end{equation*}
+        Evaluating:
+            \begin{equation*}
+                \dfrac{a}{2} + b - (\dfrac{a}{2} - b) = 2b
+            \end{equation*}
+        On the LHS:
+            \begin{equation*}
+                -\dfrac{a\sqrt{3}}{3} + b + (\dfrac{a\sqrt{3}}{3} + b) = 2b
+            \end{equation*}
+        So it works for linear functions.
+
+        Now consider $f(x) = x^{2}$. We have
+            \begin{equation*}
+                \int_{-1}^{1} f(x) \, \dd{x} = \int_{-1}^{1} x^{2} \, \dd{x} = \left(\dfrac{x^{3}}{3}\right)\eval_{-1}^{1} = \dfrac{2}{3}
+            \end{equation*}
+        It is clear that the LHS also evaluates to $2/3$. So it works for all quadratics, going off of the linearity of integration. 
+
+        Now for $f(x) = x^{3}$, it is an odd function so it integrates to $0$.
+
+        Let $f(x) = x^{i}$ for $i$ of even degree. Then
+            \begin{equation*}
+                \int_{-1}^{1} f(x) \, \dd{x} = \left(\dfrac{x^{i + 1}}{i + 1}\right)\eval_{-1}^{1} = \dfrac{2}{i + 1}
+            \end{equation*}
+        And
+            \begin{equation*}
+                f\left(\dfrac{-\sqrt{3}}{3}\right) = f\left(\dfrac{\sqrt{3}}{3}\right)
+            \end{equation*}
+        Since $i$ is even, $i = 2j$. So
+            \begin{equation*}
+                f\left(\dfrac{\sqrt{3}}{3}\right) = \dfrac{3^{j}}{3^{i}} = \dfrac{1}{3^{j}}
+            \end{equation*}
+        So the LHS evaluates to 
+            \begin{equation*}
+                \dfrac{2}{3^{j}}
+            \end{equation*}
+        We see that this equation first fails when $i = 4$. So therefore, the degree of precision is $3$.
+    \end{answer}
+
+\textbf{Exercise 22}: The quadrature formula $\int_{0}^{2} f(x) \, \dd{x} = c_{0}f(0) + c_{1}f(1) + c_{2}f(2)$ is exact for all polynomials of degree less than or equal to two. Determine $c_{0}, c_{1}$, and $c_{2}$
+    \begin{answer}
+        For constant polynomial:
+            \begin{equation*}
+                \int_{0}^{2} p_{0} \, \dd{x} = p_{0}x\eval_{0}^{2} = 2p_{0}
+            \end{equation*}
+        Then it follows that:
+            \begin{equation*}
+                c_{0} + c_{1} + c_{2} = 2
+            \end{equation*}
+
+        For linear polynomials:
+            \begin{equation*}
+                \int_{0}^{2} x \, \dd{x} = \left(\dfrac{x^{2}}{2}\right)\eval_{0}^{2} = 2
+            \end{equation*}
+        So then:
+            \begin{equation*}
+                c_{1} + 2c_{2} = 2
+            \end{equation*}
+
+        Finally, for quadratic polynomials:
+            \begin{equation*}
+                \int_{0}^{2} 3x^{2} \, \dd{x} = \left(x^{3}\right)\eval_{0}^{2} = 8
+            \end{equation*}
+        and therefore,
+            \begin{equation*}
+                3c_{1} + 12c_{2} = 8
+            \end{equation*}
+
+        From the last two equations, $6c_{2} = 2$ or $c_{2} = \frac{1}{3}$. So $c_{1} = \frac{4}{3}$. So $c_{0} = \frac{1}{3}$.
+
+        Then the approximation is:
+            \begin{equation*}
+                \dfrac{1}{3}f(0) + \dfrac{4}{3}f(1) + \dfrac{1}{3}f(2)
+            \end{equation*}
+    \end{answer}
+
+\newpage
+\section*{Exercise Set 4.4}
+\hrule
+
+\textbf{Exercise 2}: Use the Composite Trapezoidal rule with the indicated values of $n$ to approximate the following integrals.
+    \begin{itemize}
+        \item [(b)] $\int_{-0.5}^{0.5} x\ln{x + 1} \, \dd{x}, n = 6$.
+    \end{itemize}
+    \begin{answer}
+        I got $0.093630139742868559449284759921284$. Here is my code:
+        \inputminted{matlab}{./code/CompositeIntegration/CompositeTrapezoidal.m}
+        \inputminted{matlab}{./code/script3.m}
+    \end{answer}
+
+\textbf{Exercise 4}: Use the Composite Simpson's rule to approximate the integrals in Exercise $2$.
+    \begin{itemize}
+        \item [(b)] $\int_{-0.5}^{0.5} x \ln{x + 1} \, \dd{x}, n = 6$
+    \end{itemize}
+    \begin{answer}
+        I got $0.08809221096042886556265472108862$. Here is my code:
+        \inputminted{matlab}{./code/CompositeIntegration/CompositeSimpson.m}
+        \inputminted{matlab}{./code/script4.m}
+    \end{answer}
+
+\textbf{Exercise 11}: Determine the values of $n$ and $h$ required to approximate 
+    \begin{equation*}
+        \int_{0}^{2} e^{2x} \sin{3x} \, \dd{x}
+    \end{equation*}
+to within $10^{-4}$. Use 
+    \begin{itemize}
+        \item [(b)] Composite Simpson's rule.
+            \begin{answer}
+                The error term is given by
+                    \begin{equation*}
+                        -\dfrac{(b - a)}{180}h^{4}f^{(4)}(\mu)
+                    \end{equation*}
+                for $\mu \in (a, b)$. The fourth derivative is
+                    \begin{equation*}
+                        -e^{2x} (119 \sin(3 x) + 120 \cos(3 x))
+                    \end{equation*}
+                also, $b - a = 2$. So we want:
+                    \begin{equation*}
+                        -\dfrac{1}{90}h^{4} (-e^{2x}(119 \sin{3x} + 120 \cos{3x})) < 10^{-4}
+                    \end{equation*}
+                or 
+                    \begin{equation*}
+                        h^{4} < \dfrac{9 \cdot 10^{-3}}{e^{2x}(119 \sin{3x} + 120 \cos{3x})}
+                    \end{equation*}
+                We see that 
+                    \begin{equation*}
+                        e^{2x}(119\sin{3x} + 120 \cos{3x}) < 120e^{2x}\sqrt{2}
+                    \end{equation*}
+                which is at most $120e^{4}\sqrt{2}$ on the interval. So this means that:
+                    \begin{equation*}
+                        h < \sqrt[4]{\dfrac{1}{9000 \cdot 120e^{4}\sqrt{2}}} < \sqrt[4]{\dfrac{1}{160000e^{4}}}
+                    \end{equation*}
+                We can get $n = (b - a) / h$
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 16}: In multivariable calculus and statistics courses, it is shown that
+    \begin{equation*}
+        \int_{-\infty}^{\infty} \dfrac{1}{\sigma\sqrt{2\pi}}e^{-(1 / 2)(x / \sigma)^{2}} \, \dd{x} = 1
+    \end{equation*}
+for any positive $\sigma$. The function
+    \begin{equation*}
+        f(x) = \dfrac{1}{\sigma\sqrt{2\pi}}e^{-(1 / 2)(x / \sigma)^{2}}
+    \end{equation*}
+is the \textit{ normal density function} with \textit{mean} $\mu  = 0$ and \textit{standard deviation} $\sigma$. The probability that a randomly chosen value described by this distribution lies in $[a, b]$ is given by $\int_{a}^{b} f(x) \, \dd{x}$. Approximate to within $10^{-5}$ the probability that a randomly chosen value described by this distribution will lie in
+    \begin{itemize}
+        \item [(a)] $[-\sigma, \sigma]$
+            \begin{answer}
+                I got $0.682698220175433$
+            \end{answer}
+
+        \item [(b)] $[-2\sigma, 2\sigma]$
+            \begin{answer}
+                I got $0.954463324707435$
+            \end{answer}
+
+        \item [(c)] $[-3\sigma, 3\sigma]$
+            \begin{answer}
+                I got $0.997195309084966$. Here is my code:
+                \inputminted{matlab}{./code/CompositeIntegration/CompositeSimpson.m}
+                \inputminted{matlab}{./code/script5.m}
+            \end{answer}
+    \end{itemize}
+
+\newpage
+\section*{Exercise Set 4.5}
+\hrule
+
+\textbf{Exercise 2}: Use Romberg integration to compute $R_{3, 3}$ for the following integrals.
+    \begin{itemize}
+        \item [(b)] $\int_{-0.75}^{0.75} x \ln{x + 1} \, \dd{x}$
+    \end{itemize}
+    \begin{answer}
+        I got $0.32795861011519389371926536114188$. Here is the code:
+        \inputminted{matlab}{./code/CompositeIntegration/Romberg.m}
+        \inputminted{matlab}{./code/script6.m}
+    \end{answer}
+
+\textbf{Exercise 9}: Romberg integration is used to approximate
+    \begin{equation*}
+        \int_{2}^{3} f(x) \, \dd{x}.
+    \end{equation*}
+If $f(2) = 0.51342, f(3) = 0.36788, R_{31} = 0.43687,$ and $R_{33} = 0.43662$, find $f(2.5)$.
+    \begin{answer}
+        Using the extrapolation formula:
+            \begin{equation*}
+                R_{k, j} = R_{k, j - 1} + \dfrac{1}{4^{j - 1} - 1}(R_{k, j - 1}  - R_{k - 1, j - 1})
+            \end{equation*}
+        we can solve for $R_{2, 1}$. We have the equations:
+            \begin{align*}
+                R_{2, 2} &= \dfrac{4R_{2, 1} - R_{1, 1}}{3}   \\
+                R_{3, 2} &= \dfrac{4R_{3, 1} - R_{2, 1}}{3}   \\
+                R_{3, 3} &= \dfrac{16R_{3, 2} - R_{2, 2}}{15}   
+            \end{align*}
+        If follows that we want to plug it all in and simplify:
+            \begin{equation*}
+                R_{3, 3} = \dfrac{16\left(\dfrac{4R_{3, 1} - R_{2, 1}}{3}\right) - \left(\dfrac{4R_{2, 1} - R_{1, 1}}{3}\right)}{15}
+            \end{equation*}
+        Which is
+            \begin{equation*}
+                R_{3, 3} = \dfrac{64R_{3, 1} - 16R_{2, 1} - 4R_{2, 1} + R_{1, 1}}{45} = \dfrac{64R_{3, 1} - 20R_{2, 1} + R_{1, 1}}{45}
+            \end{equation*}
+        Now we solve for $R_{2, 1}$:
+            \begin{equation*}
+                45R_{3, 3} = 64R_{3,1} - 20R_{2, 1} + R_{1, 1}
+            \end{equation*}
+        or
+            \begin{equation*}
+                R_{2, 1} = -\dfrac{45R_{3, 3} - 64R_{3, 1} - R_{1, 1}}{20}
+            \end{equation*}
+        We already have $R_{3, 1} = 0.43687$ and $R_{3, 3} = 0.43662$. Now $R_{1, 1}$ is the trapezoid with one node:
+            \begin{equation*}
+                R_{1, 1} = \dfrac{f(2) + f(3)}{2} = \dfrac{0.51342 + 0.36788}{2} = 0.44065
+            \end{equation*}
+        Plugging this all in:
+            \begin{equation*}
+                R_{2, 1} = -\dfrac{45(0.43687) - 64(0.43662) - 0.44065}{20} = 0.436259
+            \end{equation*}
+        Recall that:
+            \begin{equation*}
+                R_{2, 1} = \dfrac{b - a}{4}(f(2) + f(3) + 2f(2.5)) = \dfrac{1}{4}(0.51342 + 0.36788 + f(2.5)) = 0.436259
+            \end{equation*}
+        So
+            \begin{equation*}
+                1.745036 = 0.51342 + 0.36788 + 2f(2.5)
+            \end{equation*}
+        and
+            \begin{equation*}
+                2f(2.5) = 1.745036 - 0.51342 - 0.36788  = 0.863736
+            \end{equation*}
+        therefore,
+            \begin{equation*}
+                f(2.5) = 0.863736 / 2  = 0.431868
+            \end{equation*}
+    \end{answer}
+
+\textbf{Exercise 14}: In Exercise 24 of Section 1.1, a Maclaurin series was integrated to approximate $erf(1)$, where $erf(x)$ is the normal distribution error function defined by
+    \begin{equation*}
+        \mathop{erf}(x) = \dfrac{2}{\sqrt{\pi}} \int_{0}^{x} e^{-t^{2}} \, \dd{t}.
+    \end{equation*}
+Approximate $\mathop{erf}(1)$ to within $10^{-7}$. 
+    \begin{answer}
+        I got: $0.84270079294971489414223242420121$. Here is my code:
+        \inputminted{matlab}{./code/CompositeIntegration/Romberg.m}
+        \inputminted{matlab}{./code/script7.m}
+    \end{answer}
+
+\textbf{Exercise 18}: Show that, for any $k$, 
+    \begin{equation*}
+        \sum_{i = 1}^{2^{k - 1} - 1} f\left(a + \dfrac{i}{2}h_{k - 1}\right) = \sum_{i = 1}^{2^{k - 2}} f\left(a + \left(i  -\dfrac{1}{2}\right)h_{k - 1}\right) + \sum_{i = 1}^{2^{k - 2} - 1}f(a + ih_{k - 1}).
+    \end{equation*}
+    \begin{answer}
+        Notice that we can break the LHS into a sum over $i$ even and $i$ odd:
+            \begin{equation*}
+                \sum_{i = 1}^{2^{k - 1} - 1} f\left(a + \dfrac{i}{2}h_{k - 1}\right) = \sum_{i = \text{even}}^{2^{k - 1} - 2} f\left(a + \dfrac{i}{2} h_{k - 1}\right) + \sum_{i = \text{odd}}^{2^{k - 1} - 1} f\left(a + \dfrac{i}{2}h_{k - 1}\right)
+            \end{equation*}
+        For the even one, we can take $i = 2j$:
+            \begin{equation*}
+                \sum_{i = \text{even}}^{2^{k - 1} - 2} f\left(a + \dfrac{i}{2}h_{k - 1}\right) = \sum_{j = 1}^{2^{k - 2} - 1}f(a + jh_{k - 1})
+            \end{equation*}
+        Now for $i = 2j - 1$:
+            \begin{equation*}
+                \sum_{i = \text{odd}}^{2^{k - 1} - 1} = f\left(a + \dfrac{i}{2}h_{k - 1}\right) = \sum_{j = 1}^{2^{k - 2}} f\left(a + \dfrac{2j - 1}{2}h_{k - 1}\right) = \sum_{j = 1}^{2^{k - 2}}f\left(a + \left(j - \dfrac{1}{2}\right)h_{k - 1}\right)
+            \end{equation*}
+        so we are done.
+    \end{answer}
+
+\textbf{Exercise 19}: Use the result of Exercise $18$ to show that for all $k$,
+    \begin{equation*}
+        R_{k, 1} = \dfrac{1}{2} \left[ R_{k - 1, 1} + h_{k - 1} \sum_{i = 1}^{2^{k - 2}} f\left(a + \left(i - \dfrac{1}{2}\right)h_{k - 1}\right)\right]
+    \end{equation*}
+    \begin{answer}
+        Recall that:
+            \begin{equation*}
+                R_{k, 1} = \dfrac{h_{k - 1}}{2}\left(f(a) + f(b) + \sum_{i = 1}^{2^{k - 1} - 1}f\left(a + \dfrac{i}{2}h_{k - 1}\right)\right)
+            \end{equation*}
+        By the previous problem, this is:
+            \begin{equation*}
+                R_{k, 1} = \dfrac{h_{k - 1}}{2}\left(f(a) + f(b) + \sum_{i = 1}^{2^{k - 2} - 1}f(a + ih_{k - 1}) + \sum_{i = 1}^{2k - 2}f\left(a + \left(i - \dfrac{1}{2}\right)h_{k - 1}\right)\right)
+            \end{equation*}
+        Pulling the $h_{k - 1} / 2$ inside and simplifying, this is:
+            \begin{equation*}
+                \dfrac{1}{2}\left(R_{k - 1, 1} + h_{k - 1}\sum_{i = 1}^{2^{k - 2}}f\left(a + \left(i - \dfrac{1}{2}\right)h_{k - 1}\right)\right)
+            \end{equation*}
+        so we are done.
+    \end{answer}
+
+
+
+
+
+\end{document}

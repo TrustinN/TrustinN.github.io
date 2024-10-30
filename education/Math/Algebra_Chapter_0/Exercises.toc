@@ -1,0 +1,12 @@
+\contentsline {chapter}{\numberline {1}Set Theory and Categories}{2}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Naive Set Theory}{2}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Functions Between Sets}{5}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Categories}{13}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Morphisms}{23}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Universal Properties}{28}{section.1.5}%
+\contentsline {chapter}{\numberline {2}Groups, First Encounter}{37}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Definition of Group}{37}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Examples of Groups}{43}{section.2.2}%
+\contentsline {section}{\numberline {2.3}The Category Grp}{49}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Group Homomorphisms}{54}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Free Groups}{63}{section.2.5}%

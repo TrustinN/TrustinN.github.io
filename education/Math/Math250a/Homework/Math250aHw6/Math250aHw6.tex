@@ -1,0 +1,134 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math250a/Homework/Math250aHw6/Math250aHw6.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+
+\title{Math250aHw6}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Let $G = \langle a, b : a^{2} = b^{2} \rangle$ be the coproduct in the category of groups of the following diagram
+    \begin{center}
+        \begin{tikzcd}
+            \mathbb{Z}\ar[r, "2"]\ar[d, "2"] & \mathbb{Z}\ar[d, ""] \\
+            \mathbb{Z} \ar[r, ""]            & G                      
+        \end{tikzcd}
+    \end{center}
+Prove (by exhibiting certain surjections out of the coproduct) that $G$ is nonabelian and infinite.
+    \begin{proof}
+        We know that it is infinite because there is a surjective mapping to $2\mathbb{Z}$:
+            \begin{center}
+                \begin{tikzcd}
+                    \mathbb{Z}\ar[r, "2"]\ar[d, "2"]                  & \mathbb{Z}\ar[d, ""]\ar[ddr, "1", bend left = 30] &             \\
+                    \mathbb{Z}\ar[r, ""]\ar[drr, "1"', bend right = 30] & G                                                &             \\
+                                                                      &                                                  & 2\mathbb{Z}   
+                \end{tikzcd}
+            \end{center}
+        Given by a multiplication of $z \in \mathbb{Z}$ by $2$, then by $1$. Now consider the more general diagram:
+            \begin{center}
+                \begin{tikzcd}
+                    \mathbb{Z}\ar[r, "2"]\ar[d, "2"]                  & \mathbb{Z}\ar[d, ""]\ar[ddr, "f", bend left = 30] &             \\
+                    \mathbb{Z}\ar[r, ""]\ar[drr, "g"', bend right = 30] & G \ar[dr, "\varphi"]                                                &             \\
+                                                                      &                                                  & H   
+                \end{tikzcd}
+            \end{center}
+        We have that $f(2\mathbb{Z}) = g(2\mathbb{Z})$ and $\varphi(a) = f(1), \varphi(b) = g(1)$. So 
+            \begin{equation*}
+                \varphi(a^{n}) = f(n), \varphi(b^{n}) = g(n)
+            \end{equation*}
+        and by the condition that $f(2\mathbb{Z}) = g(2\mathbb{Z})$, we let $a, b$ be sent to two cycles that don't commute such as $(1 \, 2), (2 \, 3)$. These generate $D_{6}$. So for $H = D_{6}$, there is a surjection which says that $G$ is nonabelian.
+    \end{proof}
+
+\textbf{Exercise 2}: Let $R = \mathbb{Z}[t^{\pm 1}] \otimes_{\mathbb{Z}[t]} (\mathbb{Z}[t]/t) $ be the coproduct in the category of rings of the following diagram
+    \begin{center}
+        \begin{tikzcd}
+            \mathbb{Z}[t]\ar[r, ""] \ar[d, ""] & \mathbb{Z}[t]/t \ar[d, ""] \\
+            \mathbb{Z}[t^{\pm 1}]\ar[r, ""]    & R                            
+        \end{tikzcd}
+    \end{center}
+Show that $R = 0$ is the zero ring by showing that it admits no maps to any nonzero ring.
+    \begin{proof}
+        We observe that with the natural mappings, we must have in the diagram:
+            \begin{center}
+                \begin{tikzcd}
+                    \mathbb{Z}[t]\ar[r, "\pi"] \ar[d, "i"] & \mathbb{Z}[t]/(t)\ar[d, ""]\ar[ddr, "f", bend left = 20] &            \\
+                    \mathbb{Z}[t^{\pm 1}] \ar[r, ""] \ar[drr, "g", bend right = 20]                                                                                                                                 & R \ar[dr, "\varphi"]                                     &            \\
+                                                                                                                                                                                                   &                                                          & R^{\prime}   
+                \end{tikzcd}
+            \end{center}
+        with $f(1) = ?$, and $t \mapsto 0 \mapsto 0$ under $f$. As for the morphism under $g$, we have $g(1) = ?$ and $t \mapsto t \mapsto 0$ under $g$. But by the fact that $g$ is a morphism, we must have $g(t \cdot t^{-1}) = g(1) = 1$. But $g(t \cdot t^{-1}) = g(0) = 0$. Therefore, $g(1) = 0$. So $f(1) = 0$ and there are no rings other than the zero ring that accept these maps.
+
+        This means that the coproduct exists: For any two mappings $\mathbb{Z}[t]/(t) \rightarrow R^{\prime}$ and $\mathbb{Z}[t^{\pm 1}] \rightarrow R^{\prime}$, there exists a unique map $R = 0 \rightarrow R^{\prime}$ that makes the diagram commute. Furthermore, we see that shown above, that if $1 \neq 0$, there are no maps $R \rightarrow R^{\prime}$ making the diagram commute.
+    \end{proof}
+
+Let $F, G : C \rightarrow D$ be two functors. Recall that a \textit{natural transformation} $\nu: F \rightarrow G$ is a collection of morphisms $\nu x : F(X) \rightarrow G(X)$ such that for any morphism $g : X \rightarrow Y$ the following square commutes
+    \begin{center}
+        \begin{tikzcd}
+            F(x) \ar[r, "\nu x"] \ar[d, "F(g)"] & G(x) \ar[d, "G(g)"] \\
+            F(Y) \ar[r, "\nu Y"]                & G(Y)                  
+        \end{tikzcd}
+    \end{center}
+
+\textbf{Exercise 3}: Let $G$ be a group. Let $BG$ be the category with a single object $*$ and morphisms $\mathop{Hom}(*, *) = G$. Show that $\mathop{Hom}(\text{id}_{BG}, \text{id}_{BG}) = Z(G)$. (In other words, under composition natural transformations from the identity functor to itself form a group, isomorphism to the center of $G$.)
+    \begin{proof}
+        Using the definition of natural transformations, we want to find the elements of $\mathop{Hom}(id_{BG}, id_{BG})$ by the morphisms $g_{0} : id_{BG}(*) \rightarrow id_{BG}(*)$ making the diagram
+            \begin{center}
+                \begin{tikzcd}
+                    id_{BG}(*)\ar[r, "g_{0}"]\ar[d, "id_{BG}(g)"] & id_{BG}(*)\ar[d, "id_{BG}(g)"] \\
+                    id_{BG}(*)\ar[r, "g_{0}"]                     & id_{BG}(*)                       
+                \end{tikzcd}
+            \end{center}
+        commute. We can simplify this down to 
+            \begin{center}
+                \begin{tikzcd}
+                    * \ar[r, "g_{0}"]\ar[d, "g"] & * \ar[d, "g"] \\
+                    * \ar[r, "g_{0}"]            & *               
+                \end{tikzcd}
+            \end{center}
+        and find that $g_{0}g = gg_{0}$. So the morphisms that send the identity functor to itself making the diagram commute is isomorphic to the elements of $G$ that commute with all $g \in \mathop{Hom}(*, *)$.
+    \end{proof}
+
+\textbf{Exercise 4}: Let $X, Y_{i}$ be vector spaces. The set $\mathop{Hom}(X, Y_{i})$ is naturally a vector space. Construct a natural map
+        \begin{equation*}
+            \bigoplus_{i}\mathop{Hom}(X, Y_{i}) \rightarrow \mathop{Hom}(X, \bigoplus_{i}Y_{i})
+        \end{equation*}
+Here $\bigoplus \mathop{Hom}(X, Y_{i})$ is the coproduct in the category of vector spaces. Give an example where this map is not surjective.
+    \begin{proof}
+        We have mappings from $X \rightarrow Y_{i}$ in each column:
+            \begin{align*}
+                x_{1} &\mapsto  y_{1_{1}} & x_{1} &\mapsto  y_{2_{1}} & x_{1} &\mapsto  y_{i_{1}} \\
+                x_{2} &\mapsto  y_{1_{2}} & x_{2} &\mapsto  y_{2_{2}} & x_{2} &\mapsto  y_{i_{2}} \\
+                      &\vdots             &       &\vdots             &       &\vdots             \\
+                x_{n} &\mapsto  y_{1_{n}} & x_{n} &\mapsto  y_{2_{n}} & x_{n} &\mapsto  y_{i_{n}}   
+            \end{align*}
+        Where the basis vectors of $X$ map to vectors of $Y_{i}$. Then we can map this information to:
+            \begin{align*}
+                x_{1} &\mapsto  (y_{1_{1}}, y_{2_{1}}, \ldots , y_{i_{1}}) \\
+                x_{2} &\mapsto  (y_{1_{2}}, y_{2_{2}}, \ldots , y_{i_{2}}) \\
+                      &\vdots                                              \\
+                x_{n} &\mapsto  (y_{1_{n}}, y_{2_{n}}, \ldots , y_{i_{n}})   
+            \end{align*}
+        which is an element in $\mathop{Hom}(X, \bigoplus_{i}Y_{i})$.
+    \end{proof}
+
+\textbf{Exercise 5}: Show that the functor $\mathop{Ab} \rightarrow \text{Group}$ from Abelian groups to all groups does not admit a right adjoint.
+    \begin{proof}
+        
+    \end{proof}
+
+
+
+
+
+
+
+
+
+\end{document} 

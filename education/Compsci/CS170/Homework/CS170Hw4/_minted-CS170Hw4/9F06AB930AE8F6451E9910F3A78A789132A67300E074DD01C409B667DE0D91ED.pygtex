@@ -1,0 +1,50 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+    \PYG{n}{function} \PYG{n}{minTrip}\PYG{p}{(}\PYG{n}{start}\PYG{p}{,} \PYG{n}{end}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{G}\PYG{p}{(}\PYG{n}{V}\PYG{p}{,} \PYG{n}{E}\PYG{p}{,} \PYG{n}{c}\PYG{p}{)}\PYG{p}{)}
+        \PYG{n}{queue1} \PYG{esc}{$\leftarrow$} \PYG{n}{PriorityQueue}\PYG{p}{(}\PYG{p}{)}
+        \PYG{n}{queue2} \PYG{esc}{$\leftarrow$} \PYG{n}{PriorityQueue}\PYG{p}{(}\PYG{p}{)}
+        \PYG{n}{path1}\PYG{p}{,} \PYG{n}{path2} \PYG{esc}{$\leftarrow$} \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{*}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{V}\PYG{p}{)}\PYG{p}{,} \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{o}{*}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{V}\PYG{p}{)}
+        \PYG{n}{currCost1}\PYG{p}{,} \PYG{n}{currCost2} \PYG{esc}{$\leftarrow$} \PYG{p}{[}\PYG{n}{math}\PYG{o}{.}\PYG{n}{inf}\PYG{p}{]}\PYG{o}{*}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{V}\PYG{p}{)}\PYG{p}{,} \PYG{p}{[}\PYG{n}{math}\PYG{o}{.}\PYG{n}{inf}\PYG{p}{]}\PYG{o}{*}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{V}\PYG{p}{)}
+        \PYG{k}{for} \PYG{n}{n} \PYG{o+ow}{in} \PYG{n}{start}\PYG{o}{.}\PYG{n}{neighbors}
+            \PYG{n}{queue1}\PYG{o}{.}\PYG{n}{insert}\PYG{p}{(}\PYG{n}{n}\PYG{p}{,} \PYG{n}{c}\PYG{p}{(}\PYG{n}{start}\PYG{p}{,} \PYG{n}{n}\PYG{p}{)}\PYG{p}{)}\PYG{p}{,} \PYG{n}{currCost1}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]} \PYG{o}{=} \PYG{n}{c}\PYG{p}{(}\PYG{n}{start}\PYG{p}{,} \PYG{n}{n}\PYG{p}{)}
+            \PYG{n}{queue2}\PYG{o}{.}\PYG{n}{insert}\PYG{p}{(}\PYG{n}{n}\PYG{p}{,} \PYG{n}{c}\PYG{p}{(}\PYG{n}{start}\PYG{p}{,} \PYG{n}{n}\PYG{p}{)}\PYG{p}{)}\PYG{p}{,} \PYG{n}{currCost2}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]} \PYG{o}{=} \PYG{n}{c}\PYG{p}{(}\PYG{n}{start}\PYG{p}{,} \PYG{n}{n}\PYG{p}{)}
+        \PYG{n}{queue1}\PYG{o}{.}\PYG{n}{insert}\PYG{p}{(}\PYG{n}{start}\PYG{p}{,} \PYG{n}{r}\PYG{p}{)}
+        \PYG{n}{queue2}\PYG{o}{.}\PYG{n}{insert}\PYG{p}{(}\PYG{n}{start}\PYG{p}{,} \PYG{n}{r}\PYG{p}{)}
+
+        \PYG{k}{while} \PYG{k+kc}{True}
+            \PYG{n}{city1}\PYG{p}{,} \PYG{n}{cost1} \PYG{esc}{$\leftarrow$} \PYG{n}{queue1}\PYG{o}{.}\PYG{n}{pop}\PYG{p}{(}\PYG{p}{)}
+            \PYG{n}{city2}\PYG{p}{,} \PYG{n}{cost2} \PYG{esc}{$\leftarrow$} \PYG{n}{queue2}\PYG{o}{.}\PYG{n}{pop}\PYG{p}{(}\PYG{p}{)}
+            \PYG{k}{if} \PYG{n}{city1} \PYG{o}{==} \PYG{n}{end} \PYG{o+ow}{or} \PYG{n}{city2} \PYG{o}{==} \PYG{n}{end}\PYG{p}{:}
+                \PYG{k}{break}
+
+            \PYG{k}{while} \PYG{n}{city1} \PYG{o}{==} \PYG{n}{city2}
+                \PYG{n}{queue2}\PYG{o}{.}\PYG{n}{insert}\PYG{p}{(}\PYG{n}{city2}\PYG{p}{,} \PYG{n}{cost2} \PYG{o}{+} \PYG{n}{r}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} Wait one day}
+                \PYG{n}{city2}\PYG{p}{,} \PYG{n}{cost2} \PYG{esc}{$\leftarrow$} \PYG{n}{queue2}\PYG{o}{.}\PYG{n}{pop}\PYG{p}{(}\PYG{p}{)}
+
+            \PYG{k}{for} \PYG{n}{n} \PYG{o+ow}{in} \PYG{n}{city1}\PYG{o}{.}\PYG{n}{neighbors}
+                \PYG{n}{newCost} \PYG{o}{=} \PYG{n}{cost1} \PYG{o}{+} \PYG{n}{c}\PYG{p}{(}\PYG{n}{city1}\PYG{p}{,} \PYG{n}{n}\PYG{p}{)}
+                \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{visited}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]} \PYG{o+ow}{and} \PYG{n}{newCost} \PYG{o}{\PYGZlt{}} \PYG{n}{currCost1}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]}
+                    \PYG{n}{queue1}\PYG{o}{.}\PYG{n}{insert}\PYG{p}{(}\PYG{n}{n}\PYG{p}{,} \PYG{n}{newCost}\PYG{p}{)}
+                    \PYG{n}{path1}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]}\PYG{p}{,} \PYG{n}{currCost1}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]} \PYG{o}{=} \PYG{n}{city1}\PYG{p}{,} \PYG{n}{newCost}
+
+            \PYG{k}{for} \PYG{n}{n} \PYG{o+ow}{in} \PYG{n}{city2}\PYG{o}{.}\PYG{n}{neighbors}
+                \PYG{n}{newCost} \PYG{o}{=} \PYG{n}{cost2} \PYG{o}{+} \PYG{n}{c}\PYG{p}{(}\PYG{n}{city2}\PYG{p}{,} \PYG{n}{n}\PYG{p}{)}
+                \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{visited}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]} \PYG{o+ow}{and} \PYG{n}{newCost} \PYG{o}{\PYGZlt{}} \PYG{n}{currCost2}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]}
+                    \PYG{n}{queue2}\PYG{o}{.}\PYG{n}{insert}\PYG{p}{(}\PYG{n}{n}\PYG{p}{,} \PYG{n}{newCost}\PYG{p}{)}
+                    \PYG{n}{path2}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]}\PYG{p}{,} \PYG{n}{currCost2}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]} \PYG{o}{=} \PYG{n}{city2}\PYG{p}{,} \PYG{n}{newCost}
+
+        \PYG{n}{path}\PYG{p}{,} \PYG{n}{queue}\PYG{p}{,} \PYG{n}{currCost} \PYG{o}{=} \PYG{n}{path1}\PYG{p}{,} \PYG{n}{queue1}\PYG{p}{,} \PYG{n}{currCost1}
+        \PYG{k}{if} \PYG{n}{path2}\PYG{p}{[}\PYG{n}{end}\PYG{p}{]} \PYG{o}{==} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{:}
+            \PYG{n}{path}\PYG{p}{,} \PYG{n}{queue}\PYG{p}{,} \PYG{n}{currCost} \PYG{o}{=} \PYG{n}{path2}\PYG{p}{,} \PYG{n}{queue2}\PYG{p}{,} \PYG{n}{currCost2}
+
+        \PYG{k}{while} \PYG{k+kc}{True}
+            \PYG{n}{city}\PYG{p}{,} \PYG{n}{cost} \PYG{esc}{$\leftarrow$} \PYG{n}{queue}\PYG{o}{.}\PYG{n}{pop}\PYG{p}{(}\PYG{p}{)}
+            \PYG{k}{if} \PYG{n}{city} \PYG{o}{==} \PYG{n}{end}
+                \PYG{k}{break}
+            \PYG{k}{for} \PYG{n}{n} \PYG{o+ow}{in} \PYG{n}{city}\PYG{o}{.}\PYG{n}{neighbors}
+                \PYG{n}{newCost} \PYG{o}{=} \PYG{n}{cost} \PYG{o}{+} \PYG{n}{c}\PYG{p}{(}\PYG{n}{city}\PYG{p}{,} \PYG{n}{n}\PYG{p}{)}
+                \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{visited}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]} \PYG{o+ow}{and} \PYG{n}{newCost} \PYG{o}{\PYGZlt{}} \PYG{n}{currCost}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]}
+                    \PYG{n}{queue}\PYG{o}{.}\PYG{n}{insert}\PYG{p}{(}\PYG{n}{n}\PYG{p}{,} \PYG{n}{newCost}\PYG{p}{)}
+                    \PYG{n}{path}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]}\PYG{p}{,} \PYG{n}{currCost}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]} \PYG{o}{=} \PYG{n}{city}\PYG{p}{,} \PYG{n}{newCost}
+
+        \PYG{k}{return} \PYG{n}{path1}\PYG{p}{,} \PYG{n}{path2}
+\end{Verbatim}

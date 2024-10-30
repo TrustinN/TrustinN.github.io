@@ -1,0 +1,139 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Stat134/Homework/Stat134Hw1.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math134Hw1}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: In each of the following experiments describe the sample space and determine its size.
+    \begin{itemize}
+        \item [(a)] We flip three coins: a penny, a dime and a quarter.
+            \begin{answer}
+                We will describe the sample space with strings of length $3$ containing either $H$ or $T$. Let the first position correspond to the side that the penny lands on, the second be the side of the dime, and the third be the side of the quarter. Then the sample space is:
+                    \begin{equation*}
+                        \Omega = \{\text{strings of length $3$ with characters either $H$ or $T$}\}
+                    \end{equation*}
+                In each position of the string we can either have an $H$ or $T$ so $\lvert \Omega \rvert = 2^{3}$.
+            \end{answer}
+
+        \item [(b)] We roll a die and flip a coin. 
+            \begin{answer}
+                This time, let $1$ represent heads and $2$ represent tails. Then if $(x_{1}, x_{2})$ represents the outcome of rolling a dice in the first entry and flipping a coin in the second entry, the sample space is
+                    \begin{equation*}
+                        \Omega = \{(x_{1}, x_{2}) : x_{1} \in [6], x_{2} \in [2]\}
+                    \end{equation*}
+                Then the number of such pairs is $6 * 2 = 12$.
+            \end{answer}
+    \end{itemize}
+
+\newpage
+
+\textbf{Exercise 2}: We have $n$ boxes (numbered from $1$ to $n$) and $n$ balls (also numbered from $1$ to $n$). We put the balls in the boxes randomly, so that each $n^{n}$ outcome is equally likely.
+    \begin{itemize}
+        \item [(a)] What is the probability that the first two boxes will be empty?
+            \begin{answer}
+                The sample space is given to have size $\lvert \Omega \rvert = n^{n}$. Let 
+                    \begin{equation*}
+                        W = \{\text{events where the first two boxes are empty}\}
+                    \end{equation*}
+                Then this is in bijection with the set of functions from the set of $n$ balls to the set of the boxes after the first $2$: $f : [n] \rightarrow \{3, \ldots, n\}$. The number of such functions is $(n - 2)^{n}$. So 
+                    \begin{equation*}
+                        \mathbb{P}(W) = \dfrac{\lvert W \rvert}{\lvert \Omega \rvert} = \dfrac{(n - 2)^{n}}{n^{n}}
+                    \end{equation*}
+            \end{answer}
+
+        \item [(b)] What is the probability that there will be an empty box?
+            \begin{answer}
+                We will count the number of events where no box is empty. So our function $f: [n] \rightarrow [n]$ from the set of balls to boxes must be surjective. Then $f$ is a bijection. The number of bijective functions on $[n]$ is $n!$. The probability space has size $n^{n}$. So if $W$ is the number of events where at least one box is empty, 
+                    \begin{equation*}
+                        \mathbb{P}(W) = \dfrac{\lvert W \rvert}{\lvert \Omega \rvert} = \dfrac{n^{n} - n!}{n^{n}} = 1 - \dfrac{n!}{n^{n}}
+                    \end{equation*}
+            \end{answer}
+
+        \item [(c)] What is the probability that the first two balls end up in the same box? 
+            \begin{answer}
+                Again, looking at functions from $[n] \rightarrow [n]$, we can have the $3, \ldots, n$ labeled balls be mapped to anything. So there are $n^{n - 2}$ options there. Now we have $n$ boxes to choose from to map the first two balls. So that gives $n$ choices. In total, there are $n \cdot n^{n - 2} = n^{n - 1}$ events where this happens. So 
+                    \begin{equation*}
+                        \mathbb{P}(W) = \dfrac{\lvert W \rvert}{\lvert \Omega \rvert} = \dfrac{n^{n - 1}}{n^{n}}
+                    \end{equation*}
+            \end{answer}
+    \end{itemize}
+
+\newpage
+
+\textbf{Exercise 3}: Let $A_{1}, \ldots, A_{5}$ be events on the same probability space. Express the following events using the usual set operations (${}^{c}, \cap, \cup$) and the events $A_{k}, 1 \leq k \leq 5$.
+    \begin{itemize}
+        \item [(a)] None of the five events $A_{k}, 1 \leq k \leq 5$ occur.
+            \begin{answer}
+                It is $(A_{1} \cup A_{2} \cup \cdots \cup A_{5})^{c}$.
+            \end{answer}
+
+        \item [(b)] One or three of the five events $A_{k}, 1 \leq k \leq 5$ occur.
+            \begin{answer}
+                It is $(A_{1} \cup A_{2} \cup \cdots \cup A_{5})$.
+            \end{answer}
+    \end{itemize}
+
+\newpage
+
+\textbf{Exercise 4}: We have two red, two white and two green balls in an urn. We pick them one by one out of the urn and record their colors (this is sampling without replacement). Find the probability that at some point we pick the same color twice in a row. (E.g. this happens when we get the sequence red, white, white, green, red, green, but also if we get red, red, white, white, green, green.)
+    \begin{answer}
+        The probability space is 
+            \begin{equation*}
+                \Omega = \{\text{Strings of length $6$ with characters $r, g, w$}\}
+            \end{equation*}
+        so
+            \begin{equation*}
+                \lvert \Omega \rvert = 3^{6}
+            \end{equation*}
+        Now count the complement or number of events where the same color is not picked twice. First pick any one of the three colors. So there are $3$ options. Then for the remaining, we choose a color not the same so there are $2$ options for each of the remaining string positions. So there are $3 \cdot 2^{5}$. So the probability is
+            \begin{equation*}
+                \mathbb{P}(W) = 1 - \dfrac{3 \cdot 2^{5}}{3^{6}}
+            \end{equation*}
+    \end{answer}
+
+\newpage
+
+\textbf{Exercise 5}: Is it possible to set up a probability space with sample space $\Omega = \{1, 2, \ldots\}$ to model a uniformly chosen positive integer (i.e. with all outcomes equally likely)?
+    \begin{answer}
+        A probability space is defined as $(\Omega, \mathcal{F}, P)$ where $P$ is the probability function from $\mathcal{F} \rightarrow \mathbb{R}_{\geq 0}$. Check the conditions:
+            \begin{itemize}
+                \item [(i)] We have that $0 \leq P(f) \leq 1$ for $f \in \mathcal{F}$, as the probability of picking a number $i$ out of $\{1, 2, \ldots\}$ is $\lim\limits_{n \to \infty}\frac{1}{n} = 0$. 
+
+                \item [(ii)] $P(\Omega) = 1$ and $P(\emptyset) = 0$ since we must choose a number. And the probability of having a chosen number in $\Omega$ is therefore $1$.
+
+                \item [(iii)] We can break this into a finite and infinite case. If a set $S \subseteq \{1, 2, \ldots\}$ is finite $\lvert S \rvert = m$, then 
+                    \begin{equation*}
+                        P(S) = \lim\limits_{n \to \infty} \dfrac{\lvert S \rvert}{n} = 0 = 0 \cdot m = P(s_{1}) + \cdots + P(s_{m})
+                    \end{equation*}
+                and if $S \subseteq \{1, 2, \ldots\}$ is infinite, $\lvert S \rvert = \infty$, we see a counterexample, where if $S = \{2, 4, \ldots\}$, then $\lvert S \rvert = \lvert \{1, 2, \ldots\} \rvert = \lvert \Omega \rvert$, so 
+                    \begin{equation*}
+                        P(S) = \dfrac{\lvert S \rvert}{\lvert \Omega \rvert} = 1
+                    \end{equation*}
+                But the complement of $S$ also has probability $1$:
+                    \begin{equation*}
+                        P(S^{c}) = \dfrac{\lvert S^{c} \rvert}{\lvert \Omega \rvert} = 1
+                    \end{equation*}
+                So we cannot have
+                    \begin{equation*}
+                        1 = P(S \cup S^{c}) = P(S) + P(S^{c}) = 2
+                    \end{equation*}
+                Then we are guaranteed to be able to make probability spaces where the event involves choosing a finite number of numbers. As for when the event is choosing an infinite subset, there is no guarantee that it is possible.
+            \end{itemize}
+    \end{answer}
+
+
+
+
+
+\end{document}

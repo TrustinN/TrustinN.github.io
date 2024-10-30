@@ -1,0 +1,200 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{matplotlib.pyplot} \PYG{k}{as} \PYG{n+nn}{plt}
+\PYG{k+kn}{import} \PYG{n+nn}{numpy} \PYG{k}{as} \PYG{n+nn}{np}
+
+\PYG{n}{d1} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{load}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}./data/dataset\PYGZus{}1.npy\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{d2} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{load}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}./data/dataset\PYGZus{}2.npy\PYGZdq{}}\PYG{p}{)}
+
+
+\PYG{k}{def} \PYG{n+nf}{split\PYGZus{}variable}\PYG{p}{(}\PYG{n}{data}\PYG{p}{):}
+    \PYG{k}{return} \PYG{n}{data}\PYG{p}{[:,} \PYG{l+m+mi}{0}\PYG{p}{],} \PYG{n}{data}\PYG{p}{[:,} \PYG{l+m+mi}{1}\PYG{p}{]}
+
+
+\PYG{k}{def} \PYG{n+nf}{get\PYGZus{}distribution}\PYG{p}{(}\PYG{n}{data}\PYG{p}{):}
+    \PYG{n}{mean} \PYG{o}{=} \PYG{n+nb}{sum}\PYG{p}{(}\PYG{n}{data}\PYG{p}{)}\PYG{o}{.}\PYG{n}{astype}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{float16}\PYG{p}{)} \PYG{o}{/} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{data}\PYG{p}{)}
+    \PYG{n}{variance} \PYG{o}{=} \PYG{n+nb}{sum}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{square}\PYG{p}{(}\PYG{n}{data} \PYG{o}{\PYGZhy{}} \PYG{n}{mean}\PYG{p}{))} \PYG{o}{/} \PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{data}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{mean}\PYG{p}{,} \PYG{n}{variance}
+
+
+\PYG{k}{def} \PYG{n+nf}{get\PYGZus{}covariance}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{,} \PYG{n}{mu\PYGZus{}x}\PYG{p}{,} \PYG{n}{mu\PYGZus{}y}\PYG{p}{):}
+    \PYG{n}{cov} \PYG{o}{=} \PYG{p}{(}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{mu\PYGZus{}x}\PYG{p}{)} \PYG{o}{*} \PYG{p}{(}\PYG{n}{y} \PYG{o}{\PYGZhy{}} \PYG{n}{mu\PYGZus{}y}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n+nb}{sum}\PYG{p}{(}\PYG{n}{cov}\PYG{p}{)} \PYG{o}{/} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{cov}\PYG{p}{)}
+
+
+\PYG{k}{def} \PYG{n+nf}{get\PYGZus{}correlation}\PYG{p}{(}\PYG{n}{cov}\PYG{p}{,} \PYG{n}{var\PYGZus{}x}\PYG{p}{,} \PYG{n}{var\PYGZus{}y}\PYG{p}{):}
+    \PYG{k}{return} \PYG{n}{cov} \PYG{o}{/} \PYG{n}{np}\PYG{o}{.}\PYG{n}{sqrt}\PYG{p}{(}\PYG{n}{var\PYGZus{}x} \PYG{o}{*} \PYG{n}{var\PYGZus{}y}\PYG{p}{)}
+
+
+\PYG{n}{d1\PYGZus{}X}\PYG{p}{,} \PYG{n}{d1\PYGZus{}Y} \PYG{o}{=} \PYG{n}{split\PYGZus{}variable}\PYG{p}{(}\PYG{n}{d1}\PYG{p}{)}
+\PYG{n}{d2\PYGZus{}X}\PYG{p}{,} \PYG{n}{d2\PYGZus{}Y} \PYG{o}{=} \PYG{n}{split\PYGZus{}variable}\PYG{p}{(}\PYG{n}{d2}\PYG{p}{)}
+
+\PYG{n}{mu1\PYGZus{}X}\PYG{p}{,} \PYG{n}{var1\PYGZus{}X} \PYG{o}{=} \PYG{n}{get\PYGZus{}distribution}\PYG{p}{(}\PYG{n}{d1\PYGZus{}X}\PYG{p}{)}
+\PYG{n}{mu1\PYGZus{}Y}\PYG{p}{,} \PYG{n}{var1\PYGZus{}Y} \PYG{o}{=} \PYG{n}{get\PYGZus{}distribution}\PYG{p}{(}\PYG{n}{d1\PYGZus{}Y}\PYG{p}{)}
+
+\PYG{n}{mu2\PYGZus{}X}\PYG{p}{,} \PYG{n}{var2\PYGZus{}X} \PYG{o}{=} \PYG{n}{get\PYGZus{}distribution}\PYG{p}{(}\PYG{n}{d2\PYGZus{}X}\PYG{p}{)}
+\PYG{n}{mu2\PYGZus{}Y}\PYG{p}{,} \PYG{n}{var2\PYGZus{}Y} \PYG{o}{=} \PYG{n}{get\PYGZus{}distribution}\PYG{p}{(}\PYG{n}{d2\PYGZus{}Y}\PYG{p}{)}
+
+\PYG{n}{cov1\PYGZus{}XY} \PYG{o}{=} \PYG{n}{get\PYGZus{}covariance}\PYG{p}{(}\PYG{n}{d1\PYGZus{}X}\PYG{p}{,} \PYG{n}{d1\PYGZus{}Y}\PYG{p}{,} \PYG{n}{mu1\PYGZus{}X}\PYG{p}{,} \PYG{n}{mu1\PYGZus{}Y}\PYG{p}{)}
+\PYG{n}{cov2\PYGZus{}XY} \PYG{o}{=} \PYG{n}{get\PYGZus{}covariance}\PYG{p}{(}\PYG{n}{d2\PYGZus{}X}\PYG{p}{,} \PYG{n}{d2\PYGZus{}Y}\PYG{p}{,} \PYG{n}{mu2\PYGZus{}X}\PYG{p}{,} \PYG{n}{mu2\PYGZus{}Y}\PYG{p}{)}
+
+\PYG{n}{corr1\PYGZus{}XY} \PYG{o}{=} \PYG{n}{get\PYGZus{}correlation}\PYG{p}{(}\PYG{n}{cov1\PYGZus{}XY}\PYG{p}{,} \PYG{n}{var1\PYGZus{}X}\PYG{p}{,} \PYG{n}{var1\PYGZus{}Y}\PYG{p}{)}
+\PYG{n}{corr2\PYGZus{}XY} \PYG{o}{=} \PYG{n}{get\PYGZus{}correlation}\PYG{p}{(}\PYG{n}{cov2\PYGZus{}XY}\PYG{p}{,} \PYG{n}{var2\PYGZus{}X}\PYG{p}{,} \PYG{n}{var2\PYGZus{}Y}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} plt.scatter(d1\PYGZus{}X, d1\PYGZus{}Y, color=\PYGZdq{}red\PYGZdq{})}
+\PYG{c+c1}{\PYGZsh{} plt.scatter(d2\PYGZus{}X, d2\PYGZus{}Y, color=\PYGZdq{}blue\PYGZdq{})}
+
+
+\PYG{k}{def} \PYG{n+nf}{least\PYGZus{}square}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{,} \PYG{n}{feature}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}nonlinear\PYGZsq{}}\PYG{p}{):}
+    \PYG{k}{if} \PYG{n}{feature} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}linear\PYGZsq{}}\PYG{p}{:}
+        \PYG{k}{return} \PYG{n}{np}\PYG{o}{.}\PYG{n}{dot}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{)} \PYG{o}{/} \PYG{n}{np}\PYG{o}{.}\PYG{n}{dot}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{x}\PYG{p}{)}
+    \PYG{k}{elif} \PYG{n}{feature} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}nonlinear\PYGZsq{}}\PYG{p}{:}
+        \PYG{n}{xTx} \PYG{o}{=} \PYG{n}{x}\PYG{o}{.}\PYG{n}{T} \PYG{o}{@} \PYG{n}{x}
+        \PYG{n}{a} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{linalg}\PYG{o}{.}\PYG{n}{inv}\PYG{p}{(}\PYG{n}{xTx}\PYG{p}{)}
+        \PYG{n}{lhs} \PYG{o}{=} \PYG{p}{(}\PYG{n}{x}\PYG{o}{.}\PYG{n}{T} \PYG{o}{@} \PYG{n}{y}\PYG{p}{)}
+        \PYG{k}{return} \PYG{n}{a} \PYG{o}{@} \PYG{n}{lhs}
+
+
+\PYG{k}{def} \PYG{n+nf}{get\PYGZus{}mse}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{,} \PYG{n}{w}\PYG{p}{):}
+    \PYG{n}{estimate} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{dot}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{w}\PYG{p}{)}
+    \PYG{n}{error} \PYG{o}{=} \PYG{n}{estimate} \PYG{o}{\PYGZhy{}} \PYG{n}{y}
+    \PYG{n}{mean\PYGZus{}squared\PYGZus{}error} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{dot}\PYG{p}{(}\PYG{n}{error}\PYG{p}{,} \PYG{n}{error}\PYG{p}{)} \PYG{o}{/} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{estimate}\PYG{p}{)}
+    \PYG{k}{return} \PYG{n}{mean\PYGZus{}squared\PYGZus{}error}
+
+
+\PYG{k}{def} \PYG{n+nf}{plot\PYGZus{}fit}\PYG{p}{(}\PYG{n}{data}\PYG{p}{,} \PYG{n}{fit}\PYG{p}{,} \PYG{n}{shape}\PYG{p}{):}
+    \PYG{c+c1}{\PYGZsh{} data is an array of data}
+    \PYG{c+c1}{\PYGZsh{} fit is an array of fits that fit each data piece in data}
+    \PYG{n}{rows}\PYG{p}{,} \PYG{n}{cols} \PYG{o}{=} \PYG{n}{shape}
+    \PYG{n}{f}\PYG{p}{,} \PYG{n}{axes} \PYG{o}{=} \PYG{n}{plt}\PYG{o}{.}\PYG{n}{subplots}\PYG{p}{(}\PYG{n}{rows}\PYG{p}{,} \PYG{n}{cols}\PYG{p}{)}
+    \PYG{k}{if} \PYG{n}{axes}\PYG{o}{.}\PYG{n}{shape}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{==} \PYG{l+m+mi}{1}\PYG{p}{:}
+        \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{data}\PYG{p}{)):}
+            \PYG{n}{curr\PYGZus{}data} \PYG{o}{=} \PYG{n}{data}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}
+            \PYG{n}{x}\PYG{p}{,} \PYG{n}{y} \PYG{o}{=} \PYG{n}{curr\PYGZus{}data}\PYG{p}{[:,} \PYG{l+m+mi}{0}\PYG{p}{],} \PYG{n}{curr\PYGZus{}data}\PYG{p}{[:,} \PYG{l+m+mi}{1}\PYG{p}{]}
+            \PYG{n}{axes}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{.}\PYG{n}{scatter}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}red\PYGZdq{}}\PYG{p}{)}
+
+            \PYG{n}{curr\PYGZus{}fit} \PYG{o}{=} \PYG{n}{fit}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}
+            \PYG{n}{x}\PYG{p}{,} \PYG{n}{y} \PYG{o}{=} \PYG{n}{curr\PYGZus{}fit}\PYG{p}{[:,} \PYG{l+m+mi}{0}\PYG{p}{],} \PYG{n}{curr\PYGZus{}fit}\PYG{p}{[:,} \PYG{l+m+mi}{1}\PYG{p}{]}
+            \PYG{n}{axes}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{o}{.}\PYG{n}{scatter}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}green\PYGZdq{}}\PYG{p}{)}
+    \PYG{k}{else}\PYG{p}{:}
+        \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{data}\PYG{p}{)):}
+            \PYG{n}{curr\PYGZus{}data} \PYG{o}{=} \PYG{n}{data}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}
+            \PYG{n}{x}\PYG{p}{,} \PYG{n}{y} \PYG{o}{=} \PYG{n}{curr\PYGZus{}data}\PYG{p}{[:,} \PYG{l+m+mi}{0}\PYG{p}{],} \PYG{n}{curr\PYGZus{}data}\PYG{p}{[:,} \PYG{l+m+mi}{1}\PYG{p}{]}
+            \PYG{n}{axes}\PYG{p}{[}\PYG{n}{i} \PYG{o}{//} \PYG{n}{cols}\PYG{p}{][}\PYG{n}{i} \PYG{o}{\PYGZpc{}} \PYG{n}{cols}\PYG{p}{]}\PYG{o}{.}\PYG{n}{scatter}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}red\PYGZdq{}}\PYG{p}{)}
+
+            \PYG{n}{curr\PYGZus{}fit} \PYG{o}{=} \PYG{n}{fit}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}
+            \PYG{n}{x}\PYG{p}{,} \PYG{n}{y} \PYG{o}{=} \PYG{n}{curr\PYGZus{}fit}\PYG{p}{[:,} \PYG{l+m+mi}{0}\PYG{p}{],} \PYG{n}{curr\PYGZus{}fit}\PYG{p}{[:,} \PYG{l+m+mi}{1}\PYG{p}{]}
+            \PYG{n}{axes}\PYG{p}{[}\PYG{n}{i} \PYG{o}{//} \PYG{n}{cols}\PYG{p}{][}\PYG{n}{i} \PYG{o}{\PYGZpc{}} \PYG{n}{cols}\PYG{p}{]}\PYG{o}{.}\PYG{n}{scatter}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}green\PYGZdq{}}\PYG{p}{)}
+
+    \PYG{n}{plt}\PYG{o}{.}\PYG{n}{show}\PYG{p}{()}
+
+
+\PYG{k}{def} \PYG{n+nf}{get\PYGZus{}feature}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{degree}\PYG{p}{):}
+    \PYG{k}{if} \PYG{n}{degree} \PYG{o}{\PYGZlt{}=} \PYG{l+m+mi}{0}\PYG{p}{:}
+        \PYG{k}{return} \PYG{n}{x}
+    \PYG{k}{else}\PYG{p}{:}
+        \PYG{n}{res} \PYG{o}{=} \PYG{p}{[}\PYG{n}{np}\PYG{o}{.}\PYG{n}{ones\PYGZus{}like}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)]}
+        \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{degree}\PYG{p}{):}
+            \PYG{n}{res}\PYG{o}{.}\PYG{n}{insert}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{x} \PYG{o}{**} \PYG{p}{(}\PYG{n}{i} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{))}
+        \PYG{k}{return} \PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{(}\PYG{n}{res}\PYG{p}{)}\PYG{o}{.}\PYG{n}{T}
+
+
+\PYG{k}{def} \PYG{n+nf}{fit\PYGZus{}data}\PYG{p}{(}\PYG{n}{data}\PYG{p}{,} \PYG{n}{degree}\PYG{p}{):}
+    \PYG{n}{x}\PYG{p}{,} \PYG{n}{y} \PYG{o}{=} \PYG{n}{data}\PYG{p}{[:,} \PYG{l+m+mi}{0}\PYG{p}{],} \PYG{n}{data}\PYG{p}{[:,} \PYG{l+m+mi}{1}\PYG{p}{]}
+    \PYG{n}{x} \PYG{o}{=} \PYG{n}{get\PYGZus{}feature}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{degree}\PYG{p}{)}
+    \PYG{n}{w} \PYG{o}{=} \PYG{n}{least\PYGZus{}square}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{,} \PYG{n}{feature}\PYG{o}{=}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}linear\PYGZsq{}} \PYG{k}{if} \PYG{n}{degree} \PYG{o}{==} \PYG{l+m+mi}{0} \PYG{k}{else} \PYG{l+s+s1}{\PYGZsq{}nonlinear\PYGZsq{}}\PYG{p}{))}
+
+    \PYG{n}{pred\PYGZus{}x} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{linspace}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{10}\PYG{p}{,} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{data}\PYG{p}{))}
+    \PYG{n}{pred\PYGZus{}y} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{dot}\PYG{p}{(}\PYG{n}{get\PYGZus{}feature}\PYG{p}{(}\PYG{n}{pred\PYGZus{}x}\PYG{p}{,} \PYG{n}{degree}\PYG{p}{),} \PYG{n}{w}\PYG{p}{)}
+    \PYG{n}{fit} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{([}\PYG{n}{pred\PYGZus{}x}\PYG{p}{,} \PYG{n}{pred\PYGZus{}y}\PYG{p}{])}\PYG{o}{.}\PYG{n}{T}
+
+    \PYG{k}{return} \PYG{n}{data}\PYG{p}{,} \PYG{n}{fit}\PYG{p}{,} \PYG{n}{w}
+
+
+\PYG{k}{def} \PYG{n+nf}{kfold\PYGZus{}cross\PYGZus{}validate}\PYG{p}{(}\PYG{n}{data}\PYG{p}{,} \PYG{n}{k}\PYG{p}{,} \PYG{n}{max\PYGZus{}degree}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{):}
+    \PYG{n}{np}\PYG{o}{.}\PYG{n}{random}\PYG{o}{.}\PYG{n}{shuffle}\PYG{p}{(}\PYG{n}{data}\PYG{p}{)}
+    \PYG{n}{subset\PYGZus{}sz} \PYG{o}{=} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{data}\PYG{p}{)} \PYG{o}{//} \PYG{n}{k}
+    \PYG{n}{training\PYGZus{}sets} \PYG{o}{=} \PYG{p}{[}\PYG{n}{np}\PYG{o}{.}\PYG{n}{concatenate}\PYG{p}{((}\PYG{n}{data}\PYG{p}{[:}\PYG{n}{i}\PYG{o}{*}\PYG{n}{subset\PYGZus{}sz}\PYG{p}{],} \PYG{n}{data}\PYG{p}{[(}\PYG{n}{i} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{*}\PYG{n}{subset\PYGZus{}sz}\PYG{p}{:]))} \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{k}\PYG{p}{)]}
+    \PYG{n}{validation\PYGZus{}sets} \PYG{o}{=} \PYG{p}{[}\PYG{n}{data}\PYG{p}{[}\PYG{n}{i}\PYG{o}{*}\PYG{n}{subset\PYGZus{}sz}\PYG{p}{:(}\PYG{n}{i}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{*}\PYG{n}{subset\PYGZus{}sz}\PYG{p}{]} \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{k}\PYG{p}{)]}
+
+    \PYG{n}{training\PYGZus{}error} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{zeros}\PYG{p}{(}\PYG{n}{max\PYGZus{}degree}\PYG{p}{)}
+    \PYG{n}{validation\PYGZus{}error} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{zeros}\PYG{p}{(}\PYG{n}{max\PYGZus{}degree}\PYG{p}{)}
+
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{training\PYGZus{}sets}\PYG{p}{)):}
+        \PYG{n}{t\PYGZus{}set} \PYG{o}{=} \PYG{n}{training\PYGZus{}sets}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}
+        \PYG{n}{v\PYGZus{}set} \PYG{o}{=} \PYG{n}{validation\PYGZus{}sets}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}
+        \PYG{k}{for} \PYG{n}{j} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{n}{max\PYGZus{}degree} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{):}
+            \PYG{n}{data}\PYG{p}{,} \PYG{n}{fit}\PYG{p}{,} \PYG{n}{w} \PYG{o}{=} \PYG{n}{fit\PYGZus{}data}\PYG{p}{(}\PYG{n}{t\PYGZus{}set}\PYG{p}{,} \PYG{n}{j}\PYG{p}{)}
+
+            \PYG{n}{training\PYGZus{}error}\PYG{p}{[}\PYG{n}{j} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{+=} \PYG{n}{get\PYGZus{}mse}\PYG{p}{(}\PYG{n}{get\PYGZus{}feature}\PYG{p}{(}\PYG{n}{t\PYGZus{}set}\PYG{p}{[:,} \PYG{l+m+mi}{0}\PYG{p}{],} \PYG{n}{j}\PYG{p}{),} \PYG{n}{t\PYGZus{}set}\PYG{p}{[:,} \PYG{l+m+mi}{1}\PYG{p}{],} \PYG{n}{w}\PYG{p}{)}
+            \PYG{n}{validation\PYGZus{}error}\PYG{p}{[}\PYG{n}{j} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{+=} \PYG{n}{get\PYGZus{}mse}\PYG{p}{(}\PYG{n}{get\PYGZus{}feature}\PYG{p}{(}\PYG{n}{v\PYGZus{}set}\PYG{p}{[:,} \PYG{l+m+mi}{0}\PYG{p}{],} \PYG{n}{j}\PYG{p}{),} \PYG{n}{v\PYGZus{}set}\PYG{p}{[:,} \PYG{l+m+mi}{1}\PYG{p}{],} \PYG{n}{w}\PYG{p}{)}
+
+    \PYG{n}{training\PYGZus{}error} \PYG{o}{/=} \PYG{n}{k}
+    \PYG{n}{validation\PYGZus{}error} \PYG{o}{/=} \PYG{n}{k}
+
+    \PYG{k}{return} \PYG{n}{training\PYGZus{}error}\PYG{p}{,} \PYG{n}{validation\PYGZus{}error}
+
+
+\PYG{n}{data} \PYG{o}{=} \PYG{p}{[]}
+\PYG{n}{fits} \PYG{o}{=} \PYG{p}{[]}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{} Dataset 1 linear feature                                                    \PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}}
+
+\PYG{n}{d}\PYG{p}{,} \PYG{n}{fit}\PYG{p}{,} \PYG{n}{w} \PYG{o}{=} \PYG{n}{fit\PYGZus{}data}\PYG{p}{(}\PYG{n}{d1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{n}{data}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{d}\PYG{p}{),} \PYG{n}{fits}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{fit}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{} Dataset 1 affine feature                                                    \PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}}
+
+\PYG{n}{d}\PYG{p}{,} \PYG{n}{fit}\PYG{p}{,} \PYG{n}{w} \PYG{o}{=} \PYG{n}{fit\PYGZus{}data}\PYG{p}{(}\PYG{n}{d1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}
+\PYG{n}{data}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{d}\PYG{p}{),} \PYG{n}{fits}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{fit}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{} Dataset 1 quadratic features                                                \PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}}
+
+\PYG{n}{d}\PYG{p}{,} \PYG{n}{fit}\PYG{p}{,} \PYG{n}{w} \PYG{o}{=} \PYG{n}{fit\PYGZus{}data}\PYG{p}{(}\PYG{n}{d1}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{)}
+\PYG{n}{data}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{d}\PYG{p}{),} \PYG{n}{fits}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{fit}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{} Dataset 2 linear features                                                \PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}}
+
+\PYG{n}{d}\PYG{p}{,} \PYG{n}{fit}\PYG{p}{,} \PYG{n}{w} \PYG{o}{=} \PYG{n}{fit\PYGZus{}data}\PYG{p}{(}\PYG{n}{d2}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{n}{data}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{d}\PYG{p}{),} \PYG{n}{fits}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{fit}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{} Dataset 2 affine features                                                \PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}}
+
+\PYG{n}{d}\PYG{p}{,} \PYG{n}{fit}\PYG{p}{,} \PYG{n}{w} \PYG{o}{=} \PYG{n}{fit\PYGZus{}data}\PYG{p}{(}\PYG{n}{d2}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}
+\PYG{n}{data}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{d}\PYG{p}{),} \PYG{n}{fits}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{fit}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{} Dataset 2 quadratic features                                                \PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}\PYGZsh{}}
+
+\PYG{n}{d}\PYG{p}{,} \PYG{n}{fit}\PYG{p}{,} \PYG{n}{w} \PYG{o}{=} \PYG{n}{fit\PYGZus{}data}\PYG{p}{(}\PYG{n}{d2}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{)}
+\PYG{n}{data}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{d}\PYG{p}{),} \PYG{n}{fits}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{fit}\PYG{p}{)}
+
+
+\PYG{n}{plot\PYGZus{}fit}\PYG{p}{(}\PYG{n}{data}\PYG{p}{,} \PYG{n}{fits}\PYG{p}{,} \PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{))}
+
+\PYG{n}{train\PYGZus{}error}\PYG{p}{,} \PYG{n}{val\PYGZus{}error} \PYG{o}{=} \PYG{n}{kfold\PYGZus{}cross\PYGZus{}validate}\PYG{p}{(}\PYG{n}{d1}\PYG{p}{,} \PYG{n}{k}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{n}{max\PYGZus{}degree}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{scatter}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{arange}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{6}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{),} \PYG{n}{train\PYGZus{}error}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}red\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{scatter}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{arange}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{6}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{),} \PYG{n}{val\PYGZus{}error}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}blue\PYGZdq{}}\PYG{p}{)}
+
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{yscale}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}log\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{show}\PYG{p}{()}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{train\PYGZus{}error}\PYG{p}{,} \PYG{n}{val\PYGZus{}error}\PYG{p}{)}
+
+
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}done\PYGZdq{}}\PYG{p}{)}
+
+
+
+
+\end{Verbatim}

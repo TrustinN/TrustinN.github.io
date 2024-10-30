@@ -1,0 +1,20 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+    \PYG{k}{def} \PYG{n+nf}{shortestPath}\PYG{p}{(}\PYG{n}{G}\PYG{p}{(}\PYG{n}{V}\PYG{p}{,} \PYG{n}{E}\PYG{p}{,} \PYG{n}{w}\PYG{p}{)}\PYG{p}{,} \PYG{n}{s}\PYG{p}{,} \PYG{n}{t}\PYG{p}{)}
+        \PYG{n}{SCCs} \PYG{esc}{$\leftarrow$} \PYG{n}{kosaraju}\PYG{p}{(}\PYG{n}{G}\PYG{p}{)}
+        \PYG{n}{SCCs} \PYG{o}{=} \PYG{n}{topologicalSort}\PYG{p}{(}\PYG{n}{SCCs}\PYG{p}{)}
+
+        \PYG{n}{costs} \PYG{esc}{$\leftarrow$} \PYG{p}{[}\PYG{n}{inf}\PYG{p}{]} \PYG{o}{*} \PYG{esc}{$\abs{V}$}
+        \PYG{n}{parents} \PYG{esc}{$\leftarrow$} \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{*} \PYG{esc}{$\abs{V}$}
+        \PYG{n}{currSCC} \PYG{o}{=} \PYG{n}{SCCs}\PYG{o}{.}\PYG{n}{find}\PYG{p}{(}\PYG{n}{contains}\PYG{p}{(}\PYG{n}{s}\PYG{p}{)}\PYG{p}{)}
+        \PYG{k}{while} \PYG{k+kc}{True}
+            \PYG{n}{parents} \PYG{esc}{$\leftarrow$} \PYG{n}{BellmanFord}\PYG{p}{(}\PYG{n}{currSCC}\PYG{p}{)}
+            \PYG{k}{if} \PYG{n}{t} \PYG{o+ow}{in} \PYG{n}{currSCC}\PYG{o}{.}\PYG{n}{V}
+                \PYG{k}{break}
+            \PYG{n}{nextSCC} \PYG{o}{=} \PYG{n}{getNextTopological}\PYG{p}{(}\PYG{n}{currSCC}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} the next scc in the topological ordering.}
+            \PYG{k}{for} \PYG{n}{v} \PYG{o+ow}{in} \PYG{n}{nextSCC}\PYG{o}{.}\PYG{n}{vertices}
+                \PYG{n}{edges} \PYG{o}{=} \PYG{n}{getEdgesInto}\PYG{p}{(}\PYG{n}{v}\PYG{p}{)}
+                \PYG{n}{setCosts}\PYG{p}{(}\PYG{n}{edges}\PYG{p}{,} \PYG{n}{costs}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} for every edge coming into our scc, set the cost for each vertex in our scc}
+            \PYG{n}{currSCC} \PYG{o}{=} \PYG{n}{nextSCC}
+
+        \PYG{k}{return} \PYG{n}{backtrack}\PYG{p}{(}\PYG{n}{parents}\PYG{p}{,} \PYG{n}{start}\PYG{o}{=}\PYG{n}{s}\PYG{p}{,} \PYG{n}{end}\PYG{o}{=}\PYG{n}{t}\PYG{p}{)}
+\end{Verbatim}

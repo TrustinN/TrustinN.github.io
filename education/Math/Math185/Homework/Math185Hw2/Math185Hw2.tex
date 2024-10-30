@@ -1,0 +1,270 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math185/Homework/Math185Hw2/Math185Hw2.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math185Hw2}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Split the polynomial $x^{4} + 1$ into four linear factors (with complex coefficients). Then, by combining pairs of complex-conjugate factors, find a splitting of the same into two quadratic real factors.
+    \begin{proof}
+        We have that 
+            \begin{equation*}
+                x^{4} = -1 = e^{i\pi}, e^{3\pi i}, e^{5i\pi}, e^{7i\pi}
+            \end{equation*}
+        and therefore, the roots are 
+            \begin{equation*}
+                e^{\dfrac{i\pi}{4}}, e^{\dfrac{3i\pi}{4}}, e^{\dfrac{5i\pi}{4}}, e^{\dfrac{7i\pi}{4}}
+            \end{equation*}
+        Now we multiply the conjugates together:
+            \begin{equation*}
+                (x - e^{\dfrac{i\pi}{4}})(x - e^{\dfrac{7i\pi}{4}}) = x^{2} - (e^{\dfrac{i\pi}{4}} + e^{\dfrac{7i\pi}{4}})x + 1 = x^{2} - \sqrt{2}x + 1
+            \end{equation*}
+        while
+            \begin{equation*}
+                (x - e^{\dfrac{3i\pi}{4}})(x - e^{\dfrac{5i\pi}{4}}) = x^{2} - (e^{\dfrac{3i\pi}{4}} + e^{\dfrac{5i\pi}{4}})x + 1 = x^{2} + \sqrt{2} + 1
+            \end{equation*}
+        So the factorization is 
+            \begin{equation*}
+                (x^{2} - \sqrt{2}x + 1)(x^{2} + \sqrt{2}x + 1)
+            \end{equation*}
+    \end{proof}
+
+\textbf{Exercise 2}: Represent $\exp(\frac{\pi i}{4}), \exp(\frac{\pi i}{2})$ and their sum in the complex plane. By expressing each of them as $x + iy$, deduce that $\tan{\frac{3\pi}{8}} = 1 + \sqrt{2}$. By considering $(2 + i)(3 + i)$, show that $\frac{\pi}{4} = \tan^{-1}{1/2} + \tan^{-1}{1/3}$.
+    \begin{proof}
+        The vectors $\exp(\frac{i\pi}{4})$ and $\exp(\frac{i\pi}{2})$ are $\frac{\sqrt{2}}{2} + \frac{\sqrt{2}}{2}i$ and $i$ respectively. Their sum is $\frac{\sqrt{2}}{2} + \frac{2 + \sqrt{2}}{2}i$. Drawn on the complex plane:
+            \begin{fixedfigure}
+                \incfig{exercise2p1}
+            \end{fixedfigure}
+        So we see that by similar triangles, the ratio of the $y$ to $x$ value of the vector $\frac{\sqrt{2}}{2} + \frac{\sqrt{2} + 2}{2}i$ is the same as the ratio of $1$ to $1 + \sqrt{2}$. So $\tan{\theta} = 1 + \sqrt{2}$. We know that the blue vector bisects the rhombus's angle. The angle is therefore $\frac{\frac{\pi}{4} + \frac{\pi}{2}}{2} = \frac{3\pi}{8}$. Therefore, $\tan{\frac{3\pi}{8}} = 1 + \sqrt{2}$.
+
+        For the second part, we can draw a picture:
+            \begin{fixedfigure}
+                \incfig{exercise2p2}
+            \end{fixedfigure}
+        Notice that $(2 + i)(3 + i) = 5(1 + i) = 5e^{i\frac{\pi}{4}}$. Then we know that the angle $\frac{\pi}{4}$ is the sum of $\mathop{arg}(3 + i) + \mathop{arg}(2 + i)$. Using $\tan^{-1}$, we can get these:
+            \begin{align*}
+                \mathop{arg}(3 + i) &= \tan^{-1}{1/3} \\
+                \mathop{arg}(2 + i) &= \tan^{-1}{1/2}   
+            \end{align*}
+        Therefore, $\frac{\pi}{4} = \tan^{-1}{1/3} + \tan^{-1}{1/2}$.
+    \end{proof}
+
+\textbf{Exercise 3}: Show that, in polar coordinates $(r, \theta)$, the Cauchy-Riemann equations for the differentiable function $(r, \theta) \mapsto u + iv$ read as follows, when $r > 0$.
+    \begin{equation*}
+        r \pdv{u}{r} = \pdv{v}{\theta}, \hspace{30pt} \pdv{u}{\theta} = -r \pdv{v}{r}
+    \end{equation*}
+    \begin{proof}
+        Suppose we have $(r, \theta) \rightarrow r(\cos{\theta} + i\sin{\theta})$. Then splitting it into the real and imaginary component, we have $u(r, \theta) = r\cos{\theta}$ and $v(r, \theta) = r\sin{\theta}$. Now compute the Jacobian:
+            \begin{equation*}
+                \begin{bmatrix}
+                    \pdv{u}{r} & \pdv{u}{\theta} \\
+                    \pdv{v}{r} & \pdv{v}{\theta}   
+                \end{bmatrix} = \begin{bmatrix}
+                    \cos{\theta} & -r\sin{\theta} \\
+                    \sin{\theta} & r\cos{\theta}    
+                \end{bmatrix}
+            \end{equation*}
+        From this, we see that 
+            \begin{equation*}
+                r\pdv{u}{r} = \pdv{v}{\theta}
+            \end{equation*}
+        and
+            \begin{equation*}
+                -r\pdv{v}{r} = \pdv{u}{\theta}
+            \end{equation*}
+    \end{proof}
+
+\textbf{Exercise 4}: Which of the following functions are holomorphic functions of $z = x + iy = r(\cos{\theta} + i\sin{\theta})$?
+\begin{equation*}
+    e^{-y}(\cos{x} + i\sin{x}); \, \cos{x} - i\sin{y}; \, r^{3} + 3i\theta; \, re^{r\cos{\theta}}(\cos{(\theta + r\sin{\theta})} + i\sin{(\theta + r\sin{\theta})})
+\end{equation*}
+    \begin{proof}
+        Check:
+            \begin{itemize}
+                \item $e^{-y}(\cos{x} + i\sin{x})$. This is holomorphic because it is a composition of holomorphic functions: $z \mapsto iz \mapsto \exp(iz)$. In other words:
+                    \begin{equation*}
+                        x + iy \mapsto -y + ix \mapsto e^{-y}(\cos{x} + i\sin{x})
+                    \end{equation*}
+
+                \item $\cos{x} - i\sin{y}$. This not holomorphic. We see that the Jacobian is $\begin{bmatrix}
+                    -\sin{x} & 0        \\
+                    0        & -\cos{x}   
+                \end{bmatrix}$.
+
+                \item $r^{3} + 3i\theta$. By exercise $3$, we need that
+                    \begin{equation*}
+                        r \pdv{u}{r} = \pdv{v}{\theta}, \hspace{30pt} \pdv{u}{\theta} = -r \pdv{v}{r}
+                    \end{equation*}
+                Let $u(r, \theta) = r^{3}$ and $v(r, \theta) = 3\theta$. Then
+                    \begin{equation*}
+                        \pdv{u}{r} = 3r^{2}, \pdv{u}{\theta} = 0, \pdv{v}{r} = 0, \pdv{v}{\theta} = 3
+                    \end{equation*}
+                We see that it is holomorphic for $r = 1$.
+
+                \item $re^{r\cos{\theta}}(\cos{(\theta + r \sin{\theta}) + i\sin{(\theta + r \sin{\theta})}})$. We have
+                    \begin{align*}
+                        re^{r\cos{\theta}}(\cos{(\theta + r\sin{\theta}) + i\sin{(\theta + r\sin{\theta})}}) &= re^{r\cos{\theta}}(e^{i\theta + ri\sin{\theta}}) \\
+                                                                                                             &= re^{i\theta}e^{re^{i\theta}}                     \\
+                                                                                                             &= ze^{z}                                             
+                    \end{align*}
+                The product of holomorphic functions is holomorphic.
+            \end{itemize}
+    \end{proof}
+
+\textbf{Exercise 5}: Let the function $f$ be holomorphic in an open disk $D \subseteq \mathbb{C}$. Show that each of the following conditions forces $f$ to be constant.
+    \begin{itemize}
+        \item [(a)] $f^{\prime} \equiv 0$ in $D$
+
+        \item [(b)] $f$ is real-valued in $D$
+            \begin{proof}
+                If $f$ is real-valued, then $f = \begin{bmatrix}
+                    u(x, y) \\
+                    v(x, y)   
+                \end{bmatrix}$ where $v(x, y) = 0$. So the Jacobian is $\begin{bmatrix}
+                    \pdv{u}{x} & \pdv{u}{y} \\
+                    0          & 0            
+                \end{bmatrix}$. By the $CR$ equations, we see that $\pdv{u}{x}, \pdv{u}{y} = 0$. So $u(x, y)$ has no $x$ or $y$ terms. So $u(x, y) = c$ where $c$ is a constant.
+            \end{proof}
+
+        \item [(c)] $\lvert f \rvert$ is constant in $D$
+
+        \item [(d)] $\mathop{arg}f$ is constant in $D$
+
+        \item [(e)] $\overline{f(z)}$ is also holomorphic.
+    \end{itemize}       
+
+\textbf{Exercise 6}: Find all the complex solutions of the following equations (log is the multi-valued function):
+    \begin{itemize}
+        \item [(a)] $log(z) = \frac{\pi i}{2}$
+            \begin{answer}
+                We have that $\mathop{log}(z) = \mathop{log}(re^{i\theta}) = \mathop{log}(r) + i\theta = \frac{\pi i}{2}$. So 
+                    \begin{equation*}
+                        \mathop{log}(r) = 0
+                    \end{equation*}
+                and $r = 1$. Now
+                    \begin{equation*}
+                        i\theta = \dfrac{\pi i}{2}
+                    \end{equation*}
+                This gives $\theta = \frac{\pi}{2}$. So the solution is $e^{i\pi/2}$.
+            \end{answer}
+
+        \item [(b)] $\exp(z) = \pi i$
+            \begin{answer}
+                Expand out $\exp(z)$ in terms of $x, y$: 
+                    \begin{equation*}
+                        \exp(z) = e^{x}(\cos{y} + i\sin{y}) = \pi i
+                    \end{equation*}
+                Then $e^{x} = \pi$, as $\sqrt{\lVert \pi i \rVert} = \pi$. So $x = \mathop{log}(\pi)$. Now since there is not real component, $\cos{y} = 0$. Also, $\sin{y} = 1$. This is true for $y = \frac{\pi}{2}$. So $z = \mathop{log}(\pi) + i\frac{\pi}{2}$.
+            \end{answer}
+
+        \item [(c)] $\sin{z} = \cos{z}$
+            \begin{answer}
+                Using the formula in terms of $e$:
+                    \begin{equation*}
+                        \dfrac{e^{iz} - e^{-iz}}{2i} = \dfrac{e^{iz} + e^{-iz}}{2}
+                    \end{equation*}
+                So
+                    \begin{equation*}
+                        e^{iz} - e^{-iz} = ie^{iz} + ie^{-iz}
+                    \end{equation*}
+                Reordering:
+                    \begin{align*}
+                        e^{iz} - ie^{iz}        &= ie^{-iz} + e^{-iz}       \\
+                        (1 - i)e^{iz}           &= (i + 1)e^{-iz}           \\
+                        \dfrac{e^{iz}}{e^{-iz}} &= \dfrac{(i + 1)}{(1 - i)} \\
+                        e^{2iz}                 &= \dfrac{2i}{2}            \\
+                        e^{2iz}                 &= i                          
+                    \end{align*}
+                Using $\exp(2ix -2y) = e^{-2y}(\cos{2x} + i\sin{2x})$. Since $\sqrt{\lVert i \rVert} = 1$, we have $y = 0$. Then this says that $\cos{z} = \sin{z}$ at real values of $z$. These are known as $\frac{\pi}{4} + k\pi$ for $k \in \mathbb{Z}$.
+            \end{answer}
+
+        \item [(d)] $\overline{\exp(i z)} = \exp(i\overline{z})$ 
+            \begin{answer}
+                Expand both sides:
+                    \begin{align*}
+                        \overline{\exp(iz)} &= \overline{\exp(-y + ix)}              \\
+                                            &= \overline{e^{-y}(\cos{x} + i\sin{x})} \\
+                                            &= e^{-y}(\cos{x} - i\sin{x})              
+                    \end{align*}
+                and
+                    \begin{align*}
+                        \exp(i\overline{z}) &= \exp(i(x - iy))           \\
+                                            &= \exp(y + ix)              \\
+                                            &= e^{y}(\cos{x} + i\sin{x})   
+                    \end{align*}
+                Now set them equal and simplify:
+                    \begin{align*}
+                        e^{-y}(\cos{x} - i\sin{x}) &= e^{y}(\cos{x} + i\sin{x})  \\
+                        \cos{x} - i\sin{x}         &= e^{2y}(\cos{x} + i\sin{x})   
+                    \end{align*}
+                Let $w = \cos{x} + i\sin{x}$. Then 
+                    \begin{equation*}
+                        \overline{w} = e^{2y}w
+                    \end{equation*}
+                Since $w \neq 0$, we can divide:
+                    \begin{equation*}
+                        e^{2y} = \dfrac{\overline{w}}{w} = 1
+                    \end{equation*}
+                So $y = 0$. So there are only real solutions. Going back to one of the equations above, we continue:
+                    \begin{align*}
+                        \cos{x} - i\sin{x} &= \cos{x} + i\sin{x} \\
+                        0                  &= 2i\sin{x}          \\
+                        0                  &= \sin{x}              
+                    \end{align*}
+                which we know has solutions at $x = k\pi$ for $k \in \mathbb{Z}$.
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 7}: Establish the identities $(x = \mathop{Re}(z), y = \mathop{Im}(z))$
+    \begin{align*}
+        \lvert \cos{z} \rvert^{2} &= \cos^{2}{x} + \sinh^{2}{y} \\
+        \lvert \sin{z} \rvert^{2} &= \sin^{2}{x} + \sinh^{2}{y}   
+    \end{align*}
+\begin{proof}
+    Using the fact that 
+        \begin{align*}
+            \cos{x + iy} &= \cos{x}\cosh{y} - i\sin{x}\sinh{y} \\
+            \sin{x + iy} &= \sin{x}\cosh{y} + i\cos{x}\sinh{y}   
+        \end{align*}
+    So 
+        \begin{align*}
+            \lVert \cos{x + iy} \rVert &= \cos^{2}{x}\cosh^{2}{y} + \sin^{2}{x}\sinh^{2}{y}       \\
+                                       &= \cos^{2}{x}\cosh^{2}{y} + (1 - \cos^{2}{x})\sinh^{2}{y} \\
+                                       &= \sinh^{2}{x} + \cos^{2}{x}(\cosh^{2}{y} - \sinh^{2}{y}) 
+        \end{align*}
+    Now using the formulas:
+        \begin{align*}
+            \cos{iy} &= \cosh{y}  \\
+            \sin{iy} &= i\sinh{y}   
+        \end{align*}
+    Now we see that $\cos^{2}{iy} + \sin^{2}{iy} = \cosh^{2}{y} - \sinh^{2}{y}$. Plugging it in above, we get
+        \begin{equation*}
+            \lVert \cos{x + iy} \rVert = \sinh^{2}{x} + \cos^{2}{x}
+        \end{equation*}
+    as desired. 
+
+    For the other one, we use the other formula shown at the top:
+        \begin{align*}
+            \lVert \sin{x + iy} \rVert &= \sin^{2}{x}\cosh^{2}{y} + \cos^{2}{x}\sinh^{2}{y}       \\
+                                       &= \sin^{2}{x}\cosh^{2}{y} + (1 - \sin^{2}{x})\sinh^{2}{y} \\
+                                       &= \sinh^{2}{y} + \sin^{2}{x}(\cosh^{2}{y} - \sinh^{2}{y}) \\
+                                       &= \sinh^{2}{y} + \sinh^{2}{x}                               
+        \end{align*}
+    which concludes the proof.
+\end{proof}
+
+
+
+
+
+\end{document}

@@ -1,0 +1,176 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math104/Homework/Math104Hw2/Math104Hw2.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+
+\title{Math104Hw2}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: State what it means mathematically that a sequence $(s_{n})$ converges to $s \in \mathbb{R}$.
+    \begin{answer}
+        For a sequence $(s_{n})$ to converge to $s$, we must have that $\forall \varepsilon > 0$, there exists an $N$ such that $\forall n > N$, we have that:
+            \begin{equation*}
+                \lvert s_{n} - s \rvert < \varepsilon
+            \end{equation*}
+    \end{answer}
+
+\textbf{Exercise 2}: Assume that $\text{lim}(s_{n}) = 0$. Prove that $\text{lim}(\sqrt[3]{s_{n}}) = 0$.
+    \begin{proof}
+        Since $\text{lim}(s_{n}) = 0$, we have that for all $\varepsilon$, there is an $N$ such that $\forall n > N$, 
+            \begin{equation*}
+                \lvert s_{n} \rvert < \varepsilon
+            \end{equation*}
+        or
+            \begin{equation*}
+                -\varepsilon < s_{n} < \varepsilon
+            \end{equation*}
+        If we take the cube root of both sides, we have
+            \begin{equation*}
+                \sqrt[3]{-\varepsilon} < \sqrt[3]{s_{n}} <  \sqrt[3]{\varepsilon}
+            \end{equation*}
+        But now we are done as we can replace $\sqrt[3]{\varepsilon} = \delta$ and say that there is an $N$ such that for all $n > N$,
+            \begin{equation*}
+                \lvert \sqrt[3]{s_{n}} \rvert <  \delta
+            \end{equation*}
+        We would just choose $N$ based on the epsilon for our previous sequence, where $\varepsilon = \delta^{3}$.
+    \end{proof}
+
+\textbf{Exercise 3}: Use the definition of convergence to prove $\text{lim}(\frac{3n}{n + 1}) = 3$; no theorem in Ross 9 is allowed.
+    \begin{proof}
+        We need to show that $\forall \varepsilon >  0$, we have an $N$ such that $\forall n > N$,
+            \begin{equation*}
+                \left\lvert \dfrac{3n}{n + 1} - 3 \right\rvert < \varepsilon
+            \end{equation*}
+        So we can collect the terms in the absolute value:
+            \begin{equation*}
+                \left\lvert \dfrac{-3}{n + 1} \right\rvert < \varepsilon
+            \end{equation*}
+        Therefore, we require that:
+            \begin{equation*}
+                \dfrac{3}{n + 1} < \varepsilon \text{ or } n > \dfrac{3}{\varepsilon} - 1
+            \end{equation*}
+        Now let $N = \frac{3}{\varepsilon} - 1$. Then we plug in $n > \frac{3}{\varepsilon} - 1$ into
+            \begin{equation*}
+                \left\lvert \dfrac{3n}{n + 1} - 3 \right\rvert = \left\lvert \dfrac{-3}{n + 1} \right\rvert
+            \end{equation*}
+        We get that 
+            \begin{align*}
+                n &> \frac{3}{\varepsilon} - 1 \\
+                n + 1 &> \frac{3}{\varepsilon} \\
+                \varepsilon &> \frac{3}{n + 1}
+            \end{align*}
+        But $\lvert \frac{-3}{n + 1} \rvert = \frac{3}{n + 1}$. So we can conclude that for any $\varepsilon$, we have found an $N$ such that $\forall n > N$,
+            \begin{equation*}
+                \left\lvert \dfrac{3n}{n + 1} - 3 \right\rvert < \varepsilon
+            \end{equation*}
+        So we are done.
+    \end{proof}
+
+\textbf{Exercise 4}: Use the definition of convergence to prove $\text{lim}(\frac{n - 1}{n^{2} + 1}) = 0$; no theorem in Ross 9 is allowed.
+    \begin{proof}
+        We want that $\forall \varepsilon > 0$, there exists an $N$ such that $\forall n > N$, we have
+            \begin{equation*}
+                \left\lvert \dfrac{n - 1}{n^{2} + 1} \right\rvert < \varepsilon
+            \end{equation*}
+        We can choose an intermediate function:
+            \begin{equation*}
+                \left\lvert \dfrac{n - 1}{n^{2} + 1} \right\rvert < \left\lvert \dfrac{n - 1}{n^{2} - 1} \right\rvert < \varepsilon
+            \end{equation*}
+        So we require that $N \geq 1$. But now we see that 
+            \begin{equation*}
+                \dfrac{n - 1}{n^{2} - 1} = \dfrac{1}{n + 1} < \varepsilon
+            \end{equation*}
+        and so we take
+            \begin{equation*}
+                \dfrac{1}{\varepsilon} - 1 < n
+            \end{equation*}
+        Using the original constraints, let $N = \max(1, \frac{1}{\varepsilon} - 1)$. Now if $n > \max(1, \frac{1}{\varepsilon} - 1)$, we get
+            \begin{align*}
+                n - 1     &>  0                                                       \\
+                \dfrac{1}{n + 1} &< \varepsilon
+            \end{align*}
+        Therefore,
+            \begin{equation*}
+                \left\lvert \dfrac{n - 1}{n^{2} - 1} \right\rvert = \left\lvert \dfrac{1}{n + 1} \right\rvert = \dfrac{1}{n + 1} < \varepsilon
+            \end{equation*}
+        For $n > 1$, we have 
+            \begin{equation*}
+                \left\lvert \dfrac{n - 1}{n^{2} + 1} \right\rvert =  \dfrac{n - 1}{n^{2} + 1} < \dfrac{n - 1}{n^{2} - 1} = \left\lvert \dfrac{n - 1}{n^{2} - 1} \right\rvert
+            \end{equation*}
+        So we have that $\forall \varepsilon$, there is an $N$ such that $\forall n > N$,
+            \begin{equation*}
+                \left\lvert \dfrac{n - 1}{n^{2} + 1} \right\rvert < \left\lvert \dfrac{n - 1}{n^{2} - 1} \right\rvert < \varepsilon
+            \end{equation*}
+        which finishes the proof.
+    \end{proof}
+
+\textbf{Exercise 5}: Use the definition of convergence to prove that the sequence $(s_{n})$ diverges where $s_{n} = \sqrt{n}$.
+    \begin{proof}
+        We wish to show that the sequence does not converge. So we want that $\exists \varepsilon > 0$ we have that for any $N$, there is an $n > N$ such that 
+            \begin{equation*}
+                \lvert \sqrt{n} - L \rvert \geq \varepsilon
+            \end{equation*}
+        where $L$ is an arbitrary number in $\mathbb{R}$. Suppose for contradiction, there was an $N$ such that for all $n > N$, 
+            \begin{equation*}
+                \lvert \sqrt{n} - L \rvert < \varepsilon
+            \end{equation*}
+        Take $\varepsilon = 1$. Take an arbitrary $n_{0} > N$ and square it. We have $N < n_{0} \leq n_{0}^{2}$. So plugging in $n = n_{0}^{2}$, we get:
+            \begin{equation*}
+                -1 + L < n_{0} < 1 + L
+            \end{equation*}
+        But now consider $N < n_{0}^{2} < (n_{0} + 5)^{2}$. So
+            \begin{align*}
+                -1 + L < n_{0} + 5 < 1 + L \\
+                -1 - L < -n_{0} < 1 - L
+            \end{align*}
+        The sum of the inequalities gives us:
+            \begin{equation*}
+                -2 < 5 < 2
+            \end{equation*}
+        which is a contradiction. So for any $N$, there is an $n > N$ such that
+            \begin{equation*}
+                \lvert \sqrt{n} - L \rvert \geq \varepsilon
+            \end{equation*}
+        This shows non-convergence.
+    \end{proof}
+
+\textbf{Exercise 6}: Assume that $\text{lim}(s_{n}) = s$ and $s_{n} \geq 0$. Prove that $s \geq 0$.
+    \begin{proof}
+        Since the limit exists, we have that $\forall \varepsilon > 0$, there is an $N$ such that $\forall n > N$, we have
+            \begin{equation*}
+                \lvert s_{n} - s \rvert < \varepsilon
+            \end{equation*}
+        This also means
+            \begin{equation*}
+                -\varepsilon + s < s_{n} < \varepsilon + s
+            \end{equation*}
+        But since $s_{n} \geq 0$, we have
+            \begin{equation*}
+                0 \leq s_{n} < \varepsilon + s \implies 0 \leq \varepsilon + s
+            \end{equation*}
+        Suppose for contradiction that $s < 0$. We want to find an $\varepsilon$ small enough such that its sum with $s$ lies below $0$. Take $\varepsilon = \lvert \frac{s}{2} \rvert$. So
+            \begin{equation*}
+                \left\lvert \dfrac{s}{2} \right\rvert + s = s - \dfrac{s}{2} = \dfrac{s}{2} < 0
+            \end{equation*}
+        But that is impossible because we started with: $\forall \varepsilon > 0$, $0 \leq \varepsilon + s$. Therefore, $s \geq 0$.
+    \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

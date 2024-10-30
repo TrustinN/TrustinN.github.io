@@ -1,0 +1,237 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math172/Homework/Math172Hw7/Math172Hw7.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+
+\title{Math172Hw7}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Show that the number of ways to split the multiplication $x_{0}x_{1}\cdots x_{n}$ into $n$ pairwise multiplications $(ab)$ using brackets is equal to the Catalan number $C_{n}$. For example, for $n = 3$ we have $C_{3} = 5$ ways:
+    \begin{equation*}
+        (x_{0}(x_{1}(x_{2}x_{3}))), (x_{0}((x_{1}x_{2})x_{3})), ((x_{0}x_{1})(x_{2}x_{3})), ((x_{0}(x_{1}x_{2}))x_{3}), (((x_{0}x_{1})x_{2})x_{3})
+    \end{equation*}
+        \begin{proof}
+            If $B_{n}$ is the number of ways to split a multiplication of $x_{0}x_{1}\ldots x_{n}$, then we will show that the relation:
+                \begin{equation*}
+                    \sum_{i \geq 1}^{n} B_{i - 1}B_{n - i}
+                \end{equation*}
+            holds similarly to the Catalan numbers and that $C_{0} = B_{0}$, $C_{1} = B_{1}$. For $B_{0}$, $B_{1}$, we have
+                \begin{equation*}
+                    x_{0}, (x_{0}, x_{1})
+                \end{equation*}
+            So $B_{0} = B_{1} = 1 = C_{0} = C_{1}$. So the base case is done. Now consider the general case. Suppose that we have $x_{0} \ldots x_{n}$. Then we will count this by:
+                \begin{itemize}
+                    \item Then we count the number of ways to place the first parenthesis. The first outermost parenthesis will split the numbers into left and right portions. Suppose that we chose to place the first outermost parenthesis after $x_{i}$:
+                        \begin{equation*}
+                            (x_{0}x_{1} \ldots x_{i - 1})(x_{i}\ldots x_{n})
+                        \end{equation*}
+                    So for $i = 1$ to $n$, we have distinct ways of placing the outermost parenthesis.
+
+                    \item Now we apply induction on the LHS for $x_{0} \ldots x_{i - 1}$ to get $B_{i - 1}$ and for the RHS, we get also $B_{n -i}$. So therefore, for each $i = 1, n$, we have: $B_{i - 1}B_{n - i}$ ways to split parenthesis:
+                        \begin{equation*}
+                            \sum_{i \geq 1}^{n}B_{i - 1}B_{n - i}
+                        \end{equation*}
+                \end{itemize}
+            which is what we wanted.
+        \end{proof}
+
+\textbf{Exercise 2}: Show that Catalan numbers satisfy the following recurrence relation:
+    \begin{equation*}
+        C_{n} = \dfrac{2(2n - 1)}{n + 1}C_{n - 1}
+    \end{equation*}
+        \begin{proof}
+            We see that
+                \begin{equation*}
+                    C_{n} = \dfrac{1}{n + 1}\dbinom{2n}{n}
+                \end{equation*}
+            and
+                \begin{equation*}
+                    C_{n - 1} = \dfrac{1}{n}\dbinom{2n - 2}{n - 1}
+                \end{equation*}
+            So multiplying them together:
+                \begin{align*}
+                    \dfrac{2(2n - 1)}{ n + 1}C_{n - 1} &=  \dfrac{2(2n - 1)}{n(n + 1)}\dbinom{2n - 2}{n - 1}                          \\
+                                                       &= \dfrac{2n(2n - 1)(2n - 2)(2n - 3) \cdots (1)}{n^{2}(n + 1)(n - 1)!(n - 1)!} \\
+                                                       &= \dfrac{2n!}{(n + 1)n!n!}                                                    \\
+                                                       &= \dfrac{1}{n + 1}\dbinom{2n}{n}                                              \\
+                                                       &= C_{n}                                                                         
+                \end{align*}
+            which concludes the proof.
+        \end{proof}
+
+\textbf{Exercise 3}: This continuation of Problem $3$ in Problem set $6$. Let $F(x)$, $G(x)$ be formal power series.
+    \begin{itemize}
+        \item If $G(0) = 0$ then we have $\dv{x}(F(G(x))) = G^{\prime}(x)F^{\prime}(G(x))$.
+            \begin{proof}
+                We will first show that if $F(x)$ is a power series, then 
+                    \begin{equation*}
+                        \dv{x}(F(x))^{n} = nF^{\prime}(x)(F(x))^{n - 1}
+                    \end{equation*}
+                We start with a result from the last hw:
+                    \begin{equation*}
+                        \dv{x}F(x)G(x) = F^{\prime}(x)G(x) + F(x)G^{\prime}(x)
+                    \end{equation*}
+                So we will induct on the number $n$. If $n = 1$, then $\dv{x}F(x)^{1} = 1F^{\prime}(x)(F(x))^{0} = F^{\prime}(x)$, which is true.
+
+                Inductive Step: Suppose that $\dv{x}(F(x))^{n} = nF^{\prime}(x)(F(x))^{n - 1}$. We will show this for $n + 1$. Consider:
+                    \begin{align*}
+                        \dv{x}(F(x))^{n + 1} &= \dv{x}(F(x)^{n}F(x))                                       \\
+                                             &= \dv{x}(F(x))^{n}F(x) + (F(x))^{n}F^{\prime}(x)             \\
+                                             &= nF^{\prime}(x)(F(x))^{n - 1}F(x) + (F(x))^{n}F^{\prime}(x) \\
+                                             &= nF^{\prime}(x)(F(x))^{n} + (F(x))^{n}F^{\prime}(x)         \\
+                                             &= nF^{\prime}(x)(F(x))^{n} + F^{\prime}(x)(F(x))^{n}         \\
+                                             &= (n + 1)F^{\prime}(x)(F(x))^{n}                               
+                    \end{align*}
+                So now we can use this. We have that $F(x) = \sum_{i \geq 0}a_{i}x^{i}$, $G(x) = \sum_{i \geq 1}b_{i}x^{i}$. So $F(G(x)) = \sum_{i \geq 0}a_{i}G(x)^{i}$. And:
+                    \begin{align*}
+                        \dv{x}F(G(x)) &= \dv{x}\sum_{i \geq 0}a_{i}G(x)^{i}               \\
+                                      &= \sum_{i \geq 1}a_{i}iG^{\prime}(x)(G(x))^{i - 1} \\
+                                      &= G^{\prime}(x)\sum_{i \geq 1}a_{i}iG(x)^{i - 1}   \\
+                                      &= G^{\prime}(x)F^{\prime}(G(x))                      
+                    \end{align*}
+                which concludes the proof.
+            \end{proof}
+
+        \item If $F^{\prime}(x) = G^{\prime}(x)$ then $F(x) - G(x) = const$, that is $F(x) - G(x)$ has only the constant term.
+            \begin{proof}
+                Let $F(x) = \sum_{i \geq 0} a_{i}x^{i}$ and $G(x) = \sum_{j \geq 0}b_{j}x^{j}$. Then $F^{\prime}(x) = \sum_{i \geq 1}ia_{i}x^{i - 1}$ and $G^{\prime}(x) = \sum_{j \geq 1}jb_{j}x^{j - 1}$. Now:
+                    \begin{equation*}
+                        F^{\prime}(x) - G^{\prime}(x) = \sum_{i \geq 1}i(a_{i} - b_{i})x^{i - 1} = 0
+                    \end{equation*}
+                But we know that the coefficient of each $x^{i}$ is $0$. So
+                    \begin{equation*}
+                        i(a_{i} - b_{i}) = 0
+                    \end{equation*}
+                and $i \neq 0$, so $a_{i} - b_{i} = 0, a_{i} = b_{i}$ for $i \geq 1$. Then we have the rewrite:
+                    \begin{align*}
+                        F(x) &= a_{0} + \sum_{i \geq 1}a_{i}x^{i}  \\
+                        G(x) &= b_{0} + \sum_{i \geq 1}a_{i}x^{i}  
+                    \end{align*}
+                and therefore,
+                    \begin{equation*}
+                        F(x) - G(x) = a_{0} - b_{0} = \text{const}
+                    \end{equation*}
+                which concludes the proof.
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 4}: Use generating functions to show that the number of partitions of $n$ with not more than $k$ parts of size $k$ for each $k \geq 1$ is equal to the number of partitions of $n$ without parts of sizes $2, 6, 12, \ldots , k(k + 1), \ldots $ where $k$ are integers.
+    \begin{proof}
+        We start by saying that $m_{i}$ is the number of parts of the partition of size $i$. Then the number of partitions of $n$ in the generating function is counted by having the total sum of $im_{i}$ contribute $1$ to the exponent of $n$:
+            \begin{equation*}
+                \sum_{0 \leq m_{1}, m_{2}, \ldots }x^{m_{1} + 2m_{2} + \cdots }
+            \end{equation*}
+        and since each of the $m_{i}$ are bounded by $0 \leq m_{i} \leq i$, we get:
+            \begin{align*}
+                \sum_{0 \leq m_{1}, m_{2}, \ldots }x^{m_{1} + 2m_{2} + \cdots } &= \left(\sum_{0 \leq m_{1} \leq 1}x^{m_{1}}\right)\left(\sum_{0 \leq m_{2} \leq 2}x^{m_{2}}\right)\cdots  \\
+                                                                                &= (1 + x)(1 + x^{2} + x^{4})(1 + x^{3} + x^{6} + x^{9})\cdots                                             \\
+                                                                                &= \prod_{i \geq 1}(1 + x^{i} + \cdots + x^{i^{2}})                                                          
+            \end{align*}
+        Then 
+            \begin{equation*}
+                (1 - x^{i})(1 + x^{i} + \cdots +x^{i^{2}}) = 1 - x^{i^{2} + i}
+            \end{equation*}
+        So we find:
+            \begin{equation*}
+                \left(\prod_{i \geq 1}(1 + x^{i} + \cdots +x^{i^{2}})\right)\left(\prod_{i \geq 1}(1 - x^{i})\right) = (1 - x^{2})(1 - x^{6})\cdots  = \prod_{i \geq 1}(1 - x^{i(i + 1)})
+            \end{equation*}
+        In short:
+            \begin{align*}
+                \left(\prod_{i \geq 1}(1 + x^{i} + \cdots +x^{i^{2}})\right)\left(\prod_{i \geq 1}(1 - x^{i})\right) &= \prod_{i \geq 1}(1 - x^{i(i + 1)})                                      \\
+                \prod_{i\geq 1}(1 + x^{i} + \cdots + x^{i^{2}})                                                      &= \dfrac{\prod_{i \geq 1}(1 - x^{i(i + 1)})}{\prod_{i \geq 1}(1 - x^{i})} \\
+                                                                                                                     &= \dfrac{1}{\prod_{\substack{i\geq 1 \\ i \neq k(k + 1)}}(1 - x^{i})}       
+            \end{align*}
+        and just to verify that this is the number of partitions without $k(k + 1)$ parts:
+            \begin{equation*}
+                \sum_{\substack{0 \leq m_{1}, m_{2}, \ldots \\ m_{i} : i \neq k(k + 1)}}x^{m_{1} + 2m_{2} + \cdots }
+            \end{equation*}
+        which is just:
+            \begin{align*}
+                \left(\sum_{m_{1}\geq 0}x^{m_{1}}\right)\left(\sum_{m_{3}\geq 0}x^{3m_{3}}\right)\cdots  &= \prod_{m_{i} : i \neq k(k + 1)}\left(\sum_{m_{i}\geq 0}x^{im_{i}}\right)       \\
+                                                                                                         &= \prod_{\substack{i \geq 1 \\ i \neq k(k + 1)}}\left(\dfrac{1}{1 - x^{i}}\right)   
+            \end{align*}
+        which is the same as the expression above.
+    \end{proof}
+
+\textbf{Exercise 5}: Let $p_{even}(n)$ denote the number of partitions of $n$ with even number of parts and $p_{odd }(n)$ denote the number of partitions of $n$ with odd number of parts.
+    \begin{itemize}
+        \item Show that the generating function of $p_{even}(n) - p_{odd}(n)$ is equal to $\prod_{i \geq 1}(1 - x^{2i - 1})$.
+            \begin{proof}
+                We have that the number of partitions:
+                    \begin{equation*}
+                        \sum_{n \geq 0}p(n)x^{n} = \sum_{n \geq 0} (p_{\even} + p_{\odd}) x^{n}
+                    \end{equation*}
+                And we have
+                    \begin{equation*}
+                        \sum_{n \geq 0} p(n) x^{n} = \sum_{0 \leq m_{1}, m_{2}, \ldots }x^{m_{1} + 2m_{2} + \cdots }
+                    \end{equation*}
+                where $m_{i}$ are the number of parts of size $i$. Then we denote $(-1)^{m_{i}}$ as the $-p_{\odd}$ contribution to the partition:
+                    \begin{align*}
+                        \sum_{0 \leq m_{1}, m_{2}, \ldots } &=                                                                                                                              \left(\sum_{m_{1} \geq 0}x^{m_{1}}\right)\left(\sum_{m_{2} \geq 0}x^{2m_{2}}\right)\cdots            \\
+                                                            &\rightarrow \left(\sum_{m_{1} \geq 0}(-1)^{m_{1}}x^{m_{1}}\right)\left(\sum_{m_{2} \geq 0}(-1)^{m_{2}}x^{2m_{2}}\right) \cdots                                                                                                      \\
+                                                            &=                                                                                                                              \left(\sum_{m_{1} \geq 0}(-x)^{m_{1}}\right)\left(\sum_{m_{2} \geq 0}(-x^{2})^{m_{2}}\right) \cdots  \\
+                                                            &=                                                                                                                             \prod_{i \geq 1}\dfrac{1}{1 + x^{i}}                                                                                                        
+                    \end{align*}
+                Now we just compare this to $\prod_{i \geq 1}(1 - x^{2i - 1})$. Observe that:
+                    \begin{equation*}
+                        \prod_{i \geq 1}(1 - x^{2i - 1}) = (1 - x)(1 - x^{3})(1 - x^{5}) \cdots 
+                    \end{equation*}
+                Now when we multiply both sides by $\prod_{i \geq 1}(1 + x^{i})$, we get:
+                    \begin{align*}
+                         \prod_{i \geq 1}(1 + x^{i})\prod_{i \geq 1}(1 - x^{2i - 1}) &=       (1 - x)(1 - x^{3})(1 - x^{5}) \cdots \prod_{i \geq 1}(1 + x^{i})     \\
+                                                                                     &=       (1 - x^{2})(1 - x^{3})(1 - x^{5}) \cdots \prod_{i \geq 2}(1 + x^{i}) \\
+                                                                                     &\vdots                                                                       \\
+                                                                                     &=       1                                                                      
+                     \end{align*}
+                Therefore dividing both sides by $\prod_{i \geq 1}(1 + x^{i})$, we get:
+                    \begin{align*}
+                         \prod_{i \geq 1}(1 + x^{i})\prod_{i \geq 1}(1 - x^{2i - 1}) &= 1                                      \\
+                         \prod_{i \geq 1}(1 - x^{2i - 1})                            &= \dfrac{1}{\prod_{i \geq 1}(1 + x^{i})}   
+                    \end{align*}
+                and therefore, the formula we proved above was equivalent to $\prod_{i \geq 1}(1 - x^{2i - 1})$.
+            \end{proof}
+
+        \item For each $n$ determine if $p_{even}(n) > p_{odd}(n), p_{even}(n) < p_{odd}(n)$ or $p_{even}(n) = p_{odd}(n)$.
+            \begin{proof}
+                We can rewrite $\prod_{i\geq 1}(1 - x^{2i - 1})$ as
+                    \begin{equation*}
+                        \prod_{j \geq 1}(1 - x)^{j}\prod_{i \geq 1}(1 + x^{2} + \cdots + x^{2i})
+                    \end{equation*}
+                Now for some $N$ sufficiently large, the coefficients of $x^{i}$ no longer change in $\prod_{i \geq 1}(1 - x^{2i -  1})$. We take if $i$ is even, we just need $N = i/2$ and if $i$ is odd, we take $N = (i + 1)/2$. This is because the product of the term with $(1 - x^{2N - 1})$ will no longer affect all coefficients less than $i$ and it will subtract $1$ from the current $x^{i}$ coefficient. From this, for $i$ even, we take:
+                    \begin{equation*}
+                        \prod_{j \geq 1}^{i}(1 - x^{j})\prod_{k \geq 1}^{i/2} (1 + x^{2} + \cdots x^{2i})
+                    \end{equation*}
+                So the left product only has positive coefficients and the right product has negative coefficients for odd powers and positive ones for even ones. So all even $n$ turns out to have $p_{\even}(n) > p_{\odd}(n)$ except for $n = 2$. This is because the coefficient of $x^{2}$ is $1$ and we subtract $1$ from it giving us $p_{\odd}(2) = p_{\even}(2)$. Now for odd $n$, we only have the left product to consider because the right product only contributes even summands. And the odd summands in the left product are negative, making the coefficients of odd terms negative. So $p_{\even}(n) <  p_{\odd}(n)$ when $n$ is odd.
+            \end{proof}
+    \end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

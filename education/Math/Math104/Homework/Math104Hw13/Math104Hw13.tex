@@ -1,0 +1,171 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math104/Homework/Math104Hw13/Math104Hw13.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math104Hw13}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Find the limit $\lim\limits_{x \to 0}\frac{e^{3x} - \cos{x}}{x}$ if it exists.
+    \begin{proof}
+        Using L'Hopital's rule, we have that $\lim\limits_{x \to 0}e^{3x} - \cos{x} = \lim\limits_{x \to 0}x = 0$ means that 
+            \begin{equation*}
+                \lim\limits_{x \to 0}\dfrac{e^{3x} - \cos{x}}{x} = \lim\limits_{x \to 0}\dfrac{3e^{3x} + \sin{x}}{1}
+            \end{equation*}
+        Then
+            \begin{equation*}
+                \lim\limits_{x \to 0}3e^{3x} + \sin{x} = 3 
+            \end{equation*}
+        is finite, so 
+            \begin{equation*}
+                \lim\limits_{x \to 0}\dfrac{e^{3x} - \cos{x}}{x} = 3
+            \end{equation*}
+    \end{proof}
+
+\textbf{Exercise 2}: Find the limit $\lim\limits_{x \to 0}(1 + 2x)^{\frac{1}{x}}$ if it exists.
+    \begin{proof}
+        Using the Taylor Series of $(1 + 2x)^{\frac{1}{x}}$, we have:
+            \begin{align*}
+                (1 + 2x)^{\dfrac{1}{x}} &= \sum_{k \geq 0}^{\infty}\dfrac{\dfrac{1}{x}\left(\dfrac{1}{x} - 1\right)\cdots \left(\dfrac{1}{x} - k + 1\right)}{k!}(2x)^{k} \\
+                                        &= \sum_{ k \geq 0}\dfrac{1(1 - x)(1 - 2x)\cdots ( 1 - (k - 1)x)}{k!}(2^{k})
+            \end{align*}
+        So
+            \begin{equation*}
+                \lim\limits_{x \to 0}(1 + 2x)^{\dfrac{1}{x}} = \sum_{ k \geq 0}\dfrac{2^{k}}{k!}
+            \end{equation*}
+        But we have the Taylor Series of $e^{x}$ as
+            \begin{equation*}
+                e^{x} = \sum_{ k \geq 0}\dfrac{x^{k}}{k!}
+            \end{equation*}
+        and therefore, 
+            \begin{equation*}
+                e^{2} = \sum_{ k \geq 0}\dfrac{2^{k}}{k!}
+            \end{equation*}
+        The limit is $e^{2}$.
+    \end{proof}
+
+\textbf{Exercise 3}: Find the limit $\lim\limits_{x \to 0}(\frac{1}{\sin{x}} - \frac{1}{x})$ if it exists.
+    \begin{proof}
+        By L'Hopital,
+            \begin{align*}
+                \lim\limits_{x \to 0}\left(\dfrac{1}{\sin{x}} - \dfrac{1}{x}\right) &= \lim\limits_{x \to 0}\dfrac{x - \sin{x}}{x\sin{x}}           \\
+                                                                                    &= \dfrac{0}{0}                                                 \\
+                                                                                    &= \lim\limits_{x \to 0}\dfrac{1 - \cos{x}}{\sin{x} + x\cos{x}}   
+            \end{align*}
+        and since
+            \begin{equation*}
+                \lim\limits_{x \to 0}\dfrac{1 - \cos{x}}{\sin{x} + x\cos{x}} = \dfrac{0}{0}
+            \end{equation*}
+        Check for $\lim\limits_{x \to 0}\frac{f^{\prime}}{g^{\prime}}$:
+            \begin{equation*}
+                \lim\limits_{x \to 0}\dfrac{\sin{x}}{2\cos{x} - x\sin{x}} = 0
+            \end{equation*}
+        so 
+            \begin{equation*}
+                \lim\limits_{x \to 0}\left(\dfrac{1}{\sin{x}} - \dfrac{1}{x}\right) = 0
+            \end{equation*}
+    \end{proof}
+
+\textbf{Exercise 4}: Find the Taylor series of $\cos{x}$ and show that it converges to $\cos{x}$ for all $x \in \mathbb{ R}$ .
+    \begin{proof}
+        The Taylor Series is defined as
+            \begin{equation*}
+                f(x) = \sum_{k \geq 0}\dfrac{f^{k}(0)}{k!}x^{k}
+            \end{equation*}
+        Then
+            \begin{align*}
+                f(x)                            &= \cos{x}  & f(0)                         &= 1  \\
+                f^{\prime}(x)                   &= -\sin{x} & f^{\prime}(0)                &= 0  \\
+                f^{\prime\prime}(x)             &= -\cos{x} & f^{\prime\prime}(0)          &= -1 \\
+                f^{\prime\prime\prime}(x)       &= \sin{x}  & f^{\prime\prime\prime}(0)    &= 0  \\
+                f^{\prime\prime\prime\prime}(x) &= \cos{x}  & f^{\prime\prime\prime\prime}(0) &= 1    
+            \end{align*}
+        So for $f^{(k)}$, we have if $k = 2j$,
+            \begin{equation*}
+                f^{(2j)}(0) = \begin{cases}
+                    1 &\text{ if } j = \text{ even } \\
+                    -1 &\text{ if } j = \text{ odd }   
+                \end{cases} = (-1)^{j}
+            \end{equation*}
+        and the Taylor series is
+            \begin{equation*}
+                f(x) = \sum_{j \geq0}\dfrac{(-1)^{j}}{(2j)!}x^{2j}
+            \end{equation*}
+        Since $\lvert f^{(n)}(x) \rvert \leq 1$, we have that $R_{n}(x) \rightarrow 0$. So the remainder converges to $0$ and the Taylor series converges to the function $\cos{x}$.
+    \end{proof}
+
+\textbf{Exercise 5}: Repeat the Q4 for the function $\sinh{x} = (e^{x} - e^{-x})$ (this is the def).
+    \begin{proof}
+        As before, the Taylor Series is
+            \begin{equation*}
+                f(x) = \sum_{k \geq 0}\dfrac{f^{(k)}(0)}{k!}x^{k}
+            \end{equation*}
+        Now:
+            \begin{align*}
+                f(x)                &= e^{x} - e^{-x} & f(0)                &= 0      \\
+                f^{\prime}(x)       &= e^{x} + e^{-x} & f^{\prime}(0)       &= 2      \\
+                f^{\prime\prime}(x) &= e^{x} - e^{-x} & f^{\prime\prime}(0) &= 0      \\
+                \vdots              &= \vdots         & \vdots              &= \vdots   
+            \end{align*}
+        Then we have that for
+            \begin{align*}
+                f^{k}(0) &= \begin{cases}
+                    0                &\text{ if } k = \text{ even } \\
+                    2 &\text{ if } k = \text{ odd }   
+                \end{cases} \\
+                      &= 1 + (-1)^{k + 1}
+            \end{align*}
+        So now we have
+            \begin{equation*}
+                f(x) = \sum_{k \geq 0}\dfrac{1 + (-1)^{k + 1}}{k!}x^{k}
+            \end{equation*}
+        Again, since $f^{(n)}(0)$ is bounded, we have that $R_{n}(x) \rightarrow 0$, so the Taylor series converges to $\sinh{x}$.
+    \end{proof}
+
+\textbf{Exercise 6}: Repeat the Q4 for the function $\cosh{x} = (e^{x} + e^{-x})$ (this is the def).
+    \begin{proof}
+        As before, the Taylor Series is
+            \begin{equation*}
+                f(x) = \sum_{k \geq 0}\dfrac{f^{(k)}(0)}{k!}x^{k}
+            \end{equation*}
+        Now:
+            \begin{align*}
+                f(x)                &= e^{x} + e^{-x} & f(0)                &= 2      \\
+                f^{\prime}(x)       &= e^{x} - e^{-x} & f^{\prime}(0)       &= 0      \\
+                f^{\prime\prime}(x) &= e^{x} + e^{-x} & f^{\prime\prime}(0) &= 2      \\
+                \vdots              &= \vdots         & \vdots              &= \vdots   
+            \end{align*}
+        Then we have that for
+            \begin{align*}
+                f^{k}(0) &= \begin{cases}
+                    2                &\text{ if } k = \text{ even } \\
+                    0 &\text{ if } k = \text{ odd }   
+                \end{cases} \\
+                      &= 1 + (-1)^{k}
+            \end{align*}
+        So now we have
+            \begin{equation*}
+                f(x) = \sum_{k \geq 0}\dfrac{1 + (-1)^{k}}{k!}x^{k}
+            \end{equation*}
+        Again, since $f^{(n)}(0)$ is bounded, we have that $R_{n}(x) \rightarrow 0$, so the Taylor series converges to $\cosh{x}$.
+    \end{proof}
+
+
+
+
+
+
+
+
+
+
+\end{document}

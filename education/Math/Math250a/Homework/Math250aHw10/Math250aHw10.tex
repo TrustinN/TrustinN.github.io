@@ -1,0 +1,243 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math250a/Homework/Math250aHw10/Math250aHw10.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math250aHw10}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 4}: Let $\varphi : A \rightarrow B$ be a commutative ring homomorphism. Let $E$ be an $A-$ module and $F$ a $B$-module. Let $F_{A}$ be the $A$-module obtained from $F$ via the operation of $A$ on $F$ through $\varphi$, that is for $y \in F_{A}$ and $a \in A$ this operation is given by 
+    \begin{equation*}
+        (a, y)\mapsto (\varphi (a)y)
+    \end{equation*}
+Show that there is a natural isomorphism
+    \begin{equation*}
+        \Hom_{B}(B  \otimes_{A} E, F) \cong \Hom_{A}(E, F_{A}).
+    \end{equation*} 
+        \begin{proof}
+            Consider the diagram:
+                \begin{center}
+                    \begin{tikzcd}
+                        (B, (E, F))\ar[r, ""]                    & (E, F_{A})                    \\
+                        (B, (E^{\prime}, F))\ar[u, ""]\ar[r, ""] & (E^{\prime}, F_{A})\ar[u, ""]   
+                    \end{tikzcd}
+                \end{center}
+            We know that 
+                \begin{equation*}
+                    \Hom_{B}(B \otimes_{A} E, F) \cong (B, (E, F))
+                \end{equation*}
+            So if $\pi \in (B, (E, F))$, we can send $\pi \mapsto \pi (1_{B})$ for the top morphism. If $\psi : E \rightarrow E^{\prime}$, then we have that the left morphism sends $f \in (B, (E^{\prime}, F)) \mapsto  f(-) \circ \psi \in (B, (E, F))$. For the bottom morphism, we can take $f(-) \circ \psi \mapsto f(1_{B}) \circ \psi$. So we have
+                \begin{center}
+                    \begin{tikzcd}
+                        f(-) \circ \psi \ar[r, "ev_{1_{B}}"] & f(1_{B}) \circ \psi \\
+                        f(-) \ar[u, "- \circ \psi"] \ar[r, "ev_{1_{B}}"'] & f(1_{B})\ar[u, "- \circ \psi"']    
+                    \end{tikzcd}
+                \end{center}
+            This is invertible because $\ldots$ idk.
+
+            As for naturality in the other part, we have:
+                \begin{center}
+                    \begin{tikzcd}
+                        \ar[d, ""](B, (E, F))\ar[r, ""] & \ar[d, ""](E, F_{A})\ar[d, ""] \\
+                        (B, (E, F^{\prime}))\ar[r, ""]  & (E, F^{\prime}_{A})              
+                    \end{tikzcd}
+                \end{center}
+            If we have a morphism $ \psi : F \rightarrow F^{\prime}$ and $f \in (E, F)$, we have the natural transformations:
+                \begin{center}
+                    \begin{tikzcd}
+                        f(-)\ar[d, "\psi \circ -"]\ar[r, "ev_{1_{B}}"] & f(1_{B})\ar[d, "\psi \circ -"] \\
+                        \psi \circ f(-)\ar[r, "ev_{1_{B}}"]            & \psi \circ f(1_{B})              
+                    \end{tikzcd}
+                \end{center}
+        \end{proof}
+
+\textbf{Exercise 6}: Let $M, N$ be flat. Show that $M \otimes N$ is flat.
+    \begin{proof}
+        Let $E^{\prime} \rightarrow E \rightarrow E^{\prime\prime}$ be an exact sequence. By definition, we have that
+            \begin{equation*}
+                E^{\prime} \otimes M \rightarrow E \otimes M \rightarrow E^{\prime\prime}\otimes M
+            \end{equation*}
+        is exact also. Now we tensor again by $N$ which should also preserve flatness:
+            \begin{equation*}
+                (E^{\prime} \otimes M) \otimes N \rightarrow (E \otimes M) \otimes N \rightarrow (E^{\prime\prime}\otimes M) \otimes N
+            \end{equation*}
+        is exact. By the associative property of tensor products, we have that for any exact sequence 
+            \begin{equation*}
+                E^{\prime} \rightarrow E \rightarrow E^{\prime\prime}
+            \end{equation*}
+        tensoring with $M \otimes N$ preserves exactness, so $N \otimes M$ is flat.
+    \end{proof}
+
+\textbf{Exercise 8}: Prove Proposition 3.2
+    \begin{proof}
+        (Part I) Let $S$ be a multiplicative subset of $R$. Then $S^{-1}R$ is flat over $R$.
+
+        We need to show that if we have an exact sequence
+            \begin{equation*}
+                0 \rightarrow E^{\prime} \rightarrow E
+            \end{equation*}
+        then we also have the exact sequence
+            \begin{equation*}
+                0 \rightarrow R[S^{-1}] \otimes E^{\prime} \rightarrow R[S^{-1}] \otimes E
+            \end{equation*}
+        Then we just need to show that 
+            \begin{equation*}
+                0 \rightarrow E[S^{-1}] \rightarrow E^{\prime}[S^{-1}]
+            \end{equation*}
+        is exact. Suppose that we have some elements $\frac{e_{1}}{s_{1}}, \frac{e_{2}}{s_{2}}$ such that 
+            \begin{equation*}
+                \varphi(\dfrac{e_{1}}{s_{1}}) = \varphi(\dfrac{e_{2}}{s_{2}})
+            \end{equation*}
+        Then we have
+            \begin{equation*}
+                \varphi(\dfrac{e_{1}}{s_{1}} - \dfrac{e_{2}}{s_{2}}) = 0
+            \end{equation*}
+        Since this is a module morphism we can multiply by anything in $r \in S^{-1}$ and we see that 
+            \begin{equation*}
+                \varphi(e_{1}s_{2} - e_{2}s_{1}) = 0
+            \end{equation*}
+
+        (Part II) A module $M$ is flat over $R$ if and only if the localization $M_{p}$ is flat over $R_{p}$ for each prime ideal $p$ of $R$.
+
+        ($\rightarrow$) Suppose that $M$ is flat over $R$. Then we have $M_{p} \cong M  \otimes R_{p}$. Since $M$ is flat and $R_{p}$ is flat, we have that $M_{p} \cong M \otimes R_{p}$ is flat over $R$. Then it is also flat over $R_{p}$. So this is true for any $p$ prime.
+
+        ($\leftarrow$) Idk < Help needed.
+
+        (Part III) ($\rightarrow$) Consider an injective mapping 
+            \begin{equation*}
+                \varphi:= r \rightarrow ar
+            \end{equation*}
+        with the corresponding exact sequence:
+            \begin{center}
+                \begin{tikzcd}
+                    0\ar[r, ""] & R\ar[r, ""] & R   
+                \end{tikzcd}
+            \end{center}
+        Since $F$ is flat:
+            \begin{center}
+                \begin{tikzcd}
+                    0\ar[r, ""] & R \otimes F\ar[r, ""] & R \otimes F   
+                \end{tikzcd}
+            \end{center}
+        is exact and the morphism is given by
+            \begin{equation*}
+                \varphi \otimes 1 := r \otimes f \mapsto ar \otimes f
+            \end{equation*}
+        which is injective, so $af \neq 0$ for any $a$.
+
+        ($\leftarrow$) Torsion free modules over a PID are free, since any module over a PID can be written as:
+            \begin{equation*}
+                E = E_{tor} \oplus F
+            \end{equation*}
+        for $F$ free. Free modules are flat modules.
+    \end{proof}
+
+\textbf{Exercise 9}: We continue to assume that rings are commutative. Let $M$ be an $A$-module. We say that $M$ is \textbf{faithfully flat} if $M$ is flat, and if the functor
+    \begin{equation*}
+        T_{M}: E \mapsto M\otimes_{A} E.
+    \end{equation*}
+is faithful, that is $E \neq 0$ implies $M \otimes_{A}E \neq 0$. Prove that the following conditions are equivalent.
+    \begin{itemize}
+        \item $M$ is faithfully flat.
+
+        \item $M$ is flat, and if $u : F \rightarrow E$ is a homomorphism of $A$-modules, $u \neq 0$, then $T_{M}(u) : M \otimes_{A}F \rightarrow M \otimes_{A}E$ is also $ \neq 0$.
+
+        \item $M$ is flat, and for all maximal ideals $m$ of $A$, we have $mM \neq M$.
+
+        \item A sequence of $A$-modules $N^{\prime}\rightarrow N \rightarrow M^{\prime\prime}$ is exact if and only if the sequence tensored with $M$ is exact.
+    \end{itemize}
+    \begin{proof}
+        ($1 \rightarrow 2$) Consider the diagram:
+            \begin{center}
+                \begin{tikzcd}
+                    F \ar[r, "u"]\ar[d, "T_{M}(F)"']    & E \ar[d, "T_{M}(E)"] \\
+                    M \otimes_{A}F \ar[r, "T_{M}(u)"'] & M \otimes_{A}(E)       
+                \end{tikzcd}
+            \end{center}
+        Since $E \neq 0$, and supposing $u \neq 0$, we can construct the exact sequence $K \rightarrow F \rightarrow E$:
+            \begin{center}
+                \begin{tikzcd}
+                    K \ar[r, "k"]             & F \ar[r, "u"]\ar[d, "T_{M}(F)"]    & E \ar[d, "T_{M}(E)"] \\
+                    M \otimes_{A}K \ar[r, ""] & M \otimes_{A}(F)\ar[r, "T_{M}(u)"] & M \otimes_{A}(E)       
+                \end{tikzcd}
+            \end{center}
+        where $k$ is the kernel of $u$. Since $M$ is flat, we have an exact sequence on the bottom also. Since $M \otimes_{A} (E)$ is not $0$, $M \otimes_{A} K \rightarrow M\otimes_{A}(F)$ is not surjective. Then the image is not all of $M \otimes_{A}F$ and therefore, the kernel of $T_{M}(u)$ is not all of $M \otimes_{A}F$. So $T_{M}(u)$ is not the $0$ map.
+
+        ($2 \rightarrow 3$) Consider the exact sequence:
+            \begin{center}
+                \begin{tikzcd}
+                    0 \ar[r, ""]& m\ar[r, ""] & R \ar[r, ""] & R/m\ar[r, ""] & 0 
+                \end{tikzcd}
+            \end{center}
+        Since $M$ is flat, tensoring, we get:
+            \begin{center}
+                \begin{tikzcd}
+                    0 \ar[r, ""] & m \otimes M \ar[r, ""] & R \otimes M\ar[r, ""] & R/m \otimes M \ar[r, ""] & 0
+                \end{tikzcd}
+            \end{center}
+        is exact or
+            \begin{center}
+                \begin{tikzcd}
+                    0\ar[r, ""] & mM\ar[r, ""] & M\ar[r, ""] & M/mM \ar[r, ""] & 0
+                \end{tikzcd}
+            \end{center}
+        But because $R \rightarrow R/m$ is not the zero map, $R \otimes M \rightarrow R/m \otimes M$ is not the zero map also. Then $M/mM$ is not the zero module. Therefore, $mM \rightarrow M$ is not surjective, and so $mM$ is not equal to $M$ for any $m$.
+
+        ($3 \rightarrow 4$) If $M$ is flat, by definition, we already have the $\rightarrow$ direction. Suppose that
+            \begin{center}
+                \begin{tikzcd}
+                    \ar[r, ""]N^{\prime} \otimes M & N \otimes M \ar[r, ""] & M^{\prime\prime} \otimes M   
+                \end{tikzcd}
+            \end{center}
+        is exact. Then we tensor everything with $R/m$ for some maximal ideal $m$. To get:
+            \begin{center}
+                \begin{tikzcd}
+                    \ar[r, ""]N^{\prime}\otimes M/mM & N \otimes M/mM \ar[r, ""] & M^{\prime\prime} \otimes M/mM   
+                \end{tikzcd}
+            \end{center}
+        where $R/m \otimes M$ is a vector space and therefore a free module. Furthermore, it is a one dimensional vector space because we only have one copy of $R/m$. Then for any module $T$, we just have $T \otimes M/mM \cong T$. So we have:
+            \begin{center}
+                \begin{tikzcd}
+                    N^{\prime}\ar[r, ""] & N\ar[r, ""] & M^{\prime\prime}   
+                \end{tikzcd}
+            \end{center}
+        is exact.
+
+        $(4 \rightarrow 1)$ First, assume that tensoring $M$ with any short exact sequence on three modules gives a short exact sequence. Then by definition, $M$ is flat. So now we will show that the functor
+            \begin{equation*}
+                T_{M} : E \mapsto M \otimes_{A}E
+            \end{equation*}
+        is faithful. We will prove the contrapositive. Suppose that $M  \otimes E = 0$. Then we have that the sequence 
+            \begin{center}
+                \begin{tikzcd}
+                    0 \otimes M\ar[r, ""] & \ar[r, ""]E \otimes M & 0 \otimes M
+                \end{tikzcd}
+            \end{center}
+        is exact. But by assuming $4$, we can say that detensoring by $M$ gives an exact sequence:
+            \begin{center}
+                \begin{tikzcd}
+                    0 \ar[r, ""] & E\ar[r, ""] & 0   
+                \end{tikzcd}
+            \end{center}
+        and we therefore conclude that $E = 0$. So we have proved equality of the four conditions.
+    \end{proof}
+
+
+
+
+\end{document}
+
+
+
+
+
+

@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{syms}\PYG{+w}{ }\PYG{l+s}{s}\PYG{p}{;}
+
+\PYG{n}{f}\PYG{p}{(}\PYG{n}{s}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{s}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n+nb}{exp}\PYG{p}{(}\PYG{n}{s}\PYG{p}{);}
+\PYG{n}{cols}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{l+m+mi}{3}\PYG{p}{;}
+\PYG{n}{h}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{l+m+mf}{0.4}\PYG{p}{;}
+\PYG{n}{numIter}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYGZca{}\PYG{p}{(}\PYG{n}{cols}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{);}
+\PYG{n}{approx}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{approxDerive}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{h}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{n}{h}\PYG{+w}{ }\PYG{o}{/}\PYG{+w}{ }\PYG{n}{numIter}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{numIter}\PYG{p}{);}
+\PYG{n}{indices}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nb}{zeros}\PYG{p}{(}\PYG{n}{cols}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{);}
+\PYG{n}{indices}\PYG{p}{(}\PYG{k}{end}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{numIter}\PYG{p}{;}
+\PYG{k}{for}\PYG{+w}{ }\PYG{n+nb}{i}\PYG{p}{=}\PYG{l+m+mi}{2}\PYG{p}{:}\PYG{n}{cols}
+\PYG{+w}{    }\PYG{n}{numIter}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{numIter}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYGZca{}\PYG{p}{(}\PYG{n+nb}{i}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{);}
+\PYG{+w}{    }\PYG{n}{indices}\PYG{p}{(}\PYG{k}{end}\PYG{o}{\PYGZhy{}}\PYG{n+nb}{i}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{numIter}\PYG{p}{;}
+\PYG{k}{end}
+\PYG{n}{approx}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{approx}\PYG{p}{(}\PYG{n}{indices}\PYG{p}{);}
+
+\PYG{n}{ex}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{Extrapolate}\PYG{p}{(}\PYG{n}{approx}\PYG{p}{)}
+\end{Verbatim}

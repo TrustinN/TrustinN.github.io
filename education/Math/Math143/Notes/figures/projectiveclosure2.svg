@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="150mm"
+   height="90mm"
+   viewBox="0 0 240 120"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.3 (0e150ed, 2023-07-21)"
+   sodipodi:docname="projectiveclosure2.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.2962484"
+     inkscape:cx="256.50948"
+     inkscape:cy="159.30589"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showborder="true"
+     width="200mm"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="2520"
+     inkscape:window-height="995"
+     inkscape:window-x="20"
+     inkscape:window-y="65"
+     inkscape:window-maximized="1"
+     inkscape:showpageshadow="2"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid815"
+       units="mm"
+       spacingx="10"
+       spacingy="10"
+       empspacing="4"
+       dotted="false"
+       originx="0"
+       originy="0"
+       visible="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-177)">
+    <path
+       style="fill:none;stroke:#ff0000;stroke-width:0.2944;stroke-dasharray:none"
+       d="m 76.093955,181.00259 c 0,0 22.577719,33.07007 13.389923,56.49895 -6.531671,16.65576 -38.615946,24.73452 -47.68119,7.18483 -9.93728,-19.23789 55.374819,-24.71722 66.296442,55.84578"
+       id="path1"
+       sodipodi:nodetypes="cssc" />
+    <path
+       style="fill:none;stroke:#0000ff;stroke-width:0.244846;stroke-dasharray:none"
+       d="m 124.92064,204.16972 26.61797,92.8913 27.97603,-40.47018 -22.00057,-86.101 z"
+       id="path2"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       style="fill:#000000;stroke:#0000ff;stroke-width:0.2944;stroke-dasharray:none"
+       d="m 131.93973,204.19002 39.19002,51.60019"
+       id="path3" />
+    <text
+       xml:space="preserve"
+       style="font-size:6.77333px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';fill:#000000;stroke:#000000;stroke-width:0.2944;stroke-dasharray:none"
+       x="82.952209"
+       y="182.9621"
+       id="text4"><tspan
+         sodipodi:role="line"
+         id="tspan4"
+         style="stroke-width:0.2944;fill:#000000;stroke:#000000"
+         x="82.952209"
+         y="182.9621">$X$</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.2944;fill:#000000;stroke:#000000"
+         x="82.952209"
+         y="191.42876"
+         id="tspan5" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.77333px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';fill:#000000;stroke:#000000;stroke-width:0.2944;stroke-dasharray:none"
+       x="174.39558"
+       y="273.75229"
+       id="text6"><tspan
+         sodipodi:role="line"
+         id="tspan6"
+         style="stroke-width:0.2944"
+         x="174.39558"
+         y="273.75229">$H_{\infty} = \mathbb{V}(w)$</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.2944"
+         x="174.39558"
+         y="282.21896"
+         id="tspan7" /></text>
+  </g>
+</svg>

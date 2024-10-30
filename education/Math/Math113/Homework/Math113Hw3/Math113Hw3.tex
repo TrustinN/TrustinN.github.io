@@ -1,0 +1,165 @@
+%! TeX root = 	
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/MyStyle/mystyle}
+
+\title{Math113Hw3}
+\author{Trustin Nguyen}
+
+
+\begin{document}
+\maketitle
+\reversemarginpar
+
+\begin{topic}
+	\section*{Homework 3}
+\end{topic}
+
+\textbf{Exercise 1}: Show that any group of order 10 is either cyclic or dihedral.
+\begin{proof}
+	Let $\lvert G \rvert = 10$. by Lagrange, all elements of $G$ have order 1, 2, 5, or 10. If an element $a$ has order 10, then $\langle a \rangle = G = C_{10}$. if there are no order 5 elements, then it has only order 2 elments, so $\lvert G \rvert = 2^{n}$ which is not true. So $G$ has an order 5 element, $r$ and order $2$ $s$. Since $\langle r \rangle$ has index 2, $\langle r \rangle \triangleleft G$.
+
+	There is $srs^{-1} \in \langle r \rangle$ so there are 5 cases:
+	\begin{enumerate}
+		\item $srs^{-1} = e$ implies that $sr = s$ which means $r = e$ which is false.
+
+		\item $srs^{-1} = r$ implies that $sr = rs$ so $sr$ has order $10$, which is not possible since that case was already covered.
+
+		\item $srs^{-1} = r^{2}$ implies that $r = sr^{2}s^{-1}$.
+			\begin{align*}
+				srs^{-1}srs^{-1} = sr^{2}s^{-1} &= r^{4} \\
+				r &= r^{4} \\
+				e &= r^{3}
+			\end{align*}
+		which is not true.
+
+		\item $srs^{-1} = r^{3}$ implies that $r = sr^{3}s^{-1}$
+			\begin{align*}
+				srs^{-1}srs^{-1}srs^{-1} = sr^{3}s^{-1} &= r^{9} \\
+				r &= r^{9} \\
+				e &= r^{8}
+			\end{align*}
+		which is not true 
+
+		\item It must be that $srs^{-1} = r^{4} = r^{-1}$, so the group is dihedral.
+	\end{enumerate}
+\end{proof}
+
+\textbf{Exercise 2}: Let $H$ be a subgroup of finite group $G$ and let $K$ be a subgroup of $H$. Show that 
+\begin{equation*}
+	\abs{G:K} = \abs{G:H}\abs{H:K}
+\end{equation*}
+\begin{proof}
+	By Lagrange,
+	\begin{align*}
+		\abs{H}\abs{G : H} &= \abs{G} \\
+		\abs{K}\abs{H : K} &= \abs{K}
+	\end{align*}
+	So we have
+	\begin{align*}
+		\abs{G} &= \abs{G : H}\abs{H : K}\abs{K} \\
+		\dfrac{\abs{G}}{\abs{K}} &= \abs{G : H}\abs{H : K}
+	\end{align*}
+	Since the elements of $K$ form a left coset of $K$, they form an equaivalence class. Since the left cosets partition $G$ and are of the smae size, there are $\dfrac{\abs{G}}{\abs{K}}$ left cosets.
+\end{proof}
+
+\textbf{Exercise 3}: Let $G$ be a finite group and let $p$ be the least prime number dividing the order of $G$. Let $H$ be a subgroup of index $p$. By considering the homomorphism
+\begin{equation*}
+	G \mapsto S_{p}
+\end{equation*}
+given by permuting the set of cosets
+\begin{equation*}
+	g \mapsto (aH \mapsto gaH)
+\end{equation*}
+and the previous exercises, or otherwise, show that $H$ is normal in $G$.
+
+\begin{proof}
+	consider the kernel of the permutation of the group action
+	\begin{equation*}
+		\varphi(g) \mapsto (aH \mapsto gaH)
+	\end{equation*}
+	with $\ker{(\varphi)} \leq H$. How with the previous problem,
+	\begin{equation*}
+		\abs{G : \ker{(\varphi)}} = \abs{G : H}\abs{H : \ker{\varphi}} \\
+		\abs{G : \ker{(\varphi)}} = p\abs{H : \ker{\varphi}}
+	\end{equation*}
+	and that $\abs{G : \ker{(\varphi)}} \leq p!$ by the isomorphism theorem. 
+	\begin{equation*}
+		\abs{H : \ker{(\varphi)}} \divides (p - 1)!
+	\end{equation*}
+	then $(p - 1)!$ divides the order of $G$ but if $\abs{H : \ker{(\varphi)}} \neq 1$, that implies that a smaller prime than $p$ dividing $\abs{H : \ker{(\varphi)}}$ and therefore $G$. So 
+	\begin{equation*}
+		\abs{H : \ker{(\varphi)}} = 1
+	\end{equation*}
+	and $H$ is the kernel of the group action, making it normal in $G$.
+\end{proof} 
+
+Proof Idea: The idea is that we do not know what the kernel of the group homomorphism will look like. The kernel if it was normal would be the entire group, but when we multiply the group $K$ by an element in the coset, if left coset is not equal to right coset, then we do not get the same coset, or the o coset. So the permutation might not land us back in $K$. So we know that the kernel is a subset of $K$. But since we make $\abs{G : K}$ minimal, we find that $\abs{G : \ker{\varphi}}$ is maximized so that the size of the kernel matches that of $K$. 
+
+\textbf{Exercise 4}: Let $p, q$ be not necessarily distinct primes. Show that no group of order $pq$ is simple.
+\begin{proof}
+	The group $\abs{G} = pq$ has either elements of order $1, p, q,$ or $pq$. Considering $p, q$ with $p \leq q$. Since $p$ is the least prime number dividing the order of the group, by the last problem, the cyclic group with index $p$ is normal. So no group of order $pq$ is simple.
+\end{proof}
+
+\textbf{Exercise 5}: Consider a pack of $2n$ cards, numbered from $0$ to $2n - 1$. We consider a shuffle where wew split the cards into two equal halves and then interleave the cards such that the top and bottom cards reamin at the top and the bottom, respectively. By expresssing our shuffle as an element of $S_{2n}$, or otherwise, show that its order (i.e. the smallest number of times we need to shuffle to get back the cards into the original position) is the multiplicative order of 2 modulo $2n - 1$, i.e. the least positive $k$ such that $2^{k} \cong 1 \pmod{2n - 1}$. Deduce that after at most $2n - 2$ shuffles we get the cards into the original position. What is the order for 52 cards?
+
+\begin{proof}
+	Observe that our shuffle looks something like
+	\begin{align*}
+		0 &\mapsto 0 \\
+		1 &\mapsto 2 \\
+		2 &\mapsto 4 \\
+		  &\vdots \\
+		n - 1 &\mapsto 2n - 2 \\
+		n &\mapsto 1 \\
+		n + 1 &\mapsto 3 \\
+		      &\vdots \\
+		2n - 1 &\mapsto 2n - 1
+	\end{align*}
+	We obserce that for $n + 1$ and higher, the pattern of doubling continues, but we take the remainder $\mod{2n - 1}$. So we end up with the bijection
+	\begin{equation*}
+		f(x) = 2x \mod{2n - 1}
+	\end{equation*}
+	If we look at the orbit of one element, we can consider the number of compositions of the function that it takes for that element to map back to itself. Taking the 1st cord, we see that
+	\begin{align*}
+		f^{k}(x) = x \rightarrow 2^{k}(x) \mod{2n - 1} = x \\
+		2^{k}(1) \mod{2n - 1} = 1\\
+		2^{k} \mod{2n - 1} = 1
+	\end{align*}
+	So the order of the group action by $f(x)$ on the set of cards is the smallest $k$ such that $2^{k} \mod{2n - 1} = 1$. We also conclude that it will take at most $2n - 2$ shuffles because using the Euler totient function,
+	\begin{equation*}
+		U_{n} = \{[x] : \gcd{(x,n)} = 1\}
+	\end{equation*}
+	we notice that it has at most $n - 1$ elements whenever $n > 1$, and that for $\varphi(n) = \abs{U_{n}}$, 
+	\begin{equation*}
+		a^{\varphi(n)} \cong 1 \pmod{n}
+	\end{equation*}
+	whenever $a$ and $n$ are relatively prime. So $k \leq 2n - 1 - 1 = 2n - 2$. the order for $52$ cards is the least $k$ for 
+	\begin{equation*}
+		2^{k} \cong 1 \pmod{103}
+	\end{equation*}
+	Observe that $103$ is prime, so we have
+	\begin{equation*}
+		2^{102} \cong 1 \pmod{103}
+	\end{equation*}
+	Now check for all factors of 102: 1, 2, 3, 17, 51, 102:
+	\begin{align*}
+		2^{1} &\not\equiv 1 \pmod{103} \\
+		2^{2} &\not\equiv 1 \pmod{103} \\
+		2^{3} &\not\equiv 1 \pmod{103} \\
+		2^{17} &\equiv (2^{7})^{2}2^{3} \\
+		       &\equiv 25^{2}2^{3} \\
+		       &\equiv 7(2^{3}) \\
+		       &\not\equiv 1 \pmod{103} \\
+		2^{51} &\equiv (2^{17})^{3} \\
+		       &\not\equiv 1 \pmod{103} \\
+		       &\equiv (7(2^{3}))^{3} \\
+		       &\equiv (7^{3})(2^{9}) \\
+		       &\equiv (34)(25)(2^{2}) \\
+		       &\equiv (3400) \\
+		       &\equiv 1 \pmod{103}
+	\end{align*}
+	So the number of shuffles needed is 51.
+\end{proof}
+
+\end{document}

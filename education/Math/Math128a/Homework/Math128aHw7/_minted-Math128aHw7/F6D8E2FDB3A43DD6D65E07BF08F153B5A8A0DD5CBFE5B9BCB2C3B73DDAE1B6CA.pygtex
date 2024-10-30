@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{function}\PYG{+w}{ }y\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nf}{Trapezoid}\PYG{p}{(}f, a, b, n\PYG{p}{)}
+\PYG{n}{y}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{n}{h}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{b}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{a}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{/}\PYG{+w}{ }\PYG{n}{n}\PYG{p}{;}
+\PYG{n}{fX}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{(}\PYG{n}{a}\PYG{p}{);}
+\PYG{k}{for}\PYG{+w}{ }\PYG{n+nb}{i}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{:}\PYG{n}{n}
+\PYG{+w}{    }\PYG{n}{newFX}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{(}\PYG{n}{a}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n+nb}{i}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{h}\PYG{p}{);}
+\PYG{+w}{    }\PYG{n}{y}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{y}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{h}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{newFX}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{fX}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{/}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{fX}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{newFX}\PYG{p}{;}
+\PYG{k}{end}
+\PYG{k}{end}
+\end{Verbatim}

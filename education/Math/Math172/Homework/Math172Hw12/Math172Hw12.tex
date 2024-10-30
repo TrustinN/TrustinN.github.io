@@ -1,0 +1,152 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math172/Homework/Math172Hw12/Math172Hw12.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math172Hw12}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: 
+    \begin{itemize}
+        \item Let $G$ be a graph obtained from $K_{6}$ by removing two edges. Is it possible that $G$ is planar?
+            \begin{proof}
+                We can use the fact that if we have a planar connected graph, then $E \leq 3V - 6$, for connected graphs with at least $3$ vertices. Then we have $\lvert E \rvert = \binom{6}{2} - 2$ and $\lvert V \rvert = 6$. Then $\lvert E \rvert = 15 - 2 = 13$. But 
+                    \begin{equation*}
+                        13 = \lvert E \rvert > 3\lvert V \rvert - 6 = 12
+                    \end{equation*}
+                which shows that $K_{6}$ with two edges removed is not planar.
+            \end{proof}
+
+        \item Let $G$ be a graph obtained from $K_{6}$ by removing three edges. Is it possible that $G$ is planar? 
+            \begin{answer}
+                Yes it is possible. We have the graph:
+                    \begin{fixedfigure}
+                        \incfig[0.5]{exercise1}
+                    \end{fixedfigure}
+                We have that the vertex $1$ is missing the edge to $3$. $6$ is missing an edge to $3$ and $2$. Adding each of these edges in gives every vertex degree $5$, which means that this is $K_{6}$ with $3$ edges removed.
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 2}: Let $G$ be a convex octagon, and let $S$ be a set of $10$ points inside $G$ in general position (no three on the same line). Assume, after drawing some non-intersecting straight segments between points in $S$ and vertices of $G$, we have split the interior of $G$ into triangles, with the vertices of these triangles being either a vertex of $G$ or a point in $S$ and every point of $S$ being a vertex of some triangle. How many triangles are formed? (You can assume without proof that the resulting graph on $18$ vertices, with edges being the drawn line-segments and the sides of $G$, is connected).
+    \begin{proof}
+        We have by Euler's formula that $V + F - E = 2$. Then we know that $\lvert V \rvert = 18$. Notice that each face of the triangle uses $3$ oriented edges, except for the face that is on the exterior of the octagon, which uses $8$ oriented edges. There are $2\lvert E \rvert$ oriented edges total, so we have:
+            \begin{equation*}
+                3(\lvert F \rvert - 1) + 8 = 2\lvert E \rvert
+            \end{equation*}
+        and
+            \begin{equation*}
+                18 + \lvert F \rvert - \lvert E \rvert = 2
+            \end{equation*}
+        So we must solve the system:
+            \begin{align*}
+                3\lvert F \rvert - 2\lvert E \rvert &= -5  \\
+                \lvert F \rvert - \lvert E \rvert   &= -16   
+            \end{align*}
+        We have:
+            \begin{align*}
+                \lvert E \rvert  &= 43 \\
+                \lvert F \rvert &= 27   
+            \end{align*}
+        There are $27$ faces total, minus the exterior face, we have $26$ faces in the octagon. So there are $26$ triangles.
+    \end{proof}
+
+\textbf{Exercise 3}: In class we prove that every planar graph should have a vertex of degree at most $5$. In this problem we construct an example showing that this bound is strict.
+    \begin{itemize}
+        \item Let $G$ be a simple planar connected graph with all vertices having degree at least $5$. Show that $G$ has at least $12$ vertices.
+            \begin{proof}
+                Since every vertex has degree $\geq 5$, we know that $2\lvert E \rvert \geq 5\lvert V \rvert$. Since $G$ is simple planar connected, we also know
+                    \begin{equation*}
+                        \lvert E \rvert \leq  3\lvert  V \rvert - 6
+                    \end{equation*}
+                Suppose for contradiction that $G$ has less than $12$ vertices. Then 
+                    \begin{equation*}
+                        2\lvert E \rvert \geq 5 \cdot 11 = 55
+                    \end{equation*}
+                so 
+                    \begin{equation*}
+                        \lvert E \rvert \geq 28
+                    \end{equation*}
+                But using the planar bound above, we get:
+                    \begin{equation*}
+                        \lvert E \rvert \leq 33 - 6 = 27
+                    \end{equation*}
+                which is a contradiction.
+            \end{proof}
+
+        \item Show that if $G$ from part $(1)$ has exactly $12$ vertices, then it has $20$ faces, all faces are triangles and all vertices have degree exactly $5$.
+            \begin{proof}
+                Using the planar bound above, we know that
+                    \begin{equation*}
+                        \lvert E \rvert \leq 3(12) - 6 = 30
+                    \end{equation*}
+                Then we have that all degrees are at least $5$, so the sum of all degrees is at least $5\lvert V \rvert \leq 2\lvert E \rvert$ o r
+                    \begin{equation*}
+                         60 \leq 2\lvert E \rvert \implies \lvert E \rvert \geq 30
+                    \end{equation*}
+                Therefore, $\lvert E \rvert = 30$. Then using Euler's formula that:
+                    \begin{equation*}
+                        \lvert V \rvert + \lvert F \rvert - \lvert E \rvert = 2
+                    \end{equation*}
+                we get
+                    \begin{equation*}
+                        12 + \lvert F \rvert - 30 = 2
+                    \end{equation*}
+                Then $\lvert F \rvert = 20$. All vertices have degree $5$ because there are $30$ edges, so total degree is $60$. Each vertex has degree at least $5$, but if a vertex has degree more than $5$, the total degree will exceed $60$. So each vertex has degree exactly $5$.
+            \end{proof}
+
+        \item Construct $G$ as in part $(2)$. 
+            \begin{answer}
+                \begin{fixedfigure}
+                    \incfig[0.5]{exercise3}
+                \end{fixedfigure}
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 4}: Consider the following graph $G$ with $10$ vertices and $15$ edges:
+    \begin{fixedfigure}
+        \incfig[0.5]{exercise4}
+    \end{fixedfigure}
+    \begin{itemize}
+        \item Find the chromatic number $\chi (G)$ of this graph.
+            \begin{proof}
+                The chromatic number is greater than $2$, because there is an odd cycle. We also see from the coloring:
+                    \begin{fixedfigure}
+                        \incfig[0.2]{exercise4a }
+                    \end{fixedfigure}
+                That the graph is $3$ colorable. So $ \chi  ( G) = 3$.
+            \end{proof}
+
+        \item Is $G$ planar or not? 
+            \begin{proof}
+                Suppose for contradiction that $G$ is planar. Then we have some planar drawing of $G$ with no self-intersections. Consider the vertices $t, u, v, w$ shown below:
+                    \begin{fixedfigure}
+                        \incfig[0.3]{exercise4b}
+                    \end{fixedfigure}
+                Consider the plane containing the vertices $u, v, w$. We know that such a plane exists in some planar drawing. This is because if we travel from $u \rightarrow v$, it is the edge immediately oriented to the right. Since these lie in the same plane, then there are no edges in the interior, so we can draw an edge $u, w$, which still makes it planar. Similarly, we can draw an edge $t, w$ by the same reasoning. So we get:
+                    \begin{fixedfigure}
+                        \incfig[0.3]{exercise4b2}
+                    \end{fixedfigure}
+                Now we can remove the edges $(t, v), (v, w), (u, v)$ to get a planar graph:
+                    \begin{fixedfigure}
+                        \incfig[0.3]{exercise4b3}
+                    \end{fixedfigure}
+                Repeating this on the other corners of the star, we get that $K_{5}$ is planar, which is a contradiction.
+            \end{proof}
+    \end{itemize}
+
+
+
+
+
+
+
+\end{document}

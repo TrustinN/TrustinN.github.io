@@ -1,0 +1,123 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Stat134/Homework/Stat134Hw4/Stat134Hw4.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Stat134Hw4}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Drop a uniformly random point inside the triangle with vertices at $(0, 0), (5, 0)$ and $(5, 2)$. Let $X$ be the $x$-coordinate of this random point. Find the cumulative distribution function and probability density function of $X$.
+    \begin{answer}
+        First calculate the area of the triangle:
+            \begin{equation*}
+                5 * 2 * \dfrac{1}{2} = 5
+            \end{equation*}
+        Then the probability that a chosen point $P(x, y)$ where $X \leq x$ given by the area of the sample space over the event area. We have $\mathop{Area}(\Omega) = 5$ as calculated above. Now if $W$ is the event that $X \leq x$. Then $\mathop{Area}(W) = x * \frac{2}{5}x * \frac{1}{2} = \frac{x^{2}}{5}$. So our cumulative density function is 
+            \begin{equation*}
+                F(X \leq x) = \begin{cases}
+                    \dfrac{x^{2}}{25} &\text{ if } 0 \leq x \leq 5 \\
+                    0 &\text{ if } x < 0 \\
+                    1 &\text{ if } x > 5
+                \end{cases}
+            \end{equation*}
+    \end{answer}
+
+\textbf{Exercise 2}: Let $X$ be a uniform random variable on $[-1, 2]$. Show that $Y = X^{2}$ is a continuous random variable and find its density.
+    \begin{answer}
+        $Y$ is a continuous random variable because it has uncountably many values for which $p(x) \neq 0$, where $p$ is the probability density function. Now the probability density function for $X$ is 
+            \begin{equation*}
+                p_{X}(x) = \begin{cases}
+                   0  &\text{ if } x < -1 \\
+                    0 &\text{ if } x > 2 \\
+                    \dfrac{1}{3} &\text{ if } -1 \leq x \leq 2   
+                \end{cases}
+            \end{equation*}
+        Now the definition of pdf for $Y$ is that $\mathbb{P}(Y = k) = \mathbb{P}(X = Y^{-1}(k))$. So we have:
+            \begin{equation*}
+                p_{Y}(y) = \begin{cases}
+                    \frac{2}{3} &\text{ if } 0 \leq y \leq 1 \\
+                    \frac{1}{3} &\text{ if } 1 \leq y \leq 2 \\
+                    0 &\text{ if } y > 2   
+                \end{cases}
+            \end{equation*}
+    \end{answer}
+
+\textbf{Exercise 3}: Suppose that $Y$ is a discrete random variable whose probability mass function is:
+    \begin{align*}
+        \begin{array}{ c | c | c | c }
+            x        & 1            & 2            & 3            \\
+            \hline
+            p_{Y}(x) & \frac{1}{4} & \frac{1}{2} & \frac{1}{4}   
+        \end{array}
+    \end{align*}
+\begin{itemize}
+    \item [(a)] What is $\mathbb{P}(Y \geq 2)$?
+        \begin{answer}
+            There are three values for $Y: 1, 2, 3$. Then 
+                \begin{equation*}
+                    \mathbb{P}(Y \geq 2) = \mathbb{P}(Y = 2) + \mathbb{P}(Y = 3)
+                \end{equation*}
+            So the answer is
+                \begin{equation*}
+                    \dfrac{1}{2} + \dfrac{1}{4} = \dfrac{3}{4}
+                \end{equation*}
+        \end{answer}
+
+    \item [(b)] Compute $\mathbb{E}[\frac{1}{Y}]$ 
+        \begin{answer}
+            We have by definition that:
+                \begin{equation*}
+                    \mathbb{E}\left[\dfrac{1}{Y}\right] = \sum_{k \in \mathbb{R} \backslash \{0\}}k\mathbb{P}\left(\dfrac{1}{Y} = k\right)
+                \end{equation*}
+            We only have $3$ possible values for $\frac{1}{Y}: 1, \frac{1}{2}, \frac{1}{3}$, so the expectation is
+                \begin{equation*}
+                    \dfrac{1}{3}\mathbb{P}\left(\dfrac{1}{Y} = \dfrac{1}{3}\right) + \dfrac{1}{2} \mathbb{P}\left(\dfrac{1}{Y} = \dfrac{1}{2}\right) + \mathbb{P}\left(\dfrac{1}{Y} = 1\right)
+                \end{equation*}
+            So the answer is 
+                \begin{equation*}
+                    \dfrac{1}{3} \cdot \dfrac{1}{4} + \dfrac{1}{2} \cdot \dfrac{1}{2} + \dfrac{1}{4} = \dfrac{1}{12} + \dfrac{1}{4} + \dfrac{1}{4}  = \dfrac{7}{12}
+                \end{equation*}
+        \end{answer}
+\end{itemize}
+
+\textbf{Exercise 4}: Let $X$ be a uniformly chosen element of the set $\{1, 2, 4, 8, \ldots, 2^{99}\}$. Find the expected value of the random variable $X$.
+    \begin{answer}
+        Let $S = \{1, 2, 4, 8, \ldots, 2^{99}\}$. Then $\lvert S \rvert = 100$. Each element has a $\frac{1}{100}$ probability of being chosen. The formula for expectation is
+            \begin{equation*}
+                \mathbb{E}(X) = \sum_{k \in \mathbb{R} \backslash \{0\}} k \cdot \mathbb{P}(X = k)
+            \end{equation*}
+        We know that each probability is $\frac{1}{100}$, so we have that
+            \begin{equation*}
+                \mathbb{E}(X) = \sum_{k = 0}^{99}2^{k}\dfrac{1}{100} = \dfrac{1}{100}\sum_{k = 0}^{99}2^{k}
+            \end{equation*}
+        Now 
+            \begin{align*}
+                S      &= \sum_{k = 0}^{99}2^{k}     \\
+                2S     &= \sum_{k = 1}^{100}2^{k}    \\
+                S - 2S &= 1 - 2^{100}                \\
+                S      &= \dfrac{1 - 2^{100}}{1 - 2}   
+            \end{align*}
+        So the answer is 
+            \begin{equation*}
+                \dfrac{2^{100} - 1}{100}
+            \end{equation*}
+    \end{answer}
+
+\textbf{Exercise 5}: Let $(X, Y)$ be a uniformly chosen random point on the unit circle. Show that $Z = X/Y$ is a continuous random variable and find its probability density function.
+
+
+
+
+
+
+
+\end{document}

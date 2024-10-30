@@ -1,0 +1,13 @@
+.centered {
+    width: 60%;
+    margin: auto;
+}
+
+.center_images {
+    max-width: 90%;
+    margin: auto;
+}
+
+.nobr {
+    white-space: nowrap;
+}

@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{function}\PYG{+w}{ }p\PYGZus{}hat\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nf}{Aitken}\PYG{p}{(}x\PYG{p}{)}
+\PYG{+w}{    }\PYG{n}{delx}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{:}\PYG{k}{end}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{:}\PYG{k}{end}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{);}
+\PYG{+w}{    }\PYG{n}{del2x}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{delx}\PYG{p}{(}\PYG{k}{end}\PYG{p}{:}\PYG{k}{end}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{delx}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{:}\PYG{l+m+mi}{1}\PYG{p}{);}
+\PYG{+w}{    }\PYG{n}{p\PYGZus{}hat}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{:}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{p}{((}\PYG{n}{delx}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{:}\PYG{l+m+mi}{1}\PYG{p}{))}\PYGZca{}\PYG{l+m+mi}{2}\PYG{+w}{ }\PYG{o}{./}\PYG{+w}{ }\PYG{n}{del2x}\PYG{p}{);}
+
+\PYG{k}{end}
+
+\end{Verbatim}

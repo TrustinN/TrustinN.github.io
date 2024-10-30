@@ -1,0 +1,213 @@
+%! TeX root = Berkeley/Math/Stat134/Homework/Stat134Hw5/Stat134Hw5.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Stat134Hw5}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Let $X$ be uniform random variable on the interval $[1, 3]$. Compute $\mathbb{E}[X^{3} - X]$.
+    \begin{answer}
+        We have that 
+            \begin{equation*}
+                X = \begin{cases}
+                    \dfrac{1}{2} &\text{ if } 1 \leq x \leq 3 \\
+                    0 &\text{ if } otherwise      
+                \end{cases}
+            \end{equation*}
+        Then $\mathbb{E}[X^{3} - X] = \mathbb{E}[X^{3}] - \mathbb{E}[X] = \mathbb{E}[X^{3}] - 2$. Also, 
+            \begin{align*}
+                \mathbb{E}[X^{3}] &= \int_{-\infty}^{\infty} x^{3}p(x) \, \dd{x}  \\
+                                  &= \int_{1}^{3} x^{3}\dfrac{1}{2} \, \dd{x}     \\
+                                  &= \left(\dfrac{x^{4}}{8}\right)\eval_{1}^{3}   \\
+                                  &= \dfrac{81}{8} - \dfrac{1}{8} = 10              
+            \end{align*}
+        which tells us that $\mathbb{E}[X^{3} - X] = 10 - 2 = 8$.
+    \end{answer}
+
+\newpage
+
+\textbf{Exercise 2}: Let $X$ be a continuous random variable with triangular density
+    \begin{equation*}
+        f(x) = \begin{cases}
+            c \cdot (1 - x) &\text{ if } 0 \leq x \leq 1 \\
+            c \cdot (1 + x) &\text{ if } -1 \leq x < 0 \\
+            0 &\text{ if } \lvert x \rvert > 1   
+        \end{cases}
+    \end{equation*}
+Here $c$ is a positive constant, which makes $f(x)$ a probability density function. Find $c$ and then compute the expectation and variance of $X$.
+    \begin{answer}
+        We must have that 
+            \begin{equation*}
+                \int_{-\infty}^{\infty} f(x) \, \dd{x}  = 1
+            \end{equation*}
+        which can be broken up as:
+            \begin{equation*}
+                \int_{-\infty}^{-1} 0 \, \dd{x} + \int_{-1}^{0} c \cdot (1 + x) \, \dd{x}  + \int_{0}^{1} c \cdot (1 - x) \, \dd{x}  + \int_{1}^{\infty} 0 \, \dd{x} 
+            \end{equation*}
+        or 
+            \begin{equation*}
+                \int_{-1}^{0} c \cdot (1 + x) \, \dd{x}  + \int_{0}^{1} c \cdot (1 - x) \, \dd{x} 
+            \end{equation*}
+        Now evaluate:
+            \begin{align*}
+                \int_{-1}^{0} c \cdot (1 + x) \, \dd{x} + \int_{0}^{1} c \cdot (1 - x) \, \dd{x}  &= c\left(\int_{-1}^{0} 1 + x \, \dd{x} + \int_{0}^{1} 1 - x \, \dd{x} \right) \\
+                                                                                                  &= 2c \int_{0}^{1} 1 - x \, \dd{x}                                             \\
+                                                                                                  &= 2c \left(x - \dfrac{x^{2}}{2}\right)\eval_{0}^{1}                           \\
+                                                                                                  &= 2c \left(1 - \dfrac{1}{2}\right)                                            \\
+                                                                                                  &= 2c / 2 = c                                                                    
+            \end{align*}
+        So $c = 1$ since the integral must be $1$. 
+
+        (Expectation) The expectation is 
+            \begin{equation*}
+                \int_{-1}^{1} x \cdot f(x) \, \dd{x} = \int_{-1}^{0} x(1 + x) \, \dd{x} + \int_{0}^{1} x(1 - x) \, \dd{x} 
+            \end{equation*}
+        which is 
+            \begin{align*}
+                \int_{-1}^{0} x + x^{2} \, \dd{x} + \int_{0}^{1} x - x^{2} \, \dd{x}  &= \int_{-1}^{0} x \, \dd{x} + \int_{-1}^{0} x^{2} \, \dd{x} + \int_{0}^{1} x \, \dd{x} + \int_{0}^{1} -x^{2} \, \dd{x}  \\
+                                                                                      &= \int_{-1}^{0} x \, \dd{x} + \int_{0}^{1} x \, \dd{x}                                                                  \\
+                                                                                      &= 0                                                                                                                       
+            \end{align*}
+        (Variance) The variance is given by $\mathbb{E}[X^{2}] - \mathbb{E}[X]^{2}$. To calculate the value of $\mathbb{E}[X^{2}]$, we have the integral:
+            \begin{equation*}
+                \int_{-1}^{0} x^{2}(1 + x) \, \dd{x} + \int_{0}^{1} x^{2}(1 - x) \, \dd{x} = \int_{-1}^{0} x^{2} \, \dd{x} + \int_{-1}^{0} x^{3} \, \dd{x} + \int_{0}^{1} x^{2} \, \dd{x}  + \int_{0}^{1} -x^{3} \, \dd{x} 
+            \end{equation*}
+        which is 
+            \begin{equation*}
+                2\int_{-1}^{0} x^{2} \, \dd{x} - 2\int_{0}^{1} x^{3} \, \dd{x} 
+            \end{equation*}
+        So calculate:
+            \begin{align*}
+                2\left(\int_{-1}^{0} x^{2} \, \dd{x} - \int_{0}^{1} x^{3} \, \dd{x} \right) &= 2\left(\left(\dfrac{x^{3}}{3}\right)\eval_{-1}^{0} - \left(\dfrac{x^{4}}{4}\right)\eval_{0}^{1}\right) \\
+                                                                                            &= 2\left(\dfrac{1}{3} - \dfrac{1}{4}\right)                                                             \\
+                                                                                            &= 2(1/12) = 1/6
+            \end{align*}
+        So the variance is $\frac{1}{6} - 0 = \frac{1}{6}$.
+    \end{answer}
+
+\newpage
+
+\textbf{Exercise 3}: Let $X$ be Normal random variable $\mathcal{N}(2, 9)$ of mean $2$ and variance $9$. Using the table from Appendix $E$ of the textbook (copied on the next page; this is for standard normal $\mathcal{N}(0, 1)$) estimate $P(X < 5)$ and $P(\lvert X \rvert > 8)$.
+    \begin{answer}
+        If $Z \sim \mathcal{N}(0, 1)$, then $X = 2 + Z \cdot 3$. So we want to find 
+            \begin{equation*}
+                \mathbb{P}(X = 3Z + 2 < 5) = \mathbb{P}(X < 1)
+            \end{equation*}
+        Using the table, we get the value $0.8413$
+
+        For $\mathbb{P}(\lvert X \rvert > 8)$, we can split it as:
+            \begin{equation*}
+                \mathbb{P}(X > 8) + \mathbb{P}(X < -8)
+            \end{equation*}
+        Now plug in $X = 3Z + 2$:
+            \begin{equation*}
+                \mathbb{P}(3Z + 2 > 8) + \mathbb{P}(3Z + 2 < -8) = \mathbb{P}(Z > 2) + \mathbb{P}(Z < \frac{-10}{3})
+            \end{equation*}
+        We know that $\mathbb{P}(Z > 2) = 1 - \mathbb{P}(Z \leq 2)$, where $\mathbb{P}(Z \leq 2) = 0.9772$. Also, $\mathbb{P}(Z < \frac{-10}{3}) = 1 - \mathbb{P}(Z < \frac{10}{3})$. Using the table, $\mathbb{P}(X < \frac{10}{3}) = 0.9996$. So
+            \begin{equation*}
+                1 - \mathbb{P}(Z \leq 2) + 1 - \mathbb{P}(Z < \dfrac{10}{3}) = 0.0228 + 0.0004 = 0.0232
+            \end{equation*}
+    \end{answer}
+
+\newpage
+
+\textbf{Exercise 4}: Let $X$ be Normal random variable $\mathcal{N}(0, 2)$ of mean $0$ and variance $2$. Compute $\mathbb{E}X^{3}$ and $\mathbb{E}X^{4}$.
+    \begin{answer}
+        (Part I : $\mathbb{E}[X^{3}]$) The pdf is 
+            \begin{equation*}
+                f(x) = \dfrac{1}{\sqrt{2\pi \sigma^{2}}} e^{-\frac{\left(\frac{x - \mu}{\sigma}\right)^{2}}{2}} = \dfrac{1}{2\sqrt{\pi}}e^{-\frac{x^{2}}{8}}
+            \end{equation*}
+        We have that $\mathbb{E}[X^{3}] = 0$ because $x^{3}$ is odd and $p(x)$ is even. So $x^{3}p(x)$ is odd.
+
+        (Part II : $\mathbb{E}[X^{4}]$) Integrate by parts using:
+            \begin{equation*}
+                \int U^{\prime}V \, \dd{x} + \int UV^{\prime} \, \dd{x} = \int (UV)^{\prime} \, \dd{x} 
+            \end{equation*}
+        Let $U = x^{3}$, $V = f(x)$. Then
+            \begin{equation*}
+                \int_{-\infty}^{\infty} 3x^{2}f(x) \, \dd{x} + \int_{-\infty}^{\infty} x^{3}f^{\prime}(x) \, \dd{x} = \int_{-\infty}^{\infty} F^{\prime}(x) \, \dd{x} 
+            \end{equation*}
+        We have that $\int_{-\infty}^{\infty} F^{\prime}(x) \, \dd{x} = 0$ because $F(x) = x^{3}p(x)$ is odd. Notice that the left equation is one for the variance:
+            \begin{equation*}
+                3 \int_{-\infty}^{\infty} x^{2}f(x) \, \dd{x} = 3\mathbb{E}[X^{2}] = 3\sigma^{2}
+            \end{equation*}
+        So we are down to:
+            \begin{equation*}
+                3\sigma^{2} = -\int_{-\infty}^{\infty} x^{3}f^{\prime}(x) \, \dd{x} 
+            \end{equation*}
+        Now 
+            \begin{equation*}
+                f^{\prime}(x) = -\dfrac{x}{4} \cdot f(x)
+            \end{equation*}
+        So 
+            \begin{equation*}
+                -\int_{-\infty}^{\infty} x^{3}f^{\prime}(x) \, \dd{x} = \int_{-\infty}^{\infty} \dfrac{x^{4}}{4} f(x) \, \dd{x} = \dfrac{1}{4}\int_{-\infty}^{\infty} x^{4}f(x) \, \dd{x} = \dfrac{1}{4}\mathbb{E}[X^{4}]
+            \end{equation*}
+        So the answer is 
+            \begin{equation*}
+                \dfrac{1}{4} \mathbb{E}[X^{4}] = 3\sigma^{2}
+            \end{equation*}
+        and therefore
+            \begin{equation*}
+                \mathbb{E}[X^{4}] = 4 \cdot 3 \cdot 2^{2} = 48
+            \end{equation*}
+    \end{answer}
+
+\newpage
+
+\textbf{Exercise 5}: 
+    \begin{itemize}
+        \item [(a)] Find all $\alpha > 0$ for which there is a finite constant $c_{\alpha}$ so that the function $f_{\alpha}(x) = c_{\alpha}\frac{1}{1 + \lvert x \rvert^{\alpha}}$ is a probability density function.
+            \begin{answer}
+                We want to have
+                    \begin{equation*}
+                        \int_{-\infty}^{\infty} c_{\alpha}\dfrac{1}{1 + \lvert x \rvert^{\alpha}} \, \dd{x} = 1
+                    \end{equation*}
+                which means that we want the integral to converge. Using the fact that
+                    \begin{equation*}
+                        \int_{0}^{\infty} \dfrac{1}{x^{p}} \, \dd{x} 
+                    \end{equation*}
+                converges when $p > 1$ and diverges when $p \leq 1$, we have
+                    \begin{equation*}
+                        \int_{-\infty}^{\infty} \dfrac{1}{\lvert x \rvert^{p}} \, \dd{x}  = 2\int_{0}^{\infty} \dfrac{1}{x^{p}} \, \dd{x} 
+                    \end{equation*}
+                So 
+                    \begin{equation*}
+                        \int_{-\infty}^{\infty} \dfrac{1}{\lvert x \rvert^{p}} \, \dd{x} 
+                    \end{equation*}
+                converges under the same conditions when $p > 1$. Since $\frac{1}{1 + \lvert x \rvert^{\alpha}} < \frac{1}{\lvert x \rvert^{\alpha}}$, we know that it converges for $\alpha > 1$.
+            \end{answer}
+
+        \item [(b)] Suppose that $\alpha > 0$ is a number for which $f_{\alpha}$ is a PDF. Suppose that $X$ is a random variable with PDF $f_{\alpha}$. For which $\alpha > 0$ will $\mathbb{E}X$ exist?
+            \begin{answer}
+                We now want for the integral:
+                    \begin{equation*}
+                        \int_{-\infty}^{\infty} c_{\alpha}\dfrac{x}{1 + \lvert x \rvert^{\alpha}} \, \dd{x} 
+                    \end{equation*}
+                to be finite. Now we want 
+                    \begin{equation*}
+                        \int_{0}^{\infty} c_{\alpha}\dfrac{x}{1 + x^{\alpha}} \, \dd{x} 
+                    \end{equation*}
+                to converge because the integrand is symmetric. Again, $\frac{x}{1 + x^{\alpha}} < \frac{x}{x^{\alpha}} = \frac{1}{x^{\alpha - 1}}$. So it converges for $\alpha > 2$.
+            \end{answer}
+
+        \item [(c)] Suppose that $X$ has a PDF given by $f_{\alpha}$ and $X$ has a finite expectation. What is $\mathbb{E}X$? 
+            \begin{answer}
+                The expectation is $0$ because $\frac{x}{1 + \lvert x \rvert^{\alpha}}$ is an odd function. So the negative part and positive part integrate to values that cancel when $\alpha > 2$.
+            \end{answer}
+    \end{itemize}
+
+
+
+
+\end{document}

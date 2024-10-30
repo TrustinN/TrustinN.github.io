@@ -1,0 +1,145 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Stat134/Homework/Stat134Hw6/Stat134Hw6.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Stat134Hw6}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Let $X$ be Normal random variable $\mathcal{N}(3, 4)$ of mean $3$ and variance $4$. What is $\mathbb{E}(X^{2})?$
+    \begin{answer}
+        We have that variance is $\mathbb{E}(X^{2}) - (\mathbb{E}X)^{2}$. Also, $(\mathbb{E}(X))^{2} = 9$ and the variance is $4$. So $3 + 9 = \mathbb{E}(X^{2})$ and $\mathbb{E}(X^{2}) = 12$.
+    \end{answer}
+
+\textbf{Exercise 2}: Suppose $10$ percent of households earn over $80,000$ dollars a year, and $0.25$ percent of households earn over $450,000$. A random sample of $400$ households has been chosen. In this sample, let $X$ be the number of households that earn over $80, 000$, and let $Y$ be the number of households that earn over $450,000$. Use either the Normal or Poisson approximation, whichever is appropriate in either case, to find the simplest estimates you can for the probabilities $P(X \geq 48)$ and $P(Y \geq 2)$.
+    \begin{answer}
+        We will use a Normal distribution since $np(1 - p) = 40 * .9 = 36$ is sufficiently large. We want:
+            \begin{equation*}
+                P(X \geq 48) \implies P(X - 40 \geq 8) \implies P(\dfrac{X - 40}{\sqrt{36}} = \dfrac{X - 40}{6} \geq 4/3) = 1 - P(\dfrac{X - 40}{6} \leq 4/3) = 1 - .9082
+            \end{equation*}
+        So the answer is $.0918$.
+
+        For the other one, we have $np(1 - p) = 400 * 0.0025 * .9975 = 1 * .9975$ which is small. We will want to use the Poisson distribution. So:
+            \begin{equation*}
+                P(Y \geq 2) = 1 - P(Y < 2) = 1 - P(Y = 1) - P(Y = 0)
+            \end{equation*}
+        this is 
+            \begin{equation*}
+                1 - \dfrac{1^{0}}{0!e} - \dfrac{1^{1}}{1!e}
+            \end{equation*}
+    \end{answer}
+
+\textbf{Exercise 3}: Let $X \sim Exp(2)$ be exponential random variable of rate $2$ (its density is $2e^{-2x}$, $x > 0$). Compute the conditional probabilities
+    \begin{equation*}
+        P(X > 2 \divides X > 1) \text{ and } P(X > 1 \divides X > 2)
+    \end{equation*}
+    \begin{answer}
+        The conditional probability:
+            \begin{equation*}
+                P(X > 2 \divides X > 1) = \dfrac{P(X > 2 \cap X > 1)}{P(X > 1)} = \dfrac{P(X > 2)}{P(X > 1)}
+            \end{equation*}
+        with pmf $p(x) = 2e^{-2x}$ for $x \geq 0$. So for $x > 1$, integrate:
+            \begin{equation*}
+                \int_{a}^{\infty} 2e^{-2x} \, \dd{x} = -e^{-2x} \eval_{a}^{\infty} = e^{-2a}
+            \end{equation*}
+        So $P(X > 2) = e^{-4}$ and $P(X > 1) = e^{-2}$. So the answer is $e^{-2}$
+
+        For the other one, we have
+            \begin{equation*}
+                P(X > 1 \divides X > 2) = \dfrac{P(X > 1 \cap X > 2)}{P(X > 2)} = \dfrac{P(X > 2)}{P(X > 2)} = 1
+            \end{equation*}
+    \end{answer}
+
+\textbf{Exercise 4}: Recall that PMF of Poisson($\lambda$) is $P(X = k) = e^{-\lambda} \frac{\lambda^{k}}{k!}, k = 0, 1, 2, \ldots$.
+    \begin{itemize}
+        \item [(a)] Let $X \sim Poisson(\lambda)$ and consider the sequence $p(0), p(1), p(2), \ldots$ with $p(k) = P(X = k)$. Show that $p(k)$ first increases and then decreases. At what $k$ does the change happen?
+            \begin{answer}
+                Consider the ratio of the term after over the term before:
+                    \begin{equation*}
+                        \dfrac{\lambda^{k + 1}k!}{\lambda^{k}(k + 1)!} = \dfrac{\lambda}{k + 1}
+                    \end{equation*}
+                We see that it is increasing when 
+                    \begin{equation*}
+                        \dfrac{\lambda}{k + 1} \geq 1 \implies \lambda \geq k + 1
+                    \end{equation*}
+                and is decreasing or the same otherwise. So as $k$ increases, we will reach a point where the ratio of the terms gets smaller: $\frac{\lambda}{k + 1} > \frac{\lambda}{k + 2}$. This change happens when $k = \lambda - 1$.
+            \end{answer}
+
+        \item [(b)] Let $X \sim Bin(n, p)$ and consider the sequence $p(0), p(1), \ldots, p(n)$ with $p(k) = P(X = k)$. Show that $p(k)$ first increases and then decreases. At what $k$ does the change happen?
+            \begin{answer}
+                The probability is $\binom{n}{k}p^{k}(1 - p)^{n - k}$. Now a ratio of the next term with the previous:
+                    \begin{equation*}
+                        \dfrac{\dbinom{n}{k + 1} p^{k + 1}(1 - p)^{n - k - 1}}{\dbinom{n}{k}p^{k}(1 - p)^{n - k}} = \dfrac{(n - k)!k!p}{(n - k - 1)!(k + 1)!(1 - p)} = \dfrac{(n - k) \cdot p}{(k + 1)(1 - p)}
+                    \end{equation*}
+                The change occurs when
+                    \begin{equation*}
+                        \dfrac{(n - k)p}{(k + 1)(1 - p)} = 1
+                    \end{equation*}
+                or
+                    \begin{equation*}
+                        np - kp = -kp -p + k + 1
+                    \end{equation*}
+                So
+                    \begin{equation*}
+                        np + p =  k + 1 \implies k = np + p - 1
+                    \end{equation*}
+                We see that if $k$ is sufficiently far from $n$, then $k + 1$ results in an increase, if $k + 1 < np + p - 1$. And the opposite is true for when $k$ is close to $n$.
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 5}: Let $X \sim Poisson(1)$ be Poisson random variable of mean $1$. Compute
+    \begin{equation*}
+        \mathbb{E}[(ln(2))^{X}]
+    \end{equation*}
+    \begin{answer}
+        By definition, the expectation is 
+            \begin{equation*}
+                e^{-1}\sum_{k \geq 0} \dfrac{1}{k!}\ln(2)^{k} = e^{-1}\dfrac{ln(2)^{k}}{k!}
+            \end{equation*}
+        and $\frac{ln(2)^{k}}{k!} = e^{ln(2)} = 2$. So the answer is $2e^{-1}$.
+    \end{answer}
+
+\textbf{Exercise 6}: Let $X_{n}$ be iid random variables, such that $X_{n} = e$ with probability $1/2$ and $X_{n} = \frac{1}{e}$ with probability $1/2$. Compute (in any form you can)
+    \begin{equation*}
+        \lim\limits_{n \to \infty}(X_{1}X_{2}\cdots X_{n})^{1/\sqrt{n}}
+    \end{equation*}
+        \begin{answer}
+            Let $Y = \log((X_{1} X_{2}\cdots X_{n})^{1/\sqrt{n}})$. We first compute the limit of this as $n \rightarrow \infty$. Now we can rewrite $Y$ as:
+                \begin{equation*}
+                    \dfrac{1}{\sqrt{n}}\sum_{i \geq 1}^{n} \log(X_{i})
+                \end{equation*}
+            Taking the limit as $n \rightarrow \infty$. We compute the expectation of $\log(X_{i})$. We have
+                \begin{equation*}
+                    P(\log(X_{i}) = k) = \begin{cases}
+                        \frac{1}{2} &\text{ if } k = 1 \\
+                        \frac{1}{2} &\text{ if } k = -1         
+                    \end{cases}
+                \end{equation*}
+            The expectation is 0. The variance is defined by $\mathbb{E}[\log(X_{i})^{2}]$. So we have:
+                \begin{equation*}
+                    \sum_{k} P(\log(X_{i}) = k)k^{2} = 1
+                \end{equation*}
+            By the central limit theorem, we have that it is normally distributed:
+                \begin{equation*}
+                    \lim\limits_{n \to \infty} \dfrac{Y - 0n}{1\sqrt{n}} \sim \mathcal{N}(0, 1)
+                \end{equation*}
+            Now to recover the random variable $\lim\limits_{n \to \infty} (X_{1}X_{2} \cdots X_{n})^{1/\sqrt{n}}$, we take $e^{Y}$. So the limit is the moment generating function of $\mathcal{N}(0, 1)$ at $t = 1$. This was show to be $e^{t^{2}/2}$. So taking $t = 1$, we get that the limit is $e^{1/2}$.
+        \end{answer}
+
+
+
+
+
+
+
+
+\end{document}

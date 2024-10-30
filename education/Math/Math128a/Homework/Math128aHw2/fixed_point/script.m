@@ -1,0 +1,1 @@
+x = vpa(fixed_point(@myfunc1, 1/10, 1, 0.01))

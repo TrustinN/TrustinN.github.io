@@ -1,0 +1,454 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math128a/Homework/Math128aHw4/Math128aHw4.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math128aHw4}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\section*{Exercise Set 3.1}
+\hrule
+
+\textbf{Exercise 2}: For the given functions $f(x)$, let $x_{0} = 1, x_{1} = 1.25$, and $x_{2} = 1.6$. Construct interpolation polynomials of degree at most one and at most two of approximate $f(1.4)$ and find the absolute error.
+    \begin{itemize}
+        \item [(d)] $f(x) = e^{2x} - x$ 
+    \end{itemize}
+    \begin{answer}
+        Given $x_{0}, x_{1}, x_{2}$, we get that $y_{0}, y_{1}, y_{2} = e^{2} - 1, e^{2.5} - 1.25, e^{3.2} - 1.6$. Here is the degree $2$ polynomial to approximate:
+            \begin{align*}
+                f(x) &= (e^{2} - 1)\dfrac{(x - 1.25)(x - 1.6)}{(1 - 1.25)(1 - 1.6)} + (e^{2.5} - 1.25)\dfrac{(x - 1)(x - 1.6)}{(1.25 - 1)(1.25 - 1.6)} + (e^{3.2} - 1.6)\dfrac{(x - 1)(x - 1.25)}{(1.6 - 1)(1.6 - 1.25)}
+            \end{align*}
+        and here is the degree $1$:
+            \begin{align*}
+                f(x) &= (e^{2} - 1)\dfrac{x - 1.6}{1 - 1.6} + (e^{3.2} - 1.6)\dfrac{x - 1}{1.6 - 1}   
+            \end{align*}
+        We get:
+            \begin{equation*}
+                f(1.4) = (e^{2} - 1)\dfrac{-.15 \cdot .2}{.15} + (e^{2.5} - 1.25) \dfrac{.4 \cdot -.2}{.25 \cdot -.35} + (e^{3.2} - 1.6) \dfrac{.4 \cdot .15}{.6 \cdot .35} = 15.2697633149
+            \end{equation*}
+        for the second degree approximation and
+            \begin{equation*}
+                f(1.4) = (e^{2} - 1) \dfrac{-0.2}{-.6} + (e^{3.2} - 1.6) \dfrac{.4}{.6} = 17.418038831
+            \end{equation*}
+        the true value is $f(1.4) = 15.0446467711$, so the absolute error for the first degree approximation is
+            \begin{equation*}
+                \lvert 15.0446467711 - 15.2697633149 \rvert = 0.2251165438
+            \end{equation*}
+        and for the first degree approximation is
+            \begin{equation*}
+                \lvert 15.0446467711 - 17.418038831 \rvert = 2.3733920599
+            \end{equation*}
+    \end{answer}
+
+\textbf{Exercise 4}: Use Theorem $3.3$ to find an error bound for the approximations in Exercise 2.
+    \begin{itemize}
+        \item [(d)] $f(x) = e^{2x} - x$ 
+    \end{itemize}
+    \begin{answer}
+        By the theorem, we know that there is some $\mathcal{E}$ in the interval $(1, 1.6)$ such that
+            \begin{equation*}
+                f(x) = P(x) + \dfrac{f^{n + 1}(\mathcal{E})}{(n + 1)!}(x - 1)(x - 1.25)(x - 1.6)
+            \end{equation*}
+        Considering the second degree polynomial interpolation, we get:
+            \begin{equation*}
+                f(x) = P(x) + \dfrac{f^{3}(\mathcal{E})}{6}(x - 1)(x - 1.25)(x - 1.6)
+            \end{equation*}
+        and 
+            \begin{equation*}
+                f^{1}(x) = 2e^{2x} - 1, f^{2}(x) = 4e^{2x}, f^{3}(x) = 8e^{2x}
+            \end{equation*}
+        The maximum of $f^{3}(x)$ on the interval is at $x = 1.6$, so we get:
+            \begin{equation*}
+                f^{3}(1.6) = 8e^{3.2}
+            \end{equation*}
+        Plugging this in:
+            \begin{equation*}
+                \lvert \text{Error} \rvert <= \left\lvert \dfrac{8e^{3.2}}{6}(.4)(.15)(.2) \right\rvert = 0.392520483154
+            \end{equation*}
+        Now for the first degree interpolation, the error will be given by:
+            \begin{equation*}
+                \dfrac{f^{2}(\mathcal{E})}{2}(x - 1)(x - 1.6)
+            \end{equation*}
+        We have:
+            \begin{equation*}
+                \lvert f^{2}(\mathcal{E}) \rvert < \lvert 4e^{3.2} \rvert
+            \end{equation*}
+        So plugging this in:
+            \begin{equation*}
+                \lvert \text{Error} \rvert <= \left\lvert \dfrac{4e^{3.2}}{2}(.4)(-.2) \right\rvert = 3.92520483154
+            \end{equation*}
+    \end{answer}
+
+\textbf{Exercise 6}: Use appropriate Lagrange interpolating polynomials of degrees one, two and three to approximate each of the following:
+    \begin{itemize}
+        \item [(b)] $f(0)$ if $f(-0.5) = 1.93750, f(-0.25) = 1.33203, f(0.25) = 0.800781, f(0.5) = 0.687500$ 
+    \end{itemize}
+    \begin{answer}
+        The first degree polynomial:
+            \begin{equation*}
+                f(x) = 1.33203 \dfrac{x - 0.25}{(-0.25 - 0.25)} + 0.800781 \dfrac{x + 0.25}{(0.25 + 0.25)}
+            \end{equation*}
+        The second degree polynomial:
+            \begin{align*}
+                f(x) &= 1.93750 \dfrac{(x + 0.25)(x - 0.25)}{(-0.5 + 0.25)(-0.5 - 0.25)} \\ 
+                     &+ 1.33203 \dfrac{(x + 0.5)(x - 0.25)}{(-0.25 + 0.5)(-0.25 - 0.25)} \\ 
+                     &+ 0.800781 \dfrac{(x + 0.5)(x + 0.25)}{(0.25 + 0.5)(0.25 + 0.25)}
+            \end{align*}
+        The third degree polynomial:
+            \begin{align*}
+                f(x) &= 1.93750 \dfrac{(x + 0.25)(x - 0.25)(x - 0.5)}{(-0.5 + 0.25)(-0.5 - 0.25)(-0.5 - 0.5)} \\ 
+                     &+ 1.33203 \dfrac{(x + 0.5)(x - 0.25)(x - 0.5)}{(-0.25 + 0.5)(-0.25 - 0.25)(-0.25 - 0.5)} \\ 
+                     &+ 0.800781 \dfrac{(x + 0.5)(x + 0.25)(x - 0.5)}{(0.25 + 0.5)(0.25 + 0.25)(0.25 - 0.5)} \\
+                     &+ 0.687500 \dfrac{(x + 0.5)(x + 0.25)(x - 0.25)}{(0.5 + 0.5)(0.5 + 0.25)(0.5 - 0.25)}
+            \end{align*}
+        Now we plug the values in:
+            \begin{equation*}
+                f(0) = 1.33203 \dfrac{0 - 0.25}{(-0.25 - 0.25)} + 0.800781 \dfrac{0 + 0.25}{(0.25 + 0.25)} = 1.0664055
+            \end{equation*}
+        and
+            \begin{align*}
+                f(0) &= 1.93750 \dfrac{(0 + 0.25)(0 - 0.25)}{(-0.5 + 0.25)(-0.5 - 0.25)} \\ 
+                     &+ 1.33203 \dfrac{(0 + 0.5)(0 - 0.25)}{(-0.25 + 0.5)(-0.25 - 0.25)} \\ 
+                     &+ 0.800781 \dfrac{(0 + 0.5)(0 + 0.25)}{(0.25 + 0.5)(0.25 + 0.25)} \\
+                     &= 0.953123666667
+            \end{align*}
+        and
+            \begin{align*}
+                f(0) &= 1.93750 \dfrac{(0 + 0.25)(0 - 0.25)(0 - 0.5)}{(-0.5 + 0.25)(-0.5 - 0.25)(-0.5 - 0.5)} \\ 
+                     &+ 1.33203 \dfrac{(0 + 0.5)(0 - 0.25)(0 - 0.5)}{(-0.25 + 0.5)(-0.25 - 0.25)(-0.25 - 0.5)} \\ 
+                     &+ 0.800781 \dfrac{(0 + 0.5)(0 + 0.25)(0 - 0.5)}{(0.25 + 0.5)(0.25 + 0.25)(0.25 - 0.5)} \\
+                     &+ 0.687500 \dfrac{(0 + 0.5)(0 + 0.25)(0 - 0.25)}{(0.5 + 0.5)(0.5 + 0.25)(0.5 - 0.25)} \\
+                     &= 0.984374
+            \end{align*}
+    \end{answer}
+
+\textbf{Exercise 8}: The data for Exercise $6$ were generated using the following functions. Use the error formula to find a bound for the error and compare the bound to the actual error for the cases $n = 1$ and $n = 2$.
+    \begin{itemize}
+        \item [(b)] $f(x) = x^{4} - x^{3} + x^{2} - x + 1$ 
+    \end{itemize}
+    \begin{answer}
+        We first find the second and third derivatives of the equation:
+            \begin{align*}
+                f^{(1)}(x) &= 4x^{3} - 3x^{2} + 2x - 1 \\
+                f^{(2)}(x) &= 12x^{2} - 6x + 2         \\
+                f^{(3)}(x) &= 24x - 6
+            \end{align*}
+        For the one degree polynomial interpolation, I used the x-values $-0.25, 0.25$, so the absolute value of the max of $f^{(2)}(x)$ on the interval is $4.25$. Then the error bound is given by:
+            \begin{equation*}
+                \lvert \text{Error} \rvert \leq \left\lvert \dfrac{4.25}{2}(0 - 0.25)(0 + 0.25) \right\rvert = 0.1328125
+            \end{equation*}
+        For the second degree polynomial interpolation, I used the x-values $-0.5, -0.25, 0.25$, so the absolute value of the max of $f^{(3)}(x)$ on the interval $(-0.5, 0.25)$ is $-18$. Then the error bound is given by:
+            \begin{equation*}
+                \lvert \text{Error} \rvert \leq \left\lvert \dfrac{18}{6}(0.5)(.25)(0.25) \right\rvert = 0.09375
+            \end{equation*}
+        Error Comparison: We see that $f(0) = 1$, So the error computed for the first degree approximation and second degree approximation are $\lvert 1 - 1.0664055 \rvert = 0.0664055$ and $\lvert 1 - 0.953123666667 \rvert = 0.046876333333$. We see that the absolute error is indeed smaller than the error given by the error bound.
+    \end{answer}
+
+\textbf{Exercise 21}: Show that $\max_{x_{j} \leq x \leq x_{j + 1}}\lvert g(x) \rvert = h^{2} / 4$, where $g(x) = (x - jh)(x - (j + 1)h)$.
+    \begin{answer}
+        Since $j \leq x \leq j + 1$, we have $g(x) = h^{2}(x - j)(x - (j + 1))$ achieving its max at the midpoint of the roots $j, j + 1$. So the max is at $x = \frac{2j + 1}{2}$, and $\frac{2j + 1}{2} - j = \frac{1}{2}$. Therefore, $\lvert g(\frac{2j + 1}{2}) \rvert = \frac{h^{2}}{4}$. Which is the max of $\lvert g(x) \rvert$.
+    \end{answer}
+
+\textbf{Exercise 22}: Prove Taylor's Theorem 1.14 by following the procedure in the proof of Theorem $3.3$. Hint: Let
+    \begin{equation*}
+        g(t) = f(t) - P(t) - [f(x) - P(x)] \cdot \dfrac{(t - x_{0})^{n + 1}}{(x - x_{0})^{n + 1}}
+    \end{equation*}
+where $P$ is the $n$th Taylor polynomial, and use Generalized Rolle's Theorem.
+    \begin{answer}
+        Let $P$ be the $n$th Taylor expansion and $R_{n}(x) = \frac{f^{n + 1}(x)}{(n + 1)!}(x - x_{0})$. If $x = x_{0}$, $\mathcal{E} = x_{0}$, and therefore, $R_{n}(\mathcal{E}) = \frac{f^{n + 1}(\mathcal{E})}{(n + 1)!}(0) = 0$, and $f(x_{0}) = x_{0} = P(x_{0})$. So
+            \begin{equation*}
+                g(t) = f(t) - P(t) - [f(x) - P(x)] \cdot \dfrac{(t - x_{0})^{n + 1}}{(x - x_{0})^{n + 1}}
+            \end{equation*}
+        is continuous. At $t = x_{0}$, we get $g(t) = 0$, and when $t = x$, we get $g(t) = 0$ also. Then this means that on the interval $[x_{0}, x]$, by generalized Rolle's theorem, there is an $\mathcal{E}$ such that:
+            \begin{equation*}
+                g^{(n + 1)}(\mathcal{E}) = 0 = f^{(n + 1)}(\mathcal{E}) - P^{(n + 1)}(\mathcal{E}) - [f(x) - P(x)] \dv[n + 1]{}{t} \dfrac{(t - x_{0})^{n + 1}}{(x - x_{0})^{n + 1}}
+            \end{equation*}
+        and
+            \begin{align*}
+                \dv[n + 1]{t}\dfrac{(t - x_{0})^{n + 1}}{(x - x_{0})^{n + 1}} &= \dfrac{(n + 1)!}{(x - x_{0})^{n + 1}}   
+            \end{align*}
+        This means that
+            \begin{align*}
+                [f(x) - P(x)] \dfrac{(n + 1)!}{(x - x_{0})^{n + 1}} &= f^{(n + 1)}(\mathcal{E}) - P^{(n + 1)}(\mathcal{E})           \\
+                f(x) - P(x)                                         &= \dfrac{f^{(n + 1)}(\mathcal{E})}{(n + 1)!}(x - x_{0})^{n + 1} = R_{n}(\mathcal{E})
+            \end{align*}
+        as $P$ is a polynomial of degree $n$.
+    \end{answer}
+
+\textbf{Discussion 2}: If we decide to increase the degree of the interpolating polynomial by adding nodes, is there an easy way to use a previous interpolating polynomial to obtain a higher-degree interpolating polynomial, or do we need to start over?
+    \begin{answer}
+        Yes there is a way. Suppose that we have an interpolating polynomial for $x_{0}, x_{1}, \ldots, x_{n}$ called $f_{n}(x)$ which gives us the values $y_{0}, \ldots, y_{n}$ respectively. If we want to add another node $x_{n + 1}$ such that $f(x_{i}) = y_{i}$, we can do:
+            \begin{equation*}
+                f(x) = f_{n}(x) \cdot \sum_{j = 0}^{n}\dfrac{\prod_{i \neq j}^{n + 1}(x - x_{i})}{\prod_{i \neq j}^{n + 1}(x_{j} - x_{i})} + y_{n + 1} \cdot \dfrac{(x - x_{0}) \cdots (x - x_{n})}{(x_{n + 1} - x_{0}) \cdots (x_{n + 1} - x_{n})}
+            \end{equation*}
+        To see that this works, in the term:
+            \begin{equation*}
+                \sum_{j = 0}^{n} \dfrac{\prod_{i \neq j}^{n + 1}(x - x_{i})}{\prod_{i \neq j}^{n + 1}(x_{j} - x_{i})}
+            \end{equation*}
+        each summand evaluates to $0$ if $x = x_{i}$ for $i = 0, \ldots, n + 1, i \neq j$. But if $x = x_{j}$, then the numerator and denominator of the summand are equal and the summand evaluates to $1$. Since $x$ is only one of $x_{i}$ for $i = 1, \ldots, n$, We have that the whole sum is $1$ if $x$ is one of $x_{i}$ for $i = 1, \ldots, n$. Now if $x = x_{n + 1}$, it evaluates to $0$ because of the $x - x_{n + 1}$ term in the numerator. The right term is just a Lagrange polynomial, so this shows that the interpolation for one extra term works.
+    \end{answer}
+
+\newpage
+\section*{Exercise Set 3.2}
+\hrule
+
+\textbf{Exercise 6}: Neville's method is used to approximate $f(0.5)$, giving the following table.
+    \begin{align*}
+        \begin{array}{ c c c c }
+            x_{0} = 0   & P_{0} = 0   &                &                             \\
+            x_{1} = 0.4 & P_{1} = 2.8 & P_{0, 1} = 3.5 &                             \\
+            x_{2} = 0.7 & P_{2}       & P_{1, 2}       & P_{0, 1, 2} = \frac{27}{7}   
+        \end{array}
+    \end{align*}
+Determine $P_{2} = f(0.7)$.
+    \begin{answer}
+        To get get $P_{2}$, we need to solve for $P_{1, 2}$ first. We have the relation that:
+            \begin{equation*}
+                P_{0, 1, 2}(x) = \dfrac{(x - 0)P_{1, 2}(x) + (x - 0.7)P_{0, 1}(x)}{(0.7 - 0)}
+            \end{equation*}
+        So
+            \begin{equation*}
+                P_{0, 1, 2}(0.5) = \dfrac{0.5P_{1, 2}(0.5) -0.2(3.5)}{.7} = \dfrac{27}{7}
+            \end{equation*}
+        and therefore,
+            \begin{equation*}
+                P_{1, 2}(0.5) = ((27 / 7) * .7 + 0.2(3.5)) / 0.5 = 6.8
+            \end{equation*}
+        Now we can do the same thing but using $P_{1, 2}, P_{1}$:
+            \begin{equation*}
+                P_{1, 2}(x) = \dfrac{(x - 0.4)P_{2}(x) + (x - 0.7)P_{1}(x)}{0.7 - 0.4}
+            \end{equation*}
+        then
+            \begin{equation*}
+                P_{1, 2}(0.5) = \dfrac{0.1P_{2}(0.5) - 0.5(2)}{0.3} = 6.8
+            \end{equation*}
+        so
+            \begin{equation*}
+                P_{2}(0.5) = ((0.3) * 6.8 + 1) / 0.1 = 30.4
+            \end{equation*}
+    \end{answer}
+
+\textbf{Exercise 10}: Neville's Algorithm is used to approximate $f(0)$ using $f(-2), f(-1), f(1)$, and $f(2)$. Suppose $f(-1)$ was overstated by $2$ and $f(1)$ was understated by $3$. Determine the error in the original calculation of the value of the interpolating polynomial to approximate $f(0)$.
+    \begin{answer}
+        Using Neville's algorithm, I got:
+            \begin{align*}
+                \begin{array}{ c c c c c c }
+                    x_{0} & -2 & f(-2) &                        &                                 &                                            \\
+                    x_{1} & -1 & f(-1) & f(-2) + 2f(-1)         &                                 &                                            \\
+                    x_{2} & 1  & f(1)  & \frac{f(-1) - f(1)}{2} & \frac{-f(-2) - f(-1) - f(1)}{3} &                                            \\
+                    x_{3} & 2  & f(2)  & -f(2) - 2f(1)          & \frac{f(2) + 3f(1) - f(-1)}{3}  & \frac{1}{3}(f(-2) + 2f(-1) + 2f(1) + f(2))   
+                \end{array}
+            \end{align*}
+        So the rightmost column is the correct approximation. The original calculation would substitute $f(-1) \rightarrow f(-1) + 2, f(1) \rightarrow f(1) - 3$. This give:
+            \begin{equation*}
+                \dfrac{1}{3}(f(-2) + 2f(-1) + 4 + 2f(1) - 6 + f(2)) = \dfrac{1}{3}(f(-2) + 2f(-1) + 2f(1) + f(2)) - \dfrac{2}{3}
+            \end{equation*}
+        So the error is $-2/3$.
+    \end{answer}
+
+\textbf{Discussion 2}: Can Neville's method be used to obtain the interpolation polynomial at a general point as opposed to a specific point?
+    \begin{answer}
+        Yes it can, by using Neville's method, but without fixing the approximation point.
+    \end{answer}
+
+\newpage
+\section*{Exercise Set 3.3}
+\hrule
+
+\textbf{Exercise 8}: \begin{itemize}
+    \item [(a)] Use Algorithm $3.2$ to construct the interpolating polynomial of degree four for the unequally spaced points given in the following table:
+        \begin{center}
+            \begin{tabular}{ c c }
+                \hline x   & f(x)     \\
+                \hline 0.0 & -6.00000 \\
+                \hline 0.1 & -5.89483 \\
+                \hline 0.3 & -5.65014 \\
+                \hline 0.6 & -5.17788 \\
+                \hline 1.0 & -4.28172   
+            \end{tabular}
+        \end{center}
+        \begin{answer}
+            I got:
+                \begin{align*}
+                    f(s) &= s*((((1135193048929907*s)/18014398509481984  \\
+                        &+ 3989974812726791/22517998136852480)*(s - 3/10) \\
+                        &+ 5156621573339067/9007199254740992)*(s - 1/10) + 10517/10000) - 6
+                \end{align*}
+            using matlab. Here is the code:
+        \inputminted{matlab}{code/NewtonForwardDifference/NewtonForwardDifference.m}
+        \inputminted{matlab}{code/NewtonForwardDifference/forwardPoly.m}
+        \inputminted{matlab}{code/script2.m}
+        \end{answer}
+
+    \item [(b)] Add $f(1.1) = -3.99583$ to the table and construct the interpolating polynomial of degree five. 
+        \begin{answer}
+            I got:
+                \begin{align*}
+                    f(s) &= s*(((((8162368155838225*s)/576460752303423488 \\
+                    &+ 28163809409918799/576460752303423488)*(s - 3/5) \\
+                    &+ 3873095679539377/18014398509481984)*(s - 3/10) \\
+                    &+ 5156621573339067/9007199254740992)*(s - 1/10) + 10517/10000) - 6
+                \end{align*}
+            from the same matlab code above.
+        \end{answer}
+\end{itemize}
+
+\textbf{Exercise 13}: The newton forward-difference formula is used to approximate $f(0.3)$ given the following data.
+    \begin{align*}
+        \begin{array}{ c c c c c }
+            x    & 0.0  & 0.2  & 0.4  & 0.6  \\
+            f(x) & 15.0 & 21.0 & 30.0 & 51.0   
+        \end{array}
+    \end{align*}
+Suppose it is discovered that $f(0.4)$ was understated by $10$ and $f(0.6)$ was overstated by $5$. By what amount should the approximation to $f(0.3)$ be changed?
+    \begin{answer}
+        Using matlab, I got an error of $-5.9375$. This means that we should add $5.9375$ to our approximation to get the correct approximation. Here is my code:
+        \inputminted{matlab}{code/NewtonForwardDifference/NewtonForwardDifference.m}
+        \inputminted{matlab}{code/NewtonForwardDifference/forwardPoly.m}
+        \inputminted{matlab}{code/script4.m}
+    \end{answer}
+    
+
+
+\textbf{Exercise 18}: The fastest time ever recorded in the Kentucky Derby was by a horse named Secretariat in $1973$. He covered the $1 \frac{1}{4}$ mile track in $1:59 \frac{2}{5}$ (1 minute and $59.4$ seconds). Times at the quarter-mile, half-mile, and mile poles were $0:25 \frac{1}{5}, 0:49 \frac{1}{5}$, and $1:36 \frac{2}{5}$.
+    \begin{itemize}
+        \item [(a)] Use interpolation to predict the time at the three-quarter mile pole and compare this to the actual time of $1:13$.
+            \begin{answer}
+                We are given the table:
+                    \begin{align*}
+                        \begin{array}{ c c c }
+                            x_{0} & .25  & 25.2  \\
+                            x_{1} & .5   & 49.2  \\
+                            x_{2} & 1    & 96.4  \\
+                            x_{3} & 1.25 & 119.4   
+                        \end{array}
+                    \end{align*}
+                We have that:
+                    \begin{align*}
+                        f[x_{0}, x_{1}] &= \dfrac{49.2 - 25.2}{.25} = 96  \\
+                        f[x_{1}, x_{2}] &= \dfrac{96.4 - 49.2}{.5} = 94.4 \\
+                        f[x_{2}, x_{3}] &= \dfrac{119.4 - 96.4}{.25} = 92   
+                    \end{align*}
+                and:
+                    \begin{align*}
+                        f[x_{0}, x_{1}, x_{2}] &= \dfrac{94.4 - 96}{.75} = \dfrac{-1.6}{.75} = \dfrac{-6.4}{3}        \\
+                        f[x_{1}, x_{2}, x_{3}] &= \dfrac{92 - 94.4}{.75} = \dfrac{-2.4}{.75} = \dfrac{-9.6}{3} = -3.2   
+                    \end{align*}
+                and finally:
+                    \begin{equation*}
+                        f[x_{0}, x_{1}, x_{2}, x_{4}] = \dfrac{-3.2 + \frac{6.4}{3}}{1} = \dfrac{-3.2}{3}
+                    \end{equation*}
+                Putting this all together:
+                    \begin{align*}
+                        P_{3}(x) &= f[x_{0}] + f[x_{0}, x_{1}](x - x_{0}) + f[x_{0}, x_{1}, x_{2}](x - x_{0})(x - x_{1}) + f[x_{0}, x_{1}, x_{2}, x_{3}](x - x_{0})(x - x_{1})(x - x_{2}) \\
+                                 &= 25.2 + 96(x - 0.25) - \dfrac{6.4}{3}(x - 0.25)(x - .5) - \dfrac{3.2}{3}(x - 0.25)(x - .5)(x - 1)                                                        
+                    \end{align*}
+                Plugging in $x = .75$, I got $f(x) = 72.9666$ which is $1 : 12\frac{9}{10}$. This is very close to $1:13$.
+            \end{answer}
+
+        \item [(b)] Use the derivative of the interpolating polynomial to estimate the speed of Secretariat at the end of the race. 
+            \begin{answer}
+                Using matlab, I got $f^{\prime}(119.4) = 0.0110$. This means that Secretariat was moving $0.0110 \text{ mi/s}$ or $39.6 \text{ mph}$. Here is the code:
+        \inputminted{matlab}{code/NewtonForwardDifference/NewtonForwardDifference.m}
+        \inputminted{matlab}{code/NewtonForwardDifference/forwardPoly.m}
+        \inputminted{matlab}{code/script3.m}
+
+
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 20}: 
+    \begin{itemize}
+        \item [(a)] Show that the cubic polynomials
+            \begin{equation*}
+                P(x) = 3 - 2(x + 1) + 0(x + 1)(x) + (x + 1)(x)(x - 1)
+            \end{equation*}
+        and
+            \begin{equation*}
+                Q(x) = -1 + 4(x + 2) - 3(x + 2)(x + 1) + (x + 2)(x + 1)(x)
+            \end{equation*}
+        both interpolate the data
+            \begin{center}
+                \begin{tabular}{ c c c c c c }
+                    \hline x    & -2 & -1 & 0 & 1  & 2 \\
+                    \hline f(x) & -1 & 3  & 1 & -1 & 3   
+                \end{tabular}
+            \end{center}
+            \begin{answer}
+                We can quickly evaluate $P$ at $-1, 0, 1$:
+                    \begin{align*}
+                        P(0)  &= 3 - 2 = 1  \\
+                        P(-1) &= 3          \\
+                        P(1)  &= 3 - 4 = -1   
+                    \end{align*}
+                Now for $P(-2), P(2)$:
+                    \begin{align*}
+                        P(-2) &= 3 + 2 + (-1)(-2)(-3) \\
+                              &= 5 - 6 = -1           \\
+                        P(2)  &= 3 - 6 + 3(2)(1)      \\
+                              &= -3 + 6 = 3             
+                    \end{align*}
+                We can quickly evaluate $Q$ at $0, -1, -2$:
+                    \begin{align*}
+                        Q(-2) &= -1             \\
+                        Q(-1) &= -1 + 4 = 3     \\
+                        Q(0)  &= -1 + 8 - 6 = 1   
+                    \end{align*}
+                and for $Q(1), Q(2)$:
+                    \begin{align*}
+                        Q(1) &= -1 + 12 - 3(3)(2) + (3)(2)(1) \\
+                             &= 11 - 18 + 6                   \\
+                             &= -1                            \\
+                        Q(2) &= -1 + 16 - 3(4)(3) + (4)(3)(2) \\
+                             &= 15 - 36 + 24                  \\
+                             &= 3                               
+                    \end{align*}
+            \end{answer}
+
+        \item [(b)] Why does part $(a)$ not violate the uniqueness property of interpolating polynomials? 
+            \begin{answer}
+                It does not violate the uniqueness property because they are the same polynomial when expanded out.
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 21}: Given 
+    \begin{align*}
+        P_{n}(x) &= f[x_{0}] + f[x_{0}, x_{1}](x - x_{0}) + a_{2}(x - x_{0})(x - x_{1}) \\
+                 &+ a_{3}(x - x_{0})(x - x_{1})(x - x_{2}) + \cdots                     \\
+                 &+ a_{n}(x - x_{0})(x - x_{1}) \cdots (x - x_{n - 1}),                   
+    \end{align*}
+use $P_{n}(x_{2})$ to show that $a_{2} = f[x_{0}, x_{1}, x_{2}]$.
+    \begin{answer}
+        Plugging in $x_{2}$, we get:
+            \begin{equation*}
+                f(x_{2}) = P_{n}(x_{2}) = f[x_{0}] + f[x_{0}, x_{1}](x_{2} - x_{0}) + a_{2}(x_{2} - x_{0})(x_{2} - x_{1})
+            \end{equation*}
+        Move $a_{2}$ to one side:
+            \begin{equation*}
+                f(x_{2}) - f(x_{0}) - f[x_{0}, x_{1}](x_{2} - x_{0}) = a_{2}(x_{2} - x_{0})(x_{2} - x_{1})
+            \end{equation*}
+        and divide by $x_{2} - x_{1}$:
+            \begin{equation*}
+                \dfrac{f(x_{2}) - f(x_{1})}{x_{2} - x_{1}} + \dfrac{f(x_{1}) - f(x_{0})}{x_{2} - x_{1}} - \dfrac{(f(x_{1}) - f(x_{0}))(x_{2} - x_{0})}{(x_{1} - x_{0})(x_{2} - x_{1})} = a_{2}(x_{2} - x_{0})
+            \end{equation*}
+        and so on:
+            \begin{align*}
+                f[x_{1}, x_{2}] + \dfrac{(f(x_{1}) - f(x_{0}))(x_{1} - x_{0})}{(x_{2} - x_{1})(x_{1} - x_{0})} - \dfrac{(f(x_{1}) - f(x_{0}))(x_{2} - x_{0})}{(x_{2} - x_{1})(x_{1} - x_{0})} &= a_{2}(x_{2} - x_{0}) \\
+                f[x_{1}, x_{2}] + \dfrac{(f(x_{1}) - f(x_{0}))(x_{1} - x_{2})}{(x_{2} - x_{1})(x_{1} - x_{0})}                                                                                &= a_{2}(x_{2} - x_{0}) \\
+                f[x_{1}, x_{2}] - \dfrac{f(x_{1}) - f(x_{0})}{x_{1} - x_{0}}                                                                                                                  &= a_{2}(x_{2} - x_{0}) \\
+                f[x_{1}, x_{2}] - f[x_{0}, x_{1}]                                                                                                                                             &= a_{2}(x_{2} - x_{0}) \\
+                \dfrac{f[x_{1}, x_{2}] - f[x_{0}, x_{1}]}{x_{2} - x_{0}}                                                                                                                      &= a_{2}                  
+            \end{align*}
+        which is the definition of $f[x_{0}, x_{1}, x_{2}]$.
+    \end{answer}
+
+\end{document}      

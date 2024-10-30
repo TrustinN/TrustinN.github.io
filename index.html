@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Me</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="./menu.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-title">
+        <button class="menu-button" type="button" onclick="toggleMenu()">
+          <div class="menu-icon"></div>
+        </button>
+      </div>
+      <nav aria-label="About Me Details" id="menu">
+        <ul>
+          <li><a href="./projects/index.html"> Projects </a></li>
+          <li><a href="./education/index.html"> Education </a></li>
+          <li><a href="./hobbies/index.html"> Hobbies </a></li>
+          <li>
+            <a
+              class="github"
+              href="https://github.com/TrustinN"
+              width="230"
+              height="225"
+            >
+              Github
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <div class="banner">
+      <h1>Trustin Nguyen</h1>
+      <p>Computer Science / Mathematics Enjoyer</p>
+    </div>
+    <main>
+      <div class="page-container include-sidebar">
+        <div class="sidebar-container">
+          <figure class="profile-picture">
+            <img
+              src="./media/profile_pic.JPG"
+              alt="Profile Picture"
+              height="3088"
+              width="2320"
+            />
+          </figure>
+          <div class="sidebar-nav">
+            <nav aria-label="About Me Overview">
+              <ul>
+                <li><a href="#Introduction"> Introduction </a></li>
+                <li><a href="#Projects"> Projects </a></li>
+                <li><a href="#Education"> Education </a></li>
+                <li><a href="#Hobbies"> Hobbies </a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div class="content-container">
+          <section class="overview">
+            <article id="Introduction">
+              <h2>Introduction</h2>
+              <p>
+                I like to spend my time learning new things/solving problems.
+                Other than that, maybe hanging out with friends, going on an
+                occasional walk and looking around.
+              </p>
+            </article>
+          </section>
+          <section class="overview">
+            <article id="Projects">
+              <h2>Projects</h2>
+              <p>
+                Working on projects is the most enjoyable part of learning,
+                where I can best figure out the details. So far, I have dived
+                into graphics heavy projects, which are cool to visualize, and
+                more recently, front-end related projects such as designing a
+                website.
+              </p>
+              <br />
+              <p>
+                Favorite projects I've done include developing this website,
+                implementing an RTree, RRT path planning algorithm, and a 3D
+                reconstruction algorithm.
+              </p>
+            </article>
+            <div class="explore">
+              <a href="./projects/index.html"> &#10145;</a>
+            </div>
+          </section>
+          <section class="overview">
+            <article id="Education">
+              <h2>Education</h2>
+              <p>
+                I started off in math, but decided cs would be more fun,
+                especially because of the blend of theory and hands on
+                application that comes with a computer science degree.
+              </p>
+              <br />
+              <p>
+                Math courses did feel more enjoyable to take, as there were
+                often cool/powerful ideas and techniques used. The way a theory
+                is built from the ground up is very magical. It just lacked the
+                little bit of the application that I desired.
+              </p>
+              <br />
+              <p>
+                CS courses had much more work to do, and many topics to learn to
+                be functional at programming. So it did feel a little bit dry
+                learning the tools needed to build a program. It is, however,
+                rewarding to finish a project and see the components fit nicely
+                together.
+              </p>
+              <br />
+              <p>
+                On the very applied side of the spectrum is electrical
+                engineering. It had some very cool applications, but its
+                low-level and hands-on nature wasn't desirable.
+              </p>
+              <br />
+              <p>
+                Other courses outside of these topics were a breath of fresh
+                air. The professors were especially engaging for these topics
+                and it was nice seeing something different than what I was
+                usually exposed to.
+              </p>
+              <br />
+              <aside>
+                <details>
+                  <summary>Favorite place to study?</summary>
+                  <p>A corner in Main Stacks 2nd floor</p>
+                </details>
+                <details>
+                  <summary>Best scenary?</summary>
+                  <p>Botanical Garden</p>
+                  <div>
+                    <img
+                      src="./media/pond.jpeg"
+                      alt="botanical garden pond"
+                      width="4032"
+                      height="3024"
+                    />
+                    <img
+                      src="./media/redwood.jpeg"
+                      alt="botanical garden redwood"
+                      width="4032"
+                      height="3024"
+                    />
+                  </div>
+                </details>
+              </aside>
+            </article>
+            <div class="explore">
+              <a href="./education/index.html"> &#10145;</a>
+            </div>
+          </section>
+          <section class="overview">
+            <article id="Hobbies">
+              <h2>Hobbies</h2>
+              <p>
+                I grew up most of my life learning the piano, but have taken up
+                other things on the side for added fun. Cooking is fun at times,
+                especially if I have some free time. For some reason I find
+                baking more enjoyable.
+              </p>
+            </article>
+            <div class="explore">
+              <a href="./hobbies/index.html"> &#10145; </a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <p>&lt;&lt;&lt; &copy; Trustin Nguyen &gt;&gt;&gt;</p>
+      <p><a href="#"> Back to Top </a></p>
+    </footer>
+  </body>
+</html>

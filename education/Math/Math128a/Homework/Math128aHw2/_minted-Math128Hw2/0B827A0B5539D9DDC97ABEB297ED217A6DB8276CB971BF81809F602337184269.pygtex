@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{y}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{newton}\PYG{p}{(@}\PYG{n}{myfunc2}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{100}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{@}\PYG{n}{abs\PYGZus{}error}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{1e\PYGZhy{}5}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.3793646}\PYG{p}{)}
+\PYG{n}{z}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{newton}\PYG{p}{(@}\PYG{n}{myfunc2}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{25}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{@}\PYG{n}{abs\PYGZus{}error}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{1e\PYGZhy{}5}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.3793646}\PYG{p}{)}
+\end{Verbatim}

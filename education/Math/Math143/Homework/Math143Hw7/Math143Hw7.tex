@@ -1,0 +1,303 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math143/Homework/Math143Hw7/Math143Hw7.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+
+\title{Math143Hw7}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Given a variety $X$, recall that we defined the field of rational functions on $X$ to be $k(X) = \Frac{\Gamma(X)}$. Let $X = V(xw - yz) \subseteq \mathbb{A}^{4}$ and let $f  = \overline{x}/\overline{y} \in k(X)$.
+    \begin{itemize}
+        \item [(a)] Prove that the poles of $f$ are exactly $V(y, w) \subseteq X$, equivalently the open set where $f$ is defined is the compliment of $V(y, w) \subseteq X$.
+            \begin{proof}
+                We have that in $k(X)$, $\frac{x}{y} = \frac{z}{w}$ because of the fact that:
+                    \begin{equation*}
+                        xw - zy = 0 \implies xw = zy \implies \dfrac{x}{y} = \dfrac{z}{w}
+                    \end{equation*}
+                Therefore, we look for when the denominators for both of these vanish. This is just $V(y) \cap V(w) = V(y, w)$. 
+            \end{proof}
+
+        \item [(b)] Show it is impossible to write $f = a/b$ for $a, b \in \Gamma(X)$ where $b(P) \neq 0$ for every $P$ where $f$ is defined.
+            \begin{proof}
+                Suppose that $f = a/b$. Then by the relation:
+                    \begin{equation*}
+                        \dfrac{a}{b} = \dfrac{x}{y}, 
+                    \end{equation*}
+                we get:
+                    \begin{equation*}
+                        ay = bx
+                    \end{equation*}
+                Now for a point in $V(y) - V(x) - V(w)$, which is non-empty, we have
+                    \begin{equation*}
+                        ay(p) = 0 = bx(p)
+                    \end{equation*}
+                But $p$ does not vanish on $x$, so it must vanish on $b$.
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 2}: Practice with the local ring
+    \begin{itemize}
+        \item [(a)] Let $X$ be a variety. In class we defined $\mathcal{O}_{P}(X) \subseteq k(X)$ as the subset of rational functions that are defined at $P \in X$. Prove that $\mathcal{O}_{P}(X)$ is in fact a subring.
+            \begin{proof}
+                Let $f, g \in \mathcal{O}_{P}(X)$. We have commutativity, associativity. We need to prove that the identity exists, for both multiplication, addition, and that it is closed under these operations.
+                    \begin{itemize}
+                        \item Because $\Gamma(X) \subseteq \mathcal{O}_{P}(X)$, we have that $1$, $0$ as polynomials are in $\mathcal{O}_{P}(X)$. We see that $1 \in \mathcal{O}_{P}(X)$ because $1(p) = 1 \neq 0$. So therefore, a denominator of $1$ is always possible, and we just choose our numerator to be elements of $\Gamma(X)$.
+
+                        \item If $\frac{f(x)}{g(x)}, \frac{f^{\prime}(x)}{g^{\prime}(x)} \in \mathcal{O}_{P}(X)$, we have:
+                            \begin{equation*}
+                                \dfrac{f(x)}{g(x)}  + \dfrac{f^{\prime}(x)}{g^{\prime}(x)} = \dfrac{f(x)g^{\prime}(x) + f^{\prime}(x)g(x)}{g(x)g^{\prime}(x)}
+                            \end{equation*}
+                        and because both $g(p) \neq 0$, $g^{\prime}(p) \neq 0$, we are over a field, which is an integral domain, so $g(p)g^{\prime}(p) \neq 0$. So this sum is in $\mathcal{O}_{P}(X)$.
+
+                        \item If $\frac{f(x)}{g(x)}, \frac{f^{\prime}(x)}{g^{\prime}(x)} \in \mathcal{O}_{P}(X)$, we have:
+                            \begin{equation*}
+                                \dfrac{f(x)}{g(x)} \cdot \dfrac{f^{\prime}(x)}{g^{\prime}(x)} = \dfrac{f(x)f^{\prime}(x)}{g(x)g^{\prime}(x)}
+                            \end{equation*}
+                        where again, $g(p)g^{\prime}(p) \neq 0$, so the product is in $\mathcal{O}_{P}(X)$.
+
+                        \item We also have that additive inverses exist, because $-1$ is in $\Gamma(X)$, which means that $-f(x)/g(x) \in \mathcal{O}_{P}(X)$. 
+                    \end{itemize}
+                So $\mathcal{O}_{P}(X)$ is a ring.
+            \end{proof}
+
+        \item [(b)] Let 
+            \begin{equation*}
+                R = \left\{\dfrac{a}{b} \in k(x) : a, b \in k[x] \text{ and }b(0) \neq 0\right\}
+            \end{equation*}
+        Prove that $R$ is a local ring (i.e. that $R$ has a unique maximal ideal, or equivalently that the non-units form an ideal).
+            \begin{proof}
+                The non-units are elements $a/b$ where $x \divides a$. If $x \ndivides a$, the $a$ has a constant term, non-zero, so $b/a$ exists in $R$. Also if $x \divides a$, then it is a non-unit because $b/a$ has $a(0) = 0$ so $b/a \notin R$. So we have found the non-units. Now we just need to show that they form an ideal. So if 
+                    \begin{equation*}
+                        N = \{\text{non-units of $R$}\}
+                    \end{equation*}
+                Then suppose that $f/g, f^{\prime}/g^{\prime} \in N$. Then:
+                    \begin{equation*}
+                        \dfrac{f}{g} + \dfrac{f^{\prime}}{g^{\prime}} = \dfrac{fg^{\prime} + f^{\prime}g}{gg^{\prime}}
+                    \end{equation*}
+                But $x \divides f$, $x \divides f^{\prime}$, so $x \divides fg^{\prime} + f^{\prime}g$. Additionally, $gg^{\prime}(0) \neq 0$ because we are over a field. So therefore, the sum is a non-unit also and therefore, is in $N$. Now if $a/b \in R$, $f/g \in N$, then:
+                    \begin{equation*}
+                        \dfrac{a}{b} \cdot \dfrac{f}{g} = \dfrac{af}{bg}
+                    \end{equation*}
+                and by the same idea, $x \divides af$, $bg(0) \neq 0$ so it is closed under multiplication from the ring $R$.
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 3}: Let $k$ be algebraically closed. Let $\mathcal{O}_{P}(X)$ be the local ring of a variety $X$ at a point $P$. Show that there is a one-to-one correspondence between the prime ideals in $\mathcal{O}_{P}(X)$ and the subvarieties of $X$ that pass through $P$.
+    \begin{proof}
+        Let $I$ be a prime ideal in $\mathcal{O}_{P}(X)$. We have that:
+            \begin{equation*}
+                \Gamma(X) \cap I = \{f \in \mathcal{O}_{p}(X) : \dfrac{f}{g} \in I\}
+            \end{equation*}
+        or the intersection is the set of numerators of $I$. Then if $f_{1}f_{2} \in \Gamma(X) \cap I$, then we have:
+            \begin{equation*}
+                \dfrac{f_{1}}{1} \cdot \dfrac{f_{2}}{1} \in I
+            \end{equation*}
+        and since $I$ is prime, wlog, $f_{1}/1 \in I$. Then $f_{1} \in \Gamma(X) \cap I$, so $\Gamma(X) \cap I$ is prime also. Prime ideals of $\Gamma(X)$ are radical ideals. We know that there is a bijection between radical ideals of $k[x_{1}, \ldots , x_{n}]$ and radical ideals of $k[x_{1}, \ldots , x_{n}] / I(X)$. Furthermore, there is a bijection between radical ideals and algebraic sets by taking the vanishing. So if $I$ is prime of $\mathcal{O}_{P}(X)$, then we map it to 
+            \begin{equation*}
+                I \cap\Gamma(X) \rightarrow I \cap \Gamma(X) + I(X) \rightarrow V(I \cap \Gamma(X) + I(X))
+            \end{equation*}
+            And since 
+            \begin{equation*}
+                I \cap\Gamma(X) + I(X) \supseteq I(X)
+            \end{equation*}
+            then 
+            \begin{equation*}
+                V(I \cap \Gamma(X) + I(X))  \subseteq V(I(X)) = X
+            \end{equation*}
+        To go backwards, we can try:
+            \begin{equation*}
+                Y \subseteq X \mapsto J \subseteq \mathcal{O}_{P}(Y) \subseteq \mathcal{O}_{P}(X)
+            \end{equation*}
+        if $Y \subseteq X$, then we have $I(Y)  \supseteq I(X)$ which means $\Gamma(Y) \subseteq \Gamma(X)$ so indeed $\mathcal{O}_{P}(Y) \subseteq \mathcal{O}_{P}(X)$. As a local ring, we can only map it to the ideal of non-units, which is prime, because if $f_{1}f_{2} \in J$, then $f_{1}, f_{2}$ cannot both be units, otherwise, we have a unit in $J$. So there is an inverse map, and notice that the composition is the identity:
+            \begin{equation*}
+                J \cap \Gamma(X) = J \cap\Gamma(Y) = I(Y)
+            \end{equation*}
+        since $I(Y)$ is the pole we then have:
+            \begin{center}
+                \begin{tikzcd}
+                    I(Y) \ar[r, ""] & I(Y) + I(X) \ar[r, ""]   & V(I(Y) + I(X)) = V(I(X)) \cap V(I(Y)) = Y \\
+                    \Gamma(X)       & k[x_{1}, \ldots , x_{n}] & \mathbb{A}^{n}                              
+                \end{tikzcd}
+            \end{center}
+        which concludes the proof.
+    \end{proof}
+
+\textbf{Exercise 4}: Let $k = \mathbb{C}$. For each polynomial $f$ below, find all singular points of $V(f)$. For each singular point of $V(f)$, find the multiplicity and the tangent cone. Write the tangent cone as a union of lines.
+    \begin{itemize}
+        \item [(a)] $y^{3} - y^{2} + x^{3} - x^{2} + 3xy^{2} + 3x^{2}y + 2xy$
+            \begin{answer}
+                We have:
+                    \begin{align*}
+                        f_{x} &= 3x^{2} - 2x + 3y^{2} + 6xy + 2y \\
+                        f_{y} &= 3y^{2} - 2y + 6xy + 3x^{2} + 2x   
+                    \end{align*}
+                so when $f_{x} = 0$, we have:
+                    \begin{equation*}
+                        3x^{2} + 3y^{2} + 6xy = 2x - 2y
+                    \end{equation*}
+                So that also means:
+                    \begin{equation*}
+                        f_{y} = 3y^{2} + 6xy + 3x^{2} - 2y + 2x = 2x - 2y - 2y + 2x
+                    \end{equation*}
+                So if $f_{y} = 0$ also, 
+                    \begin{equation*}
+                        -4y + 4x = 0 \implies 4x = 4y \implies x = y
+                    \end{equation*}
+                Plugging this back into $f$, we get:
+                    \begin{equation*}
+                        y^{3} - y^{2} + y^{3} - y^{2} + 3y^{3} + 3y^{3} + 2y^{2} = 8y^{3}
+                    \end{equation*}
+                Now if $f = 0$, we have:
+                    \begin{equation*}
+                        8y^{3} = 0
+                    \end{equation*}
+                which means that $y = 0$, $x = 0$. Then $(0, 0)$ is the only singular point. The multiplicity is the minimal degree of the terms which is $2$. The tangent cone is $V(f_{2}) = V(x^{2} - 2xy + y^{2}) = V(x - y)$. So the tangent cone is $y = x$.
+            \end{answer}
+
+        \item [(b)] $x^{4} + y^{4} - x^{2}y^{2}$
+            \begin{proof}
+                Same process as above:
+                    \begin{align*}
+                        f_{x} &= 4x^{3} - 2y^{2} \\
+                        f_{y} &= 4y^{3} - 2x^{2}   
+                    \end{align*}
+                and 
+                    \begin{equation*}
+                        f_{x} = 0 \implies 2y^{2} = 4x^{3}
+                    \end{equation*}
+                so we get:
+                    \begin{equation*}
+                        f_{y} = 2x^{3}y - 2x^{2}
+                    \end{equation*}
+                Now if $f_{y} = 0$ also:
+                    \begin{equation*}
+                        2x^{3}y - 2x^{2} = 2x^{2}(xy - 1) = 0
+                    \end{equation*}
+                So $x = 0$ or $xy = 1$. The singular points are the points in $V(x^{4} + y^{4} - 1)$ and $(0, 0)$. The multiplicity of the point $(0, 0)$ is $2$ while it is $1$ for $V(x^{4} + y^{4} - 1)$ after performing some shift of coordinates I think. And the tangent cone is $V(x^{2}y^{2}) = V(x) \cup V(y)$. So the lines $y = 0$ and $x = 0$ make up the tangent cone.
+            \end{proof}
+
+        \item  [(c)] $x^{3} + y^{3} - 3x^{2} - 3y^{2} + 3xy + 1$. 
+            \begin{proof}
+                We have:
+                    \begin{align*}
+                        f_{x} &= 3x^{2} - 6x + 3y \\
+                        f_{y} &= 3y^{2} - 6y + 3x   
+                    \end{align*}
+                And if $f_{x} = 0$:
+                    \begin{equation*}
+                        3y = 6x - 3x^{2} \implies y = 2x - x^{2} \implies y = 1-(x - 1)^{2}
+                    \end{equation*}
+                so
+                    \begin{equation*}
+                        f_{y} = 6xy - 3x^{2}y - 9x + 6x^{2}
+                    \end{equation*}
+                and if $f_{y} = 0$:
+                    \begin{equation*}
+                        3x(y - xy - 3 + 2x) = 0
+                    \end{equation*}
+                Didn't Finish
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 5}: Let $\varphi: \mathbb{A}^{2} \rightarrow \mathbb{A}^{2}$ be a polynomial map and let $0 \neq f \in k[x, y]$ be a nonzero polynomial with no repeated factors. Let $P \in \mathbb{A}^{2}$ and let $Q = \varphi(P)$.
+    \begin{itemize}
+        \item [(a)] Suppose $Q \in V(f)$. Show that $P \in V(\varphi^{*}f)$.
+            \begin{proof}
+                Since $Q \in V(f)$, $f(Q) = 0$. Then $f(\varphi(P)) = 0$. So $(f\varphi)(P) = 0$ and $\varphi^{*}f(P) = 0$. So $P \in V(\varphi^{*}f)$.
+            \end{proof}
+
+        \item [(b)] Prove that if $\varphi$ is a translation, then the multiplicity of $V(\varphi^{*}f)$ at $P$ equals the multiplicity of $V(f)$ at $Q$
+            \begin{proof}
+                Suppose that the multiplicity of $V(f)$ at $Q$ is $m$. Let $Q = (q_{1}, q_{2})$. Then consider the pullback of $f$:
+                    \begin{align*}
+                        \psi &: \mathbb{A}^{2} \rightarrow \mathbb{A}^{2} \\
+                        \psi(x, y) &= (x - q_{1}, y - q_{2})                      
+                    \end{align*}
+                and 
+                    \begin{align*}
+                        \psi^{*} &: k[x, y] \rightarrow k[x,y ] \\
+                        \psi^{*}f(x, y)  &= f(x - q_{1}, y - q_{2})       
+                    \end{align*}
+                Then if $f^{\prime}$ is such that $\varphi^{*}f = f^{\prime}$, Then the multiplicity of $Q$ at $f$ is the multiplicity of $(0, 0)$ at $f^{\prime}$. So denote:
+                    \begin{equation*}
+                        f^{\prime} = f_{m} + f_{m + 1} + \cdots + f_{n}
+                    \end{equation*}
+                Then now we take the translation of $f^{\prime}$ which preserves multiplicity, but this time, we send $(0, 0) \rightarrow P  = (p_{1}, p_{2})$.
+                    \begin{align*}
+                        \pi       &: \mathbb{A}^{2} \rightarrow \mathbb{A}^{2} \\
+                        \pi(x, y) &= (x + p_{1}, y + p_{2})                              
+                    \end{align*}
+                Then
+                    \begin{align*}
+                        \pi^{*}        &: k[x, y] \rightarrow k[x, y] \\
+                        \pi^{*}f(x, y) &= f(x + p_{1}, y + p_{2})               
+                    \end{align*}
+                So $\pi^{*}f^{\prime}$ gives us that the multiplicity of $(0, 0)$ in $V(f^{\prime})$ is the multiplicity of $P$ in $V(\pi^{*}f^{\prime})$. But this is just:
+                    \begin{equation*}
+                        V(\pi^{*}\psi^{*}f) = V(\varphi^{*} f)
+                    \end{equation*}
+                where $\varphi$ translates $Q \rightarrow P$. So multiplicity is preserved under translation.
+            \end{proof}
+
+        \item [(c)] Prove that if $\varphi$ is any polynomial map, then the multiplicity of $V(\varphi^{*}f)$ at $P$ is greater than or equal to the multiplicity of $V(f)$ at $Q$. 
+            \begin{proof}
+                If $\varphi$ is a polynomial map, we have:
+                    \begin{equation*}
+                        \varphi(p) = (\varphi_{1}(p), \varphi_{2}(p), \ldots , \varphi_{m}(p))
+                    \end{equation*}
+                Then $\varphi_{i}$ are all polynomials. Since translation preserves multiplicity, we can take 
+                    \begin{equation*}
+                        \varphi^{\prime}(p) = (\varphi^{\prime}_{1}(p), \ldots , \varphi^{\prime}_{m}(p))
+                    \end{equation*}
+                where $\varphi_{i}^{\prime}$ have no constant terms. So 
+                    \begin{equation*}
+                        \varphi^{\prime{*}}(f(x_{1}, x_{2}, \ldots , x_{m})) = f(\varphi_{1}^{\prime}(p), \ldots , \varphi_{m}^{\prime}(p))
+                    \end{equation*}
+                Now if we consider the pullback of map of the translation map $\psi: Q \rightarrow 0$, and consider the pullback of $f$, let that have multiplicity $m$ = multiplicity of $V(f)$ at $Q$. Then if we take $\varphi^{\prime{*}}\psi^{*} f$, and another pullback, this time sending $\pi: P \rightarrow 0$, we have $\pi^{*}\varphi^{\prime{*}}\psi^{*} f$ with the same multiplicity as $V(\varphi^{*}f)$ at $P$. We know that the lowest non-zero homogeneous term of the polynomial $\pi^{*}\varphi^{\prime*}\psi^{*} f$ is at least greater than or equal to that of $\psi^{*} f$ because $\varphi^{\prime{*}}\psi^{*} f$ preserves the degree of the polynomial $f$.
+            \end{proof}
+    \end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,203 @@
+%! TeX root = 	
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/MyStyle/mystyle}
+
+\title{Math113Hw1}
+\author{Trustin Nguyen}
+
+
+\begin{document}
+
+\maketitle
+\begin{topic}
+	\section*{Homework 1}
+\end{topic}
+\reversemarginpar
+
+\textbf{Exercise 1}: For any $k \in \mathbb{Z}$, let $f_{k} : (\mathbb{Z}, + ) \rightarrow (\mathbb{Z}, + )$ be defined by $n \mapsto kn$. Show that $f_{k}$ is a group homomorphism. Are there any other homomorphisms $(\mathbb{Z}, + ) \rightarrow (\mathbb{Z}, + )$? Carefully justify your answer.
+
+\begin{proof}
+	We first observe what happens with two elements $z_{1}, z_{2}$ in the domain $Z$:
+	\begin{align*}
+		f_{k}(z_{1}z_{2}) = f_{k}(z_{1} + z_{2}) &= kz_{1} + kz_{2} \\
+							 &= f_{k}(z_{1}) + f_{k}(z_{2}) = f(z_{1})f_{k}(z_{2})
+	\end{align*}
+	so $f_{k}$ is indeed a homomorphism.
+\end{proof}
+\begin{proof}
+	If we were to find a group homomorphism $g: (\mathbb{Z}, + ) \mapsto (\mathbb{Z}, + )$, then there would be the property:
+	\begin{equation*}
+		g(z_{1} + z_{2}) = g(z_{1}) + g(z_{2})
+	\end{equation*}
+	We can look at what happens with the identity element when $z_{2} = 0$:
+	\begin{equation*}
+		g(z_{1}) = g(z_{1}) + g(0)
+	\end{equation*}
+	therefore, $g(0) = 0$. Suppose $g(1) = k$. observe that now,
+	\begin{equation*}
+		g(z_{1} + 1) = g(z_{1}) + k
+	\end{equation*}
+	By induction, the function of $g$ is restricted to the positive integers must be $g(x) = kx$. But for the negative numbers:
+	\begin{align*}
+		g(-1 + 1) &= g(-1) + g(1) \\
+		g(0) &= g(-1) + k \\
+		-k &= g(-1)
+	\end{align*}
+	Therefore, 
+	\begin{align*}
+		g(z_{1} - 1) = g(z_{1}) - k
+	\end{align*}
+	By backwards induction, the same formula $g(x) = kx$ applies to the negative domain. So there are no other homomorphisms.
+\end{proof}
+Better proof: 
+\begin{proof}
+	Notice that the image necessarily a subgroup of $\mathbb{Z}$, the homomorphism is subsequently determined by what the generator of $\mathbb{Z}$, 1, is mapped to, and this is the smallest positive nonzero element in the image. Therefore, there are no other homomorphisms other than the ones represented by $n \mapsto kn$. 
+\end{proof}
+
+\textbf{Exercise 2}: Let $H_{1}$ and $H_{2}$ be two subgorups of $G$.
+\begin{enumerate}
+	\item Show that $H_{1} \cap H_{2}$ is a subgroup of $G$.
+
+	\begin{proof}
+		Since $H_{1}, H_{2}$ are subgroups of $G$, they contain the same identity element as $G$. Suppose that $a \in H_{1} \cap H_{2}$. Then $a^{-1} \in H_{2}$, $a^{-1} \in H_{2}$. Therefore, every element has an inverse in $H_{1} \cap h_{2}$. Suppose that $a \in H_{1} \cap H_{2}$. Then $a_{1}, a_{2} \in H_{1}$ and $a_{1}, a_{2} \in H_{2}$. By closure under the operations, $a_{1}a_{2} \in H_{1} \cap h_{2}$ and the new set is closed under the operation defined in the previous two.
+	\end{proof}
+
+	\item Show that $H_{1} \cup H_{2}$ is a subgroup of $G$ iff one of the $H_{i}$ contains the other.
+	
+	\begin{proof}
+		$(\leftarrow)$ Suppose that $H_{1} \subseteq H_{2}$ wlog. then that implies that $H_{1} \cup H_{2} = H_{2}$. Therefore, the resulting set is a subgroup since $H_{2}$ is a group.
+
+		$(\rightarrow)$ Proof by contrapositive. Suppose that neither $H_{1}$ and $H_{2}$ are subsets of the other. Then there is an element $h_{1} \in H_{1}$ that is not in $H_{2}$ and an element $h_{2} \in H_{2}$ that is not in $H_{1}$. We must check if $h_{1}h_{2}$ is in $H_{1} \cup H_{2}$. Suppose for contradiction that it is in $H_{1} \cup H_{2}$. Then wlog assume that it is in $H_{1}$:
+		\begin{align*}
+			h_{1}h_{2} &\in H_{1} \\
+			h_{1}^{-1}h_{1}h_{2} &\in H_{1} \\
+			h_{2} &\in H_{1}
+		\end{align*}
+		which gives us a contradiction.
+	\end{proof}
+\end{enumerate}
+
+\textbf{Exercise 3}: Let $G$ be a finite group.
+\begin{enumerate}
+	\item Let $g \in G$. Show that there is a positive integer $n$ such that $g^{n} = e$. The least such integer is called the order of $g$.
+
+	\begin{proof}
+		Let $G^{\prime} = \{g^{0}, g^{1}, \ldots, g^{k}\}$. Suppose that $g \neq e$, for if it is, then $n = 1$. And suppose that $g^{a} \neq g^{b}$ whenever $a \neq b$. But we must have $k$ be finite since $G^{\prime}$ is in $G$ and otherwise, the order of $G$ would be infinite. Therefore, we have $g^{k + 1} = g^{a}$ for some $a \neq k + 1$. We take inverses and we should get an exponent that gives us the identity.
+	\end{proof}
+
+	\item Show that there exists a positive integer $n$ such that $g^{n} = e$ for all $g \in G$. The least such integer is called the exponent of $G$.
+
+	\begin{proof}
+		Since $G$ has finitely many elements, we take the order of each element and subsequently the lcm of these elements. Since the order divides the exponent, then the exponent makes all elements the identity.
+	\end{proof}
+\end{enumerate}
+\textbf{Exericise 4}:
+\begin{enumerate}
+	\item  Let $G$ be a finite group of even order, i.e. $\abs{G}$ is finite and even. Show that $G$ contains an element of order $2$.
+
+	\begin{proof}
+		Consider the set $G\backslash \{0\}$. This set has odd order but since every element has an inverse, there must be at least one element that maps back to itself in the mapping $g \mapsto g^{-1}$. Therfore, there is an element of order 2. 
+	\end{proof}
+
+	\item Let $G$ be a group and suppose now that every element of $G$, other than the identity, has order 2. Show that $G$ is abelian.
+
+	\begin{proof}
+		We follow from the definition: 
+		\begin{align*}
+			g_{1}^{2} = e \\
+			g_{2}^{2} = e
+		\end{align*}
+		We multiply these elements together:
+		\begin{align*}
+			g_{1}^{2}g_{2}^{2} = e
+		\end{align*}
+		Now take inverses:
+		\begin{align*}
+			g_{1}g_{2} = g_{1}^{-1}g_{2}^{-1} = (g_{2}g_{1})^{-1}
+		\end{align*}
+	But notice that when an element has order 2, then $g^{-1} = g$. Therefore, we have that
+		\begin{align*}
+			g_{1}g_{2} = g_{2}g_{1}
+		\end{align*}
+		as desired.
+	\end{proof}
+
+	Little note: When elements have order 2, it is usually crucial to use the observation that $g^{-1} = g$ or that an element is its inverse.
+\end{enumerate}
+
+\textbf{Exercise 5}: Let $X$ be a set. Recall that $\mathcal{P}(X)$ is the power set of $X$, i.e. the set of all subsets of $X$:
+\begin{equation*}
+	\mathcal{P}(X) = \{A : A \subseteq X\}
+\end{equation*}
+\begin{enumerate}
+	\item Does $\mathcal{P}(X)$ form a group under intersection?
+		\begin{proof}
+			Notice that the identity element is unique for every element in $\mathcal{P}(X)$:
+			\begin{align*}
+				\mathcal{P}(\{1, 2\}) = \{\emptyset, \{1\}, \{2\}, \{1, 2\}\} \\
+				\{1\} \cap \{1\}^{-1} = \{1\}^{-1} \cap \{1\} = \{1, 2\}
+			\end{align*}
+			Since for two sets $A, B, A \cap B \subseteq A$ and $A \cap B \subseteq B$. So 
+			\begin{align*}
+				\{1\} \cap \{1\}^{-1} \subseteq \{1\} \subseteq \{1, 2\}
+			\end{align*}
+			which shows that $\mathcal{P}(X)$ does not form a gorup under intersection.
+		\end{proof}
+	\item Does $\mathcal{P}(X)$ form a group under union?
+		\begin{proof}
+			The same problem as the first group but with a different identity element:
+			\begin{equation*}
+				A \cup \emptyset = \emptyset \cup A = A
+			\end{equation*}
+			But observe that there is no inverse of $A$ that yields $\emptyset$, for example, $X = \{1, 2\}$:
+			\begin{align*}
+				A \cup A^{-1} = \emptyset \\
+				\{1\} \cup \{1\}^{-1} = \emptyset
+			\end{align*}
+			But the union must be nonempty since $1 \in \{1\} \cup \{1\}^{-1}$. Therefore, the union cannot be the identity element.
+		\end{proof}
+	\item The symmetric difference of $A, B \in \mathcal{P}(X)$ is defined by $A \Delta B = (A \cup B) \ (A \cap B)$. Show that $(\mathcal{P}(X), \Delta)$ is a group.
+		\begin{proof}
+			(Closure) First to show under the closure of the operation where $A, B \in \mathcal{P}(X)$, there is the statement:
+			\begin{align*}
+				A \Delta B = (A \cup B) \backslash (A \cap B) \\
+				A \subseteq X \text{ and } B \subseteq X \rightarrow X
+			\end{align*}
+			Suppose that $s \in A \Delta B$. Then 
+			\begin{align*}
+				(s \in A \cup B) \land (s \notin A \cap B) \\
+				(s \in A \lor s \in B) \land \lnot (s \in A \cap B) 
+			\end{align*}
+			\begin{enumerate}
+				\item [(a)] Case 1: $s \in A \land s \notin B$. Then since $A \subseteq S, s \in X$
+
+				\item [(b)] Case 2: $s \in B \land s \notin A$. Then since $B \subseteq S, s \in X$
+			\end{enumerate}
+			Therefore, we conclude that $A\Delta B \subseteq X$.
+
+			(Existence of Inverses) To show the existence of an inverse, we have to find a $A^{-1}$ such that 
+			\begin{equation*}
+				A \Delta A^{-1} = \emptyset
+			\end{equation*}
+			Observe that 
+			\begin{align*}
+				A \Delta A &= (A \cup A) \backslash (A \cap A) \\
+					   &= A \backslash A \\
+					   &= \emptyset
+			\end{align*}
+
+			(Associative Property) We have the verify:
+			\begin{equation*}
+				(A \Delta B) \Delta C = A \Delta (B \Delta C)
+			\end{equation*}
+			We can do this through a membership table.
+		\end{proof}
+\end{enumerate}
+
+
+
+
+
+
+\end{document}

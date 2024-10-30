@@ -1,0 +1,1 @@
+y = newton(@myfunc3, 3.5, @out_error, 1e-5)

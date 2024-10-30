@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+    \PYG{esc}{$d \leftarrow [0] * \abs{V}$}
+
+    function distDescendants(node, k)
+        \PYG{esc}{$res \leftarrow (1 \text{ if } k \leq 0 \text{ else } 0)$}
+        for children in node.children:
+            res += distDescendants(children, k)
+        return res
+
+    for v in V:
+        d[v] = distDescendants(v, K)
+\end{Verbatim}

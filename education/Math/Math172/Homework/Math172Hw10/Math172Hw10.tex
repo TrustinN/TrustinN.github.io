@@ -1,0 +1,99 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math172/Homework/Math172Hw10/Math172Hw10.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math172Hw10}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: How many different labeled trees are there on $[n]$ that have no vertices of degree more than $2$?
+    \begin{proof}
+        Because trees are connected, we know that each vertex has degree at least $1$. We also know that a tree has $n - 1$ edges, and therefore, the total degree is $2n - 2$. Let $k$ be the number of vertices with degree $2$ and $j$ be the number of vertices with degree $1$. Then $k + j = n$ and $2k + j = 2n - 2$. Solve the system:
+            \begin{align*}
+                k + j  & = n      \\
+                2k + j &=  2n - 2   
+            \end{align*}
+        we get:
+            \begin{equation*}
+                k = n - 2, \, j = 2
+            \end{equation*}
+        So we construct our tree by the following algorithm:
+            \begin{itemize}
+                \item [(a)] Choose an element of $I = [n]$ called $k_{1}$ as a leaf. Remove $n_{1}$ from $I$
+
+                \item [(b)] Pick an element of $I$ to connect to $k_{1}$, called $k_{2}$, remove it from $I$, and repeat this process $n - 2$ more times. We will get the path $k_{1}, k_{2}, \ldots, k_{n - 1}$.
+
+                \item [(c)] Take the last element of $I$ to append to the path. We will have $k_{1},  k_{2}, \ldots, k_{n}$ as the final path.
+            \end{itemize}
+        Such a path completely describes the tree, because each step is forced. If we first choose a leaf and the vertex connected to it, subsequent connections cannot reference a vertex more than twice, otherwise, that vertex will have degree $\geq 3$. Step $2$ cannot terminate early, because our graph must be connected, so this means that our last or first vertex was not a leaf.
+
+        So there are $n!$ such constructions. But there is a bijection between a path and the path with the ordering reversed. So there are $n!/2$ such trees. For $n = 1$, there is $1$ such tree.
+    \end{proof}
+
+\textbf{Exercise 2}: Let $T$ be a tree with $101$ vertices so that the largest degree in $T$ is ten. Is it true that $T$ must contain a path of length $5$?
+    \begin{proof}
+        No it does not have to have a path of length $5$. Let $v_{0}$ be the vertex with degree $10$. Then $v_{0}$ is connected to $v^{\prime}_{1}, \ldots, v^{\prime}_{10}$ such that the shortest path between $v_{0} \rightarrow v^{\prime}_{i}$ has length $1$. Now let each $v^{\prime}_{i}$ have degree $10$, where $v_{i}^{\prime}$ is connected to $v_{0}, v_{i_{1}}, \ldots, v_{i_{9}}$. Notice that this is a graph on $101$ vertices because we have $v_{0}$ and for each $v_{i}$, there are $9$ other vertices connected to it. So we have $\lvert \{v_{0}\} \rvert + \lvert \{v_{i}\} \rvert + \lvert \{v_{i_{j}}\} \rvert = 1 + 10 + 90 = 101$:
+            \begin{fixedfigure}
+                \incfig{exercise2}
+            \end{fixedfigure}
+
+        Let $P$ be the longest path in our graph. Then its endpoints must be leaves, otherwise, there is a vertex and edge that we can append to the graph which shows that one of the endpoints was not a leaf, as it was actually a neighbor of two vertices. The only leaves in our graphs are of the form $v_{i_{j}}$ for some $i, j$. 
+            \begin{itemize}
+                \item If our path is between $v_{i_{j_{1}}}$ and $v_{i_{j_{2}}}$, then we must have the path $v_{i_{j_{1}}}, v_{i}, \ldots, v_{i}, v_{i_{j_{2}}}$. But notice that it must be the path $v_{i_{j_{1}}}, v_{i}, v_{i_{j_{2}}}$, otherwise, we will have created a cycle: $v_{i}, \ldots, v_{i}$. This path is of length less than $5$
+
+                \item If our path is between $v_{i_{k_{1}}}, v_{j_{k_{2}}}$ for $i \neq j$, then our path is of the form $v_{i_{k_{1}}}, v_{i}, \ldots, v_{j}, v_{j_{k_{2}}}$. Since no vertices in the path $v_{i}, \ldots, v_{j}$ are leaves, then $v_{0}$ connects them, so we have $v_{i}, v_{0}, \ldots, v_{0}, v_{j}$. Again, there are no vertices between the sub path $v_{0}, \ldots, v_{0}$ otherwise, we had a cycle. So our path is of the form $v_{i_{k_{1}}}, v_{i}, v_{0}, v_{j}, v_{j_{k_{2}}}$. This uses $4$ edges which is less than $5$. 
+            \end{itemize}
+        Then the longest path has length $4 < 5$, which shows that there might not be a path of length $5$.
+    \end{proof}
+
+\textbf{Exercise 3}: Let $G$ be a connected simple graph. Which of the following statements are true:
+    \begin{itemize}
+        \item If $e$ is an edge of $G$, then there must be a spanning tree of $G$ that contains $e$.
+            \begin{proof}
+                True. We know that there exists a spanning tree $T = (V, E^{\prime})$ of $G = (V, E)$ because $G$ is connected. Suppose that $e \in G$ but $e \notin T$. Then we first note that $e$ connects two vertices $v_{1}, v_{2}$, and our spanning tree is connected, so there is a path from $v_{1} \rightarrow v_{2}$, not using $e$. Suppose that that path is $(v_{1}, v_{2}^{\prime}, v_{3}^{\prime}, \ldots, v_{n}^{\prime}, v_{2})$. Suppose we remove $v_{n}^{\prime}, v_{2}$ as an edge and add in $e$. Then our new graph is still connected, because any path that uses $\{v_{n}^{\prime}, v_{2}\}$, we can replace with $v_{n}^{\prime}, \ldots, v_{1}, e$. Suppose that removing the edge and adding in $e$ created a cycle. Then we have a cycle, $c_{1}, c_{2}, \ldots, c_{n}, e$. But since traveling along $e$ is the same as traveling along $v_{1}, v_{2}^{\prime}, v_{3}^{\prime}, \ldots, v_{n}^{\prime}, v_{2}$, we actually have that:
+                    \begin{equation*}
+                        c_{1}, c_{2}, \ldots, c_{n}, v_{1}, v_{2}^{\prime}, v_{3}^{\prime}, \ldots, v_{n}^{\prime}, v_{2}
+                    \end{equation*}
+                is a cycle. So $T$ has a cycle, contradiction. Therefore, we have a way of getting $e$ into a new spanning tree.
+            \end{proof}
+
+        \item If $e$ and $f$ are edges of $G$, then there must be a spanning tree of $G$ that contains $e$ and $f$.
+            \begin{proof}
+                This is true also. By the last proof we know that if $e$ connects $v_{1} \rightarrow v_{2}$ and $f$ connects $v_{3} \rightarrow v_{4}$, then we can take out the necessary edges and put in $e, f$ to create a spanning subgraph. This process works even if $f$ is in a path going from $v_{1} \rightarrow v_{2}$ or if $e$ is in the path $v_{3}\rightarrow v_{4}$, there are no conflicts. By similar reasoning as above, we also get a tree also.
+            \end{proof}
+
+        \item If $e, f, g$ are edges of $G$, then there must be a spanning tree of $G$ that contains $e, f, g$.
+            \begin{answer}
+                This is false. Consider the graph:
+                    \begin{center}
+                        \begin{tikzgraph}
+                                                  & \bullet \ar[drr, "e"] &  &                        \\
+                                                  &                       &  & \bullet \ar[dlll, "f"] \\
+                            \bullet \ar[uur, "g"] &                       &  &                          
+                        \end{tikzgraph}
+                    \end{center}
+                There is no spanning tree that contains all three edges, otherwise, we get the cycle, $e, f, g$.
+            \end{answer}
+    \end{itemize} 
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

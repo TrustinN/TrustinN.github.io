@@ -1,0 +1,240 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math185/Homework/Math185Hw5/Math185Hw5.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math185Hw5}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Verify Stokes' formula in the plane for the vector field $(x, y) \mapsto \begin{bmatrix}
+    -y \\
+    x    
+\end{bmatrix}$ and the region bounded by the circle of radius $R$, centered at zero.
+
+Verify Green's formula for the vector field $(x, y) \mapsto \begin{bmatrix}
+    x \\
+    y   
+\end{bmatrix}$ and the same region in the plane.
+    \begin{proof}
+        (Stokes') We have:
+            \begin{equation*}
+                \int_{\gamma}^{} \begin{bmatrix}
+                    f_{1} \\
+                    f_{2}   
+                \end{bmatrix} \cdot \begin{bmatrix}
+                    -r\sin{\theta} \\
+                    r\cos{\theta}
+                \end{bmatrix} \, \dd{\theta}  = \int_{0}^{2\pi} r^{2}(\sin^{2}{\theta} + \cos^{2}{\theta}) \, \dd{\theta}  = 2\pi r^{2}
+            \end{equation*}
+        Now compute over area:
+            \begin{equation*}
+                \int_{}^{} \int_{D}^{} \nabla \times f \, \dd{x}  \, \dd{y} = \int_{0}^{r} \int_{0}^{2\pi} \begin{bmatrix}
+                    \pdv{x} \\
+                    \pdv{y}   
+                \end{bmatrix} \times \begin{bmatrix}
+                    f_{1} \\
+                    f_{2}   
+                \end{bmatrix} \, \dd{x}  \, \dd{y} = \int_{0}^{r} \int_{0}^{2\pi} 2 \, \dd{\theta}  \, \dd{r} = 2\pi r^{2}
+            \end{equation*}
+
+        (Green's) We have:
+            \begin{equation*}
+                \int_{\gamma}^{} \begin{bmatrix}
+                    f_{1} \\
+                    f_{2}   
+                \end{bmatrix} \times \begin{bmatrix}
+                    -r\sin{\theta} \\
+                    r\cos{\theta}    
+                \end{bmatrix} \, \dd{\theta}  = \int_{0}^{2\pi} r^{2}(\cos^{2}{\theta} + \sin^{2}{\theta}) \, \dd{\theta}  = 2\pi r^{2}
+            \end{equation*}
+        And for over the area:
+            \begin{equation*}
+                \int_{}^{} \int_{D}^{} \nabla \cdot f \, \dd{x}  \, \dd{y} = \int_{0}^{r} \int_{0}^{2\pi} \begin{bmatrix}
+                    \pdv{x} \\
+                    \pdv{y}   
+                \end{bmatrix} \cdot \begin{bmatrix}
+                    f_{1} \\
+                    f_{2}   
+                \end{bmatrix} \, \dd{x} \, \dd{y} = \int_{0}^{r} \int_{0}^{2\pi} 2 \, \dd{\theta}  \, \dd{r}  = 4\pi r
+            \end{equation*}
+    \end{proof}
+
+\newpage
+
+\textbf{Exercise 2}: Prove Green's formula for the closed path described by the right-angled triangle with vertices at $0, a, bi$ ($a, b \in \mathbb{R}$) and a general continuously differentiable vector field $f(x, y) = \begin{bmatrix}
+    f_{1}(x, y) \\
+    f_{2}(x, y)   
+\end{bmatrix}$; do so by reducing to the Fundamental Theorem of Calculus in 1 variable.
+
+\textit{Note}: The hypotenuse will need more care. Assume $a, b > 0$ for a definite picture.
+
+\newpage
+
+\textbf{Exercise 3}: Evaluate $\int_{}^{} (3z^{2} + z) \, \dd{z} $ along
+    \begin{itemize}
+        \item [(a)] the circular arc $\lvert z \rvert = 2$, from $2$ to $2i$;
+            \begin{answer}
+                Let $z= 2e^{i\theta}$. Then we have
+                    \begin{equation*}
+                        \int_{0}^{\pi/2} (3(2e^{i\theta})^{2} + 2e^{i\theta})i2e^{i\theta} \, \dd{\theta} = \int_{0}^{\pi/2} 24ie^{3i\theta} + 4ie^{2i\theta}  \, \dd{\theta}  = (8e^{2i\theta} + 2e^{2i\theta}) \eval_{0}^{\pi/2} = -12 - 8i
+                    \end{equation*}
+            \end{answer}
+
+        \item [(b)] the straight line from $2$ to $2i$;
+            Using the parametrization $\gamma(t) = 2(1 - t) + 2it = 2 + (2i - 2)t$, our integral turns into:
+                \begin{align*}
+                    \int_{\gamma}^{} f  \, \dd{\gamma}  &= (2i - 2)\int_{0}^{1} 3[2(1 - t) + 2it]^{2} \, \dd{t} + (2i - 2) \int_{0}^{1} 2(1 - t) + 2it \, \dd{t}                  \\
+                                                        &= (2i - 2)\int_{0}^{1} 3[2 - 2t + 2it]^{2} \, \dd{t} + 2(2i - 2)\int_{0}^{1} (1 - t) + it \, \dd{t}                      \\
+                                                        &= (2i - 2)\int_{0}^{1} [2 - (2t - 2it)]^{2} \, \dd{t} + 2(2i - 2)(t - \dfrac{t^{2}}{2} + i\dfrac{t^{2}}{2})\eval_{0}^{1} \\
+                                                        &= 3(2i - 2)\int_{0}^{1} 4 - 4(2t - 2it) + (2t - 2it)^{2} \, \dd{t} + 2(2i - 2) - (2i - 2) + i(2i - 2)                    \\
+                                                        &= 12(2i - 2) + 24(2i - 2)\int_{0}^{1} -t + it - it^{2} \, \dd{t} + (2i - 2) + i(2i - 2)                                  \\
+                                                        &= 12(2i - 2) + 24(2i - 2)(\dfrac{-t^{2}}{2} + i\dfrac{t^{2}}{2} - \dfrac{it^{3}}{3})\eval_{0}^{1} + (2i - 2) + i(2i - 2) \\
+                                                        &= 12(2i - 2) - 12(2i - 2) + 12i(2i - 2) - 8i(2i - 2) - 4                                                                 \\
+                                                        &= 4i(2i - 2) - 4                                                                                                         \\
+                                                        &= -12 - 8i                                                                                                                 
+                \end{align*}
+
+        \item [(c)] the straight lines from $2$ to $2 + 2i$ and then $2 + 2i$ to $2i$.
+            \begin{answer}
+                Using the parametrizations $\gamma_{1}(t) = 2 + 2it$ and $\gamma_{2}(t) = 2 - 2t + 2i$, we have
+                    \begin{align*}
+                        \int_{\gamma}^{} f \, \dd{\gamma}  &= \int_{\gamma_{1}}^{} f \, \dd{\gamma_{1}} + \int_{\gamma_{2}}^{} f \, \dd{\gamma_{2}}                                          \\
+                                                           &= 2i\int_{0}^{1} 3(2 + 2it)^{2} + 2 + 2it \, \dd{t}  - 2\int_{0}^{1} 3(2 - 2t + 2i)^{2} + 2 - 2t + 2i \, \dd{t}                  \\
+                                                           &= 2i\int_{0}^{1} 3(4 + 8it - 4t^{2}) + 2 + 2it \, \dd{t} -2 \int_{0}^{1} 3((2 - 2t)^{2} + 8i - 8it - 4) + 2 - 2t + 2i \, \dd{t}  \\
+                                                           &= 2i\int_{0}^{1} 14 + 26it - 12t^{2} \, \dd{t} -  2 \int_{0}^{1} 3(4 - 8t + 4t^{2}) + 26i - 24it - 10 - 2t \, \dd{t}             \\
+                                                           &= 2i(14t + \dfrac{i13t^{2}}{2} - 4t^{3})\eval_{0}^{1} - 2 \int_{0}^{1} 12 -26t + 12t^{2} + 26i - 24it \, \dd{t}                  \\
+                                                           &=                                                                                                                                \\
+                                                           &                                                                                                                                   
+                    \end{align*}
+            \end{answer}
+    \end{itemize}
+
+\newpage
+
+\textbf{Exercise 4}: By choosing convenient parametrizations, evaluate the following integrals:
+    \begin{itemize}
+        \item [(a)] $\int_{}^{} z^{-1} \, \dd{z} $, around the square with vertices at $\pm 1 \pm i$.
+            \begin{proof}
+                We can parametrize starting from the bottom right counterclockwise:
+                    \begin{align*}
+                        \gamma_{1}(t) &= 1 - i + 2it \\
+                        \gamma_{2}(t) &= i + 1 - 2t  \\
+                        \gamma_{3}(t) &= i - 2it - 1 \\
+                        \gamma_{4}(t) &= -i - 1 + 2t   
+                    \end{align*}
+                Then our integral is:
+                    \begin{equation*}
+                        \int_{\gamma_{1}}^{} z^{-1} \, \dd{\gamma_{1}} + \int_{\gamma_{2}}^{} z^{-1} \, \dd{\gamma_{2}} + \int_{\gamma_{3}}^{} z^{-1} \, \dd{\gamma_{3}}  + \int_{\gamma_{4}}^{} z^{-1} \, \dd{\gamma_{4}}
+                    \end{equation*}
+                which is 
+                    \begin{equation*}
+                        \left(\log{\dfrac{1}{\gamma_{1}(t)}}\right)\eval_{0}^{1} + \left(\log{\dfrac{1}{\gamma_{2}(t)}}\right)\eval_{0}^{1} + \left(\log{\dfrac{1}{\gamma_{3}(t)}}\right)\eval_{0}^{1} + \left(\log{\dfrac{1}{\gamma_{4}(t)}}\right)\eval_{0}^{1} 
+                    \end{equation*}
+                We get:
+                    \begin{equation*}
+                        \log{\dfrac{1}{1 - i}} - \log{\dfrac{1}{1 + i}} + \log{\dfrac{1}{1 + i}} - \log{\dfrac{1}{-1 + i}} + \log{\dfrac{1}{-1 + i}} - \log{\dfrac{1}{-1 - i}} + \log{\dfrac{1}{-1 - i}} - \log{\dfrac{1}{1 - i}} = 0 
+                    \end{equation*}
+                So the total integral is $0$.
+            \end{proof}
+
+        \item [(b)] $\int_{}^{} z^{m} \, \dd{z} $ around the unit circle, $m$ an integer. (You should get $0$, if $m \neq -1$.) 
+            \begin{answer}
+                We can parametrize with $z = e^{i\theta}$:
+                    \begin{equation*}
+                        \int_{\gamma}^{} e^{mi\theta} \, \dd{\gamma}  = \int_{0}^{2\pi} e^{mi\theta}ie^{i\theta} \, \dd{\theta} = i \int_{0}^{2\pi} e^{(m + 1)i\theta} \, \dd{\theta} = \begin{cases}
+                            0         &\text{ if } m + 1 \neq 0 \\
+                            2\pi &\text{ if } m + 1 = 0   
+                        \end{cases}
+                    \end{equation*}
+                So it is $0$ for $m \neq -1$.
+            \end{answer}
+    \end{itemize}
+
+\newpage
+
+\textbf{Exercise 5}: Derive the \textit{Wallis formula}
+    \begin{equation*}
+        \int_{0}^{2\pi} \cos^{2n}{\theta} \, \dd{\theta} = 2\pi\dfrac{(2n)!}{2^{2n}(n!)^{2}}
+    \end{equation*}
+by integrating $\frac{1}{z}(z + \frac{1}{z})^{2n}$ around the unit circle, using the binomial formula and invoking $Q.4.2$.
+    \begin{answer}
+        We have that $(z + \frac{1}{z})^{2n} = (2\cos{\theta})^{2n}$. Then 
+            \begin{equation*}
+                \int_{0}^{2\pi} \dfrac{1}{z}(z + \dfrac{1}{z})^{2n} \, \dd{z}  = \int_{0}^{2\pi} i(2\cos{n})^{2n} \, \dd{\theta} = i 2^{2n} \int_{0}^{2\pi} \cos^{2n}{\theta} \, \dd{\theta} 
+            \end{equation*}
+        Now by the binomial expansion:
+            \begin{equation*}
+                (z + \dfrac{1}{z})^{2n} = \sum_{k = 0}^{2n} \dbinom{2n}{k}z^{2n - k}z^{-k}= \sum_{k = 0}^{2n}\dbinom{2n}{k}z^{2n - 2k}
+            \end{equation*}
+        By the last question, we have:
+            \begin{equation*}
+                \int_{\gamma}^{} \dfrac{1}{z}(z + \dfrac{1}{z})^{2n} \, \dd{z} = \int_{\gamma}^{} \dbinom{2n}{n}z^{-1} \, \dd{z}  = \int_{0}^{2\pi} \dbinom{2n}{n}i \, \dd{\theta} = 2\pi \dbinom{2n}{n} i
+            \end{equation*}
+        Overall, we have:
+            \begin{equation*}
+                i2^{2n}\int_{0}^{2\pi} \cos^{2n}{\theta} \, \dd{\theta} = 2\pi \dbinom{2n}{n}i
+            \end{equation*}
+        so
+            \begin{equation*}
+                \int_{0}^{2\pi} \cos^{2n}{\theta} \, \dd{\theta} = 2\pi\dbinom{2n}{n}\cdot \dfrac{1}{2^{2n}}
+            \end{equation*}
+        which is what we wanted.
+    \end{answer}
+
+\newpage
+
+\textbf{Exercise 6}: For the vector field $f$ below, show that $\int_{\gamma}^{} f \cdot \, \dd{\gamma}  = 0$ for any simple (not self-intersecting) closed curve $\gamma$.
+    \begin{equation*}
+        f = \begin{bmatrix}
+            y^{2}\cos{x} - 2e^{y} \\
+            2y\sin{x} - 2xe^{y}     
+        \end{bmatrix}
+    \end{equation*}
+Compute the same integral along the arc of parabola $y = x^{2}$ form $(0, 0)$ to $(\pi, \pi^{2})$.
+    \begin{proof}
+        By Stokes' Theorem, we have that 
+            \begin{align*}
+                \int_{\gamma}^{} f \cdot \, \dd{\gamma} &= \int_{}^{} \int_{D}^{} \nabla \times f \, \dd{x}  \, \dd{y} = \int_{}^{} \int_{D}^{} \begin{bmatrix}
+                    \pdv{x} \\
+                    \pdv{y}   
+                \end{bmatrix} \times \begin{bmatrix}
+                    f_{1} \\
+                    f_{2}   
+                \end{bmatrix} \, \dd{x}  \, \dd{y}  \\
+                &= \int_{}^{} \int_{D}^{} 2y\cos{x} - 2e^{y} - (2y\cos{x} - 2e^{y}) \, \dd{x}  \, \dd{y} = 0
+            \end{align*}
+
+        We have that $f = \begin{bmatrix}
+            u(x, y)_{x}  \\
+            u(x, y)_{y}   
+        \end{bmatrix}$. And since $f = u_{x} + iu_{y}$, $f = y^{2}\sin{x} - 2xe^{y}$. Taking the endpoints, we get $2\pi e^{\pi^{2}}$.
+    \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

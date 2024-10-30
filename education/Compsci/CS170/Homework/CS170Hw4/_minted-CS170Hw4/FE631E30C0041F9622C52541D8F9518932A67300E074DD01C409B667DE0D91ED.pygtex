@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+    \PYG{k}{def} \PYG{n+nf}{getBestExchange}\PYG{p}{(}\PYG{n}{G}\PYG{p}{,} \PYG{n}{start}\PYG{p}{,} \PYG{n}{end}\PYG{p}{)}
+        \PYG{n}{parents} \PYG{esc}{$\leftarrow$} \PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{*} \PYG{esc}{$\abs{V}$}
+        \PYG{n}{costs} \PYG{esc}{$\leftarrow$} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{*} \PYG{esc}{$\abs{V}$}
+        \PYG{n}{costs}\PYG{p}{[}\PYG{n}{start}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{1}
+        \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{esc}{$\abs{V}$} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{)}
+            \PYG{k}{for} \PYG{p}{(}\PYG{n}{u}\PYG{p}{,} \PYG{n}{v}\PYG{p}{)} \PYG{o+ow}{in} \PYG{esc}{$E$}
+                \PYG{n}{currCost} \PYG{o}{=} \PYG{n}{cost}\PYG{p}{[}\PYG{n}{u}\PYG{p}{]} \PYG{o}{*} \PYG{n}{v}
+                \PYG{k}{if} \PYG{n}{currCost} \PYG{o}{\PYGZgt{}} \PYG{n}{costs}\PYG{p}{[}\PYG{n}{v}\PYG{p}{]}
+                    \PYG{n}{cost}\PYG{p}{[}\PYG{n}{v}\PYG{p}{]} \PYG{o}{=} \PYG{n}{currCost}
+                    \PYG{n}{parents}\PYG{p}{[}\PYG{n}{v}\PYG{p}{]} \PYG{o}{=} \PYG{n}{u}
+        \PYG{k}{return} \PYG{n}{backtrack}\PYG{p}{(}\PYG{n}{parents}\PYG{p}{,} \PYG{n}{start}\PYG{p}{,} \PYG{n}{end}\PYG{p}{)}
+\end{Verbatim}

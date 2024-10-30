@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{function}\PYG{+w}{ }y\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nf}{myfunc8}\PYG{p}{(}x\PYG{p}{)}
+\PYG{+w}{    }\PYG{n}{y}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{l+m+mi}{600}\PYG{o}{*}\PYG{n}{x}\PYGZca{}\PYG{l+m+mi}{4}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{550}\PYG{o}{*}\PYG{n}{x}\PYGZca{}\PYG{l+m+mi}{3}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{200}\PYG{o}{*}\PYG{n}{x}\PYGZca{}\PYG{l+m+mi}{2}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{20}\PYG{o}{*}\PYG{n}{x}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{k}{end}
+
+\end{Verbatim}

@@ -1,0 +1,1154 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math185/Notes/Math185Notes.tex
+
+\documentclass{report}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/report}
+\graphicspath{{./figures/}}
+
+\title{Math185Notes}
+\author{Trustin Nguyen}
+
+\begin{document}
+\newgeometry{
+    total={150mm,235mm},
+}
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+
+\tableofcontents
+\restoregeometry
+
+\reversemarginpar
+
+\chapter{Week 1}
+
+\begin{topic}
+    \section{Complex Numbers}
+\end{topic}
+
+Complex numbers are defined by pairs: $\mathbb{C} = \mathbb{R} \times \mathbb{R}$. Addition:
+    \begin{equation*}
+        (x, y) + (u, v) = (x + u, y+ v)
+    \end{equation*}
+and multiplication:
+    \begin{equation*}
+        (x, y) \cdot (u, v) = (xu - yv, xv + yu)
+    \end{equation*}
+
+\begin{theorem}{}
+    Addition is commutative, associative and $\mathbb{R} $- linear. Multiplication is commutative, associative and distributive for addition.
+\end{theorem}
+
+\textbf{Notation, definitions, and observations}:
+    \begin{itemize}
+        \item  $0$ stands for $(0, 0)$
+
+        \item  $1$ stands for $(1, 0)$
+
+        \item  $\mathbb{R}$ can be identified with $\mathbb{R} \times 0 \subseteq \mathbb{C}$, operations match.
+
+        \item  $i$ stands for $(0, 1)$. Note that $i^{2} = (-1, 0)$
+
+        \item Can write $(x, y) = x + iy$, $(u, v) = u + iv$ with multiplication as:
+            \begin{equation*}
+                (x + iy)(u + iv) = xu + i^{2} uv + ixv + iuy
+            \end{equation*}
+
+        \item If $z = x + iy$, then $x = \mathop{Re}(z)$ and $y = \mathop{Im}(z)$.
+
+        \item We have the conjugate $\overline{z} = x - iy$. 
+    \end{itemize}
+
+\textbf{Proposition}:
+    \begin{itemize}
+        \item $\mathop{Re}(\overline{z}w)$ is the real dot product of $z = (x, y)$ and $w = u, v$
+
+        \item $\mathop{Im}(\overline{z}w)$ is the cross product also.
+
+        \item $\overline{z}z$ is the squared length of $(x, y)$. 
+    \end{itemize}
+
+\begin{definition}{Modulus and argument}
+    The length of $z = x + iy$ or $\sqrt{z\overline{z}}$. The argument, $\mathop{arg}(z)$, is the angle formed with the $x$ axis and undefined when $z = 0$. 
+\end{definition}
+
+\textbf{Corollary}: Every complex number is invertible.
+
+\textbf{Geometric Interpretation}:
+    \begin{align*}
+        \lvert z_{1} \cdot z_{2} \rvert &= \lvert z_{1} \rvert \lvert z_{2} \rvert   \\
+        \mathop{arg}(z_{1} \cdot z_{2}) &= \mathop{arg}(z_{1}) + \mathop{arg}(z_{2})   
+    \end{align*}
+and
+    \begin{equation*}
+        z = (x, y) = x + iy = r(\cos{\theta} + i\sin{\theta})
+    \end{equation*} 
+with $r = \lvert z \rvert$. Notice that 
+    \begin{equation*}
+        (\cos{\varphi} + i\sin{\varphi})(\cos{\psi} + i\sin{\psi}) = \cos{(\varphi + \psi)} + i \sin{(\varphi + \psi)}
+    \end{equation*}
+So angles are added for unit vectors.
+
+\textbf{More Facts}: 
+    \begin{itemize}
+        \item Triangle Inequality: $\lvert z + w \rvert \leq \lvert z \rvert + \lvert w \rvert$ or $\lvert \sum_{i = 1}^{k}z_{i} \rvert \leq \sum_{i = 1}^{k} \lvert z_{i} \rvert$.
+
+        \item Parallelogram law: $\lvert z_{1} + z_{2} \rvert^{2} + \lvert z_{1} - z_{2} \rvert^{2} = 2(\lvert z_{1} \rvert^{2} + \lvert z_{2} \rvert^{2})$. 
+    \end{itemize}
+
+\textbf{Complex exponential}: Define the function $\exp() : \mathbb{C} \rightarrow \mathbb{C}$. 
+    \begin{equation*}
+        \exp(z) = e^{x}(\cos{y} + i\sin{y})
+    \end{equation*}
+for $z = x + iy$. It follows that $\lvert \exp(z) \rvert = e^{\mathop{Re}(z)}$ and $\mathop{arg}(\exp(z)) = \mathop{Im}(z)$.
+
+\begin{theorem}{}
+    $\exp(z + w) = \exp(z) \cdot \exp(w)$
+\end{theorem}
+
+\begin{topic}
+    \section{Complex Numbers: Algebra, Geometry, and Applications}
+\end{topic}
+
+Integral powers of complex numbers from geometry: If $z = r \cdot e^{i\theta}$, so $\lvert z \rvert = r$ and $\mathop{arg}(z) = \theta$. We get 
+    \begin{equation*}
+        z^{n} = r^{n} \cdot(e^{i\theta})^{n} = r^{n} \cdot e^{in\theta}
+    \end{equation*}
+so
+    \begin{equation*}
+        \lvert z \rvert^{n} = \lvert z \rvert^{n}, \mathop{arg}(z^{n}) = n \cdot \mathop{arg}(z)
+    \end{equation*}
+If we consider the map $z \mapsto z^{n}$, then $0$ and $1$ are fixed points. This map takes polar grid to polar grid.
+
+\begin{examples}
+    \begin{example}
+        $z \mapsto z^{2}$ in the cartesian grid. Look at action on real and imaginary axis:
+            \begin{equation*}
+                z = x + 0 \cdot i
+            \end{equation*}
+        then
+            \begin{equation*}
+                (x, 0) \mapsto (x^{2}, 0)
+            \end{equation*}
+        while
+            \begin{equation*}
+                z = 0 + iy
+            \end{equation*}
+        and
+            \begin{equation*}
+                (0, y) \mapsto (0, -y^{2})
+            \end{equation*}
+        Consider a line that does not pass through the origin: $z = a + iy \mapsto a^{2} - y^{2} + 2ay \cdot i$.
+            \begin{equation*}
+                (a, y) \mapsto (a^{2} - y^{2}, 2ay)
+            \end{equation*} 
+        In the image, we have $(u, v)$, so $v = 2ay$ and $u = a^{2} - \frac{v^{2}}{4a^{2}}$.
+    \end{example}
+\end{examples}
+
+$n$-th roots of unity are solutions to $w^{n} = z$. Modulus $\sqrt[n]{\lvert z \rvert}$ and $n$ possible values for modulus.
+
+\textbf{De Moivre formulas}: 
+    \begin{equation*}
+        (\cos{\theta} + i \sin{\theta})^{n} = \cos{n \theta} + i \sin{n \theta}
+    \end{equation*}
+
+\textbf{Proposition}:
+    \begin{equation*}
+        x^{n} - 1 = (x - 1)(x - \zeta_{n})(x - \zeta_{n}^{2}) \cdots (x - \zeta_{n}^{n - 1})
+    \end{equation*} 
+into linear terms.
+
+Primitive roots of unity are roots of unity $\zeta_{n}^{k}$ such that $\zeta_{n}^{kj} \neq 1$ for any $1 \leq j < n$
+
+\begin{theorem}{}
+    The set of $n$-th root of unity break up into primitive $d$-th roots of unity for the group of divisors $d$ of $n$.
+\end{theorem}
+
+\begin{theorem}{}
+    Grouping the factors of 
+        \begin{equation*}
+            x^{n} - 1 = (x - 1)(x - \zeta_{n})(x - \zeta_{n}^{2}) \cdots (x - \zeta_{n}^{n - 1})
+        \end{equation*}
+    according to divisors of $n$ with primitive roots gives a factorization
+        \begin{equation*}
+            x^{n} - 1 = \prod_{d \divides n} \varPhi_{d}(x)
+        \end{equation*}
+    and $\varPhi_{d}(x)$ are the $d$-th cyclotomic polynomials which has integer coefficients.
+\end{theorem}
+
+\begin{examples}
+    \begin{example}
+        $n = 3$, we have 
+            \begin{equation*}
+                x^{3} - 1 = (x - 1)(x^{2} + x + 1)
+            \end{equation*}
+        then 
+            \begin{align*}
+                \varPhi_{1}(x) &= (x - 1)       \\
+                \varPhi_{3}(x) &= x^{2} + x + 1   
+            \end{align*}
+    \end{example}
+    \begin{example}
+        $n = 6$, 
+            \begin{equation*}
+                x^{6} - 1 = (x - 1)(x + 1)(x^{2} + x + 1)(x^{2} - x + 1)
+            \end{equation*}
+    \end{example}
+\end{examples}
+
+\textbf{Aside}: Cyclotomic integers and fake proofs of FLT. Cyclotomic integers are $\mathbb{Z}[\zeta_{2}, \zeta_{3}, \ldots]$, adjoin all roots of unity of order to $\mathbb{Z}$. Recall FLT:
+    \begin{equation*}
+        x^{n} + y^{n} = z^{n} \text{ for $n > 2$ has no integer solutions}
+    \end{equation*}
+or
+    \begin{equation*}
+        x^{n} - y^{n} = z^{n}
+    \end{equation*}
+Factor:
+    \begin{equation*}
+        (x - y)(x - \zeta_{n} \cdot y)(x - \zeta_{n}^{2} \cdot y) \cdots (x - \zeta_{n}^{n - 1}y) = z^{n}
+    \end{equation*}
+Relies on $\mathbb{Z}[\zeta_{n}]$ being a UFD.
+
+\chapter{Week 2}
+
+\begin{topic}
+    \section{Applications Continued}
+\end{topic}
+
+\textbf{Cardano's formula}: $f(x) = x^{3} - 3px - 2q = 0$ has solutions 
+    \begin{equation*}
+        (q + \sqrt{q^{2} - p^{3}})^{1/3} + (q - \sqrt{q^{2} - p^{3}})^{1/3}
+    \end{equation*}
+where 
+    \begin{equation*}
+        \Delta = \sqrt{q^{2} - p^{3}}
+    \end{equation*}
+Cases:
+    \begin{itemize}
+        \item $p < 0$ there is a unique real root
+
+        \item $p > 0$ then there is extrema at $3x^{2} - 3p = 0$, $x = \pm \sqrt{p}$, value : $\pm 2p\sqrt{p} - 2q$.If $\lvert q \rvert > p \sqrt{p}$, there is a unique solution. If $\lvert q \rvert < p \sqrt{p}$, there are $3$ solutions.
+    \end{itemize}
+
+\textbf{Geometry}: 
+    \begin{itemize}
+        \item Translation: $a \in \mathbb{C}$: $z \mapsto z + a$
+
+        \item Rotation: Multiplication by $e^{i \theta}$: $z \mapsto e^{i \theta}z$
+
+        \item Scaling by $r \in \mathbb{R}$: $z \mapsto r \cdot z$. 
+    \end{itemize}
+
+\textbf{Observation}: $\begin{bmatrix}
+    p &  -q \\
+    q & p     
+\end{bmatrix}$ acts as rotation on $\mathbb{R}^{2}$ by $\theta$ where $p \pm iq = r \cdot e^{i \theta}$.
+
+\textbf{Areas of Polygons}: The area of a polygon with vertices located at $z_{1}, \ldots, z_{n}$ ordered anticlockwise is
+    \begin{equation*}
+        \dfrac{1}{2}(\mathop{Im}(\overline{z_{1}}z_{2} + \overline{z_{2}}z_{3} + \cdots + \overline{z_{n - 1}}z_{n} + \overline{z_{n}}z_{1}))
+    \end{equation*}
+\begin{proof}
+    The formula is invariant under translations and rotations:
+        \begin{equation*}
+            z_{k} \mapsto e^{i \theta} \cdot z_{k}
+        \end{equation*}
+    and 
+        \begin{equation*}
+            \overline{z_{k}}z_{k + 1} \mapsto \overline{z_{k}}e^{-i\theta}\cdot e^{i \theta} z_{k + 1} = \overline{z_{k}}z_{k + 1}
+        \end{equation*}
+    Do the same for translation. Additive check:
+        \begin{equation*}
+            (\overline{z_{1}}z_{2} + \overline{z_{2}}z_{3} + \overline{z_{3}}z_{1}) + (\overline{z_{1}}z_{3} + \overline{z_{3}}z_{4} + \overline{z_{4}}z_{1})
+        \end{equation*}
+\end{proof}
+
+\textbf{Complex Inversion}: This is the map
+    \begin{equation*}
+        z \mapsto \dfrac{1}{z}
+    \end{equation*}
+Bijection of $\mathbb{C}^{\times}$. Real inversion sends $(r, \theta) \mapsto (\frac{\frac{1}{r}}{\theta})$. Complex inversion: $(r, \theta) \mapsto (\frac{1}{r}, -\theta)$. Fixed points: $z = \frac{1}{z}$, $z^{2} = 1$.
+
+\begin{theorem}{Inversion}
+    Inversions maps clircles to clircles. Clircles are circles or lines.
+\end{theorem}
+
+\textbf{Note}: Equation of a line in $\mathbb{C}$ is $\alpha z + \overline{ \alpha z} = c$, where $\alpha$ is in $\mathbb{C} \backslash \{0\}$ and $c$ is a real number. Equation of a circle is $\lvert z - p \rvert^{2} = r^{2}$.
+
+\begin{definition}{Mobius Transformations}
+    The map
+        \begin{equation*}
+            z \mapsto \dfrac{az + b}{cz + d} = \mu(z)
+        \end{equation*}
+    where $ad - bc \neq 0$.
+\end{definition}
+
+\begin{theorem}{}
+    \begin{itemize}
+        \item $\mu$ is a bijection from $\mathbb{C} \backslash \{- \frac{d}{c}\}$ to $\mathbb{C} \backslash \{\frac{a}{c}\}$. 
+
+        \item Composition of maps $\mu$ is matrix multiplication:
+
+        \item Every Mobius transformation  is a composition of rotations, scalings, translations and inversions. So these take clircles to clircles.
+    \end{itemize}
+\end{theorem}
+
+\begin{definition}{Riemann sphere}
+    $\hat{\mathbb{C}} = \mathbb{C} \cup \{ \infty\}$. This has a topology as
+        \begin{itemize}
+            \item $\mathbb{C} \cong \mathbb{R}^{2}$
+
+            \item neighborhood of $\infty$ sets containing the exterior of some large disk in $\mathbb{C}$. 
+        \end{itemize}
+\end{definition}
+
+\textbf{Corollary}: We say that a sequence of $\mathbb{z_{n}}$ diverges to $\infty$ if $\lim \lvert z_{n} \rvert = \infty$.
+
+We get $\hat{\mathbb{C}}$ as a unit sphere in $\mathbb{R}^{3}$ by stereographic projection. The point at the north pole corresponds to $\infty$.
+
+
+\begin{topic}
+    \section{Complex Differentiation}
+\end{topic}
+
+Functions are defined on open sets in $\mathbb{C}$ which will be continuous in this course. Functions might have singularities $z \mapsto \frac{1}{z}$.
+
+\begin{definition}{}
+    Let $I \subseteq \mathbb{R}$ be an open interval. A function $f : I \rightarrow \mathbb{R}$ is differentiable at a point $x_{0} \in I$ if 
+        \begin{equation*}
+            \lim\limits_{x \to x_{0}}\dfrac{f(x) - f(x_{0})}{x - x_{0}}
+        \end{equation*}
+    exists. $f(x_{0}) + (x - x_{0}) \cdot f^{\prime}(x_{0})$ is the best linear approximation of $f$ for $x_{0}$.
+\end{definition}
+
+\begin{definition}{}
+    Let $U \subseteq \mathbb{R}^{2}$ be an open subset. A function $f : U \rightarrow \mathbb{R}$ is differentiable at $\begin{bmatrix}
+        x_{0} \\
+        y_{0}   
+    \end{bmatrix} \in U$ if there exists a linear map $Df : \mathbb{R}^{2} \rightarrow \mathbb{R}$ such that 
+        \begin{equation*}
+            \dfrac{\lvert f(x) - f(p) - Df(x - p)}{\lVert x - p \rVert \rvert} \rightarrow 0
+        \end{equation*}
+\end{definition}
+
+\textbf{Remark}: If $f = \begin{bmatrix}
+    u \\
+    v   
+\end{bmatrix}$, then $Df$ is the Jacobian matrix: $\begin{bmatrix}
+    U_{x} & U_{y} \\
+    V_{x} & V_{y}   
+\end{bmatrix}$. 
+    \begin{equation*}
+        f \begin{bmatrix}
+            u \\
+            v   
+        \end{bmatrix}(x, y) = \begin{bmatrix}
+            u \\
+            v   
+        \end{bmatrix}(x, y) + \begin{bmatrix}
+            U_{x} & U_{y} \\
+            V_{x} & V_{y}   
+        \end{bmatrix} \begin{bmatrix}
+            x - x_{0} \\
+            y - y_{0}   
+        \end{bmatrix} + (\text{error})
+    \end{equation*}
+
+\begin{theorem}{Differentiability Theorem}
+    If the partial derivatives are everywhere defined and continuous in $U$, then $f$ is differentiable in $U$.
+\end{theorem}
+
+\textbf{Remark}: For limits and convergence in $\mathbb{C}$, use $\mathbb{R}^{2}$. The formula $z \mapsto \frac{1}{z}$ can be rewritten as $z \mapsto \frac{\overline{z}}{\lVert z \rVert}$ which is continuous away from $0$. So algebra and limits interact similar to real case.
+
+\begin{definition}{}
+    $f$ is complex differentiable at $z_{0} \in U$ if 
+        \begin{equation*}
+            \lim\limits_{z \to  z_{0}} \dfrac{f(z) - f(z_{0})}{ z - z_{0}} \text{ exists}
+        \end{equation*}
+\end{definition}
+
+\begin{examples}
+    $f(z) = z^{n}$,
+        \begin{equation*}
+            \dfrac{z^{n} - z_{0}^{n}}{z - z_{0}} = z^{n - 1} + z^{n - 2}z_{0} + \cdots + z^{1}z_{0}^{n - 2} + z_{0}^{n - 1}
+        \end{equation*}
+    Right hand side goes to $nz^{n - 1}$, so $f^{\prime}(z) = nz^{n - 1}$.
+\end{examples}
+
+\begin{theorem}{}
+    If $f, g$ are complex differentiable at $z_{0}$, so are their products, sum, quotient.
+\end{theorem}
+
+\textbf{Corollary}: We can differentiable rational functions also:
+    \begin{equation*}
+        z \mapsto \dfrac{P(z)}{Q(z)}
+    \end{equation*}
+for $P, Q$ polynomials, when $Q(z) \neq 0$.
+
+\begin{examples}
+    $f(z) = \frac{1}{z}$, $f^{\prime}(z) = \frac{-1}{z^{2}}$
+\end{examples}
+
+\begin{definition}{Holomorphic}
+    A function $f: U \rightarrow \mathbb{C}$ is holomorphic if it is complex differentiable everywhere in $U$.
+\end{definition}
+
+\begin{topic}
+    \section{Complex vs Real Differentiability}
+\end{topic}
+
+\textbf{Proposition}: $f$ is complex differentiable at $z_{0} = x_{0} + iy_{0}$ means the map $\begin{bmatrix}
+    Re(f) \\
+    Im(f)   
+\end{bmatrix} : \mathbb{R}^{2} \rightarrow \mathbb{R}^{2}$. 
+
+\begin{theorem}{Cauchy-Riemann}
+    $z \mapsto f(z)$ is complex differentiable at $z_{0}$ iff the map $(x, y) \mapsto(u , v)$ is real differentiable at $(x_{0}, y_{0})$ and satisfies $u_{x} = v_{y}$, $u_{y} = -v_{x}$. 
+\end{theorem}
+
+\begin{examples}
+    \begin{example}
+        The complex exponential map is holomorphic in $\mathbb{C}$. 
+            \begin{align*}
+                z      &\mapsto \exp(z)                      \\
+                (x, y) &\mapsto (e^{x}\cos{y}, e^{x}\sin{y})   
+            \end{align*}
+        and
+            \begin{equation*}
+                \begin{bmatrix}
+                    u_{x} & u_{y} \\
+                    v_{x} & v_{y}   
+                \end{bmatrix} = \begin{bmatrix}
+                    e^{x}\cos{y} & -e^{x}\sin{y} \\
+                    e^{x}\sin{y} & e^{x}\cos{y}    
+                \end{bmatrix} = \begin{bmatrix}
+                    p & -q \\
+                    q & p    
+                \end{bmatrix}
+            \end{equation*}
+        The derivative is $p + iq = e^{x}(\cos{y} + i\sin{y}) = e^{z}$.
+    \end{example}
+    \begin{example}
+        The map $(x, y) \mapsto (x^{2} + y^{2}, 2xy)$ is differentiable at $y = 0$ but not holomorphic in $\mathbb{C}$.
+    \end{example}
+    \begin{example}
+        $(x, y) \mapsto (\frac{1}{2}\mathop{log}(x^{2} + y^{2}), \mathop{arctan}\frac{y}{x})$ for $x > 0$.
+    \end{example}
+\end{examples}
+
+\textbf{General properties of holomorphic maps}:
+
+The set of holomorphic maps $f: U \rightarrow \mathbb{C}$ is an algebra. Set is closed under addition and multiplication. Also closed under multiplication by inverse.
+
+\begin{theorem}{}
+    If $f : U \rightarrow \mathbb{C}$ is holomorphic and twice real differentiable, then $f^{\prime}$ is also holomorphic.
+\end{theorem}
+    \begin{proof}
+        We have 
+            \begin{equation*}
+                f^{\prime} = u_{x} + iv_{x}
+            \end{equation*}
+        and checking CR for $f^{\prime}$, we need $(u_{x})_{x} = (v_{x})_{y}$ and $(u_{x})_{y} = -(v_{y})_{x}$. Flip the subscripts by Clairant theorem and we see that $f^{\prime}$ is holomorphic.
+    \end{proof}
+
+\chapter{Week 3}
+
+\begin{topic}
+    \section{More on Harmonic Functions}
+\end{topic}
+
+\textbf{The complex partial derivatives}:
+\begin{definition}{}
+    $\pdv{z} = \frac{1}{2}(\pdv{x} - i \pdv{y}), \pdv{\overline{z }} = \frac{1}{2}(\pdv{x} + i\pdv{y})$.
+\end{definition}
+
+We have 
+    \begin{align*}
+        \pdv{z}(z)                       &= 1 \\
+        \pdv{\overline{z}}(z)            &= 0 \\
+        \pdv{z}(\overline{z})            &= 0 \\
+        \pdv{\overline{z}}(\overline{z}) &= 1   
+    \end{align*}
+So they are linear and satisfy Leibniz rule:
+    \begin{equation*}
+        \pdv{z}(fg) = \pdv{z}f \cdot g + f \cdot \pdv{z}g
+    \end{equation*}
+CR equation for $f = u + iv$ becomes 
+    \begin{equation*}
+        \pdv{\overline{z}}f = 0 : \dfrac{1}{2}(f_{x} + if_{y}) = 0
+    \end{equation*}
+sort RHS by complex and real parts and we get CR equations.
+
+\textbf{Application}: Polynomial functions $(x, y) \mapsto P(x, y)$
+    \begin{equation*}
+        P(x, y) = \sum_{m, n \geq 0}^{\text{finite}}p_{m, n}x^{m}y^{n} \hspace{30pt}  p_{m, n} \in \mathbb{C}
+    \end{equation*}
+are often infinitely often differentiable on $\mathbb{R}^{2}$.
+
+\textbf{Lemma}: $P$ is a zero polynomial iff $p_{m, n} = 0$.
+    \begin{proof}
+        Take the smallest $m$ and the smallest $n$ that shows up. Then 
+            \begin{equation*}
+                \pdv{x^{m} y^{n}} P(x, y)\eval_{x = y = 0} = m! \cdot n! p_{m, n} \neq 0
+            \end{equation*}
+    \end{proof}
+
+\textbf{Trick}: Every polynomial in $(x, y)$ can be uniquely converted to one in $z, \overline{z}$ and the converse also.
+    \begin{equation*}
+        \sum p_{m, n}x^{m}y^{n} = \sum q_{r, s} z^{r}\overline{z}^{s}
+    \end{equation*}
+    \begin{proof}
+        $x = \frac{a + \overline{z}}{2}, y = \frac{z - \overline{z}}{2i}$.
+    \end{proof}
+
+A polynomial is holomorphic iff its conversion in terms of $z, \overline{z}$ does not involve $\overline{z}$.
+
+\begin{examples}
+    \begin{example}
+        (Non-Example): $(x, y) \mapsto (\frac{x}{x^{2} + y^{2}}, \frac{y}{x^{2} + y^{2}})$, $(x, y \neq (0, 0))$. Try CR:
+            \begin{align*}
+                u_{x} &= \dfrac{1}{x^{2} + y^{2} - \dfrac{2x^{2}}{(x^{2} + y^{2})^{2}}} \\
+                u_{y} &= \dfrac{-2xy}{(x^{2} + y^{2})^{2}} \\
+                v_{x} &= \dfrac{-2xy}{(x^{2} + y^{2})^{2}} \\
+                v_{y} &= \dfrac{1}{x^{2} + y^{2}} - \dfrac{2y^{2}}{(x^{2} + y^{2})^{2}}
+            \end{align*}
+        Fixed by changing to $(\frac{x}{x^{2} + y^{2}}, \frac{-y}{x^{2} + y^{2}})$. 
+            \begin{equation*}
+                z \mapsto \dfrac{x - iy}{x^{2} + y^{2}} \text{ holomorphic on $\mathbb{C} \backslash \{0\}$}
+            \end{equation*}
+        This is 
+            \begin{equation*}
+                z \mapsto \dfrac{1}{z}
+            \end{equation*}
+        $(x, y) \mapsto (\cos{x} \cosh{y}, -\sin{x \sinh{y}})$ where $\cosh{x} = \frac{e^{x}  + e^{-x}}{2}$ and $\sinh{x} = \frac{e^{x} - e^{-x}}{2}$. Check CR: $\begin{bmatrix}
+            -\sin{x}\cosh{y} & \cos{x}\sinh{y}  \\
+            -\cos{x}\sinh{y} & -\sin{x}\cosh{y}   
+        \end{bmatrix}$
+    \end{example}
+\end{examples}
+
+\begin{definition}{}
+    $\cos{iy} = \cosh{y}$ and $\sin{iy} = i \sinh{y}$.
+\end{definition}
+
+\textbf{Proposition}:
+    \begin{align*}
+        \cos{z}  &= \dfrac{e^{iz} + e^{-iz}}{2}   \\
+        \sin{z}  &= \dfrac{e^{iz} - e^{ -iz}}{2i} \\
+        \exp(iz) &= \cos{z} + i\sin{z}              
+    \end{align*}
+
+\textbf{Question}: When is 
+    \begin{align*}
+        \exp(z) &= 0 \\
+        \sin{z} &= 0 \\
+        \cos{z} &= 0   
+    \end{align*}
+There is 
+    \begin{align*}
+        \exp(z)               &= e^{x}(\cos{y} + i\sin{y}) \\
+        \lvert \exp(z) \rvert &= e^{x} \neq 0              \\
+    \end{align*}
+$\sin{z} = 0?$
+    \begin{equation*}
+        e^{iz} = e^{-iz} \iff e^{2iz} = 1
+    \end{equation*}
+so
+    \begin{equation*}
+        e^{2ix  - 2y} = 1
+    \end{equation*}
+Need $2y = 0$ for modulus and $2x = 2\pi n$ for argument. So $x = \pi n$. 
+
+\begin{examples}
+    \begin{example}
+        The complex log function. Consider $(x, y) \mapsto (\frac{1}{2} \mathop{log}(x^{2} + y^{2}), \arctan{\frac{y}{x}})$. It can also be written as 
+            \begin{equation*}
+                (\mathop{log}(r), \theta)
+            \end{equation*}
+        Claim: The mapping is holomorphic for $x > 0$. The matrix is 
+            \begin{equation*}
+                \begin{bmatrix}
+                    \dfrac{x}{x^{2} + y^{2}} & \dfrac{y}{x^{2} + y^{2}}                       \\
+                                             & \dfrac{\dfrac{1}{x}}{1 + \dfrac{y^{2}}{x^{2}}}   
+                \end{bmatrix}
+            \end{equation*} 
+        \textbf{Problem}: $\theta$ is not a real valued function but angled value.
+    \end{example}
+\end{examples}
+
+\begin{topic}
+    \section{Topological Interlude}
+\end{topic}
+
+\begin{definition}{Simply connected}
+    $U \subseteq \mathbb{C}$ is path connected and every closed loop in $\mathcal{U}$ can be continuously deformed to a constant loop: Every continuous map $f : s^{1} \rightarrow \mathcal{U}$ can be extended to an 
+        \begin{equation*}
+            F : s^{1} \times [0, 1] \rightarrow \mathcal{U}
+        \end{equation*}
+    with 
+        \begin{equation*}
+            F \eval_{s^{1} \times \{0\}} = f, F \eval_{s^{1} \times \{1\}} = \text{ canst}
+        \end{equation*}
+\end{definition}
+
+\textbf{Example}: Convex shapes
+
+Define: $log(z) = log r + i\theta$ where $z = re^{i \theta}$. 
+
+\textbf{Observation}: For any choice of log $z$, $\exp(\mathop{log}(z)) = z$. This is multivalued but holomorphic. Make cuts in domain to disallow problem loops. The function $\mathop{log}(z)$ is not defined for $r = 0$. So make a branch cut. Complement is connected so function on domain is simply connected.
+
+\begin{theorem}{Monodromy}
+    A continuous multi valued function on a simply connected domain can be rendered single value by choosing the value at any single point.
+\end{theorem}
+
+\textbf{Fractional Powers}: We know $z \mapsto w = z^{n}$. We know that it is $n$ to one except at $z = 0$. The inverse function $w \mapsto z = w^{\frac{1}{n}}$ is multivalued because there are $n$ choices. The inverse map is holomorphic and multi-valued on $\mathbb{C} \backslash \{0\}$. It is not holomorphic at $z = 0$. $0$ is a branch point. Can fix this with a cut along negative $\mathbb{R}$ axis. In polar coordinates, if $w = re^{i\theta}$, then $z = r^{\frac{1}{n}}e^{i\Theta/n}$. Can fix the value by asking that $-\pi < \Theta < \pi$. 
+
+\begin{definition}{}
+    For $z, \alpha \in \mathbb{C}$, define 
+        \begin{equation*}
+            z^{\alpha} : \exp(\alpha \cdot \mathop{log}(z))
+        \end{equation*}
+    and check for $\alpha = \frac{1}{n}$ this agrees with $z^{\frac{1}{n}}$ before.
+\end{definition}
+
+\begin{topic}
+    \section{Inverse Trigonometric Functions}
+\end{topic}
+
+Define $z = \arccos{w}$ if $\cos{z} = w$.
+
+\textbf{Proposition}: $\cos{z_{1}} = \cos{z_{2}} \iff$ either $z_{1} - z_{2} \in 2\pi\mathbb{Z}$ or $z_{1} + z_{2} \in 2\pi \mathbb{Z}$.
+    \begin{proof}
+        $\cos{z} = \frac{e^{iz} + e^{-iz}}{2}$. Then $e^{iz_{1}} + e^{-iz_{1}} = e^{iz_{2}} + e^{-iz_{2}} = 2c$. We get:
+            \begin{equation*}
+                \alpha + \alpha^{-1}  = 2c
+            \end{equation*}
+        or 
+            \begin{equation*}
+                \alpha^{2} - 2c\alpha + 1 = 0 
+            \end{equation*}
+        This has $2$ roots. Either $e^{iz_{1}} = e^{iz_{2}}$ or $e^{iz_{1}} = e^{-iz_{2}}$.
+    \end{proof}
+
+Given that $c = \cos{z_{1}} = \cos{z_{2}}$, what is $z_{1}$ in terms of $c$?
+    \begin{equation*}
+        \alpha = c \pm \sqrt{c^{2} - 1}
+    \end{equation*}
+
+\begin{topic}
+    \section{Composition, Chain Rule, and Inverse Functions}
+\end{topic}
+
+\begin{theorem}{}
+    $f : U \rightarrow \mathbb{C}$ and $g : V \rightarrow \mathbb{C}$ holomorphic and $f(U) \subseteq V$. Then $g \circ f$ is holomorphic.
+\end{theorem} 
+
+\begin{theorem}{Inverse Function}
+    If $f : U \rightarrow \mathbb{C}$ is holomorphic, $z_{0} \in U$, $f(z_{0}) = w_{0}$, $f^{\prime}(z_{0}) \neq 0$, then $f$ is invertible locally, near $z_{0}$ with holomorphic inverse
+\end{theorem}
+
+If $f: U \rightarrow V$ is holomorphic and $f^{\prime}(z_{0}) \neq 0$, $f(z_{0}) = w_{0}$, then after shrinking $U$ and $V$ around $z_{0}$ and $w_{0}$ $f$ becomes bijective, $f^{-1}$ is holomorphic and 
+    \begin{equation*}
+        (f^{-1})^{\prime} (w_{0}) = \dfrac{1}{f^{\prime}(z_{0})}
+    \end{equation*}
+Formula follows from $f^{-1} \circ f = id$. So $(f^{-1})^{\prime}(w_{0}) \cdot f^{\prime}(z_{0}) = 1$ by chain rule
+
+Comment on complex chain rule: Alternative approach: view $f$ as a real map from $U \rightarrow \mathbb{R}^{2}$. $g: \Im{f} \rightarrow \mathbb{R}^{2}$. Real approach to composition involves matrices.
+    \begin{equation*}
+        D(f \circ g) = D(f) \cdot D(g)
+    \end{equation*}
+as product of matrices. $f = u + iv$, $g = \alpha + i\beta$. 
+    \begin{equation*}
+        Df = \begin{bmatrix}
+            u_{\alpha} & u_{\beta} \\
+            v_{\alpha} & v_{\beta}   
+        \end{bmatrix} \text{ and } Dg = \begin{bmatrix}
+            \alpha_{x} & \alpha_{y} \\
+            \beta_{x}  & \beta_{y}    
+        \end{bmatrix}
+    \end{equation*}
+Exploiting the fact that $f, g$ are holomorphic, the matrices have the form $\begin{bmatrix}
+    p & -q \\
+    q & p    
+\end{bmatrix}$ and $\begin{bmatrix}
+    r  & s \\
+    -s & r   
+\end{bmatrix}$. So multiplication matches complex multiplication. Note that $f, g$ should be holomorphic for this to work.
+
+\begin{topic}
+    \section{Conformal maps}
+\end{topic}
+
+\begin{definition}{Conformal}
+    $f : U \rightarrow \mathbb{R}^{2}$ is conformal or angle preserving if 
+        \begin{itemize}
+            \item $f$ is differentiable everywhere
+
+            \item $Df$ is invertible everywhere
+
+            \item $f$ preserves angles between curves. $t \mapsto \gamma(t)$, $s \mapsto \delta(s)$. Curve is smooth, $\gamma^{\prime}(t)$, $\delta^{\prime}(s) \neq 0$. The tangent line to the curve. Define $\mathop{Angle}(\delta, \gamma)$ as the angle between tangent vectors there.
+        \end{itemize}
+\end{definition}
+
+\textbf{Proposition}: A linear map $\mathbb{R}^{2} \rightarrow \mathbb{R}^{2}$ is angle preserving if and only if its matrix has the form $\begin{bmatrix}
+    p & -q      \\
+    q & p
+\end{bmatrix}$.
+
+\begin{definition}{Differentiable Map}
+    A differentiable map is conformal if it is locally invertible, differentiable inverse and preserves angles between smooth curves.
+\end{definition}
+
+\begin{theorem}{}
+    Conformal maps are the holomorphic maps with nowhere vanishing derivative.
+\end{theorem}
+
+\begin{examples}
+    \begin{example}
+        $z \mapsto \frac{1}{z}$ is conformal ($z \neq 0$).
+    \end{example}
+\end{examples}
+
+\textbf{Mobius}: $z \mapsto \frac{az + b}{cz + d}$ is conformal if $z \neq -d/c$.
+
+\begin{examples}
+    \begin{example}
+        Power maps $z \rightarrow z^{n}$ $n \in \mathbb{N}$ conformal on $\mathbb{C} \backslash \{0\}$.
+    \end{example}
+\end{examples}
+
+\textbf{Proposition}: If $\gamma, \delta$ are smooth curves meeting at $0$ w/ angle $\theta$, then $\gamma^{n}, \delta^{n}$ meet at $0$ at a well-defined angle $n\theta$. 
+    \begin{equation*}
+        \gamma(t) = \gamma(0) + t\cdot \gamma^{\prime}(0) + O(t)
+    \end{equation*}
+so
+    \begin{equation*}
+        \gamma(t)^{n} = n\gamma^{\prime}(t) \cdot \gamma(t)^{n - 1}
+    \end{equation*}
+
+\begin{topic}
+    \section{Harmonic functions and conjugates}
+\end{topic}
+
+$f$ is harmonic if it is twice continuously differentiable and $u_{xx} + u_{yy} \equiv 0$ by laplace equation. If $f = u+ iv$ is holomorphic and twice continuously differentiable, then $u, v$ are harmonic. Then $v$ is called the harmonic conjugate of $u$. In principle, $v_{x} = -u_{y}$, $v_{y} = u_{x}$, $u_{x}, -u_{y}$ are known.
+
+
+\chapter{Week 4}
+
+\begin{topic}
+    \section{Series, Convergence, Functions}
+\end{topic}
+
+\begin{definition}{Series}
+    A series is a formal expression
+        \begin{equation*}
+            \sum_{n = 0}^{\infty}a_{n} \text{ or } \sum_{n = -\infty}^{\infty} a_{n}
+        \end{equation*}
+\end{definition}
+
+\begin{definition}{Sum}
+    The sum of each of the series is 
+        \begin{equation*}
+            \lim\limits_{N \to \infty} \sum_{n = 0}^{N}a_{n}
+        \end{equation*}
+    If finite, the series are called convergent. If not, it is called divergent.
+\end{definition}
+
+\begin{definition}{Convergence}
+    $\sum a_{n}$ is absolutely convergent if $\sum \lvert a_{n} \rvert$ is convergent. Conditionally convergent if convergence but not absolutely.
+\end{definition}
+
+\textbf{Remark}: $\sum \lvert a_{n} \rvert$ always has a sum. Convergence iff the sum is finite.
+
+\textbf{Facts}:
+    \begin{itemize}
+        \item If $\sum a_{n}$ converges, then $a_{n} \rightarrow 0$. 
+            \begin{proof}
+                $S_{N} = \sum_{n = 1}^{N} a_{n}$ and $T_{N} = \sum_{n = 1}^{N + 1}a_{n}$. Then $S_{N} \rightarrow s$, $T_{N} \rightarrow s$. So $T_{N} - S_{N} \rightarrow 0 $. So $a_{n + 1} \rightarrow 0$. 
+            \end{proof}
+
+        \item $\sum_{n = 0}^{\infty} a_{n}$ convergent iff $\sum_{n = A}^{\infty} a_{n}$ convergent for any $A$.
+
+        \item The sum does not change upon reordering finitely many terms. 
+
+        \item A series of complex numbers converges iff its real and imaginary parts do so. 
+
+        \item $\sum a_{n}, \sum b_{n}$ converge $\implies$ $\sum (a_{n} + b_{n})$ converges to their sum. 
+
+        \item Dominated convergence: Comparison test: $\sum a_{n}$ absolutely convergent, $\lvert b_{n} \rvert < \lvert a_{n} \rvert \implies$ $\sum b_{n}$ absolutely convergent also.
+
+        \item $a_{n}, b_{n}, c_{n}$ real, $a_{n} \leq b_{n} \leq c_{n}$, and $\sum a_{n}, \sum c_{n}$ convergent $\implies \sum b_{n}$ convergent and $\sum a_{n} \leq \sum b_{n} \leq \sum c_{n}$.
+            \begin{proof}
+                Consider $\sum (c_{n} - a_{n})$ non negative, so absolutely convergent. We also have $\sum b_{n} - a_{n}$ is positive, absolutely convergent also, as $\lvert b_{n} - a_{n} \rvert \leq \lvert c_{n} - a_{n} \rvert$. So $\sum a_{n} + (b_{n} - a_{n})$ converges.
+            \end{proof}
+    \end{itemize}
+\textbf{Less Obvious}:
+    \begin{itemize}
+        \item Absolute convergence $\implies$ convergence.
+            \begin{proof}
+                Partial sums from Cauchy sequence: $x_{n}$ converges iff for any $\varepsilon > 0$, there is $n, m > N$ such that 
+                    \begin{equation*}
+                        \lvert x_{n} - x_{m} \rvert < \varepsilon
+                    \end{equation*}
+                For partial sums:
+                    \begin{equation*}
+                        \left\lvert \sum_{k = n + 1}^{m} a_{n} \right\rvert < \varepsilon
+                    \end{equation*}
+                Estimate: $\lvert \sum_{k = n + 1}^{m} a_{k} \rvert \leq \sum_{k = n + 1}^{m} \lvert a_{k} \rvert$. 
+            \end{proof}
+
+        \item $\sum a_{n}$ absolute convergent $\implies \lvert \sum_{n = 0}^{\infty} a_{n} \rvert \leq \sum_{n = 0}^{\infty}\lvert a_{n} \rvert$.
+
+        \item The sum of absolutely convergent series does not change upon any reordering of terms.
+    \end{itemize}
+
+\begin{examples}
+    \begin{example}
+        $\sum_{n = 1}^{\infty} \frac{1}{n}$ divergent, $\sum_{n = 1}^{\infty}\frac{1}{n^{2}}$ convergent $= \frac{\pi^{2}}{6}$.
+    \end{example}
+    \begin{example}
+        $\sum_{n = 1}^{\infty} \frac{1}{n(n + 1)}$ converges to $1$.
+    \end{example}
+\end{examples}
+
+\textbf{Proposition}: If $a_{n}$ is a decreasing sequence $ \rightarrow 0$, then $\sum_{n = 0}^{\infty} (-1)^{n} a_{n}$ converges.
+    \begin{proof}
+        Partial sums form a cauchy sequence.
+    \end{proof}
+
+\textbf{Proposition}: If $\sum a_{n}$ is conditionally convergent, $a_{n} \in \mathbb{R}$ then reordering can make it sum to any chosen value.
+
+\begin{topic}
+    \section{Convergence/Divergence Tests}
+\end{topic}
+
+\textbf{Comparison Test}:
+    \begin{itemize}
+        \item $\sum a_{n}$ absolutely convergent, $\lvert b_{n} \rvert < \lvert  a_{n} \rvert \implies$ $\sum b_{n}$ converges absolutely
+
+        \item $a_{n} \in \mathbb{R}$, $\sum a_{n} = \infty$, $b_{n} > a_{n} \implies \sum b_{n} $ is $\infty$. 
+    \end{itemize}
+
+\textbf{Ratio Test}: (Comparison test with geometric series). $\sum_{n \geq 0}^{\infty}r^{n}$ converges absolutely for $\lvert r \rvert < 1$ and diverges for $r \geq 1$.
+
+\textbf{Proposition}: If $\lvert \frac{a_{n + 1}}{a_{n}} \rvert < r < 1$ for large enough $n$ then $\sum a_{n}$ converges absolutely. If $\lvert \frac{a_{n + 1}}{a_{n}} \rvert \geq 1$, for large enough $n$, then it diverges. Test fails if $\lvert \frac{a_{n + 1}}{a_{n}} \rvert < 1$ but cannot find an $r$ bound above. Test fails for $\sum_{n = 1}^{\infty} \frac{1}{n^{\alpha}}$ for $\alpha \in \mathbb{R}$.
+
+\textbf{Integral Test}: Effective when the ratio test/comparison test with geometric series fails. Good for series with slow decay.
+
+\textbf{Proposition}: Let $f : \mathbb{R}_{+} \rightarrow \mathbb{R}$ be decreasing for large $x$. Then $\sum_{n = 1}^{\infty} f(n)$ converges if $\int_{M}^{\infty} f(x) \, \dd{x} $ is finite diverges otherwise. We have:
+    \begin{equation*}
+        \int_{M + 1}^{\infty} f(x) \, \dd{x}  \leq \sum_{n = M + 1}^{\infty}f(n) \leq \int_{M}^{\infty} f(x) \, \dd{x} 
+    \end{equation*}
+if $f$ is decreasing for $x \geq M$.
+
+\begin{examples}
+    \begin{example}
+        The integral $\int_{1}^{\infty} \frac{1}{x}^{\alpha} \, \dd{x} $ diverges for $\alpha \leq 1$ and is finite for $\alpha > 1$. Same for $\sum_{n = 1}^{\infty} \frac{1}{n^{\alpha}}$.
+    \end{example}
+    \begin{example}
+        $\int_{2}^{\infty} \frac{1}{x \mathop{log}x} \, \dd{x} = \infty$
+    \end{example}
+    \begin{example}
+        $\int_{2}^{\infty} \frac{1}{x\mathop{log}(x)^{\alpha}} \, \dd{x} < \infty$ for $\alpha > 1$.
+    \end{example}
+    \begin{example}
+        $\int_{1}^{\infty} \frac{\sin{x}}{x} \, \dd{x}  < \infty$. We cannot use integral test for this because $\sin{x}/x$ is not decreasing/monotonic.
+    \end{example}
+    \begin{example}
+        $\sum_{n = 1}^{\infty} \frac{\sin{n}}{n^{2}}$ comparison test with $\frac{1}{n^{2}}$.
+    \end{example}
+\end{examples}
+
+\begin{topic}
+    \section{Series of Functions}
+\end{topic}
+
+Want to investigate continuity, differentiation, integration.
+
+\begin{definition}{}
+    Let $f_{n} : C \rightarrow \mathbb{C}$ be a collection of functions. Say $f_{n} \rightarrow f$ pointwise if $\forall x$, $f_{n}(x) \rightarrow f(x)$. $f_{n} \rightarrow f$ uniformly if $\sup_{x \in D}\lvert f_{n}(x) - f(x) \rvert \rightarrow 0$. So uniformly convergence requires that the series of functions converges to a function at a uniform/ bounded rate.
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        $D = [0, 1]$, $f_{n}(x) = x^{n}$ $f_{n}(x) \rightarrow 0, x < 1$ and $1, x = 1$. Convergence is pointwise but not uniform.
+    \end{example}
+    \begin{example}
+        $D = \{z \in \mathbb{C} : \lvert z \rvert \leq 1\}$, $g_{n}(z) = \lvert z \rvert^{\frac{1}{n}}$, $g_{n}(z) \rightarrow \begin{cases}
+            1     &\text{ if } 0 < \lvert z \rvert \leq 1 \\
+            0 &\text{ if } z = 0   
+        \end{cases}$ is also not uniform.
+    \end{example} 
+\end{examples}
+
+\begin{theorem}{}
+    If each $f_{n}$ is continuous, $f_{n} \rightarrow f$ uniformly, then $f$ is continuous.
+\end{theorem} 
+
+\begin{theorem}{}
+    If $f_{n} : [a, b] \rightarrow \mathbb{R}$ integrable and $f_{n} \rightarrow f$, then $f$ is integrable and $\int_{a}^{x} f_{n}(t) \, \dd{t}  \rightarrow \int_{a}^{x} f(t) \, \dd{t} $ uniformly in $x$.
+\end{theorem}
+
+\textbf{Corollary}: $f_{n}$ continuously differentiable on $D \subseteq \mathbb{R}$, $\mathbb{R}^{2}$, $f^{\prime}_{n} \rightarrow g$ and $f_{n} \rightarrow f$, then $f_{n} \rightarrow f$ uniformly, $f$ continuously differentiable and $f^{\prime} \rightarrow g$
+
+\textbf{Remarks}: Same for series. If $D$ is path connected, it suffices to check $f_{n} \rightarrow f$ at any single point.
+
+\textbf{Corollary}: If in addition, the $f_{n}$ are holomorphic then so is $f$.
+    \begin{proof}
+        $0 = \pdv{f_{n}}{\overline{z}} \rightarrow \pdv{f}{\overline{z}}$
+    \end{proof}
+
+For series: pointwise and uniform convergence by partial sums.
+
+\begin{examples}
+    \begin{example}
+        $D = \{z \in \mathbb{C} : \lvert z \rvert \leq 1\}$, $f_{n} (z) = z^{n}$. Convergence of $\sum_{n = 0}^{\infty} f_{n}$ is uniform in $\{z : \lvert z \rvert \leq r\}$ for all $r < 1$ and divergent for any $z$ such that $\lvert z \rvert = 1$.
+    \end{example}
+    \begin{example}
+        Same $D$, $g_{n}(z) = z^{n}/n$, $h_{n}(z) = z^{n}/n^{2}$
+    \end{example}
+\end{examples}
+
+\begin{topic}
+    \section{Power Series}
+\end{topic}
+
+Power series centered at $a \in \mathbb{C}$. 
+    \begin{equation*}
+        S(z) = \sum_{n = 0}^{\infty}a_{n}(z - a)^{n}
+    \end{equation*}
+$a_{n}$ is constant and $z$ is the variable.
+
+\textbf{Variant}: Laurent series: $\sum_{n =  - \infty}^{\infty}a_{n}(x - a)^{n}$.
+
+\begin{examples}
+    \begin{example}
+        $\sum_{n = 0}^{\infty}z^{n} = \frac{1}{1 - z}$. Uniformly and absolutely convergent for $\lvert z \rvert \leq r$, $r < 1$.
+    \end{example}
+    \begin{example}
+        $\sum_{n = 0}^{\infty}nz^{n - 1}: \dv{z}\frac{1}{1 - z} = \frac{1}{(1 - z)^{2}}$.
+    \end{example}
+    \begin{example}
+        $\sum_{n = 0}^{\infty}\frac{z^{n}}{n!}$ converges for all $z$. We will see later that $\exp(z)$.
+    \end{example}
+\end{examples}
+
+\begin{theorem}{}
+    If $s(z)$ is a power series which converges for some $z$ with $\lvert  z - a \rvert = R$, then it converges absolutely and uniformly in any disk 
+        \begin{equation*}
+            \lvert z - a \rvert \leq r, r < R
+        \end{equation*}
+    Moreover: $s(z)$ is holomorphic for $\lvert z - a \rvert < R$ and may be differentiated term by term, to any order.
+\end{theorem}
+
+\begin{definition}{}
+    The region of convergence of a power series is the largest open set in which it converges. We saw that this is always a disk.
+\end{definition}
+
+\begin{theorem}{}
+    If $\sum_{n = 1}^{\infty}a_{n}$ is absolutely convergent, then for any $\sigma : \mathbb{N} \rightarrow \mathbb{N}$
+        \begin{equation*}
+            \sum_{n = 1}^{\infty}a_{\sigma(n)}
+        \end{equation*}
+    is absolutely convergent and has the same sum.
+\end{theorem}
+    \begin{proof}
+        Absolutely convergent means that $\forall \varepsilon > 0$, $\varepsilon N_{\varepsilon}$ such that 
+            \begin{equation*}
+                \sum_{k \in S} \lvert a_{k} \rvert < \varepsilon
+            \end{equation*}
+        for any set $S$. Want $\sum a_{\sigma(n)}$ converges to the same sum on $\sum a_{n}$ by estimating the difference. Choose $N$ large enough so that $N \geq N_{\varepsilon}$. Additionally, if $n \leq N_{\varepsilon}$ then $\sigma(n) < N$. For any $m > N$
+    \end{proof}
+
+Last time, $\exp(z) = \sum_{n = 0}^{\infty}\frac{z^{n}}{n!}$. Previously, it was claimed that $\exp(x + iy) = e^{x} \cdot (\cos{y} + i\sin{y})$.
+    \begin{itemize}
+        \item Step 1: 
+            \begin{equation*}
+                E(iy) = \sum_{n = 0}^{\infty} \dfrac{(iy)^{n}}{n!} = \sum_{n = 0}^{\infty} \dfrac{(-1)^{n}y^{2n}}{(2n)!} + i \sum_{n = 0}^{\infty}\dfrac{y^{2n + 1}(-1)^{2n + 1}}{(2n + 1)!} = \cos{y} + i\sin{y}
+            \end{equation*}
+    \end{itemize}
+
+\textbf{Proposition}: $E(z + w) = E(z)E(w)$. Apply to $z = x, u = iy$, get the previous formula.
+
+\begin{theorem}{}
+    If $f_{n} \rightarrow f$ uniformly and each $f_{n}$ is continuous, then $f$ is continuous. 
+\end{theorem}
+    \begin{proof}
+        Want give $x_{0} \in$ domain, then for any $\varepsilon > 0$, $\exists \delta > 0$ such that $\lvert x - x_{0} \rvert < \delta$ means $\lvert f(x) - f(x_{0}) \rvert < \varepsilon$. Steps: Approximate $f$ by some $f_{n}$. Use continuity of $f_{n}$.
+
+        Approximate convergence: 
+            \begin{equation*}
+                \exists N : \sup\lvert f(x) - f_{n}(x) \rvert < \varepsilon/2
+            \end{equation*}
+        for $n > N$. Continuity of $f_{n} :$ $\exists \delta$ such that $\lvert f_{n}(x) - f_{n}(x_{0}) \rvert < \varepsilon/2$ if $\lvert x - x_{0} \rvert < \delta$.
+    \end{proof}
+
+\chapter{Week 5}
+
+\begin{topic}
+    \section{Algebra with Analytic Functions}
+\end{topic}
+
+\begin{theorem}{}
+    The radius of convergence of 
+        \begin{equation*}
+            \sum_{n = 0}^{\infty} a_{n}z^{n}
+        \end{equation*}
+    is $1/ \limsup \sqrt[n]{\lvert a_{n} \rvert}$ and $\frac{1}{0} = \infty$, $\frac{1}{\infty} = 0$.
+\end{theorem}
+    \begin{proof}
+        If $\lvert z \rvert > \frac{1}{\limsup \sqrt[n]{\lvert a_{n} \rvert}}$, then $\lvert z \rvert^{n}\lvert a_{n} \rvert > 1$ for infinitely many values of $n$. If $z < 1/\limsup \sqrt[n]{\lvert a_{n} \rvert}$, then $\lvert z \rvert < r/\limsup \sqrt[n]{\lvert a_{n} \rvert}$ for some $r < 1$. So we get $\lvert a_{n}z^{n} \rvert < r^{n}$ and we can compare with $zr^{n}$.
+    \end{proof}
+
+\begin{examples}
+    \begin{example}
+        $\exp(z) = \sum_{n = 0}^{\infty} \frac{z^{n}}{n!}$. $a_{n} = \frac{1}{n!}$ and $\limsup \frac{1}{\sqrt[n]{n!}}$. So $log(\sqrt[n]{n!}) = \frac{1}{n}\sum_{k = 1}^{n}log(k)$. Estimate with integral: $\int_{1}^{n} log(x) \, \dd{x} \approx \frac{n}{e}$. So $\limsup \frac{1}{\sqrt[n]{n!}} = 0$ and $1/0 = \infty$.
+    \end{example}
+    \begin{example}
+        $\frac{1}{(1 - z)^{k}}$ can be rewritten by binomial expansion or noticing that it is the derivative of $\frac{1}{1 - z}$.
+    \end{example}
+\end{examples}
+
+\textbf{Recall}: A function $f : D \rightarrow \mathbb{C}$ is complex analytic if it has a convergent Taylor expansion near any $z_{0} \in D$.
+
+\textbf{Proposition}: If $a(z) = \sum_{n \geq 0} a_{n}z^{n}$ converges for $\lvert z \rvert < R$, then $a(z)$ is analytic in side that disk. More precisely, the Taylor series at $z_{0}$ converges in the disk.
+
+\begin{examples}
+    \begin{example}
+        $a(z) = \frac{1}{1 - z} = \sum_{n \geq 0}z^{n}$ which has radius of convergence $1$. Has singularity at $z = 1$. So the largest disk has radius $1$. $\frac{1}{1 - z} = \frac{1}{(1 - z_{0}) - (z - z_{0})} = \frac{1}{1 - z_{0}} - \frac{1}{1 - \frac{z - z_{0}}{1 - z_{0}}}$ so $\frac{1}{1 - z_{0}} \sum_{n = 0}^{\infty}(\frac{z - z_{0}}{1 - z_{0}})^{n}$. Converges precisely when $\lvert z - z_{0} \rvert < \lvert 1 - z_{0} \rvert$.
+    \end{example}
+\end{examples}
+
+\textbf{Products}: If $\sum a_{n}z^{n}$ and $\sum b_{n}z^{n}$ converge for $\lvert z \rvert < R$, then so does their product.
+
+\textbf{Proposition}: If $a(z) = \sum a_{n}z^{n}$ converges for small $n$ and $a_{0} \neq 0$, then $1/a(z)$ is analytic at $0$.
+
+\textbf{Composition}: Analytically preserved through composition.
+
+\textbf{Inverse}: Inverses of analytic functions are analytic.
+
+\begin{topic}
+    \section{Powers and Roots}
+\end{topic}
+
+$z \mapsto z^{p}$ is holomorphic and locally bijective away from $z = 0$. Local inverses $z \mapsto z^{\frac{1}{p}}$ ($p$ choices for inverses.).
+
+\textbf{Binomial Expansion for powers}: In the disk $\lvert z \rvert < 1$, the expansion converges:
+    \begin{equation*}
+        (1 + z)^{\alpha} = \sum_{n \geq 0} \dbinom{\alpha}{n}z^{n}
+    \end{equation*}
+    \begin{proof}
+        Know that $(1 + z)^{\alpha} = \exp(\alpha\log(1 + z))$ and Taylor series converges.
+    \end{proof}
+
+\textbf{Powers of Taylor Series}: If $\sum_{ n \geq 0} a_{n}z^{n}$ converges and $a_{0} \neq 0$, then a choice of $a_{0}^{\alpha}$ determines a choice of $(\sum a_{n}z^{n})^{\alpha}$.
+
+Last time: $a(z) = a_{k}z^{k} + a_{k + 1}z^{k + 1} + \cdots$ means that we can take the $k$-th root of $a(z)$ to get $r(z)$ which converges somewhere. So the map $z \rightarrow a(z)$ factors as $z \rightarrow r(z) \rightarrow a(z)$ which is a conformal map followed by some multiplication of the angles. $z \mapsto z^{k}$ multiplies angles by $k$. We call $k$ the valency of the map $a(z)$ at $z = 0$. 
+
+\textbf{Remark}: More generally, if $a_{0} \neq 0$, 
+    \begin{equation*}
+        a(z) : z \mapsto r(z) \mapsto a_{0} + r(z)^{k}
+    \end{equation*}
+where $r(z)^{k} = a( z) - a(0) = a(z) - a_{0}$. Now, zeroes of $a^{\prime}(z)$ are isolated.
+
+\begin{theorem}{}
+    Analytic functions are conformal except at isolated points, where they multiply angles by their valency.
+\end{theorem}
+
+\begin{topic}
+    \section{Analytic Functions vs Power Series}
+\end{topic}
+
+\begin{itemize}
+    \item Power series are guaranteed to define analytic functions within their open region of convergence on an open disk.
+
+    \item Analytic functions have convergent Taylor expansions on any point in their domain 
+\end{itemize}
+
+\textbf{Analytic Continuation}: Borderline extra curricular: Lets you continue power series beyond their disk of convergence to their natural or maximal domain. Difficulty: Leads to multivalued functions. The remedy would be to have the domain not be an open subset of $\mathbb{C}$ but a multi-sheeted cover of the Riemann surface.
+
+\begin{topic}
+    \section{Laurent Series}
+\end{topic} 
+
+Complete algebraic/composition calculus:
+    \begin{equation*}
+        \sum_{n = -N}^{\infty} a_{n}z^{n} \text{ and } \sum_{ -\infty}^{\infty}a_{n}z^{n}
+    \end{equation*}
+Sum of negative powers $\sum_{n = -\infty}^{-1}a_{n}z^{n}$ is called the principal part.
+
+\textbf{Proposition}: If $a(z), b(z)$ are convergent Taylor series near $mz = 0$ and $b(z)$  not $\equiv 0$, then $a(z)/b(z)$ has a convergent Laurent expansion near $0$ with finite principal part. In this case, algebra works similarly to Taylor series.
+
+Sum of series is analytic on a punctured disk centered at $0$ and is said to have a pole at $0$.
+
+\begin{examples}
+    \begin{example}
+        $\exp(\frac{1}{z}) = \sum_{n = -\infty}^{0} \frac{z^{n}}{(-n)!}$ converges for $z \neq 0$. It has an infinite principal part.
+    \end{example}
+    \begin{example}
+        $\exp(z + \frac{1}{z}) = \exp(z)\exp(\frac{1}{z})$. Each coefficient is an infinite sum.
+    \end{example}
+\end{examples}
+
+\begin{theorem}{}
+    The maximal open region of convergence of a Laurent series is an annuls $A_{r}^{R}, r < \lvert  z \rvert < R$. 
+        \begin{itemize}
+            \item $R$ is the radius of convergence of the Taylor part
+
+            \item $r$ is the inverse radius of convergence of $\sum_{n > 0}^{\infty} a_{-n}w^{n}$ from principal part with $w = \frac{1}{z}$.
+        \end{itemize}
+\end{theorem}.
+
+Borderline case: $r = R$ $\iff$ Theory of Fourier Series.
+
+\begin{topic}
+    \section{Integrals}
+\end{topic}
+$f: [a, b] \rightarrow \mathbb{R}$ piecewise continuous we can define $\int_{a}^{b} f(t) \, \dd{t} $ by Riemann sums. The FTC says that 
+    \begin{equation*}
+        \dv{x} \int_{z}^{x} f(t) \, \dd{t}  = f(x)
+    \end{equation*}
+
+\textbf{Integrals along curves in $\mathbb{R}^{2}$}. Let $\gamma : [a, b] \rightarrow \mathbb{R}^{2}$ continuous and piecewise continuously differentiable $f: D \rightarrow \mathbb{R}$ or $\mathbb{C}$ continuous on an open $D \supseteq \gamma([a ,b])$.
+
+Could define an integral on $\gamma$ as $\int_{a}^{b} f(\gamma(t)) \, \dd{t} $.
+
+More useful: Integrating differentiable along curves. Theory of differential forms and their integrals.
+
+\textbf{Old school approach}: Vector fields. 
+
+In $\mathbb{R}^{2}$ can integral vector fields along curves or across curves (circulation or work vs flux).
+
+\begin{definition}{}
+    For a vector field $f$ defined on $D \subseteq \gamma([a, b])$
+        \begin{align*}
+            \int_{\gamma}^{} f \, \dd{\gamma}        &= \int_{a}^{b} f(\gamma(t))\dv{\gamma}{t} \, \dd{t}  \\
+            \int_{\gamma}^{} f\times \, \dd{\gamma}  &= \int_{a}^{b} f(\gamma(t))\times \, \dd{\gamma}{t}   
+        \end{align*}
+\end{definition}
+
+\begin{theorem}{}
+    The values of the integrals are independent of the parametization of the path $\gamma$.
+\end{theorem}
+
+\textbf{Stokes' and Green's theorems}: Theorems which give conditions under which the integrals depend only on the endpoints of $\gamma$.
+
+Apply to closed path. Assume that we have a path $\gamma(t)$ with inner region $D$, traveling with domain $D$ on left. Let $D$ be simply connected. If vector field $f$ is defined on $D$ and $\gamma$ and continuously differentiable everywhere.
+
+\textbf{Jordan curve Theorem}: If $\gamma$ is not self-intersection, its bounded region is simply connected.
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

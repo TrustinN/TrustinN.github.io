@@ -1,0 +1,245 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math185/Homework/Math185Hw4/Math185Hw4.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math185Hw4}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Show that two power series $\sum_{n = 0}^{\infty}a_{n}z^{n}$ and $\sum_{n = 0}^{\infty}b_{n}z^{n}$ with positive radius of convergence sum to the same function if and only if $a_{n} = b_{n}$ for all $n$. 
+    \begin{proof}
+        ($\rightarrow$) Suppose that 
+            \begin{equation*}
+                \sum_{n \geq 0}a_{n}z^{n} = \sum_{n \geq 0}b_{n}z^{n}
+            \end{equation*}
+        Then for $z = 0$, we get: $a_{0} = b_{0}$. Taking the derivative, we get 
+            \begin{equation*}
+                \sum_{n \geq 1} na_{n}z^{n - 1} = \sum_{n \geq 1}nb_{n}z^{n - 1}
+            \end{equation*}
+        Then for $z = 0$, we get: $a_{1} = b_{1}$. So if we take the $k-$the derivative, we will see that $k!a_{k} = k!b_{k}$ and therefore $a_{k} = b_{k}$. We can take the derivative infinitely many times, so $a_{n} = b_{n}$ for all $n$.
+
+        ($\leftarrow$) Suppose that $a_{n} = b_{n}$ for all $n$. Then $a_{n} - b_{n} = 0$ and therefore,
+            \begin{equation*}
+                \sum_{n \geq 0} (a_{n} - b_{n})z^{n} = 0
+            \end{equation*}
+        So we get $\sum_{n \geq 0} a_{n}z^{n} - \sum_{n \geq 0}b_{n}z^{n} = 0$, which is what we wanted.
+    \end{proof}
+
+\newpage
+
+\textbf{Exercise 2}: Strengthen Q1 as follows: show that if $a(z) = \sum a_{n}z^{n}$  converges for small $z$ and $a_{n} \neq 0$ for some $n > 0$, then for all sufficiently small $z \neq 0$ we have $a(z) \neq a_{0}$. In other words, the solution $z = 0$ to the equation $a(z) = a_{0}$ is \textit{isolated}.
+
+\textit{Hint}: Write $a(z) = a_{0} + z^{k}(a_{k} + \sum_{n > k}a_{n}z^{n - k})$ and exploit the continuity of the series.
+    \begin{proof}
+        If we write $a(z) = a_{0} + z^{k}(a_{k} + \sum_{n > k}a_{n}z^{n - k})$, we see that $\sum_{n > k}a_{n}z^{n - k}$ has a radius of convergence at least as large as $a(z)$. Since it is continuous also, we have that $\lim\limits_{z \to 0}\sum_{n > k}a_{n}z^{n - k} = 0$, and more precisely by epsilon-delta, for any $\varepsilon > 0$, there is a $R$ such that for all $\lvert z \rvert < R$:
+            \begin{equation*}
+                \left\lvert \sum_{n > k}a_{n}z^{n - k} \right\rvert < \varepsilon
+            \end{equation*}
+        then
+            \begin{equation*}
+                -\varepsilon < \sum_{n > k}a_{n}z^{n - k} < \varepsilon
+            \end{equation*}
+        and so
+            \begin{equation*}
+                -\varepsilon + a_{k} < a_{k} + \sum_{n > k} a_{n}z^{n - k} < \varepsilon + a_{k}
+            \end{equation*}
+        If we choose $\varepsilon < a_{k}$, then $0 < a_{k} + \sum_{n > k}a_{n}z^{n - k} = \delta$ so we have 
+            \begin{equation*}
+                a(z) = a_{0} + z^{k}\delta > a_{0}
+            \end{equation*}
+        for some $\lvert z \rvert < R^{\prime}$, $R^{\prime}$ sufficiently small, $z$ non-zero.
+    \end{proof}
+
+\newpage
+
+\textbf{Exercise 3}: Show that $arc\tan{z} = z - \frac{z^{3}}{3} + \frac{z^{5}}{5} + \cdots$ for $\lvert z \rvert < 1$. 
+    \begin{proof}
+        The derivative of arctan is $\frac{1}{1 + z^{2}}$, which is equal to its Taylor Series:
+            \begin{align*}
+                \dfrac{1}{1 + z^{2}}             &= \dfrac{1}{1 - (-z^{2})}                                             \\
+                                                 &= 1 + (-z^{2}) + (-z^{2})^{2} + (-z^{2})^{3} + \cdots                 \\
+                (arc\tan{z})^{\prime}            &= 1 - z^{2} + z^{4} - z^{6} + \cdots                                  \\
+                \int_{}^{} (arc\tan{z})^{\prime} \, \dd{z}  &= \int_{}^{} 1 - z^{2} + z^{4} - z^{6} + \cdots \, \dd{z}             \\
+                                                 &= z - \dfrac{z^{3}}{3} + \dfrac{z^{5}}{5} - \dfrac{z^{7}}{7} + \cdots   
+            \end{align*}
+        We know that this is the power series for $\lvert z \rvert < 1$ because the expansion of $\frac{1}{1 + z^{2}}$ converges for $\lvert z \rvert < 1$, and when we take the integral, the radius of convergence is preserved. The last thing to check is that integrating does not introduce a constant. Since $arc\tan{0} = 0$, the constant term is $0$.
+    \end{proof}
+
+\newpage
+
+\textbf{Exercise 4}: Find the open region of convergence of 
+    \begin{itemize}
+        \item [(a)] $\sum_{n = 0}^{\infty} \frac{(z + i)^{n}}{(n + 1)(n + 2)}$
+            \begin{answer}
+                Let $y = z + i$. Then we have:
+                    \begin{equation*}
+                        \sum_{n = 0}^{\infty} \dfrac{y^{n}}{(n + 1)(n + 2)}
+                    \end{equation*}
+                By the ratio test, it converges when
+                    \begin{equation*}
+                        \left\lvert \dfrac{y(n + 1)(n + 2)}{(n + 2)(n + 3)} \right\rvert < 1
+                    \end{equation*}
+                or 
+                    \begin{equation*}
+                        \left\lvert y \right\rvert < \dfrac{n + 3}{n + 1} \rightarrow 1
+                    \end{equation*}
+                So this is the circle of radius $1$ centered at $-i$ as:
+                    \begin{equation*}
+                        \lvert z + i \rvert < 1
+                    \end{equation*}
+            \end{answer}
+
+        \item [(b)] $\sum_{n = 1}^{\infty} \frac{1}{n^{2} \cdot 3^{n}} \left(\frac{z + 1}{z - 1}\right)^{n}$ 
+            \begin{answer}
+                Let $y = \frac{z + 1}{z - 1}$. Then we have the series:
+                    \begin{equation*}
+                        \sum_{n \geq 1} \dfrac{1}{n^{2} \cdot 3^{n}}y^{n}
+                    \end{equation*}
+                By the ratio test, this converges when
+                    \begin{equation*}
+                        \left\lvert \dfrac{y \cdot n^{2} \cdot 3^{n}}{(n + 1)^{2} \cdot 3^{n + 1}} \right\rvert = \left\lvert \dfrac{y \cdot n^{2}}{3 (n + 1)^{2}} \right\rvert < 1
+                    \end{equation*}
+                So 
+                    \begin{equation*}
+                        \lvert y \rvert < \dfrac{3(n + 1)^{2}}{n^{2}} \rightarrow 3
+                    \end{equation*}
+                Then the condition becomes:
+                    \begin{equation*}
+                        \left\lvert \dfrac{z + 1}{z - 1} \right\rvert < 3
+                    \end{equation*}
+            \end{answer}
+    \end{itemize}
+
+\newpage
+
+\textbf{Exercise 5}: Investigate the (a) absolute and (b) uniform convergence of the series of functions
+    \begin{equation*}
+        \dfrac{z}{3} + \dfrac{z^{2}(3 - z)}{3^{2}} + \dfrac{z^{3}(3 - z)^{2}}{3^{3}} + \dfrac{z^{4}(3 - z)^{3}}{3^{4}} + \cdots
+    \end{equation*}
+    \begin{answer}
+        (Part I) The series converges absolutely when 
+            \begin{equation*}
+                \sum_{n \geq 1}\left\lvert \dfrac{z^{n + 1}(3 - z)^{n}}{3^{n + 1}} \right\rvert \text{ is finite}
+            \end{equation*}
+        By the ratio test, we then require:
+            \begin{equation*}
+                \left\lvert \dfrac{z^{n + 2}(3 - z)^{n + 1}3^{n + 1}}{z^{n + 1}(3 - z)^{n}3^{n + 2}} \right\rvert = \left\lvert \dfrac{z(3 - z)}{3} \right\rvert < 1
+            \end{equation*}
+
+        (Part II) Let the series of functions be $f_{n}(z) = \sum_{k = 0}^{n} \frac{z^{k + 1}(3 - z)^{k}}{3^{k + 1}}$. Then $\lim\limits_{n \to \infty} f_{n}(z) = \sum_{k \geq 0}\frac{z^{k + 1}(3 - z)^{k}}{3^{k + 1}}$. To compute this, let $C = \lim\limits_{n \to \infty}f_{n}(z)$. Then:
+            \begin{align*}
+                C                        &= \dfrac{z}{3} + \dfrac{z^{2}(3 - z)}{3^{2}} + \dfrac{z^{3}(3 - z)^{2}}{3^{3}} + \cdots \\
+                \dfrac{z(3 - z)}{3}C     &= \dfrac{z^{2}(3 - z)}{3^{2}} + \dfrac{z^{3}(3 - z)^{2}}{3^{3}} + \cdots                \\
+                C - \dfrac{z(3 - z)}{3}C &= \dfrac{z}{3}                                                                          \\
+                3C - z(3 - z)C           &= z                                                                                     \\
+                z^{2}C - 3zC + 3C        &= z                                                                                     \\
+                C(z^{2} - 3z + 3)        &= z                                                                                     \\
+                C                        &= \dfrac{z}{z^{2} - 3z + 3}                                                               
+            \end{align*}
+        Suppose that $f_{n}(z) \rightarrow C$ uniformly for contradiction. Since by the theorem, each $f_{n}(z)$ is continuous for $n \in \mathbb{N}$. But $C = \frac{z}{z^{2} - 3z + 3}$ is not continuous, which is a contradiction. It is not continuous because it is not defined when the denominator vanishes.
+    \end{answer}
+
+\newpage
+
+\textbf{Exercise 6}: If the power series $a(z)$ and $b(z)$ converge for $\lvert z \rvert < R$, we have seen that their product $a(z)b(z)$ also converges for  $\lvert z \rvert < R$. Find an example in which the radius of convergence for $a(z) b(z)$ is \textit{greater} than that of both $a(z)$ or $b(z)$.
+    \begin{answer}
+        Take $a(z) = (1 - z)^{\alpha} = \sum_{k \geq 0} \frac{\alpha(\alpha - 1) \cdots (\alpha - k + 1)}{k!}z^{k}$ and $b(z) = (1 - z)^{1 - \alpha} = \sum_{k \geq 0} \frac{(1 - \alpha)(1 - \alpha - 1) \cdots (1 - \alpha - k + 1)}{k!}z^{k}$ for $\lvert z \rvert < 1$. Then $a(z)b(z) = 1 - z$, which has infinite radius of convergence. If we take $\alpha = .5$, then we know that $a(z)$ and $b(z)$ have the same radius of convergence $\lvert z \rvert < 1$.
+    \end{answer}
+
+\newpage
+
+\textbf{Exercise 7}: Find the series expansion of $f(z) = 1/(1 - z + z^{2})$ by two different methods:
+    \begin{itemize}
+        \item By partial fraction expansion, and using the geometric series
+            \begin{proof}
+                We first find the partial fraction decomposition by solving for the roots of $1 - z + z^{2}$:
+                    \begin{equation*}
+                        z = \dfrac{1 \pm \sqrt{1 - 4}}{2} = \dfrac{1 \pm i\sqrt{3}}{2}
+                    \end{equation*}
+                Let:
+                    \begin{align*}
+                        z_{1} &= \dfrac{1 + i\sqrt{3}}{2} \\
+                        z_{2} &= \dfrac{1 - i\sqrt{3}}{2}   
+                    \end{align*}
+                Now solve:
+                    \begin{equation*}
+                        \dfrac{A}{z - z_{1}} + \dfrac{B}{z - z_{2}} = \dfrac{1}{1 - z + z^{2}}
+                    \end{equation*}
+                So we get:
+                    \begin{equation*}
+                        Az - Az_{2} + Bz - Bz_{1} = 1
+                    \end{equation*}
+                Solve the system:
+                    \begin{align*}
+                        A + B               &= 0 \\
+                        -Az_{2} - Bz_{1} &= 1   
+                    \end{align*}
+                expand with $A = -B$:
+                    \begin{align*}
+                        Bz_{2} - Bz_{1}       &= B(z_{2} - z_{1}) \\
+                                              &= -Bi\sqrt{3}      \\
+                        1                     &= -Bi\sqrt{3}      \\
+                        \dfrac{-1}{i\sqrt{3}} &= B                \\
+                        \dfrac{i\sqrt{3}}{3}  &= B                  
+                    \end{align*}
+                So the decomposition is:
+                    \begin{equation*}
+                        \dfrac{-i\sqrt{3}}{3}\dfrac{1}{z - z_{1}}
+                    \end{equation*}
+            \end{proof}
+
+        \item By setting up and solving a recursion for the coefficients. 
+            \begin{answer}
+                We note that $f(0) = 1$, so $a_{0} = 1$. Next, we see that $f(z)(1 - z + z^{2}) = 1$. This means that for a general term, $a_{n}$, we have the relation that:
+                    \begin{equation*}
+                        a_{n}z^{n} - z \cdot a_{n - 1} z^{n - 1} + z^{2} \cdot a_{n - 2}z^{n - 2} = 0
+                    \end{equation*}
+                This tells us that
+                    \begin{equation*}
+                        a_{n} - a_{n - 1} + a_{n - 2} = 0
+                    \end{equation*}
+                We also need to compute $a_{1}$. The relation limits to $a_{n} - a_{n - 1} = 0$ for $n = 1$. So we get $a_{1} = 1$. Now we figure out the rest of the terms using the recursion relation:
+                    \begin{align*}
+                        a_{0} &= 1                     \\
+                        a_{1} &= 1                     \\
+                        a_{n} &= a_{n - 1} - a_{n - 2}   
+                    \end{align*}
+                Here is the list:
+                    \begin{align*}
+                        n = 0  &\hspace{10pt} a_{0} = 1  \\
+                        n = 1  &\hspace{10pt} a_{1} = 1  \\
+                        n = 2  &\hspace{10pt} a_{2} = 0  \\
+                        n = 3  &\hspace{10pt} a_{3} = -1 \\
+                        n = 4  &\hspace{10pt} a_{4} = -1 \\
+                        n = 5  &\hspace{10pt} a_{5} = 0  \\
+                        n = 6  &\hspace{10pt} a_{6} = 1  \\
+                        n = 7  &\hspace{10pt} a_{7} = 1  \\
+                        n = 8  &\hspace{10pt} a_{8} = 0  \\
+                        \vdots &\hspace{10pt} \vdots       
+                    \end{align*}
+                and we see that the pattern repeats. So the series is 
+                    \begin{equation*}
+                        1 + z + 0z^{2} - z^{3} - z^{4} + 0z^{5} + z^{6} + z^{7} + \cdots
+                    \end{equation*}
+            \end{answer}
+    \end{itemize}
+
+
+
+
+
+
+
+
+
+
+\end{document}

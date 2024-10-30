@@ -1,0 +1,1006 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Compsci/CS189/Homework/CS189Hw1/tex/CS189Hw1.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{CS189Hw1}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\section*{Linear Algebra Review}
+\hrule
+
+\textbf{Exercise 1}: First isomorphism theorem. The isomorphism theorems are an important class of results with versions for various algebraic structures. Here, we are concerned about the first isomorphism theorem for vector spaces–one of the most fundamental results in linear algebra.
+
+\textbf{Theorem} Let $V, W$ be vector spaces, and let $T: V \rightarrow W$ be a linear map. Then the following are true:
+    \begin{itemize}
+        \item [(a)] $\ker{T}$ is a subspace of $V$.
+
+        \item [(b)] $\Im{T}$ is a subspace of $W$.
+
+        \item [(c)] $\Im{T}$ is isomorphic to $V / \ker{T}$. 
+    \end{itemize}
+
+Prove parts $(a)$ and $B$ of the theorem. (The interesting result is part $(c)$, so if you're inclined, try it out! We promise it's a very rewarding proof :) If you are interested by unfamiliar with the language, try looking up ``isomorphism'' and ``quotient space.'')
+    \begin{proof}
+        (Part A) By definition, if $k \in \ker{T}$, then $T(k) = 0 \in W$. Then for definition of a subspace:
+            \begin{itemize}
+                \item $T(k_{1}) + T(k_{1}) = 0 = T(k_{1} + k_{2})$. Since $T$ is linear. It follows that $k_{1} + k_{2}$ is also in $\ker{T}$.
+
+                \item $rT(k_{1}) = T(rk_{1}) = 0$ also by the linearity of $T$. So $rk_{1}$ is also in $\ker{T}$ if $k_{1} \in \ker{T}$.
+            \end{itemize}
+        We must have $0$ in $\ker{T}$ because $T$ is linear. So we are done.
+
+        (Part B) Same process as the last one:
+            \begin{itemize}
+                \item $w_{1} + w_{2} = T(v_{1}) + T(v_{2}) = T(v_{1} + v_{2})$, so $w_{1} + w_{2} \in \Im{T}$.
+
+                \item $rw_{1} = rT(v_{1}) = T(rv_{1})$ so $rw_{1} \in \Im{T}$.
+            \end{itemize}
+        We must have $0$ in the image also because $0$ is mapped to $0$ by the linearity of $T$.
+
+        (Part C) We have that $V / \ker{T}$ are elements of the form $v + \ker{T}$ which are the cosets that partition the set. Then the isomorphism given by the mapping:
+            \begin{equation*}
+                v + \ker{T} \in V / \ker{T} \rightarrow T(v) \in \Im{T}
+            \end{equation*}
+        This is injective because if $v_{0} + \ker{T}, v_{1} + \ker{T}$ were two different cosets, we have:
+            \begin{equation*}
+                T(v_{0} + \ker{T}) = T(v_{0}), T(v_{1} + \ker{T}) = T(v_{1})
+            \end{equation*}
+        It follows that:
+            \begin{equation*}
+                T(v_{0}) = T(v_{1}) \implies T(v_{0} - v_{1}) = 0, v_{0} - v_{1} \in \ker{T}
+            \end{equation*}
+        But this is a contradiction because then
+            \begin{equation*}
+                v_{1} + \ker{T} = v_{1} + (v_{0} - v_{1}) + \ker{T} = v_{0} + \ker{T}
+            \end{equation*}
+        To see surjectivity, suppose that $w \in \Im{T}$. Then 
+            \begin{equation*}
+                T(v) = w
+            \end{equation*}
+        for some $v \in V$. Since the kernel cosets partitions $V$, $v = v^{\prime} + \ker{T}$. It follows that $T(v^{\prime}) = w$ for some $v^{\prime} \in \ker{T}$.
+    \end{proof}
+
+\textbf{Exercise 2}: First we review some basic concepts of rank. Recall that elementary matrix operations do not change a matrix's rank. Let $A \in \mathbb{R}^{m \times n}$ and $B \in \mathbb{R}^{n \times p}$. Let $I_{n}$ denote the $n \times n$ identity matrix.
+    \begin{itemize}
+        \item [(a)] Perform elementary row and column operations to transform $\begin{bmatrix}
+            I_{n} & 0  \\
+            0     & AB   
+        \end{bmatrix}$ to $\begin{bmatrix}
+            B & I_{n} \\
+            0 & A       
+        \end{bmatrix}$.
+            \begin{answer}
+            \end{answer}
+
+        \item [(b)] Let's find lower and upper bounds on $rank(AB)$. Use part $(a)$ to prove that $rank(A) + rank(B) - n \leq rank(AB)$. Then use what you know about the relationship between the column space (range) and/or rowspace of $AB$ and the column/row spaces for $A$ and $B$ to argue that $rank(AB) \leq \min(rank{A}, rank{B})$.
+            \begin{answer}
+                Row operations preserve rank. So we see that the rank of the second matrix is $rank{B} + rank{A} - n$ while for the first matrix, it is $n + rank{AB}$. So it follows that:
+                    \begin{equation*}
+                        rank{A} + rank{B} - n \leq rank{AB}
+                    \end{equation*}
+                It is clear that $rank{AB} \leq \min(rank{A}, rank{B})$, because by the isomorphism theorem, the dimension of the image is less than or equal to the dimension of the domain. Then it follows that $rank{AB} \leq rank{B}$. We also know that the rank of $AB$ is less than or equal to the rank of $A$ because the matrix $A$ in $AB$ operates on a smaller subspace, and therefore its image is a subspace of the image of $A$.
+            \end{answer}
+
+        \item [(c)] if a matrix $A$ has rank $r$, then some $r \times r$ submatrix $M$ of $A$ has a nonzero determinant. Use this fact to show the standard facts that the dimension of $A^{\prime}s$ column space is at least $r$, and the dimension of $A$'s row space is at least $r$.
+            \begin{answer}
+                Since a submatrix of $A$ has non-zero determinant, there is a way to row-reduce $A$ such that a submatrix is the identity matrix of dimension $r$. This means that the row space and column space have dimension at least $r$.
+            \end{answer}
+
+        \item [(d)] It is a fact that $rank(A^{T}A) = rank{A}$; here's one way to see that. We've already seen in part (b) that $rank(A^{T}A) \leq rank{A}$. Suppose that $rank(A^{T}A)$ were strictly less than $rank{A}$. What would that tell us about the relationship between the column space of $A$ and the null space of $A^{T}$? What standard fact about the fundamental subspaces of $A$ says  that relationship is impossible?
+            \begin{answer}
+                We can check the rank of $A^{T}A$ by multiplying it with the unit vectors that span the subspace. Then it is clear that none of the column vectors of $A$ are in the null space of $A^{T}$. Therefore, we cannot have that $rank{A^{T}A} < rank{A}$.
+            \end{answer}
+
+        \item [(e)] Given a set of vectors $S \subseteq \mathbb{R}^{n}$, let $AS = \{Av : v \in s\}$ denote the subset of $\mathbb{R}^{m}$ found by applying $A$ to every vector in $S$. In terms of the ideas of the column space (range) and row space of $A$: What is $A\mathbb{R}^{n}$, and why? 
+            \begin{answer}
+                $A\mathbb{R}^{n}$ gives the span of the column vectors of $A$. This is because it is the subspace spanned by the action of $A$ on the generators of $\mathbb{R}^{n}$.
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 3}: Let $A \in \mathbb{R}^{n \times n}$ be a symmetric matrix. Prove equivalence between these three different definitions of positive semidefiniteness (PSD). Note that when we talk about PSD matrices this class, they are defined to be symmetric matrices. There are non-symmetric matrices that exhibit PSD properties, like the first definition below, but not all three.
+    \begin{itemize}
+        \item [(a)] For all $x \in \mathbb{R}^{n}$, $x^{T}Ax \geq 0$.
+
+        \item [(b)] All the eigenvalues of $A$ are non-negative.
+
+        \item [(c)] There exists a matrix $U \in \mathbb{R}^{n \times n}$ such that $A = UU^{T}$.
+    \end{itemize}
+Positive semidefiniteness will be denoted as $A \geq 0$.
+    \begin{proof}
+        We start with $(a) \implies (b)$. Let $x$ be an eigenvector of $A$. Then
+            \begin{equation*}
+                x^{T}Ax = \lambda x^{T}x  \geq 0
+            \end{equation*}
+        clearly, $\lambda \geq 0$. 
+
+        Now for $(b) \implies (c)$. By the spectral theorem, we can write $A = PDP^{T}$ where $P$ are orthogonal matrices and $D$ is a diagonal matrix containing the eigenvalues of $A$. Then: 
+            \begin{equation*}
+                A = PD^{1/2}D^{1/2}P^{T} = (PD^{1/2})(PD^{1/2})^{T}
+            \end{equation*}
+
+        For $(c) \implies (a)$, we have:
+            \begin{equation*}
+                x^{T}UU^{T}x = (x^{T}U)(x^{T}U)^{T} \geq 0
+            \end{equation*}
+        since it becomes a dot product of $(x^{T}U)^{T}$ with itself.
+    \end{proof}
+
+\textbf{Exercise 4}: The Frobenius inner product between two matrices of the same dimensions $A, B \in \mathbb{R}^{m \times n}$ is
+    \begin{equation*}
+        \langle A, B \rangle = trace(A^{T} B) = \sum_{i = 1}^{m} \sum_{j = 1}^{n} A_{ij}B_{ij},
+    \end{equation*}
+where trace $M$ denotes the \textit{trace} of $M$, which you should look up if you don't already know it. (The norm is sometimes written $\langle A, B \rangle_{F}$ to be clear.) The Frobenius norm of a matrix is 
+    \begin{equation*}
+        \lVert A \rVert_{F} = \sqrt{\langle A, B \rangle} = \sqrt{\sum_{i = 1}^{m} \sum_{j = 1}^{n} \lvert A_{ij} \rvert^{2}}
+    \end{equation*}
+Prove the following. The Cauchy-Schwarz inequality, the cyclic property of the trace, and the definitions in part $3$ above may be helpful to you.
+    \begin{itemize}
+        \item [(a)] $x^{T}Ay = \langle A, xy^{T} \rangle$ for all $x \in \mathbb{R}^{m}, y \in \mathbb{R}^{n}, A \in \mathbb{R}^{m \times n}$.
+            \begin{answer}
+                We have that the trace of $x^{T}Ay$ is the same as the trace of
+                    \begin{equation*}
+                        (x^{T}Ay)^{T} = y^{T}(x^{T}A)^{T} = y^{T}A^{T}x
+                    \end{equation*}
+                Now note that $\langle A, xy^{T} \rangle = trace(A^{T}xy^{T})$. $A^{T}x$ is a vector in $\mathbb{R}^{n}$. We see that $y^{T}A^{T}x$ is a dot product between $y$ and $A^{T}x$. On the other hand, the diagonal of $A^{T}x$ times $y^{T}$ gives us the summands of the dot product previously mentioned. Then it is clear that they are equivalent.
+            \end{answer}
+
+        \item [(b)] If $A$ and $B$ are symmetric PSD matrices, then $trace(AB) \geq 0$.
+            \begin{answer}
+                This means that $A = UU^{T}$, $B = VV^{T}$. Then
+                    \begin{equation*}
+                        tr(AB) = tr(UU^{T}VV^{T}) = tr(V^{T}UU^{T}V) = tr((U^{T}V)^{T}(U^{T}V)) \geq 0
+                    \end{equation*}
+            \end{answer}
+
+        \item [(c)] Optional: If $A, B \in \mathbb{R}^{n \times n}$ are real symmetric matrices with $\lambda_{\max}(A) \geq 0$ and $B$ being PSD, the $\langle A, B \rangle \leq \sqrt{n} \lambda_{\max}(A) \lVert B \rVert_{F}$. 
+    \end{itemize}
+
+\textbf{Exercise 5}: Let $A \in \mathbb{R}^{m \times n}$ be an arbitrary matrix. The maximum singular value of $A$ is defined to be $\sigma_{\max}(A) = \sqrt{\lambda_{\max}(A^{T}A)} = \sqrt{\lambda_{\max}(AA^{T})}$. Prove that
+    \begin{equation*}
+        \sigma_{\max}(A) = \max_{u \in \mathbb{R}^{m}, v\in \mathbb{R}^{n}, \lVert u \rVert = 1, \lVert v \rVert = 1} (u^{T}Av)
+    \end{equation*}
+    \begin{answer}
+        We see that that:
+            \begin{equation*}
+                \max_{u \in \mathbb{R}^{m}, v \in \mathbb{R}^{n}, \lVert u \rVert = 1, \lVert v \rVert = 1}(u^{T}Av) = \sqrt{\max_{u \in \mathbb{R}^{m}, v \in \mathbb{R}^{n}, \lVert u \rVert = 1, \lVert v \rVert = 1}(u^{T}Avv^{T}A^{T}u)}
+            \end{equation*}
+        This simplifies to:
+            \begin{equation*}
+                \sqrt{\max_{u \in \mathbb{R}^{m}, v \in \mathbb{R}^{n}, \lVert u \rVert = 1, \lVert v \rVert = 1}(u^{T}AA^{T}u)}
+            \end{equation*}
+        Now $u$ can be written as a linear combination of the eigenbasis for $A^{T}A$. $A^{T}A$ acts linearly on $u$, so we see that the max is when $u$ is an eigenvector corresponding to the maximum eigenvalue. This concludes the proof.
+    \end{answer}
+
+\newpage
+\section*{Matrix/Vector Calculus and Norms}
+\hrule
+
+\textbf{Exercise 1}: Consider a $2 \times 2$ matrix $A$, written in full as $\begin{bmatrix}
+    A_{11} & A_{12} \\
+    A_{21} & A_{22}   
+\end{bmatrix}$, and two arbitrary $2$-dimensional vectors $x, y$. Calculate the gradient of
+    \begin{equation*}
+        \sin{A^{2}_{11} + e^{A_{11} + A_{22}}} + x^{T}Ay
+    \end{equation*}
+    \begin{answer}
+        Applying $dA$ to the whole thing:
+            \begin{equation*}
+                \dv{A} \sin{(A_{11}^{2} + e^{A_{11} + A_{22}})} + \dv{A} x^{T}Ay
+            \end{equation*}
+        We get:
+            \begin{equation*}
+                \begin{bmatrix}
+                    \dv{A_{11}} \sin{(A_{11}^{2} + e^{A_{11} + A_{22}})} & \dv{A_{12}} \sin{(A_{11}^{2} + e^{A_{11} + A_{22}})} \\
+                    \dv{A_{21}} \sin{(A_{11}^{2} + e^{A_{11} + A_{22}})} & \dv{A_{22}} \sin{(A_{11}^{2} + e^{A_{11} + A_{22}})}   
+                \end{bmatrix} + \dv{A} x^{T}Ay
+            \end{equation*}
+        For the left term, we get:
+            \begin{equation*}
+                \begin{bmatrix}
+                    (2A_{11} + e^{A_{11}})\cos{A_{11}^{2} + e^{A_{11} + A_{22}}} & 0                                                  \\
+                    0                                                            & e^{A_{22}}\cos{(A_{11}^{2} + e^{A_{11} + A_{22}})}   
+                \end{bmatrix}
+            \end{equation*}
+        Now for the 
+            \begin{equation*}
+                \dv{A} x^{T} Ay
+            \end{equation*}
+        term:
+            \begin{align*}
+                \dv{A} \begin{bmatrix}
+                    x_{1} & x_{2}   
+                \end{bmatrix} \begin{bmatrix}
+                    A_{11} & A_{12} \\
+                    A_{21} & A_{22}   
+                \end{bmatrix} \begin{bmatrix}
+                    y_{1} \\
+                    y_{2}   
+                \end{bmatrix} &= \dv{A}(\begin{bmatrix}
+                    x_{1} & x_{2}   
+                \end{bmatrix}) \begin{bmatrix}
+                    y_{1}A_{11} + y_{2}A_{12} \\
+                    y_{1}A_{21} + y_{2}A_{22} 
+                \end{bmatrix} \\
+                &= \dv{A} x_{1}y_{1}A_{11} + x_{1}y_{2}A_{12} + x_{2}y_{1}A_{21} + x_{2}y_{2}A_{22}
+            \end{align*}
+        So the term is:
+            \begin{equation*}
+                \begin{bmatrix}
+                    x_{1}y_{1} & x_{1}y_{2} \\
+                    x_{2}y_{1} & x_{2}y_{2}   
+                \end{bmatrix}
+            \end{equation*}
+        Then the derivative is given by:
+            \begin{equation*}
+                \begin{bmatrix}
+                    (2A_{11} + e^{A_{11}})\cos{(A_{11}^{2} + e^{A_{11} + A_{22}})} & 0                                                  \\
+                    0                                                            & e^{A_{22}}\cos{(A_{11}^{2} + e^{A_{11} + A_{22}})} 
+                \end{bmatrix} +
+                \begin{bmatrix}
+                    x_{1}y_{1} & x_{1}y_{2} \\
+                    x_{2}y_{1} & x_{2}y_{2}   
+                \end{bmatrix}
+            \end{equation*}
+    \end{answer}
+
+\textbf{Exercise 2}: Aside from norms on vectors, we can also impose norms on matrices. Besides the Frobenius norm, the most common kind of norm on matrices is called the induced norm. Induced norms are defined as
+    \begin{equation*}
+        \lVert A \rVert_{p} = \sup_{x \neq 0} \dfrac{\lVert Ax \rVert_{p}}{\lVert x \rVert_{p}}
+    \end{equation*}
+where the notation $\lVert \cdot \rVert_{p}$ on the right-hand side denotes the vector $l_{p}$-norm. Please give the closed-form (or the most simple) expressions for the following induced norms of $A \in \mathbb{R}^{m \times n}$.
+    \begin{itemize}
+        \item [(a)] $\lVert A \rVert_{2}$
+            \begin{answer}
+                We can write it as:
+                    \begin{equation*}
+                        \lVert A \rVert_{p} = \dfrac{x^{T}A^{T}Ax}{x^{T}x}
+                    \end{equation*}
+                Now since $A^{T}A$ is symmetric, we can diagonalize it. The supremum is them given by the max eigenvalue. So it is $\lambda_{\max}(A^{T}A)$
+            \end{answer}
+
+        \item [(b)] $\lVert A \rVert_{\infty}$ 
+            \begin{answer}
+                This would be the maximum over the sum over each column of the rows of $A$.
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 3}: \begin{itemize}
+    \item [(a)] Let $\alpha = \sum_{i = 1}^{n} y_{i} \ln(1 + e^{\beta_{i}})$ for $y, \beta \in \mathbb{R}^{n}$. What are the partial derivatives $\pdv{\alpha}{\beta_{i}}$?
+        \begin{answer}
+            The partials are $\pdv{\alpha}{\beta_{i}} = \frac{y_{i}e^{\beta_{i}}}{1 + e^{\beta_{i}}}$.
+        \end{answer}
+
+    \item [(b)] Given $x \in \mathbb{R}^{n}, A \in \mathbb{R}^{m \times n}$. Write the partial derivative $\pdv{(Ax)}{x}$.
+        \begin{answer}
+            The partial is $A$. Let $a_{i}$ be the column vectors of $A$. Then 
+                \begin{equation*}
+                    Ax = a_{1}x_{1} + a_{2}x_{2} + \cdots + a_{n}x_{n}
+                \end{equation*}
+            Then the partial of a direct sum of the $a_{i}x_{i}$ is the same as the direct sum of the partials. So it is a direct sum of $a_{1}, \ldots, a_{n}$, which gives the matrix $A$.
+        \end{answer}
+
+    \item [(c)] Given $z \in \mathbb{R}^{m}$, write the gradient $\nabla_{z}(z^{T}z)$.
+        \begin{answer}
+            Using the same reasoning as the last one, it would be $2z$
+        \end{answer}
+
+    \item [(d)] Given $x \in \mathbb{R}^{n}, z \in \mathbb{R}^{m}$, and $z = g(x)$. Write the gradient $\nabla_{x}(z^{T}z)$ in terms of $\pdv{z}{x}$ and $z$.
+        \begin{answer}
+            We would take $\pdv{x_{i}}z^{T}z$ over $i$. This is equivalent to $\pdv{z}z^{T}z\pdv{z}{x_{i}} = 2z\pdv{z}{x_{i}}$. Now we have $2z\pdv{z}{x}$
+        \end{answer}
+
+    \item [(e)] Given $x \in \mathbb{R}^{n}, y, z \in \mathbb{R}^{m}, A \in \mathbb{R}^{m \times n}$, and $z = Ax - y$. Write the gradient $\nabla_{x}(z^{T}z)$.
+        \begin{answer}
+            We have:
+                \begin{equation*}
+                    \nabla_{x}(z^{T}z) = \nabla_{x}((Ax - y)^{T}(Ax - y)) = \nabla_{x}(x^{T}A^{T}Ax - 2y^{T}Ax + y^{T}y)
+                \end{equation*}
+            So we are reduced to 
+                \begin{equation*}
+                    \nabla_{x}(x^{T}A^{T}Ax) - 2A^{T}y
+                \end{equation*}
+            Now the general rule for $\nabla_{x}(x^{T}Bx) = (B + B^{T})x$, which can be shown by expanding and computation. Then
+                \begin{equation*}
+                    \nabla_{x}(x^{T}A^{T}Ax) = (A^{T}A + A^{T}A)x = 2A^{T}Ax
+                \end{equation*}
+            So
+                \begin{equation*}
+                    \nabla_{x}(z^{T}z) = 2A^{T}Ax - 2Ay = 2A^{T}(Ax - y) = 2A^{T}z
+                \end{equation*} 
+        \end{answer}
+\end{itemize}
+
+\newpage
+\section*{Linear Neural Networks}
+\hrule
+
+Let's apply the multivariate chain rule to a ``simple'' type of neural network called a \textit{linear neural network}. They're not very powerful, as they can learn only linear regression functions or decision functions, but they're a good stepping stone for understanding more complicated neural networks. We are given an $n \times d$ \textit{design matrix} $X$. Each row of $X$ is a training point, so $X$ represents $n$ training points with $d$ features each. We are also given an $n \times k$ matrix $Y$. Each row of $Y$ is a set of $k$ labels for the corresponding training point in $X$. Our goal is to learn a $k \times d$ matrix $W$ of weights such that
+    \begin{equation*}
+        Y \approx XW^{T}
+    \end{equation*}
+If $n$ is larger than $d$, typically there is no $W$ that achieves equality, so we seek an approximate answer. We do that by finding the matrix $W$ that minimizes the \textit{cost function}
+    \begin{equation*}
+        RSS(W) = \lVert XW^{T} - Y \rVert^{2}_{F}
+    \end{equation*}
+This is a classic \textit{least-squares linear regression} problem; most of you have seen those before. But we are solving $k$ linear regression problems simultaneously, which is why $Y$ and $W$ are matrices instead of vectors.
+
+\textbf{Linear neural networks.} Instead of optimizing $W$ over the space of $k \times d$ matrices directly, we write the $W$ we seek as a product of multiple matrices. This parameterization is called a \textit{linear neural network}.
+    \begin{equation*}
+        W = \mu(W_{L}, W_{L - 1}, \ldots, W_{2}, W_{1}) = W_{L}W_{L - 1} \cdots W_{2}W_{1}
+    \end{equation*}
+Here, $\mu$ is called the \textit{matrix multiplication map} (hence the Greek letter mu) and each $W_{j}$ is a real-valued $d_{j} \times d_{j - 1}$ matrix. Recall that $W$ is $k \times d$ matrix, so $d_{L} = k$ and $d_{0} = d$. $L$ is the number of \textit{layers} of ``connections'' in the neural network. You can also think of the network as having $L + 1$ layers of units: $d_{0} = d$ units in the \textit{input layer}, $d_{1}$ units in the first \textit{hidden layer}, $d_{L - 1}$ units in the last hidden layer, and $d_{L} = k$ units in the \textit{output layer}.
+
+We collect all the neural network's weights in a \textit{weight vector} $\theta = (W_{L}, W_{L - 1}, \ldots, W_{1}) \in \mathbb{R}^{d_{\theta}}$, where $d_{\theta} = d_{L}d_{L - 1} + d_{L - 1}d_{L - 2} + \cdots + d_{1}d_{0}$ is the total number of real-valued weights in the network. Thus we can write $\mu(\theta)$ to mean $\mu(W_{L}, W_{L - 1}, \ldots, W_{1})$. But you should image $\theta$ as a column vector: we take all the components of all the matrices $W_{L}, W_{L - 1}, \ldots, W_{1}$ and write them all in one very long column vector. Given a fixed weight vector $\theta$, the linear neural network takes an \textit{input vector} $x \in \mathbb{R}^{d_{\theta}}$ and returns an \textit{output vector} $y = W_{L}W_{L - 1}\cdots W_{2}W_{1}x = \mu(\theta)x \in \mathbb{R}^{d_{L}}$.
+
+Now our goal is to find a weight vector $\theta$ that minimizes the composition $RSS \circ \mu$ - that is, it minimizes the cost function
+    \begin{equation*}
+        J(\theta) = RSS(\mu(\theta)).
+    \end{equation*}
+We are substituting a linear neural network for $W$ and optimizing the weights in $\theta$ instead of directly optimizing the components of $W$. This makes the optimization problem harder to solve, and you would never solve least-squares linear regression problems this way in practice; but again, it is a good exercise to work toward understanding the behavior of ``real'' neural networks in which $\mu$ is \textit{not} a linear function.
+
+We would like to use a gradient descent algorithm to find $\theta$, so we will derive $\nabla_{\theta}J$ as follows.
+    \begin{itemize}
+        \item [1.] The gradient $G = \nabla_{W}RSS(W)$ is a $k \times d$ matrix whose entries are $G_{ij} = \pdv*{RSS(W)}{W_{ij}}$, where $RSS(W)$ is defined by Equation (1). Knowing that the simple formula for $\nabla_{W}RSS(W)$ in matrix notation can be written as the following:
+            \begin{equation*}
+                \nabla_{W}RSS(W) = 2(WX^{T} - Y^{T})X
+            \end{equation*}
+        prove this fact by deriving a formula for each $G_{ij}$ using summations, simplified as much as possible.
+            \begin{answer}
+                We know that the Frobenius norm is also given by the square root of the trace of the matrix times the transpose:
+                    \begin{equation*}
+                        RSS(W) = tr((WX^{T} - Y^{T})(XW^{T} - Y))
+                    \end{equation*}
+                Now we break it down:
+                    \begin{align*}
+                        X &= \begin{bmatrix}
+                            \mid & \mid &        & \mid \\
+                            x_{0} & x_{1} & \cdots & x_{d} \\
+                            \mid & \mid &        & \mid   
+                        \end{bmatrix} \\
+                        Y &= \begin{bmatrix}
+                            \mid  & \mid  &        & \mid  \\
+                            y_{0} & y_{1} & \cdots & y_{k} \\
+                            \mid  & \mid  &        & \mid    
+                        \end{bmatrix}   
+                    \end{align*}
+                We see that a given column of $XW^{T} - Y$ is given by
+                    \begin{equation*}
+                        \sum_{i \geq 0}x_{i} w_{j, i} - y_{j}
+                    \end{equation*}
+                for the $j$-th column. The trace gives us a sum of dot products:
+                    \begin{equation*}
+                        RSS(W) = \sum_{j} \left(\left(\sum_{i \geq 0} x_{i}w_{j, i} - y_{j}\right)^{T}\left(\sum_{i \geq 0} x_{i} w_{j, i} - y_{j}\right)\right)
+                    \end{equation*}
+                Now if we only care about the partial wrt $w_{i, j}$, we only care about the term with $w_{j, i}$. I used $w_{j, i}$ to denote the element $w_{i, j}$ in the transpose matrix. So this reduces to
+                    \begin{equation*}
+                        (x_{i}w_{j, i} - y_{j})^{T}(x_{i}w_{j, i} - y_{j}) = \sum_{n \geq 0} (x_{n, i}w_{j, i} - y_{n, j})^{2}
+                    \end{equation*}
+                Taking the partial wrt to $w_{i, j}$, we get:
+                    \begin{equation*}
+                        \sum_{n \geq 0} 2x_{n, i}(x_{n, i}w_{j, i} - y_{n, i}) = 2(x_{i}w_{j, i} - y_{i})^{T}x_{i}
+                    \end{equation*}
+                So then the gradient is given by
+                    \begin{equation*}
+                        2(XW^{T} - Y)^{T}X = 2(X^{T}W - Y^{T})X
+                    \end{equation*}
+            \end{answer}
+
+        \item [2.] Directional derivatives are closely related to gradients. The notation $RSS^{\prime}_{\Delta \theta}(W)$ denotes the directional derivative of $RSS(W)$ in the direction $\Delta W$, and the notation $\mu^{\prime}_{\Delta\theta}(\theta)$ denotes the directional derivative of $\mu(\theta)$ in the direction $\Delta\theta$. Informally speaking, the directional derivative $RSS^{\prime}_{\Delta W}(W)$ tells us how much $RSS(W)$ changes if we increase $W$ by an infinitesimal displacement $\Delta W \in \mathbb{R}^{k \times d}$. (However, any $\Delta W$ we can actually specify is not actually infinitesimal; $RSS^{\prime}_{\Delta}(W)$ is a local linearization of the relationship between $W$ and $RSS(W)$ at $W$. To a physicist, $RSS^{\prime}_{\Delta W}(W)$ tells us the initial velocity of change of $RSS(W)$ if we start changing $W$ with velocity $\Delta W$.)
+
+        Show how to write $RSS^{\prime}_{\Delta W}(W)$ as a Frobenius inner product of two matrices, one related to part $3.1$.
+            \begin{answer}
+                To get the directional derivative, we can take the dot product of the vectors in $W$ with the direction of change $\Delta W$. So the Frobenius inner product is
+                    \begin{equation*}
+                        \langle 2(WX^{T} - Y^{T})X, \Delta W \rangle_{F}
+                    \end{equation*}
+            \end{answer}
+
+                \item [3.] In principle, we could take the gradient $\nabla_{\theta} \mu(\theta)$, but we would need a $3$D array to express it! As we don't know a nice way to write it, we'll jump directly to writing the directional derivative $\mu^{\prime}_{\Delta \theta}(\theta)$. Here, $\Delta\theta \in \mathbb{R}^{d_{\theta}}$ is a weight vector whose matrices we will write $\Delta\theta = (\Delta W_{L}, \Delta W_{L - 1}, \ldots, \Delta W_{1})$. Show that
+                    \begin{equation*}
+                        \mu^{\prime}_{\Delta\theta}(\theta) = \sum_{j = 1}^{L}W_{ > j} \Delta W_{j}W_{ < j}
+                    \end{equation*}
+                where $W_{> j} = W_{L}W_{L - 1} \cdots W_{j + 1}, W_{< j} = W_{j - 1}W_{j - 2} \cdots W_{1}$, and we use the convention that $W_{ > L}$ is the $d_{L} \times d_{L}$ identity matrix and $W_{ < 1}$ is the $d_{0} \times d_{0}$ identity matrix.
+                    \begin{answer}
+                        We want to compute
+                            \begin{equation*}
+                                \mu^{\prime}_{\Delta\theta}(\theta) = \langle \nabla_{\theta}\mu(\theta), \Delta \theta \rangle_{F}
+                            \end{equation*}
+                        Now we can break this down component-wise:
+                            \begin{equation*}
+                                \sum_{j \geq 0}^{L} \langle \nabla_{W_{j}}\mu(\theta), \Delta\theta \rangle_{F}
+                            \end{equation*}
+                        then:
+                            \begin{equation*}
+                                \nabla_{W_{j}, \mu(\theta)} = \pdv{W_{j}}(W_{L}W_{L - 1} \cdots W_{2} W_{1}) = W_{L}W_{L - 1} \cdots W_{j + 1} \nabla W_{j} W_{j - 1}\cdots W_{1}
+                            \end{equation*}
+                        We can see this by taking multiple product rules:
+                            \begin{equation*}
+                                \pdv{W_{j}} W_{L}W_{L - 1} \cdots W_{1} = \pdv{W_{L}}{W_{j}}W_{L - 1}W_{L - 2}\cdots W_{1} + W_{L} \cdot \pdv{W_{j}} W_{L - 2} \cdots W_{1}
+                            \end{equation*}
+                        and once we get to $W_{j}$:
+                            \begin{equation*}
+                            W_{L} \cdots W_{j + 1} \pdv{W_{j}} W_{j}\cdots W_{1} = W_{L} \cdots W_{j + 1} (\nabla W_{j} W_{j - 1} \cdots W_{1} + \pdv{W_{j}}W_{j - 1} \cdots W_{1})
+                            \end{equation*}
+                        So the answer is given by
+                            \begin{equation*}
+                                \sum_{j \geq 0} \langle W_{> j}\nabla W_{j}W_{< j}, \Delta\theta \rangle_{F} = \sum_{j \geq 0}^{L} W_{> j} \Delta W_{j} W_{ < j}
+                            \end{equation*}
+                    \end{answer}
+
+        \item [4.] Recall the chain rule for scalar functions, $\dv{x} f(g(x)) \eval_{x = x_{0}} = \dv{y}f(y) \eval_{y = g(x)} \cdot \dv{x}g(x) \eval_{x = x_{0}}$. There is a multivariate version of the chain rule, which we hope you remember from some class you've taken, and the multivariate chain rule can be used to chain directional derivatives. Write out the chain rule that expresses the  directional derivative $J^{\prime}_{\Delta\theta}(\theta)\eval_{\theta = \theta_{0}}$ by composing your directional derivatives for $RSS$ and $\mu$, evaluated at a weight vector $\theta_{0}$. (Just write the pure form of the chain rule without substituting the values of the those directional derivatives; we'll substitute the values in the next part.)
+            \begin{answer}
+                Using the chain rule:
+                    \begin{equation*}
+                        J^{\prime}_{\Delta\theta}(\theta)\eval_{\theta = \theta_{0}} = RSS^{\prime}_{\Delta\mu}(\mu(\theta)) \eval_{\mu = \mu(\theta_{0})} \cdot \mu^{\prime}_{\Delta\theta}(\theta) \eval_{\theta = \theta_{0}}
+                    \end{equation*}
+            \end{answer}
+
+        \item [5.] Now substitute the values you derived in parts $3.2$ and $3.3$ into your expression for $J^{\prime}_{\Delta\theta}(\theta)$ and use it to show that
+            \begin{align*}
+                \nabla_{\theta}J(\theta)=& \hspace{5pt} (2(\mu(\theta)X^{T} - Y^{T})XW^{T}_{<L},          \\
+                                         & \hspace{5pt} \ldots,                                           \\
+                                         & \hspace{5pt} 2W^{T}_{>j}(\mu(\theta)X^{T} - Y^{T})XW^{T}_{<j}, \\
+                                         & \hspace{5pt} \ldots,                                           \\
+                                         & \hspace{5pt} 2W^{T}_{> 1}(\mu(\theta)X^{T} - Y^{T})X).       
+            \end{align*}
+        This gradient is a vector in $\mathbb{R}^{d_{\theta}}$ written in the same format as $(W_{L}, \ldots, W_{j}, \ldots, W_{1})$. Note that the values $W_{> j}$ and $W_{< j}$ here depend on $\theta$.
+            \begin{answer}
+                Plugging in our results:
+                    \begin{equation*}
+                        J^{\prime}_{\Delta\theta}(\theta)\eval_{\theta = \theta_{0}} = \langle 2(WX^{T} - Y^{T})X, \Delta W \rangle_{F} \eval_{W = \mu(\theta_{0})}  \cdot \sum_{j \geq 0}^{L} W_{> j} \Delta W_{j} W_{ < j}
+                    \end{equation*}
+                And 
+                    \begin{equation*}
+                        J^{\prime}_{\Delta\theta}(\theta) = \langle 2(\mu(\theta)X^{T} - Y^{T})X, \Delta \mu(\theta) \rangle_{F} \cdot \sum_{j \geq 0}^{L} W_{> j} \Delta W_{j} W_{ < j}
+                    \end{equation*}
+                Now to get the gradient:
+                    \begin{equation*}
+                        J^{\prime}_{\Delta\theta}(\theta) = \langle \nabla_{\theta}J(\theta), \Delta \theta \rangle
+                    \end{equation*}
+                So:
+                    \begin{equation*}
+                        \langle \nabla_{\theta}J(\theta), \Delta \theta \rangle = \langle 2(\mu(\theta)X^{T} - Y^{T})X, \Delta \mu(\theta) \rangle_{F} \cdot \sum_{j \geq 0}^{L} W_{> j} \Delta W_{j} W_{ < j}
+                    \end{equation*}
+            \end{answer}
+    \end{itemize}
+
+\newpage
+\section*{Probability Potpourri}
+\hrule
+
+\textbf{Exercise 1}: Recall the covariance of two scalar random variables $X$ and $Y$ is defined as $Cov(X, Y) = \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])]$. For a multivariate random variable $Z \in \mathbb{R}^{n}$, (i.e. $Z$ is a column vector where each element $Z_{i}$ is a scalar random variable), we define the covariance matrix $\Sigma$ such that $\Sigma_{ij} = Cov(Z_{i}, Z_{j})$. Concisely, $\Sigma = \mathbb{E}[(Z - \mu)(Z - \mu)^{T}]$, where $\mu$ is the mean value of $Z$. Prove that the covariance matrix is always positive semi-definite. 
+    \begin{answer}
+        We have that if $x$ is a column vector:
+            \begin{equation*}
+                x^{T} \Sigma x = x^{T}\mathbb{E}[(Z - \mu)(Z - \mu)^{T}]x
+            \end{equation*}
+        This gives:
+            \begin{equation*}
+                \sum_{i} \sum_{j} \mathbb{E}[x_{i} (Z_{i} - \mu_{i})]\mathbb{E}[(Z_{j} - \mu_{j}) x_{j}] = \sum_{i} \mathbb{E}[x_{i}(Z_{i} - \mu_{i})] \sum_{j} \mathbb{E}[x_{j}(Z_{j} - \mu_{j})]
+            \end{equation*}
+        Let $Y = \sum_{j} x_{j}Z_{j}$ so $\mathbb{E}[Y] = \sum_{j} x_{j}\mu_{j}$ and $Y - \mathbb{E}[Y] = \sum_{j} x_{j}Z_{j} - x_{j}\mu_{j}$. Then the equation up top tells us that $x^{T} \Sigma x = (Y - \mathbb{E}[Y])^{2} = \sigma_{Y}^{2}$ or the variance of $Y$. This number is positive, so the covariance is semi-definite.
+    \end{answer}
+
+    \textbf{Exercise 2}: Suppose a pharmaceutical company is developing a diagnostic test for a rare disease that has a prevalence of $1$ in $1,000$ in the population. Let $x$ be the true positive rate of the test, and let $y$ be the false positive rate. Determine the minimum value that $x$ must have, expressed as a function of $y$, such that a patient who tests positive actually has the disease with probability greater than $0.5$.
+        \begin{answer}
+            Let $T_{p}$ denote probability of testing positive and $D, 1 - D$ denote probability of having the disease and probability of not having the disease. Then we have:
+                \begin{equation*}
+                    P(T_{p} \mid D) = x, P(T_{p} \mid 1 - D) = y
+                \end{equation*}
+            And we want to find:
+                \begin{equation*}
+                    P(D \mid T_{p}) = \dfrac{D \cap T_{p}}{T_{p}} > 0.5
+                \end{equation*}
+            We have:
+                \begin{equation*}
+                    D \cdot P(T_{p} \mid D) + (1 - D) \cdot P(T_{p} \mid 1 - D) = T_{p} = Dx + (1 - D)y
+                \end{equation*}
+            Also, 
+                \begin{equation*}
+                    x = P(T_{p} \mid D) = \dfrac{T_{p} \cap D}{D} \implies xD = T_{p} \cap D
+                \end{equation*}
+            So we have in terms of $x, y$:
+                \begin{equation*}
+                    \dfrac{Dx}{Dx + (1 - D)y} > 0.5
+                \end{equation*}
+            Simplifying yields:
+                \begin{equation*}
+                    x > \dfrac{(1 - D)y}{D}
+                \end{equation*}
+            where $D = 1/1000$
+        \end{answer}
+
+    \textbf{Exercise 3}: An archery target is made of $3$ concentric circles of radii $1/\sqrt{3}, 1$ and $\sqrt{3}$ feet. Arrows striking within the inner circle are awarded $4$ points, arrows within the middle ring are awarded $3$ points, and arrows within the outer ring are awarded $2$ points. Shots outside the target are awarded $0$ points.
+
+    Consider a random variable $X$, the distance of the strike from the center (in feet), and let the probability density function of $X$ be
+        \begin{equation*}
+            f(x) = \begin{cases}
+                \dfrac{2}{\pi(1 + x^{2})} &\text{ if } x > 0 \\
+                0 &\text{ if } otherwise                   
+            \end{cases}
+        \end{equation*}
+    What is the expected value of the score of a single strike?
+        \begin{answer}
+            Let $Y$ be the random variable for the score such that:
+                \begin{equation*}
+                    Y = g(X) = \begin{cases}
+                        2 &\text{ if } 0 \leq x \leq \dfrac{1}{\sqrt{3}} \\
+                        3 &\text{ if } \dfrac{1}{\sqrt{3}} \leq x \leq 1 \\
+                        4 &\text{ if } 1 \leq x \leq \sqrt{3} \\
+                        0 &\text{ if } otherwise   
+                    \end{cases}
+                \end{equation*}
+            Then
+                \begin{equation*}
+                    \mathbb{E}(Y) = \int p(g^{-1}(Y)) \cdot Y \, \dd{Y}  = \int_{-\infty}^{\infty} p(x) \cdot g(x) \, \dd{x} 
+                \end{equation*}
+            This gives:
+                \begin{align*}
+                    \mathbb{E}(Y) &= \int_{0}^{\frac{1}{\sqrt{3}}} \dfrac{2}{\pi(1 + x^{2})}g(x) \, \dd{x} + \int_{\frac{1}{\sqrt{3}}}^{1} \dfrac{2}{\pi(1 + x^{2})}g(x) \, \dd{x} + \int_{1}^{\sqrt{3}} \dfrac{2}{\pi(1 + x^{2})}g(x) \, \dd{x} \\
+                                  &= 4\int_{0}^{\frac{1}{\sqrt{3}}} \dfrac{2}{\pi(1 + x^{2})} \, \dd{x} + 3\int_{\frac{1}{\sqrt{3}}}^{1} \dfrac{2}{\pi(1 + x^{2})} \, \dd{x} + 2\int_{1}^{\sqrt{3}} \dfrac{2}{\pi(1 + x^{2})} \, \dd{x} \\
+                \end{align*}
+        \end{answer}
+
+    \textbf{Exercise 4}: Let $X \sim Pois(\lambda), Y \sim Pois(\mu)$. Given that $X \perp Y$, derive an expression for $\mathbb{P}(X = k \mid X + Y = n)$ where $k = 0, \ldots, n$. What well-known probability distribution is this? What are its parameters? 
+        \begin{answer}
+            We see that:
+                \begin{equation*}
+                    \mathbb{P}(X = k \mid X + Y = n) = \dfrac{\mathbb{P}(X = k, X + Y = n)}{P(X + Y = n)} = \dfrac{\mathbb{P}(X =k)\mathbb{P}(Y = n - k)}{\mathbb{P}(X + Y = n)}
+                \end{equation*}
+            Solve for the denominator first:
+                \begin{align*}
+                    \mathbb{P}(X + Y = n) &= \sum_{i = 0}^{n}\mathbb{P}(X = i)\mathbb{P}(Y = n - i)                                           \\
+                                          &= \sum_{i = 0}^{n} \dfrac{\lambda^{i}e^{-\lambda}}{i!} \cdot \dfrac{\mu^{n - i}e^{-\mu}}{(n - i)!} \\
+                                          &= \sum_{i = 0}^{n} \dfrac{\lambda^{i}\mu^{n - i}e^{-(\lambda + \mu)}}{i!(n - i)!}                  \\
+                                          &= \dfrac{1}{n!} \sum_{i = 0}^{n} \dbinom{n}{i} \lambda^{i}\mu^{n - i}e^{-(\lambda + \mu)}          \\
+                                          &= \dfrac{(\lambda + \mu)^{n}e^{-(\lambda + \mu)}}{n!}                                                
+                \end{align*}
+            Now for the numerator:
+                \begin{equation*}
+                    \mathbb{P}(X = k)\mathbb{P}(Y = n - k) = \dfrac{\lambda^{k}\mu^{n - k}e^{-(\lambda + \mu)}}{k!(n - k)!}
+                \end{equation*}
+            Putting this all together:
+                \begin{equation*}
+                    \dfrac{\mathbb{P}(X = k)\mathbb{P}(Y = n - k)}{\mathbb{P}(X + Y = n)} = \dfrac{\lambda^{k}\mu^{n - k}n!}{k!(n - k)!(\lambda + \mu)^{n}} = \dbinom{n}{k} \dfrac{\lambda^{k}\mu^{n - k}}{(\lambda + \mu)^{k}(\lambda + \mu)^{n - k}}
+                \end{equation*}
+            Then this is a binomial distribution with parameters $n, k, p = \frac{\lambda}{\mu + \lambda}$.
+        \end{answer}
+
+    \textbf{Exercise 5}: Consider a coin that may be biased, where the probability of the coin landing heads on any single flip is $\theta$. If the coin is flipped $n$ times and heads is observed $k$ times, what is the maximum likelihood estimate (MLE) of $\theta$?
+        \begin{answer}
+            We have that:
+                \begin{equation*}
+                    \theta_{\text{MLE}} = \mathop{argmax}_{\theta} p(D \mid \theta) = \mathop{argmax}_{\theta} \prod p(x_{i} \mid \theta)
+                \end{equation*}
+            Since we rolled $k$ heads, this is:
+                \begin{equation*}
+                    \mathop{argmax}_{\theta} p(H \mid \theta)^{k} p(T \mid \theta)^{n - k} = \mathop{argmax}_{\theta} \theta^{k}(1 - \theta)^{n - k}
+                \end{equation*}
+            To find the maximum, we take the derivative with respect to $\theta$:
+                \begin{equation*}
+                    \dv{\theta} \theta^{k}(1 - \theta)^{n - k} = k\theta^{k - 1}(1 - \theta)^{n - k} - (n - k)\theta^{k}(1 - \theta)^{n - k - 1} = 0
+                \end{equation*}
+            Now simplify:
+                \begin{align*}
+                    0       &= k\theta^{k - 1}(1 - \theta)^{n - k} - (n - k)\theta^{k}(1 - \theta)^{n - k - 1} \\
+                    0       &= \theta^{k - 1}(1 - \theta)^{n - k - 1}(k(1 - \theta) - (n - k)\theta)           \\
+                    0       &= k(1 - \theta) - (n - k)\theta                                                   \\
+                    0       &= k - k\theta - n\theta + k\theta                                                 \\
+                    n\theta &= k                                                                               \\
+                    \theta  &= \dfrac{k}{n}                                                                      
+                \end{align*}
+            So we conclude that the MLE of $\theta$ is $\frac{k}{n}$
+        \end{answer}
+
+    \textbf{Exercise 6}: Consider a family of distributions parameterized by $\theta \in \mathbb{R}$ with the following probability density function:
+        \begin{equation*}
+            f_{\theta}(x) = \begin{cases}
+                e^{\theta - x} &\text{ if } x \geq \theta \\
+                0 &\text{ if } x < \theta       
+            \end{cases}
+        \end{equation*}
+        \begin{itemize}
+            \item [(a)] Prove that $f$ is a valid probability density function by showing that it integrates to $1$ for all $\theta$.
+                \begin{answer}
+                    Consider:
+                        \begin{equation*}
+                            \int_{-\infty}^{\infty} f_{\theta}x \, \dd{x}
+                        \end{equation*}
+                    Then we can break it up as:
+                        \begin{equation*}
+                            \int_{-\infty}^{\theta} f_{\theta}(x) \, \dd{x} + \int_{\theta}^{\infty} f_{\theta}(x) \, \dd{x}
+                        \end{equation*}
+                    Notice that $f_{\theta}(x) = 0$ when $x < \theta$, so the left integral is $0$. So we just have:
+                        \begin{equation*}
+                            \int_{\theta}^{\infty} e^{\theta - x} \, \dd{x} = \left(-e^{\theta - x}\right) \eval_{\theta}^{\infty} = -e^{\theta - \infty} - (-e^{\theta - \theta}) = 0 + e^{0} = 1
+                        \end{equation*}
+                \end{answer}
+
+            \item [(b)] Suppose that you observe $n$ samples distributed according to $f: x_{1}, x_{2}, \ldots, x_{n}$. Find the maximum likelihood estimate of $\theta$. 
+                \begin{answer}
+                    We have that:
+                        \begin{equation*}
+                            \mathop{MLE}_{\theta} = \mathop{argmax}_{\theta}p(D, \theta) = \mathop{argmax}_{\theta}\prod_{i} p(x_{i}, \theta) = \mathop{argmax}_{\theta}\prod_{i} f_{\theta}(x_{i})
+                        \end{equation*}
+                    Note that if any of $x_{1}, \ldots, x_{n}$ are $0$, the expression evaluates to $0$. So assume that none are $0$. We are reduced to
+                        \begin{equation*}
+                            \dv{\theta} \prod_{i} e^{\theta - x_{i}}
+                        \end{equation*}
+                    To make this easier, we can take the log $MLE$ instead which is:
+                        \begin{equation*}
+                            \dv{\theta} \sum_{i} \theta - x_{i} = n\theta - \sum_{i} x_{i} = n
+                        \end{equation*}
+                    We see that the derivative is positive. This means that if we wanted to minimize our original function, we want $\theta$ to be as minimal as possible. It follows that $\theta = \min(x_{1}, \ldots, x_{n})$.
+                \end{answer}
+        \end{itemize}
+
+\newpage
+\section*{The Multivariate Normal Distribution}
+\hrule
+
+    The multivariate normal distribution with mean $\mu \in \mathbb{R}^{d}$ and positive definite covariance matrix $\Sigma \in \mathbb{R}^{d \times d}$, denoted $\mathcal{N}(\mu, \Sigma)$ has the probability density function
+        \begin{equation*}
+            f(x; \mu, \Sigma) = \dfrac{1}{\sqrt{(2\pi)^{d} \lvert \Sigma \rvert}} \exp\left(\dfrac{-1}{2}(x - \mu)^{T}\Sigma^{-1}(x - \mu)\right)
+        \end{equation*}
+    Here $\lvert \Sigma \rvert$ denotes the determinant of $\Sigma$. You may use the following facts without proof.
+        \begin{itemize}
+            \item The volume under the normal PDF is $1$.
+                \begin{equation*}
+                    \int_{\mathbb{R}^{d}}^{} f(x) \, \dd{x}  = \int_{\mathbb{R}^{d}}^{} \dfrac{1}{\sqrt{(2\pi)^{d} \lvert \Sigma \rvert}} \exp\left\{-\dfrac{1}{2} (x - \mu)^{T} \Sigma^{-1} (x - \mu)\right\} \, \dd{x} = 1
+                \end{equation*}
+
+            \item The change-of-variables formula for integrals: let $f$ be a smooth function from $\mathbb{R}^{d} \rightarrow \mathbb{R}$, let $A \in \mathbb{R}^{d \times d}$ be an invertible matrix, and let $b \in \mathbb{R}^{d}$ be a vector. Then, performing the change of variables $x \mapsto z = Ax + b$,
+                \begin{equation*}
+                    \int_{\mathbb{R}^{d}}^{} f(x) \, \dd{x}  = \int_{\mathbb{R}^{d}}^{} f(A^{-1}z - A^{-1}b)\lvert A^{-1} \rvert \, \dd{z}.
+                \end{equation*}
+        \end{itemize}
+    All throughout this question, we take $X \sim \mathcal{N}(\mu, \Sigma)$.
+        \begin{itemize}
+            \item [1.] Use a suitable change of variables to show that $\mathbb{E}[X] = \mu$. You must utilize the definition of expectation.
+                \begin{answer}
+                    By the definition of expectation,
+                        \begin{equation*}
+                            \mathbb{E}[X] = \int_{\mathbb{R}^{d}}^{} \dfrac{x}{\sqrt{(2\pi)^{d}\lvert \Sigma \rvert}}\exp\left\{-\dfrac{1}{2}(x - \mu)^{T}\Sigma^{-1}(x - \mu)\right\} \, \dd{x} 
+                        \end{equation*}
+                    Using the change of variables $y = x - \mu$,
+                        \begin{equation*}
+                            \mathbb{E}[X] = \int_{\mathbb{R}^{d}}^{} \dfrac{y}{\sqrt{(2\pi)^{d} \lvert \Sigma \rvert}}\exp\left\{-\dfrac{1}{2}y^{T}\Sigma^{-1} y\right\} \, \dd{y} + \mu\int_{\mathbb{R}^{d}}^{} \dfrac{1}{\sqrt{(2\pi)^{d} \lvert \Sigma \rvert}} \exp\left\{-\dfrac{1}{2}y^{T}\Sigma^{-1}y\right\} \, \dd{y} 
+                        \end{equation*}
+                    So this is
+                        \begin{equation*}
+                            \mathbb{E}[X] = \int_{\mathbb{R}^{d}}^{} \dfrac{y}{\sqrt{(2\pi)^{d} \lvert \Sigma \rvert}} \exp\{-\dfrac{1}{2}y^{T}\Sigma^{-1}y\} \, \dd{y} + \mu
+                        \end{equation*}
+                    Notice that
+                        \begin{equation*}
+                            -\dfrac{1}{2} y^{T} \Sigma^{-1}y = -\dfrac{1}{2} (-y)^{T} \Sigma^{-1}(-y)
+                        \end{equation*}
+                    This means that the integral:
+                        \begin{equation*}
+                            \int_{\mathbb{R}^{d}}^{} \dfrac{y}{\sqrt{(2\pi)^{d}\lvert \Sigma \rvert}} \exp\left\{-\dfrac{1}{2} y^{T} \Sigma^{-1}y\right\} \, \dd{y}  = 0
+                        \end{equation*}
+                    So $\mathbb{E}[X] = \mu$.
+                \end{answer}
+
+            \item [2.] Use a suitable change of variables to show that $Var(X) = \Sigma$, where the variance of a vector-valued random variable $X$ is
+                \begin{equation*}
+                    Var(X) = Cov(X, X) = \mathbb{E}[(X - \mu)(X - \mu)^{T}] = \mathbb{E}[XX^{T}] - \mu\mu^{T}
+                \end{equation*}
+                \begin{answer}
+                    Using the same change of variables, we have:
+                        \begin{equation*}
+                            Var(X) = \int_{\mathbb{R}^{d}}^{} (y + \mu)(y + \mu)^{T}\dfrac{1}{\sqrt{(2\pi)^{d}\lvert \Sigma \rvert}}\exp\left\{-\dfrac{1}{2}y^{T}\Sigma^{-1}y\right\} \, \dd{y} 
+                        \end{equation*}
+                    expanding this gives:
+                        \begin{equation*}
+                            Var(X) = \int_{\mathbb{R}^{d}}^{} \dfrac{yy^{T}}{\sqrt{(2\pi)^{d}\lvert \Sigma \rvert}} \exp\left\{-\dfrac{1}{2}y^{T} \Sigma^{-1} y\right\} \, \dd{y}  + \mu\mu^{T}
+                        \end{equation*}
+                    
+                \end{answer}
+
+            \item [3.] Compute the moment generating function (MGF) of $X: M_{X}(\lambda) = \mathbb{E}[e^{\lambda^{T}X}]$, where $\lambda \in \mathbb{R}^{d}$. Note: moment generating functions have several interesting and useful properties, one being that $M_{X}$ characterizes the distribution of $X$: if $M_{X} = M_{Y}$, then $X$ and $Y$ have the same distribution
+                \begin{answer}
+                    By definition, the MGF is given by
+                        \begin{equation*}
+                            \int_{\mathbb{R}^{d}}^{} e^{\lambda^{T}x}\dfrac{1}{\sqrt{(2\pi)^{d}\lvert \Sigma \rvert}}\exp\left\{-\dfrac{1}{2}(x - \mu)^{T}\Sigma^{-1}(x - \mu)\right\} \, \dd{x} 
+                        \end{equation*}
+                    and from a change of variables:
+                        \begin{equation*}
+                            \int_{\mathbb{R}^{d}}^{} e^{\lambda^{T}(y + \mu)}\dfrac{1}{\sqrt{(2\pi)^{d}\lvert \Sigma \rvert}}\exp\left\{-\dfrac{1}{2}y^{T} \Sigma^{-1} y\right\} \, \dd{y} 
+                        \end{equation*}
+                    We can take out the constant factor $e^{\lambda^{T}\mu}$ and move the rest into the larger exponential:
+                        \begin{equation*}
+                            e^{\lambda^{T}\mu} \cdot \int_{\mathbb{R}^{d}}^{} \dfrac{1}{\sqrt{(2\pi)^{d}\lvert \Sigma \rvert}}\exp\left\{-\dfrac{1}{2}(y^{T}\Sigma^{-1/2}\Sigma^{-1/2}y + 2\lambda^{T}y)\right\} \, \dd{y} 
+                        \end{equation*}
+                    Now we complete the square in the exponent:
+                        \begin{equation*}
+                            y^{T}\Sigma^{-1/2}\Sigma^{-1/2}y + y^{T}\lambda + \lambda^{T}y + \lambda^{T}\Sigma\lambda - \lambda^{T}\Sigma\lambda = (y^{T}\Sigma^{-1/2} + \lambda^{T}\Sigma^{1/2})(\Sigma^{-1/2}y + \Sigma^{1/2}\lambda) - \lambda^{T}\Sigma\lambda
+                        \end{equation*}
+                    Now consider only $(y^{T}\Sigma^{-1/2} + \lambda^{T}\Sigma^{1/2})(\Sigma^{-1/2}y + \Sigma^{1/2}\lambda)$:
+                        \begin{align*}
+                            (y^{T}\Sigma^{-1/2} + \lambda^{T}\Sigma^{1/2})(\Sigma^{-1/2}y + \Sigma^{1/2}\lambda) &= (y^{T} + \lambda^{T}\Sigma)\Sigma^{-1/2} \Sigma^{-1/2}(y + \Sigma\lambda) \\
+                                                                                                                 &= (y + \Sigma\lambda)^{T}\Sigma^{-1}(y + \Sigma\lambda)                       
+                        \end{align*}
+                    Then the integral becomes:
+                        \begin{align*}
+                            \mathbb{E}[e^{\lambda^{T}X}] &= e^{\lambda^{T}\mu} \int_{\mathbb{R}^{d}}^{} \dfrac{1}{\sqrt{(2\pi)^{d}\lvert \Sigma \rvert}}\exp\left\{-\dfrac{1}{2}(y + \Sigma\lambda)^{T}\Sigma^{-1}(y + \Sigma\lambda) - \lambda^{T}\Sigma\lambda\right\} \, \dd{y}                            \\
+                                                         &= \exp\left\{\lambda^{T}\mu + \frac{1}{2}\lambda^{T}\Sigma\lambda\right\} \int_{\mathbb{R}^{d}}^{} \dfrac{1}{\sqrt{(2\pi)^{d}\lvert \Sigma \rvert}}\exp\left\{-\dfrac{1}{2}(y + \Sigma\lambda)^{T}\Sigma^{-1}(y + \Sigma\lambda)\right\} \, \dd{y}  \\
+                                                         &= \exp\left\{\lambda^{T} \mu + \dfrac{1}{2}\lambda^{T}\Sigma\lambda\right\}                                                                                                                                                                           
+                        \end{align*}
+                    
+                \end{answer}
+
+            \item [4.] Using the fact that MGFs determine distributions, given $A \in \mathbb{R}^{k \times d}$ and $b \in \mathbb{R}^{k}$ identify the distribution of $AX + b$ (don't worry about covariance matrices being invertible).
+                \begin{answer}
+                    We have that the mean of the new distribution is
+                        \begin{equation*}
+                            \mathbb{E}[AX + b] = A \mathbb{E}[X] + b = A \mu + b
+                        \end{equation*}
+                    and the variance is
+                        \begin{align*}
+                            Var(AX + b) = Var(AX) &= \mathbb{E}[AXX^{T}A^{T}] - A\mathbb{E}[X]\mathbb{E}[X^{T}]A^{T}  \\
+                                                  &= A \mathbb{E}[XX^{T}]A^{T} - A\mathbb{E}[X]\mathbb{E}[X^{T}]A^{T} \\
+                                                  &= A(\mathbb{E}[XX^{T}] - \mathbb{E}[X]\mathbb{E}[X^{T}])A^{T}      \\
+                                                  &= A\Sigma A^{T}                                                      
+                        \end{align*}
+                    Then we see that this has the same distribution as a multivariate gaussian with mean $A\mu + b$ and variance $A\Sigma A^{T}$.
+                \end{answer}
+
+            \item [5.] Show that there exists an affine transformation of $X$ that is distributed as the standard multivariate Gaussian, $\mathcal{N}(0, I_{d})$. (Assume $\Sigma$ is invertible.) 
+                \begin{answer}
+                    By the previous question, we want an affine transformation of $X \rightarrow AX + b$ such that the new distribution has mean $0$ and variance $I_{d}$. So:
+                        \begin{equation*}
+                            A\Sigma A^{T} = I_{d}
+                        \end{equation*}
+                    We can write $\Sigma = \Sigma^{1/2}\Sigma^{1/2}$. Then $A = (\Sigma^{1/2})^{-1}$. Now we want a mean of $0$. So
+                        \begin{equation*}
+                            A\mu + b = 0
+                        \end{equation*}
+                    or
+                        \begin{equation*}
+                            b = -(\Sigma^{1/2})^{-1}\mu
+                        \end{equation*}
+                    So the affine transformation is
+                        \begin{equation*}
+                            X \rightarrow (\Sigma^{1/2})^{-1}X - (\Sigma^{1/2})^{-1}b = (\Sigma^{1/2})^{-1}(X - b)
+                        \end{equation*}
+                \end{answer}
+        \end{itemize}
+
+    \newpage
+    \section*{Real Analysis}
+    \hrule
+
+    \textbf{Exercise 1}: Limit of a Sequence. A sequence $\{x_{n}\}$ is said to converge to a limit $L$ if, for every measure of closeness $\varepsilon \in \mathbb{R}$, the sequence's terms $n \in \mathbb{N}$ after a point $n_{0} \in \mathbb{N}$ converge upon that limit. More formally, if $\lim\limits_{n \to \infty}x_{n} = L$ then $\forall \varepsilon > 0, \exists n_{0} \in \mathbb{Z}^{+}$ such that $\forall n \geq n_{0}$:
+        \begin{equation*}
+            \lvert x_{n} - L \rvert < \varepsilon
+        \end{equation*}
+        \begin{itemize}
+            \item [(a)] Consider the sequence $\{x_{n}\}$ defined by the recurrence relation $x_{n + 1} = \frac{1}{2}x_{n}$. Treat $x_{0}$ as some constant that is the first element of the sequence. Prove that $\{x_{n}\}$ converges by evaluating $\lim\limits_{n \to \infty}x_{n}$. \textbf{You must use the formal definition of the limit of a sequence.}
+                \begin{answer}
+                    The claim is that $L = 0$. So we need to show that $\forall \varepsilon > 0$, there is an $N$ such that $\forall n > N$, 
+                        \begin{equation*}
+                            \lvert x_{n} \rvert < \varepsilon
+                        \end{equation*}
+                    We see that $x_{n} = \frac{1}{2^{n}}x_{0}$. Now fix $\varepsilon$. Then we want:
+                        \begin{equation*}
+                            \dfrac{1}{2^{n}}\lvert x_{0} \rvert < \varepsilon
+                        \end{equation*}
+                    or
+                        \begin{equation*}
+                            \dfrac{\lvert x_{0} \rvert}{\varepsilon} < 2^{n}
+                        \end{equation*}
+                    Pick $N > \log_{2}\frac{\lvert x_{0} \rvert}{\varepsilon}$. Then we see that for all $n > N$, $\lvert x_{n} \rvert < \varepsilon$. So the sequence converges.
+                \end{answer}
+
+            \item [(b)] Optional. Consider a sequence $\{x_{n}\}$ of non-zero real numbers and suppose that $L = \lim\limits_{n \to \infty}n(1 - \frac{\lvert x_{n + 1} \rvert}{\lvert x_{n} \rvert})$ exists. Prove that $\{\lvert x_{n} \rvert\}$ converges when $L > 1$ by evaluating $\lim\limits_{n \to \infty}\lvert x_{n} \rvert$. 
+        \end{itemize}
+
+    \textbf{Exercise 2}: Taylor Series. Taylor series expansions are a method of approximating a function near a point using polynomial terms. The Taylor expansion for a function $f(x)$ at point $a$ is given by:
+        \begin{equation*}
+            f(x) = f(a) + f^{\prime}(a)(x - a) + \dfrac{f^{\prime\prime}(a)}{2!}(x - a)^{2} + \dfrac{f^{\prime\prime\prime}(a)}{3!}(x - a^{3}) + \cdots
+        \end{equation*}
+    his can also be rewritten as $f(x) = \sum_{n = 0}^{\infty}\frac{f^{(n)}(a)}{n!}(x - a)^{n}$.
+        \begin{itemize}
+            \item [(a)] Calculate the first three terms of the Taylor series for $f(x) = \ln(1 + x)$ centered at $a = 0$.
+                \begin{answer}
+                    Here are the necessary derivatives:
+                        \begin{align*}
+                            f(x)                &= \ln(1 + x)                         \\
+                            f^{\prime}(x)       &= \dfrac{1}{1 + x}                   \\
+                            f^{\prime\prime}(x) &= -\left(\dfrac{1}{1 + x}\right)^{2}   
+                        \end{align*}
+                    Then 
+                        \begin{align*}
+                            f(0)                &= 0  \\
+                            f^{\prime}(0)       &= 1  \\
+                            f^{\prime\prime}(0) &= -1   
+                        \end{align*}
+                    Then the first three terms are:
+                        \begin{equation*}
+                            p(x) = 0 + x - \dfrac{1}{2}x^{2}
+                        \end{equation*}
+                \end{answer}
+
+            \item [(b)] Optional. The gamma function is defined as 
+                \begin{equation*}
+                    \Gamma(z) = \int_{0}^{\infty} t^{z - 1}e^{-t} \, \dd{t}.
+                \end{equation*}
+            Calculate and use a first-order Taylor expansion of the gamma function centered at $1$ to approximate $\Gamma(1.1)$. You should express your answer in terms of the Euler-Mascheroni constant $\gamma$.
+
+            You may use the fact that $\Gamma(x + 1)$ interpolates the factorial function without proof.
+        \end{itemize}
+
+    \textbf{Exercise 3}: Consider a twice continuously differentiable function $f: \mathbb{R}^{n} \mapsto \mathbb{R}$. Suppose this function admits a unique global optimum $x^{*} \in \mathbb{R}^{n}$. Suppose that for some spherical region $\chi = \{x \mid \lVert x - x^{*} \rVert^{2} \leq D\}$ around $x^{*}$ for some constant $D$, the Hessian matrix $H$ of a function $f(x)$ is PSD and its maximum eigenvalue is $1$. Prove that
+        \begin{equation*}
+            f(x) - f(x^{*}) \leq \dfrac{D}{2}
+        \end{equation*}
+    for every $x \in \chi$.
+        \begin{answer}
+            The multivariate taylor expansion of degree $2$ is:
+                \begin{equation*}
+                    T(x) = f(x^{*}) + (x - x^{*})^{T}\nabla f(x^{*}) + \dfrac{1}{2}(x - x^{*})^{T} H_{f}(x^{*})(x - x^{*})
+                \end{equation*}
+            then let $R_{2}(x) = \varepsilon$ where $\varepsilon$ is the error of the first degree taylor expansion centered at $x^{*}$. Notice that
+                \begin{equation*}
+                    f(x) - f(x^{*}) = \varepsilon
+                \end{equation*}
+            The error bound is given by the next degree term
+                \begin{equation*}
+                    R_{2}(\mathcal{E}) = \dfrac{1}{2}(\mathcal{E} - x^{*})^{T}H_{f}(x^{*})(\mathcal{E} - x^{*})
+                \end{equation*}
+            By the taylor remainder theorem, the maximum error is given by the max over the condition $\lVert \mathcal{E} - x^{*} \rVert \leq D$, as we know that $\lVert x - x^{*} \rVert \leq D$. Recall that for $\lVert x - x^{*} \rVert \leq 1$, the maximum of $x^{T}Ax$ for a PSD matrix is given by the eigenvector corresponding the max eigenvalue. Since the max eigenvalue is $1$, we know that
+                \begin{equation*}
+                    \dfrac{1}{2}(\mathcal{E} - x^{*})^{T}H_{f}(x^{*})(\mathcal{E} - x) \leq \dfrac{1}{2} (\mathcal{E} - x^{*})^{T}(\mathcal{E} - x) \leq \dfrac{D}{2}
+                \end{equation*}
+            So
+                \begin{equation*}
+                    f(x) - f(x^{*}) \leq \dfrac{D}{2}
+                \end{equation*}
+        \end{answer}
+
+    \newpage
+    \section*{Hands-on with data}
+    \hrule
+
+    In the following problem, you will use two simple datasets to  walk through the steps of a standard machine learning workflow: inspecting your data, choosing a model, implementing it, and verifying its accuracy. We have provided two datasets in the form of numpy arrays: \mintinline{python}{dataset_1.npy} and \mintinline{python}{dataset_2.npy}. You can load each using NumPy's \mintinline{python}{np.load} method. You can plot figures using Matplotlib's \mintinline{python}{plt.plot} method.
+
+    Each dataset is a two-column array with the first column consisting of $n$ scalar inputs $X \in \mathbb{R}^{n \times 1}$ and the second column consisting of $n$ scalar labels $Y \in \mathbb{R}^{n \times 1}$. We denote each entry of $X$ and $Y$ with subscripts:
+        \begin{equation*}
+            X = \begin{bmatrix}
+                x_{1}  \\
+                x_{2}  \\
+                \vdots \\
+                x_{n}    
+            \end{bmatrix} \hspace{30pt} Y = \begin{bmatrix}
+                y_{1}  \\
+                y_{2}  \\
+                \vdots \\
+                y_{n}    
+            \end{bmatrix}
+        \end{equation*}
+    and assume that $y_{i}$ is a (potentially stochastic) function of $x_{i}$.
+        \begin{itemize}
+            \item [(a)] It is often useful to visually inspect your data and calculate simple statistics; this can detect dataset corruptions or inform your method. For both datasets:
+                \begin{itemize}
+                    \item [(i)] Plot the data as a scatter plot.
+
+                    \item [(ii)] Calculate the correlation coefficient between $X$ and $Y$:
+                        \begin{equation*}
+                            \rho_{X, Y} = \dfrac{Cov(X, Y)}{\sigma_{X}\sigma_{Y}}
+                        \end{equation*}
+                    in which $Cov(X, Y)$ is the covariance between $X$ and $Y$ and $\sigma_{X}$ is the standard deviation of $X$.
+                \end{itemize}
+            Your solution may make use of the NumPy library only for arithmetic operations, matrix-vector or matrix-matrix multiplications, matrix inversion, and element-wise exponentiation. It may not make use of library calls for calculating means, standard deviations, or the correlation coefficient itself directly.
+
+            \item [(b)] We would like to design a function that can predict $y_{i}$ given $x_{i}$ and then apply it to new inputs. This is a recurring theme in machine learning, and you will soon learn about a general-purpose framework for thinking about such problems. As a preview, we will now explore one of the simplest instantiations of this idea using the class of linear functions:
+                \begin{equation*}
+                    \hat{Y} = Xw
+                \end{equation*}
+            The parameters of our function are denoted by $w \in \mathbb{R}$. It is common to denote predicted variants of quantities with a hat, so $\hat{Y}$ is a predicted label whereas $Y$ is a ground truth label.
+
+            We would like to find a $w^{*}$ that minimizes the \textbf{squared error} $\mathcal{J}_{SE}$ between predictions and labels:
+                \begin{equation*}
+                    w^{*} = \mathop{argmin}_{w}\mathcal{J}_{SE}(w) = \mathop{argmin}_{w}\lVert X_{W} - Y \rVert_{2}^{2}
+                \end{equation*}
+
+            Derive $\nabla_{W} \mathcal{J}_{SE}(w)$ and set it equal to $0$ to solve for $w^{*}$. (Note that this procedure for finding an optimum relies on the convexity of $\mathcal{J}_{SE}$. You do not need to show convexity here, but it is a useful exercise to convince yourself this is valid.)
+
+            \item [(c)] Your solution $w^{*}$ should be a function of $X$ and $Y$. Implement it and report its \textbf{mean squared error} (MSE) for \textbf{dataset 1}. The mean squared error is the objective $\mathcal{J}_{SE}$ from part $(b)j$ divided by the number of data points:
+                \begin{equation*}
+                    \mathcal{J}_{MSE}(w) = \dfrac{1}{n}\lVert Xw - Y \rVert^{2}_{2}
+                \end{equation*}
+            Also visually inspect the model's quality by plotting a line plot of predicted $\hat{y}$ for uniformly space $x \in [0, 10]$. Keep the scatter plot from part $(a)$ in the background so that you can compare the raw data to your linear function. Does the function provide a good fit of the data? Why or why not?
+
+            \item [(d)] We are now going to experiment with constructing new \textit{features} for our model. That is, instead of considering models that are linear in the inputs, we will now consider models that are linear in some (potentially nonlinear) transformation of the data:
+                \begin{equation*}
+                    \hat{Y} = \Psi w = \begin{bmatrix}
+                        \varphi(x_{1})^{T} \\
+                        \varphi(x_{2})^{T} \\
+                        \vdots             \\
+                        \varphi(x_{n})^{T}   
+                    \end{bmatrix} w,
+                \end{equation*}
+            where $\varphi(x_{i}), w \in \mathbb{R}^{m}$. Repeat part $(c)$, providing both the mean squared error of your predictor and a plot of its predictions, for the following features on \textbf{dataset 1}:
+                \begin{equation*}
+                    \varphi(x_{i}) = \begin{bmatrix}
+                        x_{i} \\
+                        1       
+                    \end{bmatrix}
+                \end{equation*}
+            How do the plotted function and mean squared error compare? (A single sentence will suffice.)
+
+            \item [(e)] Now consider the quadratic features:
+                \begin{equation*}
+                    \varphi(x_{i}) = \begin{bmatrix}
+                        x_{i}^{2} \\
+                        x_{i}     \\
+                        1           
+                    \end{bmatrix}
+                \end{equation*}
+            Repeat part $(c)$ with these features on \textbf{dataset 1}, once again providing short commentary on any changes.
+
+            \item [(f)] Repeat parts $(c) - (e)$ with \textbf{dataset 2}.
+
+            \item [(g)] Finally, we would like to understand which features $\Psi$ provide us with the best model. To that end, you will implement a method known as $k$-fold cross validation. The following are instructions for this method; deliverables for part $(g)$ are at the end.
+                \begin{itemize}
+                    \item [(i)] Split \textbf{dataset 2} randomly into $k = 4$ equal sized subsets. Group the dataset into $4$ distinct training / validation splits by denoting each subset as the validation set and the remaining subsets as the training set for that split.
+
+                    \item [(ii)] On each of the $4$ training / validation splits, fit linear models using the following $5$ polynomial feature sets:
+                        \begin{equation*}
+                            \varphi_{1}(x_{i}) = \begin{bmatrix}
+                                x_{i} \\
+                                1       
+                            \end{bmatrix} \hspace{10pt} \varphi_{2}(x_{i}) = \begin{bmatrix}
+                                x_{i}^{2} \\
+                                x_{i}     \\
+                                1           
+                            \end{bmatrix} \hspace{10pt}  \varphi_{3}(x_{i}) = \begin{bmatrix}
+                                x_{i}^{3} \\
+                                x_{i}^{2} \\
+                                x_{i}     \\
+                                1           
+                            \end{bmatrix} \hspace{10pt}  \varphi_{4}(x_{i}) = \begin{bmatrix}
+                                x_{i}^{4} \\
+                                x_{i}^{3} \\
+                                x_{i}^{2} \\
+                                x_{i}     \\
+                                1           
+                            \end{bmatrix} \hspace{10pt}  \varphi_{5}(x_{i}) = \begin{bmatrix}
+                                x_{i}^{5} \\
+                                x_{i}^{4} \\
+                                x_{i}^{3} \\
+                                x_{i}^{2} \\
+                                x_{i}     \\
+                                1           
+                            \end{bmatrix}
+                        \end{equation*}
+                    This step will product $20$ distinct $w^{*}$ vectors: one for each dataset split and featurization $\varphi_{j}$.
+
+                    \item [(iii)] For each feature set $\varphi_{j}$, average the training and validation mean squared errors over all training splits.
+                \end{itemize}
+            It is worth thinking about what this extra effort has bought us: by splitting the dataset into subsets, we were able to use all available data points for model fitting while still having held out data points for evaluation for any particular model. 
+
+            \textbf{Deliverables for part (g):} Plot the training mean squared error and the validation mean squared error on the same plot as a function of the largest exponent in the feature set. Use a log scale for the $y$-axis. Which model does the training mean squared error suggest is best? Which model does the validation mean squared error suggest is best?
+
+        \end{itemize}
+        \begin{answer}
+            For dataset 1, the training mean squared error suggested that a degree $5$ feature was the best fit, but in contrast, the validation mean squared error suggested that a degree $1$ feature was the best fit. 
+
+            For dataset 2, both the training and validation error showed that a degree $2$ feature was the best fit as it gave the lowest average error.
+
+            Here is my code:
+            \inputminted{python}{../code/q1.py}
+        \end{answer}
+
+
+    \end{document}

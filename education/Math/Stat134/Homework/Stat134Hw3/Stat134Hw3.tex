@@ -1,0 +1,155 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Stat134/Homework/Stat134Hw3/Stat134Hw3.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Stat134Hw3}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: $46\%$ of th electors of a town consider themselves as independent, whereas $30\%$ consider themselves democrats and $24\%$ republicans. In a recent election, $35\%$ of the independents, $62\%$ of the democrats and $58\%$ of the republicans voted. 
+    \begin{itemize}
+        \item [(a)] What proportion of the total population actually voted?
+            \begin{answer}
+                If $P(R), P(D), P(I)$ represents the proportion of republican, democrat, and independents, and $P(V)$ is the proportion that voted, then 
+                    \begin{equation*}
+                        P(V) = P(V \cap R) + P(V \cap D) + P(I \cap D)
+                    \end{equation*}
+                So 
+                    \begin{equation*}
+                        P(V) = P(V \divides R)P(R) + P(V \divides D)P(D) + P(I \divides D)/P(I)
+                    \end{equation*}
+                therefore,
+                    \begin{equation*}
+                        P(V) = (.58)(.24) + (.62)(.3) + (.35)(.46) = 0.4862
+                    \end{equation*}
+            \end{answer}
+
+        \item [(b)] A uniformly random voter $X$ is picked. Given that $X$ voted, what is the probability that $X$ is independent? democrat? republican? 
+            \begin{answer}
+                We want to find $P(I \divides V) = \frac{P(I \cap V)}{P(V)}$. Now that we have $P(V)$ and $P(I \cap V)$, we can compute:
+                    \begin{equation*}
+                        P(I \divides V) = \dfrac{P(I \cap V)}{P(V)} = \dfrac{.35}{0.4862} = 0.71986836692719
+                    \end{equation*}
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 2}: We choose a number from the set $\{1, 2, 3, \ldots, 100\}$ uniformly at random and denote this number by $X$. For each of the following choices decide whether the two events in question are independent or not.
+    \begin{itemize}
+        \item [(a)] $A = \{X \text{ is even}\}$, $B = \{X \text{ is divisible by $5$}\}$.
+            \begin{answer}
+                We have that $\lvert A \rvert = 50$, $\lvert B \rvert = 20$. So we check that $P(A)P(B) = P(A \cap B)$. Also, $\lvert \{X : 10 \divides X\} \rvert = 10$. The sample space $\Omega$ has cardinality $100$. So we have 
+                    \begin{align*}
+                        P(A)        &= \dfrac{50}{100} = \dfrac{1}{2}  \\
+                        P(B)        &= \dfrac{20}{100} = \dfrac{1}{5}  \\
+                        P(A \cap B) &= \dfrac{10}{100} = \dfrac{1}{10}   
+                    \end{align*}
+                Since $P(A)P(B) = P(A \cap B)$, the events are independent.
+            \end{answer}
+
+        \item [(b)] $C = \{X \text{ has two digits}\}$, $D = \{X \text{ is divisible by } 3\}$.
+            \begin{answer}
+                Try to show the same thing as above. 
+                    \begin{align*}
+                        \lvert C \rvert &= 90 \\
+                        \lvert D \rvert &= 33 \\
+                        \lvert C \cap D \rvert &= 33 - 3 = 30
+                    \end{align*}
+                So 
+                    \begin{align*}
+                        P(C)        &= \dfrac{90}{100} = \dfrac{9}{10} \\
+                        P(D)        &= \dfrac{33}{100}                 \\
+                        P(C \cap D) &= \dfrac{30}{100} = \dfrac{3}{10}   
+                    \end{align*}
+                Since $P(C)P(D) = \frac{297}{1000} \neq \frac{300}{1000} = P(C \cap D)$, the events are not independent.
+            \end{answer}
+
+        \item [(c)] $E = \{X \text{ is a prime}\}$, $F = \{X \text{ has a digit } 5\}$. Note that $1$ is not a prime number. 
+            \begin{answer}
+                Try to show the same thing as above. We have $\lvert F \rvert = 10$. Also note that $\lvert F \cap E \rvert = 1$ since $5$ is prime and any number with two or more digits that has a $5$ at the end is divisible by $5$. So 
+                    \begin{equation*}
+                        P(E \cap F) = \dfrac{1}{100} \text{ and } P(F) = \dfrac{10}{100}
+                    \end{equation*}
+                So suppose that the events are independent for contradiction. Then
+                    \begin{equation*}
+                        P(E \cap F) = P(E)P(F)
+                    \end{equation*}
+                and
+                    \begin{equation*}
+                        P(E) = \dfrac{P(E \cap F)}{P(F)} = \dfrac{1}{10} = \dfrac{10}{100}
+                    \end{equation*}
+                But this is not true because there are more than $10$ primes between $1$ and $100$:
+                    \begin{equation*}
+                        2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, \ldots
+                    \end{equation*}
+                So the events are not independent.
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 3}: An urn contains $5$ balls numbered from $1$ to $5$. We draw $3$ of them at random without replacement.
+    \begin{itemize}
+        \item [(a)] Let $X$ be the largest number drawn. What is the probability mass function of $X$?
+            \begin{answer}
+                The possible values are $X = 3, 4, 5$ and we have:
+                    \begin{align*}
+                        P(X = 3) &= \dfrac{\dbinom{2}{2}}{10} = \dfrac{1}{10} \\
+                        P(X = 4) &= \dfrac{\dbinom{3}{2}}{10} = \dfrac{3}{10} \\
+                        P(X = 5) &= \dfrac{\dbinom{4}{2}}{10} = \dfrac{6}{10}   
+                    \end{align*}
+                which defines the probability mass function.
+            \end{answer}
+
+        \item [(b)] Let $Y$ be the smallest number drawn. What is the probability mass function of $Y$? 
+            \begin{answer}
+                The values for the function are $X = 3, 2, 1$. Now compute their probabilities:
+                    \begin{align*}
+                        P(X = 3) &= \dfrac{\dbinom{2}{2}}{10} = \dfrac{1}{10} \\
+                        P(X = 2) &= \dfrac{\dbinom{3}{2}}{10} = \dfrac{3}{10} \\
+                        P(X = 1) &= \dfrac{\dbinom{4}{2}}{10} = \dfrac{6}{10}   
+                    \end{align*}
+                which defines the probability mass function.
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 4}: Let $A$ and $B$ be two disjoint events. Under what conditions are $A$ and $B$ independent?
+    \begin{answer}
+        We require that 
+            \begin{equation*}
+                P(A)P(B) = P(A \cap B)
+            \end{equation*}
+        Since $A$ and $B$ are disjoint, we have that $P(A \cap B) = 0$. So 
+            \begin{equation*}
+                P(A)P(B) = 0
+            \end{equation*}
+        This means that $A$, $B$ are independent when $P(A)$ or $P(B)$ is $0$.
+    \end{answer}
+
+\textbf{Exercise 5}: We flip a biased coin with probability of heads $\frac{1}{3}$. Let $X$ denote the total number of heads after five flips. What is more probable: $X < 1.5$ or $X > 1.5$?
+    \begin{answer}
+        We have the probability mass function defined as 
+            \begin{equation*}
+                P(X = \alpha) = \left(\dfrac{1}{3}\right)^{\alpha}\left(1 - \dfrac{1}{3}\right)^{5 - \alpha}
+            \end{equation*}
+        for $\alpha \in \{0, 1, 2, 3, 4, 5\}$. If $X < 1.5$, then $X = 0 \text{ or } 1$. These events are disjoint, so we can add probability:
+            \begin{align*}
+                P(X = 0)   &= \left(1 - \dfrac{1}{3}\right)^{5} = \dfrac{32}{243}                                           \\
+                P(X = 1)   &= \left(\dfrac{1}{3}\right)\left(1 - \dfrac{1}{3}\right)^{4} = \dfrac{16}{243} \\
+                P(X < 1.5) &= P(X = 0) + P(X = 1) = \dfrac{48}{243} = 0.19753086419753                                                           
+            \end{align*}
+        Since $P(X > 1.5) = 1 - 0.19753086419753 = 0.80246913580247 > P(X < 1.5)$, we conclude that $P(X > 1.5)$ is more probable.
+    \end{answer}
+
+
+
+
+
+
+\end{document}

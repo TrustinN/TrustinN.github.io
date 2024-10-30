@@ -1,0 +1,124 @@
+%! TeX root = 	
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/MyStyle/mystyle}
+
+\title{Math113Hw7}
+\author{Trustin Nguyen}
+
+
+\begin{document}
+
+\maketitle
+
+\section*{Math113Hw7}
+\hrule
+
+\textbf{Exercise 1}: let $I$ be an ideal of a ring $R$ and $P_{1}, \ldots, P_{n}$ be prime ideals. Show that if $I \subseteq \bigcup P_{i}$, then $I \subseteq P_{j}$ for some $j$.
+
+\begin{proof}
+	We will proceed by induction on the number of prime ideals. 
+	\begin{enumerate}
+		\item Base Case: If $I$ is a subset of $P_{1}$, it is indeed a subset of $P_{1}$.
+
+		\item Inductive Case: Suppose that $I$ is a subset of $P_{1} \cup \ldots \cup P_{n}$ implies that $I$ is a subset of some $P_{i}$. Suppose that $I \subseteq P_{1} \cup \ldots \cup P_{n + 1}$ where none of the prime ideals are subsets of each other. Consider the $p_{i} \in P_{i}$. We choose $p_{1}$, then $p_{2}$ such that it is not in the previous prime ideals and so on. Now the element $p_{n} + p_{n - 1}\cdots p_{1} \in I$ has two cases:
+		\begin{enumerate}
+			\item [(a)] $p_{n} + p_{n - 1}\cdots p_{1} \in P_{1} \cup \cdots \cup P_{n - 1}$. By the inductive hyposthesis, this belongs to some $P_{i}$ where $i$ is between 1 and $n - 1$. So $p_{i} \in P_{i}$ which is a contradiction by the $p_{n}$ we chose.
+
+			\item [(b)] $p_{n} + p_{n - 1} \cdots p_{1} \in P_{n}$. Then $p_{n - 1} \cdots p_{1} \in P_{n}$ and since this is a prime ideal, all of the $p_{k}$ are in $P_{n}$ so $I \subseteq P_{n}$.
+		\end{enumerate}	
+	\end{enumerate}
+\end{proof}
+
+\textbf{Exercise 2}:
+\begin{enumerate}
+	\item Show that $\mathbb{Z}[\sqrt{-2}]$ is a Euclidean domain.
+		\begin{proof}
+			This is a Euclidean domain because there is a Euclidean function $\varphi : \mathbb{Z}[\sqrt{-2}]/\{0\} \rightarrow \mathbb{Z}_{\geq 0}$ defined by 
+			\begin{equation*}
+				\varphi : a + b\sqrt{-2} \mapsto (a + b\sqrt{-2})(a - b\sqrt{-2})
+			\end{equation*}
+			which is the product of a complex number with its conjugate. We check the conditions:
+			\begin{enumerate}
+				\item [(a)] $\varphi(ab) \geq \varphi(b)$: We have $a + b\sqrt{-2}\mapsto a^{2} + 2b^{2}$. Since this is non-zero, elements in the range are atleast 1 which guaantees that 
+					\begin{equation*}
+						\varphi(ab) = \varphi(a)\varphi(b) \geq (1)\varphi(b)
+					\end{equation*}
+
+			\item [(b)] If we were to have a division algorithm, for some $a, b, q, r \in \mathbb{Z}[\sqrt{-2}]$, 
+				\begin{equation*}
+					a = bq + br
+				\end{equation*}
+				where $0 \leq \varphi(br) < \varphi(b)$. Therefore, 
+				\begin{equation*}
+					\abs{\dfrac{a}{b} - 1} < 1
+				\end{equation*}
+				So for anything in $\mathbb{C}$, there is a $q \in \mathbb{Z}[\sqrt{-2}]$ which satisfies the equation. Notice that for an arbitrary real componenet $a \in \mathbb{C}$, it lies between two consecutive integers $a_{1} < a < a_{1}$. We have that 
+				\begin{equation*}
+					(a_{1} - a) + (a - a_{0}) = 1
+				\end{equation*}
+				So we can choose an $a_{0}$ or $a_{1}$ whichever leads to a difference $\leq .5$. We can repeaat the same idea for the complex componenet $c \in \mathbb{C}$ where we can choose a $b \in \mathbb{Z}$ where $\abs{b\sqrt{2} - c} \leq \dfrac{\sqrt{2}}{s}$. We can conclude that we can find an element $q \in \mathbb{Z}[\sqrt{-2}]$ such that 
+				\begin{equation*}
+					\abs{x - 1} \leq \abs{.5 + \dfrac{\sqrt{2}}{2}i} = .25 + .5 < 1
+				\end{equation*}
+			\end{enumerate}
+		\end{proof}
+
+	\item Show that the norm doesn't make $\mathbb{Z}[\sqrt{-3}]$ into a euclidean domain. Is there another $\varphi$ for which $\mathbb{Z}[\sqrt{-3}]$ is a Euclidean domain? Justify your answer.
+		\begin{proof}
+			If we take the norm, then the homomorphism fails the 2nd condition which is that there is a division algorithm. If we weant to find a $a + b\sqrt{-3} \in \mathbb{Z}[\sqrt{-3}]$ such that 
+			\begin{equation*}
+				\abs{a + b\sqrt{-3} - z} < 1
+			\end{equation*}
+			for $z \in \mathbb{C}$, then we have that the difference of the real components will have a max value of $.5$ while the max difference in the complex componenets will be $\dfrac{\sqrt{3}}{3}$. This means that
+			\begin{equation*}
+				\abs{a + b\sqrt{-3} - z} \leq \abs{\dfrac{1}{2} + \dfrac{\sqrt{3}}{2}i} = \dfrac{1}{4} + \dfrac{3}{4} = 1
+			\end{equation*}
+			So if we choose a $z$ such that the difference is $1$, it will not work. An example is $z = \dfrac{1}{2} + \dfrac{\sqrt{-3}}{2}$. There is also no homomorphism that makes $\mathbb{Z}[\sqrt{-3}]$ a Euclidea domain. If it is a euclidea domain, it is a UFD, but we have
+			\begin{equation*}
+				(1 + \sqrt{-3})(1 - \sqrt{-3}) = 4 = 2*2
+			\end{equation*}
+			But this shows that $\mathbb{Z}[\sqrt{-3}]$ is not a UFD since $1 + \sqrt{-3}$ and $2$ are not associates.
+		\end{proof}
+\end{enumerate}
+\textbf{Exercise 3}:
+\begin{enumerate}
+	\item Show that $\mathbb{Z}[\sqrt{-7}]$ is not a principal ideal domain.
+		\begin{proof}
+			Take the ideal $(2, 1 + \sqrt{-7})$. Notice that $2$ is irreducible and that $1 + \sqrt{-7}$ is too. If this was generated by a single element, we have that $a + b\sqrt{-7}$ divides $1 + \sqrt{-7}, 2$. But this is impossible, since they are both irreducibles and that $2$ does not divide $1 + \sqrt{-7}$. Also, $1$ is not in the ideal, so we are not generating the whole group.
+		\end{proof}
+
+	\item Exhibit an element of $\mathbb{Z}[\sqrt{-7}]$ which is a product of 2 irreducibles and also a product of 3 irreducbles.
+
+	An element would be 8 which would be $(1 - \sqrt{-7})(1 + \sqrt{-7})$ and $2 * 2 * 2$.
+\end{enumerate}
+
+\textbf{Exercise 4}: Find all integer solutions to $x^{2} + 2 = y^{3}$.
+\begin{proof}
+	Notice all prossible $x^{2} = 2$ is some element of $\mathbb{Z}[\sqrt{-2}]$. 
+	as proved in exercise 2, $\mathbb{Z}[\sqrt{-2}]$ is a euclidean domain and therefore a unique factorization domain. so $x^{2} + 2$ is written as a product of two numbers which is $x + \sqrt{-2}$, $x - \sqrt{-2}$. since irreducibles of conjugates do not divide the other conjugate in a UFD, $x + \sqrt{-2}$ is a cube of an element. So 
+	\begin{align*}
+		x + \sqrt{-2} &= (a + b\sqrt{-2})^{3} \\
+			      &= (a^{2} - 2b^{2} + 2ab +\sqrt{-2})(a + b\sqrt{-2}) \\
+			      &= a^{3} - 2ab^{2} + 2a^{2b\sqrt{-2}} + a^{2}b\sqrt{-2} - 2b^{3}\sqrt{-2} - 4ab^{2} \\
+			      &= a^{3} - 6ab^{2} + (3a^{2}b - 2b^{3})\sqrt{-2}
+	\end{align*}
+	therefore, 
+	\begin{align*}
+		3a^{2}b - 2b^{3} = 1 \\
+		b(3a^{2} - 2b^{2}) = 1 \\
+		b = \pm 1 \\
+		3a^{2} - 2 = 1 \\
+		a = \pm 1
+	\end{align*}
+	Cases:
+	\begin{enumerate}
+		\item $a = 1, b = \pm 1$: $x = a^{3} - 6ab^{2} = -5$ \\
+
+		\item $a = -1 b = \pm 1$: $x = a^{3} - 6ab^{2} = 5$
+	\end{enumerate}
+	So the solutions are $x = 5, -5$ and $y = 3$.
+\end{proof}
+\textbf{Exercise 5}: Consider the subring $\mathbb{Z}[\sqrt{2}]$ of $\textbf{R}$. Show that it is a Euclidean domain and find the units.
+
+\end{document}

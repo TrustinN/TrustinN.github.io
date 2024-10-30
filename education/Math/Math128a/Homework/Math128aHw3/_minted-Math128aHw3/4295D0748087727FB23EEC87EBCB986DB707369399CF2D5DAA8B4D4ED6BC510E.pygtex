@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{out}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{steffensen}\PYG{p}{(@}\PYG{n}{myfunc2}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{1e\PYGZhy{}5}\PYG{p}{);}
+\PYG{n}{x}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{out}\PYG{p}{.}\PYG{n}{x}
+\PYG{n}{y}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{out}\PYG{p}{.}\PYG{n}{y}
+\end{Verbatim}

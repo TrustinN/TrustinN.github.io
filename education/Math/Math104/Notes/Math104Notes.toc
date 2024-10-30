@@ -1,0 +1,47 @@
+\contentsline {chapter}{\numberline {1}Week 1}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Absolute Values (Ross 3)}{3}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Lower and Upper Bounds/ Completeness Axiom}{4}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Week 2}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Sequence and Convergence}{7}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Divergence}{9}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Limit Theorems}{10}{section.2.3}%
+\contentsline {chapter}{\numberline {3}Week 3}{12}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Examples}{12}{section.3.1}%
+\contentsline {section}{\numberline {3.2}More on Convergence and Divergence}{14}{section.3.2}%
+\contentsline {chapter}{\numberline {4}Week 4}{17}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Cauchy Sequence}{17}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Subsequences}{18}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Subsequences Continued}{19}{section.4.3}%
+\contentsline {section}{\numberline {4.4}More on limsup and liminf}{21}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Week 5}{24}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Metrics}{24}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Topology on a Metric Space}{26}{section.5.2}%
+\contentsline {section}{\numberline {5.3}More on Closed and Open Sets}{28}{section.5.3}%
+\contentsline {chapter}{\numberline {6}Week 6}{31}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Series}{31}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Summation Series Continued}{33}{section.6.2}%
+\contentsline {chapter}{\numberline {7}Week 7}{36}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Continuous Functions}{36}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Continuous Functions Continued}{38}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Intermediate Value Theorem}{40}{section.7.3}%
+\contentsline {chapter}{\numberline {8}Week 8}{42}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Uniform Continuity}{42}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Limits of Functions}{45}{section.8.2}%
+\contentsline {chapter}{\numberline {9}Week 9}{50}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Continuity on Metric Spaces}{50}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Metric Spaces and Connectedness}{53}{section.9.2}%
+\contentsline {chapter}{\numberline {10}Week 10}{56}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Power Series}{56}{section.10.1}%
+\contentsline {chapter}{\numberline {11}Week 11}{63}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Series of Functions}{63}{section.11.1}%
+\contentsline {section}{\numberline {11.2}Derivative and Integral of Power Series}{65}{section.11.2}%
+\contentsline {chapter}{\numberline {12}Week 12}{68}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Derivatives}{68}{section.12.1}%
+\contentsline {section}{\numberline {12.2}Mean Value Theorem}{70}{section.12.2}%
+\contentsline {chapter}{\numberline {13}Week 13}{73}{chapter.13}%
+\contentsline {section}{\numberline {13.1}Derivative of Inverse Functions}{73}{section.13.1}%
+\contentsline {chapter}{\numberline {14}Week 14}{80}{chapter.14}%
+\contentsline {section}{\numberline {14.1}Riemann Integral}{80}{section.14.1}%
+\contentsline {chapter}{\numberline {15}Week 15}{83}{chapter.15}%
+\contentsline {section}{\numberline {15.1}Properties of Integrals}{83}{section.15.1}%
+\contentsline {section}{\numberline {15.2}Fundamental Theorem of Calculus}{88}{section.15.2}%

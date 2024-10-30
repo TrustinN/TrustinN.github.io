@@ -1,0 +1,193 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math104/Homework/Math104Hw7/Math104Hw7.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+
+\title{Math104Hw7}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Show that $f(x) = \sqrt{x}$ is continuous on $[0, \infty )$
+    \begin{proof}
+        Let $p \in [0, \infty )$. We need to show that $f$ is continuous at $p$. That means that $\forall \varepsilon> 0$, there is a $\delta > 0$ such that if $\lvert x - p \rvert < \delta$, then
+            \begin{equation*}
+                \lvert f(x) - f(p) \rvert < \varepsilon
+            \end{equation*}
+        So we want to show that there is a $\delta$ such that
+            \begin{equation*}
+                \lvert \sqrt{x} - \sqrt{p} \rvert < \varepsilon
+            \end{equation*}
+        We first notice that
+            \begin{equation*}
+                \lvert \sqrt{x} - \sqrt{p} \rvert \lvert \sqrt{x} + \sqrt{p} \rvert = \lvert x - p \rvert
+            \end{equation*}
+        Furthermore, we claim:
+            \begin{equation*}
+                \lvert \sqrt{x} - \sqrt{p} \rvert \leq \lvert \sqrt{x} + \sqrt{p} \rvert
+            \end{equation*}
+        since
+            \begin{equation*}
+                \lvert \sqrt{x} - \sqrt{p} \rvert \leq \lvert \sqrt{x} \rvert + \lvert \sqrt{p} \rvert = \sqrt{x} + \sqrt{p} = \lvert \sqrt{x} + \sqrt{p} \rvert
+            \end{equation*}
+        So if we take $\lvert x - p \rvert < \varepsilon^{2}$, we see that
+            \begin{equation*}
+                \lvert \sqrt{x} - \sqrt{p} \rvert^{2} \leq \lvert \sqrt{x} - \sqrt{p} \rvert \lvert \sqrt{x} + \sqrt{p} \rvert < \varepsilon^{2}
+            \end{equation*}
+        So
+            \begin{equation*}
+                \lvert \sqrt{x} - \sqrt{p} \rvert < \varepsilon
+            \end{equation*}
+        so we have found $\delta = \varepsilon^{2}$. This does not work for when $p = 0$, since $[0, \infty )$ is not open in $\mathbb{R}$. To fix this, let $x_{n}$ be any sequence in $[0, \infty )$ converging to $0$. Since $f(x_{n})$ is bounded, decreasing, it converges.
+     \end{proof}
+
+\textbf{Exercise 2}: Use the $\varepsilon-\delta$ property to show that $f(x) = x^{2}$ is continuous at $x_{0} = 3$.
+    \begin{proof}
+        We will show that for all $\varepsilon > 0$, there is a $\delta> 0$ such that if 
+            \begin{equation*}
+                \lvert x - x_{0} \rvert < \delta
+            \end{equation*} 
+        then
+            \begin{equation*}
+                \lvert f(x) - f(x_{0}) \rvert < \varepsilon
+            \end{equation*}
+        Then writing it out properly, we get:
+            \begin{equation*}
+                \lvert x^{2} - 9 \rvert < \varepsilon
+            \end{equation*}
+        But this is 
+            \begin{equation*}
+                \lvert x - 3 \rvert\lvert x + 3 \rvert < \varepsilon
+            \end{equation*}
+        Now if
+            \begin{equation*}
+                \lvert x - 3 \rvert < 1
+            \end{equation*}
+        then we have that:
+            \begin{equation*}
+                \lvert x \rvert < 4
+            \end{equation*}
+        and therefore, 
+            \begin{equation*}
+                \lvert x + 3 \rvert \leq \lvert x \rvert + 3 < 7
+            \end{equation*}
+        Then we require
+            \begin{equation*}
+                \lvert x- 3 \rvert \lvert x + 3 \rvert < \varepsilon
+            \end{equation*}
+        or 
+            \begin{equation*}
+                \lvert x - 3 \rvert < \dfrac{\varepsilon}{7}
+            \end{equation*}
+        So we take $\delta = \min(1, \frac{\varepsilon}{7})$.
+    \end{proof}
+
+\textbf{Exercise 3}: Let $f, g$ to be two continuous functions on $[a, b]$ and $f(a) \geq g(a), f(b) \leq g(b)$. Prove that $\exists x_{0} \in [a, b]$, such that $f(x_{0}) = g(x_{0})$.
+    \begin{proof}
+        Let $h(x) = f(x) - g(x)$ which is continuous because $f, g$ are continuous. Then we know that $h(a) \geq 0$, $h(b) \leq 0$. We know that $[a, b]$ is non-empty, so by the intermediate value theorem, there exists an $x_{0}$ such that $0 \leq h(x_{0}) \leq 0$ or $h(x_{0}) = 0$. This means that $f(x_{0}) - g(x_{0}) = 0$ or $f(x_{0}) = g(x_{0})$.
+    \end{proof}
+
+\textbf{Exercise 4}: Prove $x = \cos{x}$ for some $x \in (0, \pi/2)$.
+    \begin{proof}
+        Let $f = x - \cos{x}$. Then $f(0) = - 1$, $f(\pi/2) = \pi/2$. By the intermediate value theorem, we know that there is an $x_{0}$ in $[a, b]$ such that $f(x_{0}) = 0$ since $-1 < 0 < \pi/2$. Then we must have:
+            \begin{equation*}
+                f(x_{0}) = 0 = x_{0} - \cos{x_{0}}
+            \end{equation*}
+        Then
+            \begin{equation*}
+                x_{0} = \cos{x_{0}}
+            \end{equation*}
+        which shows that $x = \cos{x}$ for $x_{0} \in [a, b]$.
+    \end{proof}
+
+\textbf{Exercise 5}: Let $E$ be a non-closed set in $\mathbb{R}$ and $s \in E^{-} - E$. Prove that $\frac{1}{x - s}$ is continuous on $E$ but $f(E)$ is not bounded.
+    \begin{proof}
+        Since $s \in E^{-} - E$, we know that for any $p \in (0, 1)$, $(x_{n}) \subseteq E$:
+            \begin{equation*}
+                \lim\dfrac{1}{x_{n} - s} = \dfrac{\lim 1}{\lim x_{n} - s} = \dfrac{1}{p - s} = f(p)
+            \end{equation*}
+        Which is possible because the denominator does not converge to $0$ for large values of $n$. So $f(x) = \frac{1}{x - s}$ is continuous in $(0, 1)$.
+
+        (Not Bounded) Since $s \in E^{-} - E$, we know that there is a sequence $(x_{n}) \subseteq E$ converging to $s$. So then $x_{n} - s$ is a sequence converging to $0$. By definition, we have that $\forall \varepsilon> 0$, there is an $N$ such that $\forall n > N$,
+            \begin{equation*}
+                \lvert x_{n} - s \rvert < \varepsilon
+            \end{equation*}
+        or
+            \begin{equation*}
+                \dfrac{1}{\lvert x_{n} - s \rvert} >  \dfrac{1}{\varepsilon}
+            \end{equation*}
+        because $(x_{n}) \subseteq E$, $s \notin E$, so $x_{n} - s \neq 0$ for any $n$. Suppose that $f$ is bounded above by $M$ and below by $L$. Let $M^{\prime} = \max(\lvert M \rvert, \lvert L \rvert)$. Then we can find an $\varepsilon = \frac{1}{M^{\prime}}$ such that:
+            \begin{equation*}
+                \left\lvert \dfrac{1}{x_{n} - s} \right\rvert > M^{\prime}
+            \end{equation*}
+        This means that:
+            \begin{align*}
+                \dfrac{1}{x_{n} - s} > M^{\prime} &\text{ or } \dfrac{1}{x_{n} - s} < -M^{\prime}
+            \end{align*}
+        Then it cannot be that:
+            \begin{equation*}
+                \dfrac{1}{x_{n} - s} > M^{\prime}
+            \end{equation*}
+        because $M^{\prime} > \lvert M \rvert > M$ so 
+            \begin{equation*}
+                \dfrac{1}{x_{n} - s} > M
+            \end{equation*}
+        contradiction. So if $\frac{1}{x_{n} - s} < -M^{\prime}$. We have $M^{\prime} > \lvert L \rvert$. But that means:
+            \begin{equation*}
+                -M^{\prime} < L < M^{\prime}
+            \end{equation*}
+        Which also leads to a contradiction because that implies:
+            \begin{equation*}
+                \dfrac{1}{x_{n} - s} <  - M^{\prime} < L
+            \end{equation*}
+        so it cannot be that we have both an upper and lower bound $M, L$. So $f(E)$ is not bounded.
+    \end{proof}
+
+\textbf{Exercise 6}: Assume $f(x)$ is a continuous function on $[0, 1]$, prove that $\exists x \in (0, 1)$ such that $f(x) < 1/x$.
+    \begin{proof}
+        Suppose for contradiction that $f(x) \geq \frac{1}{x}$ for all $x \in (0, 1)$. Let $x_{n}$ be a sequence in $(0, 1)$ converging to $0$. Then we will show that $\frac{1}{x_{n}}$ diverges. Let $M$ be any number greater than $0$. Then since $x_{n}$ converges to $0$, we know that $\forall \varepsilon > 0$, there is an $N$ such that $\forall n > N$, 
+            \begin{equation*}
+                \lvert x_{n} \rvert < \varepsilon
+            \end{equation*}
+        which means that
+            \begin{equation*}
+                0 < x_{n} < \dfrac{1}{M}
+            \end{equation*}
+        for all $n > N$. So then since $x_{n} > 0$, we have:
+            \begin{equation*}
+                x_{n} < \dfrac{1}{M} \implies \dfrac{1}{x_{n}} > M
+            \end{equation*}
+        so for any $M > 0$, there is an $n$ such that for all $n > N$, we have:
+            \begin{equation*}
+                \dfrac{1}{x_{n}} > M
+            \end{equation*}
+        which means that $\frac{1}{x_{n}}$ diverges to $\infty $. But then we have $f(x_{n}) \geq \frac{1}{x_{n}}$ implies that $f(x_{n})$ diverges to:
+            \begin{equation*}
+                f(x_{n}) \geq \dfrac{1}{x_{n}} > M
+            \end{equation*}
+        But that contradicts the continuity of $f(x)$ on $[0, 1]$, because $\lim f(x_{n}) = \infty \neq f(0)$ which is finite. Therefore, we must have $f(x) < \frac{1}{x}$ for some $x$.
+    \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
