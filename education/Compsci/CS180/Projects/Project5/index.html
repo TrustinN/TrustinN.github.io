@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      id="MathJax-script"
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+    <title>Fun With Diffusion Models!</title>
+    <link href="/css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="page-container include-sidebar">
+      <header>
+        <div class="header-title">
+          <button class="menu-button" type="button" onclick="toggleMenu()">
+            <div class="menu-icon"></div>
+          </button>
+        </div>
+        <nav aria-label="other-sections" id="menu">
+          <ul>
+            <li><a href="/index.html"> Home </a></li>
+            <li>
+              <a href="/education/Compsci/CS180/index.html">Portfolio</a>
+            </li>
+            <li><a href="/projects/index.html"> Projects </a></li>
+            <li><a href="/hobbies/index.html"> Hobbies </a></li>
+            <li>
+              <a class="github" href="https://github.com/TrustinN"> Github </a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <div class="banner">
+        <h1>Project 5: Fun With Diffusion Models!</h1>
+      </div>
+      <div class="sidebar-container">
+        <div class="sidebar-nav">
+          <nav aria-label="primary-navigation">
+            <ul>
+              <li><a href="#Forward Process">Forward Process</a></li>
+              <li><a href="#Denoising">Denoising</a></li>
+              <li><a href="#CFG">Classifier Free Guidance</a></li>
+              <li>
+                <a href="#Image Translation">Image to Image Translation"</a>
+              </li>
+              <li>
+                <a href="#Editing Images">Editing Hand-Drawn/Web Images</a>
+              </li>
+              <li><a href="#Inpainting">Inpainting</a></li>
+              <li>
+                <a href="#Text Conditional Translation">
+                  Text Conditional Image to Image Translation</a
+                >
+              </li>
+              <li><a href="#Visual Anagrams">Visual Anagrams</a></li>
+              <li><a href="#Hybrid Images">Hybrid Images</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <main>
+        <section>
+          <article id="Forward Process">
+            <h2>Forward Process</h2>
+          </article>
+        </section>
+        <section>
+          <article id="Denoising">
+            <h2>Denoising</h2>
+            <h3>Classic Denoising</h3>
+            <div class="image-container" style="--grid-cols: repeat(6, 1fr)">
+              <img
+                src="./media/gaussian/noise_t250.png"
+                alt="Campanile Noise t250"
+              />
+              <img
+                src="./media/gaussian/noise_t500.png"
+                alt="Campanile Noise t500"
+              />
+              <img
+                src="./media/gaussian/noise_t750.png"
+                alt="Campanile Noise t750"
+              />
+              <img
+                src="./media/gaussian/clean_t250.png"
+                alt="Campanile Clean t250"
+              />
+              <img
+                src="./media/gaussian/clean_t500.png"
+                alt="Campanile Clean t500"
+              />
+              <img
+                src="./media/gaussian/clean_t750.png"
+                alt="Campanile Clean t750"
+              />
+              <img
+                src="./media/one_step/noise_t250.png"
+                alt="Campanile Noise t250"
+              />
+              <img
+                src="./media/one_step/noise_t500.png"
+                alt="Campanile Noise t500"
+              />
+              <img
+                src="./media/one_step/noise_t750.png"
+                alt="Campanile Noise t750"
+              />
+              <img
+                src="./media/one_step/clean_t250.png"
+                alt="Campanile Clean t250"
+              />
+              <img
+                src="./media/one_step/clean_t500.png"
+                alt="Campanile Clean t500"
+              />
+              <img
+                src="./media/one_step/clean_t750.png"
+                alt="Campanile Clean t750"
+              />
+              <img
+                src="./media/iterative/camp_1.png"
+                alt="Campanile Iterative Denoise 1"
+              />
+              <img
+                src="./media/iterative/camp_2.png"
+                alt="Campanile Iterative Denoise 2"
+              />
+              <img
+                src="./media/iterative/camp_3.png"
+                alt="Campanile Iterative Denoise 3"
+              />
+              <img
+                src="./media/iterative/camp_4.png"
+                alt="Campanile Iterative Denoise 4"
+              />
+              <img
+                src="./media/iterative/camp_5.png"
+                alt="Campanile Iterative Denoise 5"
+              />
+              <img
+                src="./media/iterative/camp_iterative.png"
+                alt="Campanile Iterative Denoise 6"
+              />
+            </div>
+            <div class="image-container" style="--grid-cols: repeat(3, 1fr)">
+              <img
+                src="./media/gaussian/clean_t750.png"
+                alt="Gaussian Denoise"
+              />
+              <img
+                src="./media/one_step/clean_t750.png"
+                alt="One Step Denoise"
+              />
+              <img
+                src="./media/iterative/camp_iterative.png"
+                alt="Iterative Denoise"
+              />
+            </div>
+          </article>
+        </section>
+        <section>
+          <article id="Diffusion Sampling">
+            <h2>Diffusion Model Sampling</h2>
+            <div class="image-container" style="--grid-cols: repeat(5, 1fr)">
+              <img
+                src="./media/diff_sample/diff_sample_1.png"
+                alt="Diffusion Sample 1"
+              />
+              <img
+                src="./media/diff_sample/diff_sample_2.png"
+                alt="Diffusion Sample 2"
+              />
+              <img
+                src="./media/diff_sample/diff_sample_3.png"
+                alt="Diffusion Sample 3"
+              />
+              <img
+                src="./media/diff_sample/diff_sample_4.png"
+                alt="Diffusion Sample 4"
+              />
+              <img
+                src="./media/diff_sample/diff_sample_5.png"
+                alt="Diffusion Sample 5"
+              />
+            </div>
+          </article>
+        </section>
+        <section>
+          <article id="CFG">
+            <h2>Classifier Free Guidance</h2>
+            <div class="image-container" style="--grid-cols: repeat(5, 1fr)">
+              <img
+                src="./media/iterative_cfg/cfg1/denoise_8.png"
+                alt="iterative_cfg1_clean"
+              />
+              <img
+                src="./media/iterative_cfg/cfg2/denoise_8.png"
+                alt="iterative_cfg2_clean"
+              />
+              <img
+                src="./media/iterative_cfg/cfg3/denoise_8.png"
+                alt="iterative_cfg3_clean"
+              />
+              <img
+                src="./media/iterative_cfg/cfg4/denoise_8.png"
+                alt="iterative_cfg4_clean"
+              />
+              <img
+                src="./media/iterative_cfg/cfg5/denoise_8.png"
+                alt="iterative_cfg5_clean"
+              />
+            </div>
+          </article>
+        </section>
+        <section>
+          <article id="Image Translation">
+            <h2>Image to Image Translation</h2>
+            <div class="image-container" style="--grid-cols: repeat(6, 1fr)">
+              <img
+                src="./media/im_translation/t_1.png"
+                alt="Image Translation t1"
+              />
+              <img
+                src="./media/im_translation/t_3.png"
+                alt="Image Translation t3"
+              />
+              <img
+                src="./media/im_translation/t_5.png"
+                alt="Image Translation t5"
+              />
+              <img
+                src="./media/im_translation/t_7.png"
+                alt="Image Translation t7"
+              />
+              <img
+                src="./media/im_translation/t_10.png"
+                alt="Image Translation t10"
+              />
+              <img
+                src="./media/im_translation/t_20.png"
+                alt="Image Translation t20"
+              />
+            </div>
+          </article>
+        </section>
+        <section>
+          <article id="Editing Images">
+            <h2>Editing Hand-Drawn/Web Images</h2>
+            <div class="image-container" style="--grid-cols: repeat(7, 1fr)">
+              <img src="./media/web_edits/t_1.png" alt="Web Edit t1" />
+              <img src="./media/web_edits/t_3.png" alt="Web Edit t3" />
+              <img src="./media/web_edits/t_5.png" alt="Web Edit t5" />
+              <img src="./media/web_edits/t_7.png" alt="Web Edit t7" />
+              <img src="./media/web_edits/t_10.png" alt="Web Edit t10" />
+              <img src="./media/web_edits/t_20.png" alt="Web Edit t20" />
+              <img src="./media/web_edits/original.png" alt="Base Image" />
+              <img
+                src="./media/hand_drawn_edits/t_1.png"
+                alt="Hand-Drawn Edit t1"
+              />
+              <img
+                src="./media/hand_drawn_edits/t_3.png"
+                alt="Hand-Drawn Edit t3"
+              />
+              <img
+                src="./media/hand_drawn_edits/t_5.png"
+                alt="Hand-Drawn Edit t5"
+              />
+              <img
+                src="./media/hand_drawn_edits/t_7.png"
+                alt="Hand-Drawn Edit t7"
+              />
+              <img
+                src="./media/hand_drawn_edits/t_10.png"
+                alt="Hand-Drawn Edit t10"
+              />
+              <img
+                src="./media/hand_drawn_edits/t_20.png"
+                alt="Hand-Drawn Edit t20"
+              />
+              <img
+                src="./media/hand_drawn_edits/original.png"
+                alt="Base Image"
+              />
+            </div>
+          </article>
+        </section>
+        <section>
+          <article id="Inpainting">
+            <h2>Inpainting</h2>
+            <div class="image-container" style="--grid-cols: repeat(8, 1fr)">
+              <img
+                src="./media/inpainting/denoise_1.png"
+                alt="Campanile Inpaint 1"
+              />
+              <img
+                src="./media/inpainting/denoise_2.png"
+                alt="Campanile Inpaint 2"
+              />
+              <img
+                src="./media/inpainting/denoise_3.png"
+                alt="Campanile Inpaint 3"
+              />
+              <img
+                src="./media/inpainting/denoise_4.png"
+                alt="Campanile Inpaint 4"
+              />
+              <img
+                src="./media/inpainting/denoise_5.png"
+                alt="Campanile Inpaint 5"
+              />
+              <img
+                src="./media/inpainting/denoise_6.png"
+                alt="Campanile Inpaint 6"
+              />
+              <img
+                src="./media/inpainting/denoise_7.png"
+                alt="Campanile Inpaint 7"
+              />
+              <img
+                src="./media/inpainting/denoise_8.png"
+                alt="Campanile Inpaint 8"
+              />
+            </div>
+          </article>
+        </section>
+        <section>
+          <article id="Text Conditional Translation">
+            <h2>Text Conditional Image to Image Translation</h2>
+            <div class="image-container" style="--grid-cols: repeat(6, 1fr)">
+              <img
+                src="./media/text_conditioned/t_1/denoise_8.png"
+                alt="Campanile Translation Rocket t1"
+              />
+              <img
+                src="./media/text_conditioned/t_2/denoise_8.png"
+                alt="Campanile Translation Rocket t2"
+              />
+              <img
+                src="./media/text_conditioned/t_3/denoise_8.png"
+                alt="Campanile Translation Rocket t3"
+              />
+              <img
+                src="./media/text_conditioned/t_4/denoise_7.png"
+                alt="Campanile Translation Rocket t4"
+              />
+              <img
+                src="./media/text_conditioned/t_5/denoise_6.png"
+                alt="Campanile Translation Rocket t5"
+              />
+              <img
+                src="./media/text_conditioned/t_6/denoise_5.png"
+                alt="Campanile Translation Rocket t6"
+              />
+            </div>
+          </article>
+        </section>
+        <section>
+          <article id="Visual Anagrams">
+            <h2>Visual Anagrams</h2>
+          </article>
+        </section>
+        <section>
+          <article id="Hybrid Images">
+            <h2>Hybrid Images</h2>
+          </article>
+        </section>
+      </main>
+      <footer>
+        <p>&lt;&lt;&lt; &copy; Trustin Nguyen &gt;&gt;&gt;</p>
+        <p><a href="#"> Back to Top </a></p>
+      </footer>
+    </div>
+  </body>
+</html>

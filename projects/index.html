@@ -5,44 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Projects</title>
-    <link rel="stylesheet" href="../css/style.css" />
-    <script src="../menu.js" defer></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/menu.js" defer></script>
   </head>
 
   <body>
-    <header>
-      <div class="header-title">
-        <button class="menu-button" type="button" onclick="toggleMenu()">
-          <div class="menu-icon"></div>
-        </button>
-      </div>
-      <nav aria-label="other-sections" id="menu">
-        <ul>
-          <li><a href="../index.html"> Home </a></li>
-          <li><a href="../education/index.html"> Education </a></li>
-          <li><a href="../hobbies/index.html"> Hobbies </a></li>
-          <li>
-            <a class="github" href="https://github.com/TrustinN"> Github </a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-    <div class="banner">
-      <h1>Projects</h1>
-    </div>
-    <main>
-      <div class="page-container include-sidebar">
-        <div class="sidebar-container">
-          <div class="sidebar-nav">
-            <nav aria-label="projects">
-              <ul>
-                <li><a href="#RRT"> Path Planning </a></li>
-                <li><a href="#RTree"> Spatial Indexing </a></li>
-                <li><a href="#SurfaceRecon"> Surface Reconstruction </a></li>
-              </ul>
-            </nav>
-          </div>
+    <div class="page-container include-sidebar">
+      <header>
+        <div class="header-title">
+          <button class="menu-button" type="button" onclick="toggleMenu()">
+            <div class="menu-icon"></div>
+          </button>
         </div>
+        <nav aria-label="other-sections" id="menu">
+          <ul>
+            <li><a href="/index.html"> Home </a></li>
+            <li><a href="/education/index.html"> Education </a></li>
+            <li><a href="/hobbies/index.html"> Hobbies </a></li>
+            <li>
+              <a class="github" href="https://github.com/TrustinN"> Github </a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <div class="banner">
+        <h1>Projects</h1>
+      </div>
+      <div class="sidebar-container">
+        <div class="sidebar-nav">
+          <nav aria-label="projects">
+            <ul>
+              <li><a href="#RRT"> Path Planning </a></li>
+              <li><a href="#RTree"> Spatial Indexing </a></li>
+              <li><a href="#SurfaceRecon"> Surface Reconstruction </a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <main>
         <div class="content-container">
           <section>
             <article id="RRT">
@@ -66,9 +66,9 @@
                 a chosen step size. Over many iterations, the tree will flood
                 the free space and a solution will be found.
               </p>
-              <div class="centered centered__img--single">
+              <div class="image-container" style="--grid-cols: repeat(1, 1fr)">
                 <img
-                  src="../media/projects/rrt/RRT_extend.svg"
+                  src="/media/projects/rrt/RRT_extend.svg"
                   alt="rrt_extend"
                 />
               </div>
@@ -81,12 +81,13 @@
                 becomes handy when dealing with meshes for fast obstacle
                 collision detection.
               </p>
-              <div class="centered centered__img--pair">
+              <div class="image-container" style="--grid-cols: repeat(3, 1fr)">
                 <img
-                  src="../media/projects/rtree/RTree-Visualization-3D.svg.png"
+                  src="/media/projects/rtree/RTree-Visualization-3D.svg.png"
                   alt="RTree Wikipedia"
                   width="800"
                   height="800"
+                  style="grid-column: 2 / 3"
                 />
               </div>
               <p>
@@ -94,9 +95,9 @@
                 path is not optimal in terms of length. It is also not effective
                 in maneuvering small spaces:
               </p>
-              <div class="centered centered__img--pair">
-                <img src="../media/projects/rrt/rrt_basic.png" alt="rrt" />
-                <img src="../media/projects/rrt/rrt_maze.png" alt="rrt_maze" />
+              <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
+                <img src="/media/projects/rrt/rrt_basic.png" alt="rrt" />
+                <img src="/media/projects/rrt/rrt_maze.png" alt="rrt_maze" />
               </div>
               <p>
                 As it fails to find the optimal path in a maze. One of these
@@ -107,9 +108,9 @@
                 determing the parent node, and the metric used is the distance
                 from the sampled node to the root of the tree,
               </p>
-              <div class="centered centered__img--single">
+              <div class="image-container" style="--grid-cols: repeat(1, 1fr)">
                 <img
-                  src="../media/projects/rrt/RRT_star_intro.svg"
+                  src="/media/projects/rrt/RRT_star_intro.svg"
                   alt="rrt_rewire"
                 />
               </div>
@@ -117,13 +118,13 @@
                 We can see that the distance from the root to the leaf nodes are
                 shortened substantially.
               </p>
-              <div class="centered centered__img--pair">
+              <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
                 <img
-                  src="../media/projects/rrt/rrt_star_rom.png"
+                  src="/media/projects/rrt/rrt_star_rom.png"
                   alt="rrt star"
                 />
                 <img
-                  src="../media/projects/rrt/rrt_star_maze.png"
+                  src="/media/projects/rrt/rrt_star_maze.png"
                   alt="rrt star"
                 />
               </div>
@@ -185,16 +186,16 @@
                 Overall, it was a very fun and rewarding project to work on.
                 Here are some cool animations of visualizing the solution path.
               </p>
-              <div class="centered centered__img--pair">
-                <video width="48%" autoplay muted loop playsinline>
+              <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
+                <video autoplay muted loop playsinline>
                   <source
-                    src="../media/projects/rrt/bto_maze_tracked.mp4"
+                    src="/media/projects/rrt/bto_maze_tracked.mp4"
                     type="video/mp4"
                   />
                 </video>
-                <video width="48%" autoplay muted loop playsinline>
+                <video autoplay muted loop playsinline>
                   <source
-                    src="../media/projects/rrt/bto_rom_tracked.mp4"
+                    src="/media/projects/rrt/bto_rom_tracked.mp4"
                     type="video/mp4"
                   />
                 </video>
@@ -204,16 +205,16 @@
                 obstacles, and underlying data structures, which can be found on
                 Github.
               </p>
-              <div class="centered">
-                <video width="48%" autoplay muted loop playsinline>
+              <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
+                <video autoplay muted loop playsinline>
                   <source
-                    src="../media/projects/rrt/bto_maze_visual.mp4"
+                    src="/media/projects/rrt/bto_maze_visual.mp4"
                     type="video/mp4"
                   />
                 </video>
-                <video width="48%" autoplay muted loop playsinline>
+                <video autoplay muted loop playsinline>
                   <source
-                    src="../media/projects/rrt/rrt_connect_visual.mp4"
+                    src="/media/projects/rrt/rrt_connect_visual.mp4"
                     type="video/mp4"
                   />
                 </video>
@@ -226,11 +227,11 @@
             </article>
           </section>
         </div>
-      </div>
-    </main>
-    <footer>
-      <p>&lt;&lt;&lt; &copy; Trustin Nguyen &gt;&gt;&gt;</p>
-      <p><a href="#"> Back to Top </a></p>
-    </footer>
+      </main>
+      <footer>
+        <p>&lt;&lt;&lt; &copy; Trustin Nguyen &gt;&gt;&gt;</p>
+        <p><a href="#"> Back to Top </a></p>
+      </footer>
+    </div>
   </body>
 </html>

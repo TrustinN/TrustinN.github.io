@@ -6,59 +6,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About Me</title>
     <link rel="stylesheet" href="./css/style.css" />
-    <script src="./menu.js" defer></script>
+    <script src="/menu.js" defer></script>
   </head>
   <body>
-    <header>
-      <div class="header-title">
-        <button class="menu-button" type="button" onclick="toggleMenu()">
-          <div class="menu-icon"></div>
-        </button>
-      </div>
-      <nav aria-label="About Me Details" id="menu">
-        <ul>
-          <li><a href="./projects/index.html"> Projects </a></li>
-          <li><a href="./education/index.html"> Education </a></li>
-          <li><a href="./hobbies/index.html"> Hobbies </a></li>
-          <li>
-            <a
-              class="github"
-              href="https://github.com/TrustinN"
-              width="230"
-              height="225"
-            >
-              Github
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-    <div class="banner">
-      <h1>Trustin Nguyen</h1>
-      <p>Computer Science / Mathematics Enjoyer</p>
-    </div>
-    <main>
-      <div class="page-container include-sidebar">
-        <div class="sidebar-container">
-          <figure class="profile-picture">
-            <img
-              src="./media/profile_pic.JPG"
-              alt="Profile Picture"
-              height="3088"
-              width="2320"
-            />
-          </figure>
-          <div class="sidebar-nav">
-            <nav aria-label="About Me Overview">
-              <ul>
-                <li><a href="#Introduction"> Introduction </a></li>
-                <li><a href="#Projects"> Projects </a></li>
-                <li><a href="#Education"> Education </a></li>
-                <li><a href="#Hobbies"> Hobbies </a></li>
-              </ul>
-            </nav>
-          </div>
+    <div class="page-container include-sidebar">
+      <header>
+        <div class="header-title">
+          <button class="menu-button" type="button" onclick="toggleMenu()">
+            <div class="menu-icon"></div>
+          </button>
         </div>
+        <nav aria-label="About Me Details" id="menu">
+          <ul>
+            <li><a href="/projects/index.html"> Projects </a></li>
+            <li><a href="/education/index.html"> Education </a></li>
+            <li><a href="/hobbies/index.html"> Hobbies </a></li>
+            <li>
+              <a
+                class="github"
+                href="https://github.com/TrustinN"
+                width="230"
+                height="225"
+              >
+                Github
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <div class="banner">
+        <h1>Trustin Nguyen</h1>
+        <p>Computer Science / Mathematics Enjoyer</p>
+      </div>
+      <div class="sidebar-container">
+        <figure class="profile-picture">
+          <img
+            src="/media/profile_pic.JPG"
+            alt="Profile Picture"
+            height="3088"
+            width="2320"
+          />
+        </figure>
+        <div class="sidebar-nav">
+          <nav aria-label="About Me Overview">
+            <ul>
+              <li><a href="#Introduction"> Introduction </a></li>
+              <li><a href="#Projects"> Projects </a></li>
+              <li><a href="#Education"> Education </a></li>
+              <li><a href="#Hobbies"> Hobbies </a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <main>
         <div class="content-container">
           <section class="overview">
             <article id="Introduction">
@@ -88,7 +88,7 @@
               </p>
             </article>
             <div class="explore">
-              <a href="./projects/index.html"> &#10145;</a>
+              <a href="./projects/index.html"> &#x27A7;</a>
             </div>
           </section>
           <section class="overview">
@@ -133,15 +133,18 @@
                 <details>
                   <summary>Best scenary?</summary>
                   <p>Botanical Garden</p>
-                  <div class="centered centered__img--pair">
+                  <div
+                    class="image-container"
+                    style="--grid-cols: repeat(2, 1fr)"
+                  >
                     <img
-                      src="./media/pond.jpeg"
+                      src="/media/pond.jpeg"
                       alt="botanical garden pond"
                       width="4032"
                       height="3024"
                     />
                     <img
-                      src="./media/redwood.jpeg"
+                      src="/media/redwood.jpeg"
                       alt="botanical garden redwood"
                       width="4032"
                       height="3024"
@@ -151,7 +154,7 @@
               </aside>
             </article>
             <div class="explore">
-              <a href="./education/index.html"> &#10145;</a>
+              <a href="/education/index.html"> &#x27A7;</a>
             </div>
           </section>
           <section class="overview">
@@ -165,15 +168,15 @@
               </p>
             </article>
             <div class="explore">
-              <a href="./hobbies/index.html"> &#10145; </a>
+              <a href="/hobbies/index.html"> &#x27A7; </a>
             </div>
           </section>
         </div>
-      </div>
-    </main>
-    <footer>
-      <p>&lt;&lt;&lt; &copy; Trustin Nguyen &gt;&gt;&gt;</p>
-      <p><a href="#"> Back to Top </a></p>
-    </footer>
+      </main>
+      <footer>
+        <p>&lt;&lt;&lt; &copy; Trustin Nguyen &gt;&gt;&gt;</p>
+        <p><a href="#"> Back to Top </a></p>
+      </footer>
+    </div>
   </body>
 </html>
