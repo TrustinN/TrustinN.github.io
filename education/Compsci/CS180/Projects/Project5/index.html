@@ -385,92 +385,117 @@
               two noise predictions off of our current image \(\epsilon_{c},
               \epsilon_{u}\) such that our new predicted noise is:
               \begin{equation*} \epsilon = (1 - \gamma)\epsilon_{u} + \gamma
-              \epsilon_{c} \end{equation*} This means that when \(\gamma > 1\)
-              the noise prediction leans more towards using the conditional
+              \epsilon_{c} \end{equation*} This means that when \(\gamma &gt;
+              1\) the noise prediction leans more towards using the conditional
               noise. From the small update the images become much more
               recognizable:
             </p>
             <div class="image-container" style="--grid-cols: repeat(5, 1fr)">
-              <div
-                class="image-container"
-                style="--grid-cols: repeat(1, 1fr); --image-container-margin: 0"
-              >
-                <img
-                  class="dissolve"
-                  src="./media/iterative_cfg/cfg1/denoise_8.png"
-                  alt="iterative_cfg1_clean"
-                  onmouseover="resetSiblingGif(this)"
-                />
-                <img
-                  class="emerge"
-                  src="./media/iterative_cfg/cfg1/output.gif"
-                  alt="iterative_cfg1_gif"
-                />
-              </div>
-              <div
-                class="image-container"
-                style="--grid-cols: repeat(1, 1fr); --image-container-margin: 0"
-              >
-                <img
-                  class="dissolve"
-                  src="./media/iterative_cfg/cfg2/denoise_8.png"
-                  alt="iterative_cfg2_clean"
-                  onmouseover="resetSiblingGif(this)"
-                />
-                <img
-                  class="emerge"
-                  src="./media/iterative_cfg/cfg2/output.gif"
-                  alt="iterative_cfg2_gif"
-                />
-              </div>
-              <div
-                class="image-container"
-                style="--grid-cols: repeat(1, 1fr); --image-container-margin: 0"
-              >
-                <img
-                  class="dissolve"
-                  src="./media/iterative_cfg/cfg3/denoise_8.png"
-                  alt="iterative_cfg3_clean"
-                  onmouseover="resetSiblingGif(this)"
-                />
-                <img
-                  class="emerge"
-                  src="./media/iterative_cfg/cfg3/output.gif"
-                  alt="iterative_cfg3_gif"
-                />
-              </div>
-              <div
-                class="image-container"
-                style="--grid-cols: repeat(1, 1fr); --image-container-margin: 0"
-              >
-                <img
-                  class="dissolve"
-                  src="./media/iterative_cfg/cfg4/denoise_8.png"
-                  alt="iterative_cfg4_clean"
-                  onmouseover="resetSiblingGif(this)"
-                />
-                <img
-                  class="emerge"
-                  src="./media/iterative_cfg/cfg4/output.gif"
-                  alt="iterative_cfg4_gif"
-                />
-              </div>
-              <div
-                class="image-container"
-                style="--grid-cols: repeat(1, 1fr); --image-container-margin: 0"
-              >
-                <img
-                  class="dissolve"
-                  src="./media/iterative_cfg/cfg5/denoise_8.png"
-                  alt="iterative_cfg5_clean"
-                  onmouseover="resetSiblingGif(this)"
-                />
-                <img
-                  class="emerge"
-                  src="./media/iterative_cfg/cfg5/output.gif"
-                  alt="iterative_cfg5_gif"
-                />
-              </div>
+              <figure>
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(1, 1fr);
+                    --image-container-margin: 0;
+                  "
+                >
+                  <img
+                    class="dissolve"
+                    src="./media/iterative_cfg/cfg1/denoise_8.png"
+                    alt="iterative_cfg1_clean"
+                    onmouseover="resetSiblingGif(this)"
+                  />
+                  <img
+                    class="emerge"
+                    src="./media/iterative_cfg/cfg1/output.gif"
+                    alt="iterative_cfg1_gif"
+                  />
+                </div>
+              </figure>
+              <figure>
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(1, 1fr);
+                    --image-container-margin: 0;
+                  "
+                >
+                  <img
+                    class="dissolve"
+                    src="./media/iterative_cfg/cfg2/denoise_8.png"
+                    alt="iterative_cfg2_clean"
+                    onmouseover="resetSiblingGif(this)"
+                  />
+                  <img
+                    class="emerge"
+                    src="./media/iterative_cfg/cfg2/output.gif"
+                    alt="iterative_cfg2_gif"
+                  />
+                </div>
+              </figure>
+              <figure>
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(1, 1fr);
+                    --image-container-margin: 0;
+                  "
+                >
+                  <img
+                    class="dissolve"
+                    src="./media/iterative_cfg/cfg3/denoise_8.png"
+                    alt="iterative_cfg3_clean"
+                    onmouseover="resetSiblingGif(this)"
+                  />
+                  <img
+                    class="emerge"
+                    src="./media/iterative_cfg/cfg3/output.gif"
+                    alt="iterative_cfg3_gif"
+                  />
+                </div>
+              </figure>
+              <figure>
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(1, 1fr);
+                    --image-container-margin: 0;
+                  "
+                >
+                  <img
+                    class="dissolve"
+                    src="./media/iterative_cfg/cfg4/denoise_8.png"
+                    alt="iterative_cfg4_clean"
+                    onmouseover="resetSiblingGif(this)"
+                  />
+                  <img
+                    class="emerge"
+                    src="./media/iterative_cfg/cfg4/output.gif"
+                    alt="iterative_cfg4_gif"
+                  />
+                </div>
+              </figure>
+              <figure>
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(1, 1fr);
+                    --image-container-margin: 0;
+                  "
+                >
+                  <img
+                    class="dissolve"
+                    src="./media/iterative_cfg/cfg5/denoise_8.png"
+                    alt="iterative_cfg5_clean"
+                    onmouseover="resetSiblingGif(this)"
+                  />
+                  <img
+                    class="emerge"
+                    src="./media/iterative_cfg/cfg5/output.gif"
+                    alt="iterative_cfg5_gif"
+                  />
+                </div>
+              </figure>
             </div>
           </article>
         </section>
