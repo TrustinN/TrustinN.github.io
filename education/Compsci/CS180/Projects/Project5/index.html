@@ -27,10 +27,10 @@
         <nav aria-label="other-sections" id="menu">
           <ul>
             <li><a href="/index.html"> Home </a></li>
-            <li>
-              <a href="/education/Compsci/CS180/index.html">Portfolio</a>
-            </li>
             <li><a href="/projects/index.html"> Projects </a></li>
+            <li>
+              <a href="/education/index.html">Education</a>
+            </li>
             <li><a href="/hobbies/index.html"> Hobbies </a></li>
             <li>
               <a class="github" href="https://github.com/TrustinN"> Github </a>
@@ -62,6 +62,7 @@
               </li>
               <li><a href="#Visual Anagrams">Visual Anagrams</a></li>
               <li><a href="#Hybrid Images">Hybrid Images</a></li>
+              <li><a href="#Unconditional Unet">Unconditional Unet</a></li>
             </ul>
           </nav>
         </div>
@@ -273,63 +274,65 @@
                 formula
               </li>
             </ul>
-            <div class="carousel-container centered" id="carousel1">
-              <button class="carousel-button" onclick="shiftLeft(1)">
-                &#9664;
-              </button>
-              <div
-                class="image-container"
-                style="
-                  --grid-cols: repeat(5, 1fr);
-                  --image-container-width: 40rem;
-                "
-              >
-                <figure class="carousel-image">
-                  <img
-                    src="./media/iterative/camp_1.png"
-                    alt="Campanile Iterative Denoise 1"
-                  />
-                  <figcaption>\(t = 690\)</figcaption>
-                </figure>
-                <figure class="carousel-image">
-                  <img
-                    src="./media/iterative/camp_2.png"
-                    alt="Campanile Iterative Denoise 2"
-                  />
-                  <figcaption>\(t = 540\)</figcaption>
-                </figure>
-                <figure class="carousel-image">
-                  <img
-                    src="./media/iterative/camp_3.png"
-                    alt="Campanile Iterative Denoise 3"
-                  />
-                  <figcaption>\(t = 390\)</figcaption>
-                </figure>
-                <figure class="carousel-image">
-                  <img
-                    src="./media/iterative/camp_4.png"
-                    alt="Campanile Iterative Denoise 4"
-                  />
-                  <figcaption>\(t = 240\)</figcaption>
-                </figure>
-                <figure class="carousel-image">
-                  <img
-                    src="./media/iterative/camp_5.png"
-                    alt="Campanile Iterative Denoise 5"
-                  />
-                  <figcaption>\(t = 90\)</figcaption>
-                </figure>
-                <figure class="carousel-image">
-                  <img
-                    src="./media/iterative/camp_iterative.png"
-                    alt="Campanile Iterative Denoise 6"
-                  />
-                  <figcaption>\(t = 0\)</figcaption>
-                </figure>
+            <div class="centered">
+              <div class="carousel-container" id="carousel1">
+                <button class="carousel-button" onclick="shiftLeft(1)">
+                  &#9664;
+                </button>
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(5, 1fr);
+                    --image-container-width: 40rem;
+                  "
+                >
+                  <figure class="carousel-image">
+                    <img
+                      src="./media/iterative/camp_1.png"
+                      alt="Campanile Iterative Denoise 1"
+                    />
+                    <figcaption>\(t = 690\)</figcaption>
+                  </figure>
+                  <figure class="carousel-image">
+                    <img
+                      src="./media/iterative/camp_2.png"
+                      alt="Campanile Iterative Denoise 2"
+                    />
+                    <figcaption>\(t = 540\)</figcaption>
+                  </figure>
+                  <figure class="carousel-image">
+                    <img
+                      src="./media/iterative/camp_3.png"
+                      alt="Campanile Iterative Denoise 3"
+                    />
+                    <figcaption>\(t = 390\)</figcaption>
+                  </figure>
+                  <figure class="carousel-image">
+                    <img
+                      src="./media/iterative/camp_4.png"
+                      alt="Campanile Iterative Denoise 4"
+                    />
+                    <figcaption>\(t = 240\)</figcaption>
+                  </figure>
+                  <figure class="carousel-image">
+                    <img
+                      src="./media/iterative/camp_5.png"
+                      alt="Campanile Iterative Denoise 5"
+                    />
+                    <figcaption>\(t = 90\)</figcaption>
+                  </figure>
+                  <figure class="carousel-image">
+                    <img
+                      src="./media/iterative/camp_iterative.png"
+                      alt="Campanile Iterative Denoise 6"
+                    />
+                    <figcaption>\(t = 0\)</figcaption>
+                  </figure>
+                </div>
+                <button class="carousel-button" onclick="shiftRight(1)">
+                  &#9654;
+                </button>
               </div>
-              <button class="carousel-button" onclick="shiftRight(1)">
-                &#9654;
-              </button>
             </div>
             <p>The resulting image looks sharper than the previous ones</p>
             <h3>A Comparison</h3>
@@ -382,27 +385,29 @@
               We can also denoise pure noise, rather than starting from a noisy
               image. Here are \(5\) results:
             </p>
-            <div class="image-container" style="--grid-cols: repeat(5, 1fr)">
-              <img
-                src="./media/diff_sample/diff_sample_1.png"
-                alt="Diffusion Sample 1"
-              />
-              <img
-                src="./media/diff_sample/diff_sample_2.png"
-                alt="Diffusion Sample 2"
-              />
-              <img
-                src="./media/diff_sample/diff_sample_3.png"
-                alt="Diffusion Sample 3"
-              />
-              <img
-                src="./media/diff_sample/diff_sample_4.png"
-                alt="Diffusion Sample 4"
-              />
-              <img
-                src="./media/diff_sample/diff_sample_5.png"
-                alt="Diffusion Sample 5"
-              />
+            <div class="centered">
+              <div class="image-container" style="--grid-cols: repeat(5, 1fr)">
+                <img
+                  src="./media/diff_sample/diff_sample_1.png"
+                  alt="Diffusion Sample 1"
+                />
+                <img
+                  src="./media/diff_sample/diff_sample_2.png"
+                  alt="Diffusion Sample 2"
+                />
+                <img
+                  src="./media/diff_sample/diff_sample_3.png"
+                  alt="Diffusion Sample 3"
+                />
+                <img
+                  src="./media/diff_sample/diff_sample_4.png"
+                  alt="Diffusion Sample 4"
+                />
+                <img
+                  src="./media/diff_sample/diff_sample_5.png"
+                  alt="Diffusion Sample 5"
+                />
+              </div>
             </div>
           </article>
         </section>
@@ -419,112 +424,114 @@
               noise. From the small update the images become much more
               recognizable:
             </p>
-            <div class="image-container" style="--grid-cols: repeat(5, 1fr)">
-              <figure>
-                <div
-                  class="image-container"
-                  style="
-                    --grid-cols: repeat(1, 1fr);
-                    --image-container-margin: 0;
-                  "
-                >
-                  <img
-                    class="dissolve"
-                    src="./media/iterative_cfg/cfg1/denoise_8.png"
-                    alt="iterative_cfg1_clean"
-                    onmouseover="resetSiblingGif(this)"
-                  />
-                  <img
-                    class="emerge"
-                    src="./media/iterative_cfg/cfg1/output.gif"
-                    alt="iterative_cfg1_gif"
-                  />
-                </div>
-              </figure>
-              <figure>
-                <div
-                  class="image-container"
-                  style="
-                    --grid-cols: repeat(1, 1fr);
-                    --image-container-margin: 0;
-                  "
-                >
-                  <img
-                    class="dissolve"
-                    src="./media/iterative_cfg/cfg2/denoise_8.png"
-                    alt="iterative_cfg2_clean"
-                    onmouseover="resetSiblingGif(this)"
-                  />
-                  <img
-                    class="emerge"
-                    src="./media/iterative_cfg/cfg2/output.gif"
-                    alt="iterative_cfg2_gif"
-                  />
-                </div>
-              </figure>
-              <figure>
-                <div
-                  class="image-container"
-                  style="
-                    --grid-cols: repeat(1, 1fr);
-                    --image-container-margin: 0;
-                  "
-                >
-                  <img
-                    class="dissolve"
-                    src="./media/iterative_cfg/cfg3/denoise_8.png"
-                    alt="iterative_cfg3_clean"
-                    onmouseover="resetSiblingGif(this)"
-                  />
-                  <img
-                    class="emerge"
-                    src="./media/iterative_cfg/cfg3/output.gif"
-                    alt="iterative_cfg3_gif"
-                  />
-                </div>
-              </figure>
-              <figure>
-                <div
-                  class="image-container"
-                  style="
-                    --grid-cols: repeat(1, 1fr);
-                    --image-container-margin: 0;
-                  "
-                >
-                  <img
-                    class="dissolve"
-                    src="./media/iterative_cfg/cfg4/denoise_8.png"
-                    alt="iterative_cfg4_clean"
-                    onmouseover="resetSiblingGif(this)"
-                  />
-                  <img
-                    class="emerge"
-                    src="./media/iterative_cfg/cfg4/output.gif"
-                    alt="iterative_cfg4_gif"
-                  />
-                </div>
-              </figure>
-              <figure>
-                <div
-                  class="image-container"
-                  style="
-                    --grid-cols: repeat(1, 1fr);
-                    --image-container-margin: 0;
-                  "
-                >
-                  <img
-                    class="dissolve"
-                    src="./media/iterative_cfg/cfg5/denoise_8.png"
-                    alt="iterative_cfg5_clean"
-                    onmouseover="resetSiblingGif(this)"
-                  />
-                  <img
-                    class="emerge"
-                    src="./media/iterative_cfg/cfg5/output.gif"
-                    alt="iterative_cfg5_gif"
-                  />
-                </div>
-              </figure>
+            <div class="centered">
+              <div class="image-container" style="--grid-cols: repeat(5, 1fr)">
+                <figure>
+                  <div
+                    class="image-container"
+                    style="
+                      --grid-cols: repeat(1, 1fr);
+                      --image-container-margin: 0;
+                    "
+                  >
+                    <img
+                      class="dissolve"
+                      src="./media/iterative_cfg/cfg1/denoise_8.png"
+                      alt="iterative_cfg1_clean"
+                      onmouseover="resetSiblingGif(this)"
+                    />
+                    <img
+                      class="emerge"
+                      src="./media/iterative_cfg/cfg1/output.gif"
+                      alt="iterative_cfg1_gif"
+                    />
+                  </div>
+                </figure>
+                <figure>
+                  <div
+                    class="image-container"
+                    style="
+                      --grid-cols: repeat(1, 1fr);
+                      --image-container-margin: 0;
+                    "
+                  >
+                    <img
+                      class="dissolve"
+                      src="./media/iterative_cfg/cfg2/denoise_8.png"
+                      alt="iterative_cfg2_clean"
+                      onmouseover="resetSiblingGif(this)"
+                    />
+                    <img
+                      class="emerge"
+                      src="./media/iterative_cfg/cfg2/output.gif"
+                      alt="iterative_cfg2_gif"
+                    />
+                  </div>
+                </figure>
+                <figure>
+                  <div
+                    class="image-container"
+                    style="
+                      --grid-cols: repeat(1, 1fr);
+                      --image-container-margin: 0;
+                    "
+                  >
+                    <img
+                      class="dissolve"
+                      src="./media/iterative_cfg/cfg3/denoise_8.png"
+                      alt="iterative_cfg3_clean"
+                      onmouseover="resetSiblingGif(this)"
+                    />
+                    <img
+                      class="emerge"
+                      src="./media/iterative_cfg/cfg3/output.gif"
+                      alt="iterative_cfg3_gif"
+                    />
+                  </div>
+                </figure>
+                <figure>
+                  <div
+                    class="image-container"
+                    style="
+                      --grid-cols: repeat(1, 1fr);
+                      --image-container-margin: 0;
+                    "
+                  >
+                    <img
+                      class="dissolve"
+                      src="./media/iterative_cfg/cfg4/denoise_8.png"
+                      alt="iterative_cfg4_clean"
+                      onmouseover="resetSiblingGif(this)"
+                    />
+                    <img
+                      class="emerge"
+                      src="./media/iterative_cfg/cfg4/output.gif"
+                      alt="iterative_cfg4_gif"
+                    />
+                  </div>
+                </figure>
+                <figure>
+                  <div
+                    class="image-container"
+                    style="
+                      --grid-cols: repeat(1, 1fr);
+                      --image-container-margin: 0;
+                    "
+                  >
+                    <img
+                      class="dissolve"
+                      src="./media/iterative_cfg/cfg5/denoise_8.png"
+                      alt="iterative_cfg5_clean"
+                      onmouseover="resetSiblingGif(this)"
+                    />
+                    <img
+                      class="emerge"
+                      src="./media/iterative_cfg/cfg5/output.gif"
+                      alt="iterative_cfg5_gif"
+                    />
+                  </div>
+                </figure>
+              </div>
             </div>
           </article>
         </section>
@@ -537,49 +544,51 @@
               image. This is done by running the forward noising process and
               running the previous algorithm on the noisy image.
             </p>
-            <div class="image-container" style="--grid-cols: repeat(6, 1fr)">
-              <figure>
-                <img
-                  src="./media/im_translation/t_1.png"
-                  alt="Image Translation t1"
-                />
-                <figcaption>\(t = 1\)</figcaption>
-              </figure>
-              <figure>
-                <img
-                  src="./media/im_translation/t_3.png"
-                  alt="Image Translation t3"
-                />
-                <figcaption>\(t = 3\)</figcaption>
-              </figure>
-              <figure>
-                <img
-                  src="./media/im_translation/t_5.png"
-                  alt="Image Translation t5"
-                />
-                <figcaption>\(t = 5\)</figcaption>
-              </figure>
-              <figure>
-                <img
-                  src="./media/im_translation/t_7.png"
-                  alt="Image Translation t7"
-                />
-                <figcaption>\(t = 7\)</figcaption>
-              </figure>
-              <figure>
-                <img
-                  src="./media/im_translation/t_10.png"
-                  alt="Image Translation t10"
-                />
-                <figcaption>\(t = 10\)</figcaption>
-              </figure>
-              <figure>
-                <img
-                  src="./media/im_translation/t_20.png"
-                  alt="Image Translation t20"
-                />
-                <figcaption>\(t = 20\)</figcaption>
-              </figure>
+            <div class="centered">
+              <div class="image-container" style="--grid-cols: repeat(6, 1fr)">
+                <figure>
+                  <img
+                    src="./media/im_translation/t_1.png"
+                    alt="Image Translation t1"
+                  />
+                  <figcaption>\(t = 1\)</figcaption>
+                </figure>
+                <figure>
+                  <img
+                    src="./media/im_translation/t_3.png"
+                    alt="Image Translation t3"
+                  />
+                  <figcaption>\(t = 3\)</figcaption>
+                </figure>
+                <figure>
+                  <img
+                    src="./media/im_translation/t_5.png"
+                    alt="Image Translation t5"
+                  />
+                  <figcaption>\(t = 5\)</figcaption>
+                </figure>
+                <figure>
+                  <img
+                    src="./media/im_translation/t_7.png"
+                    alt="Image Translation t7"
+                  />
+                  <figcaption>\(t = 7\)</figcaption>
+                </figure>
+                <figure>
+                  <img
+                    src="./media/im_translation/t_10.png"
+                    alt="Image Translation t10"
+                  />
+                  <figcaption>\(t = 10\)</figcaption>
+                </figure>
+                <figure>
+                  <img
+                    src="./media/im_translation/t_20.png"
+                    alt="Image Translation t20"
+                  />
+                  <figcaption>\(t = 20\)</figcaption>
+                </figure>
+              </div>
             </div>
           </article>
         </section>
@@ -587,95 +596,104 @@
           <article id="Editing Images">
             <h2>Editing Hand-Drawn/Web Images</h2>
             <p>We can also denoise hand-drawn and web images:</p>
-            <div class="carousel-container centered" id="carousel2">
-              <button class="carousel-button" onclick="shiftLeft(2)">
-                &#9664;
-              </button>
-              <div class="image-container" style="--grid-cols: repeat(5, 1fr)">
-                <img
-                  class="carousel-image"
-                  src="./media/web_edits/t_1.png"
-                  alt="Web Edit t1"
-                />
-                <img
-                  class="carousel-image"
-                  src="./media/web_edits/t_3.png"
-                  alt="Web Edit t3"
-                />
-                <img
-                  class="carousel-image"
-                  src="./media/web_edits/t_5.png"
-                  alt="Web Edit t5"
-                />
-                <img
-                  class="carousel-image"
-                  src="./media/web_edits/t_7.png"
-                  alt="Web Edit t7"
-                />
-                <img
-                  class="carousel-image"
-                  src="./media/web_edits/t_10.png"
-                  alt="Web Edit t10"
-                />
-                <img
-                  class="carousel-image"
-                  src="./media/web_edits/t_20.png"
-                  alt="Web Edit t20"
-                />
-                <img
-                  class="carousel-image"
-                  src="./media/web_edits/original.png"
-                  alt="Base Image"
-                />
+            <div class="centered">
+              <div class="carousel-container" id="carousel2">
+                <button class="carousel-button" onclick="shiftLeft(2)">
+                  &#9664;
+                </button>
+                <div
+                  class="image-container"
+                  style="--grid-cols: repeat(5, 1fr)"
+                >
+                  <img
+                    class="carousel-image"
+                    src="./media/web_edits/t_1.png"
+                    alt="Web Edit t1"
+                  />
+                  <img
+                    class="carousel-image"
+                    src="./media/web_edits/t_3.png"
+                    alt="Web Edit t3"
+                  />
+                  <img
+                    class="carousel-image"
+                    src="./media/web_edits/t_5.png"
+                    alt="Web Edit t5"
+                  />
+                  <img
+                    class="carousel-image"
+                    src="./media/web_edits/t_7.png"
+                    alt="Web Edit t7"
+                  />
+                  <img
+                    class="carousel-image"
+                    src="./media/web_edits/t_10.png"
+                    alt="Web Edit t10"
+                  />
+                  <img
+                    class="carousel-image"
+                    src="./media/web_edits/t_20.png"
+                    alt="Web Edit t20"
+                  />
+                  <img
+                    class="carousel-image"
+                    src="./media/web_edits/original.png"
+                    alt="Base Image"
+                  />
+                </div>
+                <button class="carousel-button" onclick="shiftRight(2)">
+                  &#9654;
+                </button>
               </div>
-              <button class="carousel-button" onclick="shiftRight(2)">
-                &#9654;
-              </button>
-            </div>
-            <div class="carousel-container centered" id="carousel3">
-              <button class="carousel-button" onclick="shiftLeft(3)">
-                &#9664;
-              </button>
-              <div class="image-container" style="--grid-cols: repeat(5, 1fr)">
-                <img
-                  class="carousel-image"
-                  src="./media/hand_drawn_edits/t_1.png"
-                  alt="Hand-Drawn Edit t1"
-                />
-                <img
-                  class="carousel-image"
-                  src="./media/hand_drawn_edits/t_3.png"
-                  alt="Hand-Drawn Edit t3"
-                />
-                <img
-                  class="carousel-image"
-                  src="./media/hand_drawn_edits/t_5.png"
-                  alt="Hand-Drawn Edit t5"
-                />
-                <img
-                  class="carousel-image"
-                  src="./media/hand_drawn_edits/t_7.png"
-                  alt="Hand-Drawn Edit t7"
-                />
-                <img
-                  class="carousel-image"
-                  src="./media/hand_drawn_edits/t_10.png"
-                  alt="Hand-Drawn Edit t10"
-                />
-                <img
-                  class="carousel-image"
-                  src="./media/hand_drawn_edits/t_20.png"
-                  alt="Hand-Drawn Edit t20"
-                />
-                <img
-                  class="carousel-image"
-                  src="./media/hand_drawn_edits/original.png"
-                  alt="Base Image"
-                />
+
+              <div class="carousel-container" id="carousel3">
+                <button class="carousel-button" onclick="shiftLeft(3)">
+                  &#9664;
+                </button>
+                <div
+                  class="image-container"
+                  style="--grid-cols: repeat(5, 1fr)"
+                >
+                  <img
+                    class="carousel-image"
+                    src="./media/hand_drawn_edits/t_1.png"
+                    alt="Hand-Drawn Edit t1"
+                  />
+                  <img
+                    class="carousel-image"
+                    src="./media/hand_drawn_edits/t_3.png"
+                    alt="Hand-Drawn Edit t3"
+                  />
+                  <img
+                    class="carousel-image"
+                    src="./media/hand_drawn_edits/t_5.png"
+                    alt="Hand-Drawn Edit t5"
+                  />
+                  <img
+                    class="carousel-image"
+                    src="./media/hand_drawn_edits/t_7.png"
+                    alt="Hand-Drawn Edit t7"
+                  />
+                  <img
+                    class="carousel-image"
+                    src="./media/hand_drawn_edits/t_10.png"
+                    alt="Hand-Drawn Edit t10"
+                  />
+                  <img
+                    class="carousel-image"
+                    src="./media/hand_drawn_edits/t_20.png"
+                    alt="Hand-Drawn Edit t20"
+                  />
+                  <img
+                    class="carousel-image"
+                    src="./media/hand_drawn_edits/original.png"
+                    alt="Base Image"
+                  />
+                </div>
+                <button class="carousel-button" onclick="shiftRight(3)">
+                  &#9654;
+                </button>
               </div>
-              <button class="carousel-button" onclick="shiftRight(3)">
-                &#9654;
-              </button>
             </div>
           </article>
         </section>
@@ -690,74 +708,76 @@
               area we want to inpaint, we replace it with the original image
               processed through the forward noising function.
             </p>
-            <div class="carousel-container centered" id="carousel4">
-              <button class="carousel-button" onclick="shiftLeft(4)">
-                &#9664;
-              </button>
-              <div
-                class="image-container"
-                style="--grid-cols: repeat(5, 1fr); width: 100%"
-              >
-                <figure class="carousel-image">
-                  <img
-                    src="./media/inpainting/denoise_1.png"
-                    alt="Campanile Inpaint 1"
-                  />
-                  <figcaption>\(t=990\)</figcaption>
-                </figure>
-                <figure class="carousel-image">
-                  <img
-                    src="./media/inpainting/denoise_2.png"
-                    alt="Campanile Inpaint 2"
-                  />
-                  <figcaption>\(t=840\)</figcaption>
-                </figure>
-                <figure class="carousel-image">
-                  <img
-                    src="./media/inpainting/denoise_3.png"
-                    alt="Campanile Inpaint 3"
-                  />
-                  <figcaption>\(t=690\)</figcaption>
-                </figure>
-                <figure class="carousel-image">
-                  <img
-                    src="./media/inpainting/denoise_4.png"
-                    alt="Campanile Inpaint 4"
-                  />
-                  <figcaption>\(t=540\)</figcaption>
-                </figure>
-                <figure class="carousel-image">
-                  <img
-                    src="./media/inpainting/denoise_5.png"
-                    alt="Campanile Inpaint 5"
-                  />
-                  <figcaption>\(t=390\)</figcaption>
-                </figure>
-                <figure class="carousel-image">
-                  <img
-                    src="./media/inpainting/denoise_6.png"
-                    alt="Campanile Inpaint 6"
-                  />
-                  <figcaption>\(t=240\)</figcaption>
-                </figure>
-                <figure class="carousel-image">
-                  <img
-                    src="./media/inpainting/denoise_7.png"
-                    alt="Campanile Inpaint 7"
-                  />
-                  <figcaption>\(t=90\)</figcaption>
-                </figure>
-                <figure class="carousel-image">
-                  <img
-                    src="./media/inpainting/denoise_8.png"
-                    alt="Campanile Inpaint 8"
-                  />
-                  <figcaption>\(t=0\)</figcaption>
-                </figure>
+            <div class="centered">
+              <div class="carousel-container" id="carousel4">
+                <button class="carousel-button" onclick="shiftLeft(4)">
+                  &#9664;
+                </button>
+                <div
+                  class="image-container"
+                  style="--grid-cols: repeat(5, 1fr); width: 100%"
+                >
+                  <figure class="carousel-image">
+                    <img
+                      src="./media/inpainting/denoise_1.png"
+                      alt="Campanile Inpaint 1"
+                    />
+                    <figcaption>\(t=990\)</figcaption>
+                  </figure>
+                  <figure class="carousel-image">
+                    <img
+                      src="./media/inpainting/denoise_2.png"
+                      alt="Campanile Inpaint 2"
+                    />
+                    <figcaption>\(t=840\)</figcaption>
+                  </figure>
+                  <figure class="carousel-image">
+                    <img
+                      src="./media/inpainting/denoise_3.png"
+                      alt="Campanile Inpaint 3"
+                    />
+                    <figcaption>\(t=690\)</figcaption>
+                  </figure>
+                  <figure class="carousel-image">
+                    <img
+                      src="./media/inpainting/denoise_4.png"
+                      alt="Campanile Inpaint 4"
+                    />
+                    <figcaption>\(t=540\)</figcaption>
+                  </figure>
+                  <figure class="carousel-image">
+                    <img
+                      src="./media/inpainting/denoise_5.png"
+                      alt="Campanile Inpaint 5"
+                    />
+                    <figcaption>\(t=390\)</figcaption>
+                  </figure>
+                  <figure class="carousel-image">
+                    <img
+                      src="./media/inpainting/denoise_6.png"
+                      alt="Campanile Inpaint 6"
+                    />
+                    <figcaption>\(t=240\)</figcaption>
+                  </figure>
+                  <figure class="carousel-image">
+                    <img
+                      src="./media/inpainting/denoise_7.png"
+                      alt="Campanile Inpaint 7"
+                    />
+                    <figcaption>\(t=90\)</figcaption>
+                  </figure>
+                  <figure class="carousel-image">
+                    <img
+                      src="./media/inpainting/denoise_8.png"
+                      alt="Campanile Inpaint 8"
+                    />
+                    <figcaption>\(t=0\)</figcaption>
+                  </figure>
+                </div>
+                <button class="carousel-button" onclick="shiftRight(4)">
+                  &#9654;
+                </button>
               </div>
-              <button class="carousel-button" onclick="shiftRight(4)">
-                &#9654;
-              </button>
             </div>
           </article>
         </section>
@@ -771,139 +791,141 @@
               on the prompt given, which will give the image a push towards what
               is specified by the prompt.
             </p>
-            <div class="image-container" style="--grid-cols: repeat(6, 1fr)">
-              <figure>
-                <div
-                  class="image-container"
-                  style="
-                    --grid-cols: repeat(1, 1fr);
-                    --image-container-margin: 0;
-                  "
-                >
-                  <img
-                    class="dissolve"
-                    src="./media/text_conditioned/t_1/denoise_8.png"
-                    alt="Campanile Translation Rocket t_1"
-                    onmouseover="resetSiblingGif(this)"
-                  />
-                  <img
-                    class="emerge"
-                    src="./media/text_conditioned/t_1/output.gif"
-                    alt="Campanile Translation Rocket t_1 gif"
-                  />
-                </div>
-                <figcaption>\(t = 1\)</figcaption>
-              </figure>
-              <figure>
-                <div
-                  class="image-container"
-                  style="
-                    --grid-cols: repeat(1, 1fr);
-                    --image-container-margin: 0;
-                  "
-                >
-                  <img
-                    class="dissolve"
-                    src="./media/text_conditioned/t_2/denoise_8.png"
-                    alt="Campanile Translation Rocket t_2"
-                    onmouseover="resetSiblingGif(this)"
-                  />
-                  <img
-                    class="emerge"
-                    src="./media/text_conditioned/t_2/output.gif"
-                    alt="Campanile Translation Rocket t_2 gif"
-                  />
-                </div>
-                <figcaption>\(t = 3\)</figcaption>
-              </figure>
-              <figure>
-                <div
-                  class="image-container"
-                  style="
-                    --grid-cols: repeat(1, 1fr);
-                    --image-container-margin: 0;
-                  "
-                >
-                  <img
-                    class="dissolve"
-                    src="./media/text_conditioned/t_3/denoise_8.png"
-                    alt="Campanile Translation Rocket t_3"
-                    onmouseover="resetSiblingGif(this)"
-                  />
-                  <img
-                    class="emerge"
-                    src="./media/text_conditioned/t_3/output.gif"
-                    alt="Campanile Translation Rocket t_3 gif"
-                  />
-                </div>
-                <figcaption>\(t = 5\)</figcaption>
-              </figure>
-              <figure>
-                <div
-                  class="image-container"
-                  style="
-                    --grid-cols: repeat(1, 1fr);
-                    --image-container-margin: 0;
-                  "
-                >
-                  <img
-                    class="dissolve"
-                    src="./media/text_conditioned/t_4/denoise_7.png"
-                    alt="Campanile Translation Rocket t_4"
-                    onmouseover="resetSiblingGif(this)"
-                  />
-                  <img
-                    class="emerge"
-                    src="./media/text_conditioned/t_4/output.gif"
-                    alt="Campanile Translation Rocket t_4 gif"
-                  />
-                </div>
-                <figcaption>\(t = 7\)</figcaption>
-              </figure>
-              <figure>
-                <div
-                  class="image-container"
-                  style="
-                    --grid-cols: repeat(1, 1fr);
-                    --image-container-margin: 0;
-                  "
-                >
-                  <img
-                    class="dissolve"
-                    src="./media/text_conditioned/t_5/denoise_7.png"
-                    alt="Campanile Translation Rocket t_5"
-                    onmouseover="resetSiblingGif(this)"
-                  />
-                  <img
-                    class="emerge"
-                    src="./media/text_conditioned/t_5/output.gif"
-                    alt="Campanile Translation Rocket t_5 gif"
-                  />
-                </div>
-                <figcaption>\(t = 10\)</figcaption>
-              </figure>
-              <figure>
-                <div
-                  class="image-container"
-                  style="
-                    --grid-cols: repeat(1, 1fr);
-                    --image-container-margin: 0;
-                  "
-                >
-                  <img
-                    class="dissolve"
-                    src="./media/text_conditioned/t_6/denoise_5.png"
-                    alt="Campanile Translation Rocket t_6"
-                    onmouseover="resetSiblingGif(this)"
-                  />
-                  <img
-                    class="emerge"
-                    src="./media/text_conditioned/t_6/output.gif"
-                    alt="Campanile Translation Rocket t_6 gif"
-                  />
-                </div>
-                <figcaption>\(t = 20\)</figcaption>
-              </figure>
+            <div class="centered">
+              <div class="image-container" style="--grid-cols: repeat(6, 1fr)">
+                <figure>
+                  <div
+                    class="image-container"
+                    style="
+                      --grid-cols: repeat(1, 1fr);
+                      --image-container-margin: 0;
+                    "
+                  >
+                    <img
+                      class="dissolve"
+                      src="./media/text_conditioned/t_1/denoise_8.png"
+                      alt="Campanile Translation Rocket t_1"
+                      onmouseover="resetSiblingGif(this)"
+                    />
+                    <img
+                      class="emerge"
+                      src="./media/text_conditioned/t_1/output.gif"
+                      alt="Campanile Translation Rocket t_1 gif"
+                    />
+                  </div>
+                  <figcaption>\(t = 1\)</figcaption>
+                </figure>
+                <figure>
+                  <div
+                    class="image-container"
+                    style="
+                      --grid-cols: repeat(1, 1fr);
+                      --image-container-margin: 0;
+                    "
+                  >
+                    <img
+                      class="dissolve"
+                      src="./media/text_conditioned/t_2/denoise_8.png"
+                      alt="Campanile Translation Rocket t_2"
+                      onmouseover="resetSiblingGif(this)"
+                    />
+                    <img
+                      class="emerge"
+                      src="./media/text_conditioned/t_2/output.gif"
+                      alt="Campanile Translation Rocket t_2 gif"
+                    />
+                  </div>
+                  <figcaption>\(t = 3\)</figcaption>
+                </figure>
+                <figure>
+                  <div
+                    class="image-container"
+                    style="
+                      --grid-cols: repeat(1, 1fr);
+                      --image-container-margin: 0;
+                    "
+                  >
+                    <img
+                      class="dissolve"
+                      src="./media/text_conditioned/t_3/denoise_8.png"
+                      alt="Campanile Translation Rocket t_3"
+                      onmouseover="resetSiblingGif(this)"
+                    />
+                    <img
+                      class="emerge"
+                      src="./media/text_conditioned/t_3/output.gif"
+                      alt="Campanile Translation Rocket t_3 gif"
+                    />
+                  </div>
+                  <figcaption>\(t = 5\)</figcaption>
+                </figure>
+                <figure>
+                  <div
+                    class="image-container"
+                    style="
+                      --grid-cols: repeat(1, 1fr);
+                      --image-container-margin: 0;
+                    "
+                  >
+                    <img
+                      class="dissolve"
+                      src="./media/text_conditioned/t_4/denoise_7.png"
+                      alt="Campanile Translation Rocket t_4"
+                      onmouseover="resetSiblingGif(this)"
+                    />
+                    <img
+                      class="emerge"
+                      src="./media/text_conditioned/t_4/output.gif"
+                      alt="Campanile Translation Rocket t_4 gif"
+                    />
+                  </div>
+                  <figcaption>\(t = 7\)</figcaption>
+                </figure>
+                <figure>
+                  <div
+                    class="image-container"
+                    style="
+                      --grid-cols: repeat(1, 1fr);
+                      --image-container-margin: 0;
+                    "
+                  >
+                    <img
+                      class="dissolve"
+                      src="./media/text_conditioned/t_5/denoise_7.png"
+                      alt="Campanile Translation Rocket t_5"
+                      onmouseover="resetSiblingGif(this)"
+                    />
+                    <img
+                      class="emerge"
+                      src="./media/text_conditioned/t_5/output.gif"
+                      alt="Campanile Translation Rocket t_5 gif"
+                    />
+                  </div>
+                  <figcaption>\(t = 10\)</figcaption>
+                </figure>
+                <figure>
+                  <div
+                    class="image-container"
+                    style="
+                      --grid-cols: repeat(1, 1fr);
+                      --image-container-margin: 0;
+                    "
+                  >
+                    <img
+                      class="dissolve"
+                      src="./media/text_conditioned/t_6/denoise_5.png"
+                      alt="Campanile Translation Rocket t_6"
+                      onmouseover="resetSiblingGif(this)"
+                    />
+                    <img
+                      class="emerge"
+                      src="./media/text_conditioned/t_6/output.gif"
+                      alt="Campanile Translation Rocket t_6 gif"
+                    />
+                  </div>
+                  <figcaption>\(t = 20\)</figcaption>
+                </figure>
+              </div>
             </div>
             <p>
               We see that the images look more similar to the base image
@@ -1016,6 +1038,87 @@
                   <figcaption class="dissolve">A Snowy Village</figcaption>
                   <figcaption class="emerge">A Pencil</figcaption>
                 </figure>
+              </div>
+            </div>
+          </article>
+        </section>
+        <section>
+          <article id="Unconditional Unet">
+            <h2>Unconditional Unet</h2>
+            <div class="centered">
+              <div class="image-container" style="--grid-cols: repeat(5, 1fr)">
+                <figure>
+                  <img
+                    class="zoom-in"
+                    src="./media/unconditional_unet/loss_1.png"
+                    alt="Unconditional Unet Loss 1"
+                  />
+                  <figcaption>Epoch 1</figcaption>
+                </figure>
+                <figure>
+                  <img
+                    class="zoom-in"
+                    src="./media/unconditional_unet/loss_2.png"
+                    alt="Unconditional Unet Loss 2"
+                  />
+                  <figcaption>Epoch 2</figcaption>
+                </figure>
+                <figure>
+                  <img
+                    class="zoom-in"
+                    src="./media/unconditional_unet/loss_3.png"
+                    alt="Unconditional Unet Loss 3"
+                  />
+                  <figcaption>Epoch 3</figcaption>
+                </figure>
+                <figure>
+                  <img
+                    class="zoom-in"
+                    src="./media/unconditional_unet/loss_4.png"
+                    alt="Unconditional Unet Loss 4"
+                  />
+                  <figcaption>Epoch 4</figcaption>
+                </figure>
+                <figure>
+                  <img
+                    class="zoom-in"
+                    src="./media/unconditional_unet/loss_5.png"
+                    alt="Unconditional Unet Loss 5"
+                  />
+                  <figcaption>Epoch 5</figcaption>
+                </figure>
+              </div>
+            </div>
+            <div class="centered">
+              <div
+                class="image-container"
+                style="
+                  --grid-cols: repeat(1, 1fr);
+                  --image-container-width: 40rem;
+                "
+              >
+                <img
+                  src="./media/unconditional_unet/epoch_1.png"
+                  alt="Epoch 1 Denoise"
+                />
+                <img
+                  src="./media/unconditional_unet/epoch_5.png"
+                  alt="Epoch 5 Denoise"
+                />
+              </div>
+            </div>
+            <div class="centered">
+              <div
+                class="image-container"
+                style="
+                  --grid-cols: repeat(1, 1fr);
+                  --image-container-width: 40rem;
+                "
+              >
+                <img
+                  src="./media/unconditional_unet/sampling.png"
+                  alt="Various noise level denoisings"
+                />
               </div>
             </div>
           </article>

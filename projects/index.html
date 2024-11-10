@@ -36,195 +36,37 @@
           <nav aria-label="projects">
             <ul>
               <li><a href="#RRT"> Path Planning </a></li>
-              <li><a href="#RTree"> Spatial Indexing </a></li>
-              <li><a href="#SurfaceRecon"> Surface Reconstruction </a></li>
+              <li>
+                <a href="#Image Processing">
+                  Computer Vision/Image Processing</a
+                >
+              </li>
             </ul>
           </nav>
         </div>
       </div>
       <main>
         <div class="content-container">
-          <section>
+          <section class="overview">
             <article id="RRT">
-              <h2>Path Planning</h2>
-              <p>
-                RRT represents a class of methods (Rapidly exploring Random
-                Trees) to finding an optimal path within a given free space from
-                one point to another. It is often used in planning robotic
-                motion constrained motion problems due to its flexibility.
-              </p>
-              <br />
-              <p>
-                I started the project as an application to a club, but worked on
-                it after as a passion project, and it provided a nice
-                introduction to researching and implementing algorithms.
-              </p>
-              <br />
-              <p>
-                The core idea is to sample the free space and attempt to grow
-                the tree from the root (starting point) to the sampled point by
-                a chosen step size. Over many iterations, the tree will flood
-                the free space and a solution will be found.
-              </p>
-              <div class="image-container" style="--grid-cols: repeat(1, 1fr)">
-                <img
-                  src="/media/projects/rrt/RRT_extend.svg"
-                  alt="rrt_extend"
-                />
-              </div>
-              <p>
-                The algorithm makes heavy use of finding the nearest neighbor to
-                the sampled point, and so spatial indexing is often used as a
-                speed up. There are many trees that can be used for indexing,
-                but I chose to implement RTrees due to its flexibility, mainly,
-                its ability to handle objects outside of just points. This
-                becomes handy when dealing with meshes for fast obstacle
-                collision detection.
-              </p>
-              <div class="image-container" style="--grid-cols: repeat(3, 1fr)">
-                <img
-                  src="/media/projects/rtree/RTree-Visualization-3D.svg.png"
-                  alt="RTree Wikipedia"
-                  width="800"
-                  height="800"
-                  style="grid-column: 2 / 3"
-                />
-              </div>
-              <p>
-                The simple implementation is not very effective however, as the
-                path is not optimal in terms of length. It is also not effective
-                in maneuvering small spaces:
-              </p>
-              <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
-                <img src="/media/projects/rrt/rrt_basic.png" alt="rrt" />
-                <img src="/media/projects/rrt/rrt_maze.png" alt="rrt_maze" />
-              </div>
-              <p>
-                As it fails to find the optimal path in a maze. One of these
-                problems can be tackled with rrt*, a variant which adjusts the
-                wiring of the new node to the tree. Rather than selecting the
-                closest neighbor to the sampled node, we select the tree node in
-                a neighborhood of the nearest neighbor. The cost function will
-                determing the parent node, and the metric used is the distance
-                from the sampled node to the root of the tree,
-              </p>
-              <div class="image-container" style="--grid-cols: repeat(1, 1fr)">
-                <img
-                  src="/media/projects/rrt/RRT_star_intro.svg"
-                  alt="rrt_rewire"
-                />
-              </div>
-              <p>
-                We can see that the distance from the root to the leaf nodes are
-                shortened substantially.
-              </p>
-              <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
-                <img
-                  src="/media/projects/rrt/rrt_star_rom.png"
-                  alt="rrt star"
-                />
-                <img
-                  src="/media/projects/rrt/rrt_star_maze.png"
-                  alt="rrt star"
-                />
-              </div>
-              <p>
-                There are many other variants, and here is a list and some
-                details of the ones I implemented:
-              </p>
-              <aside>
-                <details>
-                  <summary>RRT Connect</summary>
-                  <p>
-                    A bidirectional form of rrt where two trees are grown, one
-                    from the start and one from the goal point.
-                  </p>
-                </details>
-                <details>
-                  <summary>Informed RRT*</summary>
-                  <p>
-                    After the initial RRT* solution has been found, sampling is
-                    restrained to an ellipsoid, for faster convergence to the
-                    solution.
-                  </p>
-                </details>
-                <details>
-                  <summary>Quick RRT</summary>
-                  <p>
-                    Similar to RRT* but we also consider the ancestors in the
-                    rewiring method of RRT*. By doing this, we decrease the
-                    depth of the tree, making the path more linear.
-                  </p>
-                </details>
-                <details>
-                  <summary>EP RRT</summary>
-                  <p>
-                    Similar to Informed RRT* but we sample within a given radius
-                    to our solution path for faster convergence to the solution.
-                  </p>
-                </details>
-                <details>
-                  <summary>BTO RRT</summary>
-                  <p>
-                    This makes two modifications. One is the connect heuristic,
-                    branch from RRT Connect. Rather than having both trees grow
-                    to each other's roots, one tree grows to the other's root,
-                    while the other grows towards the most recently appended
-                    node, which acts sort of like a flag.
-                  </p>
-                  <br />
-                  <p>
-                    The second modification is the post processing of the path.
-                    The path is downsampled to get a tighter solution, and
-                    interpolated with a parametric spline for path smoothing. We
-                    then clamp our path with keypoints to ensure that no
-                    collision is added during the interpolation.
-                  </p>
-                </details>
-              </aside>
-              <p>
-                Overall, it was a very fun and rewarding project to work on.
-                Here are some cool animations of visualizing the solution path.
-              </p>
-              <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
-                <video autoplay muted loop playsinline>
-                  <source
-                    src="/media/projects/rrt/bto_maze_tracked.mp4"
-                    type="video/mp4"
-                  />
-                </video>
-                <video autoplay muted loop playsinline>
-                  <source
-                    src="/media/projects/rrt/bto_rom_tracked.mp4"
-                    type="video/mp4"
-                  />
-                </video>
-              </div>
-              <p>
-                I also built a GUI for visualization of the solution path,
-                obstacles, and underlying data structures, which can be found on
-                Github.
-              </p>
-              <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
-                <video autoplay muted loop playsinline>
-                  <source
-                    src="/media/projects/rrt/bto_maze_visual.mp4"
-                    type="video/mp4"
-                  />
-                </video>
-                <video autoplay muted loop playsinline>
-                  <source
-                    src="/media/projects/rrt/rrt_connect_visual.mp4"
-                    type="video/mp4"
-                  />
-                </video>
-              </div>
+              <h2>RRT Path Planning</h2>
+              <p>Building an interactive solver for 2D and 3D environments.</p>
             </article>
+            <div class="explore">
+              <a href="./rrt/index.html"> &#x27A7;</a>
+            </div>
           </section>
-          <section id="RTree">
-            <article>
-              <h2>Spatial Indexing</h2>
+          <section class="overview">
+            <article id="Image Processing">
+              <h2>Computer Vision/Image Processing</h2>
+              <p>
+                Exploring methods in applying various transformations to images
+                to produce mosaics, morphs, and more.
+              </p>
             </article>
+            <div class="explore">
+              <a href="/education/Compsci/CS180/index.html"> &#x27A7;</a>
+            </div>
           </section>
         </div>
       </main>

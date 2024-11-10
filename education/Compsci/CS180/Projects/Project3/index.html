@@ -9,7 +9,7 @@
       src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
     ></script>
     <script src="/menu.js" defer></script>
-    <title>Face Morphing and Modelling a Photo Collection</title>
+    <title>Face Morphing and Modeling a Photo Collection</title>
     <link href="/css/style.css" rel="stylesheet" />
   </head>
   <body>
@@ -23,10 +23,10 @@
         <nav aria-label="other-sections" id="menu">
           <ul>
             <li><a href="/index.html"> Home </a></li>
-            <li>
-              <a href="/education/Compsci/CS180/index.html">Portfolio</a>
-            </li>
             <li><a href="/projects/index.html"> Projects </a></li>
+            <li>
+              <a href="/education/index.html">Education</a>
+            </li>
             <li><a href="/hobbies/index.html"> Hobbies </a></li>
             <li>
               <a class="github" href="https://github.com/TrustinN"> Github </a>
@@ -35,7 +35,7 @@
         </nav>
       </header>
       <div class="banner">
-        <h1>Project 3: Face Morphing and Modelling a Photo Collection</h1>
+        <h1>Project 3: Face Morphing and Modeling a Photo Collection</h1>
       </div>
       <div class="sidebar-container">
         <div class="sidebar-nav">
@@ -149,17 +149,19 @@
               Getting the mean face is adding all the images and dividing by the
               number of images.
             </p>
-            <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
-              <img
-                src="./media/AverageNeutralFace.png"
-                alt="AverageNeutralFace"
-                width="45%"
-              />
-              <img
-                src="./media/AverageSmilingFace.png"
-                alt="AverageSmilingFace"
-                width="45%"
-              />
+            <div class="centered">
+              <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
+                <img
+                  src="./media/AverageNeutralFace.png"
+                  alt="AverageNeutralFace"
+                  width="45%"
+                />
+                <img
+                  src="./media/AverageSmilingFace.png"
+                  alt="AverageSmilingFace"
+                  width="45%"
+                />
+              </div>
             </div>
             <p>
               To morph a given face, f, and its keypoints, f_k, to the average
@@ -179,27 +181,29 @@
               the average and the average morphed to my face:
             </p>
 
-            <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
-              <img
-                src="./media/AvgAndMyFaceKp.png"
-                alt="AverageAnyMyFaceKp"
-                width="45%"
-              />
-              <img
-                src="./media/NewAvgAndMyFaceKp.png"
-                alt="NewAverageAnyMyFaceKp"
-                width="45%"
-              />
-              <img
-                src="./media/NewAvgAndMyFaceDelaunay.png"
-                alt="NewAverageAnyMyFaceDelaunay"
-                width="45%"
-              />
-              <img
-                src="./media/MyFaceAvgMorphs.png"
-                alt="MyFaceAvgMorphs"
-                width="45%"
-              />
+            <div class="centered">
+              <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
+                <img
+                  src="./media/AvgAndMyFaceKp.png"
+                  alt="AverageAnyMyFaceKp"
+                  width="45%"
+                />
+                <img
+                  src="./media/NewAvgAndMyFaceKp.png"
+                  alt="NewAverageAnyMyFaceKp"
+                  width="45%"
+                />
+                <img
+                  src="./media/NewAvgAndMyFaceDelaunay.png"
+                  alt="NewAverageAnyMyFaceDelaunay"
+                  width="45%"
+                />
+                <img
+                  src="./media/MyFaceAvgMorphs.png"
+                  alt="MyFaceAvgMorphs"
+                  width="45%"
+                />
+              </div>
             </div>
           </article>
         </section>

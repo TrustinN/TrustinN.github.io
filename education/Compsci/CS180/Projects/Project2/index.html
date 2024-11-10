@@ -23,10 +23,10 @@
         <nav aria-label="other-sections" id="menu">
           <ul>
             <li><a href="/index.html"> Home </a></li>
-            <li>
-              <a href="/education/Compsci/CS180/index.html">Portfolio</a>
-            </li>
             <li><a href="/projects/index.html"> Projects </a></li>
+            <li>
+              <a href="/education/index.html">Education</a>
+            </li>
             <li><a href="/hobbies/index.html"> Hobbies </a></li>
             <li>
               <a class="github" href="https://github.com/TrustinN"> Github </a>
@@ -108,19 +108,21 @@
               filter with a gaussian filter to obtain first, then applying the
               image. This is because convolution is associative.
             </p>
-            <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
-              <img
-                src="./media/finiteDiffCameraman.png"
-                alt="fdCameraman"
-                width="400"
-                height="300"
-              />
-              <img
-                src="./media/DOGCameraman.png"
-                alt="DOGCameraman"
-                width="400"
-                height="300"
-              />
+            <div class="centered">
+              <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
+                <img
+                  src="./media/finiteDiffCameraman.png"
+                  alt="fdCameraman"
+                  width="400"
+                  height="300"
+                />
+                <img
+                  src="./media/DOGCameraman.png"
+                  alt="DOGCameraman"
+                  width="400"
+                  height="300"
+                />
+              </div>
             </div>
           </article>
         </section>
@@ -134,26 +136,28 @@
               scalar value and added back to the original to get more detail. On
               the left is the original, and the right is the sharpened image:
             </p>
-            <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
-              <img
-                src="./media/taj copy.jpg"
-                alt="taj_original"
-                width="400"
-                height="300"
-              />
-              <img src="./media/taj.png" alt="taj" width="400" height="300" />
-              <img
-                src="./media/woods copy.png"
-                alt="woods_original"
-                width="400"
-                height="300"
-              />
-              <img
-                src="./media/woods.png"
-                alt="woods"
-                width="400"
-                height="300"
-              />
+            <div class="centered">
+              <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
+                <img
+                  src="./media/taj copy.jpg"
+                  alt="taj_original"
+                  width="400"
+                  height="300"
+                />
+                <img src="./media/taj.png" alt="taj" width="400" height="300" />
+                <img
+                  src="./media/woods copy.png"
+                  alt="woods_original"
+                  width="400"
+                  height="300"
+                />
+                <img
+                  src="./media/woods.png"
+                  alt="woods"
+                  width="400"
+                  height="300"
+                />
+              </div>
             </div>
           </article>
         </section>
@@ -177,51 +181,52 @@
               image results in a frequency domain image that looks like an
               average of the previous two.
             </p>
-            <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
-              <img
-                src="./media/derek_nutmeg.png"
-                alt="hybrid"
-                width="400"
-                height="300"
-              />
-              <img
-                src="./media/fourier.png"
-                alt="fourier"
-                width="400"
-                height="300"
-              />
+            <div class="centered">
+              <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
+                <img
+                  src="./media/derek_nutmeg.png"
+                  alt="hybrid"
+                  width="400"
+                  height="300"
+                />
+                <img
+                  src="./media/fourier.png"
+                  alt="fourier"
+                  width="400"
+                  height="300"
+                />
+              </div>
             </div>
             <p>
               One failed example is a blending between a panda and bear. One
               problem that can make the hybrid less convincing is if the edges
               do not line up well:
             </p>
-            <p>
-              <img
-                src="./media/panda_bear.png"
-                alt="panda_bear"
-                width="400"
-                height="300"
-              />
-              <img src="" />
-            </p>
+            <img
+              src="./media/panda_bear.png"
+              alt="panda_bear"
+              width="400"
+              height="300"
+            />
             <p>
               Here is a more successful hybrid which is between a tennis ball
               and orange. This works well because the edges line up well:
             </p>
-            <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
-              <img
-                src="./media/hairy_orange.png"
-                alt="hairy_orange"
-                width="400"
-                height="300"
-              />
-              <img
-                src="./media/tennis.png"
-                alt="tennis"
-                width="400"
-                height="400"
-              />
+            <div class="centered">
+              <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
+                <img
+                  src="./media/hairy_orange.png"
+                  alt="hairy_orange"
+                  width="400"
+                  height="300"
+                />
+                <img
+                  src="./media/tennis.png"
+                  alt="tennis"
+                  width="400"
+                  height="400"
+                />
+              </div>
             </div>
           </article>
         </section>
@@ -241,13 +246,15 @@
               For both the Laplacian and Gaussian stacks, the last image
               contains a collection of the lowest frequencies of the image.
             </p>
-            <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
-              <img
-                src="./media/spline/stack.png"
-                alt="stack"
-                width="400"
-                height="300"
-              />
+            <div class="centered">
+              <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
+                <img
+                  src="./media/spline/stack.png"
+                  alt="stack"
+                  width="400"
+                  height="300"
+                />
+              </div>
             </div>
           </article>
         </section>
@@ -267,82 +274,88 @@
               a smaller window for the higher ones. A diagram of the blending at
               each level is shown below along with the gray and colored blend:
             </p>
-            <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
+            <div class="centered">
+              <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
+                <img
+                  src="./media/spline/orple.png"
+                  alt="orple_color"
+                  width="400"
+                  height="300"
+                />
+                <img
+                  src="./media/spline/orple_gray.png"
+                  alt="orple_gray"
+                  width="400"
+                  height="300"
+                />
+              </div>
               <img
-                src="./media/spline/orple.png"
-                alt="orple_color"
-                width="400"
-                height="300"
-              />
-              <img
-                src="./media/spline/orple_gray.png"
-                alt="orple_gray"
-                width="400"
-                height="300"
-              />
-            </div>
-            <img
-              src="./media/spline/orple_stack.png"
-              alt="orple_stack"
-              width="800"
-              height="600"
-            />
-            <p>
-              Here is an attempt at putting leaves on a tree with an irregular
-              mask:
-            </p>
-            <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
-              <img
-                src="./media/spline/tree1_copy.jpg"
-                alt="tree1"
-                width="400"
-                height="200"
-              />
-              <img
-                src="./media/spline/tree2_copy.jpeg"
-                alt="tree2"
-                width="400"
-                height="200"
-              />
-              <img
-                src="./media/spline/leaves_on_tree.png"
-                alt="leaves_on_tree"
-                width="400"
-                height="200"
-              />
-              <img
-                src="./media/spline/leaves_on_tree_stack.png"
-                alt="leaves_on_tree_stack"
+                src="./media/spline/orple_stack.png"
+                alt="orple_stack"
                 width="800"
                 height="600"
               />
             </div>
+            <p>
+              Here is an attempt at putting leaves on a tree with an irregular
+              mask:
+            </p>
+            <div class="centered">
+              <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
+                <img
+                  src="./media/spline/tree1_copy.jpg"
+                  alt="tree1"
+                  width="400"
+                  height="200"
+                />
+                <img
+                  src="./media/spline/tree2_copy.jpeg"
+                  alt="tree2"
+                  width="400"
+                  height="200"
+                />
+                <img
+                  src="./media/spline/leaves_on_tree.png"
+                  alt="leaves_on_tree"
+                  width="400"
+                  height="200"
+                />
+                <img
+                  src="./media/spline/leaves_on_tree_stack.png"
+                  alt="leaves_on_tree_stack"
+                  width="800"
+                  height="600"
+                />
+              </div>
+            </div>
             <p>Finally, here is a combination of a donut and bagel:</p>
-            <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
-              <img
-                src="./media/spline/donut2 copy.jpeg"
-                alt="donut"
-                width="400"
-                height="300"
-              />
-              <img
-                src="./media/spline/bagel2 copy.jpeg"
-                alt="bagel"
-                width="400"
-                height="300"
-              />
-              <img
-                src="./media/spline/dogel.png"
-                alt="dogel"
-                width="400"
-                height="300"
-              />
-              <img
-                src="./media/spline/dogel_stack.png"
-                alt="dogel_stack"
-                width="800"
-                height="800"
-              />
+            <div class="centered">
+              <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
+                <img
+                  src="./media/spline/donut2 copy.jpeg"
+                  alt="donut"
+                  width="400"
+                  height="300"
+                />
+                <img
+                  src="./media/spline/bagel2 copy.jpeg"
+                  alt="bagel"
+                  width="400"
+                  height="300"
+                />
+                <img
+                  src="./media/spline/dogel.png"
+                  alt="dogel"
+                  width="400"
+                  height="300"
+                />
+                <img
+                  src="./media/spline/dogel_stack.png"
+                  alt="dogel_stack"
+                  width="800"
+                  height="800"
+                />
+              </div>
             </div>
           </article>
         </section>
