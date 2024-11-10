@@ -70,9 +70,11 @@ figcaption.emerge {
   display: flex;
   flex-direction: row nowrap;
   align-items: center;
+  justify-content: center;
   position: relative;
   margin: 0 auto;
   flex-grow: 1;
+  width: 100%;
 }
 
 .carousel-button {

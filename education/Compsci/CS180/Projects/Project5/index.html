@@ -4,68 +4,29 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fun With Diffusion Models!</title>
+    <script src="./carousel.js" defer></script>
+    <script src="./resetGif.js" defer></script>
+    <script src="/common.js" defer></script>
     <script
       id="MathJax-script"
       src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+      defer
     ></script>
-    <script src="./carousel.js" defer></script>
-    <script src="./resetGif.js" defer></script>
-    <script src="/menu.js" defer></script>
-    <title>Fun With Diffusion Models!</title>
     <link href="/css/style.css" rel="stylesheet" />
     <link href="./style.css" rel="stylesheet" />
   </head>
 
   <body>
     <div class="page-container include-sidebar">
-      <header>
-        <div class="header-title">
-          <button class="menu-button" type="button" onclick="toggleMenu()">
-            <div class="menu-icon"></div>
-          </button>
-        </div>
-        <nav aria-label="other-sections" id="menu">
-          <ul>
-            <li><a href="/index.html"> Home </a></li>
-            <li><a href="/projects/index.html"> Projects </a></li>
-            <li>
-              <a href="/education/index.html">Education</a>
-            </li>
-            <li><a href="/hobbies/index.html"> Hobbies </a></li>
-            <li>
-              <a class="github" href="https://github.com/TrustinN"> Github </a>
-            </li>
-          </ul>
-        </nav>
-      </header>
+      <header></header>
+
       <div class="banner">
         <h1>Project 5: Fun With Diffusion Models!</h1>
       </div>
+
       <div class="sidebar-container">
-        <div class="sidebar-nav">
-          <nav aria-label="primary-navigation">
-            <ul>
-              <li><a href="#Forward Process">Forward Process</a></li>
-              <li><a href="#Denoising">Denoising</a></li>
-              <li><a href="#CFG">Classifier Free Guidance</a></li>
-              <li>
-                <a href="#Image Translation">Image to Image Translation</a>
-              </li>
-              <li>
-                <a href="#Editing Images">Editing Hand-Drawn/Web Images</a>
-              </li>
-              <li><a href="#Inpainting">Inpainting</a></li>
-              <li>
-                <a href="#Text Conditional Translation">
-                  Text Conditional Image to Image Translation</a
-                >
-              </li>
-              <li><a href="#Visual Anagrams">Visual Anagrams</a></li>
-              <li><a href="#Hybrid Images">Hybrid Images</a></li>
-              <li><a href="#Unconditional Unet">Unconditional Unet</a></li>
-            </ul>
-          </nav>
-        </div>
+        <div class="sidebar-nav"></div>
       </div>
       <main>
         <section>
@@ -78,10 +39,10 @@
               \mathcal{N}(0, \sqrt{1 - \overline{\alpha}}) \end{equation*}
               Adding this noise to our base image \begin{equation*}
               \sqrt{\overline{\alpha}} \cdot x_0 \end{equation*} gives the noisy
-              image that the network sees at \(\alpha\), the interpolation
-              factor. Here, \(\alpha\) is determined by a schedule, and we
-              obtain it by \(\alpha[t]\) where \(t\) is the timestep \(t \in [0,
-              999]\). Here are some results of generating the noisy image:
+              image that the network sees at $\alpha$, the interpolation factor.
+              Here, $\alpha$ is determined by a schedule, and we obtain it by
+              $\alpha[t]$ where $t$ is the timestep $t \in [0, 999]$. Here are
+              some results of generating the noisy image:
             </p>
             <div class="centered">
               <div
@@ -93,28 +54,28 @@
               >
                 <figure>
                   <img src="./media/camp_clean.png" alt="Campanile Noise t0" />
-                  <figcaption>\(t = 0\)</figcaption>
+                  <figcaption>$t = 0$</figcaption>
                 </figure>
                 <figure>
                   <img
                     src="./media/gaussian/noise_t250.png"
                     alt="Campanile Noise t250"
                   />
-                  <figcaption>\(t = 250\)</figcaption>
+                  <figcaption>$t = 250$</figcaption>
                 </figure>
                 <figure>
                   <img
                     src="./media/gaussian/noise_t500.png"
                     alt="Campanile Noise t500"
                   />
-                  <figcaption>\(t = 500\)</figcaption>
+                  <figcaption>$t = 500$</figcaption>
                 </figure>
                 <figure>
                   <img
                     src="./media/gaussian/noise_t750.png"
                     alt="Campanile Noise t750"
                   />
-                  <figcaption>\(t = 750\)</figcaption>
+                  <figcaption>$t = 750$</figcaption>
                 </figure>
               </div>
             </div>
@@ -162,21 +123,21 @@
                     src="./media/gaussian/clean_t250.png"
                     alt="Campanile Clean t250"
                   />
-                  <figcaption>Denoise \(t = 250\)</figcaption>
+                  <figcaption>Denoise $t = 250$</figcaption>
                 </figure>
                 <figure>
                   <img
                     src="./media/gaussian/clean_t500.png"
                     alt="Campanile Clean t500"
                   />
-                  <figcaption>Denoise \(t = 500\)</figcaption>
+                  <figcaption>Denoise $t = 500$</figcaption>
                 </figure>
                 <figure>
                   <img
                     src="./media/gaussian/clean_t750.png"
                     alt="Campanile Clean t750"
                   />
-                  <figcaption>Denoise \(t = 750\)</figcaption>
+                  <figcaption>Denoise $t = 750$</figcaption>
                 </figure>
               </div>
             </div>
@@ -187,7 +148,7 @@
               predicted to be in the image. Recall that we used the equation:
               \begin{equation*} x_{t} = \sqrt{\overline{\alpha}} \cdot x_{0} +
               \sqrt{1 - \overline{\alpha}} \cdot \epsilon \end{equation*} for
-              the forward process. So we can recover the original image \(x_0\)
+              the forward process. So we can recover the original image $x_0$
               by: \begin{equation*} x_{0} = \dfrac{x_{t} - \sqrt{1 -
               \overline{\alpha}} \cdot \epsilon}{\sqrt{\overline{\alpha}}}
               \end{equation*}
@@ -222,21 +183,21 @@
                     src="./media/one_step/clean_t250.png"
                     alt="Campanile Clean t250"
                   />
-                  <figcaption>Denoise: \(t = 250\)</figcaption>
+                  <figcaption>Denoise: $t = 250$</figcaption>
                 </figure>
                 <figure>
                   <img
                     src="./media/one_step/clean_t500.png"
                     alt="Campanile Clean t500"
                   />
-                  <figcaption>Denoise: \(t = 500\)</figcaption>
+                  <figcaption>Denoise: $t = 500$</figcaption>
                 </figure>
                 <figure>
                   <img
                     src="./media/one_step/clean_t750.png"
                     alt="Campanile Clean t750"
                   />
-                  <figcaption>Denoise: \(t = 750\)</figcaption>
+                  <figcaption>Denoise: $t = 750$</figcaption>
                 </figure>
               </div>
             </div>
@@ -259,18 +220,16 @@
             </p>
 
             <ul style="margin-left: 2rem">
-              <li>\(x_{t}\) is the noisy image at time \(t\)</li>
+              <li>$x_{t}$ is the noisy image at time $t$</li>
+              <li>$x_{t^{\prime}}$ is the noisy image at the next timestep</li>
+              <li>$\overline{\alpha}_{t}$ is $\alpha[t]$</li>
               <li>
-                \(x_{t^{\prime}}\) is the noisy image at the next timestep
+                $\alpha_{t} =
+                \frac{\overline{\alpha}_{t}}{\overline{\alpha_{t^{\prime}}}}$
               </li>
-              <li>\(\overline{\alpha}_{t}\) is \(\alpha[t]\)</li>
+              <li>$\beta_{t} = 1 - \alpha_{t}$</li>
               <li>
-                \(\alpha_{t} =
-                \frac{\overline{\alpha}_{t}}{\overline{\alpha_{t^{\prime}}}}\)
-              </li>
-              <li>\(\beta_{t} = 1 - \alpha_{t}\)</li>
-              <li>
-                \(x_{0}\) is the predicted clean image given by the one step
+                $x_{0}$ is the predicted clean image given by the one step
                 formula
               </li>
             </ul>
@@ -291,42 +250,42 @@
                       src="./media/iterative/camp_1.png"
                       alt="Campanile Iterative Denoise 1"
                     />
-                    <figcaption>\(t = 690\)</figcaption>
+                    <figcaption>$t = 690$</figcaption>
                   </figure>
                   <figure class="carousel-image">
                     <img
                       src="./media/iterative/camp_2.png"
                       alt="Campanile Iterative Denoise 2"
                     />
-                    <figcaption>\(t = 540\)</figcaption>
+                    <figcaption>$t = 540$</figcaption>
                   </figure>
                   <figure class="carousel-image">
                     <img
                       src="./media/iterative/camp_3.png"
                       alt="Campanile Iterative Denoise 3"
                     />
-                    <figcaption>\(t = 390\)</figcaption>
+                    <figcaption>$t = 390$</figcaption>
                   </figure>
                   <figure class="carousel-image">
                     <img
                       src="./media/iterative/camp_4.png"
                       alt="Campanile Iterative Denoise 4"
                     />
-                    <figcaption>\(t = 240\)</figcaption>
+                    <figcaption>$t = 240$</figcaption>
                   </figure>
                   <figure class="carousel-image">
                     <img
                       src="./media/iterative/camp_5.png"
                       alt="Campanile Iterative Denoise 5"
                     />
-                    <figcaption>\(t = 90\)</figcaption>
+                    <figcaption>$t = 90$</figcaption>
                   </figure>
                   <figure class="carousel-image">
                     <img
                       src="./media/iterative/camp_iterative.png"
                       alt="Campanile Iterative Denoise 6"
                     />
-                    <figcaption>\(t = 0\)</figcaption>
+                    <figcaption>$t = 0$</figcaption>
                   </figure>
                 </div>
                 <button class="carousel-button" onclick="shiftRight(1)">
@@ -383,7 +342,7 @@
             <h2>Diffusion Model Sampling</h2>
             <p>
               We can also denoise pure noise, rather than starting from a noisy
-              image. Here are \(5\) results:
+              image. Here are $5$ results:
             </p>
             <div class="centered">
               <div class="image-container" style="--grid-cols: repeat(5, 1fr)">
@@ -416,11 +375,11 @@
             <h2>Classifier Free Guidance</h2>
             <p>
               In CFG, the model uses conditional classification. We can generate
-              two noise predictions off of our current image \(\epsilon_{c},
-              \epsilon_{u}\) such that our new predicted noise is:
+              two noise predictions off of our current image $\epsilon_{c},
+              \epsilon_{u}$ such that our new predicted noise is:
               \begin{equation*} \epsilon = (1 - \gamma)\epsilon_{u} + \gamma
-              \epsilon_{c} \end{equation*} This means that when \(\gamma &gt;
-              1\) the noise prediction leans more towards using the conditional
+              \epsilon_{c} \end{equation*} This means that when $\gamma &gt; 1$
+              the noise prediction leans more towards using the conditional
               noise. From the small update the images become much more
               recognizable:
             </p>
@@ -551,49 +510,49 @@
                     src="./media/im_translation/t_1.png"
                     alt="Image Translation t1"
                   />
-                  <figcaption>\(t = 1\)</figcaption>
+                  <figcaption>$t = 1$</figcaption>
                 </figure>
                 <figure>
                   <img
                     src="./media/im_translation/t_3.png"
                     alt="Image Translation t3"
                   />
-                  <figcaption>\(t = 3\)</figcaption>
+                  <figcaption>$t = 3$</figcaption>
                 </figure>
                 <figure>
                   <img
                     src="./media/im_translation/t_5.png"
                     alt="Image Translation t5"
                   />
-                  <figcaption>\(t = 5\)</figcaption>
+                  <figcaption>$t = 5$</figcaption>
                 </figure>
                 <figure>
                   <img
                     src="./media/im_translation/t_7.png"
                     alt="Image Translation t7"
                   />
-                  <figcaption>\(t = 7\)</figcaption>
+                  <figcaption>$t = 7$</figcaption>
                 </figure>
                 <figure>
                   <img
                     src="./media/im_translation/t_10.png"
                     alt="Image Translation t10"
                   />
-                  <figcaption>\(t = 10\)</figcaption>
+                  <figcaption>$t = 10$</figcaption>
                 </figure>
                 <figure>
                   <img
                     src="./media/im_translation/t_20.png"
                     alt="Image Translation t20"
                   />
-                  <figcaption>\(t = 20\)</figcaption>
+                  <figcaption>$t = 20$</figcaption>
                 </figure>
               </div>
             </div>
           </article>
         </section>
         <section>
-          <article id="Editing Images">
+          <article id="Hand-Drawn/Web Images">
             <h2>Editing Hand-Drawn/Web Images</h2>
             <p>We can also denoise hand-drawn and web images:</p>
             <div class="centered">
@@ -722,56 +681,56 @@
                       src="./media/inpainting/denoise_1.png"
                       alt="Campanile Inpaint 1"
                     />
-                    <figcaption>\(t=990\)</figcaption>
+                    <figcaption>$t=990$</figcaption>
                   </figure>
                   <figure class="carousel-image">
                     <img
                       src="./media/inpainting/denoise_2.png"
                       alt="Campanile Inpaint 2"
                     />
-                    <figcaption>\(t=840\)</figcaption>
+                    <figcaption>$t=840$</figcaption>
                   </figure>
                   <figure class="carousel-image">
                     <img
                       src="./media/inpainting/denoise_3.png"
                       alt="Campanile Inpaint 3"
                     />
-                    <figcaption>\(t=690\)</figcaption>
+                    <figcaption>$t=690$</figcaption>
                   </figure>
                   <figure class="carousel-image">
                     <img
                       src="./media/inpainting/denoise_4.png"
                       alt="Campanile Inpaint 4"
                     />
-                    <figcaption>\(t=540\)</figcaption>
+                    <figcaption>$t=540$</figcaption>
                   </figure>
                   <figure class="carousel-image">
                     <img
                       src="./media/inpainting/denoise_5.png"
                       alt="Campanile Inpaint 5"
                     />
-                    <figcaption>\(t=390\)</figcaption>
+                    <figcaption>$t=390$</figcaption>
                   </figure>
                   <figure class="carousel-image">
                     <img
                       src="./media/inpainting/denoise_6.png"
                       alt="Campanile Inpaint 6"
                     />
-                    <figcaption>\(t=240\)</figcaption>
+                    <figcaption>$t=240$</figcaption>
                   </figure>
                   <figure class="carousel-image">
                     <img
                       src="./media/inpainting/denoise_7.png"
                       alt="Campanile Inpaint 7"
                     />
-                    <figcaption>\(t=90\)</figcaption>
+                    <figcaption>$t=90$</figcaption>
                   </figure>
                   <figure class="carousel-image">
                     <img
                       src="./media/inpainting/denoise_8.png"
                       alt="Campanile Inpaint 8"
                     />
-                    <figcaption>\(t=0\)</figcaption>
+                    <figcaption>$t=0$</figcaption>
                   </figure>
                 </div>
                 <button class="carousel-button" onclick="shiftRight(4)">
@@ -813,7 +772,7 @@
                       alt="Campanile Translation Rocket t_1 gif"
                     />
                   </div>
-                  <figcaption>\(t = 1\)</figcaption>
+                  <figcaption>$t = 1$</figcaption>
                 </figure>
                 <figure>
                   <div
@@ -835,7 +794,7 @@
                       alt="Campanile Translation Rocket t_2 gif"
                     />
                   </div>
-                  <figcaption>\(t = 3\)</figcaption>
+                  <figcaption>$t = 3$</figcaption>
                 </figure>
                 <figure>
                   <div
@@ -857,7 +816,7 @@
                       alt="Campanile Translation Rocket t_3 gif"
                     />
                   </div>
-                  <figcaption>\(t = 5\)</figcaption>
+                  <figcaption>$t = 5$</figcaption>
                 </figure>
                 <figure>
                   <div
@@ -879,7 +838,7 @@
                       alt="Campanile Translation Rocket t_4 gif"
                     />
                   </div>
-                  <figcaption>\(t = 7\)</figcaption>
+                  <figcaption>$t = 7$</figcaption>
                 </figure>
                 <figure>
                   <div
@@ -901,7 +860,7 @@
                       alt="Campanile Translation Rocket t_5 gif"
                     />
                   </div>
-                  <figcaption>\(t = 10\)</figcaption>
+                  <figcaption>$t = 10$</figcaption>
                 </figure>
                 <figure>
                   <div
@@ -923,7 +882,7 @@
                       alt="Campanile Translation Rocket t_6 gif"
                     />
                   </div>
-                  <figcaption>\(t = 20\)</figcaption>
+                  <figcaption>$t = 20$</figcaption>
                 </figure>
               </div>
             </div>
@@ -1124,10 +1083,8 @@
           </article>
         </section>
       </main>
-      <footer>
-        <p>&lt;&lt;&lt; &copy; Trustin Nguyen &gt;&gt;&gt;</p>
-        <p><a href="#"> Back to Top </a></p>
-      </footer>
+
+      <footer></footer>
     </div>
   </body>
 </html>

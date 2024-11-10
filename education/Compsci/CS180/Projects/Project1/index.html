@@ -4,54 +4,29 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Images of the Russian Empire</title>
+    <link href="/css/style.css" rel="stylesheet" />
+    <script src="/common.js" defer></script>
     <script
       id="MathJax-script"
       src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
     ></script>
-    <script src="/menu.js" defer></script>
-    <title>Images of the Russian Empire</title>
-    <link href="/css/style.css" rel="stylesheet" />
   </head>
   <body>
     <div class="page-container include-sidebar">
-      <header>
-        <div class="header-title">
-          <button class="menu-button" type="button" onclick="toggleMenu()">
-            <div class="menu-icon"></div>
-          </button>
-        </div>
-        <nav aria-label="other-sections" id="menu">
-          <ul>
-            <li><a href="/index.html"> Home </a></li>
-            <li><a href="/projects/index.html"> Projects </a></li>
-            <li>
-              <a href="/education/index.html">Education</a>
-            </li>
-            <li><a href="/hobbies/index.html"> Hobbies </a></li>
-            <li>
-              <a class="github" href="https://github.com/TrustinN"> Github </a>
-            </li>
-          </ul>
-        </nav>
-      </header>
+      <header></header>
+
       <div class="banner">
         <h1>Project 1: Images of the Russian Empire</h1>
       </div>
+
       <div class="sidebar-container">
-        <div class="sidebar-nav">
-          <nav aria-label="primary-navigation">
-            <ul>
-              <li><a href="#exhaustive-search">Exhaustive Search</a></li>
-              <li><a href="#pyramid">Image Pyramid</a></li>
-              <li><a href="#edge-detection">Edge Detection</a></li>
-              <li><a href="#border-cropping">Border Cropping</a></li>
-            </ul>
-          </nav>
-        </div>
+        <div class="sidebar-nav"></div>
       </div>
+
       <main>
         <section>
-          <article id="exhaustive-search">
+          <article id="Exhaustive Search">
             <h2>Aligning Images with Exhaustive Search</h2>
             <p>
               Using an exhaustive search given a window \([-z, z]\), the
@@ -158,7 +133,7 @@
         </section>
 
         <section>
-          <article id="pyramid">
+          <article id="Image Pyramid">
             <h2>Image Pyramid</h2>
             <p>
               For larger images, larger windows will slow down the result. Using
@@ -279,7 +254,7 @@
         </section>
 
         <section>
-          <article id="edge-detection">
+          <article id="Edge Detection">
             <h2>Edge Detection for Alignment</h2>
             <p>
               One improvement is to use the sobel filter to detect edges in the
@@ -427,7 +402,7 @@
         </section>
 
         <section>
-          <article id="border-cropping">
+          <article id="Results">
             <h2>Naive Cropping and Results</h2>
             <p>
               To achieve stronger results, cropping the image by 15% on all
@@ -611,10 +586,7 @@
         </section>
       </main>
 
-      <footer>
-        <p>&lt;&lt;&lt; &copy; Trustin Nguyen &gt;&gt;&gt;</p>
-        <p><a href="#"> Back to Top </a></p>
-      </footer>
+      <footer></footer>
     </div>
   </body>
 </html>

@@ -16,6 +16,17 @@ body {
 
 /* HTML body */
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  white-space: wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
 img,
 video {
   display: block;
@@ -87,10 +98,12 @@ article {
   padding: 2rem;
   text-align: left;
   max-width: 60rem;
+  overflow: hidden;
 }
 
-article p {
+p {
   max-width: 60rem;
+  margin-bottom: 1rem;
 }
 
 footer {
@@ -421,12 +434,12 @@ a.github {
     z-index: 1;
   }
 
-  .overview .explore {
+  .explore {
     flex-grow: 1;
     transform: translateX(-2rem);
   }
 
-  .overview .explore:hover {
+  .explore:hover {
     transform: translateX(-1rem);
     transition: transform 0.25s ease-in-out;
   }

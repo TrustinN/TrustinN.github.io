@@ -5,32 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Education</title>
-    <link rel="stylesheet" href="/css/style.css" />
     <script src="hw.js" defer></script>
-    <script src="/menu.js" defer></script>
+    <script src="/common.js" defer></script>
+    <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
     <div class="page-container">
-      <header>
-        <div class="header-title">
-          <button class="menu-button" type="button" onclick="toggleMenu()">
-            <div class="menu-icon"></div>
-          </button>
-        </div>
-        <nav aria-label="other-sections" id="menu">
-          <ul>
-            <li><a href="/index.html"> Home </a></li>
-            <li><a href="/projects/index.html"> Projects </a></li>
-            <li><a href="/hobbies/index.html"> Hobbies </a></li>
-            <li>
-              <a class="github" href="https://github.com/TrustinN"> Github </a>
-            </li>
-          </ul>
-        </nav>
-      </header>
+      <header></header>
+
       <div class="banner">
         <h1>Education</h1>
       </div>
+
       <main>
         <div class="content-container">
           <section>
@@ -41,81 +27,83 @@
                 Programming for Mathematical Applications
               </p>
             </article>
-            <table>
-              <tr>
-                <th>&nbsp;</th>
-                <th>Course</th>
-                <th>Description</th>
-              </tr>
-              <tr>
-                <td rowspan="4">1st Semester</td>
-                <td>FRENCH 43A</td>
-                <td>Aspects of French Culture</td>
-              </tr>
-              <tr>
-                <td>INTEGBI 43</td>
-                <td>What Lives Inside Us? Microbiomes and Symbiosis</td>
-              </tr>
-              <tr>
-                <td>MATH 54</td>
-                <td>Linear Algebra and Differential Equations</td>
-              </tr>
-              <tr>
-                <td>
-                  <span> MATH 55 </span>
-                </td>
-                <td>
-                  Discrete Mathematics
-                  <aside>
-                    <details id="Math55HwDetails">
-                      <summary>Homework</summary>
-                      <div id="Math55HwContent"></div>
-                    </details>
-                  </aside>
-                </td>
-              </tr>
-              <tr>
-                <td rowspan="4">2nd Semester</td>
-                <td>GWS 100AC</td>
-                <td>Women in American Culture</td>
-              </tr>
-              <tr>
-                <td>MATH 110</td>
-                <td>
-                  Linear Algebra
-                  <aside>
-                    <details id="Math110HwDetails">
-                      <summary>Homework</summary>
-                      <div id="Math110HwContent"></div>
-                    </details>
-                  </aside>
-                </td>
-              </tr>
-              <tr>
-                <td>MATH 113</td>
-                <td>
-                  Introduction to Abstract Algebra
-                  <aside>
-                    <details id="Math113HwDetails">
-                      <summary>Homework</summary>
-                      <div id="Math113HwContent"></div>
-                    </details>
-                  </aside>
-                </td>
-              </tr>
-              <tr>
-                <td>MATH 124</td>
-                <td>
-                  Programming for Mathematical Applications
-                  <aside>
-                    <details id="Math124HwDetails">
-                      <summary>Homework</summary>
-                      <div id="Math124HwContent"></div>
-                    </details>
-                  </aside>
-                </td>
-              </tr>
-            </table>
+            <div class="centered">
+              <table>
+                <tr>
+                  <th>&nbsp;</th>
+                  <th>Course</th>
+                  <th>Description</th>
+                </tr>
+                <tr>
+                  <td rowspan="4">1st Semester</td>
+                  <td>FRENCH 43A</td>
+                  <td>Aspects of French Culture</td>
+                </tr>
+                <tr>
+                  <td>INTEGBI 43</td>
+                  <td>What Lives Inside Us? Microbiomes and Symbiosis</td>
+                </tr>
+                <tr>
+                  <td>MATH 54</td>
+                  <td>Linear Algebra and Differential Equations</td>
+                </tr>
+                <tr>
+                  <td>
+                    <span> MATH 55 </span>
+                  </td>
+                  <td>
+                    Discrete Mathematics
+                    <aside>
+                      <details id="Math55HwDetails">
+                        <summary>Homework</summary>
+                        <div id="Math55HwContent"></div>
+                      </details>
+                    </aside>
+                  </td>
+                </tr>
+                <tr>
+                  <td rowspan="4">2nd Semester</td>
+                  <td>GWS 100AC</td>
+                  <td>Women in American Culture</td>
+                </tr>
+                <tr>
+                  <td>MATH 110</td>
+                  <td>
+                    Linear Algebra
+                    <aside>
+                      <details id="Math110HwDetails">
+                        <summary>Homework</summary>
+                        <div id="Math110HwContent"></div>
+                      </details>
+                    </aside>
+                  </td>
+                </tr>
+                <tr>
+                  <td>MATH 113</td>
+                  <td>
+                    Introduction to Abstract Algebra
+                    <aside>
+                      <details id="Math113HwDetails">
+                        <summary>Homework</summary>
+                        <div id="Math113HwContent"></div>
+                      </details>
+                    </aside>
+                  </td>
+                </tr>
+                <tr>
+                  <td>MATH 124</td>
+                  <td>
+                    Programming for Mathematical Applications
+                    <aside>
+                      <details id="Math124HwDetails">
+                        <summary>Homework</summary>
+                        <div id="Math124HwContent"></div>
+                      </details>
+                    </aside>
+                  </td>
+                </tr>
+              </table>
+            </div>
           </section>
           <section>
             <article>
@@ -125,109 +113,111 @@
                 Fields
               </p>
             </article>
-            <table>
-              <tr>
-                <th>&nbsp;</th>
-                <th>Course</th>
-                <th>Description</th>
-              </tr>
-              <tr>
-                <td rowspan="5">1st Semester</td>
-                <td>MATH 104</td>
-                <td>
-                  Introduction to Real Analysis
+            <div class="centered">
+              <table>
+                <tr>
+                  <th>&nbsp;</th>
+                  <th>Course</th>
+                  <th>Description</th>
+                </tr>
+                <tr>
+                  <td rowspan="5">1st Semester</td>
+                  <td>MATH 104</td>
+                  <td>
+                    Introduction to Real Analysis
 
-                  <aside>
-                    <details id="Math104HwDetails">
-                      <summary>Homework</summary>
-                      <div id="Math104HwContent"></div>
-                    </details>
-                  </aside>
-                  <a href="./Math/Math104/Notes/Math104Notes.pdf"> Notes </a>
-                </td>
-              </tr>
-              <tr>
-                <td>MATH 143</td>
-                <td>
-                  Elementary Algebraic Geometry
-                  <aside>
-                    <details id="Math143HwDetails">
-                      <summary>Homework</summary>
-                      <div id="Math143HwContent"></div>
-                    </details>
-                  </aside>
-                  <a href="./Math/Math143/Notes/Math143Notes.pdf"> Notes </a>
-                </td>
-              </tr>
-              <tr>
-                <td>MATH 172</td>
-                <td>
-                  Combinatorics
-                  <aside>
-                    <details id="Math172HwDetails">
-                      <summary>Homework</summary>
-                      <div id="Math172HwContent"></div>
-                    </details>
-                  </aside>
-                  <a href="./Math/Math172/Notes/Math172Notes.pdf"> Notes </a>
-                </td>
-              </tr>
-              <tr>
-                <td>MATH 250A</td>
-                <td>
-                  Groups, Rings, and Fields
+                    <aside>
+                      <details id="Math104HwDetails">
+                        <summary>Homework</summary>
+                        <div id="Math104HwContent"></div>
+                      </details>
+                    </aside>
+                    <a href="./Math/Math104/Notes/Math104Notes.pdf"> Notes </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>MATH 143</td>
+                  <td>
+                    Elementary Algebraic Geometry
+                    <aside>
+                      <details id="Math143HwDetails">
+                        <summary>Homework</summary>
+                        <div id="Math143HwContent"></div>
+                      </details>
+                    </aside>
+                    <a href="./Math/Math143/Notes/Math143Notes.pdf"> Notes </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>MATH 172</td>
+                  <td>
+                    Combinatorics
+                    <aside>
+                      <details id="Math172HwDetails">
+                        <summary>Homework</summary>
+                        <div id="Math172HwContent"></div>
+                      </details>
+                    </aside>
+                    <a href="./Math/Math172/Notes/Math172Notes.pdf"> Notes </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>MATH 250A</td>
+                  <td>
+                    Groups, Rings, and Fields
 
-                  <aside>
-                    <details id="Math250aHwDetails">
-                      <summary>Homework</summary>
-                      <div id="Math250aHwContent"></div>
-                    </details>
-                  </aside>
-                </td>
-              </tr>
-              <tr>
-                <td>ELENG 198</td>
-                <td>Micromouse</td>
-              </tr>
-              <tr>
-                <td rowspan="5">2nd Semester</td>
-                <td>CS 61A</td>
-                <td>The Structure and Interpretation of Computer Programs</td>
-              </tr>
-              <tr>
-                <td>CS 61B</td>
-                <td>Data Structures</td>
-              </tr>
-              <tr>
-                <td>MATH 185</td>
-                <td>
-                  Complex Analysis
-                  <aside>
-                    <details id="Math185HwDetails">
-                      <summary>Homework</summary>
-                      <div id="Math185HwContent"></div>
-                    </details>
-                  </aside>
-                  <a href="./Math/Math185/Notes/Math185Notes.pdf"> Notes </a>
-                </td>
-              </tr>
-              <tr>
-                <td>STAT 134</td>
-                <td>
-                  Concepts of Probability
-                  <aside>
-                    <details id="Stat134HwDetails">
-                      <summary>Homework</summary>
-                      <div id="Stat134HwContent"></div>
-                    </details>
-                  </aside>
-                </td>
-              </tr>
-              <tr>
-                <td>ELENG 198</td>
-                <td>PCB Engineering</td>
-              </tr>
-            </table>
+                    <aside>
+                      <details id="Math250aHwDetails">
+                        <summary>Homework</summary>
+                        <div id="Math250aHwContent"></div>
+                      </details>
+                    </aside>
+                  </td>
+                </tr>
+                <tr>
+                  <td>ELENG 198</td>
+                  <td>Micromouse</td>
+                </tr>
+                <tr>
+                  <td rowspan="5">2nd Semester</td>
+                  <td>CS 61A</td>
+                  <td>The Structure and Interpretation of Computer Programs</td>
+                </tr>
+                <tr>
+                  <td>CS 61B</td>
+                  <td>Data Structures</td>
+                </tr>
+                <tr>
+                  <td>MATH 185</td>
+                  <td>
+                    Complex Analysis
+                    <aside>
+                      <details id="Math185HwDetails">
+                        <summary>Homework</summary>
+                        <div id="Math185HwContent"></div>
+                      </details>
+                    </aside>
+                    <a href="./Math/Math185/Notes/Math185Notes.pdf"> Notes </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>STAT 134</td>
+                  <td>
+                    Concepts of Probability
+                    <aside>
+                      <details id="Stat134HwDetails">
+                        <summary>Homework</summary>
+                        <div id="Stat134HwContent"></div>
+                      </details>
+                    </aside>
+                  </td>
+                </tr>
+                <tr>
+                  <td>ELENG 198</td>
+                  <td>PCB Engineering</td>
+                </tr>
+              </table>
+            </div>
           </section>
           <section>
             <article>
@@ -237,70 +227,70 @@
                 Computer Architecture
               </p>
             </article>
-            <table>
-              <tr>
-                <th>&nbsp;</th>
-                <th>Course</th>
-                <th>Description</th>
-              </tr>
-              <tr>
-                <td rowspan="5">1st Semester</td>
-                <td>CS 61C</td>
-                <td>
-                  Great Ideas of Computer Architecture (Machine Structures)
-                </td>
-              </tr>
-              <tr>
-                <td>CS 170</td>
-                <td>
-                  Efficient Algorithms and Intractable Problems
-                  <aside>
-                    <details id="CS170HwDetails">
-                      <summary>Homework</summary>
-                      <div id="CS170HwContent"></div>
-                    </details>
-                  </aside>
-                </td>
-              </tr>
-              <tr>
-                <td>CS 180</td>
-                <td>
-                  Intro to Computer Vision and Computational Photography
-                  <a href="./Compsci/CS180/index.html"> Projects </a>
-                </td>
-              </tr>
-              <tr>
-                <td>MATH 128A</td>
-                <td>
-                  Numerical Analysis
-                  <aside>
-                    <details id="Math128aHwDetails">
-                      <summary>Homework</summary>
-                      <div id="Math128aHwContent"></div>
-                    </details>
-                  </aside>
-                </td>
-              </tr>
-              <tr>
-                <td>CS 189</td>
-                <td>
-                  Introduction to Machine Learning
-                  <aside>
-                    <details id="CS189HwDetails">
-                      <summary>Homework</summary>
-                      <div id="CS189HwContent"></div>
-                    </details>
-                  </aside>
-                </td>
-              </tr>
-            </table>
+            <div class="centered">
+              <table>
+                <tr>
+                  <th>&nbsp;</th>
+                  <th>Course</th>
+                  <th>Description</th>
+                </tr>
+                <tr>
+                  <td rowspan="5">1st Semester</td>
+                  <td>CS 61C</td>
+                  <td>
+                    Great Ideas of Computer Architecture (Machine Structures)
+                  </td>
+                </tr>
+                <tr>
+                  <td>CS 170</td>
+                  <td>
+                    Efficient Algorithms and Intractable Problems
+                    <aside>
+                      <details id="CS170HwDetails">
+                        <summary>Homework</summary>
+                        <div id="CS170HwContent"></div>
+                      </details>
+                    </aside>
+                  </td>
+                </tr>
+                <tr>
+                  <td>CS 180</td>
+                  <td>
+                    Intro to Computer Vision and Computational Photography
+                    <a href="./Compsci/CS180/index.html"> Projects </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>MATH 128A</td>
+                  <td>
+                    Numerical Analysis
+                    <aside>
+                      <details id="Math128aHwDetails">
+                        <summary>Homework</summary>
+                        <div id="Math128aHwContent"></div>
+                      </details>
+                    </aside>
+                  </td>
+                </tr>
+                <tr>
+                  <td>CS 189</td>
+                  <td>
+                    Introduction to Machine Learning
+                    <aside>
+                      <details id="CS189HwDetails">
+                        <summary>Homework</summary>
+                        <div id="CS189HwContent"></div>
+                      </details>
+                    </aside>
+                  </td>
+                </tr>
+              </table>
+            </div>
           </section>
         </div>
       </main>
-      <footer>
-        <p>&lt;&lt;&lt; &copy; Trustin Nguyen &gt;&gt;&gt;</p>
-        <p><a href="#"> Back to Top </a></p>
-      </footer>
+
+      <footer></footer>
     </div>
   </body>
 </html>

@@ -5,40 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About Me</title>
-    <link rel="stylesheet" href="./css/style.css" />
-    <script src="/menu.js" defer></script>
+    <script src="/common.js" defer></script>
+    <link href="/css/style.css" rel="stylesheet" />
   </head>
 
   <body>
     <div class="page-container include-sidebar">
-      <header>
-        <div class="header-title">
-          <button class="menu-button" type="button" onclick="toggleMenu()">
-            <div class="menu-icon"></div>
-          </button>
-        </div>
-        <nav aria-label="About Me Details" id="menu">
-          <ul>
-            <li><a href="/projects/index.html"> Projects </a></li>
-            <li><a href="/education/index.html"> Education </a></li>
-            <li><a href="/hobbies/index.html"> Hobbies </a></li>
-            <li>
-              <a
-                class="github"
-                href="https://github.com/TrustinN"
-                width="230"
-                height="225"
-              >
-                Github
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </header>
-      <div class="banner">
+      <header></header>
+
+      <div class="banner centered">
         <h1>Trustin Nguyen</h1>
         <p>Computer Science / Mathematics Enjoyer</p>
       </div>
+
       <div class="sidebar-container">
         <figure class="profile-picture">
           <img
@@ -48,17 +27,9 @@
             width="2320"
           />
         </figure>
-        <div class="sidebar-nav">
-          <nav aria-label="About Me Overview">
-            <ul>
-              <li><a href="#Introduction"> Introduction </a></li>
-              <li><a href="#Projects"> Projects </a></li>
-              <li><a href="#Education"> Education </a></li>
-              <li><a href="#Hobbies"> Hobbies </a></li>
-            </ul>
-          </nav>
-        </div>
+        <div class="sidebar-nav"></div>
       </div>
+
       <main>
         <div class="content-container">
           <section class="overview">
@@ -81,7 +52,6 @@
                 more recently, front-end related projects such as designing a
                 website.
               </p>
-              <br />
               <p>
                 Favorite projects I've done include developing this website,
                 implementing an RTree, RRT path planning algorithm, and a 3D
@@ -100,32 +70,27 @@
                 especially because of the blend of theory and hands on
                 application that comes with a computer science degree.
               </p>
-              <br />
               <p>
                 Math courses were very enjoyable to take, as there were often
                 cool/powerful ideas and techniques used. Interestingly, many of
                 the courses were self-contained and content was built from the
                 ground up.
               </p>
-              <br />
               <p>
                 CS courses were much more applied and putting the theory into
                 practice was definitely a challenge. It was rewarding to finish
                 a project and see the components fit nicely together.
               </p>
-              <br />
               <p>
                 On the very applied side of the spectrum is electrical
                 engineering. It had some very cool applications, but it I found
                 that higher-level programming was more fun.
               </p>
-              <br />
               <p>
                 Other courses outside of these topics were a breath of fresh
                 air. I particularly found an intro to biology course and french
                 course to be engaging and memorable.
               </p>
-              <br />
               <aside>
                 <details>
                   <summary>Favorite place to study?</summary>
@@ -176,10 +141,8 @@
           </section>
         </div>
       </main>
-      <footer>
-        <p>&lt;&lt;&lt; &copy; Trustin Nguyen &gt;&gt;&gt;</p>
-        <p><a href="#"> Back to Top </a></p>
-      </footer>
+
+      <footer></footer>
     </div>
   </body>
 </html>

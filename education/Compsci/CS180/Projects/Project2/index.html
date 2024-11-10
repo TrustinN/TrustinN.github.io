@@ -4,55 +4,26 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fun With Filters and Frequencies</title>
+    <script src="/common.js" defer></script>
     <script
       id="MathJax-script"
       src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+      defer
     ></script>
-    <script src="/menu.js" defer></script>
-    <title>Fun With Filters and Frequencies</title>
     <link rel="stylesheet" href="/css/style.css" />
   </head>
+
   <body>
     <div class="page-container include-sidebar">
-      <header>
-        <div class="header-title">
-          <button class="menu-button" type="button" onclick="toggleMenu()">
-            <div class="menu-icon"></div>
-          </button>
-        </div>
-        <nav aria-label="other-sections" id="menu">
-          <ul>
-            <li><a href="/index.html"> Home </a></li>
-            <li><a href="/projects/index.html"> Projects </a></li>
-            <li>
-              <a href="/education/index.html">Education</a>
-            </li>
-            <li><a href="/hobbies/index.html"> Hobbies </a></li>
-            <li>
-              <a class="github" href="https://github.com/TrustinN"> Github </a>
-            </li>
-          </ul>
-        </nav>
-      </header>
+      <header></header>
+
       <div class="banner">
         <h1>Project 2: Fun With Filters and Frequencies</h1>
       </div>
+
       <div class="sidebar-container">
-        <div class="sidebar-nav">
-          <nav aria-label="primary-navigation">
-            <ul>
-              <li><a href="#Edge Detection">Edge Detection</a></li>
-              <li><a href="#Sharpening">Unsharp Filter</a></li>
-              <li><a href="#Hybrid">Hybrid Images</a></li>
-              <li>
-                <a href="#Separating Frequencies"
-                  >Gaussian and Laplacian Stacks</a
-                >
-              </li>
-              <li><a href="#Blending">Multi-Resolution Blending</a></li>
-            </ul>
-          </nav>
-        </div>
+        <div class="sidebar-nav"></div>
       </div>
       <main>
         <section>
@@ -61,33 +32,33 @@
             <p>
               Detecting edges is detecting areas where the pixel values change
               abruptly, corresponding to the magnitude of the gradient at that
-              pixel. The filter uses the kernel matrix
-              <code class="nobr">[[-1, 1]]</code> and
-              <code class="nobr">[[-1], [1]]</code>, derived from the
-              derivative:
-              <code>f_x(x, y) = (f(x + 0.5, y) - f(x - 0.5, y))</code> and the
-              same for <code>f_y</code>. These kernels are convolved with the
-              image to get the x and y components of the gradient. We then take
-              the euclidean norm between the x and y components to get the
-              magnitude. To obtain an output in terms of either zeros or ones, I
-              used a threshold as a cutoff value to determine if the pixel was
-              part of an edge or not. To do this, I normalized the gradient
-              magnitude image and compared to the threshold with
-              <code class="nobr">abs(img[i][j]) < 3 * threshold</code>. I found
-              that normalization was important for filters that might scale up
-              the pixel values.
+              pixel. The filter uses the kernel matrix \begin{equation*}
+              \begin{bmatrix} -1 & 1 \end{bmatrix} \end{equation*} and
+              \begin{equation*} \begin{bmatrix} -1 \\ 1 \end{bmatrix}
+              \end{equation*} derived from the derivative: \begin{equation*}
+              f_x(x, y) = f(x + 0.5, y) - f(x - 0.5, y) \end{equation*} These
+              kernels are convolved with the image to get the $x$ and $y$
+              components of the gradient. We then take the euclidean norm
+              between the $x$ and $y$ components to get the magnitude. To obtain
+              an output in terms of either zeros or ones, I used a threshold as
+              a cutoff value to determine if the pixel was part of an edge or
+              not. To do this, I normalized the gradient magnitude image and
+              compared to the threshold with \begin{equation*} \lvert
+              \text{img}[i][j] \rvert &lt; 3 \cdot \text{threshold
+              }\end{equation*} I found that normalization was important for
+              filters that might scale up the pixel values.
             </p>
             <p>
               To improve the edge detection, I used a gaussian blur which can be
-              convolved with both the finite difference x and y filters to get
-              the difference of gaussian filter. This is useful because it
+              convolved with both the finite difference $x$ and $y$ filters to
+              get the difference of gaussian filter. This is useful because it
               removes the high frequencies/details that might accidently be
               detected as edges. One difference between the filters is how
               convolving with a gaussian first makes the edges less sharp. Then
               the gradient's magnitude is less, and I had to adjust the
               threshold to be lower. In the previous filter, I used a threshold
-              of 0.8, where all values above 3 * 0.8 were set to 1. In this one,
-              I adjusted the threshold to 0.5.
+              of $0.8$, where all values above $3 * 0.8$ were set to $1$. In
+              this one, I adjusted the threshold to $0.5$.
             </p>
             <p>
               Below on the left is the output using the finite difference
@@ -127,7 +98,7 @@
           </article>
         </section>
         <section>
-          <article id="Sharpening">
+          <article id="Unsharp Filter">
             <h2>Image Sharpening</h2>
             <p>
               To sharpen an image, I convoluted a gaussian filter with the image
@@ -162,7 +133,7 @@
           </article>
         </section>
         <section>
-          <article id="Hybrid">
+          <article id="Hybrid Images">
             <h2>Hybrid Images</h2>
             <p>
               To get a hybrid image, I convoluted one with a gaussian filter and
@@ -231,23 +202,29 @@
           </article>
         </section>
         <section>
-          <article id="Separating Frequencies">
+          <article id="Gaussian and Laplacian Stacks">
             <h2>Gaussian and Laplacian Stacks</h2>
             <p>
               The gaussian stack is obtained by repeating the gaussian
               convolution with the previous image and doubling the standard
               deviation of the gaussian at each level. I chose a standard
               deviation of 1 for the first level after the original image and a
-              kernel size of 6 * the standard deviation to ensure that values
-              outside the kernel would be close to 0. As for the Laplacian
-              stack, this is obtained by taking the pairwise difference of the
-              an image in the Gaussian stack and the next image. This gives an
-              image that captures a certain band of frequencies at each level.
-              For both the Laplacian and Gaussian stacks, the last image
-              contains a collection of the lowest frequencies of the image.
+              kernel size of $6 \cdot \sigma $ to ensure that values outside the
+              kernel would be close to $0$. As for the Laplacian stack, this is
+              obtained by taking the pairwise difference of the an image in the
+              Gaussian stack and the next image. This gives an image that
+              captures a certain band of frequencies at each level. For both the
+              Laplacian and Gaussian stacks, the last image contains a
+              collection of the lowest frequencies of the image.
             </p>
             <div class="centered">
-              <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
+              <div
+                class="image-container"
+                style="
+                  --grid-cols: repeat(1, 1fr);
+                  --image-container-width: 35rem;
+                "
+              >
                 <img
                   src="./media/spline/stack.png"
                   alt="stack"
@@ -259,7 +236,7 @@
           </article>
         </section>
         <section>
-          <article id="Blending">
+          <article id="Multi-Resolution Blending">
             <h2>Multi-Resolution Blending</h2>
             <p>
               To get a seemless blend of two images, both images are alpha
@@ -360,10 +337,8 @@
           </article>
         </section>
       </main>
-      <footer>
-        <p>&lt;&lt;&lt; &copy; Trustin Nguyen &gt;&gt;&gt;</p>
-        <p><a href="#"> Back to Top </a></p>
-      </footer>
+
+      <footer></footer>
     </div>
   </body>
 </html>
