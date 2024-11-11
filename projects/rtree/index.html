@@ -55,6 +55,20 @@
                 spatial indexing methods such as K-D trees/Octrees for its
                 ability to store not only points but higher-dimensional objects.
               </p>
+              <div class="centered">
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(1, 1fr);
+                    --image-container-width: 30rem;
+                  "
+                >
+                  <img
+                    src="./media/rtree-2d-insert.png"
+                    alt="rtree-2d-insert"
+                  />
+                </div>
+              </div>
             </article>
           </section>
           <section>
@@ -76,6 +90,17 @@
                 location $p_{i}$ on the object is such that: \begin{equation*}
                 a_{i} \leq p_{i} \leq b_{i} \end{equation*}
               </p>
+              <div class="centered">
+                <div
+                  class="image-container"
+                  style="--grid-cols: repeat(1, 1fr)"
+                >
+                  <img
+                    src="./media/rtree-structure.png"
+                    alt="rtree-structure"
+                  />
+                </div>
+              </div>
               <p>
                 An index pointer also has bounding box and also points to either
                 a leaf node or a branch node
@@ -167,12 +192,40 @@
                 up. If a node is underfull, we remove the node from the tree.
                 After the delete operation, we reinsert all of its children.
               </p>
+              <div class="centered">
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(1, 1fr);
+                    --image-container-width: 35rem;
+                  "
+                >
+                  <img
+                    src="./media/rtree-2d-delete.png"
+                    alt="rtree-2d-delete"
+                  />
+                </div>
+              </div>
               <p>
                 This means that the tree must be able to handle insertion of
                 index pointers also. It is recommended that the minimum number
                 of children is $40\%$ of the max number of children of a tree
                 node.
               </p>
+              <div class="centered">
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(1, 1fr);
+                    --image-container-width: 35rem;
+                  "
+                >
+                  <img
+                    src="./media/rtree-3d-delete.png"
+                    alt="rtree-3d-delete"
+                  />
+                </div>
+              </div>
             </article>
           </section>
           <section>
