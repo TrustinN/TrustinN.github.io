@@ -37,6 +37,7 @@ const createHeaderNav = (label = "") => {
 
   hNav.append(ul);
   hNav.setAttribute("aria-label", label);
+  hNav.classList.add("gray-hover");
   hNav.id = "menu";
   return hNav;
 };
@@ -83,11 +84,13 @@ const createSidebarNav = (label = "") => {
 
 const nav = createSidebarNav();
 const sNav = document.querySelector(".sidebar-nav");
-sNav.append(nav);
+if (sNav) {
+  sNav.append(nav);
+}
 
 // Footer Element
 
-const footer = document.getElementsByTagName("footer");
+const footer = document.getElementsByTagName("footer")[0];
 footer.innerHTML = `
   <div>&lt;&lt;&lt; &copy; Trustin Nguyen &gt;&gt;&gt;</div>
   <div><a href="#"> Back to Top </a></div>

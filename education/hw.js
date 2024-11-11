@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <link rel="stylesheet" href="../css/style.css" />
       </head>
       <body>
-        <div class="schoolwork-container">
+        <div class="centered gray-hover">
           <a href="./Math/Math55/Homework/Math55Hw1/Math55Hw1.pdf"> Homework 1 </a>
           <a href="./Math/Math55/Homework/Math55Hw2/Math55Hw2.pdf"> Homework 2 </a>
           <a href="./Math/Math55/Homework/Math55Hw3/Math55Hw3.pdf"> Homework 3 </a>
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <link rel="stylesheet" href="../css/style.css" />
       </head>
       <body>
-        <div class="schoolwork-container">
+        <div class="centered gray-hover">
           <a href="./Math/Math110/Homework/Math110Hw1/Math110Hw1.pdf">
             Homework 1
           </a>
@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <link rel="stylesheet" href="../css/style.css" />
       </head>
       <body>
-        <div class="schoolwork-container">
+        <div class="centered gray-hover">
           <a href="./Math/Math113/Homework/Math113Hw1/Math113Hw1.pdf">
             Homework 1
           </a>
@@ -190,7 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
       </head>
 
       <body>
-        <div class="schoolwork-container">
+        <div class="centered gray-hover">
           <a href="./Math/Math124/Homework/Math124Hw1/Math124Hw1.pdf">
             Homework 1
           </a>
@@ -257,7 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
-    <div class="schoolwork-container">
+    <div class="centered gray-hover">
       <a href="./Math/Math104/Homework/Math104Hw1/Math104Hw1.pdf">
         Homework 1
       </a>
@@ -330,7 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
-    <div class="schoolwork-container">
+    <div class="centered gray-hover">
       <a href="./Math/Math143/Homework/Math143Hw1/Math143Hw1.pdf">
         Homework 1
       </a>
@@ -397,7 +397,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
-    <div class="schoolwork-container">
+    <div class="centered gray-hover">
       <a href="./Math/Math172/Homework/Math172Hw1/Math172Hw1.pdf">
         Homework 1
       </a>
@@ -464,7 +464,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
-    <div class="schoolwork-container">
+    <div class="centered gray-hover">
       <a href="./Math/Math250a/Homework/Math250aHw1/Math250aHw1.pdf">
         Homework 1
       </a>
@@ -534,7 +534,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
-    <div class="schoolwork-container">
+    <div class="centered gray-hover">
       <a href="./Math/Math185/Homework/Math185Hw1/Math185Hw1.pdf">
         Homework 1
       </a>
@@ -598,7 +598,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
-    <div class="schoolwork-container">
+    <div class="centered gray-hover">
       <a href="./Math/Stat134/Homework/Stat134Hw1/Stat134Hw1.pdf">
         Homework 1
       </a>
@@ -659,7 +659,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
-    <div class="schoolwork-container">
+    <div class="centered gray-hover">
       <a href="./Math/Math128a/Homework/Math128aHw1/Math128aHw1.pdf">
         Homework 1
       </a>
@@ -735,7 +735,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <link rel="stylesheet" href="../css/style.css" />
       </head>
       <body>
-        <div class="schoolwork-container">
+        <div class="centered gray-hover">
           <a href="./Compsci/CS170/Homework/CS170Hw1/CS170Hw1.pdf"> Homework 1 </a>
           <a href="./Compsci/CS170/Homework/CS170Hw2/CS170Hw2.pdf"> Homework 2 </a>
           <a href="./Compsci/CS170/Homework/CS170Hw3/CS170Hw3.pdf"> Homework 3 </a>
@@ -774,7 +774,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <link rel="stylesheet" href="../css/style.css" />
       </head>
       <body>
-        <div class="schoolwork-container">
+        <div class="centered gray-hover">
           <a href="./Compsci/CS189/Homework/CS189Hw1/tex/CS189Hw1.pdf"> Homework 1 </a>
           <a href="./Compsci/CS189/Homework/CS189Hw2/tex/CS189Hw2.pdf"> Homework 2 </a>
         </div>

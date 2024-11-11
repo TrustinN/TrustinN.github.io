@@ -41,6 +41,10 @@ body {
   position: relative;
 }
 
+main {
+  flex-grow: 1;
+}
+
 nav a,
 footer a {
   color: white;
@@ -64,6 +68,7 @@ footer a:focus {
 header {
   grid-area: hd;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  width: 100%;
 }
 
 header nav ul {
@@ -77,12 +82,6 @@ header nav ul {
 header a {
   display: block;
   padding: 1rem;
-}
-
-header a:hover,
-header a:focus {
-  background-color: gray;
-  color: white;
 }
 
 section {
@@ -99,6 +98,8 @@ article {
   text-align: left;
   max-width: 60rem;
   overflow: hidden;
+  border-radius: 1rem;
+  background-color: white;
 }
 
 p {
@@ -107,6 +108,7 @@ p {
 }
 
 footer {
+  width: 100%;
   grid-area: ft;
   background-color: black;
   text-align: center;
@@ -163,15 +165,11 @@ a.github {
 }
 
 .page-container {
-  display: grid;
-  grid-template-rows: auto auto 1fr auto;
-  grid-template-areas:
-    "hd"
-    "bn"
-    "mn"
-    "ft";
+  display: flex;
+  flex-flow: column nowrap;
   min-height: 100vh;
   gap: 0.5rem;
+  align-items: center;
 }
 
 .content-container {
@@ -212,10 +210,26 @@ a.github {
 }
 
 .overview {
+  position: relative;
   display: flex;
 }
 
+.overview > *:first-child {
+  background-color: white;
+  position: relative;
+  z-index: 1;
+  border-radius: 1rem;
+  width: 85%;
+}
+
+.explore {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .explore a {
+  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
@@ -230,7 +244,40 @@ a.github {
 .explore a:hover,
 .explore a:focus {
   background-color: gray;
+}
+
+.gray-hover a:hover,
+.gray-hover a:focus {
+  background-color: gray;
   color: white;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.thumbnail {
+  position: relative;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.thumbnail::before {
+  border-radius: 1rem 1rem 0rem 0rem;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.33;
 }
 
 /* Media Queries */
@@ -260,11 +307,12 @@ a.github {
 
   header ul {
     flex-direction: column;
-    z-index: 0;
+    z-index: 99;
   }
 
   article {
     padding: 1rem;
+    border-radius: 1rem 0rem 0rem 0rem;
   }
 
   section {
@@ -279,7 +327,7 @@ a.github {
     background-color: black;
     color: white;
     position: relative;
-    z-index: 1;
+    z-index: 100;
   }
 
   .menu-button {
@@ -347,8 +395,17 @@ a.github {
     border-radius: 1rem 0rem 1rem 0rem;
   }
 
+  .overview > *:first-child {
+    z-index: 0;
+    width: 100%;
+  }
+
   .explore a {
-    border-radius: 1rem 0rem 1rem 0rem;
+    border-radius: 0rem 0rem 1rem 0rem;
+  }
+
+  .thumbnail::before {
+    border-radius: 1rem 0rem 0rem 0rem;
   }
 }
 
@@ -367,6 +424,7 @@ a.github {
       "bn bn"
       "mn sb"
       "ft ft";
+    align-items: stretch;
   }
 
   .profile-picture {
@@ -423,17 +481,6 @@ a.github {
     transform: scale(1.05);
   }
 
-  .overview {
-    justify-content: left;
-  }
-
-  .overview article {
-    width: 90%;
-    background-color: white;
-    border-radius: 1rem;
-    z-index: 1;
-  }
-
   .explore {
     flex-grow: 1;
     transform: translateX(-2rem);
@@ -443,18 +490,4 @@ a.github {
     transform: translateX(-1rem);
     transition: transform 0.25s ease-in-out;
   }
-}
-
-.schoolwork-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.schoolwork-container a {
-  text-decoration: none;
-}
-
-.schoolwork-container a:hover {
-  background-color: gray;
-  color: white;
 }
