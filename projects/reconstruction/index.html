@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Surface Reconstruction</title>
+    <script src="/common.js" defer></script>
+    <script
+      id="MathJax-script"
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+      defer
+    ></script>
+    <link href="/css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="page-container">
+      <header></header>
+      <div class="banner">
+        <h1>Surface Reconstruction</h1>
+      </div>
+      <main>
+        <div class="content-container">
+          <section>
+            <article id="Implicit and Explicit Reconstruction">
+              <h2>Implicit and Explicit Reconstruction</h2>
+              <p>
+                In surface reconstruction, we attempt to recover a mesh that
+                describes the surface from a point cloud. Reconstruction can be
+                divided between two types of methods, one is implicit and the
+                other explicit.
+              </p>
+              <p>
+                In explicit reconstruction, we construct the mesh through the
+                physical properties of the mesh, for example, one method
+                involves rolling a ball over the point cloud to define the
+                surface. The crust method involves defining a local Delaunay
+                triangulation to build a crust and buid the mesh that way.
+              </p>
+              <p>
+                Implicit reconstruction on the other hand defines a signed
+                distance function. Through this, we can determine if a point in
+                3d space lies inside or outside of the mesh. A mesh generating
+                algorithm such as marching cubes is then used to generate the
+                mesh.
+              </p>
+              <div class="centered">
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(1, 1fr);
+                    --image-container-width: 30rem;
+                  "
+                >
+                  <img
+                    src="./media/sphere_recon.gif"
+                    alt="Sphere Reconstruction"
+                  />
+                </div>
+              </div>
+              <p>
+                Regardless of the method, the aim is to build a watertight mesh
+                that is robust to noise. Noise in this case is the inaccuracies
+                in the point cloud that we are given. This can arise when our
+                sampling tool we use to recover the point cloud gives inaccurate
+                readings.
+              </p>
+            </article>
+          </section>
+        </div>
+      </main>
+      <footer></footer>
+    </div>
+  </body>
+</html>
