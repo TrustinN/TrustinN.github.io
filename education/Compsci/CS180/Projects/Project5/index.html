@@ -1093,87 +1093,226 @@
           <article id="Unconditional Unet">
             <h2>Unconditional Unet</h2>
             <div class="centered">
-              <div class="image-container" style="--grid-cols: repeat(5, 1fr)">
+              <div
+                class="image-container"
+                style="
+                  --grid-cols: repeat(1, 1fr);
+                  --image-container-width: 40rem;
+                "
+              >
                 <figure>
                   <img
-                    class="zoom-in"
-                    src="./media/unconditional_unet/loss_1.png"
-                    alt="Unconditional Unet Loss 1"
+                    src="./media/unconditional_unet/loss.png"
+                    alt="Unconditional Unet Loss"
                     loading="lazy"
                   />
+                  <figcaption>After 5 epochs</figcaption>
+                </figure>
+              </div>
+            </div>
+            <div class="centered">
+              <div
+                class="image-container"
+                style="
+                  --grid-cols: repeat(2, 1fr);
+                  --image-container-width: 40rem;
+                "
+              >
+                <figure>
+                  <img
+                    src="./media/unconditional_unet/epoch_1.png"
+                    alt="Epoch 1 Denoise"
+                    loading="lazy"
+                  />
+                  <figcaption>Epoch 1 Denoising</figcaption>
+                </figure>
+                <figure>
+                  <img
+                    src="./media/unconditional_unet/epoch_5.png"
+                    alt="Epoch 5 Denoise"
+                    loading="lazy"
+                  />
+                  <figcaption>Epoch 5 Denoising</figcaption>
+                </figure>
+              </div>
+            </div>
+            <div class="centered">
+              <div
+                class="image-container"
+                style="
+                  --grid-cols: repeat(1, 1fr);
+                  --image-container-width: 40rem;
+                "
+              >
+                <figure>
+                  <img
+                    src="./media/unconditional_unet/sampling_1.png"
+                    alt="Various noise level denoisings"
+                    loading="lazy"
+                  />
+                  <figcaption>Epoch 1 sampling</figcaption>
+                </figure>
+                <figure>
+                  <img
+                    src="./media/unconditional_unet/sampling_5.png"
+                    alt="Various noise level denoisings"
+                    loading="lazy"
+                  />
+                  <figcaption>Epoch 5 sampling</figcaption>
+                </figure>
+              </div>
+            </div>
+          </article>
+        </section>
+        <section>
+          <article id="Conditional Unet">
+            <h2>Conditional Unet</h2>
+            <div class="centered">
+              <div
+                class="image-container"
+                style="
+                  --grid-cols: repeat(1, 1fr);
+                  --image-container-width: 40rem;
+                "
+              >
+                <figure>
+                  <img
+                    src="./media/conditional_unet/loss.png"
+                    alt="Conditional Unet Loss"
+                    loading="lazy"
+                  />
+                  <figcaption>Epoch 20 loss</figcaption>
+                </figure>
+              </div>
+            </div>
+            <div class="centered">
+              <div
+                class="image-container"
+                style="
+                  --grid-cols: repeat(1, 1fr);
+                  --image-container-width: 40rem;
+                "
+              >
+                <figure>
+                  <div
+                    class="image-container"
+                    style="
+                      --grid-cols: repeat(1, 1fr);
+                      --image-container-width: 40rem;
+                    "
+                  >
+                    <img
+                      src="./media/conditional_unet/sampling1.jpeg"
+                      alt="Conditional Unet Sampling 1 jpeg"
+                      loading="lazy"
+                      onmouseover="resetSiblingGif(this)"
+                      class="dissolve"
+                    />
+                    <img
+                      src="./media/conditional_unet/sampling1.gif"
+                      alt="Conditional Unet Sampling 1"
+                      loading="lazy"
+                      class="emerge"
+                    />
+                  </div>
                   <figcaption>Epoch 1</figcaption>
                 </figure>
                 <figure>
-                  <img
-                    class="zoom-in"
-                    src="./media/unconditional_unet/loss_2.png"
-                    alt="Unconditional Unet Loss 2"
-                    loading="lazy"
-                  />
-                  <figcaption>Epoch 2</figcaption>
-                </figure>
-                <figure>
-                  <img
-                    class="zoom-in"
-                    src="./media/unconditional_unet/loss_3.png"
-                    alt="Unconditional Unet Loss 3"
-                    loading="lazy"
-                  />
-                  <figcaption>Epoch 3</figcaption>
-                </figure>
-                <figure>
-                  <img
-                    class="zoom-in"
-                    src="./media/unconditional_unet/loss_4.png"
-                    alt="Unconditional Unet Loss 4"
-                    loading="lazy"
-                  />
-                  <figcaption>Epoch 4</figcaption>
-                </figure>
-                <figure>
-                  <img
-                    class="zoom-in"
-                    src="./media/unconditional_unet/loss_5.png"
-                    alt="Unconditional Unet Loss 5"
-                    loading="lazy"
-                  />
+                  <div
+                    class="image-container"
+                    style="
+                      --grid-cols: repeat(1, 1fr);
+                      --image-container-width: 40rem;
+                    "
+                  >
+                    <img
+                      src="./media/conditional_unet/sampling5.jpeg"
+                      alt="Conditional Unet Sampling 5 jpeg"
+                      loading="lazy"
+                      onmouseover="resetSiblingGif(this)"
+                      class="dissolve"
+                    />
+                    <img
+                      src="./media/conditional_unet/sampling5.gif"
+                      alt="Conditional Unet Sampling 5"
+                      loading="lazy"
+                      class="emerge"
+                    />
+                  </div>
                   <figcaption>Epoch 5</figcaption>
                 </figure>
-              </div>
-            </div>
-            <div class="centered">
-              <div
-                class="image-container"
-                style="
-                  --grid-cols: repeat(1, 1fr);
-                  --image-container-width: 40rem;
-                "
-              >
-                <img
-                  src="./media/unconditional_unet/epoch_1.png"
-                  alt="Epoch 1 Denoise"
-                  loading="lazy"
-                />
-                <img
-                  src="./media/unconditional_unet/epoch_5.png"
-                  alt="Epoch 5 Denoise"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-            <div class="centered">
-              <div
-                class="image-container"
-                style="
-                  --grid-cols: repeat(1, 1fr);
-                  --image-container-width: 40rem;
-                "
-              >
-                <img
-                  src="./media/unconditional_unet/sampling.png"
-                  alt="Various noise level denoisings"
-                  loading="lazy"
-                />
+                <figure>
+                  <div
+                    class="image-container"
+                    style="
+                      --grid-cols: repeat(1, 1fr);
+                      --image-container-width: 40rem;
+                    "
+                  >
+                    <img
+                      src="./media/conditional_unet/sampling10.jpeg"
+                      alt="Conditional Unet Sampling 10 jpeg"
+                      loading="lazy"
+                      onmouseover="resetSiblingGif(this)"
+                      class="dissolve"
+                    />
+                    <img
+                      src="./media/conditional_unet/sampling10.gif"
+                      alt="Conditional Unet Sampling 10"
+                      loading="lazy"
+                      class="emerge"
+                    />
+                  </div>
+                  <figcaption>Epoch 10</figcaption>
+                </figure>
+                <figure>
+                  <div
+                    class="image-container"
+                    style="
+                      --grid-cols: repeat(1, 1fr);
+                      --image-container-width: 40rem;
+                    "
+                  >
+                    <img
+                      src="./media/conditional_unet/sampling15.jpeg"
+                      alt="Conditional Unet Sampling 15 jpeg"
+                      loading="lazy"
+                      onmouseover="resetSiblingGif(this)"
+                      class="dissolve"
+                    />
+                    <img
+                      src="./media/conditional_unet/sampling15.gif"
+                      alt="Conditional Unet Sampling 15"
+                      loading="lazy"
+                      class="emerge"
+                    />
+                  </div>
+                  <figcaption>Epoch 15</figcaption>
+                </figure>
+                <figure>
+                  <div
+                    class="image-container"
+                    style="
+                      --grid-cols: repeat(1, 1fr);
+                      --image-container-width: 40rem;
+                    "
+                  >
+                    <img
+                      src="./media/conditional_unet/sampling20.jpeg"
+                      alt="Conditional Unet Sampling 20 jpeg"
+                      loading="lazy"
+                      onmouseover="resetSiblingGif(this)"
+                      class="dissolve"
+                    />
+                    <img
+                      src="./media/conditional_unet/sampling20.gif"
+                      alt="Conditional Unet Sampling 20"
+                      loading="lazy"
+                      class="emerge"
+                    />
+                  </div>
+                  <figcaption>Epoch 20</figcaption>
+                </figure>
               </div>
             </div>
           </article>
