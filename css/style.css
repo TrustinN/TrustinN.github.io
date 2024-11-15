@@ -86,7 +86,7 @@ header a {
 
 section {
   margin-bottom: 2rem;
-  margin-inline: 5rem;
+  margin-inline: 5vw;
   border-radius: 1rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   height: fit-content;
@@ -418,7 +418,7 @@ a.github {
 
   .include-sidebar {
     display: grid;
-    grid-template-columns: 4fr 1fr;
+    grid-template-columns: 4fr 1.1fr;
     grid-template-areas:
       "hd hd"
       "bn bn"
@@ -460,6 +460,8 @@ a.github {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     max-width: 80%;
     height: auto;
+    max-height: 60vh;
+    overflow-y: auto;
   }
 
   .sidebar-nav ul {
