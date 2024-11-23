@@ -35,6 +35,10 @@ video {
   transition: transform 0.8s ease-in-out;
 }
 
+figcaption {
+  text-align: center;
+}
+
 body {
   font-family: "Roboto", sans-serif;
   line-height: 1.8;
