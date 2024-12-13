@@ -245,8 +245,8 @@
             </article>
           </section>
           <section>
-            <article id="Additional Maps">
-              <h2>Additional Maps</h2>
+            <article id="Various Ratios">
+              <h2>Various Aspect Ratios</h2>
               <p>
                 We can perform this on any image with one point perspective, as
                 long as we can find a good guess for the 3d coordinates of the
@@ -451,9 +451,9 @@
               </div>
 
               <p>
-                For this one, we see that it does not do well when the objects
-                in the scene are not planar. The trees and bush are noticeably
-                warped/cut off by the transformations
+                In this example, we see that the method does not do well when
+                the objects in the scene are not planar. The trees and bush are
+                noticeably warped/cut off by the transformations
               </p>
               <div class="centered">
                 <div
@@ -537,6 +537,205 @@
                   <img src="./media/bay/view1.png" alt="bay view 1" />
                   <img src="./media/bay/view2.png" alt="bay view 2" />
                   <img src="./media/bay/view3.png" alt="bay view 3" />
+                </div>
+              </div>
+            </article>
+          </section>
+          <section>
+            <article id="Extending to 2-Point">
+              <h2>Extending to 2-Point Perspective</h2>
+              <p>
+                In the previous experiments, we had the vanishing point close to
+                the center of the imaging plane. But when there is enough of a
+                shift of the vanishing point, we start to see two specific
+                vanishing points which form a vanishing line.
+              </p>
+              <p>
+                To model this, we can this of this as two separate one point
+                perspectives to build the web:
+              </p>
+              <div class="centered">
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(1, 1fr);
+                    --image-container-width: 60rem;
+                  "
+                >
+                  <img
+                    src="./media/monument/monumentweb1.png"
+                    alt="monument web 1"
+                  />
+                  <img
+                    src="./media/monument/monumentweb2.png"
+                    alt="monument web 2"
+                  />
+                </div>
+              </div>
+            </article>
+          </section>
+          <section>
+            <article id="Calculating the Planes and 3D Points">
+              <h2>Calculating the Planes and 3D Coordinates</h2>
+              <p>
+                Now that we have our web, we can use the vanishing points to
+                project the inner rectangles in each web outwards. To
+                specifically determine how much we should project each plane
+                outwards, we determine the maximum possible projection such that
+                one of the corners of the planes still lies within the image
+                borders. Although it is possible to choose the minimum as a
+                metric, it can cause the planes to be calculated incorrectly
+                when the perspective lines are close. Choosing the maximum also
+                helps with stability.
+              </p>
+              <div class="centered">
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(1, 1fr);
+                    --image-container-width: 40rem;
+                  "
+                >
+                  <img
+                    src="./media/monument/planes.png"
+                    alt="monument planes"
+                  />
+                </div>
+              </div>
+              <p>
+                To compute the 3d coordinates of each point, we first establish
+                the ratios of x, y, z such that max(x, y, z) = 1. Then we apply
+                the coordinate estimates to each vertex in the top and bottom
+                planes shown below:
+              </p>
+              <div class="centered">
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(1, 1fr);
+                    --image-container-width: 40rem;
+                  "
+                >
+                  <img
+                    src="./media/monument/baseplanes.png"
+                    alt="monument base planes"
+                  />
+                </div>
+              </div>
+              <p>
+                Now that we have the initial coordinates, we can use the same
+                trick with quadrilateral ratios in the previous section to
+                compute the ratio in which we expanded outwards by, and
+                propagate the coordinate estimates across the vertices.
+              </p>
+            </article>
+          </section>
+          <section>
+            <article id="Mosaics and Final Result">
+              <h2>Mosaics and Final Result</h2>
+              <p>
+                Computing the homography is exactly the same as in the one point
+                perspective images, and at the end, we get two mosaics
+              </p>
+              <div class="centered">
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(2, 1fr);
+                    --image-container-width: 60rem;
+                  "
+                >
+                  <img
+                    src="./media/monument/leftmap.png"
+                    alt="monument left map"
+                  />
+                  <img
+                    src="./media/monument/rightmap.png"
+                    alt="monument right map"
+                  />
+                </div>
+              </div>
+              <p>
+                We remove the one plane from each figure and combine the
+                textures into a 3d representation:
+              </p>
+              <div class="centered">
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(2, 1fr);
+                    --image-container-width: 50rem;
+                  "
+                >
+                  <img
+                    src="./media/monument/texturemap.png"
+                    alt="monument texture map"
+                  />
+                  <img src="./media/monument/view1.png" alt="monument view 1" />
+                  <img src="./media/monument/view2.png" alt="monument view 2" />
+                  <img src="./media/monument/view3.png" alt="monument view 3" />
+                </div>
+              </div>
+            </article>
+          </section>
+          <section>
+            <article id="Additional Results">
+              <h2>Additional Results</h2>
+              <p>
+                Here is another 2-point perspective representation with a photo
+                of Doe Library instead:
+              </p>
+              <h3>Web</h3>
+              <div class="centered">
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(1, 1fr);
+                    --image-container-width: 40rem;
+                  "
+                >
+                  <img src="./media/doe/doeweb1.png" alt="doe web 1" />
+                  <img src="./media/doe/doeweb2.png" alt="doe web 2" />
+                </div>
+              </div>
+              <h3>Planes</h3>
+              <div class="centered">
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(1, 1fr);
+                    --image-container-width: 40rem;
+                  "
+                >
+                  <img src="./media/doe/planes.png" alt="doe planes" />
+                </div>
+              </div>
+              <h3>Left, Right Maps</h3>
+              <div class="centered">
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(2, 1fr);
+                    --image-container-width: 60rem;
+                  "
+                >
+                  <img src="./media/doe/leftmap.png" alt="doe left map" />
+                  <img src="./media/doe/rightmap.png" alt="doe right map" />
+                </div>
+              </div>
+              <h3>Texture Maps</h3>
+              <div class="centered">
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(2, 1fr);
+                    --image-container-width: 50rem;
+                  "
+                >
+                  <img src="./media/doe/texturemap.png" alt="doe texture map" />
+                  <img src="./media/doe/view1.png" alt="doe view 1" />
+                  <img src="./media/doe/view2.png" alt="doe view 2" />
+                  <img src="./media/doe/view3.png" alt="doe view 3" />
                 </div>
               </div>
             </article>
