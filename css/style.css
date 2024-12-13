@@ -35,8 +35,105 @@ video {
   transition: transform 0.8s ease-in-out;
 }
 
+img.flip:hover {
+  transform: rotateZ(180deg);
+}
+
+img.zoom-out:hover {
+  transform: scale(0.5);
+}
+
+img.zoom-in:hover,
+img.zoom-in:focus-within {
+  transform: scale(2);
+  z-index: 200;
+  position: relative;
+}
+
+img.dissolve,
+img.emerge {
+  position: absolute;
+  transition: all 0s;
+}
+
+img.dissolve {
+  opacity: 1;
+}
+
+img.dissolve:hover {
+  opacity: 0;
+}
+
+img.emerge {
+  position: relative;
+  opacity: 0;
+  pointer-events: none;
+}
+
+img.dissolve:hover + img.emerge {
+  opacity: 1;
+}
+
+figure {
+  position: relative;
+}
+
 figcaption {
   text-align: center;
+  width: 100%;
+}
+
+figcaption.dissolve {
+  position: relative;
+  opacity: 1;
+}
+
+figcaption.emerge {
+  position: absolute;
+  opacity: 0;
+}
+
+:is(img.zoom-out, img.dissolve, img.flip):hover ~ figcaption.dissolve {
+  position: absolute;
+  opacity: 0;
+}
+
+:is(img.zoom-out, img.dissolve, img.flip):hover ~ figcaption.emerge {
+  position: relative;
+  opacity: 1;
+}
+
+.carousel-container {
+  display: flex;
+  flex-direction: row nowrap;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 0 auto;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.carousel-button {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  height: 100%;
+  padding: 2rem 1rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.carousel-button:hover {
+  transform: scale(1.5);
+}
+
+.carousel-image {
+  transition: transform 0.5s ease;
+}
+
+.carousel-image.central {
+  transform: scale(1.2);
 }
 
 body {
