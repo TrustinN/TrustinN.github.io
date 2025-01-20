@@ -13,6 +13,7 @@
     ></script>
     <link href="/css/style.css" rel="stylesheet" />
   </head>
+
   <body>
     <div class="page-container">
       <header></header>
@@ -65,8 +66,138 @@
           <section>
             <article id="Hoppe's Algorithm">
               <h2>Hoppe's Algorithm</h2>
+              <p>
+                Hoppe's research paper proposes a method of obtaining the
+                surface normals of an object, and later proposes a signed
+                distance function that can be used to estimate the triangles
+                computed during marching cubes.
+              </p>
             </article>
           </section>
+          <section>
+            <article id="Normal Approximation">
+              <h2>Normal Approximation</h2>
+              <p>
+                To retrieve the normals, we utilize PCA (Principal Component
+                Analysis) on a patch of points. This gives us vectors describing
+                the orientation of the patch, and subsequently the vector of
+                smallest magnitude is the normal to the surface:
+              </p>
+              <div class="centered">
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(1, 1fr);
+                    --image-container-width: 30rem;
+                  "
+                >
+                  <img src="./media/pca.png" alt="PCA" />
+                </div>
+              </div>
+              <p>
+                The smallest vector can either be pointing towards the inside of
+                the object or outside, so to fix the traversal, we construct a
+                Riemannian Graph (all vertices connected to their 15 closest
+                neighbors) and decorate it with a Euclidean MST to ensure we can
+                traverse all vertices. The traversal order is then decided by
+                the mst with the weight function: \begin{equation*} w(u, v) = 1
+                - \lvert u.N \cdot v.N \rvert \end{equation*} which is the dot
+                product between their normals. This is because if we consider
+                two points very close to each other on a mesh surface, their
+                normals will approximately be parallel. Therefore, the given
+                weight function assigns a small weight to edges that join
+                parallel normals.
+              </p>
+              <div class="centered">
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(1, 1fr);
+                    --image-container-width: 30rem;
+                  "
+                >
+                  <img src="./media/orient.svg" alt="Orient Normals" />
+                </div>
+              </div>
+              <p>
+                This image shows the input normals, with incorrectly oriented
+                normals in red. The traversal order is established which is the
+                blue line, and in the zoom-in, the vertex after the blue line
+                has its normal flipped because its orientation is incorrect wrt
+                to the previous normal.
+              </p>
+
+              <p>
+                To begin traversal, we choose the point with the largest $x$
+                component as our start vertex, ensure its normal is facing in
+                the same direction as $\begin{bmatrix} 1 \\ 0 \\ 0
+                \end{bmatrix}$: \begin{equation*} \vec{v} \cdot \begin{bmatrix}
+                1 \\ 0 \\ 0 \end{bmatrix} &gt; 0 \end{equation*} and if not, we
+                take $\vec{v} \cdot -1$. We then traverse the mst with our
+                normal orienting method until every normal points away from the
+                interior of the mesh.
+              </p>
+            </article>
+          </section>
+          <section>
+            <article id="Signed Distance Function">
+              <h2>Signed Distance Function</h2>
+              <p>
+                A signed distance function $f(p)$ gives us two pieces of
+                information:
+              </p>
+              <ul>
+                <li>
+                  A point is inside the mesh if $f(p) &lt; 0$, outside the mesh
+                  if $f(p) &gt; 0$, and on the mesh if $f(p) = 0$.
+                </li>
+                <li>
+                  $\lvert f(p) \rvert$ gives us the distance a point is the the
+                  surface.
+                </li>
+              </ul>
+              <p>
+                Evaluating the sdf for our mesh at point $p$ is then done by
+                choosing a point from our sample, $s$, that is closest to $p$
+                and obtaining the distance from $p$ to the tangent plane, $s.TP$
+                of $s$. We multiply the result by: \begin{equation*}
+                \text{sign}\{\text{proj}_{s.TP}(p) \cdot s.N\} \end{equation*}
+                ($+1$ if the point is outside, $-1$ if inside, $0$ otherwise.)
+              </p>
+            </article>
+          </section>
+
+          <section>
+            <article id="Marching Cubes">
+              <h2>Marching Cubes</h2>
+              <p>
+                The marching cubes algorithm is based on using a lookup table to
+                determine the mesh triangles of a given finite element, in this
+                case, we discretize the space into cubic subdivisions. We then
+                use our signed distance function to determine the triangles that
+                the given finite element has.
+              </p>
+              <div class="centered">
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(1, 1fr);
+                    --image-container-width: 30rem;
+                  "
+                >
+                  <img src="./media/marchingcubes.png" alt="Marching Cubes" />
+                </div>
+              </div>
+              <p>
+                We intersect our cube with our mesh and evaluate the sdf on the
+                cube's vertices. We mark the vertices that are inside the mesh
+                as orange and we match them with the triangles found in the
+                image above. After running this on all cubes that intersect our
+                mesh, we obtain the final mesh.
+              </p>
+            </article>
+          </section>
+
           <section>
             <article id="Poisson Reconstruction">
               <h2>Poisson Reconstruction</h2>

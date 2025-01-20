@@ -27,6 +27,11 @@ h6 {
   overflow-wrap: break-word;
 }
 
+ul,
+ol {
+  list-style-position: inside;
+}
+
 img,
 video {
   display: block;
