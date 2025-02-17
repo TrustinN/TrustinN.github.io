@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{tol}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{l+m+mf}{1e\PYGZhy{}4}\PYG{p}{;}
+\PYG{n}{out}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{bisection}\PYG{p}{(@}\PYG{n}{myfunc8}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{0.1}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{tol}\PYG{p}{);}
+\PYG{n}{x}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{out}\PYG{p}{.}\PYG{n}{x}
+\PYG{n}{out}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{newton}\PYG{p}{(@}\PYG{n}{myfunc8}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{.5}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{@}\PYG{n}{out\PYGZus{}error}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{tol}\PYG{p}{);}
+\PYG{n}{x}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{out}\PYG{p}{.}\PYG{n}{x}
+\PYG{n}{out}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{secant}\PYG{p}{(@}\PYG{n}{myfunc8}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{.5}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{.8}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{tol}\PYG{p}{);}
+\PYG{n}{x}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{out}\PYG{p}{.}\PYG{n}{x}
+\PYG{n}{out}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{muller}\PYG{p}{(@}\PYG{n}{myfunc8}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mf}{.3}\PYG{p}{;}\PYG{+w}{ }\PYG{l+m+mf}{.4}\PYG{p}{;}\PYG{+w}{ }\PYG{l+m+mf}{.5}\PYG{p}{],}\PYG{+w}{ }\PYG{n}{tol}\PYG{p}{);}
+\PYG{n}{x}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{out}\PYG{p}{.}\PYG{n}{x}
+\end{Verbatim}

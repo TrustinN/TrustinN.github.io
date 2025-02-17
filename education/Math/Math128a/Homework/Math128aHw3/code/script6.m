@@ -1,0 +1,9 @@
+out = muller(@myfunc6, [.5; .55; .6], 1e-5);
+x = out.x
+y = out.y
+out = muller(@myfunc6, [6; 5.5; 5], 1e-5);
+x = out.x
+y = out.y
+out = muller(@myfunc6, [-6; -5; -4], 1e-5);
+x = out.x
+y = out.y

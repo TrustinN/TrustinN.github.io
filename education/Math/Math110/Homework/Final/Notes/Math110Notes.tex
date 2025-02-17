@@ -1,0 +1,406 @@
+%! TeX root = 	
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/MyStyle/mystyle}
+
+\title{Linear Algebra Notes}
+\author{Trustin Nguyen}
+
+
+\begin{document}
+
+\maketitle
+\reversemarginpar
+
+\begin{topic}
+	\section*{Spectral Theorem, Positive/Negative Operators}
+\end{topic}
+
+Need more info on the min polynomial of $T$ over $\mathbb{C}$. In $\mathbb{C}$, this factors into linear factors $(z - z_{j})$ we already know each $z_{j}$ must be real since $T$ is self-adjoint. Over $\mathbb{R}$, we need to rule out quadratic factors: $z^{2} + az + b$ or in other words, we require that $a^{2} - 4b <  0$. Plug in $T$ and consider
+\begin{align*}
+	\langle Tv, v \rangle = \langle (T^{2} + aT + bI)v, v \rangle &= \langle T^{2}v, v \rangle + a\langle Tv, v \rangle + b\langle v, v \rangle\\
+						    &= \langle Tv, Tv \rangle + a\langle Tv, v \rangle + b\langle v, v \rangle \\
+						    &= \lVert Tv \rVert^{2} + a\langle Tv, v \rangle + b\lVert v \rVert^{2}\\
+	\geq  \lVert Tv \rVert^{2} - \lvert a \rvert\lVert Tv \rVert\lVert v \rVert + b\lVert v \rVert^{2} &= (\lVert Tv \rVert - \dfrac{\lvert a \rvert}{2}\lVert v \rVert)^{2}  - \dfrac{\lvert a \rvert^{2}}{4}\lVert v \rVert^{2} + b\lVert v \rVert^{2} \\
+								       &= (\lVert Tv \rVert  - \lVert v \rVert\dfrac{\lvert a \rvert}{2})^{2} + (b - \dfrac{a^{2}}{4})\lVert v \rVert^{2} \geq 0
+\end{align*}
+This expression can be 0 only if $\norm{v} = 0$ which means that $v = 0$. So $T^{2} + aT + bI$ is an invertible operator. So if $p_{\text{min}}(z)$ contains $q(z)$ as a factor, we would have 
+\begin{align*}
+	p_{\text{min}}(T) =q(T)\cdot h(T) = 0 \hspace{30pt} \text{for some polynomial $h(z)$}
+\end{align*}
+So $h(T) = 0$ and $q(T)$ does not belong in the minimal polynomial. So if $T = T^{*}$, its minimal polynomial has only linear factors $z - z_{j}$, where each $z_{j} \in \mathbb{R}$. So $\mathcal{M}(T)$ is upper triangular in some orthonormal basis. But then $\mathcal{M}(T^{*}) = \overline{\mathcal{M}(T)^{T}} = \mathcal{M}(T)$. That means that $\mathcal{M}(T)$ is diagonal.
+
+\begin{topic}
+	\section*{Complex Spectral Theorem}
+\end{topic}
+
+\marginnote{\textbf{Theorem}}[8pt]
+\begin{theorem}[frametitle={Complex Spectral Theorem}]
+	Over $\mathbb{C}$, the following are equivalent
+
+\begin{enumerate}
+	\item [(a)] $T \in \mathcal{L}(V)$ is normal 
+
+	\item [(b)] There is a diagonal matrix representation for $T$ with respect to some orthonormal basis.
+\end{enumerate}
+\end{theorem}
+
+Main points of the proof: $(a) \rightarrow (b)$ we start by Schur's theorem with an upper-triangular form for $T$ with respect to some orthonormal basis:
+\begin{align*}
+	\mathcal{M}(T) &= \begin{bmatrix} a_{11} & a_{12} & a_{13} & \ldots & a_{1n} \\
+	0 & a_{22} & a_{23} & \ldots& a_{2n} \\
+0 & 0  & a_{33} & \ldots & a_{3n} \\
+\vdots & \vdots &\vdots & \ddots & \vdots \\ 0 & 0 & 0 & \ldots & a_{nn}
+\end{bmatrix}\\
+		       &= \norm{Te_{1}}^{2} = \abs{a_{11}^{2}}\\
+		       &=\norm{T^{*}e_{1}}^{2} = \sum_{j = 1}^{n} \abs{a_{1,j}}^{2} 
+\end{align*}
+Since the norms are equal, then for $a_{1,j}$ for $j \neq 1$, they must be 0. By applying this same observation, to each $Te_{j}$ and $T^{*}e_{j}$, we conclude all off-diagonal entries must be zero. $(b) \rightarrow (a)$ is clear since any 2 diagonal matrices commute.
+
+\begin{topic}
+	\section*{Nonnegative and Positive Operators}
+\end{topic}
+
+\marginnote{\textbf{Definition}}[8pt]
+\begin{definition}[frametitle={Positive and Nonnegative Operators}]
+	
+\textbf{Definition}: Let $V$ be a finite-dimensional inner product space. An operator $T \in \mathcal{L}(V)$ is called nonnegative if $T = T^{*}$ and 
+\begin{equation*}
+	\langle Tv,v \rangle \geq 0 \hspace{30pt} \forall v \in V
+\end{equation*}
+$T$ is called positive if $T = T^{*}$ and 
+\begin{equation*}
+	\langle Tv,v \rangle > 0 \hspace{30pt}  \forall v \in V\backslash \{0\}
+\end{equation*}
+\end{definition}
+
+Characterization of nonnegative and positive operators. Let $T \in  \mathcal{L}(V)$, then the following are equivalent
+\begin{enumerate}
+	\item [(a)] $T$ is positive / $T$ is nonnegative
+
+	\item [(a)] $T = T^{*}$ and all its eigenvalues are positive / $T = T^{*}$ and all its eigenvalues are nonnegative.
+
+	\item [(c)] With respect to some orthonormal basis, $\mathcal{M}(T)$ is diagonal with all diagonal terms positive / 
+		With respect to some orthonormal basis, $\mathcal{M}(T)$ is diagonal with all diagonal terms nonnegative
+
+	\item [(d)] $T$ has a positive square root / $T$ has a nonnegative square root.
+
+	\item [(e)] $T$ has a self-adjoint square root 
+
+		$T$ is invertible \ No requirements 
+
+	\item [(f)] $T = R^{*}R$ for some $R$ invertible / $T = R^{*}R$ for some $R$
+\end{enumerate}
+\begin{proof}
+	$(a) \rightarrow (b) \rightarrow (c)$ is straightforward. 
+
+	$(c) \rightarrow (a)$: Any vector $v \in V$ can be written as $v = a_{1}e_{1} + \ldots + a_{n}e_{n}$ where $(e_{j})$ are orthonormal and $Te_{j} = \lambda_{j}e_{j}$.
+	\begin{align*}
+		Tv = a_{1}\lambda_{1}e_{1} + \ldots + a_{n}\lambda_{n}e_{n}
+	\end{align*}
+	So 
+	\begin{align*}
+		\langle Tv,v \rangle &= \langle a_{1}\lambda_{1}je_{1}+ a_{2}\lambda_{2}e_{2} + \ldots + a_{n}\lambda_{n}e_{n}, a_{1}e_{1} + a_{2}e_{2} + \ldots + a_{n}e_{n} \rangle \\
+			    &= \lambda_{1}\lvert a_{1} \rvert^{2} + \lambda_{2}\lvert a_{2} \rvert^{2} + \cdots + \lambda_{n}\lvert a_{n} \rvert^{2} \geq 0
+	\end{align*}
+	Moreover, in case $\lambda_{j} > 0$ for all $j = 1, \ldots, n$, this expression is positive unless every $a_{j} = 0$. This would imply that $v = 0$.
+\end{proof}
+
+What about square roots? We say that $R$ is a square root of $T$ if $R = R^{*}, T= T^{*}, R^{2} = T$. If $T$ is positive, it has a positive square root and if $T$ is nonnegative, it has a nonnegative square root. Actually, the positive/nonngeative square root is necessasrily unique.
+\begin{align*}
+	Te_{j} = \lambda_{j}e_{j} \\
+	Re_{j} = \sqrt{\lambda_{j}}e_{j}
+\end{align*}
+the eigenvector of $R$ is the same as with $T$, and the eigenvalues are determined by $T$. So the square root is unique.
+
+$(e)$ corresonds to dropping the positivity / nonnegativity condition on the square root and $(f)$ corresponds to dropping the self-adjointness condition on the square root.
+\begin{align*}
+	R^{*}R = \begin{bmatrix} \lambda_{1} & \ldots & 0 \\
+	\vdots & \ddots & \vdots \\ 0 & \ldots & \lambda_{n} 
+	\end{bmatrix}
+\end{align*}
+
+\begin{topic}
+	\section*{SVD}
+\end{topic}
+
+\marginnote{\textbf{Theorem}}[8pt]
+\begin{theorem}[frametitle={}]
+	Suppose that $T \in \mathcal{L}(V,W)$. Then 
+	\begin{enumerate}
+		\item [(a)] $T^{*}T$ is nonnegative
+
+		\item [(b)] $\ker{T^{*}T} = \ker{T}$
+
+		\item [(c)] $\Im{T^{*}T} = \Im{T^{*}}$ 
+
+		\item [(d)] $\dim{\Im{T^{*}T}} = \dim{\Im{T^{*}}} = \dim{\Im{T}}$ 
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	\begin{enumerate}
+		\item [(a)] $(T^{*}T)^{*} = T^{*}T^{**} = T^{*}T \rightarrow \langle T^{*}Tv, v \rangle = \langle Tv, Tv \rangle \geq 0$	
+
+		\item [(b)] $\ker{T} \subseteq \ker{T^{*}T}$. Suppose $v \in \ker{T^{*}T}$ so $T^{*}Tv = 0$ so $\norm{Tv}= 0 \rightarrow Tv = 0 \rightarrow v \in \ker{T}$
+
+		\item [(c)] $\Im{T^{*}T} = [\ker{(T^{*}T)^{*}}]^{\perp} = (\ker{T^{*}T})^{\perp} = (\ker{T})^{\perp} = \Im{T^{*}}$
+
+		\item [(d)] $\dim{\Im{T^{*}T}} = \dim{\Im{T^{*}}} = \dim{\Im{T}}$
+	\end{enumerate}
+\end{proof}
+\marginnote{\textbf{Definition}}[8pt]
+\begin{definition}[frametitle={Singular Value Decomposition}]
+	The singular values of $T$ are defined as the square roots of the eigenvalues of $T^{*}T$, usually ordered from largest to smallest and called 
+	\begin{equation*}
+		s_{1} \geq s_{2} \geq \ldots \geq s_{n} \geq 0	
+	\end{equation*}
+\end{definition}
+\marginnote{\textbf{Theorem}}[8pt]
+\begin{theorem}[frametitle={}]
+	Suppose $T \in \mathcal{L}(V, W)$ and the positive singular values of $T$ are $s_{1}, \ldots, s_{m}$. Then there exist orthonormal vectors $e_{1}, \ldots, e_{m}$ in $V$ and $f_{1}, \ldots, f_{m}$ in $W$ such that 
+	\begin{align*}
+		Tv = s_{1}\langle v,e_{1} \rangle f_{1} + \cdots + s_{m}\langle v,e_{m} \rangle f_{m}
+	\end{align*}
+	
+\end{theorem}
+\begin{proof}
+	Recall the eigenvalues of $T^{*}T$ are $s_{1}^{2}, \ldots, s_{m}^{2},\underbrace{s_{m + 1}^{2}, \ldots, s_{n}^{2}}_{=0}$. Since $T^{*}T$ is self-adjoint, there is an orthonormal basis $e_{1}, e_{2}, \ldots, e_{n}$ such that $T^{*}Te_{j}s_{j}^{2}e_{j}$. Define $f_{j} := \frac{1}{s_{j}}Te_{j}$ for $j = 1, \ldots, m$
+	\begin{align*}
+		\langle f_{j},f_{k} \rangle &= \dfrac{1}{s_{j}s_{k}}\langle Te_{j}, Te_{k} \rangle \\
+				   &= \dfrac{1}{s_{j}s_{k}}\langle \underbrace{T^{*}Te_{j}}_{s_{j}^{2}e_{j}}, e_{k} \rangle = 
+				   \begin{cases}
+					   1 & \text{if $j = k$} \\
+					   0 & \text{otherwise}
+				   \end{cases}
+	\end{align*}
+An arbitrary $v \in V$ can be written as $v = \langle v, e_{1} \rangle e_{1} + \cdots + \langle v, e_{n} \rangle e_{n}$. the action:
+\begin{align*}
+	Tv &= \langle v, e_{1} \rangle Te_{1} + \cdots + \langle v, e_{n} \rangle Te_{n} \\
+	   &= s_{1}\langle v, e_{1} \rangle f_{1} + \cdots + s_{m}\langle v, e_{m} \rangle f_{m}.
+\end{align*}
+\end{proof}
+\begin{topic}
+	\section*{Isometries}
+\end{topic}
+
+Special class of operators/linear maps where $S \in \mathcal{L}(V, W)$ iff 
+\begin{align*}
+	\lVert Sv \rVert &= \lVert v \rVert \hspace{30pt} \forall v \in V \\
+	\langle Sv, Sv \rangle &= \langle v, v \rangle \\
+	\langle S^{*}Sv, v \rangle &= \langle v, v \rangle \\
+	\langle (S^{*}S - I)v, v \rangle &= 0 \\
+	S^{*}S &= I
+\end{align*}
+\begin{topic}
+	\section*{Jordan Normal Form}
+\end{topic}
+\begin{align*}
+		\begin{bmatrix}
+		\lambda_{1} & 1           & \ldots & 0           &             &             &        &             &        &             &             &        &             \\
+		0           & \lambda_{1} & 1      & \vdots      &             &             &        &             &        &             &             &        &             \\
+		0           & 0           & \ddots & 1           &             &             &        &             &        &             &             &        &             \\
+		0           & 0           & 0      & \lambda_{1} &             &             &        &             &        &             &             &        &             \\
+		            &             &        &             & \lambda_{2} & 1           & \ldots & 0           &        &             &             &        &             \\
+		            &             &        &             & 0           & \lambda_{2} & 1      & \vdots      &        &             &             &        &             \\
+		            &             &        &             & 0           & 0           & \ddots & 1           &        &             &             &        &             \\
+		            &             &        &             & 0           & 0           & 0      & \lambda_{2} &        &             &             &        &             \\
+		            &             &        &             &             &             &        &             & \ddots &             &             &        &             \\
+		            &             &        &             &             &             &        &             &        & \lambda_{n} & 1           & \ldots & 0           \\
+		            &             &        &             &             &             &        &             &        & 0           & \lambda_{n} & 1      & \vdots      \\
+		            &             &        &             &             &             &        &             &        & 0           & 0           & \ddots & 1           \\
+		            &             &        &             &             &             &        &             &        & 0           & 0           & 0      & \lambda_{n} \\
+	\end{bmatrix}
+\end{align*}
+
+Disclaimer: to guarantee this decomposition, we need to work over $\mathbb{R} = \mathbb{C}$. 
+\begin{enumerate}
+	\item If $\mathbb{F} = \mathbb{C}$ and $\dim{B} \geq 1$, then $T$ always has an eigen value. Call it $\lambda_{1} \in \mathbb{C}$. Consider the chain 
+		\begin{align*}
+			\ker{(T - \lambda_{1}I)} \subseteq \ker{(T - \lambda_{1}I)^{2}} \subseteq \ker{(T - \lambda_{1}I)^{3}}
+		\end{align*}
+		Since $V$ is finite-dimensional, there exists a $k$ such that 
+		\begin{align*}
+			\ker{(T - \lambda_{1}I)^{k}} = \ker{(T - \lambda_{1}I)^{k + j} }
+		\end{align*}
+\end{enumerate}
+Now consider 
+\begin{align*}
+	\ker{(T - \lambda_{1}I)^{k}} \cap \Im{(T - \lambda_{1}I)^{k}}
+\end{align*}
+If $v \in \ker{(T - \lambda_{1}I)^{k}}$, then $v = (T - \lambda_{1}I)^{k}u$ and that $(T - \lambda_{1}I)^{k}v = 0$, or in other words, $(T - \lambda_{1}I)^{2k}u = 0$. But then $(T - \lambda_{1}I)^{k}u = 0$ .
+So $v = \ker{(T - \lambda_{1}I)^{k}} \oplus \Im{(T - \lambda_{1}I)^{k}}$. Both of these spaces are $T$ invariant.
+
+This reduces the problem to the case of a single eigenvalue. In fact, wlog, $\lambda_{1} = 0$, by shifting. Recall $T^{k} = 0$ on our subspace but $T^{k - 1} \neq 0$. So there exists $v \in$ our subspace such that $T^{k - 1}v \neq 0$. Then thereexists a $u \in $ the same subspace such that $\langle T^{k - 1}v, u \rangle \neq 0$. Here our subspace is $\ker{(T - \lambda_{1}I)^{k}}$. Call $T^{\prime} = T - \lambda_{1}I$. Consider the matrix $(\langle T^{\prime j - 1}v, T^{* k - j} \rangle u)^{i - 1, \ldots, k}_{j = 1, \ldots, k}$. This is a matrix of  size $k \times k$. 
+\begin{align*}
+	\langle T^{j - 1}v, T^{* k - i}u \rangle \\
+	 = \langle T^{k + j - i - 1}v, u \rangle = 
+	 \begin{cases}
+		 \neq 0 & \text{if $i - j$} \\
+		 0 & \text{if $j > i$}
+	 \end{cases}
+\end{align*}
+This matrix is invertible because it's triangular with nonzeros on the main diagonal. Take the vectors 
+\begin{equation*}
+	v, Tv, \ldots, T^{k - 1}v
+\end{equation*}
+Since any dependence among these vecotrs would give rise to the same dependence among the columns of the above matrix, they must be independent. So 
+	\begin{align*} 
+		T = 
+		\begin{bmatrix}
+		0      & 1      & 0      & \ldots & 0      \\
+		0      & 0      & 1      & \ldots & 0      \\
+		\vdots & \vdots & \vdots & \ddots & \vdots \\
+		0      & 0      & 0      & 0      & 0      \\
+		\end{bmatrix}
+	\end{align*}
+	Since every $T-$invariant space is subject to this process, we can split the entire space into subspaces spanned by these Jordan chains. 
+
+\begin{topic}
+	\section*{Instructions for Jordan Normal Form}
+\end{topic}
+
+\begin{examples}[frametitle={Examples}]
+	\begin{enumerate}
+		\item Find the JNF and Jordan basis for $D: \mathcal{L}(V)$ where $V = \mathcal{P}_{3}(\mathbb{R})$.
+			\begin{align*}
+				\text{JNF}(D) &= \begin{bmatrix}
+				0 & 1 & 0 & 0 \\
+				0 & 0 & 1 & 0 \\
+				0 & 0 & 0 & 1 \\
+				0 & 0 & 0 & 0 \\
+				\end{bmatrix}
+			\hspace{30pt} 
+			\begin{split}
+				f_{1}(x) &= 1 \\
+				f_{2}(x) &= x \\
+				f_{3}(x) &= \dfrac{x^{2}}{2} \\
+				f_{4}(x) &= \dfrac{x^{3}}{3!}  
+			\end{split} \\
+			\end{align*}
+		\item 
+			\begin{align*}
+				\begin{bmatrix}
+				1 & 1 & 0 &   &   &   &   &   &   &   &   \\
+				0 & 1 & 1 &   &   &   &   &   &   &   &   \\
+				0 & 0 & 1 &   &   &   &   &   &   &   &   \\
+				  &   &   & 1 & 1 &   &   &   &   &   &   \\
+				  &   &   & 0 & 1 &   &   &   &   &   &   \\
+				  &   &   &   &   & 0 & 1 & 0 &   &   &   \\
+				  &   &   &   &   & 0 & 0 & 1 &   &   &   \\
+				  &   &   &   &   & 0 & 0 & 0 &   &   &   \\
+				  &   &   &   &   &   &   &   & 0 & 1 & 0 \\
+				  &   &   &   &   &   &   &   & 0 & 0 & 1 \\
+				  &   &   &   &   &   &   &   & 0 & 0 & 0 \\
+				\end{bmatrix}
+			\end{align*}
+			\begin{center}
+				\begin{tabular}{ | c | c | }
+				\hline
+				$\dim{V} = 11$j & $\dim{\ker{T}} = 2$ \\
+				\hline
+				$\dim{\ker{T^{2}}} = 4$ & $\dim{\ker{T^{3}}} = 6$ \\ 
+				\hline		
+				$\dim{\ker{T^{4}}} = 6 = \dim{\ker{(T^{6})}}$ & \\
+				\hline 
+				\end{tabular}
+			\end{center}
+			We also have 
+			\begin{enumerate}
+				\item [(a)] $\dim{\ker{T - I}}= 2$
+
+				\item [(b)] $\dim{\ker{T - I}^{2}} = 4$
+
+				\item [(c)] $\dim{\ker{T - I}^{3}} = 5$ 
+
+				\item [(d)] $\dim{\ker{T - I}^{4}} = 5$
+			\end{enumerate}
+
+		\item Given the following info:
+			\begin{enumerate}
+				\item [(a)] $T$ has 3 eigenvalues: $i, -i, 0$
+
+				\item [(b)] $\dim{\ker{(T)}} = 3$ 
+
+				\item [(c)] $\dim{\ker{T^{2}}} = 5$
+
+				\item [(d)] $\dim{\ker{T^{3}}} = 6$
+
+				\item [(e)] $\dim{\ker{T - iI}} = 2$ 
+
+				\item [(f)] $\dim{\ker{T + iI}^{2}} = 4$
+
+				\item [(g)] $\dim{\ker{T + iI}^{3}} = 6$
+
+				\item [(h)] $\dim{\ker{T - iI}} = 4$
+
+				\item [(i)] $\dim{\ker{T - iI}} = 6$
+			\end{enumerate}
+			We have
+			\begin{align*}
+				\begin{bmatrix}
+					0 &   &   &   &   &   &    &    &    &   &    &    &    &    &    &    &    &    \\
+					  & 0 & 1 &   &   &   &    &    &    &   &    &    &    &    &    &    &    &    \\
+					  & 0 & 0 &   &   &   &    &    &    &   &    &    &    &    &    &    &    &    \\
+					  &   &   & 0 & 1 & 0 &    &    &    &   &    &    &    &    &    &    &    &    \\
+					  &   &   & 0 & 0 & 1 &    &    &    &   &    &    &    &    &    &    &    &    \\
+					  &   &   & 0 & 0 & 0 &    &    &    &   &    &    &    &    &    &    &    &    \\
+					  &   &   &   &   &   & -i & 1  & 0  &   &    &    &    &    &    &    &    &    \\
+					  &   &   &   &   &   & 0  & -i & 1  &   &    &    &    &    &    &    &    &    \\
+					  &   &   &   &   &   & 0  & 0  & -i &   &    &    &    &    &    &    &    &    \\
+					  &   &   &   &   &   &    &    &    & 0 & 1  & 0  &    &    &    &    &    &    \\
+					  &   &   &   &   &   &    &    &    & 0 & -i & 1  &    &    &    &    &    &    \\
+					  &   &   &   &   &   &    &    &    & 0 & 0  & -i &    &    &    &    &    &    \\
+					  &   &   &   &   &   &    &    &    &   &    &    & -i &    &    &    &    &    \\
+					  &   &   &   &   &   &    &    &    &   &    &    &    & -i &    &    &    &    \\
+					  &   &   &   &   &   &    &    &    &   &    &    &    &    & -i & 1  &    &    \\
+					  &   &   &   &   &   &    &    &    &   &    &    &    &    & 0  & -i &    &    \\
+					  &   &   &   &   &   &    &    &    &   &    &    &    &    &    &    & -i & 1  \\
+					  &   &   &   &   &   &    &    &    &   &    &    &    &    &    &    & 0  & -i \\
+				\end{bmatrix}
+			\end{align*}
+		\item $\mathcal{P}_{2}^{x, y}(\mathbb{R})$ are bivariate polynomials of degree $\leq 2$.
+
+			Let the operator be $T : \pdv{x} + \pdv{y}$ and $V$ has a basis $\{1, x, y, x^{2}, xy, y^{2}\}$. The action of $T$ reduces the degree of the polynomials. The eigenvalue is 0 because we need to apply $T$ enough times to kill all the basis vectors. We need to apply $T$ 3 times to send all vectors to 0. So the $\dim{\ker{(T)^{3}}} = 6$, as it kills the whole space. What are
+			\begin{enumerate}
+				\item [(a)] $\dim{\ker{T^{3}}} = 6$ 
+
+				\item [(b)] $\dim{\ker{T^{2}}} = 5$
+
+				\item [(c)] $\dim{\ker{T}} = 3$
+			\end{enumerate}
+			Take
+			\begin{align*}
+				x^{2} &\mapsto 2x \mapsto 2\\
+				xy &\mapsto x + y \mapsto 2\\
+				y^{2} &\mapsto 2y \mapsto 2\\
+				x &\mapsto 1 \mapsto 0\\
+				y &\mapsto 1 \mapsto 0\\
+				1 &\mapsto 0 \mapsto 0   
+			\end{align*}
+			We can find the dimension of the null space by looking at the dimension of the range:
+
+			\begin{enumerate}
+				\item $\dim{\Im{T}} = 3 \rightarrow \dim{\ker{T}} = 3$. In fact, $1, x - y, (x - y)^{2} \in \ker{T}$
+
+				\item $\dim{\Im{T^{2}}} = 1 \rightarrow \dim{\ker{T^{2}}} = 5$. So we have $1, x - y, (x - y)^{2}, x, x^{2} - y^{2} \in \ker{T^{2}}$.
+			\end{enumerate}
+			So we can find the Jordan Normal Form:
+			\begin{align*}
+				\begin{bmatrix}
+					0 & 1 & 0 &   &   &   \\
+					0 & 0 & 1 &   &   &   \\
+					0 & 0 & 0 &   &   &   \\
+					  &   &   & 0 & 1 &   \\
+					  &   &   & 0 & 0 &   \\
+					  &   &   &   &   & 0 \\
+				\end{bmatrix}
+			\end{align*}
+			Now for the Jordan Basis, The first column goes to $2$, then $2x$, then, $x^{2}$. Take the next block to have $2(x - y),x^{2} - y^{2}$. Last basis vector is $(x - y)^{2}$.
+
+	\end{enumerate}
+\end{examples}
+
+
+
+
+\end{document}

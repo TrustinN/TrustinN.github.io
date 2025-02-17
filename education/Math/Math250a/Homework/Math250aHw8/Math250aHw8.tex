@@ -1,0 +1,376 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math250a/Homework/Math250aHw8/Math250aHw8.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+
+\title{Math250aHw8}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Write out a careful proof of the ``contravariant Yoneda embedding theorem'':
+
+\hspace{15pt}\textbf{Theorem 0.1}: If $F$ is a contravariant functor from a category $C$ to the category of sets, and $A$ is an object in $C$, then there is a natural isomorphism
+    \begin{equation*}
+        ((-, A), F) \cong F(A)
+    \end{equation*}
+and its important consequence, the full embedding theorem:
+    \begin{proof}
+        We want to show: 
+            \begin{center}
+                \begin{tikzcd}
+                    ((-, A), F)\ar[rr, "\delta"', bend right = 20] & \cong &  F(A)\ar[ll, "\eta"', bend right = 20]   
+                \end{tikzcd}
+            \end{center}
+        where $\delta\eta = id$ and $id = \eta\delta$. We consider $\delta_{A}$ as 
+            \begin{equation*}
+                ((A, A), F) \rightarrow F(A)
+            \end{equation*}
+        and since the functor is contravariant:
+            \begin{center}
+                \begin{tikzcd}
+                    F(A)\ar[r, " F(\varphi)"] & F(A)                         \\
+                    A\ar[u, ""]               & A\ar[u, ""]\ar[l, "\varphi"]   
+                \end{tikzcd}
+            \end{center}
+        commutes. So if $\alpha_{A} \in ((A, A), F)$, then we send it by $\delta_{A}$ to an object in $F(A)$, which is the evaluation of $\alpha_{A}$. We know that identities are sent to identities by isomorphism, so it must be that $\alpha_{A} \mapsto \alpha_{A}(1_{A})$. 
+
+        Now for $\eta_{B}(x)$, consider the diagram:
+            \begin{center}
+                \begin{tikzcd}
+                    (A, A)\ar[r, ""]\ar[d, "\varphi \circ f"] & F(A)\ar[d, "F(\varphi \circ f)"] \\
+                    (B, A)\ar[r, ""]                          & F(B)                               
+                \end{tikzcd}
+            \end{center}
+        If we have $\varphi \in (A, A)$, then for some $f : B \rightarrow A$, we have that the morphism from $(A, A) \rightarrow (B, A)$ is composition shown above. Now if $x \in F(A)$, then it is sent to $F(B)$ by $F(\varphi \circ f)(x)$. Then there is a natural mapping from $(B, A) \rightarrow F(B)$:
+            \begin{center}
+                \begin{tikzcd}
+                    f \ar[r, ""]\ar[d, "\varphi \circ f"] & x\ar[d, "F(\varphi \circ f)"] \\
+                    \varphi \circ f \ar[r, ""]            & F(\varphi \circ f)(x)           
+                \end{tikzcd}
+            \end{center}
+        Then if $\psi \in (B, A)$, we have the mapping from $\eta : x \mapsto (\psi \mapsto F(\psi)(x))$. 
+
+        ($\delta(\eta(x)) = x$) We have:
+            \begin{align*}
+                \delta(\eta(x)) &= (\eta(x))_{A}(1_{A}) \\
+                                &= F(\varphi)(x)(1_{A}  \\
+                                &= F(1_{A})(x)          \\
+                                &= (1_{A})(x)           \\
+                                &= x                      
+            \end{align*}
+        which shows that $\delta\eta$ is the identity on $F(A)$.
+
+        (${\eta(\delta(\alpha))}_{B} = \alpha_{B}$) We have that 
+            \begin{align*}
+                \eta(\delta(\alpha))_{B}(\varphi) &= \eta(\alpha_{A}(1_{A}))_{B}(\varphi)   \\
+                                                  &= F(\varphi)(\alpha_{A}(1_{A})) 
+            \end{align*}
+        Now recall that we have the natural transformation:
+            \begin{center}
+                \begin{tikzcd}
+                    (A, A) \ar[r, "\alpha_{A}"]\ar[d, "\varphi"] &  F(A)\ar[d, "F(\varphi)"] \\
+                    (B, A)\ar[r, "\alpha_{B}"]                   & F(B)                        
+                \end{tikzcd}
+            \end{center}
+        So we have 
+            \begin{equation*}
+                F(\varphi)(\alpha_{A}(1_{A})) = F(\varphi)(\alpha_{A})(1_{A}) = \alpha_{B}(1_{A})(\varphi) =  \alpha_{B}(\varphi)
+            \end{equation*}
+        Therefore, we have that
+            \begin{equation*}
+                \eta(\delta(\alpha))_{B}(\varphi) = \alpha_{B}(\varphi)
+            \end{equation*}
+        where $\varphi$ was just a placeholder morphism. So $\eta(\delta(\alpha))_{B} = \alpha_{B}$, which shows that $\eta\delta$ is the identity.
+    \end{proof}
+
+\hspace{15pt}\textbf{Corollary 0.2}: The functor from $C$ to the category of functors $C \rightarrow \text{Sets}$ taking an object $A$ to the functor $(-, A)$ is one-to-one and onto on morphisms and takes non-isomorphic objects to non-isomorphic functors.
+    \begin{proof}
+        We will use the fact that for any $A$ object of $C$, since $(-, A)
+        $ is a contravariant functor, we have:
+            \begin{equation*}
+                ((-, A), id) \cong A
+            \end{equation*}
+        Now we just map:
+            \begin{equation*}
+                ((-, A), id) \mapsto (-, A)
+            \end{equation*}
+        This is one-to-one because if $F(((-, A), id)) = F(((-, B), id))$, then $(-, A) \cong (-, B)$, which means that the identity morphism in $(A, A)$ must map to the identity on $(A, B)$ which is only possible if $A \cong B$ or $((-, A), id) \cong ((-, B), id)$. The map is onto because if $(-, D) \in (C \rightarrow \text{Set})$, then we just have that $((-, D), id) \cong D$ maps to it. We finally have that non-isomorphic objects are sent to non-isomorphic functors just by the contrapositive statement of the injectivity proved before. So we are done.
+    \end{proof}
+
+\textbf{Exercise 2}: Read Lang, pp. 173-186 and do problems p.213, $\#1-3$.
+
+\textbf{Exercise 3}: Let $k$ be a field and $f(X) \in k[X]$ a non-zero polynomial. Show that the following conditions are equivalent:
+    \begin{itemize}
+        \item [(a)] The ideal $(f(X))$ is prime.
+
+        \item [(b)] The ideal $(f(X))$ is maximal.
+
+        \item [(c)] $f(X)$ is irreducible.
+    \end{itemize}
+        \begin{proof}
+            We will show that $a \rightarrow c$. This is because if $f(X) = g(X)h(X)$, then since $(f(X))$ is prime, we have that $g(X) \in (f(X))$ or $h(X) \in (f(X))$. So $g(X) \divides f(X)$ wlog. But since the ideal is generated by $f(X)$, we also have $f(X) \divides g(X)$. So:
+                \begin{equation*}
+                    f(X)u = g(X)
+                \end{equation*}
+            and 
+                \begin{equation*}
+                    g(X)p = f(X)
+                \end{equation*}
+            so
+                \begin{equation*}
+                    g(X)up = g(X)
+                \end{equation*}
+            Therefore, $p$ is a unit which means that $f(X)$ is irreducible.
+
+            We will now show that $c \rightarrow b$. Since $k$ is a field, we have $k[X]$ is a Euclidean Domain and therefore a PID. So we have $(f(X), g(X)) = (h(X))$ for $g(X)$ not a multiple of $f(X)$. This means that $h(X) \divides f(X)$, $h(X) \divides g(X)$. Then $h(X)$ is a unit or differs from $f(X)$ by a unit. If $h(X)$ is a unit, we are done. If not, we have:
+                \begin{equation*}
+                    af(X) = h(X)
+                \end{equation*}
+            but 
+                \begin{equation*}
+                    g(X) = bh(X)
+                \end{equation*}
+            so
+                \begin{equation*}
+                    g(X) = abf(X)
+                \end{equation*}
+            which shows that $f(X) \divides g(X)$ which contradicts our assumption. So if $(f(X))$ is contained in any ideal, that ideal must be the whole ring or itself.
+
+            Now for a proof of $b \rightarrow a$. Suppose $g(X)h(X) \in (f(X))$, $(f(X))$ a proper ideal of $k[X]$. Since $k[X]$ is a Euclidean Domain, we see wlog that $g(X)$ has the same degree as $f(X)$, otherwise, we perform the division algorithm on the degree of $f$ and see that $(f(X)) = k[X]$. But:
+                \begin{equation*}
+                    \mathop{deg}g + \mathop{deg}h = \mathop{deg}f
+                \end{equation*}
+            So 
+                \begin{equation*}
+                    \mathop{deg}h = 0
+                \end{equation*}
+            which means that $h$ is a unit. So $g(X) \in f(X)$.
+        \end{proof}
+
+\textbf{Exercise 4}: 
+    \begin{itemize}
+        \item [(a)] State and prove the analogue of Theorem $5.2$ for the rational numbers.
+            \begin{proof}
+                We want to show that for any $\alpha \in \Frac{\mathbb{Z}}$, there is a unique decomposition such that if $P$ is the set of primes in $\mathbb{Z}$, and $j(p)$ is $0$ for almost all $p$,
+                    \begin{equation*}
+                        \alpha = \sum_{p \in P}\dfrac{\alpha_{p}}{p^{j(p)}} + \beta
+                    \end{equation*}
+                where $\alpha_{p}, \beta \in \mathbb{Z}$, $\alpha_{p} = 0$ if $j(p) = 0$, $\alpha_{p}$ is relatively prime to $p^{j(p)}$ if $j(p) \geq 1$, and $\lvert \alpha_{p} \rvert < \lvert p^{j(p)} \rvert$ if $j(p) > 0$. Furthermore, this decomposition is unique.
+
+                First, consider the primes $p_{1}, \ldots , p_{m}$ where $j(p_{i}) \neq 0$. We will show that there are $a_{1}, \ldots , a_{m}$ non-zero such that for any number of primes $p_{1}, \ldots , p_{m}$ chosen, $m \geq 2$:
+                    \begin{equation*}
+                        a_{1}p_{1}^{j(p_{1})} + a_{2}p_{2}^{j(p_{2})} + \cdots a_{m}p_{m}^{j(p_{m})} = 1
+                    \end{equation*}
+                Base Case: For $m = 2$, since $\mathbb{Z}$ is a PID, $p_{1}, p_{2}$ relatively prime, we have:
+                    \begin{equation*}
+                        a_{1}p_{1}^{j(p_{1})} + a_{2}p_{2}^{j(p_{2})} = 1
+                    \end{equation*}
+                Indeed neither $a_{1}, a_{2}$ are zero, because primes are not units by definition, so they cannot generate the ring.
+
+                Inductive Step: Suppose this is true for $p_{1}, \ldots , p_{m}$. Then we have:
+                    \begin{equation*}
+                        p^{\prime} = a_{1}p_{1}^{j(p_{1})} + a_{2}p_{2}^{j(p_{2})} + \cdots +a_{m}p_{m}^{j(p_{m})} = 1
+                    \end{equation*}
+                Then $p_{m + 1}$ does not divide $p^{\prime}$, otherwise, $(p_{m + 1})$ generates the entire ring. So $p_{m + 1}, p^{\prime}$ are relatively prime. Now we have:
+                    \begin{equation*}
+                        (1 - p_{m + 1})p^{\prime} + p_{m + 1} = 1
+                    \end{equation*}
+                so we have non-zero coefficients $a_{1}, \ldots , a_{m + 1}$ such that the linear combination equals $1$. Now divide through 
+                    \begin{equation*}
+                        a_{1}p_{1}^{j(p_{1})} + a_{2}p_{2}^{j(p_{2})} + \cdots a_{m}p_{m}^{j(p_{m})} = 1
+                    \end{equation*}
+                by $p_{1}^{j(p_{1})}p_{2}^{j(p_{2})}\cdots p_{m}^{j(p_{m})}$ to get:
+                    \begin{equation*}
+                        \dfrac{1}{p_{1}^{j(p_{1})}p_{2}^{j(p_{2})}\cdots p_{m}^{j(p_{m})}} = \sum_{i = 1}^{m} \dfrac{a_{i}}{\prod_{k \neq i}p_{k}^{j(p_{k})}}
+                    \end{equation*}
+                We will use this to show that any element of $\Frac{\mathbb{Z}}$ with a denominator on $m$ primes can be decomposed into a sum of elements of $\Frac{\mathbb{Z}}$ with each summand having one prime. For the case of where a summand has one prime in the denominator, that is the very most it can be decomposed. If there are two primes, we have:
+                    \begin{equation*}
+                        a_{1}p_{1}^{j(p_{1})} + a_{2}p_{2}^{j(p_{2})} = 1
+                    \end{equation*}
+                which means:
+                    \begin{equation*}
+                        ca_{1}\dfrac{p_{1}}{p_{2}^{j(p_{2})}} + ca_{2}\dfrac{p_{2}}{p_{1}^{j(p_{1})}} = \dfrac{c}{p_{1}^{j(p_{1})}p_{2}^{j(p_{2})}}
+                    \end{equation*}
+                So for any $c/p_{1}^{j(p_{1})}p_{2}^{j(p_{2})}$, it can be decomposed into denominators with only one prime factor. Now suppose we had $c/\prod_{i = 1}^{m}p_{m}^{j(p_{m})}$, where there are $m$ prime factors in the denominator. By the fact that we have the decomposition:
+                    \begin{equation*}
+                        \alpha = \dfrac{c}{p_{1}^{j(p_{1})}p_{2}^{j(p_{2})}\cdots p_{m}^{j(p_{m})}} = c\sum_{i = 1}^{m} \dfrac{a_{i}}{\prod_{k \neq i}p_{k}^{j(p_{k})}}
+                    \end{equation*}
+                the summands on the RHS have fewer primes in the denominator, and by induction, we can decompose those into sums of fractions with one prime in the denominator.
+
+                Now since $\alpha$ in the above equation is decomposed as such, if we have other summands with different primes $p^{\prime}_{i}$ in the denominator as already established, then if: 
+                    \begin{equation*}
+                        \alpha = c\sum_{i = 1}^{m} \dfrac{a_{i}}{\prod_{k \neq i}p_{k}^{j(p_{k})}} + \sum_{i \geq 0} \dfrac{c_{i}}{{p^{\prime}_{i}}^{j(p^{\prime}_{i})}}
+                    \end{equation*}
+                Then we know each of the $c_{i}$'s are $0$, if we also prove the unique decomposition. If any of the $\alpha_{p}$ in the numerator is greater than the denominator, we have the Euclidean algorithm such that the quotient gets added to $\beta$ and the remainder replaces the numerator. $\alpha_{p}$ is relatively prime to $p^{j(p)}$ otherwise it belongs as a summand of $\beta$. Now we just need to show the decomposition is unique. Suppose that:
+                    \begin{equation*}
+                        \sum_{p \in P}\dfrac{\alpha_{p}}{p^{j(p)}} + \beta  = \sum_{q \in P} \dfrac{\alpha^{\prime}_{q}}{q^{j(q)}} + \beta^{\prime}
+                    \end{equation*}
+                this means that:
+                    \begin{equation*}
+                        \sum_{p \in P}\dfrac{\alpha_{p}}{p^{j(p)}} + \beta - \sum_{p \in P} \dfrac{\alpha^{\prime}_{p}}{p^{i(p)}} - \beta^{\prime} = 0
+                    \end{equation*}
+                We have $\beta = \beta^{\prime}$ because all the other summands are in $\Frac{\mathbb{Z}}$ and not in $\mathbb{Z}$. Now if for a fixed prime $q, j(1) = i(1)$, we have that 
+                    \begin{equation*}
+                        \dfrac{\alpha_{q}}{q^{j(q)}} - \dfrac{\alpha^{\prime}_{q}}{q^{i(q)}} = 0
+                    \end{equation*}
+                so indeed $\alpha_{q} = \alpha^{\prime}_{q}$. Now suppose $j(q) < i(q)$ for some prime $q$. Then we clear denominators by multiplying by $dq^{i(q)}$ where $d$ is the lcm of the prime powers not equal to $q$. So we are left with:
+                    \begin{equation*}
+                        d(\alpha_{q} - {\alpha^{\prime}_{q}}^{q^{i(q)  - j(q) }}) = q^{i(q)}\eta
+                    \end{equation*}
+                for some $\eta \in \mathbb{Z}$. But $q$ does not divide either product parts on the LHS, which is a contradiction. So $i(q) = j(q)$ and the decomposition is unique.
+            \end{proof}
+
+        \item [(b)] State and prove the analogue of Theorem $5.3$ for positive integers.
+            \begin{proof}
+                Let $p, q \in \mathbb{Z}_{\geq 0}$. Then there is a unique $a_{i}$ such that: 
+
+                    \begin{equation*}
+                        p = a_{0} + a_{1}q + a_{2}q^{2} + \cdots + a_{n}q^{n}
+                    \end{equation*}
+                such that $a_{i} < q$ where $q > 1$. If $q > p$, then we take $a_{0}  = p < q$. If $q = p$, we take $a_{0} = 0$, $a_{1} = 1$. 
+
+                Otherwise, for $q < p$, we require the division algorithm, which will be proved at the end of this proof. Take the largest power of $q$ such that $q^{n} < p$. Then perform the division algorithm:
+                    \begin{equation*}
+                        p = a_{n}q^{n} + r_{n}
+                    \end{equation*}
+                We know that $a_{n} < q$ because $q^{n}$ is the largest power less than $p$. Furthermore, ,$r_{n} < q^{n}$. Now take the largest power of $q$ such that $q^{m} < r_{n}$. We inductively repeat this process until $r_{i} < q$. So we have:
+                    \begin{equation*}
+                        p = a_{0} + a_{1}q + a_{2}q^{2} + \cdots + a_{n}q^{n}
+                    \end{equation*}
+                as desired. Suppose that we also had:
+                    \begin{equation*}
+                        p = b_{0} + b_{1}q + b_{2}q^{2} + \cdots + b_{n}q^{n}
+                    \end{equation*}
+                Then
+                    \begin{equation*}
+                        0 = (a_{0} - b_{0}) + (a_{1} - b_{1})q + \cdots + (a_{n} - b_{n})q^{n}
+                    \end{equation*}
+                So $q$ divides $a_{0} - b_{0}$ which we know are both less than $q$. So $a_{0} - b_{0} = 0$ and $a_{0} = b_{0}$. But now we have:
+                    \begin{equation*}
+                        0 = (a_{1} - b_{1})q + (a_{2} - b_{2})q^{2} + \cdots  + (a_{n} - b_{n})q^{n}
+                    \end{equation*}
+                which tells us that $q \divides (a_{1} - b_{1})$. So we can repeat this process inductively to show $a_{i} = b_{i}$.
+
+                (Division Algorithm) (Existence) Since $q > 1$, we know that for $d \geq p + 1$,
+                    \begin{equation*}
+                        dq > p
+                    \end{equation*}
+                So we have a finite number of possibilities for $d$: $1, \ldots , p$. Choose the least of them such that $(d + 1)q > p$. Then 
+                    \begin{equation*}
+                        dq < p \implies p - dq = r > o
+                    \end{equation*}
+                But 
+                    \begin{equation*}
+                        (d + 1)q > p \implies dq + q > p \implies q > p - dq = r
+                    \end{equation*}
+                So we have found a $d$ such that:
+                    \begin{equation*}
+                        p = dq + r
+                    \end{equation*}
+                and $r < q$.
+
+                (Uniqueness) Suppose that $p = d_{1}q + r_{1} = d_{2}q + r_{2}$. Then 
+                    \begin{equation*}
+                        0 = q(d_{1} - d_{2}) + r_{1} - r_{2}
+                    \end{equation*}
+                Then $q$ divides $r_{1} - r_{2}$ which means that $r_{1} - r_{2} = 0$ as $d > r_{1}, r_{2} \geq 0$. So then:
+                    \begin{equation*}
+                        0 = q(d_{1} - d_{2})
+                    \end{equation*}
+                If $q = 0$, we have $p = r_{1} = r_{2}$, so we are done. Otherwise, since there are no zero divisors in $\mathbb{Z}_{\geq 0}$, $d_{1} - d_{2} = 0$ which means $d_{1} = d_{2}$. 
+            \end{proof} 
+    \end{itemize}
+
+\textbf{Exercise 5}: Let $f$ be a polynomial in one variable over a field $k$. Let $X, Y$ be two variables. Show that in $k[X, Y]$ we have a ``Taylor series'' expansion 
+    \begin{equation*}
+        f(X + Y) = f(X) + \sum_{i = 1}^{n}\varphi_{i}(X)Y^{i},
+    \end{equation*}
+where $\varphi_{i}(X)$ is a polynomial in $X$ with coefficients in $k$. If $k$ has characteristic $0$, show that
+    \begin{equation*}
+        \varphi_{i}(X) = \dfrac{D^{i}f(X)}{i!}.
+    \end{equation*}
+    \begin{proof}
+        Notice that we have for $f$ as a polynomial in one variable:
+            \begin{equation*}
+                f(z) = k_{0} + k_{1}z + k_{2}z^{2} + \cdots 
+            \end{equation*}
+        where finitely many $k_{i}$ are non-zero. Then
+            \begin{equation*}
+                f(X + Y) = k_{0} + k_{1}(X + Y) + k_{2}(X + Y)^{2} + \cdots 
+            \end{equation*}
+        By the binomial theorem, we have:
+            \begin{align*}
+                f(X + Y) &= \sum_{i = 0}^{m}k_{i}\sum_{j = 0}^{i} \dbinom{i}{j}X^{i - j}Y^{j} \\
+                         &= \sum_{i = 1}^{m}k_{i}\sum_{j = 1}^{i}\dbinom{i}{j}X^{i - j}Y^{j} + \sum_{i = 0}^{m}k_{i}\dbinom{i}{0}X^{i} \\
+                         &= \sum_{i = 1}^{m}k_{i}\sum_{j = 1}^{i}\dbinom{i}{j}X^{i - j}Y^{j} + f(X) \\
+                         &= \sum_{i = 1}^{m}\sum_{j = 1}^{i}k_{i}\dbinom{i}{j}X^{i - j}Y^{j} + f(X)
+            \end{align*}
+        Now for each $i = 1, \ldots , m$, we look at the instance of when $j = 1$. This gives us 
+            \begin{equation*}
+                k_{i}\dbinom{i}{1}X^{i - 1}Y^{1}
+            \end{equation*}
+        So then the collection of terms with $Y^{1}$ is:
+            \begin{equation*}
+                \sum_{i = 1}^{m}k_{i}\dbinom{i}{1}X^{i - 1}Y^{1} = \left(\sum_{i = 1}^{m}k_{i}\dbinom{i}{1}X^{i - 1}\right)(Y^{1})
+            \end{equation*}
+        and therefore,
+            \begin{equation*}
+                \varphi_{1} = \sum_{i = 1}^{m}k_{i}\dbinom{i}{1}X^{i - 1}
+            \end{equation*}
+        and in general:
+            \begin{equation*}
+                \varphi_{j} = \sum_{i \geq j}^{m}k_{i}\dbinom{i}{j}X^{i - j}
+            \end{equation*}
+        which is a polynomial on $X$, and indeed,
+            \begin{align*}
+                f(X + Y) &= \sum_{i = 1}^{m}\sum_{j = 1}^{i}k_{i}\dbinom{i}{j}X^{i - j}Y^{j} + f(X) \\
+                         &= \sum_{j = 1}^{i}\sum_{i \geq j}^{m}k_{i}\dbinom{i}{j}X^{i - j}Y^{j} + f(X) \\
+                         &= f(X) + \sum_{j = 1}^{i}\varphi_{j}(X)Y^{j}
+            \end{align*}
+
+        Now for the second part, we recall
+            \begin{equation*}
+                \varphi_{j} = \sum_{i \geq j}^{m}k_{i}\dbinom{i}{j}X^{i - j}
+            \end{equation*}
+        So we can factor out a $j!$ from the bottom:
+            \begin{align*}
+                \varphi_{j} &= \dfrac{1}{j!} \sum_{i \geq j}^{m}k_{i}\dfrac{i!}{(i - j)!}X^{i - j}\\ 
+                            &= \dfrac{1}{j!} \sum_{i \geq j}^{m} k_{i} (i)(i - 1)\cdots (i - j + 1)X^{i - j} \\
+                            &= \dfrac{1}{j!} \sum_{i \geq j}^{m} k_{i} D^{j}X^{i} \\
+                            &= \dfrac{1}{j!} D^{j}\sum_{i \geq j}^{m} k_{i}X^{i} \\
+                            &= \dfrac{1}{j!} D^{j}f(X)
+            \end{align*}
+        which concludes the proof.
+    \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

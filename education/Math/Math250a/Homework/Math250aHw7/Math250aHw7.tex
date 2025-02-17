@@ -1,0 +1,122 @@
+%! TeX root = Downloads/Berkeley/Math/Math250a/Homework/Math250aHw7/Math250aHw7.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+
+\title{Math250aHw7}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\section*{Part A}
+\hrule
+\textbf{Exercise 1}: Let $\mathbb{Q} \subseteq \mathbb{R}$ be the topological subspace of rationals and $\mathbb{Q} \rightarrow \mathbb{R}$ be the inclusion map as an epimorphism in the category of topological Hausdorff spaces and continuous maps. Show that dense subobjects can be defined by epimorphic monomorphisms.
+    \begin{answer}
+        We see that if we have a dense set $D$ and $T$ such that $D \rightarrow T$ is a subobject, then it is a monomorphism by definition. Furthermore, it is epimorphic since for
+            \begin{center}
+                \begin{tikzcd}
+                    D \ar[r, ""] & T \ar[r, "f", shift left] \ar[r, "g"', shift right] & T^{\prime} 
+                \end{tikzcd}
+            \end{center}
+        if $D \rightarrow T \xrightarrow{f} T^{\prime} = D \rightarrow T \xrightarrow{g}  T^{\prime}$, we have that inclusion maps are unique since they are the kernel of some map out of $T^{\prime}$. So $f = g$ which shows that dense subobjects are defined by epimorphic monomorphisms. 
+    \end{answer}
+
+\section*{Part B}
+\hrule
+\textbf{Exercise 1}: Show that if $\mathcal{A}$ is the category of ordered sets and $D : \mathcal{A} \rightarrow \mathcal{A}$ is a functor assigning a set to its dual, then the automorphism class group of $\mathcal{A}$ has at least two elements.
+    \begin{answer}
+        We know that $id_{\mathcal{A}}$ is a functor naturally equivalent to the identity functor. So $id_{\mathcal{A}}$ belongs in $I$. We also have that $D$ is an equivalence because if we take $D^{2}$, we get back our same set, as $D$ just reverses the order.
+
+        We know that $id, D$ are not of the same equivalence class because $D^{2} = id$ and $id = id$. Therefore, the automorphism group contains at least $id, D$.
+    \end{answer}
+
+\textbf{Exercise 2}: Let $[\rightarrow ]$ be the category with 
+    \begin{itemize}
+        \item Objects $L, R$
+
+        \item Morphism $L \rightarrow R$ 
+    \end{itemize}
+and $[\rightarrow \rightarrow ]$ be the category:
+    \begin{itemize}
+        \item Objects $L, M, R$
+
+        \item Morphisms $L \rightarrow M$, $M \rightarrow R$, $L \rightarrow R$ 
+    \end{itemize}
+    \begin{answer}
+        The morphisms in the image of the functor $[\rightarrow ] + [\rightarrow ] \xrightarrow{\pi}  [\rightarrow \rightarrow ]$ does not form a category because if the objects are $\pi(L_{1}) = L$, $\pi(L_{2}) = \pi(R_{1}) = M$, and $\pi(R_{2}) = R$, then we have the morphisms 
+            \begin{itemize}
+                \item $\pi(L_{1} \rightarrow R_{1}) = L \rightarrow M$
+
+                \item $\pi(L_{2}) \rightarrow R_{2} = M \rightarrow R$
+
+                \item But there are no more morphisms because both $[\rightarrow ]$ have only one morphism.
+            \end{itemize}
+        So the composition $L \rightarrow R$ does not exist in the image of $\pi$.
+    \end{answer}
+
+\section*{Part C}
+\hrule
+\textbf{Exercise 1}: Let $\mathcal{S}$ be the category of sets with morphisms as set functions. Prove that the automorphism class group of $\mathcal{S}$ is trivial. Use the fact that if $F: \mathcal{S} \rightarrow \mathcal{S}$ is an automorphism, then $F(D)$ has one element, if $D$ has one element. Now define for each $A \in \mathcal{S}$, $A \rightarrow F(A)$ where:
+    \begin{center}
+        \begin{tikzcd}
+            D \ar[r, ""]\ar[d, "x"] & F(D)\ar[d, "F(x)"] \\
+            A \ar[r, ""] & F(A)   
+        \end{tikzcd}
+    \end{center}
+commutes for all $x \in (D, A)$.
+    \begin{proof}
+        So we can label the map $\psi: D \rightarrow F(D)$ and $\varphi: A \rightarrow F(A)$. To make the map commute, we consider the mappings from the diagram:
+            \begin{center}
+                \begin{tikzcd}
+                    d \ar[r, "", maps to]\ar[d, "", maps to] & d^{\prime}\ar[d, "", maps to]\\
+                    a                     & a^{\prime}   
+                \end{tikzcd}
+            \end{center}
+        which means that 
+            \begin{equation*}
+                \varphi(a) = F(x)\psi(d)
+            \end{equation*}
+        sending all elements of $A$ into one element of $F(A)$, making the diagram commute for any choice of $x$.
+
+        We conclude that there is a natural transformation from the identity functor:
+            \begin{center}
+                \begin{tikzcd}
+                    D \ar[d, "x"] \\
+                    A               
+                \end{tikzcd}
+            \end{center}
+        to our functor restricted to $(D, A)$. But now the action of this functor on $(D, A)$ uniquely determines our functor, since:
+            \begin{center}
+                \begin{tikzcd}
+                    D_{1}  \ar[ddrr, "x_{1}",bend left = 20]\ar[ddr, ""] &                    &   & \\
+                    D_{2}  \ar[dr, ""]\ar[drr, "x_{2}", bend left = 20] &                    &   & \\
+                    D_{3}  \ar[r, ""] & D \ar[r, "\sigma"] & A \ar[r, "\varphi"] & F(A)\\
+                    \vdots  &                    &   & \\
+                    D_{n}  \ar[uur, ""]\ar[uurr, "x_{n}", bend right = 20] &                    &     &
+                \end{tikzcd}
+            \end{center}
+        we can decompose any $n$ element set $D$ into a disjoint union of $1$ element sets. And since there is a mapping from $D_{1} \rightarrow F(A)$ where $D_{i}$ have size $1$, we know there is a mapping $\varphi$ that gives us a natural transformation from the identity functor to any automorphism functor.
+
+        There is also a way to go backwards and find a natural transformation from $F$ to the identity functor. So for $F$ in the automorphism class group, it is isomorphic to the identity functor, so the group is trivial.
+    \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

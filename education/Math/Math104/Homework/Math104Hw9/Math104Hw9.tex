@@ -1,0 +1,88 @@
+%! TeX root = Downloads/Berkeley/Math/Math104/Homework/Math104Hw9/Math104Hw9.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math104Hw9}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Let $(S, d)$ be a metric space and $s_{0} \in S$. Define $f(s) = d(s_{0}, s)$, prove that $f : S \rightarrow \mathbb{R}$ is uniformly continuous.
+    \begin{proof}
+        We want to show that $\forall \varepsilon> 0$, there $\exists \delta > 0$ such that if
+            \begin{equation*}
+                d(s_{1}, s_{2}) < \delta
+            \end{equation*}
+        then we have
+            \begin{equation*}
+                \lvert d(s_{0}, s_{1}) - d(s_{0}, s_{2}) \rvert < \varepsilon
+            \end{equation*}
+        Consider triangle inequality:   
+            \begin{align*}
+                    d(s_{0}, s_{1}) + d(s_{1}, s_{2})           &\geq   d(s_{0}, s_{2})                \\
+                d(s_{0}, s_{1}) - d(s_{0}, s_{2})               &\geq  -d(s_{1}, s_{2})                \\
+                d(s_{0}, s_{2}) - d(s_{0}, s_{1})               &\leq   d(s_{1}, s_{2})                \\
+                \lvert d(s_{0}, s_{2}) - d(s_{0}, s_{1}) \rvert & \leq   d(s_{1}, s_{2}) < \varepsilon   
+            \end{align*}
+        So if $\delta = \varepsilon$, we are done.
+    \end{proof}
+
+\textbf{Exercise 2}: 
+    \begin{itemize}
+        \item Find a continuous real-valued function $f$ on $(0, 1)$ such that $f((0, 1))$ is $[0, 1]$.
+            \begin{answer}
+                One continuous function is
+                    \begin{equation*}
+                        f(x) = 
+                            \begin{cases}
+                                0                 & 0 < x < \dfrac{1}{3}              \\
+                                2x - \dfrac{1}{3} & \dfrac{1}{3} \leq x <\dfrac{2}{3} \\
+                                1                 & \dfrac{2}{3} \leq x < 1             
+                            \end{cases}
+                    \end{equation*}
+            \end{answer}
+
+        \item Prove that for any continuous real-valued function $f$ on $[0, 1]$, $f([0, 1])$ can't be $(0, 1)$. 
+            \begin{proof}
+                Since $f$ is continuous, we know that the preimage of an open set must be open. Therefore, if it was $(0, 1)$, then that would mean that $[0, 1]$ would be open which is a contradiction.
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 3}: Assume $f: S \rightarrow S^{*}$ is continuous and $E \subseteq S$. If open sets $V_{1}, V_{2} \subseteq S^{*}$ separate $f(E)$, let $U_{1} = f^{-1}(V_{1})$ and $U_{2} = f^{-1}(V_{2})$, then $U_{1}, U_{2}$ separate $E$.
+    \begin{proof}
+        First, we know that the preimage of a continuous function if we take the preimage of an open set. So $U_{1}, U_{2}$ are open. Since $V_{1}, V_{2}$ separate $f(E)$, we know that $(V_{1} \cap f(E)) \cap (V_{2} \cap f(E)) = \emptyset$ and that $(V_{1} \cap f(E)) \cup (V_{2} \cap f(E)) = f(E)$. So we can find an $x \in E$ such that $f(x) \in V_{1} \cap f(E)$ or $f(x) \in V_{2} \cap f(E)$ but not both. Now if we take the preimage of $x$, we find that $x \in U_{1}$ or $U_{2}$ but not both. So $(E \cap U_{1}) \cap (E \cap U_{2}) = \emptyset$. We also learn that the preimage of $f(x)$ lands in either $U_{1}$ or $U_{2}$, so we also get $(E \cap U_{1}) \cup (E \cap U_{2}) = E$.
+    \end{proof}
+
+\textbf{Exercise 4}: Assume that $E$ is connected subset of $(S, d)$ then $E^{-}$ is also connected.
+    \begin{proof}
+        We know that $E^{-}$ is the smallest closed set containing $E$. If $E$ is closed, then we are done. Otherwise, suppose that $E$ is open. Suppose that $E^{-}$ is disconnected. Then we know there are $U_{1}, U_{2}$ such that $(U_{1} \cap E^{-}) \cap (U_{2} \cap E^{-}) = \emptyset$ and $(U_{1} \cap E^{-}) \cup (U_{2} \cap E^{-}) = E^{-}$, $U_{1} \cap E^{-}$, $U_{2} \cap E^{-}$ not empty, open.
+    \end{proof}
+
+\textbf{Exercise 5}: Let $E \subseteq \mathbb{R}^{2}$ be the set $\{(x, y) : x^{2} + y^{2} = 1\}$. Show that $E$ is path-connected.
+    \begin{proof}
+        Let $\gamma (t) = (\cos{t}, \sin{t})$. Suppose we had two points $(\cos{ \theta_{1}}, \sin{\theta_{1}})$ and $(\cos{\theta_{2}}, \sin{\theta_{2}})$. Let $\theta_{1} < \theta_{2}$. Then the path $\gamma: [\theta_{1}, \theta_{2}] \rightarrow E$ given by the gamma function above is a path connecting the two points.
+    \end{proof}
+
+\textbf{Exercise 6}: Suppose that $f$ is continuous function on $(0, 1)$ such that $f(x) \in \mathbb{Q}$ for any $x$. Prove that $f$ is a constant function, i.e. all values of $f(x)$ are the same number.
+    \begin{proof}
+        Suppose that $f(a) \neq f(b)$ for some $a \neq b \in (0, 1)$. By the intermediate value theorem, since there exists an irrational between two rational numbers, we must have $f(c)$ is irrational for some $c \in (0, 1)$. So we must have $f(a) = f(b)$ for all $a \neq b \in (0, 1)$.
+
+        (Alternate Proof) Since $f$ is continuous and $(0, 1)$ connected, continuous functions take connected sets to connected sets. So $f((0, 1))$ is connected also. It must be nonempty. If there are two distinct rationals, then there is an irrational in the interval between them, contradicting what we want. So there must be one rational value in the image of $f$. So $f$ is the constant function.
+    \end{proof}
+
+
+
+
+
+
+
+
+\end{document}

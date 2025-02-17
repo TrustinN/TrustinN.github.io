@@ -1,0 +1,277 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Compsci/CS170/Homework/CS170Hw3/CS170Hw3.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{CS170Hw3}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\section*{Study Group}
+\hrule
+Rohan Kudchadker: 3038065006
+
+\newpage
+\section*{Hadamard matrices}
+\hrule
+The Hadamard matrices $H_{0}, H_{1}, H_{2}, \ldots$ are defined as follows:
+    \begin{itemize}
+        \item $H_{0}$ is the $1 \times 1$ matrix $[1]$.
+
+        \item For $k > 0$, $H_{k}$ is recursively defined as the $2^{k} \times 2^{k}$ matrix 
+            \begin{equation*}
+                H_{k} = \begin{bmatrix}
+                    H_{k - 1} & H_{k - 1}  \\
+                    H_{k - 1} & -H_{k - 1}   
+                \end{bmatrix}
+            \end{equation*}
+        For instance, the first three Hadamard matrices $H_{0}, H_{1}$ and $H_{2}$ are:
+            \begin{equation*}
+                H_{0} = [1] \hspace{30pt} 
+                H_{1} = \begin{bmatrix}
+                    1 & 1  \\
+                    1 & -1   
+                \end{bmatrix} \hspace{30pt} 
+                \begin{bmatrix}
+                    1 & 1  & 1  & 1  \\
+                    1 & -1 & 1  & -1 \\
+                    1 & 1  & -1 & -1 \\
+                    1 & -1 & -1 & 1    
+                \end{bmatrix}
+            \end{equation*}
+            \begin{itemize}
+                \item Suppose that
+                    \begin{equation*}
+                        v = \begin{bmatrix}
+                            v_{1} \\
+                            v_{2}   
+                        \end{bmatrix}
+                    \end{equation*}
+                is a column vector of length $n = 2^{k}$. $v_{1}$ and $v_{2}$ are the top and bottom half of the vector, respectively. Therefore, they are each vectors of length $\frac{n}{2} = 2^{k - 1}$. Write the matrix-vector product $H_{k}v$ in terms of $H_{k - 1}, v_{1}$, and $v_{2}$ (note that $H_{k - 1}$ is a matrix of dimension $\frac{n}{2} \times \frac{n}{2}$, or $2^{k  -1} \times 2^{k - 1}$). Since $H_{k}$ is a $n \times n$ matrix, and $v$ is a vector of length $n$, the result will be a vector of length $n$.
+                    \begin{answer}
+                        This can be more easily visualized by breaking down the Hadamard matrix as:
+                            \begin{equation*}
+                                H_{k} = \begin{bmatrix}
+                                    H_{k - 1} & 0 \\
+                                    0         & 0   
+                                \end{bmatrix} + \begin{bmatrix}
+                                    0 & H_{k - 1} \\
+                                    0 & 0           
+                                \end{bmatrix} + \begin{bmatrix}
+                                    0         & 0 \\
+                                    H_{k - 1} & 0   
+                                \end{bmatrix} + \begin{bmatrix}
+                                    0 & 0          \\
+                                    0 & -H_{k - 1}   
+                                \end{bmatrix}
+                            \end{equation*}
+                        Then we multiply:
+                            \begin{align*}
+                                H_{k}v &= \left(\begin{bmatrix}
+                                    H_{k - 1} & 0 \\
+                                    0         & 0   
+                                \end{bmatrix} + \begin{bmatrix}
+                                    0 & H_{k - 1} \\
+                                    0 & 0           
+                                \end{bmatrix} + \begin{bmatrix}
+                                    0         & 0          \\
+                                    H_{k - 1} & 0   
+                                \end{bmatrix} + \begin{bmatrix}
+                                    0 & 0          \\
+                                    0 & -H_{k - 1}   
+                                \end{bmatrix}\right)\begin{bmatrix}
+                                    v_{1} \\
+                                    v_{2}   
+                                \end{bmatrix} \\
+                                       &= \begin{bmatrix}
+                                           H_{k - 1} & 0 \\
+                                           0         & 0   
+                                       \end{bmatrix}\begin{bmatrix}
+                                           v_{1} \\
+                                           v_{2}   
+                                       \end{bmatrix} + \begin{bmatrix}
+                                           0 & H_{k - 1} \\
+                                           0 & 0           
+                                       \end{bmatrix}\begin{bmatrix}
+                                           v_{1} \\
+                                           v_{2}   
+                                       \end{bmatrix} + \begin{bmatrix}
+                                           0         & 0 \\
+                                           H_{k - 1} & 0   
+                                       \end{bmatrix}\begin{bmatrix}
+                                           v_{1} \\
+                                           v_{2}   
+                                       \end{bmatrix} + \begin{bmatrix}
+                                           0 & 0          \\
+                                           0 & -H_{k - 1}   
+                                       \end{bmatrix}\begin{bmatrix}
+                                           v_{1} \\
+                                           v_{2}   
+                                       \end{bmatrix}       \\
+                                       &= \begin{bmatrix}
+                                           H_{k - 1}v_{1} + H_{k - 1}v_{2} \\
+                                           H_{k - 1}v_{1} - H_{k - 1}v_{2}   
+                                       \end{bmatrix}         
+                            \end{align*}
+                    \end{answer}
+
+                \item Use your result from the previous part to come up with a divide-and-conquer algorithm to calculate the matrix-vector product $H_{k}v$, and show that it can be calculated using $\mathcal{O}(n \log{n})$ operations. Assume that all the numbers involved are small enough that basic arithmetic operations like addition and multiplication take unit time. You do not need to prove correctness. 
+                    \begin{answer}
+                        We see that we can break the product down into a smaller product $H_{k - 1}v_{1}$ and $H_{k - 1}v_{2}$. So we are first given an $n \times n$ matrix. The dimension is scaled down by $2$ each time. We compute two products $H_{k - 1}v_{1}, H_{k - 1}v_{2}$, so we have $T(n) = 2T(n / 2)$ so far. We also have to take the sum and difference of the new vectors $H_{k - 1}v_{1}$, $H_{k - 1}v_{2}$. This means there are $n$ additions at each level. The recursive equation is therefore, $T(n) = 2T(n / 2) + \mathcal{O}(n)$. There is $n$ work at each level, $\log{n}$ levels. So the total number of operations is $\mathcal{O}(n \log{n})$.
+                    \end{answer}
+            \end{itemize}
+    \end{itemize}
+
+\newpage
+\section*{Distant Descendants}
+\hrule
+
+You are given a tree $T = (V, E)$ with a designated root node $r$ and a positive integer $K$. For each vertex $v$, let $d[v]$ be the number of descendants of $v$ that are a distance of at least $K$ from $v$. Describe an $\mathcal{O}(\lvert V \rvert)$ algorithm to output $d[v]$ for every $v$. \textbf{Please give a 3-part solution; for the proof of correctness, only a brief justification is needed}.
+    \begin{answer}
+        The psuedocode:
+        \begin{minted}[mathescape=true, escapeinside=||, breaklines=true, linenos=true, frame=lines]{text}
+    |$d \leftarrow [0] * \abs{V}$|
+
+    function distDescendants(node, k)
+        |$res \leftarrow (1 \text{ if } k \leq 0 \text{ else } 0)$|
+        for children in node.children:
+            res += distDescendants(children, k)
+        return res
+
+    for v in V:
+        d[v] = distDescendants(v, K)
+        \end{minted}
+
+        \begin{proof}
+            We sill show that for a vertex $v$, the algorithm runs as desired. In the base case, $K \leq 0$. 
+
+            We will prove that at every level the number of descendants is the output for the node that distDescendants was called on. At the leaf level, the output will be $1$ because there are no children. Suppose we are at a depth $d > 0$ and assume that the output for the previous levels were correct. Then at the current level, suppose that the input node was node $n$. The output of distDescendants run for each of $n$'s children $c_{i}$ will be the number of nodes below each $c_{i}$ including $c_{i}$. We also add $1$ to include $n$ because $K \leq 0$. So it is clear that the output at the level $d > 0$ is correct.
+
+            Now we see that if $K > 0$, then $res$ does not get incremented, the output above a certain level will be the same at the level when $K = 0$. Therefore, this is exactly what we want: the number of descendants that are at least distance $d$ away from our start node.
+        \end{proof}
+
+        At each node, we do constant work, checking if $res$ is $1$ or $0$. This means that 
+    \end{answer}
+
+\newpage
+\section*{Depth First Search}
+\hrule
+
+Depth first search is a useful and often efficient way to organize computations on a graph.
+
+Let $G$ be an undirected connected tree, and let $wt: E \rightarrow \mathbb{R}^{+}$ be positive weights on its edges. We show a template for depth-first search based computations below.
+
+\begin{minted}[escapeinside=||, mathescape=true, breaklines=true, frame=lines, linenos=true, breaksymbol=]{text}
+    Input: Undirected connected tree |$G$| and positive weights |$wt(u, v)$| for each edge |$(u, v) \in E$|
+
+    Initialization:
+    |$visited[v] \leftarrow False$| for all vertices |$v$|.
+    |$L[v] \leftarrow 0$| and |$M[v] \leftarrow 0$| for all vertices |$v$|.
+
+    function EXPLORE(Vertex u)
+    |$visited[u] \leftarrow True$|
+    for each edge |$(u, v)$| in |$E$| do    
+        if NOT |$visited[v]$| then
+            PREVISIT(u, v)
+            EXPLORE(v)
+            POSTVISIT(u, v)
+\end{minted}
+
+DFS can be used for different purposes by defining the procedures $PREVISIT$ and $POSTVISIT$ appropriately. In each of the following cases, write down pseudocode for $PREVISIT$ and $POSTVISIT$ routines to perform the computation needed.
+    \begin{itemize}
+        \item [(a)] For each vertex $v$, compute the maximum weight of an edge along the path from root $r$ to vertex $v$ and store it in array $L[v]$.
+            \begin{answer}
+                We will use $PREVISIT$ only:
+                    \begin{minted}[mathescape=true, escapeinside=||, breaklines=true, linenos=true]{text}
+        function PREVISIT(u, v)
+            L[v] = max(L[u], wt(u, v))
+                    \end{minted}
+            \end{answer}
+
+        \item [(b)] For each vertex $v$, compute the maximum weight of any edge in the subtree rooted at vertex $v$ and store it in array $L[v]$.
+            \begin{answer}
+                We will use $POSTVISIT$ only:
+                    \begin{minted}[mathescape=true, escapeinside=||, breaklines=true, linenos=true]{text}
+        function POSTVISIT(u, v)
+            L[u] = max(L[u], max(L[v], wt(u, v)))
+                    \end{minted}
+            \end{answer}
+
+        \item [(c)] For each vertex $v$, compute the depth of the tree rooted at vertex $v$, i.e., the length of the longest path from $v$ to a leaf in its subtree, and store it in $L[v]$.
+            \begin{answer}
+                We will use $POSTVIST$ only:
+                    \begin{minted}[mathescape=true, escapeinside=||, breaklines=true, linenos=true]{text}
+        function POSTVISIT(u, v)
+            L[u] = max(L[u], L[v] + 1)
+                    \end{minted}
+            \end{answer}
+
+        \item [(d)] For each vertex $v$, compute the maximum degree among all the children of $v$ and store it in $L[v]$. 
+            \begin{answer}
+                We will use both $PREVISIT$ and $POSTVISIT$. $PREVISIT$ will set the degree for each vertex while $POSTVISIT$ will calculate the max.
+                    \begin{minted}[mathescape=true, escapeinside=||, breaklines=true, linenos=true]{text}
+        function PREVISIT(u, v)
+            M[u] = M[u] + 1
+            M[v] = 1
+                    \end{minted}
+                and for $POSTVISIT$:
+                    \begin{minted}[mathescape=true, escapeinside=||, breaklines=true, linenos=true]{text}
+        function POSTVISIT(u, v)
+            L[u] = max(L[u], max(L[v], M[v]))
+                    \end{minted}
+            \end{answer}
+    \end{itemize}
+
+\newpage
+\section*{Topological Sort Proofs}
+\hrule
+
+\begin{itemize}
+    \item [(a)] A directed acyclic graph $G$ is \textit{semiconnected} if for any two vertices $A$ and $B$, there is a path from $A$ to $B$ or a path from $B$ to $A$. Show that $G$ is semiconnected if and only if there is a directed path that visits all of the vertices of $G$. Make sure to prove both sides of the ``if and only if'' condition.
+        \begin{proof}
+            ($\leftarrow$) To show that if there is a directed path that visits all vertices, then the graph is semiconnected. Let $A$, $B$ be two arbitrary vertices. Then when we traverse our directed path, we will either run into $A$ first or $B$ first. Wlog, assume that we reach $A$ first, then $B$. This means that there is a path to $B$ from $A$. So the graph is semiconnected.
+
+            ($\rightarrow$) We will now show that if a graph $G$ is semiconnected, there exists a directed path that passes through all vertices. Suppose that our graph has a finite number of vertices. Then we can write a vertices set $[v_{0}, v_{1}, v_{2}, \ldots]$. We start by removing vertices out of our vertex set and reconstructing the graph. First, we remove $v_{0}$. There is no edges to fill in. Then we pull out $v_{1}$. We might need to pull out more vertices to fill in all the edges connecting $v_{0}$, $v_{1}$, but we know that there exists a path from $v_{0}$ to $v_{1}$ or $v_{1}$ to $v_{0}$. Wlog, assume $v_{0} \rightarrow v_{1}$. Now consider the current graph that we have $G_{c}$. If there is path that can get to all vertices in $G_{c}$ from $v_{0}$, then we can move on, otherwise, there exists a vertex that we cannot reach from $v_{0}$. Let this be $v_{i}$. Then since $G$ is semiconnected, we can find a path from $v_{i}$ to $v_{0}$, by pulling out more vertices/edges to add to $G_{c}$. Then $v_{i}$ is our new root that can reach all other vertices, otherwise, we repeat. Since we have a finite number of vertices, this process must terminate. Then it is clear that there exists a root vertex from which we can reach all other vertices.
+        \end{proof}
+
+    \item [(b)] Show that a DAG has a unique topological ordering if and only if it has a directed path that visits all of its vertices.
+        \begin{proof}
+            ($\rightarrow$) If a DAG has a unique topological ordering, then wlog, suppose that we can write that ordering as a finite sequence:
+                \begin{equation*}
+                    x_{1}x_{2}x_{3}\ldots x_{n}
+                \end{equation*}
+            We begin to reconstruct our graph one vertex at a time. Since this ordering is unique, we see that $x_{1}$ must be first. Then there cannnot be any edges from $x_{i}$ to $x_{1}$. Now we see that $x_{2}$ is second and since it is unique, $x_{2}$ must lie after $x_{1}$. Since all that is in our graph so far is $x_{1}$, we know that there must be an edge from $x_{1}$ going to $x_{2}$. In general, we repeat. $x_{i}$ must be after $x_{1}, x_{2}, \ldots, x_{i - 1}$ and before $x_{i + 1}$. So there is an edge from $x_{i - 1}$ to $x_{i}$. This shows that there is a directed path that visits all vertices:
+                \begin{equation*}
+                    x_{1} \rightarrow x_{2} \rightarrow x_{3} \rightarrow \cdots \rightarrow x_{n}
+                \end{equation*}
+
+            ($\leftarrow$) Suppose that there is a directed graph visits all vertices. Then we can write it down as:
+                \begin{equation*}
+                    x_{1} \rightarrow x_{2} \rightarrow x_{3} \rightarrow \cdots \rightarrow x_{n}
+                \end{equation*}
+            Suppose that there is a different topological ordering lets call $T$. Then we see that any other permutation of the $x_{i}$ must have an instance where $x_{j}$ is before $x_{i}$ in the ordering but $j > i$. Furthermore, there is a $j$ such that $x_{j - 1}$ is after $x_{j}$.
+
+            Suppose that this does not happen. Then for every $i$, $x_{i}$ goes after $x_{i - 1}$ in the topological ordering. But then we are at a contradiction because if we start at $i = n$, and work backwards, we see that $x_{n - 1}$ is before $x_{n}$, $x_{n - 2}$ must be before $x_{n - 1}$ and so on. We see that by the transitive property, our ordering is reduced to 
+                \begin{equation*}
+                    x_{1}x_{2} \cdots x_{n}
+                \end{equation*}
+            as $x_{1}$ must go before all $x_{j > 1}$ and so on.
+
+            This means that there exists a $j$ such that $x_{j}$ is before $x_{j - 1}$ in our topological ordering. But this is impossible and not a valid ordering because $x_{j - 1}$ must go before $x_{j}$.
+        \end{proof}
+
+    \item [(c)] This subpart is unrelated to the notion of semiconnectedness. Consider what would happen if we ran the topological sorting algorithm from class on a directed graph that had cycles.
+
+    Prove or disprove the following: The algorithm would output an ordering with the least number of edges pointing backwards.
+\end{itemize}
+
+
+\end{document}

@@ -1,0 +1,155 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math172/Homework/Math172Hw11/Math172Hw11.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math172Hw11}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Let $T$ be a tree with $n$ labeled vertices. How many ways there are to color $T$ into $k$ colors so that no two vertices of the same color are connected by an edge?
+    \begin{proof}
+        We will color the tree with a process:
+            \begin{itemize}
+                \item Choose a leaf to color called $x_{1}$. Let $N_{1} = \{x_{1}\}$ and $N_{2}$ be all the neighbors of vertices in $N_{1}$.
+
+                \item Color all vertices of $N_{i}$. Let $N_{i + 1}$ be the set of neighbors of $N_{i}$ not in the previous $N_{j}$ for $j \leq i$. This means that we do not recolor a vertex we have already colored.
+
+                \item Repeat until all vertices are colored.
+            \end{itemize}
+        This process will use all vertices because trees are connected, and on a finite graph, we have a finite path from our starting leaf $x_{1}$ to any vertex $x_{i}$. So $x_{i}$ is in one of the $N_{j}$.
+
+        We see that on the first step, there are $k$ ways to color the leaf. For the second step, notice that the subgraph of $T$ on $N_{i}$ contains no edges. This is because if there was an edge $\{v_{1}, v_{2}\}$, where $v_{1}, v_{2}  \in N_{i}$, then there is a closed walk $x_{1} \rightarrow v_{1} \rightarrow v_{2} \rightarrow x_{1}$. Since $v_{1}, v_{2}$ have neighbors in $N_{i - 1}$, we turn this into a trail of length $\geq 3$ by removing duplicate edges and vertices in this walk. Therefore, there is a cycle, contradiction.
+
+        This also shows that vertices in $N_{i}$ cannot contain edges connecting to the same vertex in $N_{i + 1}$, by extending the previous argument. Then by these two properties, we conclude that each vertex in $N_{i}$ can be colored with one of the $k - 1$ colors different from its neighbor in $N_{i - 1}$. 
+
+        The process above gives all valid colorings because the order of our coloring does not influence the validity of a coloring. So there are $k(k - 1)^{n - 2}$ ways to color $T$.
+    \end{proof}
+
+\textbf{Exercise 2}: How many ways there are to color $K_{3, 3}$ into $k$ colors so that no two vertices of the same color are connected by an edge (all vertices are labeled)?
+    \begin{proof}
+        We know that we can divide this into groups $A, B$ such that $A$ has three vertices, $B$ has three vertices, and that between every vertex $a \in A$, $b \in B$ there is an edge $\{a, b\}$. Now draw out the graph:
+            \begin{center}
+                \begin{tikzgraph}
+                    {}                           &                          & \bullet \\
+                                                 & \bullet \ar[ur]\ar[dddr] &          \\
+                    \bullet \ar[r]\ar[ur]\ar[dr] & \bullet \ar[ddr] \ar[uur]        &          \\
+                                                 & \bullet \ar[dr] \ar[uuur]         &          \\
+                                                 &                          & \bullet   
+                \end{tikzgraph}
+            \end{center}
+        We can first color the three ``outside vertices'' then color the ones along the middle column as shown below:
+            \begin{center}
+                \begin{tikzgraph}
+                    {}              &                          & \bullet \\
+                                    & \bullet \ar[ur]\ar[dddr] &          \\
+                    \bullet \ar[ur] & \bullet                  &          \\
+                                    & \bullet                  &          \\
+                                    &                          & \bullet   
+                \end{tikzgraph} 
+                \begin{tikzgraph}
+                    {}              &                          & \bullet \\
+                                    & \bullet                  &          \\
+                    \bullet \ar[r]  & \bullet \ar[ddr] \ar[uur] &          \\
+                                    & \bullet                  &          \\
+                                    &                          & \bullet   
+                \end{tikzgraph} 
+                \begin{tikzgraph}
+                    {}              &                          & \bullet \\
+                                    & \bullet                  &          \\
+                    \bullet \ar[dr] & \bullet                  &          \\
+                                    & \bullet \ar[dr]\ar[uuur] &          \\
+                                    &                          & \bullet   
+                \end{tikzgraph} 
+            \end{center}
+        We have
+            \begin{itemize}
+                \item $k$ ways to color all three outside vertices the same color.
+
+                \item $k(k - 1)\binom{3}{2}$ ways to color with two outside vertices having the same color.
+
+                \item $k(k - 1)(k - 2)$ ways to color with all outside vertices having different colors. 
+            \end{itemize}
+        Notice that we can choose the coloring of the vertices along the middle column independently because there is no edge connecting any of them. In the first case, we have $(k - 1)^{3}$ ways to color the middle vertices if all outside vertices are the same.
+
+        In the second case, we have $(k - 2)^{3}$ ways to color the middle vertices if exactly $2$ outside vertices are same color.
+
+        In the third case, we have $(k - 3)^{3}$ ways to color the middle vertices given that all outside vertices are different color. So putting it all together, we have:
+            \begin{equation*}
+                k(k - 1)^{3} + k(k - 1)\dbinom{3}{2}(k - 2)^{3} + k(k - 1)(k - 2)(k - 3)^{3}
+            \end{equation*}
+        If we simplify, we get:
+            \begin{equation*}
+                k(k - 1)^{3} + k(k - 1)(k - 2)(k^{3} - 3k - 15)
+            \end{equation*}
+    \end{proof}
+
+\textbf{Exercise 3}: Let $G$ be the following graph with $2n$ vertices and $2n$ edges: take a cycle with $n$ vertices and attach a leaf to each of the vertices of this cycle. How many ways there are to color $G$ into $k$ colors so that no two vertices of the same color are connected by an edge (all vertices are labeled)?
+    \begin{proof}
+        Pick one vertex of the cycle on $n$ vertices to color first. Then we start coloring in a circle. There are $k - 1$ options for the next vertex, and so on. For the last one, there are $k - 2$ options. So we have $k(k - 1)^{n - 2}(k - 2)$ ways to color a cycle on $n$ vertices.
+
+        Then add in the leaves. Since each leaf only has degree $1$, it has one neighbor. Then we have $k - 1$ options to color the leaf. There are $n$ leaves, so we have $(k - 1)^{n}$ ways to color the leaves. Putting this together, there are 
+            \begin{equation*}
+                k(k - 1)^{n - 2}(k - 2)(k - 1)^{n} = k(k - 1)^{2n - 2}(k - 2)
+            \end{equation*}
+        ways to color this graph.
+    \end{proof}
+
+\textbf{Exercise 4}: Is there a bipartite graph with $9$ vertices which have the following multi-set of degrees: $3, 3, 3, 3, 3, 5, 6, 6, 6$?
+    \begin{proof}
+        Suppose that the graph $G$ is bipartite. Consider the subgraph $G^{\prime}$ with the vertex of minimal degree removed. Then it has
+            \begin{equation*}
+                \dfrac{5(3) + 5 + 3(6) - 6}{2} = 16
+            \end{equation*}
+        edges. Remove another vertex of minimal degree in the graph. Then we will have removed $3$ edges, so there are $13$ edges left on $7$ vertices in $G^{\prime\prime}$. But the maximum number of edges in a bipartite graph was $\frac{7^{2} - 1}{4} = 12$. So this subgraph of $G^{\prime\prime}$ is not two colorable. Therefore, $G$ is not two-colorable/bipartite.
+    \end{proof}
+
+\textbf{Exercise 5}: Fix integers $n, k$ such that $n \geq 2$ and $0 \leq k < n/2$. Let $X$ be a set of all $k$-element subsets of $[n]$, $Y$ be the set of all $k + 1$-element subsets of $[n]$ and connect $A \in X$ to $B \in Y$ if $A \subseteq B$. Show that there is a perfect matching of $X$ into $Y$ in the obtained bipartite graph.
+    \begin{proof}
+        We must show that for any subset $S_{X} \subseteq X$, the set of the neighbors of $S_{x}, N(S_{X})$ has size greater than or equal to $S_{X}$. Notice that every element in the set $Y$ is connected to exactly $k + 1$ elements in $X$. Then we have that for a given vertex in $X$, called $v = \{e_{1}, \ldots, e_{k}\}$, it has $k$ elements of $[n]$. It is connected to $n - k$ vertices in $Y$, because there are $n - k$ ways to add an element to $v \in X$ to get an element $v^{\prime} \in Y$ such that $v \subseteq v^{\prime}$.
+
+        So given a set $S_{X} \subseteq X$, there are $\lvert S_{X} \rvert (n - k)$ edges connecting its vertices to vertices in $Y$. Each vertex in the preimage can use up at most $k + 1$ edges. So $S_{X}$ has at least $\frac{\lvert S_{X} \rvert (n - k)}{k + 1}$ neighbors. We have from 
+            \begin{equation*}
+                0 \leq k < n/2
+            \end{equation*}
+        that
+            \begin{equation*}
+                0 \leq 2k < n \implies 0 \leq k < n - k
+            \end{equation*}
+        Therefore, $k + 1 \leq n - k$ and $1 \leq \frac{n - k}{k + 1}$. So $\lvert S_{X} \rvert \leq\frac{\lvert S_{X} \rvert (n - k)}{k + 1} \leq N(S_{X})$ as desired.
+    \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

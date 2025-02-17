@@ -1,0 +1,9 @@
+tol = 1e-4;
+out = bisection(@myfunc8, 0.1, 1, tol);
+x = out.x
+out = newton(@myfunc8, .5, @out_error, tol);
+x = out.x
+out = secant(@myfunc8, .5, .8, tol);
+x = out.x
+out = muller(@myfunc8, [.3; .4; .5], tol);
+x = out.x

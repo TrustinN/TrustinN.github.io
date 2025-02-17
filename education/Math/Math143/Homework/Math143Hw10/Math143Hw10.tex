@@ -1,0 +1,292 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math143/Homework/Math143Hw10/Math143Hw10.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math143Hw10}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Prove the following statements from lecture:
+    \begin{itemize}
+        \item [(a)] Let $J \subseteq k[x_{1}, \ldots, x_{n + 1}]$ be ideals. If $\sqrt{J} \supseteq (x_{1}, \ldots, x_{n + 1})$, show that there exists an integer $N$ such that $J \supseteq (x_{1}, \ldots, x_{n + 1})^{N}$, i.e. $J$ contains all homogeneous polynomials of degree $\geq N$.
+            \begin{proof}
+                Since $\sqrt{J}$ is finitely generated, we know that $x_{1}^{k_{1}}, x_{2}^{k_{2}}, \ldots, x_{n + 1}^{k_{n + 1}} \in J$ for some powers $k_{1}, \ldots, k_{n + 1}$. Let $N = (n + 1)\max(k_{1}, \ldots, k_{n + 1})$. By the pigeonhole principle, an arbitrary homogeneous polynomial in $(x_{1}, \ldots, x_{n})^{N}$ must be divisible by some $x_{i}^{\max(k_{1}, \ldots, k_{n + 1})}$. So $x_{1}^{k_{1}}, \ldots, x_{n + 1}^{k_{n + 1}}$ generate $(x_{1}, \ldots, x_{n})^{N}$ and possible more, so $(x_{1}, \ldots, x_{n + 1})^{N} \subseteq J$.
+            \end{proof}
+
+        \item [(b)] Show that a projective algebraic set $X \subseteq \mathbb{P}^{n}$ is irreducible if and only if $\mathbb{I}(X)$ is prime. (You may do this directly or you might see how to reduce it to the affine case, which you can quote from lecture.) 
+            \begin{proof}
+                If $X$ is empty, then $\mathbb{I}(X) = k[x_{1}, \ldots, x_{n + 1}]$ which is prime. Otherwise, $\mathbb{I}(X) = I(C(X))$. We have that $\mathbb{I}(X)$ is prime iff $I(C(X))$ is prime, iff $C(X)$ is irreducible. 
+
+                Next is to prove that $C(X)$ irreducible iff $X$ irreducible. If $X$ is reducible, then 
+                    \begin{equation*}
+                        X = A \cup B
+                    \end{equation*}
+                and therefore, 
+                    \begin{align*}
+                        C(X) &= \{(x_{1}, \ldots, x_{n + 1}) : [x_{1}, \ldots, x_{n + 1}] \in A \cup B\} \\
+                             &= \{(x_{1}, \ldots, x_{n + 1}) : [x_{1}, \ldots x_{n + 1}] \in A\} \cup \{(x_{1}, \ldots, x_{n + 1}) : [x_{1}, \ldots, x_{n + 1}] \in B\} \\
+                             &= C(A) \cup C(B)
+                    \end{align*}
+                Since $A$, $B$ are projective algebraic sets killed by some homogeneous polynomials, $C(A)$ are points killed by those same polynomials. Which shows that $C(X)$ is a union of algebraic sets and is reducible.
+
+                If $C(X)$ is reducible, we have:
+                    \begin{equation*}
+                        C(X) = A \cup B
+                    \end{equation*}
+                Because $C(X)$ is a union of lines through the origin, we know that each line is irreducible, so each line must be in either $A$ or $B$. So $A, B$ are cones to some sets:
+                    \begin{equation*}
+                        C(X) = C(A^{\prime}) \cup C(B^{\prime})
+                    \end{equation*}
+                Since $C(A^{\prime}), C(B^{\prime})$ algebraic sets of lines through the origin, we know that it is the vanishing of some homogeneous polynomials. Call them $V_{A}(F_{1}, \ldots, F_{r})$, $V_{B}(G_{1}, \ldots, G_{s})$. These polynomials also kill the points in $A^{\prime}$, $B^{\prime}$ respectively. So $A^{\prime}, B^{\prime}$ are projective algebraic sets.
+
+                So $C(X)$ irreducible iff $X$ irreducible, which finishes the proof.
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 2}: Let $U_{1}, \ldots, U_{n + 1}$ be the affine charts on $\mathbb{P}^{n}$ and let $X \subseteq \mathbb{P}^{n}$ be any subset.
+    \begin{itemize}
+        \item [(a)] Prove that if $X$ is closed in the Zariski topology on $\mathbb{P}^{n}$, then $X \cap U_{i}$ is closed in the Zariski topology on each $U_{i} \cong \mathbb{A}^{n}$.
+            \begin{proof}
+                Since $X$ is a projective algebraic set, $X = \mathbb{V}(F_{1}, \ldots, F_{r})$ for homogeneous poly $F_{i}$. Then
+                    \begin{equation*}
+                        X \cap U_{i} = \{p = [x_{1} : \cdots : 1 : \cdots : x_{n + 1}] : F_{i}(p) = 0 \}
+                    \end{equation*}
+                which is the same as:
+                    \begin{equation*}
+                        X \cap U_{i} = V(F_{1}(x_{1}, \ldots, 1, \ldots, x_{n + 1}), \ldots, F_{r}(x_{1}, \ldots, 1, \ldots, x_{n + 1}))
+                    \end{equation*}
+                which shows that $X \cap U_{i}$ is an algebraic subset of $U_{i} \cong \mathbb{A}^{n}$.
+            \end{proof}
+
+        \item [(b)] Prove that if $W \subseteq U_{i}$ is open in the Zariski topology on $U_{i} \cong \mathbb{A}^{n}$, then $W \subseteq \mathbb{P}^{n}$ is open in the Zariski topology on $\mathbb{P}^{n}$.
+            \begin{proof}
+                Since $W \subseteq U_{i}$ open in $U_{i}$, we know that $W_{U_{i}}^{c}$ is closed. We have:
+                    \begin{equation*}
+                        U_{i} \cup U_{i}^{c} = \mathbb{P}^{n}
+                    \end{equation*}
+                Then the complement of $W$ in $\mathbb{P}^{n}$ is the union of the complement of $W$ in $U_{i}$ and the complement of $W$ in $U_{i}^{c}$. Since $W \subseteq U_{i}$, then $W \cap U_{i}^{c} = \emptyset$. So 
+                    \begin{equation*}
+                        W = W_{U_{i}}^{c} \cup U_{i}^{c} = W_{U_{i}}^{c} \cup \mathbb{V}(x_{i})
+                    \end{equation*}
+                This is the union of two closed sets, which means that the complement of $W$ in $\mathbb{P}^{n}$ is closed, so $W$ in $\mathbb{P}^{n}$ is open.
+            \end{proof}
+
+        \item [(c)] Prove that if $X \cap U_{i}$ is closed in the Zariski topology on each $U_{i} \cong \mathbb{A}^{n}$, then $X$ is closed in the Zariski topology on $\mathbb{P}^{n}$.
+            \begin{proof}
+                To show that $\mathbb{P}^{n} \backslash X = \bigcup_{i} U_{i} \backslash (U_{i} \cap X)$, we first have that $\bigcup_{i} U_{i} \backslash (U_{i} \cap X) \subseteq \mathbb{P}^{n}\backslash X$ because an element in $U_{i} \backslash (U_{i} \cap X)$ is not an element in $X$, but an element in $\mathbb{P}^{n}$. So an element in the union is not an element in $X$, but an element of $\mathbb{P}^{n}$.
+
+                For the other inclusion, $\mathbb{P}^{n}\backslash X \subseteq \bigcup_{i} U_{i} \backslash (U_{i} \cap X)$ if we have $X = \mathbb{P}^{n}$, then we are done as the empty set is a subset of all sets. Suppose that we have $[x_{1}: \cdots : x_{n + 1}] \in \mathbb{P}^{n} \backslash X$ and $X \neq \mathbb{P}^{n}$. Then not all $x_{i}$ are $0$. Say that $x_{j} \neq 0$. Then it lies in $U_{j}$. But because the point is not in $X$ also, it lies in $U_{j} \backslash (U_{j} \cap X)$. So we have $\mathbb{P}^{n} \backslash X \subseteq \bigcup_{i} U_{i} \backslash (U_{i} \cap X)$.
+
+                Because each $U_{i} \cap X$ is closed on each $U_{i}$, we know that $U_{i} \backslash (U_{i} \cap X)$ is open in $U_{i}$. By the previous problem, we have that $U_{i} \backslash (U_{i} \cap X)$ is open in $\mathbb{P}^{n}$. Then $\bigcup_{i} U_{i} \backslash (U_{i} \cap X)$ is open in $\mathbb{P}^{n}$. So $\mathbb{P}^{n}\backslash X$ is open and therefore $X$ is closed in $\mathbb{P}^{n}$.
+            \end{proof}
+
+        \item [(d)] Conclude that $X \subseteq \mathbb{P}^{n}$ is closed (resp. open) if and only if $X \cap U_{i}$ is closed (resp. open) for each $i$. 
+            \begin{proof}
+                $X \subseteq \mathbb{P}^{n}$ closed $\rightarrow$ $X \cap U_{i}$ closed on $U_{i}$ for each $i$ by part $a$, and the converse by part $c$.
+
+                $X \subseteq \mathbb{P}^{n}$ open implies that $X \cap U_{i}$ open on $U_{i}$ for each $i$: If $X \subseteq \mathbb{P}^{n}$ open, $X \cap U_{i}$ is open on $\mathbb{P}^{n}$ because each $U_{i}$ is open in $\mathbb{P}^{n}$. 
+
+                $X \cap U_{i}$ open on each $U_{i}$ implies that $X \subseteq \mathbb{P}^{n}$ is open by part $b$.
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 3}: Practice with homogenization. Given an ideal $I \subseteq k[x_{1}, \ldots, x_{n}]$, recall that we write
+    \begin{equation*}
+        H(I) = (\{H(f) : f \in I\}) \subseteq k[x_{1}, \ldots, x_{n + 1}]
+    \end{equation*}
+for the homogenization. Given a homogeneous ideal $J \subseteq k[x_{1}, \ldots, x_{n + 1}]$, let
+    \begin{equation*}
+        J^{\prime} = \{F(x_{1}, \ldots, x_{n}, 1) : F \in J\} \subseteq k[x_{1}, \ldots, x_{n}], 
+    \end{equation*}
+called the dehomogenization.
+    \begin{itemize}
+        \item [(a)] (Optional) Check that $J^{\prime}$ is an ideal. You don't need to write this part up.
+            \begin{proof}
+                Let $f, g \in J^{\prime}$. Then $f = F(x_{1}, \ldots, x_{n}, 1), g = G(x_{1}, \ldots, x_{n}, 1)$ where $F, G$ homogeneous polynomials in $J$. Let $\deg F = n$, $\deg G = m$ where $m \leq n$. Then $F + x_{n + 1}^{n - m}G$ is homogeneous of degree $n$. It also lies in $J$. Then 
+                    \begin{align*}
+                        f + g &= F(x_{1}, \ldots, x_{n}, 1) + G(x_{1}, \ldots, x_{n}, 1) \\
+                              &= F(x_{1}, \ldots, x_{n}, 1) + 1^{n - m}G(x_{1}, \ldots, x_{n}, 1)
+                    \end{align*}
+                So $f + g \in J^{\prime}$ because it is the evaluation of $F + x^{n - m}_{n + 1}G$ for $x_{n + 1} = 1$.
+
+                Suppose that $f \in J^{\prime}$, $g \in k[x_{1}, \ldots, x_{n}]$. Then $f = F(x_{1}, \ldots, x_{n}, 1)$ for some $F \in J$. Since $J$ is an ideal, we know that $F(x_{1}, \ldots, x_{n}, x_{n + 1})g \in J$. We let 
+                    \begin{equation*}
+                        G = F(x_{1}, \ldots, x_{n + 1})g = G_{0} + G_{1} + \cdots + G_{d}
+                    \end{equation*}
+                and we can homogenize $G$ by multiplying each form in $G$ by various powers of $x_{n + 1}$. This is possible because $J$ homogeneous so each form lies in $J$:
+                    \begin{equation*}
+                        G^{\prime} = G_{0}x_{n + 1}^{d} + G_{1}x_{n + 1}^{d - 1} + \cdots + G_{d - 1}x_{n + 1} + G_{d}
+                    \end{equation*}
+                Then we have $G^{\prime}(x_{1}, \ldots, x_{n}, 1) = F(x_{1}, \ldots, x_{n}, 1)g = fg \in J^{\prime}$.
+            \end{proof}
+
+        \item [(b)] Prove that if $J \subseteq k[x_{1}, \ldots, x_{n + 1}]$ is a radical homogeneous ideal, then $J^{\prime}$ is radical.
+            \begin{proof}
+                Suppose that $F^{d}(x_{1}, \ldots, x_{n}, 1) \in J^{\prime}$. We want to show that $F(x_{1}, \ldots, x_{n}, 1) \in J^{\prime}$. Since $F^{d}(x_{1}, \ldots, x_{n}, 1) \in J^{\prime}$, we know that:
+                    \begin{equation*}
+                        F^{d}(x_{1}, \ldots, x_{n + 1}) \in J
+                    \end{equation*}
+                where $F^{d}$ homogeneous by the definition of $J^{\prime}$. Since $J$ is radical, $F \in J$. Suppose that $F$ is not homogeneous. Then 
+                    \begin{equation*}
+                        F = f_{0} + f_{1} + \cdots + f_{k}
+                    \end{equation*}
+                and
+                    \begin{equation*}
+                        F^{d} = (f_{0} + f_{1} + \cdots + f_{k})^{d}
+                    \end{equation*}
+                Take the lowest nonzero homogeneous form $f_{j}$ where $j < k$. Then $f_{j}^{d} \neq 0$ and therefore, $F^{d} = f_{j}^{d} + \cdots + f_{k}^{d}$. So $F^{d}$ is not homogeneous contradiction. So $F$ is homogeneous and $F(x_{1}, \ldots, x_{n}, 1) \in J^{\prime}$ which concludes the proof.
+            \end{proof}
+
+        \item [(c)] Prove that if $I \subseteq k[x_{1}, \ldots, x_{n}]$ is radical, then $H(I) \subseteq k[x_{1}, \ldots, x_{n + 1}]$ is radical. 
+            \begin{proof}
+                We want to show that if 
+                    \begin{equation*}
+                        f^{n} = f_{0} + f_{1} + \cdots + f_{d} \in H(I)
+                    \end{equation*}
+                then $f \in H(I)$ if $I$ is radical. Since $H(I)$ homogeneous, we know that each $f_{i} \in H(I)$. Because
+                    \begin{equation*}
+                        H(I) = (\{H(f) : f \in I\})
+                    \end{equation*}
+                each $f_{i}$, homogeneous of degree $i$ can be written as a sum of homogenized polynomials from $I$ which generate $H(I)$, let's say $g_{i_{j}}$ of degree $i$. Then
+                    \begin{align*}
+                        f_{i}(x_{1}, \ldots, x_{n + 1}) &= g_{i_{1}}(x_{1}, \ldots, x_{n + 1}) + \cdots + g_{i_{j}}(x_{1}, \ldots, x_{n + 1}) \\
+                        f_{i}(x_{1}, \ldots, x_{n}, 1) &= g_{i_{1}}(x_{1}, \ldots, x_{n}, 1) + \cdots + g_{i_{j}}(x_{1}, \ldots, x_{n}, 1)
+                    \end{align*}
+                where each $g_{i_{j}}(x_{1}, \ldots, x_{n}, 1) \in I$. So we know that $f^{n}(x_{1}, \ldots, x_{n}, 1) \in I$. Then $f(x_{1}, \ldots, x_{n}, 1) \in I$. But because
+                    \begin{equation*}
+                        H(I) = (\{H(f) : f \in I\})
+                    \end{equation*}
+                we have
+                    \begin{equation*}
+                        H(f(x_{1}, \ldots, x_{n},1)) =  f(x_{1}, \ldots, x_{n + 1}) \in H(I)
+                    \end{equation*}
+                which shows that $H(I)$ is radical.
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 4}: Intersections of linear spaces. The vanishing of a linear equation on projective space is called a \textit{hyperplane}. Let 
+    \begin{equation*}
+        \Lambda_{1} = \mathbb{V}(a_{1, 1}x_{1} + \cdots + a_{1, n + 1}x_{n + 1}), \ldots, \Lambda_{m} = \mathbb{V}(a_{m, 1}x_{1} + \cdots + a_{m, n + 1}x_{n + 1})
+    \end{equation*}
+be hyperplanes in $\mathbb{P}^{n}$ with $m \leq n$. Show that $\Lambda_{1} \cap \cdots \cap \Lambda_{m} \neq \emptyset$.
+    \begin{proof}
+        Since we are looking for points in the intersection of $\mathbb{P}^{n}$, we want to find the points $[x_{1} : \cdots : x_{n + 1}]$ that satisfy the system:
+            \begin{align*}
+                a_{1, 1}x_{1} + a_{1, 2}x_{2} + \cdots + a_{1, n + 1}x_{n + 1} &=      0 \\
+                a_{2, 1}x_{1} + a_{2, 2}x_{2} + \cdots + a_{2, n + 1}x_{n + 1} &=      0 \\
+                                                                               &\vdots   \\
+                a_{m, 1}x_{1} + a_{m, 2}x_{2} + \cdots + a_{m, n + 1}x_{n + 1} &=      0   
+            \end{align*}
+        From linear algebra, we are finding the kernel of $T$ for the matrix:
+            \begin{equation*}
+                T = 
+                    \begin{bmatrix}
+                        a_{1, 1}  & a_{1, 2} & \ldots  &  a_{1, n + 1} \\
+                        a_{2, 1}  & a_{2, 2} & \ldots  &  a_{2, n + 1} \\
+                        \vdots    &  \vdots  &  \ddots &  \vdots       \\
+                         a_{m, 1} & a_{m, 2} & \ldots  &  a_{m, n + 1}   
+                    \end{bmatrix}
+            \end{equation*}
+        This maps an $n + 1$ dimensional space onto one of $m$ dimensions, where $n + 1 > m$, so there is a non-trivial kernel, which means that there are nonzero solutions $[x_{1} : \cdots : x_{n + 1}]$, which is what we wanted.
+    \end{proof}
+
+\textbf{Exercise 5}: Let $I \subseteq k[x_{1}, \ldots, x_{n + 1}]$ be a homogeneous ideal. Let $S_{d} \subseteq k[x_{1}, \ldots, x_{n + 1}]/I$ be the set of degree $d$ forms.
+    \begin{itemize}
+        \item [(a)] Prove that $S_{d}$ is a finite-dimensional vector space.
+            \begin{proof}
+                We first have that $S_{d}$ is the image of the map 
+                    \begin{equation*}
+                        \varphi : k[x_{1}, \ldots, x_{n + 1}] \rightarrow k[x_{1}, \ldots, x_{n + 1}]/I
+                    \end{equation*}
+                obtained from some restricted domain which is the set of homogeneous polynomials of degree $d$.
+
+                To show closure under addition: If $\overline{F}, \overline{G} \in S_{d}$, we have $F, G \in k[x_{1}, \ldots, x_{n + 1}]$ of degree $d$. The sum of homogeneous polynomials of degree $d$ is also of degree $d$. Then the image of $F + G$ is $\overline{F} + \overline{G} \in S_{d}$.
+
+                Closure under multiplication from $k$: Suppose that $\overline{F} \in S_{d}$. Then we have $F  \in k[x_{11}, \ldots, x_{n + 1}]$ of degree $d$. Then $kF$ is also of degree $d$. So $k\overline{F} \in S_{d}$.
+
+                Finite dimensional. There are a finite number of generators for homogeneous polynomials of degree $d$ in $k[x_{1}, \ldots, x_{n + 1}]$. Notice that 
+                    \begin{equation*}
+                        H_{d} = \{x_{1}^{i_{1}} \cdots x_{n + 1}^{i_{n + 1}} : i_{1}, \ldots, i_{n + 1} \geq 0, i_{1} + \cdots+ i_{n + 1} = d\}
+                    \end{equation*}
+                generate homogeneous polynomials of degree $d$ in $k[x_{1}, \ldots, x_{n + 1}]$. Then if we have a form $f \in k[x_{1}, \ldots, x_{n + 1}]/I$ where $f = \varphi (F)$ for 
+                    \begin{equation*}
+                        F = \sum a_{i}x_{1}^{i_{1}}\cdots x_{n + 1}^{i_{n + 1}}
+                    \end{equation*}
+                homogeneous of degree $d$, then 
+                    \begin{equation*}
+                        \varphi (F) = \sum a_{i}\varphi(x_{1}^{i_{1}} \cdots x_{n + 1}^{i_{n + 1}})
+                    \end{equation*}
+                We find that 
+                    \begin{equation*}
+                        \{\varphi (x_{1}^{i_{1}}\cdots x_{n + 1}^{i_{n + 1}}) : x_{1}^{i_{1}} + \cdots + x_{n + 1}^{i_{n + 1}} \in H_{d}\}
+                    \end{equation*}
+                span the image. We can reduce this to linearly independent basis by removing the linearly dependent terms. So $S_{d}$ is a finite dimensional vector space.
+            \end{proof}
+
+        \item [(b)] (Extra Credit) Can you give an upper bound on the dimension of $S_{d}$ in terms of $n$ and $d$? 
+            \begin{proof}
+                By the previous problem, our basis for $S_{d}$ is a subset of 
+                    \begin{equation*}
+                         \mathcal{B}_{d} = \{\varphi (x_{1}^{i_{1}}\cdots x_{n + 1}^{i_{n + 1}}) : x_{1}^{i_{1}} + \cdots + x_{n + 1}^{i_{n + 1}} \in H_{d}\}
+                    \end{equation*}
+                where
+                    \begin{equation*}
+                        H_{d} = \{x_{1}^{i_{1}} \cdots x_{n + 1}^{i_{n + 1}} : i_{1}, \ldots, i_{n + 1} \geq 0, i_{1} + \cdots+ i_{n + 1} = d\}
+                    \end{equation*}
+                We have that $\lvert \mathcal{B}_{d} \rvert \leq \lvert H_{d} \rvert$ because we have a surjective mapping from $H_{d} \rightarrow \mathcal{B}_{d}$ by taking $\varphi$ of the elements of $H_{d}$. So we can always match distinct element of $\mathcal{B}_{d}$ with distinct elements of $H_{d}$. So $\lvert H_{d} \rvert$ is the upper bound. Using stars and bars, we get $\binom{d + n}{n}$ number of elements of $H_{d}$. So $\binom{d + n}{n}$ is the upper bound.
+            \end{proof}
+    \end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

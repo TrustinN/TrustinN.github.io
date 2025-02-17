@@ -1,0 +1,2861 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math172/Notes/Math172Notes.tex
+
+\documentclass{report}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/report}
+\graphicspath{{./figures/}}
+
+\title{Math172Notes}
+\author{Trustin Nguyen}
+
+\begin{document}
+\newgeometry{
+    total={150mm,235mm},
+}
+
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+\tableofcontents
+\restoregeometry
+
+\reversemarginpar
+
+\chapter{Week 1}
+
+\begin{topic}
+    \section{Pigeon-hole Principle}
+\end{topic}
+
+\begin{theorem}{Pigeon-hole Principle}
+    Suppose there are $n$ objects, which are put into $m$ boxes where $n > m$. Then there is a box with at least two objects in it.
+\end{theorem}
+
+\begin{proof}
+    Assume for contradiction that we have placed $n$ objects into $m$ boxes but all boxes have at most $1$ objects. This means that the total number of objects is less than or equal to $m$. But we know that the number of objects exceeds $m$. This is a contradiction.
+\end{proof}
+
+\begin{examples}
+    \begin{example}
+        Let $m$ be an odd positive integer. Then $\exists k$ such that $2^{k} - 1$ is divisible by $m$.
+        \begin{proof}
+            We take a sequence of all numbers $2^{k} - 1$ where $k$ is up to $m$:
+                \begin{equation*}
+                    1, 4 - 1, 8 -1, \ldots, 2^{m} - 1
+                \end{equation*}
+            consider the remainders of these numbers from division by $m$. If one of the remainders are 0, then we are done. Otherwise, the remainders must be in the list:
+                \begin{equation*}
+                    1, \ldots, m - 1
+                \end{equation*}
+            This means that there are $m - 1$ possible values for the remainders. By the pigeonhole principle, two of the remainders from division by $m$ in the first list must be equal. Lets say they are $2^{a} - 1$ and $2^{b} - 1$ which have the same remainder with division by $m$. Suppose that $a < b$. Let us take the difference which will be divisible by $m$: 
+                \begin{equation*}
+                    2^{b} - 1 - 2^{a} + 1 = 2^{b} - 2^{a}
+                \end{equation*}
+            we have $2^{a}(2^{b - a} - 1)$ is divisible my $m$. But the below claim, we can say that 
+                \begin{equation*}
+                    2^{a - 1}(2^{b - a} - 1)
+                \end{equation*}
+            is divisible by $m$. We repeat this process until we have $2^{b - a} - 1$ is divisible by $m$.
+
+
+            \textbf{Claim}: Suppose that $2n$ is divisible by $m$. We claim that $n$ is divisible by $m$. 
+                \begin{proof}
+                     We have that $2n = m \cdot k$. So $m \cdot k$ is even. But $m$ is odd so $k$ is even . This means that $k = 2l$. So we have that 
+                     \begin{align*}
+                         2n &= m \cdot 2l \\
+                         n  &= m \cdot l    
+                     \end{align*}
+                \end{proof}
+        \end{proof}
+    \end{example}
+\end{examples}
+
+\begin{theorem}{Generalized Pigeonhole Principle}
+    Suppose that we have three positive integers $n, m, r$. Suppose that we also have the inequality: $n > m \cdot r$. Then if we try to place $n$ objects into $m$ boxes, then there must be a box with at least $r + 1$ objects.
+\end{theorem} 
+
+\begin{proof}
+    Assume that we have placed $n$ objects into $m$ boxes. For contradiction, say that each box has less than $r + 1$. Then the number of objects is less than or equal to $n \cdot m$ objects. This means that the total number of objects is $\leq n \cdot r$. This is a contradiction.
+\end{proof}
+
+\begin{examples}
+    \begin{example}
+        Suppose that we have $10$ points in a unit square on a plane. Then the following statements are true about these points:
+            \begin{itemize}
+                \item There exists a triple which can be covered by a disc of radius $\frac{1}{2}$.
+                    \begin{proof}
+                        If we split the square along the diagonals, then we have $10$ points and $4$ triangles. Using the pigeonhole principle with $r = 2$, we have that there is a triangle with at least $3$ points in it. But now we take the midpoint of the side of the triangle shared with the side of the square. The disc of radius $\frac{1}{2}$ covers these three points.
+                    \end{proof}
+
+                \item There exists a couple of points such that the distance between these points is no greater than $0.48$.
+                    \begin{proof}
+                        Take the same square but split it into $9$ smaller squares. By the pigeonhole principle with $r = 1$, we have that one of the squares has at least 2 points. So the maximal distance between these two points is $\frac{\sqrt{2}}{3}$. So $\sqrt{2} > 1.4$ and $\frac{1.4}{3} \approx .472 <  .48$
+                    \end{proof}
+            \end{itemize}
+    \end{example}
+\end{examples}
+
+\begin{topic}
+    \section{Mathematical Induction}
+\end{topic}
+
+\begin{definition}{Mathematical Induction}
+    Mathematical induction is used to prove a sequence of statements: $S_{1}, S_{2}, \ldots$ which iterates through the natural numbers. We have two steps:
+        \begin{itemize}
+            \item Prove that $S_{1}$ is true.
+
+            \item Inductive Step: Assuming $n$ statements are true, prove the $S_{n + 1}$ statement. 
+        \end{itemize}
+    After these two steps, we have proven that all $S_{i}$ for $i \geq 1$ is true.
+\end{definition}
+    \begin{proof}
+        Suppose that the initial step and inductive step are verified. Suppose for contradiction that $S_{n}$ is the minimal statement with the smallest index. The case that $n = 1$ is impossible. Otherwise, we have $n > 1$. Since there is a statement before it, $S_{n - 1}$, we know that this statement is true as $n - 1 < n$. But by inductive hypothesis, we have a contradiction.
+    \end{proof}
+
+\begin{examples}
+    \begin{example}
+        We will prove that $1^{2} + 2^{2} + \ldots + n^{2} = \frac{n(n + 1)(2n + 1)}{6}$.
+            \begin{proof}
+                We will use induction on $n$.
+                    \begin{itemize}
+                        \item Base Case: $n = 1$. This is true: $1^{2} = 1$ and $\frac{1(2)(3)}{6} = 1$.
+
+                        \item Inductive Case: Assume that $1^{2} + 2^{2} + \cdots + n^{2} = \frac{n(n + 1)(2n + 1)}{6}$. We will show that $1^{2} + 2^{2} + \cdots + (n + 1)^{2} = \frac{(n + 1)(n + 2)(2n + 3)}{6}$. Notice that we have:
+                            \begin{align*}
+                                1^{2} + 2^{2} + n^{2} + (n + 1)^{2} &= \dfrac{n(n + 1)(2n + 1)}{6} + (n + 1)^{2}         \\
+                                                                    &= (n + 1)\left(\dfrac{2n^{2} + n}{6} + n + 1\right) \\
+                                                                    &= (n + 1)\left(\dfrac{2n^{2} + 7n + 6}{6}\right)    \\
+                                                                    &= \dfrac{(n + 1)(n + 2)(2n + 3)}{6}   
+                            \end{align*}
+                    \end{itemize}
+            \end{proof}
+    \end{example}
+    \begin{example}
+        Suppose that $m$ is an odd integer. We have that if $2^{k}n$ is divisible by $m$, then $m \divides n$.
+            \begin{proof}
+                Fix $m, n$. We will do induction on $k$:
+                    \begin{itemize}
+                        \item For $k = 0$, we have $m \divides n$ so $m \divides n$ which is true.
+
+                        \item Suppose that this is true up to $p$. Then we have:
+                            \begin{equation*}
+                                m \divides 2^{p}n
+                            \end{equation*}
+                        Observe that for $p + 1$, we have:
+                            \begin{equation*}
+                                2^{p + 1}n = 2^{p}n \times 2
+                            \end{equation*}
+                        Since $m \divides 2^{p}n$, we have that $m \divides 2n$. So we have $m \divides n$.
+
+                    \end{itemize}
+            \end{proof}
+    \end{example}
+    \begin{example}
+        A set is an unordered collection of different objects. We have the following definitions:
+            \begin{itemize}
+                \item $a \in A$: $a$ is in the set $A$
+
+                \item $B \subseteq A$: Every element of $b$ is an element of $A$. 
+
+                \item $[n]$ is the set of $n$ elements: $\{1, 2, \ldots, n\}$.
+            \end{itemize}
+    \end{example}
+\end{examples}
+
+\begin{theorem}{Subsets of a Set}
+    If $A$ is an $n$ element set, then the number of subsets of $A$ is $2^{n}$.
+\end{theorem}
+    \begin{proof}
+        If we have a set $A$, we can enumerate each element by a number. We proceed by induction:
+            \begin{itemize}
+                \item Initial Step: We have $A = \emptyset$. The subsets are only $\emptyset$
+
+                \item Inductive case: Suppose that $\lvert [n] \rvert = 2^{n}$ is true. For $n + 1$, we have that we have subsets that do not have $n + 1$ and sets that do. So we have $2 * 2^{n}$ subsets or $2^{n + 1}$ subsets.
+            \end{itemize}
+    \end{proof}
+
+\chapter{Week 2}
+
+\begin{topic}
+    \section{Strong Induction}
+\end{topic}
+
+\begin{examples}
+    \begin{example}
+        We have the Fibonacci numbers defined as for $F_{i}$:
+            \begin{align*}
+                F_{0}     &= 0                     \\
+                F_{1}     &= 1                     \\
+                F_{n + 1} &= F_{n - 1} + F_{n + 1}   
+            \end{align*}
+        we will prove that
+            \begin{equation*}
+                F_{k} = \dfrac{(1 + \sqrt{5})^{k} - (1 - \sqrt{5})^{k}}{\sqrt{5} \cdot 2^{k}}
+            \end{equation*}
+            \begin{proof}
+                We will prove this by induction:
+                    \begin{itemize}
+                        \item Base Cases: $F_{0} = \frac{1 - 1}{\sqrt{5}} = 0$ and $F_{1} = \frac{1 + \sqrt{5} - (1 - \sqrt{5})}{2 \sqrt{5}} = 1$
+
+                        \item Inductive Case: We need more than just the previous statement because we have $F_{n} = F_{n - 1} + F_{n - 2}$. So we actually need to assume that the last two statements are true. So we compute $F_{n}$:
+                            \begin{align*}
+                                F_{n} &= \dfrac{(1 + \sqrt{5})^{n - 1} - (1 - \sqrt{5})^{n - 1}}{\sqrt{5} \cdot 2^{n - 1}} + \dfrac{(1 + \sqrt{5})^{n - 2} - (1 - \sqrt{5})^{n - 2}}{\sqrt{5} \cdot 2^{n - 2}} \\
+                                    &= \dfrac{(1 + \sqrt{5})^{n - 1} + 2 \cdot (1 + \sqrt{5})^{n - 2}}{\sqrt{5} \cdot 2^{n - 1}} \\
+                                    &= \dfrac{(1 + \sqrt{5})^{n - 2}(3 + \sqrt{5})}{\sqrt{5} \cdot 2^{n - 1}} \\
+                                    &= \dfrac{(1 - \sqrt{5})^{n - 2}(3 - \sqrt{5})}{\sqrt{5} \cdot 2^{n - 1}} \\
+                            \end{align*}
+                        we use 
+                            \begin{align*}
+                                (1 + \sqrt{5})^{2} &= 2(3 + \sqrt{5}) \\
+                                (1 - \sqrt{5})^{2} &= 2(3 - \sqrt{5})   
+                            \end{align*}
+                    \end{itemize}  
+            \end{proof}
+    \end{example}
+\end{examples}
+
+\begin{definition}{Strong Induction}
+    We have statements to prove: $S_{1}, S_{2}, S_{3}, \ldots$
+        \begin{itemize}
+            \item Initial Step: We prove a subset of the first statements: $S_{1}, \ldots, S_{k}$
+
+            \item Induction Step: We assume for each $n > k$ that $S_{1}, \ldots, S_{n - 1}$ are all true. Then we prove $S_{n}$.
+        \end{itemize}
+\end{definition}
+
+\begin{topic}
+    \section{Basic Counting Problems}
+\end{topic}
+
+The first objects that we are counting will be permutations:
+\begin{definition}{Permutation}
+    A permutation of $A$ is an arrangement of elements of $A$ in a linear order which uses elements of $A$ exactly once.
+\end{definition}
+
+\begin{theorem}{Permutations of a Set}
+    There are $n!$ permutations of an $n$ element set $A$.
+\end{theorem}
+    \begin{proof}
+        There are $n$ choices for the first element. Then there are $n - 1$, so we continue and get $n!$.
+    \end{proof}
+
+The more generalized version of a set is a multiset.
+
+\begin{definition}{Multiset}
+    A multiset is an unordered collection of elements where each element can appear with some multiplicity.
+\end{definition}
+
+\begin{theorem}{Permutations of a Multiset}
+    Suppose that $A$ is a multiset with multiplicities $a_{1}, a_{2}, \ldots, a_{k}$. And $n = a_{1} + \cdots + a_{k}$ is the size of the multiset. We have:
+        \begin{equation*}
+            \dfrac{n!}{a_{1}!a_{2}!\cdots a_{k}!}
+        \end{equation*}
+    permutations of $A$.
+\end{theorem}
+    \begin{proof}
+        Without loss of generality, suppose that:
+            \begin{equation*}
+                A = \{\underbrace{1, 1, \ldots, 1}_{a_{1} \text{ times}}, \underbrace{2, 2, \ldots, 2}_{a_{2} \text{ times}}, \ldots, \underbrace{k, k, \ldots, k}_{a_{k} \text{ times}}\}
+            \end{equation*}
+        And we let $B$ be the set $\{(1, 1), (1, 2), \ldots, (1, a_{1}), (2, 1), \ldots, (2, a_{2}), \ldots\}$. There are $n!$ permutations of $B$. We have overcounted. So find how many permutations of $B$ lead to a permutation of $A$ which we call $w$. So we count the number of ways to permute a single element of multiplicity $a_{1}$ which is just $a_{1}!$. So there are $a_{1}!a_{2}! \cdots a_{k}!$ ways to add labels to a permutation of $A$. We have the number of permutations of $A$ as $X$ and the number of ways to add labels as $\prod_{i = 1}^{k} a_{i}!$. Therefore:
+            \begin{equation*}
+                X \cdot \prod_{i = 1}^{k} a_{i}! = n!
+            \end{equation*}
+        So this concludes the proof.
+    \end{proof}
+
+We consider strings to be a generalized version of the permutations on a multiset.
+\begin{definition}{Strings}
+    We generate strings by fixing some set $A$ which we call the alphabet. Consider strings of length $m$ with letters from $A$.
+\end{definition}
+
+\begin{theorem}{Number of strings}
+    The number of strings of length $m$ in an $n$-letter alphabet is $n^{m}$.
+\end{theorem}
+    \begin{proof}
+        Since we have a string of length $m$, we have $m$ spots to fill with letters, each spot with $n$ choices of letters. Since the choices in each position are independent from each other, we have $\underbrace{n \cdot n \cdots n}_{m \text{ times}}$ which is just $n^{m}$.
+    \end{proof}
+
+\begin{topic}
+    \section{Functions}
+\end{topic}
+
+If $A, B$ are sets, then $f: A \rightarrow B$ is the assignment of elements in $A$ to elements in $B$.
+\begin{definition}{Injective and Surjective}
+    A function $f: A \rightarrow B$ is called injective if $f(a_{1}) = f(a_{2}) \implies a_{1} = a_{2}$. A function is called surjective if for every $b \in B$, there exists an $a \in A$ such that
+        \begin{equation*}
+            f(a) = b
+        \end{equation*}
+    A function is called bijective if it is both injective and surjective.
+\end{definition}
+\textbf{Proposition}: If $A, B$ are two sets of sizes $\lvert A \rvert = n, \lvert B \rvert = m$. Assume that $f: A \rightarrow B$. 
+    \begin{itemize}
+        \item If $f$ is injective, then $\lvert A \rvert \leq \lvert B \rvert$
+
+        \item If $f$ is surjective, then $\lvert A \rvert \geq \lvert B \rvert$
+
+        \item If $f$ is bijective, then $\lvert A \rvert = \lvert B \rvert$ 
+    \end{itemize}
+
+\begin{definition}{Preimage of an element}
+    For $b \in B$, let
+        \begin{equation*}
+            f^{-1}(b) = \{a \in A : f(a) = b\}
+        \end{equation*}
+\end{definition}
+Then $f^{-1}(b)$ is a set that partitions $A$ into parts.
+    \begin{proof}
+         Under the perspective of injectivity, we have that $\lvert f^{-1}(b) \rvert \leq 1$. This means that the collection of preimages splits $A$ into $b$ groups of size no greater than $1$. So $\lvert A \rvert \leq \lvert B \rvert$. As for surjectivity, we note that each $\lvert f^{-1}(b) \rvert \geq 1$. Since these preimages splits $A$ into $b$ groups of size greater than or equal to $1$, we have $\lvert A \rvert \geq \lvert B \rvert$. Since a bijective is both injective and surjective, it follows that $\lvert A \rvert = \lvert B \rvert$ from the first two parts.
+    \end{proof}
+
+\begin{examples}
+    \begin{example}
+        $[n]$ has $2^{n}$ subsets.
+            \begin{proof}
+                Construct a bijection from the subsets:
+                    \begin{center}
+                        \begin{tikzcd}
+                            \{\text{subsets of $[n]$}\}\ar[r, ""] & \{\text{strings of length $n$ in $\{0, 1\}$}\}   
+                        \end{tikzcd}
+                    \end{center}
+                Consider the string:
+                    \begin{equation*}
+                        S_{1}S_{2}\ldots S_{n}
+                    \end{equation*}
+                defined as:
+                    \begin{equation*}
+                        S_{i} = \begin{cases}
+                            1 & \text{if $i \in A$} \\
+                            0 & \text{if $i \notin A$}
+                        \end{cases}
+                    \end{equation*}
+                This means that the number of subsets of $[n]$ is equal to the number of strings of $0, 1$ strings of size $n$. We know that the number of strings is $2^{n}$. 
+            \end{proof}
+    \end{example}
+\end{examples}
+\textbf{Proposition}: There are $m^{n}$ functions from the set $[n] \rightarrow [m]$.
+    \begin{proof}
+        Each function is defined by a string: $f(1)f_{2}\ldots f(n)$. The string of length $n$ with an alphabet of size $m$ has size $m^{n}$.
+    \end{proof}
+\textbf{Proposition}: There are $n!$ bijections from the set $[n] \rightarrow [n]$.
+    \begin{proof}
+        Each bijection $f$ is determined by $f(1), f(2), \ldots, f(n)$. Since $f$ is a bijection, all $f(i)$ are distinct from $i \neq j$ so this string is a permutation of $n$ elements. 
+    \end{proof}
+\textbf{Proposition}: Suppose that $m \leq n$ and count the number of injections from $[m] \rightarrow [n]$. This will be $\frac{n!}{(n - m)!}$.
+    \begin{proof}
+        Let us count sequences $f(1), \ldots, f(m)$. Since $f$ is injective, all $f(i)$ are different. There are $n$ choices for the first, then $n - 1$ options for $f(2)$, ..., there is $n - m + 1$ option for $f(m)$. So there are $\frac{n!}{(n - m)!}$ options. 
+    \end{proof}
+\begin{definition}{Number of Surjections}
+    Suppose that $k \leq n$. The number of surjections from $[n] \rightarrow [k]$ is denoted $k! \cdot S(n, k)$ where $S(n, k)$ is called the stirling number of the second kind.
+\end{definition}
+
+\textbf{Choice Problems}: We want to count the number of subsets of a given set if we fix the size of our desired subset.
+\begin{definition}{Binomial Coefficients}
+    The number of $k$ element subsets of $[n]$ is denoted $\binom{n}{k}$.
+\end{definition}
+
+\begin{theorem}{Binomial Coefficient Value}
+    The binomial coefficient value:
+        \begin{equation*}
+            \dbinom{n}{k} = \dfrac{n!}{k!(n - k)!}
+        \end{equation*}
+\end{theorem}
+    \begin{proof}
+        Each subset $A \subseteq [n]$ is encoded by $S_{1}, \ldots, S_{n}$ where:
+            \begin{equation*}
+                S_{i} = \begin{cases}
+                    0 & \text{if $i \notin A$} \\
+                    1 & \text{if $i \in A$}
+                \end{cases}
+            \end{equation*}
+        Now we count the number of these strings with the restriction that there are exactly $k$ $1$'s in this sequence. These strings are exactly permutations of the multiset with $k$ instances of $1$ and $n - k$ instances of $1$. We have done this which is:
+            \begin{equation*}
+                \dfrac{n!}{(n - k)!k!}
+            \end{equation*}
+    \end{proof}
+
+\begin{topic}
+    \section{Counting with Binomial Coefficients}
+\end{topic}
+
+\begin{examples}
+    \begin{example}
+        Need to choose $5$ days out of the month for meetings.
+            \begin{answer}
+                The solution is just $30$ choose $5$ or $\binom{30}{5}$
+            \end{answer}
+    \end{example}
+    \begin{example}
+        Need to choose 5 days for meetings in 30 day month where we don't have a meeting on two consecutive days.
+            \begin{answer}
+                Let $a_{1}, a_{2}, \ldots, a_{5}$ be the days that we have chosen for our meetings. Assume that $1 \leq a_{1} < a_{2} < \cdots < a_{5} \leq 30$. Sow we have $a_{i} - a_{j} \geq 2$ for $i > j$. Consider another sequence $b_{1}, b_{2}, \ldots, b_{5}$ which is shifted: $(a_{1}, a_{2} - 1, a_{3} - 2, a_{4} - 3, a_{5} - 4)$ which means that $1 \leq b_{1} < b_{2} < b_{3} < b_{4} < b_{5} \leq 26$. This is a simpler condition. So there are $\binom{26}{5}$ $b-$sequences.
+            \end{answer}
+    \end{example}
+    \begin{example}
+        We need to choose days for $10$ meetings in a $7$ day week. Several meetings can be on the same day. Meetings are distinguishable.
+            \begin{answer}
+                Let $a_{1}, \ldots, a_{10}$ be the days of the meetings. So we order then in strictly increasing order:
+                    \begin{equation*}
+                        1 \leq a_{1} \leq a_{2} \leq \cdots \leq a_{10} \leq 7
+                    \end{equation*}
+                Consider the new sequence $b_{1}, \ldots, b_{10}$ which is $(a_{1}, a_{2} + 1, a_{3} + 2, \ldots, a_{10} + 9)$. So now we have a strictly increasing sequence:
+                    \begin{equation*}
+                        1 \leq b_{1} < b_{2} < \cdots < b_{10} \leq 16
+                    \end{equation*}
+                So the answer is $\binom{16}{10}$.
+            \end{answer}
+    \end{example}
+\end{examples}
+
+\textbf{Proposition}: Number of multisets consisting from numbers in $[n]$ of size $k$:
+    \begin{equation*}
+        \dbinom{n + k - 1}{k}
+    \end{equation*}
+\begin{proof}
+    Use the trick on $1 \leq a_{1} \leq \cdots \leq a_{n} \leq n$. 
+\end{proof}
+
+So we have $\binom{n}{k} = \frac{n!}{k!(n - k)!} =$ number of ways to choose $k$ element subsets of $[n]$.
+
+\textbf{Proposition}: $\binom{n}{0} = 1$, $\binom{n}{n} = 1$, $\binom{n}{k} = \binom{n}{n - k}$
+    \begin{proof}
+        $\binom{n}{0}$ is the number of ways to pick an empty set. There is only $1$ way. $\binom{n}{n}$ is $1$ because there is only 1 way to choose the whole set. We can build a correspondence between subsets of size $k$ and $n - k$ by the complement set.
+    \end{proof}
+
+\begin{theorem}{Pascal's Triangle}
+    $\binom{n}{k} + \binom{n}{k+ 1} = \binom{n + 1}{k + 1}$
+\end{theorem}
+    \begin{proof}
+        What is $\binom{n + 1}{k + 1}$? This is the number of ways to choose subsets of size $k + 1$ in the set $[n + 1]$. We try to count this in a different way. We construct $A \subseteq [n + 1]$ by first choosing if $n + 1 \in A$ or $n + 1 \notin A$. Then we choose the remaining elements from $[n]$.
+            \begin{itemize}
+                \item If $n + 1 \in A$, then we pick $k$ more elements from $[n]$ or $\binom{n}{k} $ options
+
+                \item If $n + 1 \notin A$, then we pick $k + 1$ more elements from $[n]$ which is $\binom{n}{k + 1}$ options. 
+            \end{itemize}
+        In total, we have $\binom{n}{k} + \binom{n}{k + 1} $ options.
+    \end{proof}
+
+\begin{theorem}{Hockey Stick}
+    We have that:
+        \begin{equation*}
+            \sum_{i = 1}^{n - k} \dbinom{k + i}{k} = \dbinom{n + 1}{k + 1}
+        \end{equation*}
+\end{theorem}
+    \begin{proof}
+        This is $\binom{n + 1}{k + 1}$ or how many ways to choose $k + 1$ size subsets out of $[n + 1]$. We find an alternative way to choose this:
+            \begin{itemize}
+                \item First choose $x$, the largest number of our subset. We have that $n + 1 \geq x \geq k + 1$.
+
+                \item Then pick $k$ elements which are numbers from $1$ to $x - 1$. We have $\binom{x - 1}{k}$ options.
+            \end{itemize}
+    \end{proof}
+
+\chapter{Week 3}
+
+\begin{topic}
+    \section{Binomial Theorem}
+\end{topic}
+
+A binomial is the sum of two parts: $x + y$. We want to look at the powers of this binomial:
+    \begin{equation*}
+        (x + y)^{n}
+    \end{equation*}
+\begin{theorem}{Binomial Theorem}
+    For $n \geq 0$, 
+        \begin{equation*}
+            (x + y)^{n} = \sum_{i =0}^{n} \dbinom{n}{i}x^{i}y^{n - i}
+        \end{equation*}
+\end{theorem}
+    \begin{proof}
+        We consider the expansion: $(x + y)(x + y)\cdots(x + y)$:
+            \begin{equation*}
+                x(x + y)\cdots + y(x + y)(x + y) \cdots
+            \end{equation*}
+        And we keep expanding:
+            \begin{equation*}
+                x^{2}(x + y) + \ldots + xy(x + y) + \ldots + yx(x + y) + \ldots + y^{2}(x + y)
+            \end{equation*}
+        In general, each summand corresponds to our choice of $x$ or $y$. So we are counting number of ways to choose $k$ $x$'s and $n - k$ $y$'s. So that means that
+            \begin{equation*}
+                x^{k}y^{n - k}
+            \end{equation*}
+        appears $\binom{n}{k}$ times.
+    \end{proof}
+\begin{examples}
+    \begin{example}
+        We have that 
+            \begin{equation*}
+                \dbinom{n}{0} + \dbinom{n}{1} + \ldots + \dbinom{n}{n} = 2^{n}
+            \end{equation*}
+        \begin{proof}
+            The first summand is the number of $0$ element subsets of $[n]$. The second is the number of $2$ element subsets of $[n]$,.... And the last is the number of $n$ element subsets of $[n]$. Therefore, this is the number of subsets of $[n]$ which is $2^{n}$. The other proof is to set $x = y = 1$ in the binomial theorem.
+        \end{proof}
+    \end{example}
+    \begin{example}
+        Another example is
+            \begin{equation*}
+                \sum_{i = 0}^{n} (-1)^{i} \dbinom{n}{i} = \dbinom{n}{0} - \dbinom{n}{1} + \ldots = 0
+            \end{equation*}
+        \begin{proof}
+            We have $x = -1$ and $y = 1$, so by the binomial theorem we have $0$. In the combinatorial proof, we can move all the negative terms to the other side:
+                \begin{equation*}
+                    \dbinom{n}{0} + \dbinom{n}{2} + \ldots = \dbinom{n}{1} + \dbinom{n}{3} + \ldots
+                \end{equation*}
+            So we wish to show that the number of even sized subsets of $[n]$ is equal to the number of subsets of odd size. Consider the bijection between the subsets containing $n$ and those that do not contain $n$. Notice that the bijection is between even and odd element subsets. The bijections splits $[n]$ into pairs $(A, A\backslash \{n\})$. In each of the pairs, we have one even sized subset and one odd sized subset.
+        \end{proof}
+    \end{example}
+    \begin{example}
+        Another identity is:
+            \begin{equation*}
+                \sum_{i = 0}^{n} i\dbinom{n}{i} = n2^{n - 1}
+            \end{equation*}
+        In the algebraic proof, we have
+            \begin{equation*}
+                \left(\dv{x}(x + 1)^{n}\right)\eval_{x = 1}
+            \end{equation*}
+        In the combinatorial proof, we have the following problem. Consider a group of $n$ people, distinguishable. Count the number of ways to pick a team consisting of these people f arbitrary size and choosing one of the people of these to be the team captain. First choose the captain which is $n$ options then pick an arbitrary subset of the remaining people. We get $n2^{n - 1}$ options. Then we count the other side. First, choose subsets of size of team: $\binom{n}{i}$. Then for each team of size $i$, choose the team captain: $i\binom{n}{i}$. We sum over all the size. So we have the equivalence.
+    \end{example}
+\end{examples}
+
+\begin{topic}
+    \section{Multinomial Theorem}
+\end{topic}
+
+There is a more general theorem which comes from the question of what is $(x + y + z)^{3}$. We start expanding:
+    \begin{equation*}
+        x(x + y + z)^{2} + y(x + y + z)^{2} + z(x + y + z)^{2}
+    \end{equation*}
+Then we keep expanding:
+    \begin{equation*}
+        x^{2}(x + y + z) + xy(x + y + z) + \ldots
+    \end{equation*}
+
+\begin{theorem}{Multinomial Theorem}
+    Suppose that $n \geq 0$ and $k \geq 1$. Then look at the expression $(x_{1} + \ldots + x_{k})^{n}$:
+        \begin{equation*}
+            \sum_{\substack{a_{1}, \ldots, a_{k} \\ a_{i} > 0 \\ a_{1}+ a_{2} + \ldots + a_{k} = n}}^{} \dbinom{n}{a_{1}, a_{2}, \ldots, a_{k}} \cdot x_{1}^{a_{1}}x_{2}^{a_{2}}\cdots x_{k}^{a_{k}}
+        \end{equation*}
+    and 
+        \begin{equation*}
+            \dbinom{n}{a_{1}, \ldots, a_{k}} = \dfrac{n!}{a_{1}! \cdots a_{k}!}
+        \end{equation*}
+    which is the multinomial coefficient.
+\end{theorem}
+    \begin{proof}
+        We need to find $(\sum_{i = 1}^{k} x_{i}^{n})$. Recall the distribution law:
+            \begin{equation*}
+                \left(\sum_{i =0 }^{k} a_{i}\right)\left(\sum_{j = 0}^{m} b_{j}\right) = \sum_{i, j = 0}^{i = n, j = m} a_{i}b_{j}
+            \end{equation*}
+        So we have
+            \begin{equation*}
+                \left(\sum_{i = 1}^{k} x_{i}\right)^{n} = \sum_{\substack{i_{1}, \ldots, i_{n} \\ i_{j} \in [1, \ldots, k]}}^{} x_{i_{1}}x_{i_{2}}\ldots x_{i_{n}}
+            \end{equation*}
+        We want to count how many $x_{i_{1}}x_{i_{2}}\ldots x_{i_{n}}$ are equal to $x_{1}^{a_{1}}\ldots x_{n}^{a_{n}}$. This is the same as counting $(i_{1}, \ldots, i_{n})$ which contain $a_{1}$ ones, $a_{2}$ twos, $\ldots$. These are permutations of $\{1^{a_{1}},\ldots, n^{a_{n}}\}$. There are 
+            \begin{equation*}
+                \dfrac{n!}{a_{1}! \ldots a_{n}!}
+            \end{equation*}
+        permutations.
+    \end{proof}
+
+\textbf{Proposition}: $\binom{n}{a_{1}, \ldots, a_{n}}$ is the number of ways to split $[n]$ into disjoint subsets $A_{1}, \ldots, A_{k}$ where $\lvert A_{i} \rvert = a_{i}$.
+    \begin{proof}
+        Any way to split $[n]$ into this subset is equivalent to a permutation of the multiset by assigning $1, 2, \ldots, k$ to an element of $n$.
+    \end{proof}
+
+\textbf{Proposition}: $\binom{n}{a_{1}, \ldots, a_{k}} = \binom{n}{a_{1}}\binom{n - a_{1}}{a_{2}}\binom{n - a_{1} - a_{2}}{a_{3}} \ldots \binom{n - a_{1} - a_{2} - \ldots - a_{k - 1}}{a_{k}}$.
+    \begin{proof}
+        How to split $[n]$ into $k$ groups of sizes $a_{1}, \ldots, a_{k}$. It can be counted in the following way:
+            \begin{itemize}
+                \item First choose the group $A_{1}$ which an $a_{1}$-element subset of $[n]$. There are $\binom{n}{a_{1}}$ options.
+
+                \item Then choose $A_{2}$ which is an $a_{2}$-element subset of the set $[n]\backslash A_{1}$ which has size $n - a_{1}$. There are $\binom{n - a_{1}}{a_{2}}$ options.
+
+                \item Repeat this process.
+
+                \item At the end, you will choose the last group $A_{k}$ in which you choose $a_{k}$ elements in $[n]\backslash (A_{1} \cup \ldots \cup A_{k - 1})$ in which we have $\binom{n - a_{1} \ldots a_{k - 1}}{a_{k}}$ options.
+            \end{itemize}
+    \end{proof}
+
+\begin{examples}
+    \begin{example}
+        Take for example $(x + y + z)^{3}$. It will be:
+            \begin{equation*}
+                x^{3} + y^{3} + z^{3} + 3x^{2}y + 3y^{2}x + 3y^{2}z + 3z^{2}y + 3x^{2}z + 3z^{2}x + 6xyz
+            \end{equation*}
+    \end{example}
+\end{examples}
+
+There is another way to generalize binomial theorem. Take $(1 + x)^{a}$ where $a$ is an arbitrary number. There are examples like $\sqrt{1 + x}$:
+    \begin{equation*}
+        (1 + x)^{a} = \sum_{i \geq 0}^{} \dbinom{a}{i}x^{i}
+    \end{equation*}
+This will be postponed to the generating functions section.
+
+There will be new types of counting problems: How many ways there are to split a number of objects into some number of groups.
+\begin{examples}
+    \begin{example}
+        Splitting different objects into different groups. Suppose there are $n$ balls which are numbered from $1, \ldots, n$. Say there are $k$ boxes, which are numbered from $1, \ldots, k$. How many ways are there to place all the balls into some boxes? The number of ways would be the number of functions from $[n]$ to $[k]$.
+
+        Count the number of ways to place balls in a way where no box is left empty. This is equivalent to counting surjections from $[n]$ to $[k]$. This will be $k!S(n, k)$.
+    \end{example}
+    \begin{example}
+        Now we will be splitting identical objects into different groups. Suppose there are $n$ identical balls and $k$ boxes numbered from $1, \ldots, k$. The only important piece of data is how many balls are in each box. Let $a_{1}, \ldots, a_{k}$ be the sizes of these boxes. The only constraint is that $a_{1} + \ldots + a_{k} = n$
+    \end{example}
+\end{examples}
+
+\begin{definition}{Weak Composition of $n$}
+    A sequence $(a_{1}, \ldots, a_{k})$ such that $a_{i}$ are integers $\geq 0$ and $a_{1} + \cdots + a_{k} = n$ is called weak composition of $n$. The numbers $a_{i}$ are called parts of the composition. If in addition $a_{i} \neq 0$, then the sequence $(a_{1}, \ldots, a_{k})$ is called a composition of $n$.
+\end{definition}
+
+\chapter{Week 4}
+
+\begin{topic}
+    \section{Identical Objects, Different Boxes}
+\end{topic}
+
+\textbf{Proposition}: What is the number of weak compositions of $n$ with $k$ parts is equal to $\binom{n + k - 1}{n} = \binom{n + k - 1}{k - 1}$.
+    \begin{proof}
+        (Stars and Bars) Want to count sequences $(a_{1}, \ldots , a_{k})$ where $a_{i} \geq 0$, $a_{1} + \cdots +a_{k} = n$. To think about these sequences, think about the configuration:
+            \begin{equation*}
+               \underbrace{* * \ldots *}_{a_{1} \text{ times}} \divides\underbrace{* * \ldots  *}_{a_{2} \text{ times}} \divides  \ldots \divides\underbrace{* * \ldots  *}_{a_{k} \text{ times}}
+            \end{equation*}
+        There should be in total $n$ stars and $k - 1$ bars. So weak compositions are in one to one correspondence with permutations of $\{*^{n}, \divides^{k - 1}\}$ and there are $\binom{n + k - 1}{n}$ permutations.
+    \end{proof}
+
+\textbf{Proposition}: The number of compositions of $n$ with $k$ parts (each part must be $\geq 1$) is equal to $\binom{n - 1}{k - 1}$.
+    \begin{proof}
+        (First Proof) There is a bijection $(a_{1}, \ldots , a_{k})$, then consider the composition: $(a_{1} + 1, \ldots , a_{k} + 1)$. The first is a weak composition of $n$ and the second is a composition of $n + k$. The compositions of $n$ with $k$ parts are in bijection with the number of weak compositions of $n - k$ with $k$ parts. So substituting in $n - k = n$, we get $\binom{n - 1}{k - 1}$.
+
+        (Second Proof) Encode $(a_{1}, \ldots , a_{k})$ by stars and bars. Consider $n$ stars placed in a row. Between each gap, you either do nothing or place a bar. So we have $n - 1$ gaps and $k - 1$ bars to place. Therefore, we have $\binom{n - 1}{k - 1}$ compositions.
+    \end{proof} 
+
+\textbf{Proposition}: The number of compositions of $n$ is equal to $2^{n - 1}$.
+    \begin{proof}
+        We are counting all the possible ways to place bars between $n$ stars. There are $n - 1$ gaps, so we just choose a subset of these gaps. There are $2^{n - 1}$ subsets.
+    \end{proof}
+
+For weak compositions because you can have groups of size $0$. So there are infinitely many.
+
+\begin{topic}
+    \section{Different Objects, Identical Boxes}
+\end{topic}
+
+Set $[n]$. How many ways are there to split the set into $k$ disjoint subsets.
+
+\begin{definition}{Partitions}
+    An ordered collection of non-empty subsets of $[n]$ such that each element of $[n]$ is exactly in one of the subsets is called a partition of the set $[n]$. These are called set partitions.
+\end{definition}
+
+\textbf{Proposition}: The number of partitions of $[n]$ with $k$ parts is equal to $S(n, k)$.
+    \begin{proof}
+        Recall that the number of surjections $f$ from $[n]$ to $[k]$ is equal to $k!S(n, k)$. We will show that there for each partition of $[n]$ into $k$ parts, we can assign to it $k!$ surjections. If $f : [n] \rightarrow [k]$ is a surjection, consider the partition of $[n]$ into subsets according to the value of $f(i)$, namely, if $f(i) = f(j)$, then $i, j$ are in the same partition. Since $f$ is a surjection, there are $k$ such groups. Let us fix a partition of $[n]$ with $k$ parts. To construct surjection we specify how values of $f$ correspond to values of this partition. Since the values of $f$ are numbers from $1$ to $k$, we specify how to order these numbers. So there are $k!$ ways to get surjections from such a partition. There are no two equal parts of the partition.
+    \end{proof} 
+
+\begin{theorem}{Stirling Numbers}
+    For any positive integers $n, k$,
+        \begin{equation*}
+            S(n, k) = S(n - 1, k - 1) + kS(n - 1, k)
+        \end{equation*}
+\end{theorem}
+
+\begin{topic}
+    \section{Stirling Numbers Continued}
+\end{topic}
+
+The stirling number formula looks similar to
+    \begin{equation*}
+        \dbinom{n}{k} = \dbinom{n - 1}{k - 1} + \dbinom{n - 1}{k}
+    \end{equation*}
+
+\begin{examples}
+    \begin{example}
+        We know that $S(n, 1) = 1 = S(n, n)$ since there is only way to split $[n]$ into $1$ part or $n$ parts for all $n \geq 1$.
+    \end{example}
+    \begin{example}
+        It is defined that $S(n, 0) = 0$ and $S(0, 0) = 1$.
+    \end{example}
+    \begin{example}
+        $S(1, 1) = 1, S(2, 1) = 1, S(2, 2) = 1, S(3, 1) = 1, S(3, 2) = 3, S(3, 3) = 1$
+    \end{example}
+\end{examples}
+
+\begin{proof}
+    We will construct partitions of $[n]$ by first picking partitions of $[n - 1]$ and then adding $n$. In this construction, there are two cases.
+        \begin{itemize}
+            \item We can add $n$ as its separate partition of $[n - 1]$ 
+
+            \item We can either add $n$ as a part to an existing partition of $[n - 1]$
+        \end{itemize}
+    For the first case, if we want $k$ parts in the end, we start with a partition of $[n - 1]$ with $k - 1$ parts. There are $S(n - 1, k -1)$ partitions of $[n - 1]$ into $k - 1$ parts. For the second case, we start with a partition of $[n -1]$ with $k$ parts and choose one of the $k$ parts to add $n$ to. There are $k$ choices for each partition, so we have $k \cdot S(n - 1, k)$ partitions. The total would be
+        \begin{equation*}
+            S(n, k) = S(n - 1, k - 1) + k \cdot S(n - 1, k)
+        \end{equation*}
+    proving the identity.
+\end{proof}
+
+\begin{theorem}{Number of Mappings: $[n] \rightarrow [m]$}
+    For any positive integers $n, m$
+        \begin{equation*}
+            m^{n} = \sum_{k = 1}^{n} \dbinom{m}{k} S(n, k) \cdot k!
+        \end{equation*}
+\end{theorem}
+
+\begin{proof}
+    We have $m^{n}$ is the number of mappings from $[n] \rightarrow [m]$. How to get another mapping $f: [n] \rightarrow [m]$? First pick $k = 1, \ldots , n$. Then pick a subset $I \subseteq [m]$ such that $\lvert I \rvert = k$. Finally, build $f$ by choosing a surjection from $[n] \rightarrow I$. The idea is by choosing the image of $f$ first and counting the number of surjections. There are $\binom{m}{k}$ ways to choose $I$.
+\end{proof}
+
+\begin{examples}
+    \begin{example}
+        We know that $S(n, 1) = 1$. Set $m = 2$. We have
+            \begin{equation*}
+                2^{n} = \sum_{k = 1}^{n} \dbinom{2}{k} k! \cdot S(n, k) = 2 \cdot S(n, 1) + 2 \cdot S(n, 2) = 2 + 2 \cdot S(n, 2)
+            \end{equation*}
+        We get:
+            \begin{equation*}
+                S(n, 2) = 2^{n -1} - 1
+            \end{equation*}
+    \end{example}
+    \begin{example}
+        Now set $m = 3$:
+            \begin{equation*}
+                3^{n} = \sum_{k = 1}^{n} \dbinom{3}{k} k! \cdot S(n, k) = 3 \cdot S(n, 1) + 6 \cdot S(n, 2) + 6 \cdot S(n, 3)
+            \end{equation*}
+        We get:
+            \begin{equation*}
+                S(n, 3) = \dfrac{3^{n} - 6(2^{n} - 1) - 3}{6} = \dfrac{3^{n - 1} - 1}{2} - 2^{n - 1} + 1
+            \end{equation*}
+    \end{example}
+\end{examples}
+
+\begin{definition}{Bell Number}
+    The number of partitions of $[n]$ is denoted $B(n)$ which is called Bell number:
+        \begin{equation*}
+            B(n) = \sum_{k = 1}^{n} S(n, k)
+        \end{equation*}
+\end{definition}
+
+\begin{topic}
+    \section{Identical Objects, Identical Boxes}
+\end{topic}
+
+Placing $n$ identical objects into identical boxes is equivalent to picking a multiset $\{a_{1}, a_{2}, \ldots , a_{k}\}$ of how many objects of how many objects are in each box. We can assume that $a_{1} \geq a_{2} \geq a_{3} \geq \ldots $.
+
+\begin{definition}{Integer Partitions}
+    A sequence of positive integers $\lambda_{1}, \lambda_{2}, \ldots , \lambda_{k}$ such that $\lambda_{1} \geq \lambda_{2} \geq \ldots  \geq \lambda_{k}$ and $\lambda_{1} + \cdots  + \lambda_{k} = n$ is called an integer partition of $n$. 
+\end{definition}
+
+The number $p(n)$ is the number of partitions of $n$ and $p_{k}(n)$ is the number of partitions of $n$ into $k$-parts.
+
+\begin{definition}{Young Diagram}
+    A Young diagram of a partition $\lambda$ is an arrangement of square boxes in upper-left corner of a plane quadrant such that the first row has $\lambda_{1}$ boxes, second row has $\lambda_{2}$ boxes, $\ldots $.
+\end{definition}
+
+\begin{definition}{Conjugate}
+    A conjugate of a partition $\lambda$ is denoted by $\lambda^{\prime}$ and it is the partition which is obtained by reflecting the Young Diagram of $\lambda$ with respect to the main diagonal.
+\end{definition}
+
+\begin{definition}{Self Conjugate}
+    A partition $\lambda$ is called self conjugate if it is equal to its conjugate.
+\end{definition}
+
+An alternative definition of $\lambda^{\prime}$ is 
+    \begin{equation*}
+        \lambda_{i} = \{j : \lambda_{j} \geq i\}
+    \end{equation*}
+\begin{examples}
+    \begin{example}
+        $\lambda_{1}^{\prime} = $number of parts of $\lambda$,
+
+        $\lambda_{2}^{\prime} = $number of parts $\geq  2$
+
+        So we can get the number of parts $=$ 1 by $\lambda_{1}^{\prime} - \lambda_{2}^{\prime}$
+    \end{example}
+\end{examples}
+
+\textbf{Proposition}: Number of partitions of $n$ with parts $\leq k$ is equal to the number of partitions of $n$ with $\leq k$ parts.
+    \begin{proof}
+        The number of partitions with $\leq k$ parts is the number of young diagrams with height less than or equal to $k$. The number of partitions of $n$ parts that are all $\leq k$ is the conjugate of our partition, which has length $\leq k$. This induces a bijection.
+    \end{proof}
+
+\begin{definition}{Strict Partitions}
+    A partition $\lambda$ is called strict if all parts are strictly decreasing $\lambda_{1} > \lambda_{2} > \ldots >  \lambda_{k}$
+\end{definition}
+
+\textbf{Proposition}: The number of conjugate partitions of $n$ is equal to the number of strict partitions of $n$ with only odd parts.
+    \begin{proof}
+        Take all hooks and construct a partition where $\mu$ is defined by its parts as $\mu_{i}$ = number of boxes in the $i$-th hook. We know that the parts are odd because the length will be $k$ which will be equal to the height because it is self-conjugate. Then there are $2k - 1$ boxes in the young diagram. It is also strictly decreasing because the inner hook has length $ \leq k - 1$. So $\mu_{i} >  \mu_{j}$ if $j > i$. This is a bijection because you can get the young diagram from the strictly decreasing partition with only odd parts.
+    \end{proof}
+
+\begin{topic}
+    \section{Permutations Continued}
+\end{topic}
+
+A permutation of $[n]$ is a linear ordering of elements from $[n]$. If $\sigma: [n] \rightarrow [n]$ is a bijection, then we can interpret this $\sigma$ as a permutation $\sigma(1), \sigma(2), \sigma(3), \ldots , \sigma(n)$.
+
+\begin{examples}
+    \begin{example}
+        The sequence $2 \, 3 \, 1$ is the bijection
+            \begin{align*}
+                1 &\mapsto  2 \\
+                2 &\mapsto  3 \\
+                3 &\mapsto  1   
+            \end{align*}
+    \end{example}
+\end{examples}
+
+\begin{definition}{Composition of Permutations}
+    Let $\sigma, \omega$ be permutations of $[n]$. The product $\sigma\omega$ is a permutation defined by
+        \begin{equation*}
+            [\sigma\omega](i) = \sigma(\omega(i))
+        \end{equation*}
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        $2 \, 3 \,  1 \cdot 2 \,  1 \,  3 = 3 \, 2 \, 1$. 
+    \end{example}
+\end{examples}
+
+A remark of this operation is that it is associative:
+    \begin{equation*}
+        (\sigma\omega)\tau = \sigma(\omega\tau)
+    \end{equation*}
+This is not a commutative operation. So in general, $\sigma\omega \neq \omega\sigma$. There is an identity element: $e = 1 \, 2 \, 3 \, \ldots \, n$, satisfying the property that $e$ commutes with all permutations.
+
+Finally, for any permutation $\sigma$, we can define $\sigma^{-1}$. If $\sigma(i) = j$, then $\sigma^{-1}(j) = i$. The operation satisfies $\sigma\sigma^{-1} = e = \sigma^{-1}\sigma$. Associativity, identity element, and existence of inverses make the set of permutations of $[n]$ into a group. The set of all permutations of $[n]$ is denoted $S_{n}$.
+
+We will study behavior of $\sigma^{n}$. We have cycles:
+    \begin{center}
+        \begin{tikzcd}
+                          &  & 1 \ar[dll, ""] &                \\
+            2\ar[drrr, ""] &  &                &                \\
+                          &  &                & 3 \ar[uul, ""]   
+        \end{tikzcd}
+    \end{center}
+
+\textbf{Lemma}: For any permutation $\sigma$ of $[n]$ and any $x \in [n]$, there exists a number $j \in [n]$ such that $\sigma^{j}(x) = x$.
+    \begin{proof}
+        Consider the sequence $x, \sigma(x), \sigma^{2}(x), \ldots , \sigma^{n}(x)$. This is a sequence of $n + 1$ numbers from $[n]$. By the pigeonhole principle, we have that two of the numbers must be equal:
+            \begin{equation*}
+                \sigma^{a}(x) = \sigma^{b}(x) \text{ where } 0 \leq a < b \leq n
+            \end{equation*}
+        So multiplying from the left by $\sigma^{-a}$, we have $\sigma^{b - a}(x) = x$.
+    \end{proof}
+
+\chapter{Week 5}
+
+\begin{topic}
+    \section{Cycles and Permutations}
+\end{topic} 
+
+\begin{definition}{Cycles}
+    Let $\sigma$ be a permutation of $[n]$ and $x \in [n]$. Let $i$ be the minimum positive integer such that $\sigma^{i}(x) = x$. Then 
+        \begin{equation*}
+            x, \sigma(x), \sigma^{2}(x), \ldots , \sigma^{i - 1}(x)
+        \end{equation*} 
+    is called an $i$-cycle of $\sigma$. This cycle is denoted by $(x, \sigma(x), \ldots , \sigma^{i - 1}(x))$. Cycles that differ by a rotation will be considered the same cycle.
+        \begin{center}
+            \begin{tikzcd}
+                & \sigma(x) \ar[rr, ""]     &  & \sigma^{2}(x)\ar[dr, "", bend left = 20] &                    \\
+                x \ar[ur, "", bend left = 20]    &                           &  &                          & \cdots \ar[dl, "", bend left = 20] \\
+                                 & \sigma^{i - 1}\ar[ul, "", bend left = 20] &  & \sigma^{i - 2}(x) \ar[ll, ""]       &                      
+            \end{tikzcd}
+        \end{center}
+\end{definition}
+
+\begin{theorem}{Disjoint Cycles}
+    Any permutation $\sigma$ of $[n]$ can be decomposed into disjoint cycles (every element from $[n]$ will be in exactly one of the cycles).
+\end{theorem}
+
+\begin{definition}{Cycle Type}
+    A cycle type of a permutation $\sigma$ of $[n]$ is the partition $(\lambda_{1}, \lambda_{2}, \ldots )$ of $n$ such that $\lambda_{1}, \lambda_{2}, \ldots $ are exactly the lengths of cycles of $\sigma$.
+\end{definition}
+
+\textbf{Proposition}: Let $\lambda$ be a partition of $n$, and let $m_{i}$ denote the number of parts of $\lambda$ equal to $i$. Then the number of permutations with cycle type $\lambda$ is equal to 
+    \begin{equation*}
+        \dfrac{n!}{\prod_{i \geq 1}^{} m_{i}!i^{m_{i}}}
+    \end{equation*}
+
+\begin{proof}
+    Construct $\sigma$ as follows
+        \begin{itemize}
+            \item Start with permutation of $[n]$ denoted $\omega$ which we write as a linearly ordered sequence of numbers $\omega_{1}\omega_{2}\ldots \omega_{n}$.
+
+            \item We define by $(\omega_{1}\ldots \omega_{\lambda_{1}})(\omega_{\lambda_{1} + 1}\ldots \omega_{\lambda_{1} + \lambda_{2}}) \ldots $. This gives $\sigma$ with cycle type $\lambda$. However, different choices of $\omega$ might lead to the same $\sigma.$
+
+            \item Count how many $\omega$ lead to the same $\sigma$. There are two ways to get the same $\omega$. First, we can rotate each cycle to get the same $\sigma$. For each $i$-cycle, this gives $i$ options:
+                \begin{equation*}
+                    \prod_{i \geq 1}^{} i^{m_{i}}
+                \end{equation*}
+            We can also permute all $i$-cycles for a fixed $i$, so for each $i$, this gives $m_{i}!$ more options. So we get:
+                \begin{equation*}
+                    \prod_{i \geq 1}^{} m_{i}!i^{m_{i}}
+                \end{equation*}
+            permutations leading to the same $\sigma$. Since there were $n!$ ways to start with a $\omega$, we have
+                \begin{equation*}
+                    \dfrac{n!}{\prod_{i \geq 1}^{} m_{i}!i^{m_{i}}}
+                \end{equation*}
+        \end{itemize}
+\end{proof}
+
+\begin{examples}
+    \begin{example}
+        There are $(n - 1)!$ $n$-cycles of $[n]$.
+    \end{example}
+    \begin{example}
+        There are
+            \begin{equation*}
+                \dfrac{(2n)!}{2^{n}n!}
+            \end{equation*}
+        ways to split $[2n]$ into pairs. This is the same as constructing permutations with only $2$ cycles with has cycle type $(2^{n})$.
+    \end{example}
+\end{examples}
+
+\begin{topic}
+    \section{Stirling Numbers of the First Kind}
+\end{topic}
+
+\begin{definition}{Unsigned Stirling Number of the First Kind}
+    The number of permutations of $[n]$ with exactly $k$-cycles is denoted by $c(n, k)$ and called unsigned Stirling number of the first kind. The number $(-1)^{n - k}c(n, k) = s(n, k)$ is called stirling number of the first kind. The stirling number
+        \begin{align*}
+            c(n, 0) &=0 \, n > 0,  & c(0, 0) &= 1   
+        \end{align*}
+\end{definition}
+
+Recall that for stirling numbers of the second kind, we had:
+    \begin{equation*}
+        s(n, k) = s(n - 1, k - 1) + ks(n - 1, k)
+    \end{equation*}
+
+\textbf{Proposition}: For any positive integers $n, k$ we have
+    \begin{equation*}
+        c(n, k) = c(n - 1, k - 1) + (n - 1)c(n - 1, k)
+    \end{equation*}
+    \begin{proof}
+        We have $c(n, k)$ is the number of permutations of $[n]$ with $k$ cycles. We will count this relation in the following way:
+            \begin{itemize}
+                \item We will first take a permutation of $[n - 1]$.
+
+                \item Then add $n$ to the permutation of $[n - 1]$ in some way. 
+            \end{itemize}
+        There are two ways to add $n$. 
+            \begin{itemize}
+                \item We can add $n$ as a $1$-cycle to a permutation of $[n - 1]$. In this case, there are $c(n - 1, k - 1)$ options because we have to start with $k - 1$ cycles.
+
+                \item We can add $n$ to some cycle which already exists in a permutation of $[n - 1]$. Since the number of permutations does not change, we have $c(n - 1, k)$ options for the starting permutation. But we also have $i$ different ways to add $n$ into $i$-cycle. We should take this $i$ for each cycle of the starting permutation. So the number of different ways will be the sum of all the lengths of all cycles which is equal to $n - 1$. So there are $(n - 1)c(n - 1, k)$ options. 
+            \end{itemize}
+        Taking these two cases combined, we get
+            \begin{equation*}
+                c(n, k) = c(n - 1, k - 1) + (n - 1)c(n - 1, k)
+            \end{equation*}
+    \end{proof}
+
+We know that $c(n, 1) = (n - 1)!$ and $c(n, n) = 1$. Using this recurrence relation, we can prove:
+
+\begin{theorem}{Identity on Polynomials}
+    For any $n \geq 0$,
+        \begin{equation*}
+            \sum_{k = 0}^{n} c(n, k) x^{k} = x(x + 1)(x + 2)\cdots (x + n - 1)
+        \end{equation*}
+\end{theorem}
+    \begin{proof}
+        Induction proof.
+    \end{proof}
+
+\textbf{Proposition}: For $n \geq 0$,
+    \begin{equation*}
+        \sum_{k = 0}^{n} s(n, k)x^{k} = x(x - 1)(x - 2)\cdots (x - (n - 1)) = (x)_{n}
+    \end{equation*}
+        \begin{proof}
+            \begin{align*}
+                \sum_{k = 0}^{n} s(n, k)x^{k} &= \sum_{k = 0}^{n} (-1)^{n - k}c(n, k)x^{k} \\
+                                              &= (-1)^{n}\sum_{k = 0}^{n} c(n, k)(-x)^{k} \\
+                                              &= (-1)^{n}(-x)(-x + 1)(-x + 2) \cdots (-x + n - 1) \\
+                                              &= (x)(x - 1)(x - 2)\cdots (x - (n - 1))
+            \end{align*}
+        \end{proof}
+
+Recall that
+    \begin{equation*}
+        \sum_{k = 0}^{n} S(n, k) \cdot k! \cdot \dbinom{m}{k} = m^{n}
+    \end{equation*}
+We can rewrite:
+    \begin{equation*}
+        \sum_{k = 0}^{n} S(n, k)\cdot (m)_{k} = m^{n}
+    \end{equation*}
+
+\begin{theorem}{}
+    If $f(x), g(x)$ are polynomials in $x$ such that $f(a) = g(a)$ for infinitely many $a$'s, then these polynomials are equal at every point: $f(x) = g(x)$.
+\end{theorem}
+
+Therefore, we can conclude
+    \begin{equation*}
+        \sum_{k = 0}^{n} S(n, k)\cdot (x)_{k} = x^{n}
+    \end{equation*}
+
+The main idea is that signed stirling numbers of the first kind shows how to get from polynomials to falling factorials and the stirling number of the second kind shows how to get from falling factorials to polynomials.
+
+\textbf{Reminder}: A polynomial in $x$ of degree $\leq  n$ is of the form:
+    \begin{equation*}
+        a_{0} + a_{1}x + a_{2}x^{2} + \cdots  + a_{n}x^{n} = f(x)
+    \end{equation*}
+we can rewrite
+    \begin{equation*}
+        f(b) = \sum_{i = 0}^{n} a_{i}b^{i}
+    \end{equation*}
+
+\begin{proof}
+    Enough to prove that $(f - g)(a) = 0$ vanishes at infinitely many points, then $h(x) = f - g = 0$. More precisely, if $h(x_{i}) = 0$ for a sequence $(x_{1}, x_{2}, \ldots )$, them $h(x) = 0$.
+
+    Induction on $\mathop{deg}h$:
+        \begin{itemize}
+            \item When $\mathop{deg}h = 0$, then $h(x) = a_{0}$. But $a_{0} = 0$ so $h(x) = 0$.
+
+            \item Assume that we have proved it for $\mathop{deg}h = n$. Take $\mathop{h} = n + 1$. We have $h(x_{0}) = 0$ for all $x_{i}$. Consider the substitution: $x = y + x_{1}$:
+                \begin{equation*}
+                    \tilde{h}(y) = h(y + x_{1})
+                \end{equation*}
+            so $\tilde{h}$ has degree $n + 1$. We also have:
+                \begin{equation*}
+                    \tilde{h}(x_{i} - x_{1}) = 0
+                \end{equation*}
+            In particular, $\tilde{h}(0) = 0$. But $\tilde{h} = a_{0} + a_{1}y + \cdots  + a_{n + 1}y^{n + 1}$ so $a_{0} = 0$. We can factor: $\tilde{h} = yg(y)$. Where $g(y)$ is a polynomial of degree $n$. So $g(y) = 0 = \tilde{h}$.
+        \end{itemize}
+\end{proof}
+
+\begin{topic}
+    \section{Inclusion Exclusion Principle}
+\end{topic}
+
+There are $10$ students who like apples. There are $15$ students who like oranges. How many students like at least one of these fruits?
+
+There are many cases:
+    \begin{itemize}
+        \item All students who like apples also like oranges: 15
+
+        \item People who like apples hate oranges and vice versa. So we get $25$. 
+    \end{itemize}
+Problem: $10$ students like apples and $15$ students like oranges, $5$ students like both apples and oranges. How many students like at least one of the two fruits?
+
+The answer is $10 +  15 - 5 = 20$.
+
+Problem: $10$ students like apples, $15$ students like oranges, $20$ students like bananas, $5$ students like both apples and oranges, $7$ students like both apples and bananas, $10$ students like oranges and bananas, $4$ students like all three fruits. How many students like at least one of these three fruits?
+
+Solution: $10 + 15 + 20$ counts students with one fruit once. Students who like two fruits are counted twice. Students who like all three are counted $3$ times. So subtract out the redundant counts: $45 - 5 - 7 - 10 = 23$ counts the number of students who like one fruit one time, students who like two fruits are counted once, and students who like all three fruits are counted $0$ times. Finally, $13 + 4 = 27$.
+
+\begin{theorem}{Inclusion-Exclusion Principle}
+    Let $(A_{1}, A_{2}, \ldots , A_{k})$ is a collection of $k$ sets. Then
+        \begin{equation*}
+            \lvert A_{1} \cup A_{2} \cup \cdots \cup A_{k} \rvert = \sum_{j = 1}^{k} (-1)^{j - 1}\sum_{i_{1}, \ldots , i_{j}}^{} \lvert A_{i_{1}} \cap A_{i_{2}} \cap \cdots \cap A_{i_{j}} \rvert
+        \end{equation*}
+    where $\sum_{i_{1}, \ldots , i_{j}}^{}$ is the sum over $\{i_{1}, \ldots , i_{j}\} \subseteq [k]$ with $j$ elements.
+\end{theorem}
+
+\begin{examples}
+    \begin{example}
+        $\lvert A_{1} \cup A_{2} \rvert = \lvert A_{1} \rvert + \lvert A_{2} \rvert - \lvert A_{1} \cap A_{2} \rvert$ and $\lvert A_{1} \cup A_{2} \cup A_{3} \rvert = \lvert A_{1} \rvert + \lvert A_{2} \rvert + \lvert A_{3} \rvert - \lvert A_{1} \cap A_{2} \rvert - \lvert A_{2} \cap A_{3} \rvert - \lvert A_{3} \cap A_{1} \rvert + \lvert A_{1} \cap A_{2} \cap A_{3} \rvert$.
+    \end{example}
+\end{examples}
+    \begin{proof}
+        Let $x \in A_{1} \cup A_{2} \cup \cdots \cup A_{k}$. We want to show that $x$ will be counted once in 
+            \begin{equation*}
+                \sum_{j = 1}^{k} (-1)^{j - 1}\sum_{i_{1}, \ldots , i_{j}}^{} \lvert A_{i_{1}} \cap A_{i_{2}} \cap \cdots \cap A_{i_{j}} \rvert
+            \end{equation*}
+        Let $S$ denote the set of indices $i$ such that $x \in A_{i} \iff i \in S$. We know $\lvert S \rvert \geq 1$. $x \in A_{i_{1}} \cap A_{i_{2}} \cap \cdots \cap A_{i_{j}}$ iff $\{i_{1}, i_{2}, \ldots , i_{j}\} \subseteq S$. This means that $x$ is counted in $\sum_{i_{1}, \ldots , i_{j}}^{}  \lvert A_{i_{1}} \cap \cdots \cap A_{i_{j}} \rvert$ exactly $\binom{n}{j}$ times where $n = \lvert S \rvert$. This is the number of ways to choose $\{i_{1}, \ldots , i_{j}\}\subseteq S$. In total, $x$ is counted 
+            \begin{equation*}
+                \sum_{j = 1}^{n} (-1)^{j - 1} \dbinom{n}{j}
+            \end{equation*}
+        Recall that 
+            \begin{equation*}
+                \sum_{j = 0}^{n} (-1)^{j}\dbinom{n}{j} = 0 = 1 + \sum_{j = 1}^{n} (-1)^{j}\dbinom{n}{j}
+            \end{equation*}
+        so we get:
+            \begin{equation*}
+                \sum_{j = 1}^{n} (-1)^{j - 1}\dbinom{n}{j} = 1
+            \end{equation*}
+        which means $x$ is counted once.
+    \end{proof}
+
+Applications: Consider maps $[n] \rightarrow [k]$. A set $A_{i}$ is the set of maps $f: [n] \rightarrow [k]$ which misses $i$, where $i \in [k]$. Then:
+    \begin{equation*}
+        \lvert A_{i} \rvert = \text{Number of maps $[n] \rightarrow [k]/\{i\}$}
+    \end{equation*}
+The number of such maps is $(k - 1)^{n}$. Moreover, the intersection $A_{i_{1}} \cap \cdots \cap A_{i_{j}}$ corresponds to the number of maps $[n] \rightarrow [k]\backslash \{i_{1}, \ldots , i_{j}\}$ which is $(k - j)^{n}$. By PIE, we have that:
+    \begin{equation*}
+        \lvert A_{1} \cup \cdots \cup A_{k} \rvert = \sum_{j =1}^{k} (-1)^{j - 1}(k - j)^{n}\dbinom{k}{j}
+    \end{equation*}
+These are maps from $[n] \rightarrow [k]$ which miss at least one element of $[k]$. This means that the number of surjections is:
+    \begin{equation*}
+        k^{n} - \lvert A_{1} \cup  \cdots \cup A_{k} \rvert
+    \end{equation*}
+So there is the following formula:
+    \begin{equation*}
+        k!S(n, k) = k^{n} - \sum_{j = 1}^{n} (-1)^{j - 1}(k - j)^{n}\dbinom{k}{j} = \sum_{j = 0}^{k} (-1)^{j}\dbinom{k}{j}(k  - j)^{n}
+    \end{equation*}
+Now dividing by $k!$:
+    \begin{equation*}
+        S(n, k) = \sum_{j = 0}^{k} (-1)^{j}\dfrac{(k - j)^{n}}{j!(k - j)!}
+    \end{equation*}
+
+\chapter{Week 6}
+
+\begin{topic}
+    \section{PIE in permutations}
+\end{topic}
+
+We know that there are $n!$ permutations of $[n]$. Consider permutations $\sigma$ of $[n]$ such that $\sigma(i) = i$ for a fixed $i \in [n]$. So there are $(n - 1)!$ such permutations. Moreover, permutations $\sigma$ of $[n]$ such that $\sigma(i_{1}) = i_{1}$, $\sigma(i_{2}) = i_{2}$, $\ldots , \sigma(i_{j}) = i_{j}$ where $\{i_{1}, \ldots , k_{j}\} \subseteq [n]$. Equivalently, we can look at the number of permutations of $[n]\backslash \{i_{1}, \ldots , i_{j}\}$ where there are $(n -j)!$ permutations. 
+
+\begin{definition}{Derangement}
+    A permutation $\sigma$ of $[n]$ is called derangement if it has no fixed points. That is, $\sigma(i) \neq i$ for any $i \in [n]$.
+\end{definition}
+
+\begin{theorem}{Number of Derangements}
+    The number of derangements of $[n]$ is equal to $n! \cdot \sum_{j = 0}^{n} \frac{(-1)^{j}}{j!}$.
+\end{theorem}
+    \begin{proof}
+        Let $A_{i}$ denote the set of permutations which fix $i$. We know that $\lvert A_{i} \rvert = (n - 1)!$ and we also know the sizes of the intersection of $\lvert A_{i_{1}} \cap \cdots A_{i_{j}} \rvert$ which is $(n - j)!$. The union of the sets:
+            \begin{equation*}
+                \lvert A_{1} \cup \cdots \cup A_{n} \rvert = \{\text{permutations that fix at least one point}\}
+            \end{equation*}
+        Now we apply inclusion exclusion. We have
+            \begin{align*}
+                \lvert A_{1} \cup \cdots A_{n} \rvert &= \sum_{j = 1}^{n} (-1)^{j - 1}\sum_{i_{1}, \ldots , i_{j}}^{} \lvert A_{i_{1}} \cap \cdots \cap A_{i_{j}} \rvert \\
+                                                      &= \sum_{j = 1}^{n} (-1)^{j - 1}\sum_{i_{1}, \ldots , i_{j}}^{} (n - j)!                                           \\
+                                                      &= \sum_{j = 1}^{n} (-1)^{j - 1}\dbinom{n}{j}(n - j)! \\
+                                                      &= \sum_{j = 1}^{n} (-1)^{j - 1}\dfrac{n!}{j!} \\
+                                                      &= -\sum_{j = 1}^{n} (-1)^{j} \dfrac{n!}{j!}
+            \end{align*}
+        Number of derangements = $n! + \sum_{j = 1}^{n} (-1)^{j}\frac{n!}{j!}$
+    \end{proof}
+
+Remark: If we take $n = \infty$ for $\sum_{j = 0}^{n} \frac{(-1)^{j}}{j!}$ it will evaluate to $e^{-1}$. So for very large number of permutations, around $1/3$ will have no fixed points.
+
+\begin{topic}
+    \section{Formal Power Series}
+\end{topic}
+
+\begin{definition}{Formal Power Series}
+    A formal power series is a formal expression of the form:
+        \begin{equation*}
+            \sum_{i \geq 0}^{\infty} a_{i}x^{i}
+        \end{equation*}
+    where $x$ is a formal variable, and $a_{i}$ are numbers which are coefficients of the power series.
+\end{definition}
+
+Usually, $f(x)$ is used to denote a formal power series with variable $x$. When you plug $x = 0$, you get: $f(0) = a_{0}$. The $k$-th coefficient $a_{k}$ is sometimes denoted $[x^{k}]f$.
+
+\begin{examples}
+    \begin{example}
+        Every number is a formal power series :
+            \begin{equation*}
+                a = a + 0 \cdot x + 0 \cdot x^{2} + \cdots 
+            \end{equation*}
+    \end{example}
+    \begin{example}
+        Every polynomial in $x$ is a formal power series:
+            \begin{equation*}
+                f(x) = a_{0} + a_{1}x + a_{2}x^{2} + \cdots +a_{n}x^{n} + 0 \cdot x^{n + 1} + 0 \cdot x^{n + 2} + \cdots 
+            \end{equation*}
+    \end{example}
+    \begin{example}
+        We also have $\sum_{i = 0}^{\infty} x^{i}$ is one where all coefficients are $1$.
+    \end{example}
+\end{examples}
+
+Let $f(x) = \sum_{i = 0}^{\infty} a_{i}x^{i}$  and $g(x) = \sum_{j = 0}^{\infty} b_{j}x^{j}$. We define:
+    \begin{equation*}
+        (f + g)(x) = \sum_{i = 0}^{\infty} (a_{i} + b_{i})x^{i}
+    \end{equation*}
+The product of this power series is:
+    \begin{equation*}
+        (fg)(x) = \sum_{i \geq 0}^{} \left(\sum_{j = 0}^{i} a_{i} \cdot b_{i - j}\right)x^{i}
+    \end{equation*}
+
+\textbf{Properties}: 
+    \begin{itemize}
+        \item  $(f + g) + h = f + (g + h)$
+
+        \item  $f + g = g + f$
+
+        \item  $f + 0 = f$
+
+        \item  $\forall f$, you have $-f$ such that $f + (-f) = 0$
+
+        \item  $(fg)h = f(gh)$ 
+
+        \item  $fg = gf$
+
+        \item  $f \cdot 1 = f$
+
+        \item  $(f + g)h = fh + gh$ 
+    \end{itemize}
+These properties says that the set of all formal power series form a ring denoted by $R[[x]]$.
+
+\begin{examples}
+    \begin{example}
+        $(1 - x)(\sum_{i \geq 0}^{} x^{i}) = 1 + \sum_{i \geq 1}^{} (\sum_{j = 0}^{i} a_{j}b_{i - j})x^{i} = 1$. So we have:
+            \begin{equation*}
+                \dfrac{1}{1 - x} = \sum_{i \geq 0}^{} x^{i}
+            \end{equation*}
+    \end{example}
+\end{examples}
+
+\textbf{Proposition}: Let $F(x) = \sum_{i \geq 0}^{} a_{i}x^{i}$. Then there exists $G(x)$ such that $F(x)G(x) = 1$ if and only if $F(0) \neq 0$. In other words, 
+    \begin{equation*}
+        \dfrac{1}{F(x)}
+    \end{equation*}
+is a well-defined power series if and only if its constant term is non-zero.
+    \begin{proof}
+        If $F(0) = 0$, then $\forall G$, we have $F(0)G(0) = 0$ But this contradicts the fact that there is an inverse. Let $F(0) \neq 0$. Let us construct $G(x) = \sum_{i \geq 0}^{} b_{i}x^{i}$ such that $F(x)G(x) = 1$. This means that $b_{0} = a_{0}^{-1}$. For $k \geq 1$, $\sum_{i = 0}^{k} a_{i}b_{k - i} = 0$ and equivalently, we can have $a_{0}b_{k} = \sum_{i = 1}^{k} a_{i}b_{k - i}$. Now:
+            \begin{equation*}
+                b_{k} = \dfrac{-\sum_{i = 1}^{k} a_{i}b_{k - i}}{a_{0}}
+            \end{equation*}
+        Notice that the next term depends on the previous terms. So we can construct our next terms.
+    \end{proof}
+
+\begin{examples}
+    \begin{example}
+        $\frac{1}{1 - x + x^{2}}, \frac{1}{1 - x^{2}}, \frac{1}{2 - 2x + x^{3} + x^{4}}$ are formal power series
+    \end{example}
+    \begin{example}
+        $\frac{1}{x}$ is not a formal power series.
+    \end{example}
+\end{examples}
+
+Another approach to the proof. Suppose that $F(0) \neq 0$. Then 
+    \begin{equation*}
+        F(x) = a + G(x)
+    \end{equation*}
+where $G(0) = 0$. We want to have:
+    \begin{equation*}
+        \dfrac{1}{F(x)} = \dfrac{1}{a + G(x)} = \dfrac{1}{a} + \dfrac{1}{1 + G(x)/a} = \dfrac{1}{a}\left(\sum_{j \geq 0}^{} \left(\dfrac{-G(x)}{a}\right)^{j}\right)
+    \end{equation*}
+
+\begin{definition}{Composition of Formal Power Series}
+    Let $F(x) = \sum_{}^{} a_{i}x^{i}$ and $h(t) = \sum_{}^{} b_{i}t^{i}$ such that $h(0) = 0$. Then the formal power series $F(h(t))$ is defined as:
+        \begin{equation*}
+            F(h(t)) = \sum_{i \geq 0}^{} a_{i}h(t)^{i}
+        \end{equation*}
+    More precisely, the coefficient  of $t^{k}$ can be computed only using $\sum_{i = 0}^{k} a_{i}(h(t))^{i}$ because $h(t)^{n} = at^{n} + \cdots $.
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        $F(x) = \frac{1}{1 - x} = 1 + x + x^{2}$
+
+        $h(t) = -t - t^{2} - t^{3} - \cdots $
+
+        Now computing:
+            \begin{align*}
+                F(h(t)) &= 1 + h(t) + h(t)^{2} + \cdots                  \\
+                        &= 1 + (-1)t + (-1 + 1)t^{2} + (-1 + 2 - 1)t^{3} + \cdots \\
+                        &= 1 - t                         
+            \end{align*}
+        We also know that $F(h(t)) = \frac{1}{1 + t + t^{2} + \cdots } = 1 - t$
+    \end{example}
+    \begin{example}
+        $F(x) = \frac{1}{1 - x} = 1 + x^{2} + x^{3} + \cdots $
+
+        $h(t) = 2 + t$
+
+        $F(h(t)) = \sum_{i \geq 0}^{} (2 + t)^{i} = \sum_{i \geq 0}^{} 2^{i}$
+
+        On the other hand
+            \begin{equation*}
+                \dfrac{1}{1 - (2 + t)} = \dfrac{1}{-1 - t}
+            \end{equation*}
+        is well-defined.
+    \end{example}
+\end{examples}
+
+\begin{theorem}{Inverse Formal Power Series}
+    Let $h(t)$ be a formal power series such that
+        \begin{equation*}
+            h(t) = 0 + t + \sum_{i \geq 2}^{} a_{i}t^{i}
+        \end{equation*}
+    then there exists a unique formal power series $g(x)$ such that
+        \begin{equation*}
+            g(x) = 0 + x + \sum_{i \geq 2}^{} b_{i}x^{i}
+        \end{equation*}
+    where $g(h(t)) = t$ and $h(g(x)) = x$.
+\end{theorem}
+
+\begin{topic}
+    \section{Linear Recurrence Relations}
+\end{topic}
+
+Recall the Fibonacci numbers: $f_{0}, f_{1}, f_{2}, \ldots $ and $f_{0} = 0$, $f_{1} = 1$, $f_{n} = f_{n - 1} + f_{n - 2}$. Take 
+    \begin{equation*}
+        \sum x^{n}f_{n} = \sum x^{n}f_{n - 1} + \sum x^{n}f_{n - 2}
+    \end{equation*}
+and
+    \begin{equation*}
+        \sum_{n \geq 2}x^{n}f_{n} = x\left(\sum_{n \geq 2}x^{n - 1}f_{n - 1}\right) + x^{2}\sum_{n \geq 2}x^{n - 2}f_{n - 2}
+    \end{equation*}
+which is the same as
+    \begin{equation*}
+        \sum_{n \geq 0}x^{n}f_{n} - x = x\left(\sum_{n \geq 0}x^{n}f_{n}\right) + x^{2}\sum_{n \geq 0}x^{2}f_{n}
+    \end{equation*}
+
+\begin{definition}{Generating Functions}
+    A generating function of a sequence $(a_{0}, a_{1}, \ldots )$ is a formal power series $\sum_{i \geq 0} a_{i}x^{i}$.
+\end{definition}
+
+Let $F(x) = \sum_{n \geq 0}f_{n}x^{n}$. Then
+    \begin{align*}
+        F(x) - x &= xF(x) + x^{2}F(x) \\ 
+        F(x) - xF(x) - x^{2}F(x) &= x \\
+        F(x)(1 - x - x^{2}) &= x \\
+        F(x) &= \dfrac{x}{1 - x - x^{2}}
+    \end{align*}
+
+We have $1 - x - x^{2} = -(x^{2} + x - 1) = -((x + \frac{1}{2})^{2} - \frac{5}{4}) = -(x + \frac{1 - \sqrt{5}}{2})(x + \frac{1 + \sqrt{5}}{2})$. So the roots are:
+    \begin{equation*}
+        a_{1} = \dfrac{-1 + \sqrt{5}}{2}, a_{2} = \dfrac{-1  - \sqrt{5}}{2}
+    \end{equation*}
+we also observe that $a_{1}a_{2} = -1$. We can also rewrite:
+    \begin{equation*}
+        x = \dfrac{a_2(x - a_{1}) - a_{1}(x - a_{2})}{a_{2} - a_{1}}
+    \end{equation*}
+
+Plugging these two functions in:
+    \begin{equation*}
+        F(x) = \dfrac{a_{2}(x - a_{1}) - a_{1}(x - a_{2})}{-(a_{2} - a_{1})(a_{1} - x)(a_{2} - x)} = \dfrac{a_{2}(x - a_{1})}{-(a_{2} - a_{1})(a_{2} - x)(a_{1} - x)} - \dfrac{a_{1}(x - a_{2})}{-(a_{2} - a_{1})(a_{1} - x)(a_{2} - x)}
+    \end{equation*}
+Some terms cancel out:
+    \begin{equation*}
+        = \dfrac{a_{2}}{(a_{2} - a_{1})(a_{2} - x)} - \dfrac{a_{1}}{(a_{2} - a_{1})(a_{1} - x)}
+    \end{equation*}
+Now the term $\frac{a}{a - x} = \frac{1}{ 1 - \frac{x}{a}} = \sum(\frac{x}{a})^{n}$. So we get:
+    \begin{equation*}
+        \dfrac{1}{a_{2} - a_{1}}\left(\sum_{n \geq 0}\left(\dfrac{x}{a_{2}}\right)^{2} - \sum_{n \geq 0}\left(\dfrac{x}{a_{1}}\right)^{n}\right)
+    \end{equation*}
+So 
+    \begin{equation*}
+        F_{n} = \dfrac{1}{a_{2} - a_{1}}\left(a_{2}^{-n} - a_{1}^{-n}\right) = \dfrac{(\sqrt{5} + 1)^{n} - (1 - \sqrt{5})^{n}}{\sqrt{5} \cdot 2^{n}}
+    \end{equation*}
+
+General setting: Suppose you have a sequence $(a_{0}, a_{1}, a_{2}, \ldots )$ such that they satisfy a linear recurrence relation:
+    \begin{equation*}
+        a_{n} + c_{1}a_{n - 1} + c_{2}a_{n - 2} + \cdots + c_{k}a_{n - k} = 0
+    \end{equation*}
+where $k \geq 1$ is an integer, $n \geq k$, and $c_{1}, \ldots , c_{k}$ are numbers.
+
+\begin{theorem}{}
+    Let $F(x) = \sum_{n \geq 0} a_{n}x^{n}$. In the setting above, 
+        \begin{equation*}
+            F(x) = \dfrac{p(x)}{q(x)}
+        \end{equation*}
+    where $q(x) = 1 + c_{1}x + c_{2}x^{2} + c_{k}x^{k}$ and $p(x)$ is some polynomial of degree $< k$ which is given in terms of $c_{i}$, $a_{0}, a_{1}, \ldots , a_{k - 1}$.
+\end{theorem}
+    \begin{proof}
+        Let $F_{\leq k}(x) = \sum_{n = 0}^{k}a_{n}x^{n}$. We have the relation:
+            \begin{align*}
+                \sum_{n \geq k} x^{n}(a_{n} + c_{1}a_{n - 1} + \cdots + c_{k}a_{n - k}) &= 0 \\
+                \sum_{n \geq k}a_{n}x^{n} + xc_{1}\sum_{n \geq k}a_{n - 1}x^{n - 1} + x^{2}c_{2} \sum_{n \geq k} a_{n - 2}x^{n - 2}\cdots + x^{k}c_{k}\sum_{n \geq k} a_{n - k}x^{n - k} &= 0 \\
+                F(x) - F_{ \leq k}(x) + xc_{1}(F(x) - F_{\leq k - 2}(x)) + \cdots  + x^{k}c_{k}F(x) &= 0\\
+                F(x) + c_{1}xF(x) + \cdots + c_{k}x^{k}F(x) = F_{\leq k - 1}(x) + xc_{1}F_{\leq k - 2}(x) + x^{2}c_{2} F_{\leq k - 3}(x) + \cdots  &= P(x)
+            \end{align*}
+        So $P(x)$ is of degree $< k$ and is in terms of $a_{0}, a_{1}, \ldots , a_{k - 1}$. On the left hand side:
+            \begin{align*}
+                F(x)(1 + c_{1}x + c_{2}x^{2} + \cdots + c_{k}x^{k}) = Q(x)F(x)
+            \end{align*}
+        so we are done.
+    \end{proof}
+
+How to get the coefficients of the $P(x)/Q(x)$? Assume that $Q(x) = (1 - \frac{x}{z_{1}})(1 - \frac{x}{z_{2}}) \cdots (1 - \frac{x}{z_{k}})$ where $z_{1}, \ldots , z_{k}$ are distinct and non-zero.
+
+\begin{theorem}{Partial Fraction Decomposition}
+    Assume that $\mathop{def}P(x) <  \mathop{deg}Q(x) = k$. Then:
+        \begin{equation*}
+            \dfrac{P(x)}{Q(x)} = \sum_{i = 1}^{k}\dfrac{b_{i}}{1 - \dfrac{x}{z_{i}}} = \sum_{n \geq 0} \sum_{i = 1}^{k}b_{i}z_{i}^{-n}x^{n}
+        \end{equation*}
+    where $b_{i} = \frac{P(z_{i})}{\prod_{j \neq i}^{} (1 - \frac{z_{i}}{z_{j}})}$
+\end{theorem}
+    \begin{proof}
+        \textbf{Lemma}: If $P_{1}(x), P_{2}(x)$ are tow polynomials of degree $ \leq k$, then $P_{1}(x) = P_{2}(x)$ if $P_{1}(z_{i}) = P_{2}(z_{i})$ for $k + 1$ different points. We need to prove that
+            \begin{equation*}
+                P(x) = \sum_{i = 1}^{k}b_{i}\prod_{j \neq i}^{} (1 - \dfrac{x}{z_{j}})
+            \end{equation*}
+        Both polynomials have degree $< k$. By the lemma, it is enough to check equality for $k$ different points: $x = z_{i}$:
+            \begin{equation*}
+                P(z_{i}) = \sum_{s = 1}^{k} b_{s}\prod_{i \neq j}^{} (1 - \dfrac{z_{i}}{z_{j}}) = b_{i}\prod_{j \neq i}^{} (1 - \dfrac{z_{i}}{z_{j}})
+            \end{equation*}
+        which finishes the proof. 
+    \end{proof}
+We get
+    \begin{equation*}
+        a_{n} = \sum_{i = 1}^{k}b_{i}z^{-n}_{i}
+    \end{equation*}
+
+\chapter{Week 7}
+
+\begin{topic}
+    \section{Binomial Theorem}
+\end{topic}
+
+We have
+    \begin{equation*}
+        (1 + x)^{n} = \sum_{i = 0}^{n} \dbinom{n}{i}x^{i}
+    \end{equation*}
+
+\begin{theorem}{}
+    We say
+        \begin{equation*}
+            \boxed{(1 + x)^{a}} = \sum_{i \geq 0} \dbinom{a}{i}x^{i} \text{ where $\dbinom{a}{i} = \dfrac{a(a - 1)(a - i + 1)}{i!} = \dfrac{(a_{i})}{i!}$}
+        \end{equation*}
+\end{theorem}
+
+When $a$ is not an integer, what is $(1 + x)^{a}$?
+
+\begin{theorem}{}
+    We will show that $\boxed{(1 + x)^{a}}$ behaves like $(1 + x^{a})$. 
+        \begin{itemize}
+            \item $\boxed{(1 + x)^{a}} \cdot \boxed{(1 + x)^{b}} = \boxed{(1 + x)^{ab}}$
+
+            \item $\boxed{(1 + x)^{n}} = (1 + x)^{n}$ for all integers $n$
+
+            \item $\boxed{(1 + x)^{a}}\eval_{x =0} = 1$ 
+        \end{itemize}
+\end{theorem}
+    \begin{proof}
+        (Part I) For $1$, we have:
+            \begin{equation*}
+                \left(\sum_{i \geq 0}\dbinom{a}{i}x^{i}\right)\left(\sum_{i \geq 0}\dbinom{b}{i}x^{i}\right) = \sum_{i \geq 0}\dbinom{a + b}{i}x^{i}
+            \end{equation*}
+        This is equivalent to showing for any $k \geq 0$, that $\sum_{i = 0}^{k}\binom{a}{i}\binom{b}{k - i} = \binom{a + b}{k}$. This is just looking at the coefficients of $x^{k}$. Recall:
+            \begin{equation*}
+                (1 + x)^{n} = \sum_{i = 0}^{n}\dbinom{n}{i}x^{i}
+            \end{equation*}
+        Then for any $n, m \geq 0$, integers, 
+            \begin{equation*}
+                (1 + x)^{n}(1 + x)^{m} = (1 + x)^{n+ m} 
+            \end{equation*}
+        means that for any $k$, we have $\sum_{i = 0}^{k}\binom{n}{i}\binom{m}{k - i} = \binom{n + m}{k}$. So we know that $\sum_{i = 0}^{k}\binom{a}{i}\binom{b}{k - i} = \binom{a + b}{k}$ when $a = n, b = m$ positive integers. If you fix $b = m$, then we get two polynomials in the variable $a$ which are equal when $a = n$ which means that they are equal for all $a$. So we know that $\sum_{i = 0}^{k}\binom{a}{i}\binom{b}{k - i} = \binom{a + k}{i}$ holds when $a$ is arbitrary and $b$ is an integer. Now we fix $a$ being arbitrary real and consider this for $b$. So the identity holds for real numbers. This identity is called the Chu-Vandermonde identity.
+
+        (Part II) If $n \geq 0$ integer, then $\boxed{(1 + x)^{n}} = \sum_{i \geq 0}\binom{n}{i}x^{i} = (1 + x)^{n}$. We also know that $\boxed{(1 + x)^{-n}}\cdot \boxed{(1 + x)^{n}} = \boxed{(1 + x)^{0}} = 1$. So
+            \begin{equation*}
+                \boxed{(1 + x)^{-n}} = \dfrac{1}{(1 + x)^{n}}
+            \end{equation*}
+        (Part III) This is trivial because $\boxed{(1 + 0)^{a}} = \binom{a}{0} = 1$
+    \end{proof}
+
+\begin{examples}
+    \begin{example}
+        Take $(1 + x)^{-1} = \frac{1}{(1 + x)} = \sum_{i \geq 0}(-x)^{i}$. We also have
+            \begin{equation*}
+                \boxed{(1 + x)^{-1}} = \sum_{i\geq 0}\dbinom{-1}{i}x^{i}
+            \end{equation*}
+        We have 
+            \begin{equation*}
+                \dbinom{-1}{i} = \dfrac{-1(-2)\cdots (-i)}{i!} = (-1)^{i}
+            \end{equation*}
+    \end{example}
+    \begin{example}
+        We have $(1 + x)^{-2} = \sum_{i \geq 0}\binom{-2}{i}x^{i}$. Now:
+            \begin{equation*}
+                \dbinom{-2}{i} = \dfrac{-2(-3)\cdots (-i - 1)}{i!} = (-1)^{i}\cdot \dfrac{2 \cdot 3 \cdots (i + 1)}{i!} = (-1)^{i}(i + 1)
+            \end{equation*}
+        so 
+            \begin{equation*}
+                (1 + x)^{-2} = \sum_{i \geq 0}(i + 1)(-x)^{i} \text{ and } \dfrac{1}{(1 - x)^{2}} = \sum_{i \geq 0}(i + 1)x^{i}
+            \end{equation*}
+    \end{example}
+\end{examples}
+
+i\textbf{Proposition}: For any $k$-positive integer, we have
+    \begin{equation*}
+        \dfrac{1}{(1 - x)^{k}} = \sum_{i \geq 0} \dbinom{k + i - 1}{k - 1}x^{i}
+    \end{equation*}
+\begin{proof}
+    We know that 
+        \begin{equation*}
+            (1 - x)^{-k} = \sum_{i \geq 0} \dbinom{-k}{i} (-x)^{i}
+        \end{equation*}
+    Now we compute:
+        \begin{align*}
+            \dbinom{-k}{i} &= \dfrac{(-k)(-k - 1)(-k -2) \cdots (-k - i + 1)}{i!} \\
+                           &= (-1)^{i} \dfrac{k \cdot (k + 1) \cdots (k + i - 1)}{i!} \\
+                           &= (-1)^{i}\dfrac{(k + i - 1)!}{i!(k - 1)!}
+        \end{align*}
+    So
+        \begin{equation*}
+            (1 - x)^{-k} = \sum_{i \geq 0}\dbinom{k + i - 1}{k - 1}x^{i}
+        \end{equation*}
+    which is what we wanted to show.
+\end{proof}
+
+\textbf{Proposition}: $\frac{1}{1 - x}^{k}$ is the generating function for the number of weak compositions of $n$ with fixed number of parts equal to $k$. This is equivalent to sequences $(a_{1}, \ldots , a_{n})$ where $a_{1} + \cdots +a_{k} = n$ and $a_{i} \geq 0$
+    \begin{proof}
+        Fix $k$. Let $c_{n, k}$ denote the number of weak compositions of $n$ with $k$ parts. The generating function is 
+            \begin{equation*}
+                \sum_{n \geq 0}c_{n, k}x^{n}
+            \end{equation*}
+        We can view this as follows. Each $(a_{1}, \ldots , a_{k})$ contributes $x^{a_{1} + \cdots +a_{k}}$ to $F$
+            \begin{equation*}
+                F = \sum_{a_{1}, \ldots , a_{k}}x^{a_{1} + a_{2} + \cdots  +a_{k}} = \left(\sum_{a_{1} \geq 0}x^{ a_{1}} \right)\left(\sum_{a_{1}, \ldots , a_{k}}x^{a_{2} + \cdots +a_{k}}\right) = \left(\sum_{a \geq 0}x^{a}\right)^{k} = \dfrac{1}{(1 - x)^{k}}
+            \end{equation*}
+    \end{proof}
+
+\textbf{Proposition}: If $f, g$ are two formal power series such that $f^{2} = g^{2}$, then they differ by a sign.
+    \begin{proof}
+        We $f^{2} = g^{2}$, we have $f^{2} - g^{2} = 0$. Or $(f - g)(f + g) = 0$. Suppose $f \neq \pm g$. Then $f + g = a_{k}x^{k} + \text{ higher powers of $x$, $a_{k} \neq 0$}$ and $f - g = b_{m}x^{m} + \text{ higher powers of $x$, $b_{m} \neq 0$}$. Then $(f + g)(f - g) = a_{k}b_{m} x^{m + k} + \text{ higher powers of $x^{m + k}$}$. So this is a contradiction.
+    \end{proof}
+
+\textbf{Proposition}: Let $f$ be a formal power series such that $f^{2} = 1 + x$. Then $f = \pm \boxed{(1 + x)^{\frac{1}{2}}} = \pm \sum_{i \geq 0}\binom{\frac{1}{2}}{i}x^{i}$
+    \begin{proof}
+        We have
+            \begin{equation*}
+                \boxed{(1 + x)^{\dfrac{1}{2}}}^{2} = \boxed{(1 + x)^{1}} = 1 + x = f^{2}
+            \end{equation*}
+        so
+            \begin{equation*}
+                f = \pm \boxed{(1 + x)^{\dfrac{1}{2}}}
+            \end{equation*}
+    \end{proof}
+
+\textbf{Proposition}: For any formal power series $f(x)$ such that $f(0) > 0$ for real numbers or $f(0) \neq 0$ for complex numbers, there is a $g$ such that $g^{2} = f$ where $g$ is defined uniquely up to a sign.
+    \begin{proof}
+        We only need to show that $g$ exists. Take:
+            \begin{equation*}
+                f(x) = f(0) + h(x) \text{ where $h(0) = 0$}
+            \end{equation*}
+        Then we can write $f(x) = f(0)(1 + \frac{h(x)}{f(0)})$ and 
+            \begin{equation*}
+                g(x) = \sqrt{f(0)}\boxed{\left(1 + \dfrac{h(x)}{f(0)}\right)^{\dfrac{1}{2}}}
+            \end{equation*}
+        where $\boxed{\left(1 + \dfrac{h(x)}{f(0)}\right)^{\dfrac{1}{2}}}$ is the result of substitution $x = \frac{h(x)}{f(0)}$.
+    \end{proof}
+
+\chapter{Week 8}
+
+\begin{topic}
+    \section{Catalan Numbers}
+\end{topic}
+
+\begin{definition}{Catalan Number}
+    A Catalan number $C_{n}$ is the number of ways to split a regular $n + 2$-gon into triangles by non-crossing diagonals.
+\end{definition}
+
+\begin{definition}{Dyck Path}
+    A dyck path is a path on a square grid $\{(x, y) : x, y \in \mathbb{Z}\}$ which starts at $(0, 0)$, and has steps of the form $(1, 1)$ or $(1, -1)$ and ends at some point of the form $(2n, 0)$ and never goes below $x$-axis. The number $2n$ is called the length.
+\end{definition}
+
+\textbf{Proposition}: The number of Dyck paths connecting points $(0, 0)$ to $(2n, 0)$ is equal to the $n$-th Catalan number.
+    \begin{proof}
+        We will build a bijection between Dyck paths of length $2n$ and triangulations of an $n + 2$-gon. Consider an $n + 2$-gon and enumerate the vertices clockwise by numbers $-1, 0, \ldots , n$. In any triangulation, there is a triangle with the edge $0, -1$. Let $i$ be the third vertex of this triangle. The triangle will split the $n + 2$-gon into $2$ parts. The first part will be an $i + 1$-gon formed by $(0, 1, \ldots , i)$ and another $n - i + 2$-gon formed by $(i, \ldots , n, -1)$. Now run the algorithm for each of the two parts. Fix the first part $(0, 1, \ldots , i) \rightarrow (-1, \ldots , i - 1)$ and for the second part: $(i, \ldots , n, -1) \rightarrow (-1, \ldots , n - i + 2)$. We obtain two dyck paths $D_{1}, D_{2}$ which correspond to the triangulation of these two paths. The first dyck path will be of length $2(i - 1)$ and the other length is $2(n - i)$. We construct the path by starting with $(0, 0) \rightarrow (1, 1)$, then insert $D_{1}$, then we have $(1, 1) \xrightarrow{D_{1}} (2i - 1, 1) \rightarrow (2i, 0) \xrightarrow{D_{2}} \rightarrow D(2n, 0)$.
+
+        To construct a triangulation out of a dyck path:
+            \begin{itemize}
+                \item Take a dyck path of length $2n$ and consider the leftmost point $(2i, 0)$ where the path touches the $x$-axis.
+
+                \item This corresponds to the $n + 2$-gon initial triangulation where the last point of the triangle containing $(0, -1)$ is $i$, and we triangulate $D_{1}, D_{2}$ that comes from splitting the $n + 2$-gon.
+            \end{itemize}
+        since there is a way to go backwards, there is a bijection between dyck paths and catalan numbers.
+    \end{proof}
+
+Other objects counted by Catalan numbers:
+    \begin{itemize}
+        \item Correct sequences of $n$ opening an $n$ closing brackets:
+            \begin{equation*}
+                ((())), (())(), ()(()), (()()), ()()()
+            \end{equation*}
+
+        \item The number of ways to place brackets in multiplication  of $x_{0}x_{1}\cdots x_{n}$
+    \end{itemize}
+
+\begin{topic}
+    \section{Catalan Numbers Continued}
+\end{topic}
+
+\textbf{Proposition}: For any $n \geq 1$, we have:
+    \begin{align*}
+        C_{n} &= C_{0}C_{n - 1} + C_{1}C_{n - 2} + C_{2}C_{n - 3} + \cdots +C_{n - 1}C_{0} \\
+              &= \sum_{i = 1}^{n}C_{i - 1}C_{n - i}
+    \end{align*}
+    \begin{proof}
+        We know that $C_{n}$ is the number of triangulations of $n + 2$-gon. We start with an $n + 1$-gon. Now we label the vertices using $(-1, 0, 1, \ldots , n)$. In any triangulation, there is a triangle containing $-1$, $0$. We have $i$ is the third vertex of this triangle. Now all triangulations can be counted as follows:
+            \begin{itemize}
+                \item Determine $i \in [n]$
+
+                \item Choose a triangulation for $(0, \ldots , i)$- $i + 1$-gon. There are $C_{i + 1}$ options for this.
+
+                \item Choose a triangulation for $(n - i + 1)$-gon. So this will be $C_{n - i}$ options.
+            \end{itemize}
+    \end{proof}
+
+If you set $C_{0} = 1$, then this relation tells:
+    \begin{align*}
+        C_{1} &=       C_{0}^{2}                           \\
+        C_{2} &=       C_{0}C_{1} + C_{1}C_{0}             \\
+        C_{3} &=       C_{0}C_{2} + C_{1}^{2} + C_{1}C_{0} \\
+              &\vdots                                        
+    \end{align*}
+
+\begin{theorem}{Closed Catalan Formula}
+    We have $C_{n} = \frac{1}{n + 1}\binom{2n}{n}$
+\end{theorem}
+    \begin{proof}
+        Let $F(x) = \sum_{n \geq 0}C_{n}x^{n}$. Then 
+             \begin{align*}
+                 \sum_{n \geq 1}C_{n}x^{n}                                &= \sum_{n \geq 1}\left(\sum_{i = 1}^{n}C_{i - 1}C_{n - i}\right)x^{n - 1}                      \\
+                 F(x) - 1                                                 &= xF(x)^{2}                                                                                    \\
+                 x^{2}F(x)^{2} - xF(x) + x                                &= 0                                                                                            \\
+                 \left(xF(x) - \dfrac{1}{2}\right)^{2} + x - \dfrac{1}{4} &= 0                                                                                            \\
+                 (2xF(x) - 1)^{2}                                         &= 1 - 4x                                                                                       \\
+                 2xF(x) - 1                                               &= \pm\sqrt{1 - 4x} = \pm \sum_{n\geq 0}\dbinom{\dfrac{1}{2}}{n}(-4x)^{n}                       \\
+                 2xF(x) - 1                                               &= -\sum_{n \geq 0}\dbinom{\dfrac{1}{2}}{n}(-4x)^{n}                                            \\
+                 F(x)                                                     &= \dfrac{1 - \sum_{n \geq 0}\dbinom{\dfrac{1}{2}}{n}(-4x)^{n}}{2x}                             \\
+                 C_{n}                                                    &= \dbinom{\dfrac{1}{2}}{n + 1}(-4)^{n + 1}/2                                                   \\
+                 \dbinom{\dfrac{1}{2}}{n + 1}                             &= \dfrac{\dfrac{1}{2} (\dfrac{1}{2} - 1)(\dfrac{1}{2} - 2)\cdots (\dfrac{1}{2} - n)}{(n + 1)!} \\
+                                                                          &= \dfrac{\dfrac{1}{2}(-\dfrac{1}{2})(\dfrac{-3}{2}) \cdots (\dfrac{-2n + 1}{2})}{(n + 1)!}     \\
+                                                                          &= \dfrac{1(-1)(-3)\cdots (-2n + 1)}{2^{n + 1}(n + 1)!}                                         \\
+                                                                          &= (-1)^{n}\dfrac{1 \cdot 3 \cdot 5 \cdots (2n - 1)}{2^{n + 1}(n + 1)!}                         \\
+                                                                          &= (-1)^{n}\dfrac{1 \cdot 2 \cdot 3 \cdots (2n)}{2^{n + 1}(n + 1)! \cdot 2 \cdot 4 \cdots 2n}   \\
+                                                                          &= (-1)^{n}\dfrac{(2n)!}{2^{2n + 1}(n + 1)!n!}                                                  \\
+                                                                          &= (-1)^{n}\dfrac{1}{2^{n + 1}(n + 1)}\dbinom{2n}{n}                                            \\
+                 C_{n}                                                    &= -\dfrac{(-4)^{n + 1}}{2}\dbinom{\dfrac{1}{2}}{n + 1}                                         \\
+                                                                          &= \dfrac{1}{n + 1}\dbinom{2n}{n}                                                                 
+             \end{align*}
+    \end{proof}
+
+\begin{topic}
+    \section{Partitions}
+\end{topic}
+
+\begin{definition}{Partition}
+    A partition of $n$ is a sequence $(\lambda_{1}, \ldots , \lambda_{k})$ where $\lambda_{1} \geq \lambda_{2} \geq \cdots \geq \lambda_{k} \geq 1$ and $\lambda_{1} + \cdots + \lambda_{k} = n$. 
+\end{definition}
+
+\textbf{Proposition}: The generating function of partitions:
+    \begin{equation*}
+        \sum_{n \geq 0}p(n)x^{n} = \prod_{i \geq 1}\dfrac{1}{1 - x^{i}}
+    \end{equation*}
+
+Note that $\prod_{i \geq 1}\frac{1}{1 - x^{i}}$ means that if we look at the coefficient of $x^{k}$ in $\prod_{i = 1}^{N}\frac{1}{1 - x^{i}}$ it will be constant starting from some $N$. So the coefficient of $x^{k}$ in $\prod_{i \geq 1}\frac{1}{1 - x^{i}}$ is the coefficient of $\prod_{i = 1}^{N}$ for large $N$.
+    \begin{proof}
+        A partition $\lambda$ contributes $x^{\lambda_{1} + \lambda_{2} + \cdots + \lambda_{k}}$ to the generating function. For partition $\lambda$, we write $\lvert \lambda \rvert = \lambda_{1} + \cdots +\lambda_{k}$. So
+            \begin{equation*}
+                \sum_{n \geq 0}p(n)x^{n} = \sum_{\lambda} x^{\lvert \lambda \rvert}
+            \end{equation*}
+        Recall that a partition is $(\lambda_{1}, \ldots , \lambda_{k})$ as $\lambda_{1} \geq \lambda_{2} \geq \cdots \geq \lambda_{k} > 0$. Alternatively, we have these multiplicities $m_{i}(\lambda) = $ number of parts of size $i$. Equivalently, we can write instead of $(\lambda_{1}, \ldots , \lambda_{k})$ as a sequence $(1^{m_{1}}2^{m_{2}} 3^{m_{3}}\ldots )$. Now the generating function:
+            \begin{equation*}
+                \sum_{\lambda} x^{\lvert \lambda \rvert} = \sum_{m_{1}, m_{2}, \ldots  \geq 0} x^{m_{1} + 2m_{2} + 3m_{3} + \cdots } = \left(\sum_{m_{1} \geq 0}x^{m_{1}}\right)\left(\sum_{m_{2} \geq 0}x^{2m_{2}}\right)\left(\sum_{m_{3} \geq 0}x^{3m_{3}}\right)\cdots 
+            \end{equation*}
+        Now this gives us:
+            \begin{equation*}
+                \left(\dfrac{1}{1 - x}\right)\left(\dfrac{1}{1 - x^{2}}\right)\left(\dfrac{1}{1 - x^{3}}\right)\cdots 
+            \end{equation*}
+        which concludes the proof.
+    \end{proof}
+
+\begin{examples}
+    \begin{example}
+        Let $a(n)$ denote the number of strict partitions of $n$. Then $\sum_{n \geq 0}a(n) = \prod_{i \geq 1}(1 + x^{i})$.
+            \begin{proof}
+                So we have instead where $m_{i} = 0, 1$:
+                    \begin{equation*}
+                        \sum_{\lambda \text{-strict}}x^{\lvert \lambda \rvert} = \sum_{1 \geq m_{1}, m_{2}, \ldots , \geq 0}x^{m_{1} + 2m_{2} + \cdots } = (1 + x)(1 + x^{2})(1 + x^{3}) \cdots 
+                    \end{equation*}
+            \end{proof}
+    \end{example}
+\end{examples}
+
+The generating function for partitions does not actually make computation a lot easier. But there are some properties that can be derived:
+
+\textbf{Proposition}: The number of partitions of $n$ without parts equal to $1$ is equal to $p(n) - p(n - 1)$. 
+    \begin{proof}
+        We have $\sum_{n \geq 0}a(n)x^{n} = \prod_{i \geq 2}\frac{1}{1 - x^{i}} = (1 - x)\prod_{i \geq 1}\frac{1}{1 - x^{i}}$. This is $(1 - x)(\sum_{n \geq 0}p(n)x^{n}) = 1 + (p(1) - p(0))x + (p(2) - p(1)) x^{2} + \cdots $. So you get $1 + \sum_{n \geq 1}(p(n) - p(n - 1))x^{n}$.
+    \end{proof}
+
+\textbf{Proposition}: The number of strict partitions of $n$ is equal to the number of usual partitions of $n$ with only odd parts.
+    \begin{proof}
+        Take $\sum q(n)x^{n} = \prod_{i \geq 1}(1 + x^{i})$, $q(n)$ is the number of strict partitions. We have:
+            \begin{equation*}
+                \prod_{i \geq 1}(1 + x^{i}) = \prod_{i \geq 1}\dfrac{1 - x^{2i}}{1 - x^{i}} = \dfrac{\prod_{i \geq 1}(1 - x^{2i})}{\prod_{i \geq 1}(1 - x^{i})} = \prod_{i\text{-odd}}\dfrac{1}{1 - x^{i}}
+            \end{equation*}
+        This corresponds to the number of partitions with only odd parts.
+    \end{proof}
+
+Going back to partitions:
+    \begin{equation*}
+        \sum_{n \geq 0}p(n)x^{n} = \prod_{i \geq 1}\dfrac{1}{1 - x^{i}} = (1 - x)(1 - x^{1})(1 - x^{2})(1 - x^{3})(1 - x^{4}) \cdots 
+    \end{equation*}
+We have by ignoring $x^{5}$ and greater powers
+    \begin{align*}
+        (1 - x - x^{2} + x^{3})(1 - x^{3})(1 - x^{4}) &= (1 - x - x^{2} + x^{3} - x^{3} + x^{4} + \cdots )(1  -x^{4}) \\
+                                                      &= (1 - x - x^{2} + x^{4} - x^{4} + x^{5})                                                                 \\
+                                                      &= 1 - x - x^{2} + x^{5}                                                                                     
+    \end{align*}
+
+\begin{theorem}{Euler's Pentagonal Number Theorem}
+    We have
+        \begin{equation*}
+            \prod_{i \geq 1}(1 - x^{i}) = \sum_{k = -\infty }^{\infty }(-1)^{k}x^{k(3k - 1)/2}
+        \end{equation*}
+\end{theorem}
+
+Consider the sequence of $k(3k - 1)/2$:
+    \begin{align*}
+        \begin{array}{ c c c c }
+            k = 0 & k = 1 & k = 2 & k = 3 \\
+            0     & 1     & 5     & 12      
+        \end{array}
+    \end{align*}
+You get these numbers by counting the number of dots in $k - 1$ nested pentagons that shared the top point.
+
+\textbf{Proposition}: $p(n) = p(n - 1) + p(n - 2) - p(n - 5) - p(n - 7) + \cdots $. This is:
+    \begin{equation*}
+        \sum_{k \geq 0} (-1)^{k - 1}p(n - \dfrac{3(3k - 1)}{2})
+    \end{equation*}
+where $p(i)$ for $i < 0$ are $0$.
+    \begin{proof}
+        We have:
+            \begin{equation*}
+                \prod_{i \geq 1}(1 - x^{i}) \cdot \prod_{i \geq 1}\dfrac{1}{(1 - x)^{i}} = 1
+            \end{equation*}
+        So we have:
+            \begin{equation*}
+                \left(\sum_{k = -\infty }^{\infty }(-1)^{k}x^{k(3k - 1)/2}\right)\left(\sum_{n \geq 0}p(n)x^{n}\right) = 1
+            \end{equation*}
+        Now taking the coefficient of $x^{n}$ for $n \geq 1$ we get:
+            \begin{equation*}
+                \sum_{k = -\infty }^{\infty }(-1)^{n}p(n - \dfrac{k(3k - 1)}{2}) = 0
+            \end{equation*}
+        So we take out $k = 0$:
+            \begin{equation*}
+                \sum_{k = -\inf}^{\inf}(-1)^{k - 1}p(n - \dfrac{k(3k - 1)}{2}) = p(n)
+            \end{equation*}
+    \end{proof}
+
+\chapter{Week 9}
+
+\begin{topic}
+    \section{Partitions Continued}
+\end{topic}
+
+\textbf{Proposition}: $p(n) = p(n - 1) + p(n -2) - p(n - 5) - p(n - 7) + \cdots  = \sum_{k \geq 0}(-1)^{k - 1}p(n - \frac{k(3k - 1)}{2})$.
+    \begin{proof}
+        Recall that $\prod_{i \geq 1}(1 + x^{i}) = \sum_{n \geq 0}q(n)x^{n}$ where $q(n)$ is the number of strict partitions of $n$. Let $q_{odd}(n)$ be the number of strict partitions of $n$ with odd number of parts, $q_{even}(n)$ be the number of strict partitions of $n$ with even number of parts. Then
+            \begin{equation*}
+                \prod_{i \geq 1}(1 - x^{i}) = \sum_{1 \leq i_{1} < \cdots < i_{k}}(-1)^{k}x^{i_{1} + \cdots +i_{k}} = \sum_{\lambda- \text{strict}}(-1)^{l(\lambda)}x^{\lvert \lambda \rvert}
+            \end{equation*}
+        where $l(\lambda)  = $ number of parts $\geq 1$ of partition $\lambda$, called the length of the partition. We see that 
+            \begin{equation*}
+                \prod_{i \geq 1}(1 - x^{i}) = \sum_{n \geq 0} (q_{even}(n) - q_{odd}(n))x^{n}
+            \end{equation*}
+        Then Pentagonal theorem iff $q_{even}(n) = q_{odd}(n)$ if $n$ is not pentagonal and $q_{even}(n) = q_{odd}(n) + 1$ if $n = \frac{k(3k - 1)}{2}$ with even $k$. And $q_{even}(n) + 1 = q_{odd}(n)$ if $n = \frac{k(3k - 1)}{2}$ with $k$ odd.
+
+        We will construct a pairing between ``almost'' all strict partitions of $n$ such that in each of the pairs, one partition will have an odd number of parts and the other an even number of parts. If $\lambda$ is a strict partition, then let $m$ denote the size of the minimal part of $\lambda$, $l$ denote the total number of parts of $\lambda$. Let $s$ be the minimal positive number such that $\lambda_{s + 1} < \lambda_{s - 1}$.
+
+        Now fix a strict partition $\lambda$. If $S < m$, then construct a new strict partition $\tilde{\lambda}$ by removing the $S$ boxes of the right-most diagonal and placing these $S$ boxes back as a new smallest part of the partition.
+
+        In the opposite case, we construct $\tilde{\lambda}$ by removing the smallest part and placing these $m$ boxes as a new diagonal of the partition. 
+
+        Properties: 
+            \begin{itemize}
+                \item The operation changes the parity of the number of parts.
+
+                \item  $\tilde{\tilde{\lambda}} = \tilde{\lambda}$ because if $S < m$, $ \tilde{\lambda}$ was constructed by taking $S$ boxes from the diagonal to form a new smallest part. Then for the new partition $\tilde{m} = S$ and $\tilde{S} \geq S$. So $\tilde{S} \geq \tilde{m}$. So when we do the process, we reverse the operation and place the smallest part as a diagonal.
+
+                \item If $S \geq m$, then $\tilde{\lambda}$: $\tilde{S} = m$ while $\tilde{m} > m$, so $\tilde{m} > \tilde{S}$ and to get $\tilde{\tilde{\lambda}}$, we move back the diagonal of boxes as a smallest part of the partition.
+
+                \item Since $\tilde{\tilde{\lambda}} = \lambda$, there is no problem in defining the pairing of odd and even parts in a partition: $(\lambda, \tilde{\lambda})$.
+
+                \item When does this operation work? The problem will appear when the length of the partition is equal to $S$. If $m > S$ the problem happens if $m = S + 1$.
+
+                \item If $m \leq S$ and $S = l$, then the problem happens if $m = S$.
+
+                \item If we are in the first case, $l = S = m - 1$, we have $S^{2} + \frac{S(S + 1)}{2} = \frac{S(3S + 1)}{2} = \frac{-l(3(-l))- 1}{2}$. So $l(\lambda) = l$ covers pentagonal number when $(-l) < 0$.
+
+                \item In the other case, we have $l = S = m$ and $\lvert \lambda \rvert = S^{2} + \frac{S(S - 1)}{2} = \frac{l(3l - 1)}{2}$ and $l(\lambda) = l$. This covers pentagonal numbers for $l \geq 0$.
+            \end{itemize}
+    \end{proof}
+
+\begin{topic}
+    \section{Exponential Generating Functions}
+\end{topic}
+
+Some numbers do not have a generating function such as the number of permutations of $[n]$. This is $n!$. We have
+    \begin{equation*}
+        \sum n!x^{n} = ?
+    \end{equation*}
+
+\begin{definition}{Exponential Generating Function}
+    For a sequence of numbers $(a_{0}, a_{1}, \ldots )$ its exponential generating function is given by:
+        \begin{equation*}
+            \sum_{n \geq 0} a_{n}\dfrac{x^{n}}{n!}
+        \end{equation*}
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        The exponential generating function on the number of permutations is:
+            \begin{equation*}
+                \sum_{n \geq 0}n!\dfrac{x^{n}}{n!} = \sum_{n \geq 0}x^{n} = \dfrac{1}{1 - x}
+            \end{equation*}
+    \end{example}
+\end{examples}
+
+\begin{definition}{Exponent}
+    We have $\mathop{exp}(x) = \sum_{n \geq 0}\frac{x^{n}}{n!}$. This is the Taylor expansion for $e^{x}$.
+\end{definition}
+
+We have: $e^{x + y} = e^{x}e^{y}$.
+
+\textbf{Proposition}: $\exp(x + y) = \exp(x)\exp(y)$
+    \begin{proof}
+        We have
+            \begin{equation*}
+                \left(\sum_{n \geq 0}\dfrac{x^{n}}{n!}\right)\left(\sum_{m \geq 0}\dfrac{y^{m}}{m!}\right)
+            \end{equation*}
+        is
+            \begin{equation*}
+                \sum_{n, m \geq 0}\dfrac{1}{n!m!} x^{n}y^{m} = \sum_{n, m \geq 0}\dbinom{n + m}{n}\dfrac{x^{n}y^{m}}{(n + m)!} = \sum_{S \geq 0}\sum_{n = 0}^{S}\dbinom{S}{n}\dfrac{x^{n}y^{s - n}}{s!} = \sum_{s \geq 0}\dfrac{(x + y)^{s}}{s!} = \exp(x + y)
+            \end{equation*}
+    \end{proof}
+
+In calculus, $\exp(x)$ is related to $\dv{x}\exp(x) = \exp(x)$ which will be an exercise.
+
+\begin{examples}
+    \begin{example}
+        Recall that $S(n, k) = $ Stirling numbers of the second kind. Fix $k \geq 1$:
+            \begin{align*}
+                \sum_{n \geq 0}S(n, k)\dfrac{x^{n}}{n!} &= ?   
+            \end{align*}
+        Recall that $k!S(n, k)$ is the number of surjections from $[n] \rightarrow [k]$. These surjections can be counted as follows:
+            \begin{itemize}
+                \item Pick $(a_{1}, a_{2}, \ldots , a_{k})$- composition of $n$. The number $a_{i}$ will denote the number of elements that map to $i$. 
+
+                \item Then split $[n]$ into numbered groups of sizes $a_{1}, a_{2}, \ldots , a_{k}$. 
+            \end{itemize}
+        So $k!S(n, k) = \sum_{a_{1}, a_{2}, \ldots , a_{k}}\binom{n}{a_{1},a_{2},\ldots, a_{k}}$:
+            \begin{align*}
+                k!\sum_{n \geq 0}S(n, k)\dfrac{x^{n}}{n!} &= \sum_{n \geq 0}\sum_{a_{1} \ldots , a_{k}}\dbinom{n}{a_{1}, a_{2}, \ldots , a_{k}}\dfrac{x^{n}}{n!}                                                                                 \\
+                                                          &= \sum_{a_{1}, a_{2}, \ldots, a_{k} \geq 1} \dfrac{(a_{1} + a_{2} + \cdots + a_{k})!}{a_{1}!a_{2}! \cdots a_{k}!}\dfrac{x^{a_{1} + a_{2} + \cdots  + a_{k}}}{n!}                      \\
+                                                          &= \sum_{a_{1}, \ldots , a_{k} \geq 1} \dfrac{x^{a_{1} + a_{2} + \cdots  + a_{k}}}{a_{1}!a_{2}! \cdots a_{k}!}                                                                         \\
+                                                          &= \left(\sum_{a_{1} \geq 1}\dfrac{x^{a_{1}}}{a_{1}!}\right)\left(\sum_{a_{2} \geq 1}\dfrac{x^{a_{2}}}{a_{2}!}\right) \cdots \left(\sum_{a_{k} \geq 1}\dfrac{x^{a_{k}}}{a_{k}!}\right) \\
+                                                          &= (\exp(x) - 1)^{k}                                                                                                                                                                     
+            \end{align*}
+        Therefore,
+            \begin{equation*}
+                \sum_{n \geq 0}S(n, k)\dfrac{\lambda^{n}}{n!} = \dfrac{(\exp(x) - 1)^{k}}{k!}
+            \end{equation*}
+        We also have:
+            \begin{align*}
+                \dfrac{(\exp(x) - 1)^{k}}{k!} &= \dfrac{\sum_{i = 0}^{k}(-1)^{k - i}\exp(x)^{i} \cdot \dbinom{k}{i}}{k!} \\
+                                              &= \sum_{i = 0}^{k} (-1)^{k - i}\dfrac{1}{i!(k - i)!}\exp(ix)           \\
+            \end{align*}
+        So now we need the coefficient of $x^{n}$ which is $\frac{S(n, k)}{n!}$. We have:
+            \begin{equation*}
+                S(n, k) = \sum_{i = 0}^{k}(-1)^{k - i}\dfrac{1}{i!(k - i)!}i^{n}
+            \end{equation*}
+    \end{example}
+    \begin{example}
+        Suppose that:
+            \begin{equation*}
+                b(n, k) = 1^{k} + 2^{k} + \cdots +n^{k}
+            \end{equation*}
+        Look at the generating function for fixed $n$:
+            \begin{align*}
+                \sum_{k \geq 0}b(n, k)\dfrac{x^{k}}{n!} &= \sum_{i = 1}^{n}\sum_{k \geq 0}i^{n}\dfrac{x^{n}}{n!
+                }                             \\
+                                                        &= \sum_{i = 1}^{n}\sum_{k \geq 0}\dfrac{(ix)^{n}}{n!}                              \\
+                                                        &= \sum_{i = 1}^{n}\exp(ix)                                                         \\
+                                                        &= \exp(x) + (\exp(x))^{2} + (\exp(x))^{3} + (\exp(x))^{4} + \cdots + (\exp(x))^{n} \\
+                                                        &= \dfrac{\exp(x)(1 - \exp(x)^{k})}{1 - \exp(x)}                                    \\
+                                                        &= \dfrac{1 - \exp(nx)}{\exp(-x) - 1}                                                 
+            \end{align*}
+    \end{example}
+\end{examples}
+
+\begin{definition}{Bernoulli Numbers}
+    We have:
+        \begin{equation*}
+            \dfrac{x}{\exp(-x) - 1} = \sum_{n \geq 0}B_{n}\dfrac{x^{n}}{n!}
+        \end{equation*}
+    where $B_{n}$ are Bernoulli numbers.
+\end{definition}
+
+So we have
+    \begin{align*}
+        \sum_{k \geq 0}b(n, k)\dfrac{x^{k}}{n!} &= \dfrac{1 - \exp(nx)}{x}\left(\sum_{n \geq 0}B_{n}\dfrac{x^{n}}{n!}\right)                                 \\
+                                                &= -\sum_{i \geq 1}\dfrac{n^{i}x^{i - 1}}{i!}\left(\sum_{n \geq 0}B_{n}\dfrac{x^{n}}{n!}\right)              \\
+                                                &= \sum_{k \geq 0}\sum_{i = 0}^{k}\left(-\dfrac{n^{i + 1}}{(i + 1)!}B_{k - i}\dfrac{1}{(k - i)!}\right)x^{k} \\
+    \end{align*}
+Now the coefficient:
+    \begin{equation*}
+        b(n, k) = -\sum_{i = 0}^{k}B_{k - i}\dbinom{k}{i}\dfrac{n^{i + 1}}{i + 1}
+    \end{equation*}
+
+\begin{topic}
+    \section{Graph Theory}
+\end{topic}
+
+\begin{definition}{Graph}
+    A graph is denoted by the data, $(V, E, r)$. 
+        \begin{itemize}
+            \item $V$ is the set of vertices of a graph.
+
+            \item $E$ is the set of edges
+
+            \item $r : E \rightarrow \{\{x, y\} : s, y \in V\}$. 
+        \end{itemize}
+\end{definition}
+
+\begin{definition}{Walk, Trail, Eulerian, Closed paths}
+    A walk along the graph $G$ is a pair of sequences $(v_{0}v_{1}v_{2}\ldots v_{n})$ and $(e_{1}e_{2}\ldots e_{n})$ where $v_{i}$ are vertices in $V$ and $e_{i}$ are edges that connect $v_{i - 1}, v_{i}$. Also, $n$ is called the length of this walk. A trail is a walk with all edges $e_{i}$ being different. A trail is called Eulerian if this trail uses all edges of the graph. A walk or trail is closed if $v_{0} = v_{1}$
+\end{definition}
+
+Given a graph $G$, is there a closed Eulerian trail of the graph $G$.
+
+\begin{definition}{Connected}
+    A graph $G$ is called connected if for any $u, v \in V$, there is a walk starting at $u$ and ending at $v$.
+\end{definition}
+
+\begin{definition}{Subgraph}
+    A subgraph of $G = (V, E, r)$ is a graph $G^{\prime} = (V^{\prime}, E^{\prime}, r^{\prime})$ such that $V^{\prime} \subseteq V$, $E^{\prime} \subseteq E$ and for any $e \in E^{\prime}$, $r(e) = \{x, y\}$ where $x, y \in V^{\prime}$. And $r^{\prime}$ is the restriction of $r$.
+\end{definition}
+
+\begin{definition}{Connected Component}
+    A connected component of $G$ is a maximal connected subgraph of $G^{\prime} \subseteq G$. That is, $G^{\prime}$ is a connected subgraph such that adding any vertices or edges from $G$ breaks connectivity of $G^{\prime}$.
+\end{definition}
+
+\begin{definition}{Degree}
+    For a vertex $v$ in $G$, the degree of $v$ is the total number of times the vertex $v$ appears as an endpoint of an edge $e \in E$.
+\end{definition}
+
+\begin{theorem}{}
+    A connected graph $G$ has a closed Eulerian trail iff all vertices of $G$ have even degree.
+\end{theorem}
+    \begin{proof}
+        $(\rightarrow )$ Let $(v_{0}, v_{1}, v_{2}, \ldots , v_{n})$ and $(e_{1}, e_{2}, \ldots , e_{n})$ be the vertices and edges of the Eulerian trail. Pick a $v \in V$. If $\mathop{deg}v = 0$, then we are done. Otherwise, $v$ must appear in our trail. There are two cases:
+            \begin{itemize}
+                \item $v \neq v_{0} = v_{n}$. Then $v$ appears inside $(v_{1}, \ldots , v_{n - 1})$. Let $a$ denote the number of times that $v$ appears. Each time, $v = v_{i}$, we have two edges $e_{i}, e_{i + 1}$ which are connected to $v_{i}$. So in total, we have $2a$ edges in $(e_{1}, \ldots , e_{n})$. But $(e_{1}, \ldots , e_{n})$ is the set of all edges.
+
+                \item If $v = v_{0} = v_{n}$. Let $a$ denote the number of times $v$ appears in $(v_{1}, \ldots , v_{n - 1})$. Then we get $2a$ edges in this sequence $(e_{2}, \ldots , e_{n - 1})$ connected to $v$. In addition, $e_{1}$ and $e_{n}$ are also connected to $v$. So the degree is $2n + 2$.
+            \end{itemize}
+
+        $(\leftarrow)$ Let $G$ be a graph with only even degrees and let $v$ be a vertex of this graph such that $\deg v \in G$ is positive. Start a trail from the vertex $v$ going arbitrarily without using any edge twice. When the walk enters $u \neq v$. For each of the previous visits, we have used a pair of different edges before we enter the vertex, it has even degree. So $u$ has an odd number of unused edges. After entering it, we know that there is at least one unused edge that we can use to leave it. Since the graph is finite, the walk must end. And it must end at $v$. 
+
+        \begin{itemize}
+            \item Given a graph with only even degrees and $v$ of positive degree, this construction tells us how to construct a closed trail of positive length starting and ending at $v$.
+
+            \item Fix a connected graph $G$ with only even degrees. Let $\Sigma$ be the set of all closed trails on $G$. This set is finite and must have at least one trail of positive length by $(1)$. Look at possible lengths of trails in $\Sigma$. This is a finite subset of $\mathbb{N}$. Let $N$ be the largest length of trails in $\Sigma$ and let $C$ be a trail in $\Sigma$ of length $N$. We will show that $C$ must be an Eulerian trail. This is the formal statement of increasing a trail until it becomes the largest. 
+
+            Assume for contradiction that $C$ does not use all the edges of $G$. Let $\tilde{G}$ be the subgraph of $G$ with the same set of vertices but only with edges not used in $C$. By assumption, $\tilde{G}$ has at least one edge. Moreover, we know that in $\tilde{G}$, every vertex has even degree by $(\rightarrow)$ part of the proof. We want to pick a vertex $v$ of positive degree in $\tilde{G}$ which is visited by $C$. We know that such a vertex exists:
+                \begin{itemize}
+                    \item Case 1: If $C$ has visited all vertices of $G$, then we can pick an arbitrary vertex of $\tilde{G}$ of positive degree.
+
+                    \item Case 2: If $C$ does not visit all the vertices, then let $u, w$ be a pair of vertices such that $u$ was visited by $C$ but $w$ was not. So since $G$ is connected, there exists a walk from $u$ to $w$. Let $v_{0} = u, v_{1}, \ldots, v_{n} = w$ be the vertices. Let $i$ be the least number such that $v_{i}$ is not visited by $C$. We know $v_{i} \geq1$. This number is well defined and means that $v_{i - 1}$ is visited by $C$. We have $e = (v_{i- 1}, v_{i})$ as an edge that exists in $\tilde{G}$ so the vertex $v_{i - 1}$ has positive degree in $\tilde{G}$. 
+                \end{itemize}
+            Now by the naive construction, we can take $v$ which has positive degree in $\tilde{G}$ and construct a closed trail of positive length that starts $v$ and ends at $v$. Call the new trail $\tilde{C}$. But now, we have a closed trail $C + \tilde{C}$ which is a closed trail which is obtained by taking $v \rightarrow v$ by $C$ and $v \rightarrow v$ by $\tilde{C}$ which is a trail that is longer than $C$. So this is a contradiction with the assumption that $C$ does not use all the edges.
+        \end{itemize}
+    \end{proof}
+
+\chapter{Week 10}
+
+\textbf{Proposition}: Let $G$ be a connected graph and $u, v$ be a pair of different vertices of this graph. Then there is an Eulerian trail from $u \rightarrow v$ iff $u, v$ are the only vertices of odd degree in $G$.
+    \begin{proof}
+        Let $\tilde{G}$ be the graph $G$ with an additional edge $e$ from $u$ to $v$. So now there is a Eulerian trail $u \rightarrow v$ in $G$ is equivalent to saying there is a closed Eulerian trail in $\tilde{G}$. This is equivalent to saying that all degrees in $\tilde{G}$ are even, so in $G$, we have two vertices that will have odd degree.
+    \end{proof}
+
+\textbf{Proposition}: Let $G$ be a graph. Then the number of vertices with odd degree in $G$ is even. 
+    \begin{proof}
+        Let $e$ denote the number of edges. Let $d_{1}, d_{2}, \ldots, d_{n}$ be degrees in $G$. Then $d_{1} + d_{2} + \cdots+ d_{n} = 2e$. So the number of vertices with odd degree is even.
+    \end{proof}
+
+\begin{definition}{Path, Cycles, Hamiltonian Paths/Cycles}
+    A path is a trail $(v_{0}, \ldots, v_{n})$, $(e_{1}, \ldots, e_{n})$ such that all vertices $v_{i}$ are different. A cycle is a closed trail such that all the vertices $v_{1}, \ldots, v_{n}$  are different. A Hamiltonian path or cycle is a path or cycle that uses all the vertices.
+\end{definition}
+
+Question: Given a graph $G$, how can we find a Hamiltonian cycle. If $G$ is not connected, there is no Hamiltonian cycle/path.
+
+\begin{definition}{Complete Graphs}
+    $K_{n}$ is the graph with $V = [n]$ with exactly one edge between any pair of vertices.
+\end{definition}
+
+For $n \geq3$, $K_{n}$ has a Hamiltonian cycle.
+
+Given a graph $G$, how quickly can we determine/find a Hamiltonian cycle.
+
+\begin{definition}{Simple Graphs}
+    A graph $G$ is simple if $G$ has no loops and no repeated edges. For any $u, v \in V$, there is at most one edge between them.
+\end{definition}
+
+\begin{theorem}{}
+    Let $G$ be a simple graph $n \geq 3$ such that every vertex $v \in V$ has degree at least $n/2$ where $n$ is the total number of vertices. Then there is a Hamiltonian cycle of the graph $G$.
+\end{theorem} 
+    \begin{proof}
+        We note that $G$ must be connected. Suppose that we can split $G$ into two parts. By the pigeonhole principle, one of the parts must have degree $\geq n/2$. If you pick a vertex in the other part, it has degree at most $\frac{n}{2} - 1$ neighbors which is a contradiction. Assume that there is no Hamiltonian cycle in $G$. Start adding edges to $G$ without creating a Hamiltonian cycle while keeping the graph simple. Eventually, we get $G^{\prime}  \supseteq G$ such that adding any new edge to the graph will create a Hamiltonian cycle. So all degrees of $G^{\prime}$ are still $\geq n/2$. Let $u, v$ be a pair of vertices not connected by an edge in $G^{\prime}$. If we add an edge connecting $u, v$, we will have created a Hamiltonian cycle. We get a Hamiltonian path $P$ from $u \rightarrow v$ inside $G^{\prime}$. Let $(v_{1}, v_{2}, \ldots, v_{n})$ be the vertices of $P$. Look at indices $i$ such that $v_{i}$ is a neighbor of $u$. We know there are at least $n/2$ indices $i$. We know that $i \in\{2, \ldots, n - 1\}$. Consider the set of indices $i$ such that $v_{i - 1}$ is connected to $v$. So among $\{3, \ldots, n\}$, there should be at least $n/2$ such $i$. In total, in $\{2, \ldots, n\}$ there are $n/2$ $v_{i}$ which are connected to $u$ and $n/2$ $v_{i - 1}$ connected to $v$. So there is an index $i$ in $\{3, \ldots, n - 1\}$ such that $v_{i}$ is connected to $u$ and $v_{i - 1}$ is connected to $v$. So there is a Hamiltonian cycle given by $u \rightarrow v_{i - 1} \rightarrow v \rightarrow v_{i} \rightarrow u$. This is a contradiction because the graph has hamiltonian cycle.
+    \end{proof}
+
+Recall that in the original definition, graphs were defined as $G(V, E, r)$. In simple graphs, each edge $e$ can be interpreted as a two element subset of $V$. So the definition of graphs for simple graphs is $G(V, E)$. 
+
+\begin{definition}{Simple Graph}
+    A simple graph $G$ is a pair $(V, E)$ where $V$ is a set of vertices and $E \subseteq \{\{x, y\} : x \neq y, x, y \in V\}$.
+\end{definition}
+
+\begin{definition}{Isomorphism}
+    An isomorphism from $G = (V, E)$ to $G^{\prime} = (V^{\prime}, E^{\prime})$ is a bijective map $f: V \rightarrow V^{\prime}$ such that for any pair of vertices $u, v \in V$, $\{u, v\} \in E \iff \{f(u), f(v)\} \in E^{\prime}$.
+\end{definition}
+
+To show that a graph $G,G^{\prime}$ are isomorphic, it is enough to construct an isomorphism $f$.
+
+Q: How quickly can you check if $G$ is isomorphic to $G^{\prime}$
+
+\begin{topic}
+    \section{Trees}
+\end{topic}
+
+\begin{definition}{Tree}
+    A tree is a simple graph $G = (V, E)$ which is minimally connected, or removing any edge from $G$ results in $G^{\prime}$ which is not connected.
+\end{definition}
+
+\textbf{Proposition}: For a connected graph $G$, the following statements are equivalent:
+    \begin{itemize}
+        \item $G$ is minimally connected/$G$ is a tree.
+
+        \item $G$ has no cycles.
+
+        \item For any pair of vertices $u, v \in V$ there is a unique path from $u$ to $v$. 
+    \end{itemize}
+    \begin{proof}
+        $(2 \rightarrow 1)$ Let $G$ be a graph with no cycles. Let $e$ be an edge such that $G\backslash e$ is still connected. Then there was a cycle in $G$ which is a contradiction.
+
+        $(3 \rightarrow 2)$ Suppose that $G$ satisfies $3$. Let $C$ be a cycle in $G$. Then pick any two vertices in the cycle. Then there are two paths from $u \rightarrow v$. Then we have a contradiction.
+
+        $(1 \rightarrow 3)$ Suppose that $G$ is minimally connected. Suppose that there are two different paths $P, P^{\prime}$ from $u$ to $v$. Let $e$ be the first edge of $P^{\prime}$ different from $P$. Then $e$ does not appear in $P^{\prime}$. Let $e = (w_{1}, w_{2})$. After removing $e$, the graph is still connected. We can still go: $w_{1} \rightarrow u \rightarrow v \rightarrow w_{2}$. So contradiction.
+    \end{proof}
+Usually, it is said that $G$ is connected if for any $u, v$ there is a path between them.
+
+\chapter{Week 11}
+
+\textbf{Proposition}: $G$ has $n - 1$ edges where $n$ is the number of vertices iff $G$ is a tree.
+
+\begin{definition}{Leaf}
+    A leaf is a vertex of degree one.
+\end{definition}
+
+\textbf{Lemma}: Each tree with $\geq 2$ vertices has at least $2$ leaves.
+    \begin{proof}
+        Let $P$ be a longest path in a tree $G$ where $G$ has at least $2$ vertices. $P = (v_{0}, v_{1}, \ldots, v_{n})$, and $E = (e_{1}, \ldots, e_{n})$. $v_{0}$ has degree at least $1$. Assume we have another edge $e$ connected to $v_{0}$:
+            \begin{center}
+                \begin{tikzcd}
+                    u \ar[r, "e"] & v_{0}\ar[r, "e_{1}"]\ar[r, ""] & v_{1}   
+                \end{tikzcd}
+            \end{center}
+        If $u$ appears in $P$, then we have $2$ paths connecting $u \rightarrow v_{0}$. This means that we have a path that is one step longer, which is impossible. So the degree of $v_{0}$ is $1$ and similarly, the degree of $v_{n}$ is $1$.
+    \end{proof}
+
+\begin{proof}
+    ($\rightarrow$) First, we will show that each tree $G = (V, E)$ has $\lvert V \rvert - 1$ edges. Induction on the number of vertices:
+        \begin{itemize}
+            \item When $\lvert V \rvert = 1$, there are $0$ edges.
+
+            \item Assume that this statement is true for $n - 1 \geq 0$. Let $G$ be a tree on $n \geq 2$ vertices, by lemma, $G$ has a leaf. Let $\tilde{G}$ the subgraph obtained by removing the vertex $v$ with its edge. If $\tilde{G}$ has a cycle, then $G$ also has a cycle. So $\tilde{G}$ is connected and is a tree with $n - 1$ vertices and $n - 2$ edges. So $G$ has $n - 1$ edges.
+        \end{itemize}
+
+    ($\leftarrow$) In the other direction, let $G$ be a connected graph with $n$ vertices and $n - 1$ edges. If $G$ is not minimally connected, remove edges of $G$ until there is a subgraph $G^{\prime}$ that is minimally connected. So $G^{\prime}$ is a tree with $n - 1$ edges. So we removed $0$ edges and $G$ is a tree.
+\end{proof}
+
+\begin{definition}{Forest}
+    A forest is a simple graph such that each connected component of this graph is a tree.
+\end{definition}
+
+\textbf{Proposition}: A graph $G$ is a forest if 
+    \begin{equation*}
+        \lvert E \rvert = \lvert V \rvert - k
+    \end{equation*}
+where $k$ is the number of connected components of $G$.
+    \begin{proof}
+        If $G$ is a union of $k$ trees, then
+            \begin{equation*}
+                \lvert E \rvert = \lvert V \rvert - k
+            \end{equation*}
+        In the other direction. Let $n_{1}, \ldots, n_{k}$ be the connected components and $m_{1}, \ldots, m_{k}$ be the number of edges of each component. Each connected component is connected. Then $n_{i} \leq m_{i} + 1$. If $\lvert E \rvert = \lvert V \rvert - k$, we must have $n_{i} = m_{i} + 1$.
+    \end{proof}
+
+\textbf{Question}: How many trees are there?
+    \begin{itemize}
+        \item How many trees up to isomorphism are there if $\lvert V \rvert = n$?
+
+        \item How many trees are there on $[n]$?
+    \end{itemize}
+
+\begin{theorem}{Cayley's Theorem}
+    There are $n^{n - 2}$ trees on the vertex set $[n]$.
+\end{theorem}
+
+Prufer codes:
+    \begin{itemize}
+        \item Find the leaf with the minimal label
+
+        \item Remove this leaf, and add to the code what the edge led to.
+
+        \item Repeat this procedure for $n - 2$ times. 
+
+        \item Stop when there is a tree on two vertices.
+    \end{itemize}
+
+\begin{proof}
+    Let $G$ be a tree on $[n]$, let $A = (a_{1}, \ldots, a_{n - 2})$ its code. We claim that $\deg i - 1$ is equal to the multiplicity of $i$ in $A$: 
+
+    Fix $i$. During encoding,, we can either remove a neighbor of $i$ or we can remove $i$ itself. Other operations do not affect $\deg(i)$. When we remove a neighbor of $i$, we reduce the degree of $i$ by $1$ but $i$ is added into the code. When $i$ is removed, $i$ is a leaf, $\deg (i) = 1$. If $i$ is removed it means that we have first removed its neighbors for $\deg (i) - 1$ times and then removed $i$. If $i$ is one of the two remaining vertices at the end of the procedure, $i$ has one neighbor in the remaining two vertex tree, so it has degree $1$ remaining. So the multiplicity of $i$ in the code is still $\deg(i) - 1$.
+
+    In particular, if $i$ does not appear in the code $A$, then it must be a leaf. We can reconstruct the first step of the encoding by taking the smallest number not in the code and connecting it to the first number of the code.
+
+    Reverse Algorithm: Let $A = (a_{1}, a_{2}, \ldots, a_{n - 2})$, let $G$ be $n$ disjoint vertices. Let $I = [n]$. Do the following operation $n - 2$ times at iteration $i$:
+        \begin{itemize}
+            \item Look at all numbers $j \in I$ which do not appear in $(a_{i}, a_{i + 1}, \ldots, a_{n - 2})$.
+
+            \item Pick smallest $j$, add the edge $(j, a_{i})$ and remove $j$ from $I$. 
+        \end{itemize}
+    In the end, we get some graph $G$, and $I$ has $2$ elements. Construction ends by connecting vertices in $I$ by an edge. 
+
+    Show that the resulting $G$ is a tree. At each step, we add $(j, a_{i})$ where both $j, a_{i} \in I$. We remove $j$ from $I$, so we cannot reuse $(j, a_{i})$, no loops, so $G$ is simple. Moreover, each time we remove $j$ from $I$, add an edge connecting $j$ to the remaining $I$. This means that any vertex of $G$ is connected to something in $I$. So after $n - 2$ steps, everything is connected to one of the two vertices in $I$, but in the final step, these two vertices are connected, so $G$ is connected. Also, $G$ has $n - 1$ edges, which means $G$ is a tree.
+\end{proof}
+
+Consider the problem where we have a graph and each edge has a cost
+
+\begin{definition}{Spanning Tree}
+    A spanning tree of $G = (V, E)$ is a subgraph $T \subseteq G$ such that $T$ is a tree and $T$ has the same vertex set as $G$.
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        The number of spanning trees of a complete graph $K_{n}$ is $n^{n - 2}$.
+    \end{example}
+\end{examples}
+
+\textbf{Proposition}: A connected graph $G$ always has a spanning tree.
+
+Let $G = (V, E)$ be a connected graph. Let $w : E \rightarrow \mathbb{R}_{\geq 0}$ which is the weight function. If $T \subseteq G$, spanning tree, then we can define a weight of the tree by $w(T) = \sum_{i = 1}^{n - 1}w(t_{i})$ where $t_{i}$ are edges of the tree. 
+
+\textbf{Problem}: Given a graph $G$ connected, and $w$, what is the spanning tree with the minimal weight?
+
+If $G = (V, E)$ and $\lvert V \rvert = n$, consider the following algorithm:
+    \begin{itemize}
+        \item Pick edges of $T$ one by one.
+
+        \item Look at all edges such that they are not picked for the spanning tree, adding them to the spanning tree does not create cycles. Out of these edges, pick the one with minimal weight. 
+    \end{itemize}
+This is called a greedy algorithm. This gives a graph with no cycles which is a forest. There are $n - 1$ edges which makes it a tree.
+
+\begin{theorem}{Kruskal}
+    For this problem, the greedy algorithm provides the spanning tree with the minimal weight.
+\end{theorem}
+
+\textbf{Lemma}: Let $F$ and $F^{\prime}$ be two forests with the same vertex set. Let $F^{\prime}$ has more edges than $F$. Then there is an edge of $F^{\prime}$, $e$, such that $F \cup e$ is a forest.
+    \begin{proof}
+        Let $n$ be the number of vertices. Let $k$ and $k^{\prime}$ be the number of connected components of $F, F^{\prime}$. Then 
+            \begin{equation*}
+                n - k^{\prime} > n - k \iff k > k^{\prime}
+            \end{equation*}
+        Assume that adding any edge $e$ of $F^{\prime}$ to $F$ creates a cycle. So the endpoints of any edge in $F^{\prime}$ are connected in $F$. This is the same as saying that endpoints in $F^{\prime}$ are in the same component as that of $F$. This means that the number of connected components of $F^{\prime} \geq F$ which is a contradiction.
+    \end{proof}
+
+\begin{proof}
+    Let $G$ be a connected graph, $w$ is the weight function. Let $T$ be the result of the greedy algorithm with $t_{1}, t_{2}, \ldots, t_{n - 1}$ edges of $T$ ordered by how they are picked. 
+
+    First, we need to show that the algorithm can pick $n - 1$ edges/does not fail to pick an edge at some point $m < n - 1$. By the lemma, we have a forest at $m$-th step. Since $G$ is connected, $G$ has a spanning tree on $n - 1$ edges. Then we can add an edge to the forest which still keeps it a forest. 
+
+    Assume that there is a spanning tree $H$ where $w(H) < w(T)$. Let $h_{1}, \ldots, h_{n - 1}$ be the edges of the tree. Order them so that $w(h_{1}) \leq w(h_{2}) \leq \ldots \leq w(h_{n - 1})$. Since $T$ was obtained using a greedy algorithm, we also know that $w(t_{1}) \leq w(t_{2}) \leq \cdots \leq w(t_{n - 1})$. Let $i$ be the minimal index where $\sum_{j = 1}^{i}w(t_{i}) > \sum_{j = 1}^{i}w(h_{j})$, $i \geq 2$. This means that $\sum_{j = 1}^{i - 1}w(t_{j}) \leq \sum_{j = 1}^{i -1}w(h_{j})$. So $w(t_{i}) > w(h_{i})$. We have that $(t_{1}, \ldots, t_{i - 1})$ forms a forest with $i - 1$ edges, called $F$. And $(h_{1}, \ldots, h_{i})$ is a forest with $i$ edges, called $F^{\prime}$. By the lemma, we can add an edge from the larger forest to the smaller forest $h_{j} (j \leq i)$ to $F$. But $w(t_{i}) > w(h_{i})$ and $w(h_{i - 1}) \geq w(h_{i - 2}) \geq \cdots \geq w(h_{1})$. So $w(t_{i}) > w(h_{j})$, but we could have chosen $h_{j}$ instead of $t_{i}$. So the greedy algorithm should have chosen $h_{j}$.
+\end{proof}
+
+\chapter{Week 12}
+
+\begin{topic}
+    \section{Graph Colorings}
+\end{topic}
+
+\begin{definition}{Chromatic Number}
+    A chromatic number of $G$ is denoted by $ \chi (G)$ which is the minimal integer $k$ such that we can color vertices of $G$ in $k$ colors without creating a monochromatic edge (Edge with both endpoints with the same color).
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        \begin{fixedfigure}
+            \incfig{pentagonex}
+        \end{fixedfigure}
+    \end{example}
+\end{examples}
+
+Tasks which cannot be done simultaneously $\rightarrow$ Graph vertices are tasks, edges are constraints, colorings are placings of tasks in a time slot.
+
+\begin{definition}{$k$-colorable}
+    A graph is called $k$-colorable if its vertices can be correctly colored using $k$-colors.
+\end{definition}
+
+\begin{definition}{Bipartite Graph}
+    A bipartite graph is a two colorable graph. Equivalently, $G = (V, E)$ is bipartite if $V = A \coprod B$ and all edges $e \in E$ are of the form $e = \{a, b\}$, where $a \in A, b \in B$.
+\end{definition}
+
+\textbf{Proposition}: $G$ is bipartite iff $G$ has no cycles of odd length.
+    \begin{proof}
+        $(\rightarrow)$ Let $G$ be bipartite and assume that $G$ has an odd cycle $C$. Let $(v_{1}, v_{2}, \ldots, v_{2n + 1})$ be the vertices of this cycle. Let blue be the color of $v_{1}$. Then $v_{2}$ is red. Then $v_{3}$ is blue, $v_{4}$ is red. We see that $v_{2i}$ is red and $v_{2i + 1}$ is blue. Then $v_{2n + 1}$ is blue. But there is the edge $\{v_{1}, v_{2n + 1}\}$ which is monochromatic, contradiction.
+
+        $(\leftarrow)$ Let $G$ be a graph without odd cycles. Without loss of generality, assume that $G$ is connected. Pick a vertex $v$ in $G$. Color it blue. Color each vertex $w$ into blue if the shortest path from $v \rightarrow w$ has even length and color it red otherwise. Assume that the coloring creates an edge $\{w, u\} \in E$, such that $w, u$ have the same color. So we have the closed walk of odd length: $v \rightarrow w \rightarrow u \rightarrow v$. Let $C$ be the shortest closed walk of odd length in $G$. If $C$ is not a cycle, then it splits into shorter closed walks $C_{1}, C_{2}$. One of them must be odd. So this is a contradiction, since $C$ was not the shortest closed walk of odd length. So $C$ is a cycle of odd length which is a contradiction.
+    \end{proof}
+
+\begin{definition}{$K_{a, b}$}
+    $K_{a, b}$ is the bipartite graph with $a + b$ vertices $V = A \coprod B$ where $\lvert A \rvert = a$, $\lvert B \rvert = b$ and edges are all pairs of vertices $\{v, w\}$, $v \in A, w \in B$. 
+\end{definition}
+
+\textbf{Proposition}: If $G$ is a bipartite graph with $n$ vertices, then $G$ has at most $n^{2}/4$ edges if $n$ is even and $(n^{2} - 1)/4$ edges if $n$ is odd. 
+    \begin{proof}
+        Let $a, b$ be the sizes of color groups in the two coloring of $G$. Then $G$ cannot have more edges than $K_{a, b}$ which is $ab$, which is $a(n - a)$. Maximal value of $a(n - a)$ for integer $a \in \mathbb{N}$. We have $a(n - a) = \frac{n^{2}}{4} - (a -  \frac{n}{2})^{2}$. Minimize $(a - \frac{n}{2})^{2}$. If $n$-even, we can choose $a = \frac{n}{2}$. Then $a(n - a) = \frac{n^{2}}{4}$ . If $n$ is odd, then the possible values of $a - \frac{n}{2}$. Set $a = \frac{n \pm 1}{2}$. We have $b = \frac{n \pm 1}{2}$. So $ab = \frac{n^{2} - 1}{4}$.
+    \end{proof}
+
+\begin{theorem}{}
+    If $G$ is a graph with $2m$ vertices and $m^{2} + 1$ edges, then $G$ has $m$ different triangles.
+\end{theorem}
+
+\begin{topic}
+    \section{Matchings}
+\end{topic}
+
+\begin{definition}{Matching}
+    A matching $M$ in $G = (V, E)$ is a subset $M \subseteq E$ such that any pair of edges in $M$ does not have common endpoints. A matching $M$ is perfect if each vertex appears as an endpoint of an edge $e \in M$.
+\end{definition}
+
+\begin{definition}{}
+    Let $G$ be bipartite with $X, Y$ color groups of vertices. Then a matching $M$ is called a perfect matching of $X$ into $Y$ if every vertex of $X$ is an endpoint of some edge in $G$.
+\end{definition}
+
+\textbf{Proposition}: If $X$ can be perfectly matched in to $Y$, then $\lvert X \rvert \leq \lvert Y \rvert$. 
+    \begin{proof}
+        If $M$ is a perfect matching of $X$ into $Y$, then for any $x \in X$, there is an edge $\{x, f(x)\} \in M$ where $f(x) \in Y$. Since $M$ is a matching, $f$ is an injection. So $\lvert Y \rvert \geq \lvert X \rvert$.
+    \end{proof}
+
+If $X$ has $2$ leaves with the same neighbor, there is no perfect matching of $X$ into $Y$. Let $T \subseteq X$, the $N(T)$ is the set of neighbors of $T$. 
+
+\textbf{Proposition}: For any bipartite graph $G$ with $X, Y$ color classes, $X$ can be perfectly matched into $Y$ only if for any $T \subseteq X$ we have $\lvert T \rvert \leq \lvert N(T) \rvert$.
+    \begin{proof}
+        If $M$ is a perfect matching of $X$ into $Y$, then we have a perfect matching of $T$ into $N(T)$. By the previous proposition, we have $\lvert T \rvert \leq \lvert N(T) \rvert$
+    \end{proof}
+
+\begin{theorem}{Hall's Theorem}
+    For any bipartite $G$, $X, Y$ color classes, $X$ can be perfectly matched into $Y$ iff for any $T \subseteq X$, we have $\lvert T \rvert \leq \lvert N(T) \rvert$.
+\end{theorem}
+    \begin{proof}
+        $(\rightarrow)$ Was proved in Proposition
+
+        $(\leftarrow)$ Induction on the number of vertices $\lvert X \rvert$. 
+            \begin{itemize}
+                \item Base Case: $\lvert X \rvert = 1$. Then $\lvert N(X) \rvert \geq 1$. So there is at least one neighbor connected to $X$ so there is a perfect matching of $X$ into $Y$.
+
+                \item Inductive Step: Let $n \geq 2$ and assume that the statement is true for $\lvert X \rvert < n$. Let $\lvert X \rvert = n$. 
+                    \begin{itemize}
+                        \item Case 1: Assume that there is $B \subseteq X$ where $0 < \lvert B \rvert < \lvert X \rvert$ where $\lvert B \rvert = \lvert N_{G}(B) \rvert$. Let $G_{1}$ be the subgraph which is $B \cup N(B)$. Let $G_{2}$ be the subgraph by removing $B \cup N_{G}(B)$ from $G$ with adjacent edges. Check that $\lvert T \rvert \leq \lvert N(T) \rvert $ for $G_{1}, G_{2}$. Let $T \subseteq B$. Then $N_{G_{1}}(T) = N_{G}(T)$. Then
+                            \begin{equation*}
+                                \lvert T \rvert \leq \lvert N_{G}(T) \rvert = \lvert N_{G_{1}}(T) \rvert
+                            \end{equation*}
+                        So we can use the inductive hypothesis to get some perfect matching in $G_{1}$. So we have $M_{1}$ a perfect matching of $B$ into $N_{G}(B)$. For $G_{2}$, let $U \subseteq X - B$. Consider $N_{G}(U \cup B)$. Then $N_{G}(U \cup B) \subseteq N_{G}(B) \coprod N_{G_{2}}(U)$. The sets are disjoint, because otherwise, there is a vertex in $U \cup B$ such that it has a neighbor in $N_{G}(B)$ and $N_{G_{2}}(U)$. So that edge actually belongs to $N_{G}(B)$. And an element in the disjoint union is a neighbor of an element of either $U$ or $B$. We also have the reverse containment because if $v \in N_{G}(U \cup B)$ because if $v \in N_{G}(B)$, then we are done. Otherwise, if $v \notin N_{G}(B)$, then $\exists$ edge $v, u$ with $u \in U$ and $v, (v, u) \in G_{2}$ which means that $v \in N_{G_{2}}(U)$. Then 
+                            \begin{equation*}
+                                \lvert U \rvert = \lvert U \cup B \rvert - \lvert B \rvert \leq \lvert N_{G}(U \cup B) \rvert - \lvert N_{G}(B) \rvert = \lvert N_{G_{2}}(B) \rvert
+                            \end{equation*}
+                         Apply the inductive hypothesis to $G_{2}$. So we have $M_{2}$ a perfect matching of $X - B$ into $Y - N(B)$ in $G_{2}$. Then the union $M_{1} \cup M_{2}$ give a perfect matching of $X$ into $Y$.
+
+                        \item Assume that for any $B \subseteq X$ where $B \neq X, \emptyset$, we have $\lvert N \rvert < \lvert N_{G}(B) \rvert$. Pick an arbitrary vertex $x \in X$. Since $x$ has at least $1$ neighbor, take $y \in N(\{x\})$. Let $G^{\prime}$ be the subgraph of $G$ obtained by throwing away $x, y$ and all attached edges. Let $T \subseteq X - \{x\}$. Then if $T$ is empty, then indeed $0 \leq \ldots$. Otherwise, $\lvert T \rvert < \lvert N_{G}(T) \rvert$. This is equivalent to $T \leq \lvert N_{G}(T) \rvert - 1$. If $v \in N_{G}(T)$, then either $v = y$ or $v \in N_{G^{\prime}}(T)$. Then $\lvert N_{G^{\prime}}(T) \rvert = \lvert N_{G}(T) \rvert$ or $\lvert N_{G^{\prime}}(T) \rvert = \lvert N_{G}(T) \rvert - 1$. So we get:
+                            \begin{equation*}
+                                \lvert T \rvert \leq \lvert N_{G}(T) \rvert - 1 \leq \lvert N_{G^{\prime}}(T) \rvert
+                            \end{equation*}
+                        By the inductive hypothesis, we have $M^{\prime}$ perfect matching on $G^{\prime}$. We union this to a perfect matching over $G$ by adding in $\{x, y\}$ to $M^{\prime}$.
+                    \end{itemize}
+            \end{itemize}
+    \end{proof}
+
+\chapter{Week 13}
+
+\begin{topic}
+    \section{Hall's Theorem Examples}
+\end{topic}
+
+\begin{examples}
+    \begin{example}
+        Let $G$ be a bipartite graph with $X, Y$ color groups. All $x \in X$ have degree $d_{1}$ and $y \in Y$ have degree $d_{2}$, $d_{1} \geq d_{2} \geq 1$. Then there is a perfect matching of $X$ into $Y$.
+            \begin{proof}
+                Check that $\lvert S \rvert \leq \lvert N_{G}(S) \rvert$. Let $S \subseteq X$. Let $m$ denote the number of edges between $S$ and $N(S)$. We know that $m = \lvert S \rvert d_{1}$ and $m \leq \lvert N(S) \rvert d_{2}$. So
+                    \begin{equation*}
+                        \lvert S \rvert d_{1} \leq \lvert N(S) \rvert d_{2}
+                    \end{equation*}
+                and therefore
+                    \begin{equation*}
+                        \lvert S \rvert \leq \lvert N(S) \rvert
+                    \end{equation*}
+            \end{proof}
+    \end{example}
+    \begin{example}
+        Fix $n \geq 1$. A Latin square is an $n \times n$ square of numbers for $[n]$ where every row/column appears once. For $k \leq n$, a Latin $k \times n$ rectangle is one with numbers from $[n]$ such that in each column, every number appears once, and each row has $k$ distinct numbers. Claim: Every $k \times n$ Latin rectangle can be extended to a Latin square.
+            \begin{proof}
+                Show that $k \times n \rightarrow (k + 1) \times n$. We want to add an extra column and draw edges from elements of $[n]$ to a row $a_{k + 1, j}$ if $x$ does not appear in $\begin{bmatrix}
+                    a_{1, j} & a_{2, j} & \cdots &  a_{k, j}   
+                \end{bmatrix}$ Pick $x-$number where in original rectangle, there are $k$ copies of $k$. So $x$ has degree $n - k$. For any position, $a_{k + 1, j}$ there are also $n - k$ options. So by the previous example, we are done.
+            \end{proof}
+    \end{example}
+\end{examples}
+
+\begin{topic}
+    \section{Extensions to Non-bipartite Graphs}
+\end{topic}
+
+For $2$ colorable graphs, with maximum number of $\lvert E \rvert$ and fixed $\lvert V \rvert$ is achieved by $K_{a, b}$ where $a, b$ are as closed as possible. Let $K_{a_{1}, a_{2}, \ldots, a_{k}}$ be the graph of groups of vertices of size $z_{1}, \ldots, a_{k}$. Then connect with edges all pairs $(i, j)$ where $i, j$ are different groups. Then let $n, k \in \mathbb{N}$, where $n = dk + r$. Consider $K_{d + 1, \ldots, d + 1, d, d, \ldots, d}$. Let $T(n, k)$ denote the number of edges.
+
+\begin{theorem}{Turan}
+    Let $G$ be a simple graph with $n$ vertices and more than $T(n, k)$ number of edges. Then $G$ must contain a subgraph which is isomorphic to $K_{k + 1}$ and $G$ is not $k$-colorable.
+\end{theorem}
+\textbf{Lemma}: $T(n, k) = \binom{k}{2} + (k - 1)(n - k) + T(n - k, k)$ for any $n \geq k \geq 1$. 
+    \begin{proof}
+        If $n = dk + r$, $n - k = (d - 1)k + r$. So $T(n, k)$ is the number of edges in $T_{d+ 1, \ldots, d + 1, d, \ldots, d}$ and $T(n - k, k)$ is number of edges in $K_{d, d, \ldots, d, d - 1, \ldots, d - 1}$. So $T(n, k)$ is the number of edges of the graph $G$ obtained by adding a vertex to each group in $k_{(d)^{k}(d - 1)^{k - r}}$ and adding connected new vertices to vertices in other groups. New edges between new vertices is $\binom{k}{2}$. Then a group of new edges which connect a new vertex to an old vertex. There are $n - k$ old vertices. Each old vertex is connected to $k - 1$ new vertices. So there are $(n - k)(k - 1)$ new edges added.
+    \end{proof}
+\begin{proof}
+    Let $G$ be the graph on $n$ vertices which does not contain a graph on $K_{k + 1}$ with maximal possible number of edges. So adding an edge creates $K_{k + 1}$. We want to show that $G$ has at most $T(n, k)$ edges. Induction on $n$. For all $n \leq k$, the claim is trivial : $K_{1, 1, \ldots, 0, \ldots}$ = $K_{n}$. So no $K_{k + 1}$ in $G$ and no more than $T(n,k)$ edges. Suppose that Turan theorem was proved for $n - k$. Prove it for $n$: 
+
+    Pick $G$ as before. So $G \neq K_{n}$, there is a pair $(v, w)$ not connected by an edge. In $G$, we have a complete graph on $k - 1$ vertices with $v, w$ connecting to all vertices in it. Then there is $K_{k}$ in $G$. Let $S$ be this subgraph. There are $\binom{k}{2}$ edges in $S$. There are at most $T(n - k, k)$ edges between vertices outside of $S$. There are at most $(k - 1)(n - k)$ edges between $S$ and $G - S$ because every vertex not in $S$ cannot be connected to every vertex in $S$ otherwise, there is a complete graph $K_{k + 1}$. So $\lvert E \rvert \leq T(n, k)$ which completes the proof.
+\end{proof}
+
+Let $G = (V, E)$ be a graph. For $S \subseteq V$ let $G - S$ denote the graph obtained by removing all vertices in $S$ and all edges connected to them. Let $c_{\odd} (G - S)$ denote the number of connected components of $G - S$ with an odd number of vertices.
+
+\begin{theorem}{Tutte's Theorem}
+    For a simple graph $G = (V, E)$ there is a perfect matching in $G$ iff for all subsets $S \subseteq V$, we have $\lvert S \rvert \geq \lvert c_{ \odd} (G - S) \rvert$.
+\end{theorem}
+    \begin{proof}
+        $(\rightarrow)$ Let $S \subseteq V$ assume that $M$ is a perfect matching of $G$. Let $G_{1}, \ldots, G_{k}$ be connected components of $G - S$. Consider the edges that are used in the perfect matching $M$. Let $G_{i}$ be a component such that there is no edge in $M$ which connects $G_{i}$ and $S$. So $G_{i}$ has an even number of vertices because $M$ splits $G_{i}$ into pairs. In total, there are $\leq \lvert S \rvert$ edges of $M$ which connects $S$ to some $G_{i}$. So $c_{ \odd} (G - S) \leq \lvert S \rvert$.
+    \end{proof}
+
+\begin{topic}
+    \section{Chromatic Number}
+\end{topic}
+
+Let $P(G, k)$ denote the number of ways to color vertices of $G$ into $k$ colors without creating a monochromatic edge. 
+
+\textbf{Proposition}: $P(G, k)$ is a polynomial in $k$
+    \begin{proof}
+        Let $a_{i}$ denote the number of ways to properly color $G$ using precisely $i$ colors. Let $n$ be the number of vertices in $G$. Then $a_{i} = 0$ for $i > n$. Then $P(G, k)$ can be counted by first choosing $i$ colors to use $\binom{k}{i}$ options. Then color $G$ using these colors, $a_{i}$ options. Then
+            \begin{equation*}
+                P(G, k) = \sum_{i = 0}^{n}a_{i}\dbinom{k}{i}
+            \end{equation*}
+        This is a polynomial in $k$. 
+    \end{proof}
+
+\begin{definition}{Chromatic Polynomial}
+    $P(G, k)$ is called chromatic polynomial of $G$.
+\end{definition}
+
+\textbf{Proposition}: $ \chi (G)$ is the minimal non-negative integer $P(G, \chi (G)) \neq 0$.
+
+Let $G = (V, E)$ and let $e \in E$. Let $G - e$ denote the graph $G$ without edge $e$. Let $G/e$ denote the graph obtained by contraction along edge $e$.
+
+\begin{theorem}{Deletion-Contraction Formula}
+    $P(G, k) = P(G - e, k) - P(G/e, k)$. 
+\end{theorem}
+    \begin{proof}
+        $P(G - e, k)$ counts all colorings of $G$ using $k$ colors where $e$ is the only edge that is allowed to be monochromatic. Then $P(G - e, k) - P(G, k)$ is the number of proper colorings of $G - e$ where the endpoints of $e$ are same color. These colorings are in bijection with the contracted graph. The bijection is obtained by taking the coloring of endpoints of $e$ is the same as colors of merged vertex.
+    \end{proof}
+
+\begin{examples}
+    \begin{example}
+        Square example.
+    \end{example}
+\end{examples}
+
+\begin{topic}
+    \section{Planar Graphs}
+\end{topic}
+
+Suppose there are three houses and three wells. Is it possible to connect them all without creating intersections? No
+
+\begin{definition}{Planar Graph}
+    A graph $G$ is called planar if we can draw it on $\mathbb{R}^{2}$ in a way that edges intersect other edges only at endpoints. No vertex is inside an edge.
+\end{definition}
+
+So the previous question is: Is $K_{3, 3}$ planar or not?
+
+\begin{examples}
+    \begin{example}
+        $K_{3, 2}$, $K_{4}$, all trees are planar.
+    \end{example}
+\end{examples}
+
+\begin{definition}{Faces}
+    Let $G$ be a planar graph. The edges of $G$ split the plane into regions which are called faces of $G$.
+\end{definition}
+
+\begin{theorem}{Euler's Theorem}
+    Let $G \neq \emptyset$ be a planar connected graph drawn on a plane with $V$ vertices, $E$ edges, and $F$ faces. Then $V + F - E = 2$. In particular, $F$ does not depend on how the graph is drawn.
+\end{theorem}
+    \begin{proof}
+        Induction on $E$.
+            \begin{itemize}
+                \item Base Case: $E = 0$. The graph contains only an isolated vertex, $V = 1, F = 1, E = 0$, so $1 + 1 - 0 = 2$.
+
+                \item Inductive Step: Suppose that this is proved for $E - 1$ edges. Let $G$ be a connected graph with $E$ edges. 
+                    \begin{itemize}
+                        \item Case 1: If $G$ has a leaf, $v$. Let $G^{\prime}$ be a graph obtained by removing $v$ and its edge. So $G^{\prime}$ has $V^{\prime} = V - 1$ vertices and $E^{\prime} = E - 1$ edges. The number of faces is the same $F^{\prime} = F$. $G^{\prime}$ is planar and connected. So we have that $V + F - E = V^{\prime} + F^{\prime} - E^{\prime} = 2$.
+
+                        \item Case 2: If $G$ has no leaves, $G$ is not a tree. So $G$ has a cycle $C$. Let $e$ be an edge of the cycle. Let $G^{\prime} = G - e$. So $G^{\prime}$ has $V^{\prime} = V$, $E^{\prime} = E - 1$, $F^{\prime} = F - 1$. $C$ splits the plane into two regions. Then $e$ has different faces on its sides. Then removing the edge merges the two faces. Then $V + F - E = V^{\prime} + F^{\prime} - E^{\prime} = 2$.
+                    \end{itemize}
+                So we are done.
+            \end{itemize}
+    \end{proof}
+
+\begin{theorem}{}
+    $K_{3, 3}$ is not planar.
+\end{theorem}
+    \begin{proof}
+        Suppose that $K_{3, 3}$ is planar. Then $K_{3, 3}$ has $V = 6, E = 9$. So $F = E - V + 2 = 5$. For each face, construct a closed walk $W_{i}$:
+            \begin{itemize}
+                \item Pick an edge on the boundary of some face.
+
+                \item Orient this edge $e$ in a way that the face is to the left
+
+                \item Walk along $G$, such that at each vertex, take the left-most turn.
+
+                \item At some point we return to the original edge. We get a closed walk.
+            \end{itemize}
+        Why $4$ is true: Since $G$ is finite, at some point, there is an edge repeated twice. Then we can retract steps until repeating $e$ twice. For each of the $5$ faces, we have $W_{i}$. An oriented edge of $G$ can appear only in one of these walks. Look at the face to the left to recover the corresponding walk. Also, each oriented edge appears at most once in $W_{i}$. Since $G$ is bipartite, all $W_{i}$ have an even length. So $l(W_{i}) \geq 4$. There are $5$ walks, so there are at least $20$ different oriented edges. But the graph $K_{3, 3}$ has $18$ oriented edges, contradiction.
+    \end{proof}
+
+\textbf{Proposition}: Let $G$ be a planar connected graph with $\lvert V \rvert \geq 3$. Then $\lvert E \rvert \leq 3\lvert V \rvert - 6$.
+    \begin{proof}
+        For each face of $G$, construct a closed walk $w_{i}$ where $i = 1, \ldots, F$.
+            \begin{itemize}
+                \item Pick any edge $e$ on the boundary of the face and orient it so that the face is to your left
+
+                \item Start walking, at each vertex, take the left-most turn.
+
+                \item At some point, we try to go along $e$ in the same direction as the start. So we stop. 
+            \end{itemize}
+        If the length of the walk $w_{i} = 1$, then we have a loop. If the length of $w_{i} = 2$, then $w_{i}$ has leaves as its endpoints, which is an isolated edge. So $G$ only has two vertices, and $V = 2 \leq 3$. So each $w_{i}$ has length $\geq 3$. Each oriented edge can appear at most once. So $3F \leq 2E$. Using Euler, $F = E  - V + 2$, we get
+            \begin{equation*}
+                3E - 3V + 6 \leq 2E \implies E \leq 3V - 6
+            \end{equation*}
+    \end{proof}
+
+\chapter{Week 14}
+
+\begin{topic}
+    \section{More on Planar Graphs}
+\end{topic}
+
+\textbf{Proposition}: $K_{5}$ is not planar.
+    \begin{proof}
+        We have $K_{5}$ is simple connected, with $5$ vertices, so by the previous proposition, we know that if $K_{5}$ is planar, then $E \leq 15 - 6 = 9$. But $K_{5}$ has $\binom{5}{2} = 10$ edges.
+    \end{proof}
+
+\textbf{Proposition}: A planar graph $G$ must have a vertex of degree $\leq 5$.
+    \begin{proof}
+        Assume that the graph has degree $\geq 6$. Suppose that $G$ is a connected component of the planar graph. Then the sum of degrees is equal to $2E$. So $6V \leq 2E$. Then $E  \geq 3V$. But recall that $E \leq 3V - 6$ which is a contradiction.
+    \end{proof}
+
+What are other examples of non-planar graphs?
+    \begin{itemize}
+        \item If a graph $G$ contains $K_{5}$ or $K_{3, 3}$ as a subgraph, then $G$ is non planar.
+
+        \item Another non-planar graph is with vertices on $K_{5}$ but each edge is drawn with an intermediate added vertex. 
+    \end{itemize}
+
+\begin{definition}{Division of Graphs}
+    A graph $G^{\prime}$ is called a division of a graph $G$ if $G^{\prime}$ is obtained from $G$ by the following operations:
+        \begin{itemize}
+            \item Take an edge $(u, v)$ and replace it by $(u, w), (w, v)$ where $w$ is a new vertex. 
+        \end{itemize}
+\end{definition}
+
+\textbf{Proposition}: If $G^{\prime}$ is a division of $G$, then $G^{\prime}$ is planar iff $G$ is planar.
+
+If $G$ contains a division of $K_{5}$ or $K_{3,3}$ as a subgraph, then $G$ is non-planar. 
+
+\begin{theorem}{Kuratowski}
+    A graph $G$ is planar iff $G$ does not contain a division of $K_{5}$ or $K_{3, 3}$ as a subgraph.
+\end{theorem}
+
+\chapter{Week 15}
+
+\begin{topic}
+    \section{Chromatic Number of Planar Graphs}
+\end{topic}
+
+We have $K_{4}$ is planar which means that there are planar graphs which require at least $4$ colors.
+
+\textbf{Proposition}: Every planar graph is $6$ colorable.
+    \begin{proof}
+        Induction on the number of vertices. If $V \leq 6$, then we are done. For general $V$, suppose that it is proved for $V - 1$ vertices. Let $G$ be a planar graph on $V$ vertices. Let $v$ be a vertex of degree $5$ or less. Let $G^{\prime}$ be the graph obtained by removing the vertex and its edges. Then $G^{\prime}$ is $6$ colorable as it is still planar. Since $v$ has $\leq 5$ neighbors, there is a color to choose for $v$ in $G$. So $G$ is $6$-colorable.
+    \end{proof}
+
+$3$ colors may not be enough because $K_{4}$ is planar.
+
+\textbf{Proposition}: Every planar graph is $5$ colorable.
+    \begin{proof}
+        By induction on the number of vertices. If $V \leq 5$, then the claim is true. Otherwise, if $V = n$, the claim is proved for $\leq n - 1$ vertices. $ G$ has a vertex of degree $\leq 5$. Let $v$ be this vertex. Let $G^{\prime}$ be the graph with this vertex removed. Then $G^{\prime}$ is $5$ colorable. Let $C : V^{\prime} \rightarrow [ 5]$ be the coloring of $G^{\prime}$. If $\deg v \leq 4$, then we are done. If $\deg v = 5$, and some of the neighbors of $v$ have the same color, then we are done. Let $v_{1},  \ldots, v_{ 5}$ be the neighbors of $v$, which are ordered counter clockwise around $v$. Also, $C(v_{i}) = i$. We want to construct another coloring of $G^{\prime}$ such that $v_{i}$ do not have different colors. 
+
+        Let $G^{\prime}_{1, 3} \subseteq G^{\prime}$ be the subgraph consisting only of vertices of $G^{\prime}$ with colors $1$ or $3$ in $C$. Similarly, define $G^{\prime}_{2, 4} \subseteq G^{\prime}$ by keeping vertices of color $2, 4$. Note that $v_{1}, v_{3} \in G^{\prime}_{1, 3}$. 
+
+        Claim 1: If $v_{1}, v_{3}$ are not connected by a path in $G^{\prime}_{1, 3}$, then there is a coloring of $G^{\prime}$ such that $C(v_{1}) = C(v_{3})$.
+
+        If $v_{1}, v_{3}$ are not connected in $G^{\prime}_{1, 3}$, then they are in different connected components. Let $H$ be the connected component of $v_{1}$ in $G^{\prime}_{1, 3}$. Let $\tilde{C}$ be the coloring of $G^{\prime}$ obtained by
+            \begin{itemize}
+                \item Keeping the coloring of all vertices $\notin H$
+
+                \item Changing $1$ to $3$ and $3$ to $1$ in $H$ 
+            \end{itemize}
+        Then $\tilde{C}$ is a proper coloring of $G^{\prime}$. If $e$ had endpoints both not in $H$, then the coloring is still valid. If $e$ has both endpoints in $H$, then this is still a valid coloring. If one endpoint is in $H$ and the other not, then $e \notin G^{\prime}_{1, 3}$. So swapping $1, 3$ does not make it monochromatic. So now, we have $\tilde{C}(v_{1}) = \tilde{C}(v_{3})$. 
+
+        So if $v_{1}, v_{3}$ are not connected by a path in $G^{\prime}_{1, 3}$, then we are done. Similarly, if $v_{2}, v_{4}$ are not connected by a path in $G^{\prime}_{2, 4}$, then we are done.
+
+        Claim 2: Either $v_{1}, v_{3}$ are not connected in $G^{\prime}_{1, 3}$ or $v_{2}, v_{4}$ are not connected in $G^{\prime}_{2, 4}$.
+
+        Suppose that this is not the cases. So $P_{1}$ connects $v_{1}, v_{3}$, $P_{2}$ connects $v_{2}, v_{4}$. Consider the cycle inside $G$ which is $v \rightarrow  v_{ 1} \rightarrow v_{ 3} \rightarrow v$. This cycle splits the plane into $2$ regions. So $v_{2}$ and $v_{4}$ are in different sides of the cycle. Then $P_{2}$ intersects the cycle. So $P_{2}$ intersects $P_{1}$ are a common vertex. Recall that $P_{1}, P_{2}$ are in $G^{\prime}_{1, 3}$, $G^{\prime}_{2, 4}$, so they have a common vertex that is in both, which is a contradiction. 
+    \end{proof}
+
+\begin{theorem}{Four Color Theorem}
+    Every planar graph is $4$ colorable. 
+\end{theorem}
+
+\begin{topic}
+    \section{Polyhedral}
+\end{topic}
+
+\begin{definition}{Polyhedral}
+    A convex polyhedron is a convex $3$-d body in $\mathbb{R}^{3}$ such that the boundary is a finite collection of polygons, glued along the edges. Equivalently, a convex polyhedron is a convex subset of $\mathbb{R}^{3}$ defined by inequalities:
+        \begin{align*}
+            f_{1}(x, y,z)  & \leq   a_{1} \\
+            f_{2}(x, y, z) &\leq    a_{2} \\
+                           &\vdots          
+        \end{align*}
+    where $f_{i}(x, y, z) = \alpha x + \beta  y +  \gamma  z$ where $a_{i}, \alpha, \beta, \gamma \in  \mathbb{ R}$.
+\end{definition} 
+
+\textbf{Reminder}: Convex: if $x, y \in P$, then $[x, y] \subseteq P$, or all $\lambda x + ( 1 - \lambda) y \in P$ for $\lambda \in  [ 0, 1]$. We also assume that for a polyhedra, there is a $p \in P$ such that a small ball centered at $P$ is a subset of $P$.
+
+Let $P$ be a convex polyhedron. Polygons on the boundary of $P$ are faces. Sides of the polygons are edges of $P$. The corners of the polygons are vertices.
+
+\begin{definition}{Vertex}
+    Formally, a vertex is a point $p \in P$ such that there are no points $x, y \in P$ such that $p \in (x, y)$.
+\end{definition}
+
+\begin{definition}{1 - Skeleton}
+    A $1$-skeleton of a polyhedron is a graph obtained by taking vertices and edges of the polyhedron. 
+\end{definition}
+
+\begin{theorem}{}
+    Let $P$ be a convex polyhedron.
+        \begin{itemize}
+            \item The $1$-skeleton of $P$ is a planar graph
+
+            \item $V + F - E = 2$ where $V, F, E$ are the number of vertices, faces, and edges of a polyhedron.
+        \end{itemize}
+\end{theorem}
+    \begin{proof}
+        We will show that the boundary of $P$ without a point can be unwrapped in a way that we get a bijection (preserves lines and faces) with $\mathbb{R}^{2}$.
+            \begin{itemize}
+                \item Step 1: First draw the boundary of $P$ on a sphere. Let $p \in P$ strictly inside $P$. Let $S$ be a sufficiently large sphere centered at $p$ which contains $P$. Consider all rays starting at $p$. Each ray intersects $S$ at one point. Also, each ray intersects the boundary at a single point. Since $P$ is convex, any line intersects $P$ along one point, so the ray only passes through a boundary once. So we have a mapping of $\delta P$-the boundary of $P$ to $S$ along the corresponding ray starting from $ P$. As a result, we draw a $1$-skeleton of $P$ on $S$ without self-intersections. Faces of $P$ correspond to regions on $S$ bounded by the one skeleton.
+
+                \item Step 2: We use stereographical projection to go from $S$ to a plane. Pick a point $x$ on $S$ inside one of the faces. Let $H$ be the plane tangent to $S$ opposite of $x$. Send each point $a$ on $S$ to the intersection point of $H$ and the line $(x, a)$. The projection sends the $1$-skeleton to a planar graph with the faces of $P$ corresponding to faces of the planar graph.
+            \end{itemize}
+    \end{proof}
+
+\textbf{Proposition}: $3F \leq 2E \leq  6F - 12$. Also, $3V \leq 2E \leq  6V - 12$. 
+    \begin{proof}
+        $3F \leq 2E$ since every face has at least $3$ sides. Every edge appears in exactly $2$ faces. Also $3V \leq 2E$ since each vertex has degree $\geq 3$. Every edge connects $2$ vertices.
+
+        The other inequalities come from Euler's formula:
+            \begin{equation*}
+                3(E + 2 - V) \leq 2E \iff E \leq  3V - 6
+            \end{equation*}
+        and similarly,
+            \begin{equation*}
+                3(E + 2 - F) \leq 2E \iff E \leq  3F - 6
+            \end{equation*}
+    \end{proof}
+
+\textbf{Corollary}: Every polyhedron has a face with $5$ or less sides.
+    \begin{proof}
+        If all faces have six sides or more, then
+            \begin{equation*}
+                2E \geq 6F
+            \end{equation*}
+        But this contradicts the fact that 
+            \begin{equation*}
+                2E \leq 6F - 12
+            \end{equation*}
+    \end{proof}
+
+\begin{topic}
+    \section{Platonic Solids}
+\end{topic}
+
+Platonic solids are convex polyhedron, regular faces, equal to each other. All vertices have the same degrees and all angles between the faces or the same.
+
+\begin{theorem}{}
+    Up to scaling, there are five Platonic solids
+\end{theorem}
+Idea of proof:
+    \begin{itemize}
+        \item Let $P$ be the platonic solid
+
+        \item Let $l$ be the number of sides of a face
+
+        \item Let $d$ be the degree of all vertices 
+    \end{itemize}
+Then $d = 3, 4, 5$, $l = 3, 4, 5$. So $2E = dV$ and $2E = lF$. By Euler's formula we have
+    \begin{equation*}
+        \dfrac{2E}{d} + \dfrac{2E}{l} - E = 2
+    \end{equation*}
+and
+    \begin{equation*}
+        \dfrac{2}{d} + \dfrac{2}{e} - 1 > 0 \iff \dfrac{ 1}{d} + \dfrac{1}{l} >\dfrac{ 1}{2}
+    \end{equation*}
+So this forbids the pairs $(d, l)$ of $(4, 4), (4, 5), (5, 4), (5, 5)$. So we have:
+    \begin{itemize}
+        \item  $(d, l) = (3, 3)$ Tetrahedron
+
+        \item  $(d, l) = (4, 3)$ Octahedron
+
+        \item  $(d, l) = (3, 4)$ Cube
+
+        \item $(d, l) = (3, 5)$ Dodecahedron
+
+        \item $(d, l) = (5, 3)$ Icosahedron 
+    \end{itemize}
+
+\begin{topic}
+    \section{Other Surfaces}
+\end{topic}
+
+\begin{definition}{Toroidal}
+    A graph is called toroidal if it can be drawn on a torus without self-intersections.
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        Every planar graph is toroidal.
+    \end{example}
+    \begin{example}
+        $K_{5}$ and $K_{3, 3}$ are toroidal.
+    \end{example}
+    \begin{example}
+        $K_{7}$ is toroidal. Every graph with $\leq 7$ vertices is toroidal.
+    \end{example}
+\end{examples}
+
+Is $K_{8}$ toroidal? 
+
+For planar graphs, we have $V + F - E = 2$ and for toroidal: $V + F - E = ?$
+
+\begin{theorem}{}
+    Let $G$ be a toroidal graph, drawn on a torus in a way that each face is homeomorphic to a disk. Then $V + F - E = 0$. Homeomorphic to a disk means that one can deform a disk into a face without creating any holes, self-intersections, $\ldots$.
+\end{theorem}
+
+For $K_{8}$, we have $V = 8$, $E = 28$. So it should have $F = 20$. Each face is a triangle. So $3F \leq 2E$. So $60 \leq 56$. If each face is not homeomorphic to a disc, we have $F \geq 20$ and the same proof.
+
+$K_{4, 5}$ is not toroidal. There is a family of minimal non-toroidal graphs similar to $K_{3 ,3}, K_{5}$ for planar graphs.
+
+\chapter{Week 16}
+
+\begin{topic}
+    \section{Review: Counting Problems}
+\end{topic}
+
+We have covered:
+    \begin{itemize}
+        \item Binomial and Multinomial Coefficients
+
+        \item Placing objects into boxes
+
+        \item Permutations
+
+        \item Stirling Numbers
+
+        \item Inclusion-Exclusion Principle 
+    \end{itemize}
+\textbf{Stirling Numbers}: $S(n, k), s(n, k)$. 
+
+\textbf{Second Type}: $S(n, k)$. Ways to place $n$ objects, different into $k$ boxes. This is the same as number of partitions of $[n]$ into $k$ non-empty boxes. Then $k!S(n, k) = $ number of surjections $[n] \rightarrow [k]$. 
+
+\textbf{First Type}: $c(n, k)$ is the number of permutations of $[n]$ with exactly $k$ cycles (unsigned). Then $(-1)^{n -k}c(n, k) = s(n, k)$ (signed). 
+
+Formula for Stirling number of 2nd kind using Inclusion-Exclusion: 
+    \begin{proof}
+        $S(n, k) = $ number of surjections. $k^{n} - k!S(n, k)$ is the number of functions $[n] \rightarrow[k]$ not surjections. Then
+            \begin{equation*}
+                S(n, k) = \lvert A_{1} \cup A_{2} \cup \cdots \cup A_{k} \rvert
+            \end{equation*}
+        where $A_{i}$ is the number of maps where $i$ is not in the image of your function. Then
+            \begin{align*}
+                \lvert A_{1} \cup \cdots \cup   A_{k} \rvert &= \lvert A_{1} \rvert + \cdots + \lvert A_{k} \rvert                       \\
+                                                             &- \lvert A_{1} \cap A_{2} \rvert - \lvert A_{1} \cap A_{3} - \cdots  \rvert \\
+                                                             &+  \cdots                                                                    
+            \end{align*}
+        Then $\lvert A_{j_{1}} \cap \cdots \cap A_{j_{l}} \rvert = \lvert  \text{ functions $[n] \rightarrow [k] \backslash \{j_{1}, \ldots, j_{l}\}$} \rvert$. There are $(k - l)^{n}$ such functions. So
+            \begin{equation*}
+                \lvert A_{1} \cap \cdots \cap A_{k} \rvert = \dbinom{k}{1}(k - 1)^{n} - \dbinom{k}{2}(k - 2)^{n} + \dbinom{k}{3} (k - 3)^{n} - \cdots
+            \end{equation*}
+        This is
+            \begin{equation*}
+                \sum_{i \geq 1} \dbinom{k}{i}(k  -i)^{n}(-1)^{i}
+            \end{equation*}
+        So
+            \begin{equation*}
+                k^{n} - k!S(n, k) = \sum_{i \geq 1} \dbinom{k}{i}(k - i)^{n}(-1)^{i}
+            \end{equation*}
+        Rearranging:
+            \begin{align*}
+                S(n, k) &= \dfrac{1}{k!}(k^{n} = \sum \cdots) \\
+                        &= \dfrac{1}{k!}\sum_{i \geq0} (-1)^{i}\dbinom{k}{i}(k - i)^{n}          
+            \end{align*}
+        Finally,
+            \begin{align*}
+                S(n, k) &= \sum_{i = 0}^{k}\dfrac{(k - i)^{n}}{i!(k - i)!}   
+            \end{align*}
+    \end{proof}
+
+$x^{k}, (x)_{k} = x(x - 1)(x - 2) \cdots(x - k + 1)$. 
+    \begin{align*}
+        x^{n} &= \sum_{k \geq0} S(n, k)(x)_{k} & (x)_{k} &= \sum_{k \geq0} S(n, k)x^{k}   
+    \end{align*}
+
+$S(n, k) = S(n - 1, k - 1) + kS(n - 1, k)$. Also, $c(n, k) = c(n - 1, k - 1) + (n - 1)c(n - 1, k)$.
+
+\textbf{Cycle type of permutation}: Partition of $n$ whose parts are the length of cycles. If $\lambda$ is a partition of $n$, $m_{i} = $ number of parts of size $i$, then the number of permutations given by $\lambda$ is 
+    \begin{equation*}
+        \dfrac{n!}{\prod_{i \geq1} m_{i}!i^{m_{i}}}
+    \end{equation*}
+The $i^{m_{i}}$ corresponds to rotating these cycles, and $m_{i}!$ corresponds to number of ways to swap cycle positions. 
+
+\textbf{Objects and Boxes}:
+    \begin{itemize}
+        \item $n$ different objects and $k$ different boxes. We have number of functions $[n] \rightarrow [k]$ which is $k^{n}$. 
+
+        \item Surjections: $k!S(n, k)$
+
+        \item Injections: $\binom{k}{n}n!$
+
+        \item  $n$ identical objects and $k$ different boxes. This is the number of compositions $(a_{1}, a_{2}, \ldots, a_{k})$, $\sum a_{i} = n$
+
+        \item Weak compositions: $(a_{1}, \ldots, a_{k})$, $ a_i\geq0$, and $a_{1} + \cdots + a_{k} = n$. Stars and bars: $\binom{n + k - 1}{k - 1}$. 
+
+        \item Compositions: $(a_{1}, \ldots, a_{k})$, $a_{i} \geq1$, $a_{1} + \cdots + a_{k} = n$. This is $\binom{n - 1}{k - 1}$. Place $k - 1$ bars between $n$ stars. 
+
+        \item $n$ different objects and $k$ identical boxes. This number of partitions of $[n]$, with no empty parts is given by $S(n, k)$. 
+
+        \item $n$ identical objects and $k$ identical boxes, this is the number of partitions. $\lambda = (\lambda_{1}, \lambda_{2}, \ldots, \lambda_{k})$, $\lambda_{1} \geq \lambda_{2} \geq \cdots \geq \lambda_{k} > 0$. $p(n) = $ number of partitions of $n$. 
+    \end{itemize}
+
+\textbf{Generalized Binomial}:
+\begin{examples}
+    \begin{example}
+        \begin{align*}
+            \sqrt{\dfrac{1 _ x}{1 - x}} &= (1 + x)\sqrt{\dfrac{1}{(1 - x)(1 + x)}}                      \\
+                                        &= (1 + x) \sqrt{\dfrac{1}{1 - x^{2}}}                          \\
+                                        &= (1 + x)(1 - x^{2})^{\dfrac{-1}{2}}                           \\
+                                        &= (1 + x) \sum_{n \geq0} \dbinom{\dfrac{-1}{2}}{n}(-x^{2})^{n} \\
+            \dbinom{a}{n}               &= \dfrac{a(a - 1) \cdots (a - n + 1)}{n!}                        
+        \end{align*}
+    \end{example}
+\end{examples}
+
+\textbf{Catalan Numbers}: 
+    \begin{equation*}
+        C_{n} = C_{0} C_{n - 1} + C_{1}C_{n - 2} + \cdots + C_{n - 1}C_{0} = \sum_{i = 0}^{n - 1}C_{i}C_{n - i - 1}
+    \end{equation*}
+Also:
+    \begin{align*}
+        C_{n}                    &= \dfrac{1}{n + 1}\dbinom{2n}{n} \\
+        \sum_{n \geq0}C_{n}x^{n} &= \dfrac{1 - \sqrt{1 - 4x}}{2x}    
+    \end{align*}
+
+\textbf{Generating Functions for Partitions}:
+    \begin{equation*}
+        \sum_{n \geq 0} p(n)x^{n} = \prod_{i \geq 1} \dfrac{1}{1 - x^{i}}
+    \end{equation*}
+This is because:
+    \begin{equation*}
+        \sum_{\lambda}x^{\lvert \lambda \rvert} = \sum_{m_{1}, m_{2}, \ldots}x^{m_{1} + 2m_{2} + \cdots}
+    \end{equation*}
+For even parts only:
+    \begin{equation*}
+        \prod_{i \geq 1}\dfrac{1}{1 - x^{2i}}
+    \end{equation*}
+For strict partitions:
+    \begin{equation*}
+        \prod_{i \geq 1}(1 + x^{i})
+    \end{equation*}
+For partitions of parts of sizes $3, 5, 10$:
+    \begin{equation*}
+        \dfrac{1}{1 - x^{3}}\dfrac{1}{1 - x^{5}} \dfrac{1}{1 - x^{10}}
+    \end{equation*}
+Euler's pentagonal numbers:
+    \begin{equation*}
+        \prod_{i \geq 1}(1 - x^{i}) = \sum_{ k \in \mathbb{Z}}(-1)^{k}x^{\dfrac{(3k - 1)k}{2}}
+    \end{equation*}
+So
+    \begin{equation*}
+        p(n) = \sum_{ k \in \mathbb{Z} \backslash \{0\}}(-1)^{k - 1}p(n - \dfrac{k(3k - 1)}{2}) 
+    \end{equation*}
+
+Generating function: $(a_{0}, a_{1}, \ldots)$. Generating function is $\sum_{ n\geq 0} a_{n}x^{n}$. Exponential generating functions: $\sum_{n \geq 0}a_{n}\frac{x^{n}}{n!}$.
+    \begin{equation*}
+        \exp(x) = \sum_{n \geq 0} \dfrac{x^{n}}{n!}
+    \end{equation*}
+Properties:
+    \begin{itemize}
+        \item  $\exp(x)\exp(y) = \exp(x + y)$
+
+        \item  $\dd{x}\exp(x) = \exp(x)$. 
+    \end{itemize}
+\begin{examples}
+    \begin{example}
+        $t(n)$ is the number of permutations of $[n]$ such that $\sigma^{3} = id$. 
+            \begin{align*}
+                \sum_{n \geq 0}\dfrac{t(n)}{n!}x^{n} &= \sum_{n \geq 0}\sum_{\substack{\sigma \text{ of } [n] \\ 3, 1 \text{ cycles }}}\dfrac{x^{n}}{n!} \\
+                                                     &= \sum_{n \geq 0}\sum_{k \leq \dfrac{n}{3}}\dfrac{n!}{3^{k}k!(n - 3k)!\dfrac{x^{n}}{n!}} \\
+                                                     &= \sum_{n \geq 0}\sum_{k \leq \dfrac{n}{3}}\dfrac{1}{3^{k}k!(n - 3k)!}x^{n} \\
+                                                     &= \sum_{k \geq 0}\sum_{n \geq 3k} \dfrac{x^{n}}{3^{k}k!(n - 3k)!} \\
+                                                     &= \sum_{k \geq 0}\sum_{n \geq 3k}\dfrac{x^{3k + (n - 3k)}}{3^{k}k!(n - 3k)!} \\
+                                                     &= \sum_{k \geq 0}\dfrac{x^{3k}}{3^{k}k!} \cdot\sum_{m \geq 0}\dfrac{x^{m}}{m!} \\
+                                                     &= \exp(\dfrac{x^{3}}{3})\exp(x)
+            \end{align*}
+        where $m = n - 3k$.
+    \end{example}
+\end{examples}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

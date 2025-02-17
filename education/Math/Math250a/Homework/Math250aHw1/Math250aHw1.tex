@@ -1,0 +1,288 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math250a/Homework/Math250aHw1/Math250aHw1.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+
+\title{Math250aHw1}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+\maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Let $k$ be a field. The ring of formal power series in 1 variable $k[[x]]$ has a unique maximal ideal.
+    \begin{proof}
+        Consider the homomorphism $\varphi: k[[x]] \rightarrow k$. The kernel of this homomorphism will be the maximal ideal. We can take $\varphi$ to be the evaluation map at $0$. Then $\ker{\varphi} = (x)$ since any polynomial with $x$ as a factor will be sent to $0$. Now suppose that we had another ideal $(f) \neq (x)$. Then we will show that it will be equal to the whole ring. We make clear that $f$ is not divisible by $x$ otherwise, $(f) \subseteq (x)$. This equates to showing that every polynomial that is not divisible by $x$ is invertible. We have that:
+            \begin{equation*}
+                \dfrac{1}{1 - x} = 1 + x + x^{2} + \ldots
+            \end{equation*}
+        and to get the inverse of a polynomial $f$, we can make the substitution $x = 1 - f$ to get:
+            \begin{equation*}
+                \dfrac{1}{1 - (1 - f)} = \dfrac{1}{f}
+            \end{equation*}
+        But this does not work with all $f \in R$ because for $f = x$, we have:
+            \begin{equation*}
+                \dfrac{1}{x} = 1 + 1 - x + (1 - x)^{2} + \ldots
+            \end{equation*}
+        which has an infinite degree $0$ term which is not in our field. Suppose that $x \ndivides f$. Then there is a non-zero constant:
+            \begin{equation*}
+                f = a_{0} + a_{1}x + a_{2}x^{2} + \ldots
+            \end{equation*}
+        This means that we can make the constant term equal to $1$:
+            \begin{equation*}
+                a_{0}^{-1}f = 1 + a_{0}^{-1}a_{1}x + a_{0}^{-1}a_{2}x^{2} + \ldots
+            \end{equation*}
+        We note that if $a_{0}^{-1}f$ is invertible, then $f$ is invertible:
+            \begin{equation*}
+                a_{0}^{-1}f \cdot g = 1 \implies f \cdot a_{0}^{-1}g = 1
+            \end{equation*}
+        So we have:
+            \begin{equation*}
+                \dfrac{1}{1 - (1 - a_{0}^{-1}f)} = \dfrac{1}{1 - (-a_{0}^{-1}a_{1}x - a_{0}^{-1}a_{2}x^{2} - \ldots)} = 1 + (1 - a_{0}^{-1}f) + (1 - a_{0}^{-1}f)^{2} + \ldots
+            \end{equation*}
+        But this is well defined because if we take the term of the lowest degree of each of the powers in our sum: $a_{0}^{-1}a_{1}x$, the lowest exponent in the polynomial $(a_{0}^{-1}f)^{k}$ would be $k$ since $(a_{0}^{-1}a_{1}x)^{k}$ has degree $k$. So each term of $(a_{0}^{-1}f)^{-1}$ is in our field. Therefore, we have proven that $(x)$ is the unique maximal ideal.
+    \end{proof}
+
+\textbf{Exercise 2}: Let $R$ be a commutative ring, and let $S \subseteq R$ be a multiplicatively closed subset (that is, if $a, b \in S$, then $ab \in S$.) If $I$ is an ideal maximal with respect to the property $I \cap S = \emptyset$ then $I$ is prime.
+    \begin{proof}
+        Suppose that $xy \in I$ and $x \notin I$. Consider the cosets of $I$, and let the representatives of all but the additive identity $(0 + I)$ be elements of $S$. This implies that $I \cup S = R$. We have that:
+            \begin{equation*}
+                (x + I)(y + I) = xy + I = I
+            \end{equation*}
+        But $x \in S$, and $y \notin S$ (otherwise, we say that $xy \in S$  leading to a contradiction), so $y \in I$. So $I$ is prime.
+    \end{proof}
+
+\textbf{Exercise 3}: If $R$ is a principal ideal ring (that is, every ideal of $R$ is principal), $p \in R$ an element that generates a prime ideal, and $a \notin (p)$, then $(a, p) = R$.
+    \begin{proof}
+        Suppose $(p) \neq R$. Since $R$ is a PID, we have that for some $u \in R$, $(u) = (a, p)$. This means that:
+            \begin{align*}
+                ux &= a \\
+                uy &= p   
+            \end{align*}
+        But we note that since $p$ is prime, $a \notin (p)$, then neither $u$ nor $x$ are in $(p)$. This means that $y \in p$ So we can say that $y = wp$:
+            \begin{equation*}
+                uwp = p
+            \end{equation*}
+        So $(uw - 1)p = 0$ and $uw = 1$ therefore, $u$ is a unit. But since $u$ is a unit, then $1 \in (u)$ so $(u) = R$.
+    \end{proof}
+
+\textbf{Exercise 4}: If $A, B$ are ideals in the commutative ring $R$, and $A + B = R$ then $AB = A \cap B$.
+    \begin{proof}
+        We will show a two sided containment:
+
+        ($AB \subseteq A \cap B$) We have that $AB$ is the set of all sums:
+            \begin{equation*}
+                a_{1}b_{1} + \ldots + a_{n}b_{n}
+            \end{equation*}
+        for $a_{i} \in A$ and $b_{i} \in B$. Since $b_{i} \in R$, we have by definition that that sum above is in $A$. Since it is a commutative ring, all ideals are two-sided. This means that also,
+            \begin{equation*}
+                a_{1}b_{1} + \ldots + a_{n}b_{n} \in B
+            \end{equation*}
+        So this sum is actually in the intersection $A \cap B$. 
+
+        ($A \cap  B \subseteq AB$) Suppose an element $m$ is in $A \cap B$. Since $A + B = R$, we have that the set contains the identity so:
+            \begin{equation*}
+                a + b = 1
+            \end{equation*}
+        But now, we have:
+            \begin{equation*}
+                m = am + bm
+            \end{equation*}
+        and since $m \in A$ and $m \in B$, we can write $m$ as:
+            \begin{align*}
+                m &= a_{1}r_{1} + \ldots + a_{n}r_{n} \\
+                m &= b_{1}s_{1} + \ldots + b_{m}s_{m}
+            \end{align*}
+        So therefore:
+            \begin{equation*}
+                m = a(b_{1}s_{1} + \ldots + b_{m}s_{m}) + b(a_{1}r_{1} + \ldots + a_{n}r_{n})
+            \end{equation*}
+        Once everything is expanded, $m$ will be clearly of the form:
+            \begin{equation*}
+                a_{1}^{\prime}b_{1}^{\prime} + \ldots + a_{n}^{\prime}b_{n}^{\prime}
+            \end{equation*}
+        which means that $m \in AB$.
+    \end{proof}
+
+\textbf{Exercise 5}: If $k$ is a field of characteristic $2 > 0$ and $G$ is a group with 2 elements, then $k[G] \cong k[x]/(x^{2})$, and this has a unique maximal ideal.
+    \begin{proof}
+        (Part I) Consider the morphism from $k[G] \rightarrow k[x]/(x^{2})$ given by:
+            \begin{align*}
+                0 \cdot e + 0 \cdot g &\mapsto  0     \\
+                1 \cdot e + 0 \cdot g &\mapsto  1     \\
+                0 \cdot e + 1 \cdot g &\mapsto  x + 1 \\
+                1 \cdot e + 1 \cdot g &\mapsto  x       
+            \end{align*}
+        so we have:
+            \begin{equation*}
+                e \mapsto 1 \hspace{30pt} \text{and} \hspace{30pt} g \mapsto x + 1
+            \end{equation*}
+        To prove that this is a homomorphism:
+
+        Additive:
+            \begin{align*}
+                \varphi(ae + bg) + \varphi(ce + dg) &= a + bx + b + c + dx + d      \\
+                                                    &= a + c + (b + d)x + (b + d)   \\
+                                                    &= \varphi((a + c)e + (b + d)g) \\
+                                                    &= \varphi(ae + bg + ce + dg)     
+            \end{align*}
+        Multiplicative:
+            \begin{align*}
+                \varphi(ae + bg)\varphi(ce + dg) &= (a + b + bx)(c + d + dx)                              \\
+                                                 &= (ac + ad + adx + bc + bd + bdx + bcx + bdx + bdx^{2}) \\
+                                                 &= (ac + bd) + adx + ad + bcx + bc                       \\
+                                                 &= \varphi((ae + bg)(ce + dg)) 
+            \end{align*}
+        Since the map is surjective, we have a bijective homomorphism and therefore an isomorphism of rings.
+
+        (Part II) We can check by cases the maximal ideal. Since $k[G] \cong k[x]/(x^{2})$, we can consider the ring on the right instead. Clearly, $0$ must be in the ideal. We cannot have $1$ in the ideal, and notice that $x + 1$ has an inverse as it gets mapped to $g$ and we know that $g^{2} = 1$. So we have proved that our ideal $(x)$ is maximal in $k[x]/x^{2}$, and that no other elements in the ring can belong to any maximal ideal. This means that $(x)$ is the unique maximal ideal. Since we know that $x$ is sent to $1e + 1g$, we know that the maximal ideal of $k[G]$ is just $(e + g)$.
+    \end{proof}
+
+\textbf{Exercise 6}: A commutative ring $R$ is isomorphic to the product of two (nontrivial, that is, with $1 \neq 0$) rings $R_{1} \times R_{2}$ if and only if $R$ contains \textit{nontrivial orthogonal idempotents}, that is, elements $e_{1}, e_{2} \in R$ not equal to $0$ or $1$, such that $e^{2}_{1} = e_{1}, e^{2}_{2} = e_{2}$ and $e_{1}e_{2} = 0$. Find nontrivial orthogonal idempotents in the group algebra $\mathbb{C}[G]$, where $\mathbb{C}$ denotes the complex numbers and $G$ is again the group with $2$ elements. This ring has $2$ maximal ideals.
+    \begin{proof}
+        (Part I) ($\rightarrow $) Suppose that $R \cong R_{1} \times R_{2}$. Then we have the additive identity element of $R$ denoted as $e_{0}$ and the multiplicative identity denoted as $e_{1}$. Consider the elements in $R_{1} \times R_{2}$ which are:
+            \begin{equation*}
+                r_{1} = (e_{1}, e_{0}) \hspace{30pt} \text{ and } \hspace{30pt} r_{2} = (e_{0}, e_{1})
+            \end{equation*}
+        we observe that:
+            \begin{equation*}
+                r_{1}^{2} = r_{1} \hspace{30pt} \text{ and } \hspace{30pt} r_{2}^{2} = r_{2} \hspace{30pt} \text{ and } \hspace{30pt} r_{1}r_{2} = (r_{0}, r_{0}) = 0
+            \end{equation*}
+        But these are two distinct orthogonal idempotent elements in $R_{1} \times R_{2}$. Therefore, we just need to prove that they are non-trivial. This is easily the case because any ring homomorphism
+            \begin{equation*}
+                \varphi: R \rightarrow R_{1} \times R_{2}
+            \end{equation*}
+        must satisfy:
+            \begin{align*}
+                \varphi(0) &= (e_{0}, e_{0}) \\
+                \varphi(1) &= (e_{1}, e_{1})               
+            \end{align*}
+        both of which are elements that we did not choose.
+
+        ($\leftarrow $) Suppose that our ring contains two nontrivial orthogonal idempotent elements. Then we consider $(e_{1})$ and $(e_{2})$. Observe that elements, $n$, in the sum of these ideals:
+            \begin{equation*}
+                a_{1}e_{1} + a_{2}e_{2} = n \\
+            \end{equation*}
+        have the following property for $a_{1}, a_{2} \in R$
+            \begin{align*}
+                e_{1}n + e_{2}n &= e_{1}^{2}a_{1} + e_{1}e_{2}a_{2} + e_{1}e_{2}a_{1} + e_{2}^{2}a_{2} \\
+                &= n
+            \end{align*}
+        Therefore, we have:
+            \begin{equation*}
+                n(e_{1} + e_{2}) = n
+            \end{equation*}
+        so 
+            \begin{equation*}
+                e_{1} + e_{2} = 1
+            \end{equation*}
+        But by the Chinese Remainder Theorem, we have:
+            \begin{equation*}
+                R \cong R/(e_{1}) \times R/(e_{2})
+            \end{equation*}
+        Since $e_{1}, e_{2}$ are nontrivial, we will show that neither one of the ideals are trivial. Suppose that $e_{1}$ is a unit or $e_{1}d = 1$. Then we say that:
+            \begin{align*}
+                e_{1}e_{2}  &= 0 \\
+                e_{1}de_{2} &= 0 \\
+                e_{2}       &= 0   
+            \end{align*}
+        which is a contradiction. So we are done.
+
+        (Part II) We want to find a ring isomorphic to $\mathbb{C}[G]$. We start notice that in the ring $\mathbb{C}[x]$, we have that $(x + i)(x - i) = x^{2} + 1$ looks suspiciously close to $g^{2} = 1$ which is what we desire. So we take $\mathbb{C}[x]/(x^{2} + 1)$. So the mappings can be figured out by realizing that:
+            \begin{equation*}
+                (1 + ix)^{2} = 1 + 2ix - x^{2} = 1 + 2ix - x^{2} - 1 + 1 = 2 + 2ix
+            \end{equation*}
+        which obeys the fact that $(1 \cdot e + 1 \cdot g)^{2} = 2 \cdot e + 2 \cdot g$ in $\mathbb{C}[G]$. So we can figure out all the mappings by just the generators of $\mathbb{C}[G]$:
+            \begin{align*}
+                1 \cdot e + 0 \cdot g &= 1  \\
+                0 \cdot e + 1 \cdot g &= ix   
+            \end{align*}
+        Now we check to see if this is a ring homomorphism. First is addition:
+            \begin{align*}
+                \varphi(a \cdot e) + \varphi(b \cdot e) &= a + b                          \\
+                                                        &= (a + b)                        \\
+                                                        &= \varphi((a + b) \cdot e)       \\
+                \varphi(a \cdot e) + \varphi(b \cdot g) &= a + bix                        \\
+                                                        &= \varphi(a \cdot e + b \cdot g) \\
+                \varphi(a \cdot g) + \varphi(b \cdot g) &= aix + bix                      \\
+                                                        &= (a + b)ix                      \\
+                                                        &= \varphi((a + b) \cdot g)         
+            \end{align*}
+        So we have proven the structure on the generators and therefore the whole group ring. Now for multiplication:
+            \begin{align*}
+                \varphi(a \cdot e)\varphi(b \cdot e) &= ab                  \\
+                                                     &= \varphi(ab \cdot e) \\
+                \varphi(a \cdot e)\varphi(b \cdot g) &= abix                \\
+                                                     &= \varphi(ab \cdot g) \\
+                \varphi(a \cdot g)\varphi(b \cdot g) &= aixbix              \\
+                                                     &= -abx^{2}            \\
+                                                     &= -abx^{2} - ab + ab  \\
+                                                     &= ab                  \\
+                                                     &= \varphi(ab \cdot e)   
+            \end{align*}
+        So we have that this is an isomorphism because all elements of $\mathbb{C}[x]/(x^{2} + 1)$ are of the form $a + bi + (c + di)x$ which we can get from 
+            \begin{equation*}
+                \varphi((a + bi) \cdot e) + \varphi(-ci \cdot g) + \varphi(d \cdot g) = a + bi + (c + di)x
+            \end{equation*}
+        One of the idempotent elements is $ix$ and the other we get from taking $a \cdot e + b \cdot g$ squared:
+            \begin{align*}
+                (a \cdot e + b \cdot g)^{2} &=                                        (a^{2} + b^{2}) \cdot e + 2ab \cdot g \\
+                                            &\implies a^{2} + b^{2} = a \land 2ab = g                                         
+            \end{align*}
+        which we can solve to get $a = \frac{1}{2}$ and $b = \frac{1}{2}$. So our second idempotent element is $\frac{1}{2} + \frac{1}{2}ix$. Notice that this element and the last were not orthogonal. It can be easily checked that $\frac{1}{2} + \frac{1}{2}ix$ and $\frac{1}{2} - \frac{1}{2}ix$ are orthogonal however. Therefore our orthogonal idempotent elements are:
+            \begin{itemize}
+                \item $\frac{1}{2} \cdot e + \frac{1}{2} \cdot g$ 
+
+                \item $\frac{1}{2} \cdot e - \frac{1}{2} \cdot g$
+            \end{itemize}
+        \st{Didnt finish} 
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

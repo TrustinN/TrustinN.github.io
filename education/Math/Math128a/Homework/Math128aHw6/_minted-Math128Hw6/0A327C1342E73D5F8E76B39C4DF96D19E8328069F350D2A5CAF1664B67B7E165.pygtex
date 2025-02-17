@@ -1,0 +1,21 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{points}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{p}{[[}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{6}\PYG{p}{];}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{];}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{6}\PYG{p}{];}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{];}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mf}{6.5}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{3}\PYG{p}{]];}
+\PYG{n}{lGP}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{p}{[[}\PYG{l+m+mf}{3.3}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{6.5}\PYG{p}{];}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mf}{2.8}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{3.0}\PYG{p}{];}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mf}{5.8}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{5.0}\PYG{p}{];}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mf}{5.5}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{2.2}\PYG{p}{]];}
+\PYG{n}{rGP}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{p}{[[}\PYG{l+m+mf}{2.5}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{2.5}\PYG{p}{];}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mf}{5.0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{5.8}\PYG{p}{];}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mf}{4.5}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{2.5}\PYG{p}{];}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mf}{6.4}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{2.8}\PYG{p}{]];}
+
+\PYG{n}{coeff}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{BezierCurves}\PYG{p}{(}\PYG{n}{points}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{lGP}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{rGP}\PYG{p}{);}
+\PYG{n}{polys}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{BezierPolys}\PYG{p}{(}\PYG{n}{coeff}\PYG{p}{.}\PYG{n}{x}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{coeff}\PYG{p}{.}\PYG{n}{y}\PYG{p}{);}
+
+\PYG{n}{x}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{p}{[];}
+\PYG{n}{y}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{p}{[];}
+\PYG{n}{t}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{:}\PYG{l+m+mf}{0.01}\PYG{p}{:}\PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{k}{for}\PYG{+w}{ }\PYG{n+nb}{i}\PYG{p}{=}\PYG{l+m+mi}{1}\PYG{p}{:}\PYG{n+nb}{size}\PYG{p}{(}\PYG{n}{points}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}
+\PYG{+w}{    }\PYG{n}{xPoly}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{matlabFunction}\PYG{p}{(}\PYG{n}{polys}\PYG{p}{.}\PYG{n}{x}\PYG{p}{(}\PYG{n+nb}{i}\PYG{p}{));}
+\PYG{+w}{    }\PYG{n}{x}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{p}{[}\PYG{n}{x}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{xPoly}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)];}
+\PYG{+w}{    }\PYG{n}{yPoly}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{matlabFunction}\PYG{p}{(}\PYG{n}{polys}\PYG{p}{.}\PYG{n}{y}\PYG{p}{(}\PYG{n+nb}{i}\PYG{p}{));}
+\PYG{+w}{    }\PYG{n}{y}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{p}{[}\PYG{n}{y}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{yPoly}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)];}
+\PYG{k}{end}
+\PYG{n+nb}{plot}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{)}
+
+
+\end{Verbatim}

@@ -1,0 +1,204 @@
+%! TeX root = Berkeley/Compsci/CS170/Homework/CS170Hw1.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{CS170Hw1}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\section*{Study Group}
+\textbf{Collaborators}:
+    \begin{itemize}
+        \item [(a)] Rohan Kudchadker - SID: 3038065006
+    \end{itemize}
+
+\newpage
+
+\section*{Course Policies}
+    \begin{itemize}
+        \item [(a)] What dates and times are the exams for CS170 this semester? Are there planned alternate exams?
+            \begin{answer}
+                Midterm $1$ is on  Wednesday, 10/2/2024, $7:00$ PM - $9:00$ PM. Midterm $2$ is on Tuesday 11/5/2024, $7:00$ PM - $9:00$ PM. Final: is on Tuesday, 12/17/2024, 8:00 AM - 11:00 AM. There are no planned alternate exams.
+            \end{answer}
+
+        \item [(b)] Homework is due Fridays at 10:00pm, with a late deadline at 11:59pm. At what time do we recommend you have your homework finished?
+            \begin{answer}
+                It is recommended that you submit your homework by the late deadline to avoid technical issues.
+            \end{answer}
+
+        \item [(c)] We provide 2 homework drops for cases of emergency or technical issues that may arise due to homework submission. If you miss the Gradescope late deadline (even by a few minutes) and need to submit the homework, what should you do?
+            \begin{answer}
+                Nothing just use the homework drops.
+            \end{answer}
+
+        \item [(d)] What is the primary source of communication for CS170 to reach students? We will send out all important deadlines through this medium, and you are responsible for checking your emails and reading each announcement fully.
+            \begin{answer}
+                Edstem is the primary source of communication. 
+            \end{answer}
+
+        \item [(e)] Please read the following:
+            \begin{itemize}
+                \item [(i)] Syllabus and Policies: https://cs170.org/policies/
+
+                \item [(ii)] Homework Guidelines: https://cs170.org/resources/homework-guidelines/
+
+                \item [(iii)] Regrade Etiquette: https://cs170.org/resources/regrade-etiquette/
+
+
+                \item [(iv)] Forum Etiquette: https://cs170.org/resources/ed-etiquette/ 
+            \end{itemize}
+            “I have read and understood the course syllabus and policies.”
+
+    \end{itemize}
+
+
+\newpage
+
+\section*{Understanding Academic Integrity}
+Before you answer any of the following questions, make sure you have read over the syllabus and course policies (https://cs170.org/policies/) carefully. For each statement below, write OK if it is allowed by the course policies and Not OK otherwise.
+    \begin{itemize}
+        \item [(a)] You ask a friend who took CS 170 previously for their homework solutions, some of which overlap with this semester’s problem sets. You look at their solutions, then later write them down in your own words.
+            \begin{answer}
+                NOT OK.
+            \end{answer}
+
+        \item [(b)] You had 5 midterms on the same day and are behind on your homework. You decide to ask your classmate, who’s already done the homework, for help. They tell you how to do the first three problems.
+            \begin{answer}
+                NOT OK.
+            \end{answer}
+
+        \item [(c)] You’re a serial procrastinator and started working on the homework at 8:00 PM on Monday, and out of desperation searched up a homework problem online and find the exact solution. You then write it in your words and cite the source.
+            \begin{answer}
+                NOT OK.
+            \end{answer}
+
+
+        \item [(d)] You were looking up Dijkstra’s on the internet, and inadvertently run into a website with a problem very similar to one on your homework. You read it, including the solution, and then you close the website, write up your solution, and cite the website URL in your homework writeup. 
+            \begin{answer}
+                OK.
+            \end{answer}
+    \end{itemize}
+
+\newpage
+\section*{Log Identities}
+
+
+The following subparts will cover several math identities, tricks, and techniques that will be useful throughout the rest of this course.
+Simplify the following expressions into a single logarithm (i.e. in the form $\log_{a}b$):
+    \begin{itemize}
+        \item [(a)] $\frac{\ln{x}}{\ln{y}}$
+            \begin{answer}
+                $\log_{y}(x)$
+            \end{answer}
+
+        \item [(b)] $\ln{x} + \ln{y}$
+            \begin{answer}
+                $\ln(xy)$
+            \end{answer}
+
+        \item [(c)] $\ln{x} - \ln{y}$
+            \begin{answer}
+                $\ln{\frac{x}{y}}$.
+            \end{answer}
+
+        \item [(d)] $170 \ln{x}$ 
+            \begin{answer}
+                $\ln{x^{170}}$
+            \end{answer}
+    \end{itemize}
+
+\newpage
+\section*{Asymptotics Practice}
+
+For each pair of functions f and g, specify whether f = O(g), g = O(f), or both. No justification needed.
+    \begin{itemize}
+        \item [1.] $f(n) = n^{2} + 5n, g(n) = 1000(n + 1)^{2}$.
+            \begin{answer}
+                Both
+            \end{answer}
+
+        \item [2.] $f(n) = 5n^{3}, g(n) = n^{3} + (\log{n})^{10}$.
+            \begin{answer}
+                Both
+            \end{answer}
+
+        \item [3.] $f(n) = n^{100}, g(n) = (1.01)^{n}$
+            \begin{answer}
+                $f = O(g)$
+            \end{answer}
+
+        \item [4.] $f(n) = (\log{n})^{10}, g(n) = n^{0.1}$
+            \begin{answer}
+                $f = O(g)$
+            \end{answer}
+
+        \item [5.] $f(n) = n \cdot 2^{n}, g(n) = 3^{n}$
+            \begin{answer}
+                $f = O(g)$
+            \end{answer}
+
+        \item [6.] Consider the factorial function: $n! = 1 \cdot 2 \cdots n$. $f(n) = n!, g(n) = n^{n}$
+            \begin{answer}
+                $f = O(g)$
+            \end{answer}
+
+        \item [7.] $f(n) = 1 + b = b^{2} + \cdots + b^{n}, g(n) = b^{n}$ for arbitrary constant $b > 0$.
+
+        Does your answer change depending on the value of b? If so, specify the range of b for which each statement holds.
+
+        \begin{answer}
+            When $b \leq 1$, $g = O(f)$. If $b > 1$, $f = O(g)$ and $g = O(f)$.
+        \end{answer}
+    \end{itemize}
+
+\newpage
+\section*{Recurrence Relations}
+    For each part, find the asymptotic order of growth of $T$; that is, find a function $g$ such that $T (n) = \Theta(g(n))$. Show your reasoning and \textbf{do not directly apply the Master Theorem; doing so will yield 0 credit.}
+        \begin{itemize}
+            \item [(a)] $T(n) = 2T(n / 3) + 5n$
+                \begin{answer}
+                    Each node has $2$ sub nodes. The height of the tree is $log_3(n)$. Each node does $5n$ worth of work. At the first level, there is $5n$ work. Second, $5n \cdot 2 / 3$, third level, $5n * 4 / 9$. So the total work is 
+                        \begin{equation*}
+                            \sum_{i = 0}^{\log_3(n)} 5n (2 / 3)^{i} = 5n \cdot \sum_{i = 0}^{\log_3(n)} (2 / 3)^{i}
+                        \end{equation*}
+                    as $n \rightarrow \infty$, we have $5n \cdot c \in O(n)$. So $T(n) = \Theta(n)$.
+                \end{answer}
+
+            \item [(b)] An algorithm $\mathcal{A}$ takes $\Theta(n^{2})$ time to partition the input into 5 sub-problems of size $n/5$ each and then recursively runs itself on 3 of those subproblems. Describe the recurrence relation for the run-time $T (n)$ of $\mathcal{A}$ and find its asymptotic order of growth.
+                \begin{answer}
+                    At level $k$ down the recurrence, the input will be of size $n / 5^{k}$. At each level, there are $3^{k}$ nodes that do work. For each node, they do $\text{input}^{2}$ amount of work. So at level $k$, there is $3^{k} \cdot (n / 5^{k})^{2}$ amount of work. The total work is 
+                        \begin{equation*}
+                            \sum_{k = 0}^{\log_5(n)} 3^{k} (n / 5^{k})^{2} = n^{2} \sum_{k = 0}^{\log_5(n)} (3 / 25)^{k}
+                        \end{equation*}
+                    Again, this is a geometric series and as $n \rightarrow \infty$, it approaches the order of $c \cdot n^{2}$. So $T(n) = \Theta(n^{2})$.
+                \end{answer}
+
+            \item [(c)] $T(n) = T(3n / 5) + T(4n / 5)$ (We have $T(1) = 1$)
+                \begin{answer}
+                    For each level we go down, we choose to multiply the input $n$ by either $4 / 5$ or $3 / 5$. So at level $k$, the number of inputs of the form $x^{i}y^{j}$ are exactly the coefficients of $\prod_{i = 0}^{k}(x + y)$. Each node does $1$ work (calling the node below it). So the amount of work is 
+                        \begin{equation*}
+                            \sum_{k = 0}^{?}\sum_{i}^{k} 1 \cdot \dbinom{k}{i}
+                        \end{equation*}
+                    We bound the height of the tree by choosing the best and worst branch. The shortest branch will have the input as $(3 / 5)^{m}n$ while the longest branch has input $(4 / 5)^{m}n$ where we want to solve for $m$. Then $\log_{5 / 3}n \leq m \leq \log_{5 / 4}n$. So the total work is
+                        \begin{equation*}
+                            \sum_{k = 0}^{m}\sum_{i}^{k} \dbinom{k}{i} = \sum_{k = 0}^{m} 2^{k}
+                        \end{equation*}
+                    and 
+                        \begin{equation*}
+                            1 + 2^{1 + \log_{5 / 3}n} \leq \sum_{k = 0}^{m} 2^{k} \leq 1 + 2^{1 + \log_{5 / 4}n}
+                        \end{equation*}
+                    We have that $5 / 3  = 1.6666666666667$ and $(5 / 3)^{1.35} \approx 2$. So $2^{1 + \log_{5 / 3}n} \approx (5 / 3)^{2\log_{5 / 3}n} = n^{1.35}$. We can do the same for the other: $(5 / 4)^{3} \approx 2$ and $2^{1 + \log_{5 / 4}n} \approx (5 / 4)^{3\log_{5 / 4}n} = n^{3}$. We can make a guess that $T(n) = \Theta(n^{2})$. Using induction, we have $T(1) = T(3 / 5) + T(4n / 5) = \Theta(1) = \Theta(n^{2})$. For the inductive case, we have $T(n) = T(3n / 5) + T(4n / 5) = \Theta(9n^{2} / 25) + \Theta(16n^{2} / 25) = O(n^{2}) = \Theta(n^{2})$. So $T(n) = \Theta(n^{2})$
+                \end{answer}
+        \end{itemize}
+
+
+\end{document}

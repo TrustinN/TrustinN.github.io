@@ -1,0 +1,129 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math172/Homework/Math172Hw5/Math172Hw5.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+
+\title{Math172Hw5}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: How many permutations $\sigma$ of $[6]$ satisfy $\sigma^{2} = e$? Recall that $e$ denotes the identity permutation. (Permutations $\sigma$ such that $\sigma^{2} = e$ are called \textit{involutions}).
+        \begin{proof}
+            We use the fact that permutations can be broken into disjoint cycles and the order of these cycles divide the order of the permutation. So we count the number of ways to construct a permutation from disjoint $2$-cycles. So we wish to count the cycle types $(2), (2, 2), (2, 2, 2)$. By the formula:
+                \begin{equation*}
+                    \dfrac{n!}{\prod_{i \geq 1}^{} m_{i}!i^{m_{i}}}
+                \end{equation*}
+            we get that the number of $2$ cycles is:
+                \begin{equation*}
+                    \dfrac{6!}{2} = 360
+                \end{equation*}
+            the number of $(2, 2)$ cycle types is:
+                \begin{equation*}
+                    \dfrac{6!}{2!2^{2}} = 90
+                \end{equation*}
+            and the number of $(2, 2, 2)$ cycle types is:
+                \begin{equation*}
+                    \dfrac{6!}{3!2^{3}} = 15
+                \end{equation*}
+            So we get $360 + 90 + 15 = 465$.
+        \end{proof}
+
+\textbf{Exercise 2}: Let $a(n, k)$ be the number of permutations of $[n]$ with $k$ cycles such that $1$ and $2$ are in the same cycle. Prove that for $n \geq 2$ we have
+    \begin{equation*}
+        \sum_{k = 1}^{n} a(n, k)x^{k} = x(x + 2)(x + 3)\cdots (x + n - 1)
+    \end{equation*}
+Using this result show that for $n \geq 2$, the number of permutations of $[n]$ such that $1$ and $2$ are in the same cycle is equal to $n!/2$.
+        \begin{proof}
+            We will prove that:
+                \begin{equation*}
+                    \sum_{k = 1}^{n}a(n, k)x^{k} = \sum_{k = 1}^{n - 1}c(n, k)x^{k} - \sum_{k = n}^{n}c(n, k)x^{k + 1} = x(x + 2)(x + 3) \cdots (x + n - 1)
+                \end{equation*}
+            We will show this by induction.
+                \begin{itemize}
+                    \item For $n = 2$, we have $a(2, 0) = 0$, $a(2, 1) = 1$ and $a(2, 2) = 0$. We make the comparison with $c(2, 0) = 0$, $c(2, 1) = 1$, $c(2, 2) = 0$. So we somehow have to exclude $c(2, 2)$ from our future permutation calculations. We just notice that $c(2, 2)$ has one extra cycle than $c(2, 1)$. So we have:
+                        \begin{equation*}
+                            \sum_{k = 1}^{2}a(n, k)x^{k} = \sum_{k = 1}^{n - 1}c(n, k)x^{k} - \sum_{k = n}^{n} c(n, k)x^{k + 1}
+                        \end{equation*}
+
+                    \item Suppose that this holds for $n \geq 2$. Then using the fact that $a(n + 1, k) = a(n, k - 1) + (n - 1)a(n, k)$, we have:
+                        \begin{equation*}
+                            \sum_{k = 1}^{n + 1}a(n + 1, k)x^{k} = \sum_{k = 1}^{n + 1}a(n, k - 1)x^{k} + \sum_{k = 1}^{n + 1} (n - 1)a(n, k)x^{k}
+                        \end{equation*}
+                    Now we using the inductive hypothesis:
+                        \begin{equation*}
+                            \sum_{k = 1}^{n + 1}a(n + 1, k)x^{k} = \sum_{k = 1}^{n + 1}c(n, k - 1)x^{k} - \sum_{k = n}^{n + 1}c(n, k - 1)x^{k + 1} + \sum_{k = 1}^{n + 1}(n - 1)c(n, k)x^{k} + \sum_{k = n}^{n + 1}(n - 1)c(n, k)x^{k + 1}
+                        \end{equation*}
+                    But we know the recursive definition for $c(n, k)$:
+                        \begin{equation*}
+                            c(n + 1, k) = c(n, k - 1) + (n - 1)c(n, k)
+                        \end{equation*}
+                    So taking the large equation above:
+                        \begin{equation*}
+                            \sum_{k =1}^{n + 1}a(n + 1, k)x^{k} = \sum_{k = 1}^{n + 1}c(n + 1, k)x^{k} - \sum_{k = n}^{n + 1}c(n + 1, k)x^{k + 1}
+                        \end{equation*}
+                    as desired. Notice that the RHS simplifies to:
+                        \begin{equation*}
+                            x(x + 1)(x + 2)\cdots  - x(x)(x + 2)\cdots  = x(x + 2)(x + 3)\cdots (x + n - 1)
+                        \end{equation*}
+                \end{itemize}
+            Now for the second part, we just add up all the $a(n, k)$ for $k = 1, \ldots , n$. This means evaluating $x(x  + 2)(x + 3)\cdots (x + n - 1)$ at $x = 1$. So we get $1(3)(4)\cdots (n) = n!/2$.
+        \end{proof}
+
+\textbf{Exercise 3}: A group of $n \geq 1$ tourists come to a restaurant and sit around several round tables (it is possible for a table to have only one person). Then each (nonempty) table ordered one of $r$ possible drinks. Prove that the number of ways this can happen is 
+    \begin{equation*}
+        r(r + 1)(r + 2)\cdots (r + n - 1)
+    \end{equation*}
+where two outcomes are the same if each person has the same left neighbor (possibly the same person) and the same drink in both of them.
+        \begin{proof}
+            We consider the cycle $(1 \, 2 \, 3 \, \ldots )$ to mean that person $2$ is to the right of person $1$, person $3$ is to the right of person $2$, and so on. This means that the number of distinct seatings of people at a round table is determined by permutations of the elements of this cycle. Then the number of ways to have $n \geq 1$ people sit at $k$ different round tables is $c(n, k)$ or the number of ways to choose permutations with $k$ cycles/tables. Each cycle gets assigned a drink from $1, \ldots , r$, so there are $r^{k}$ different ways to assign drinks if there are $k$ tables. So therefore, the number of ways we can have this arrangement for $k$ tables is 
+                \begin{equation*}
+                    c(n, k)r^{k}
+                \end{equation*}
+            which we then sum over all possible number of tables:
+                \begin{equation*}
+                    \sum_{n = 1}^{n} c(n, k)r^{k} = r(r + 1)(r + 2)\cdots (r + n - 1)
+                \end{equation*}
+            so we are done.
+        \end{proof}
+
+\textbf{Exercise 4}: Count the number of integers from $[1000]$ which are neither a perfect square nor a perfect cube.
+    \begin{proof}
+        We have that $1000 = 10^{3}$ and $31^{2}$ is the largest perfect square under $1000$. This means that there are $10$ perfect cubes less than $1000$ and $31$ perfect squares less than $1000$. So let $S$ be the set of perfect squares and $C$ be the set of perfect cubes. Then we wish to count:
+            \begin{equation*}
+                \lvert A \cup S \rvert = \lvert A \rvert + \lvert S \rvert - \lvert A \cap S \rvert
+            \end{equation*}
+        where $\lvert A \cup S \rvert$ is the number numbers in $[1000]$ that are either a perfect square or a perfect cube. So to calculate the intersection, we look at numbers $n = a^{2}$ and $n = b^{3}$ which enforces:
+            \begin{equation*}
+                a^{2} = b^{3}
+            \end{equation*}
+        which means that $b \divides a$ or $cb = a$. So
+            \begin{equation*}
+                c^{2}b^{2} = b^{3} \implies c^{2} = b
+            \end{equation*}
+        and therefore
+            \begin{equation*}
+                a^{2} = c^{6} = b^{3}
+            \end{equation*}
+        So we know that elements of $\mathbb{Z}$ that are perfect squares and perfect cubes can be written as a perfect $6$-th. And if an element is a perfect 6-th, then it is a perfect square and a perfect cube. So we have proven that a number is a perfect 6-th iff it is both a perfect square and a perfect cube. Notice that $4^{6} = 64^{2} > 31^{2}$ and $3^{6} = 27^{2} < 31^{2}$. Therefore, we have that $3^{6}$ is the largest perfect $6$-th less than $1000$. So:
+            \begin{equation*}
+                \lvert S \cap C \rvert = 3
+            \end{equation*}
+        and therefore,
+            \begin{equation*}
+                \lvert S \cup C \rvert = 31 + 10 - 3 = 38
+            \end{equation*}
+        by PIE.
+    \end{proof}
+
+
+
+
+
+\end{document}

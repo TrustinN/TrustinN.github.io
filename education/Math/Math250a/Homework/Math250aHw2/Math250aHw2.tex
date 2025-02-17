@@ -1,0 +1,322 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math250a/Homework/Math250aHw2/Math250aHw2.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+
+\title{Math250aHw2}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: \textbf{Direct sums}:
+    \begin{itemize}
+        \item Prove in detail that the conditions given in Proposition 3.2 for a sequence to split are equivalent. Show that a sequence 
+            \begin{center}
+                \begin{tikzcd}
+                    0\ar[r, ""] & M^{\prime}\ar[r, "f"] & M\ar[r, "g"] & M^{\prime\prime}\ar[r, ""] & 0   
+                \end{tikzcd}
+            \end{center}
+        splits if and only if there exists a submodule $N$ of $M$ such that $M$ is equal to the direct sum $\Im{f} \oplus N$, and that if this is the case, then $N$ is isomorphic to $M^{\prime\prime}$. Complete all the details of the proof of Proposition 3.2.
+    \begin{proof}
+        First, suppose that there is a homomorphism $\varphi: M^{\prime\prime} \rightarrow M$ such that $g \circ \varphi = \text{id}$. Then we have the diagram:
+            \begin{center}
+                \begin{tikzcd}
+                    M\ar[r, "g", shift left] & M^{\prime\prime}\ar[l, "\varphi", shift left] \ar[r, ""] & 0   
+                \end{tikzcd}
+            \end{center}
+        Suppose that $x \in M$. Then we have that $x - \varphi(g(x))$ is in the kernel of $g$. So $x$ is written as the sum of an element of the kernel above, and an element of the image of $\varphi$. To see that it is direct, suppose that $m \in \ker{g}, \Im{\varphi}$. Then $\varphi(m_{0}) = m$. Therefore, $g(\varphi(m_{0})) = m_{0} = g(m) = 0$. Then $m_{0} = 0$ which implies that $\varphi(m_{0}) = m = 0$. So we have that $M = \ker{g} \oplus \Im{\varphi}$. 
+
+        Now consider the mapping $f$ which is isomorphic to $\ker{g}$ because the mapping is a homomorphism that is bijective. Then we have an inverse mapping from $M \rightarrow M^{\prime}$ which sends all elements of $\Im{\varphi}$ to $0$ and acts like the inverse of $f$ for elements in $\ker{g}$. Then this means that there is a homomorphism $\psi : M \rightarrow M^{\prime}$ such that $\psi \circ f = \text{id}$. So we have proved that one of the conditions implies the other. Now suppose that $x \in M$. Then
+            \begin{equation*}
+                x - f(\psi(x))
+            \end{equation*}
+        is in the kernel of $\psi$ and $f(\psi(x))$ is in the image of $f$. So therefore:
+            \begin{equation*}
+                M = \Im{f} \oplus \ker{\psi}
+            \end{equation*}
+        By the fact that $M^{\prime} \cong \Im{f} = \ker{g}$ and $M^{\prime\prime} \cong \Im{\varphi}$, we have
+            \begin{equation*}
+                M \cong M^{\prime} \oplus M^{\prime\prime}
+            \end{equation*}
+        Now suppose that we started with statement 2 which was that there was a $\psi$ where $\psi \circ f = \text{id}$. Then we get that $M \cong \Im{f} \oplus \ker{\psi}$ which we already showed. To prove that statement $2$ implies statement 1, consider the mapping of $g$ restricted to $\ker{\psi}$. Since $\ker{\psi} \cap \Im{f} = 0$, then the mapping is injective. Since it is also surjective, we have an isomorphism and therefore, an inverse. So we have shown the details of the proof.
+    \end{proof}
+Here is the proof of the next biconditional:
+    \begin{proof}
+        ($\rightarrow $) We have already proved the first part as $M \cong \ker{g} \oplus \Im{\varphi}$. We know that $\Im{\varphi} \cong M^{\prime\prime}$.
+
+        ($\leftarrow $) Suppose that 
+            \begin{equation*}
+                M \cong \Im{f} \oplus N \text{ or } M \cong \ker{g} \oplus N
+            \end{equation*}
+        where $N$ is a submodule of $M$. Then let $m \in M$ where $m = g_{0} + n$ and $g_{0} \in \ker{g}, n \in N$. Notice that we have:
+            \begin{equation*}
+                g(m) = g(g_{0}) + g(n) = g(n)
+            \end{equation*}
+        Since $\ker{g} \cap N = 0$, the mapping is injective and furthermore, $g$ is surjective since our sequence is direct. Therefore, we have an isomorphism with $N \cong M^{\prime\prime}$. This also means that there is a homomorphism $\varphi : M^{\prime\prime} \rightarrow M$ such that $g \circ \varphi = \text{id}$. We have therefore shown that the sequence splits.
+    \end{proof}
+
+        \item Let $E$ and $E_{i}(i = 1, \ldots, m)$ be modules over a ring. Let $\varphi_{i} : E_{i} \rightarrow E$ and $\psi_{i}: E \rightarrow E_{i}$ be homomorphisms having the following properties:
+            \begin{align*}
+                \psi_{i} \circ \varphi_{i} &= id, & \psi_{i} \circ \varphi_{j} &= 0 & \text{if } i \neq j  &,    
+            \end{align*}
+            \begin{equation*}
+                \sum_{i = 1}^{m}  \varphi_{i} \circ \psi_{i} = id
+            \end{equation*}
+    \end{itemize}
+Show that the map $x \mapsto (\psi_{1}x, \ldots, \psi_{m}x)$ is an isomorphism of $E$ onto the direct product of the $E_{i}(i = 1, \ldots, m)$, and that the map
+    \begin{equation*}
+        (x_{1}, \ldots, x_{m}) \mapsto \varphi_{1}x_{1} + \cdots + \varphi_{m} x_{m}
+    \end{equation*}
+is an isomorphism of this direct product onto $E$. 
+    \begin{proof}
+        Suppose that we have the conditions listed above. Clearly,
+            \begin{equation*}
+                x \mapsto (\psi_{1}x, \ldots, \psi_{m}x)
+            \end{equation*}
+        is a homomorphism as each $\psi_{i}$ are homomorphisms. We will show injectivity. Suppose that $x \mapsto (0, 0, \ldots, 0)$. Then we must have 
+            \begin{equation*}
+                x = \sum_{i = 1}^{m} (\varphi_{i} \circ \psi_{i})(x)
+            \end{equation*}
+        But computing this sum using $\psi_{1}x = 0, \ldots, \psi_{m}x = 0$, we get that $x = 0$. Now to prove surjectivity, suppose we desired a mapping
+            \begin{equation*}
+                x \mapsto (y_{1}, \ldots, y_{m})
+            \end{equation*}
+        Then consider $x = \varphi_{1}y_{1} + \ldots + \varphi_{m}y_{m}$. Then we have:
+            \begin{align*}
+                \psi_{1}x &=      \psi_{1}\varphi_{1}y_{1} = y_{1} \\
+                          &\vdots                                  \\
+                \psi_{m}x &=      \psi_{m}\varphi_{m}y_{m} = y_{m}   
+            \end{align*}
+        So we are done. Now we just need to show that the other mapping is an inverse, because the inverse of an isomorphism is an isomorphism. We have
+            \begin{align*}
+                x                              &\mapsto  (\psi_{1}x, \ldots, \psi_{m}x)                       \\
+                (\psi_{1}x, \ldots, \psi_{m}x) &\mapsto  \varphi_{1}\psi_{1}x + \ldots + \varphi_{m}\psi_{m}x \\
+                                               &=        \sum_{i = 1}^{m} (\varphi_{i} \circ \psi_{i})(x) = x   
+            \end{align*}
+        So the mapping
+            \begin{equation*}
+                (x_{1}, \ldots, x_{m}) \mapsto \varphi_{1}x_{1} + \ldots + \varphi_{m}x_{m}
+            \end{equation*}
+        was indeed an inverse and therefore also an isomorphism.
+    \end{proof}
+
+Conversely, if $E$ is equal to the direct product (or direct sum) of submodules $E_{i}(i = 1, \ldots, m)$, if we let $\varphi_{i}$ be the inclusion of $E_{i}$ in $E$, and $\psi_{i}$ the projection of $E$ on $E_{i}$, then these maps satisfy the above-mentioned properties.
+    \begin{proof}
+        Suppose that we had an isomorphism. So there are inverse from $\varphi : E \rightarrow \bigoplus E_{i}$ and $\psi : \bigoplus E_{i} \rightarrow E$ such that $\varphi\circ\psi = \text{id}$. Now define $\varphi$ as
+            \begin{equation*}
+                \varphi(x) = (\varphi_{1}x, \ldots, \varphi_{n}x)
+            \end{equation*}
+        and $\psi$ as
+            \begin{align*}
+                \psi&: E_{i} \rightarrow E \\
+                \psi&:= e_{i} \mapsto \psi(e_{i})
+            \end{align*}
+        Then action of $\varphi$:
+            \begin{equation*}
+                \varphi(e_{1}) = (\varphi_{1}e_{1}, 0, \ldots, 0)
+            \end{equation*}
+        Then we have the action of $\psi:$
+            \begin{equation*}
+                (\varphi_{1}e_{1}, 0, \ldots, 0) \mapsto \psi_{1}\varphi_{1}e_{1} = e_{1}
+            \end{equation*}
+        Since $\varphi$ and $\psi$ are inverses, we conclude that $\psi_{1}\varphi_{1} = \text{id}$. We can generalize this for any $i$. In the previous proof, we also concluded that $\varphi \circ \psi = \sum_{i = 1}^{m} \varphi_{i} \circ \psi_{i}$. Since it is an isomorphism, we have that $\sum_{i = 1}^{m} \varphi_{i} \circ \psi_{i} = \text{id}$. Now with the first condition we proved and this condition, we have
+            \begin{equation*}
+                \psi_{1} \sum_{i = 1}^{m}  \varphi_{i} \circ \psi_{i} = \text{id}
+            \end{equation*}
+        so we can prove that for each $i \neq j$, $\psi_{i} \circ \varphi_{j} = 0$.
+    \end{proof}
+
+\textbf{Exercise 2}: Let $R$ be a principal ideal domain, and let $M$ be a finitely generated $R$-module. Show that $\text{Hom}_{R}(M, R)$ is a free $R$-module.
+    \begin{proof}
+        We will show that $\text{Hom}_{R}(M, R) = \bigoplus \text{Hom}_{R}((f_{i}), R)$ for a certain set of generators $f_{i}$ of $R$. Let $f_{1}, \ldots, f_{m}$ be the set of generators of $M$. Let $f_{1}, \ldots, f_{n}$ be the maximal set of independent generators of $M$, which we can see, is non-empty. Then we have:
+            \begin{equation*}
+                a_{1}f_{1} + \ldots + a_{n}f_{n} = 0
+            \end{equation*}
+        implies that all $a_{i}f_{i}$ are $0$. Since the set is maximal, suppose that $f_{r} \notin f_{1}, \ldots, f_{n}$. Then
+            \begin{equation*}
+                af_{r} + a_{1}f_{1} + \ldots + a_{n}f_{n} = 0
+            \end{equation*}
+        means that at least two terms are nonzero. We note that $af_{r} \neq 0$, otherwise, $f_{r}$ belongs in the set of independent elements. So we can therefore write $af_{r}$ as a combination of the other generators. Suppose that we had some homomorphism in $\text{Hom}_{R}((f_{r}), R)$ determined by:
+            \begin{equation*}
+                \varphi:= \varphi(f_{r}) \mapsto m
+            \end{equation*}
+        To show surjectivity, we must show that we can add homomorphisms from $\text{Hom}_{R}((f_{1}), R), \ldots, \text{Hom}_{R}((f_{n}), R)$ to obtain $\varphi$ shown above. Notice that we can simply map:
+            \begin{equation*}
+                \psi(af_{r}) = am
+            \end{equation*}
+        We have
+            \begin{equation*}
+                \psi(af_{r}) = a\psi(f_{r}) = am
+            \end{equation*}
+        Therefore,
+            \begin{equation*}
+                \psi(f_{r}) \mapsto m
+            \end{equation*}
+        Since this is a module homomorphism, and that $af_{r}$ can be written as a combination of the other generators, then the homomorphism action on the generators $f_{1}, \ldots, f_{n}$ also determine the homomorphism action on the generators $f_{r}$ for $f_{r} \notin f_{1}, \ldots, f_{n}$.
+
+        So $\text{Hom}_{R}(M, R) = \text{Hom}_{R}((f_{1}, R)) + \ldots + \text{Hom}_{R}((f_{n}, R))$. The sum is direct because the intersection of any two $\text{Hom}_{R}((f_{i}), R)$ and $\text{Hom}_{R}((f_{j}), R)$ is $\{0\}$ since none of the generators are multiples of each other. So we are done.
+    \end{proof}
+
+\textbf{Exercise 3}: Let $R$ be a principal ideal domain, and let $M$ be a finitely generated $R$-module. If $0 \neq r \in R$, show that $\text{Hom}_{R}(R/(r), M) \cong M_{r}$, the set of elements of $M$ annihilated by $r$.
+    \begin{proof}
+        Suppose that we have a module homomorphism $\varphi \in \text{Hom}_{R}(R/(r), M)$. Then we consider what the multiplicative identity in $R$ gets mapped to:
+            \begin{equation*}
+                \varphi(1) = m \in M
+            \end{equation*}
+        Note that because this is a module homomorphism, we have:
+            \begin{equation*}
+                r\varphi(1) = \varphi(r) = 0 = rm
+            \end{equation*}
+        Then it must be that $m \in M_{r}$. So every homomorphism is determined uniquely by what the identity in $R$ maps to in $M_{r}$. So we have a bijection between these sets. Let $\varphi_{m_{1}}$ be the notation for the homomorphism $\varphi \in \text{Hom}_{R}(R/(r), M)$ which sends the identity in $R/(r)$ to $m_{1} \in M_{r}$. Consider the mappings:
+            \begin{align*}
+                \pi &: \text{Hom}_{R}(R/(r), M) \rightarrow M_{r} \\
+                \pi &:= \varphi_{m_{1}} \mapsto m_{1}
+            \end{align*}
+        To prove this is a homomorphism:
+            \begin{align*}
+                \pi(\varphi_{m_{1}}\varphi_{m_{2}}) &= \pi(\varphi_{m_{1}m_{2}})                \\
+                                                    &= m_{1}m_{2}                               \\
+                                                    &= \pi(\varphi_{m_{1}})\pi(\varphi_{m_{2}})   
+            \end{align*}
+        and for the additive part:
+            \begin{align*}
+                \pi(\varphi_{m_{1}} + \varphi_{m_{2}}) &= \pi(\varphi_{m_{1} + m_{2}})                \\
+                                                       &= m_{1} + m_{2}                               \\
+                                                       &= \pi(\varphi_{m_{1}}) + \pi(\varphi_{m_{2}})   
+            \end{align*}
+        And as a module homomorphism:
+            \begin{align*}
+                \pi(a\varphi_{m_{1}}) &= \pi(\varphi_{am_{1}}) \\
+                                      &= am_{1}                \\
+                                      &= a\pi(\varphi_{m_{1}})   
+            \end{align*}
+        Since it is a module homomorphism and a bijection, it is an isomorphism.
+    \end{proof}
+
+\textbf{Exercise 4}: Let $R$ be an integral domain (Lang: entire ring), and let
+    \begin{equation*}
+        Q := \{(r, s) \in R^{2} : s \neq 0\}/\sim 
+    \end{equation*}
+where $\sim $ is the equivalence relation $(r, s) \sim (u, v)$ if $rv = su$. Show that the map $R \rightarrow Q: r \mapsto (r, 1)$ is a monomorphism (that is, a homomorphism of rings that is one-to-one as a map of sets), and that $Q$ is a field. The field $Q$ is called the quotient field of $R$.
+    \begin{proof}
+        We first show that $Q$ is a ring. Define addition to be such that:
+            \begin{equation*}
+                (r, s) + (t, v) = (rv + st, sv) 
+            \end{equation*}
+        and multiplication to be:
+            \begin{equation*}
+                (r, s)(t, v) = (rt, sv)
+            \end{equation*}
+        Then the additive identity is $(0, m)$, because $(0, m) + (r, s) = (r, s) + (0, m) = (rm, sm) = (r, s)$. The inverse of an element $(r, s)$ is then $(-r, s)$, and the addition commutes from the fact that $R$ is commutative. The multiplicative identity is $(1, 1)$ since $(r, s)(1, 1) = (r, s)$. We have both closure under addition and multiplication, so we have a ring. Now define the mapping in the question $R \rightarrow Q : r \mapsto (r, 1)$ to be $\varphi$. This is a homomorphism because:
+            \begin{equation*}
+                \varphi(rs) = (rs, 1) = (r, 1)(s, 1) = \varphi(r)\varphi(s)
+            \end{equation*}
+        and 
+            \begin{equation*}
+                \varphi(r + s) = (r + s, 1) = (r, 1) + (s, 1) = \varphi(r) + \varphi(s)
+            \end{equation*}
+        and to check injectivity, suppose $\varphi(r_{1}) = \varphi(r_{2})$. Then $(r_{1}, 1) = (r_{2}, 1)$. By the equivalence relation, it follows that $r_{1} \cdot 1 = r_{2} \cdot 1$ so $r_{1} = r_{2}$. So $\varphi$ is a monomorphism. $Q$ is a field because the multiplicative inverse an element $(r, s) \in Q$ is $(s, r)$ as:
+            \begin{equation*}
+                (r, s)(s, r) = (1, 1)
+            \end{equation*}
+        This completes the proof.
+    \end{proof}
+
+\textbf{Exercise 5}: Let $R$ be a principal ideal domain, let $M$ be a finitely generated torsion $R$-module, and let $Q$ be the quotient field of $R$. Show that $\text{Hom}_{R}(M, Q) = 0$.
+    \begin{proof}
+        Suppose that $\varphi \in \text{Hom}_{R}(M, Q)$. Then for an arbitrary $m \in M$, we have:
+            \begin{equation*}
+                \varphi(m) = q
+            \end{equation*}
+        for some $q \in Q$. Because $\varphi$ is a module homomorphism, we have for some $r \neq 0$, $rm = 0$:
+            \begin{equation*}
+                r\varphi(m) = \varphi(rm) = 0 = rq
+            \end{equation*}
+        But $Q$ is an integral domain, therefore, $q = 0$ which means that the only homomorphism of $\text{Hom}_{R}(M, Q)$ is the $0$ map. So $\text{Hom}_{R}(M, Q) = 0$.
+    \end{proof}
+
+\textbf{Exercise 6}: Let $R$ be a principal ideal domain, let $M$ be a finitely generated $R$-module, and let $Q$ be the quotient field of $R$. Show that $\text{Hom}_{R}(M, Q) \cong \text{Hom}_{R}(M/M_{\text{tors}}, Q)$. (Hint: Start with the result of the previous problem, which is a special case).
+    \begin{proof}
+        By a theorem in the book, $M$ is isomorphic to the direct sum of its torsion submodule and free module:
+            \begin{equation*}
+                M \cong M_{\text{tors}} \oplus M/M_{\text{tors}}
+            \end{equation*}
+        So now let $\varphi \in \text{Hom}_{R}(M, Q)$ and let $x \in M$ such that $x = x_{\text{tors}} + f$. So we have:
+            \begin{equation*}
+                \varphi(x) = \varphi(x_{\text{tors}}) + \varphi(f)
+            \end{equation*}
+        But $\varphi(x_{\text{tors}}) = 0$ by the previous part. So the homomorphisms of $\text{Hom}_{R}(M, Q)$ are exactly the ones in $\text{Hom}_{R}(M/M_{\text{tors}}, Q)$.
+    \end{proof}
+
+\textbf{Exercise 7}: Let $\mathbb{R}$ be a field of real numbers, and let $A$ be a $4 \times 4$ matrix with real entries and minimal polynomial $(x^{2} + a)^{2}$, where $a$ is a positive number. Use the structure theorem for modules of $\mathbb{R}[x]$ to produce the $\mathbb{R}-$canonical form for $A$. (The answer should be a $4 \times 4$ matrix with real entries similar to $A$).
+    \begin{proof}
+        We can define $A : V \rightarrow V$ where $V$ is a vector space over $\mathbb{R}$. Consider the module structure of the modules $A$ with minimal polynomial $(x^{2} + a)^{2}$ on $\mathbb{R}[x]$ by the action of $x$ as $A$:
+            \begin{equation*}
+                x \cdot v = Av
+            \end{equation*}
+        So we have a module over a PID. Then $M$ is a torsion module that can be decomposed with respect to some basis. We have
+            \begin{equation*}
+                M = M(p)
+            \end{equation*}
+        for $p = (x^{2} + a)$ and so:
+            \begin{equation*}
+                M = \mathbb{R}[x]/(p) \oplus \mathbb{R}[x]/(p^{2})
+            \end{equation*}
+        The first summand has elements of degree $1$ and $0$ and the second has degree $\leq 3$. So maybe:
+        \begin{equation*}
+            1, x, (x^{2} + a), x(x^{2} + a)
+        \end{equation*}
+    So since action of $A$ is determined by multiplication by $x$, we look at the basis elements times $x$ to get:
+            \begin{equation*}
+                \begin{bmatrix}
+                    0 & -a & 0 & 0 \\
+                    1 & 0  & 0 & 0  \\
+                    0 & 1  & 0 & -a  \\
+                    0 & 0  & 1 & 0    
+                \end{bmatrix}
+            \end{equation*}
+        which is the canonical form?
+    \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

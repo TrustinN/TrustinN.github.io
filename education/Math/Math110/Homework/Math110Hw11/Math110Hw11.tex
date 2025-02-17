@@ -1,0 +1,119 @@
+%! TeX root: /Users/trustinnguyen/Downloads/1st Year Math/Tex/Math110Hw10.tex
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/MyStyle/mystyle}
+
+\title{Math110Hw11}
+\author{Trustin Nguyen}
+\begin{document}
+
+\maketitle
+
+\section*{Math110Hw11}
+\hrule
+\textbf{Exercise 1}: Let $T \in \mathcal{L}(V, W)$. Prove 
+\begin{enumerate}
+	\item $T$ is injective if and only if $T^{*}$ is sujective;
+		\begin{proof}
+			$(\rightarrow)$ Using the proof that was shown in class, we have that $\ker(T) = (\Im{T^{*}})^{\perp}$. This tells us that if $T$ is injective of that $\ker{T} = \{0\}$, then that means that $\Im{T^{*}}^{\perp} = \{0\}$. Additionally, the set $\{0\}$ is a subspace so therefore, $\Im{T^{*}} = V$. So $T^{*}$ is surjective.
+
+			$(\leftarrow)$ For the other direction, we can argue backwards since it was a string of equalities.
+		\end{proof}
+	\item $T^{*}$ is injective if and only if $T$ is surjective. 
+		\begin{proof}
+			$(\rightarrow)$ Suppose that $T^{*}$ is injective. That means that $\ker{T^{*}} = \{0\}$ and using the fact that $\ker{T^{*}} = (\Im{T})^{\perp}$, we can conclude that $(\Im{T})^{\perp} = \{0\}$. Since $\{0\}$ is a subspace, we can conclude that the orthogonal complement of $(\Im{T})^{\perp}$ is $W$. By the fact that $\Im{T}^{\perp}$ and $\Im{T}$ form a direct sum to $W$. Therefore, $T$ is sujective.
+
+			$(\leftarrow)$ As before, we can argue backwards because we have used a string of if and only ifs/ equalities.
+		\end{proof}
+\end{enumerate}
+
+\textbf{Exercise 2}: Suppose $S, T \in \mathcal{L}(V)$ are self-adjoint. Prove that $ST$ is self-adjoint if and only if $ST = TS$.
+
+\begin{proof}
+	$(\rightarrow)$ Suppose that $ST$ is self-adjoint. Then we have that 
+	\begin{align*}
+		ST = (ST)^{*} = T^{*}S^{*} = TS
+	\end{align*}
+	which is what we wanted. 
+
+	$(\leftarrow)$ Suppose now that $ST = TS$. Then 
+	\begin{align*}
+		ST = S^{*}T^{*} = (TS)^{*} = (ST)^{*}
+	\end{align*}
+	which is what we wanted.
+\end{proof}
+
+\textbf{Exercise 3}: Let $P \in \mathcal{L}(V)$ be such that $P^{2} = P$. Prove that there is a subspace $U$ of $V$ such
+that $P_{U} = P$ if and only if $P$ is self-adjoint. 
+
+\begin{proof}
+	$(\rightarrow)$ Since we know that $P_{U} = P$ we can consider the matrix representation of this projection with respect to basis vectors of $U$ and that of $V$. Let $\{u_{1}, \ldots, u_{n}, v_{1}, \ldots, v_{n}\}$ be a orthogonal basis. We can do this by taking a basis of $U$ and orthogonalizing with with respect to som inner product, then for the basis vectors corresponding to v, we do the same but by using Gram-schmidt on the basis for $U$ we now have. Notice that the projection matrix maps the $u$ basis vectors to itself, because $u$ is orthogonal to all other vectors except for itself within the subspace $U$. For the $v$ basis vectors, the projection maps these to 0 because these are orthogonal to the subspace $U$. So our matrix ends up looking like 
+	\begin{align*}
+		P_{U} = \begin{bmatrix}
+			1 & 0 & \ldots & 0 & 0 & 0 & \ldots & 0 \\
+			0 & 1 & \ldots & 0 & 0 & 0 & \ldots & 0 \\ 
+			\vdots & \vdots & \ddots & 0 & 0 & 0 & \ldots & 0 \\ 
+			0 & 0 & 0 & 1 & 0 & 0 & \ldots & 0 \\
+			0 & 0 & 0 & 0 & 0 & 0 & \ldots & 0 \\
+			0 & 0 & 0 & 0 & 0 & 0 & \ldots & 0 \\
+			\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & 0 \\
+			0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 
+		\end{bmatrix}
+	\end{align*}
+	which is certainly diagonal. Therefore, when we take the conjugate transpose, we get the $T^{*}$ matrix representation which is definately the same as $T$, as it is a symmetric matrix. So $T = T^{*}$. 
+
+	$(\leftarrow)$ For the other direction, we use the fact that $P^{2} = P$ and that $P^{*} = P$. By computation, observe that for arbitrary vectors $v_{1}, v_{2}$,
+	\begin{align*}
+		\brac{Pv_{1}, P^{*}v_{2}} = \brac{v_{1}, P^{2*}v_{2}} = \brac{v_{1}, P^{*}v_{2}}
+	\end{align*}
+	Which tells us that $P$ is an orthogonal projection onto the range of $P^{*}$. We can easily verify the range to be a subspace of $V$ because of the linearity of $P^{*}$.
+\end{proof}
+
+\textbf{Exercise 4}: Let $n \in \mathbb{N}$ be fixed. Consider the real space 
+\begin{equation*}
+	V:= \Span\{1, \cos{x}, \sin{x, \cos{2x},\sin{2x}, \ldots, \cos{nx}, \sin{nx}}\} 
+\end{equation*}
+with inner product
+\begin{equation*}
+	\brac{f,g} := \int_{-\pi}^{\pi}f(x)g(x) \,\dd{x}.
+\end{equation*}
+Show that the differentiation operator $D \in \mathcal{L}(V)$ is \textit{anti-Hermitian}, i.e., satisties $D^{*} = -D$.
+
+\begin{proof}
+	We have shown before that this is a basis. Furthermore, in class, it was shown that the matrix representation of any linear operator $T \in \mathcal{L}(V)$ has its entries as the conjugate transpose of the operator $T^{*}$. We can use this. Consider the matrix representation of $D$. We can infer what it looks like based on its action on the basis. Take an arbitrary $\cos{kx}$ and observe that this is the $2k-th$ entry of the basis. The derivative of this is $-k\sin{kx}$ and note that $\sin{kn}$ is the $2k + 1-th$ element of the basis. This tells us that $-k$ lies in the $2k + 1$ row and $2k-th$ column. Also note that no other entries lie in this specific column. We do the same for $\sin{kx}$ with derivative $k\cos{kx}$ which tells us that $k$ lies in the $2k-th$ row and $2k + 1-th$ column. All other entries in this column are also 0. We also note that there is only one nonzero entry per row because if we have two, take $a, b$ corresponding to $\cos{kx}$ wlog, we get that 
+	\begin{align*}
+		\int{a\cos{kx}} \, \dd{x} = \dfrac{a}{k}\sin{kx} \\
+		\int{b\cos{kx}} \, \dd{x} = \dfrac{b}{k}\sin{kx}
+	\end{align*}
+which tells us that the basis vectors are linearly dependent, which is impossible. We have shown that the non-zero entries, when transposed and multiplied by negative 1 will remain the same. Now the rest is 0 as we have just proved. So the operator is \textit{anti-Hermitian}. (*) The conjugate requirement is left out because we are in a real space. 
+\end{proof}
+
+\textbf{Exercise 5}: Let $T$ be a normal operator on $V$. Evaluate $\norm{T(v - w)}$ given that 
+\begin{align*}
+	Tv = iv, \hspace{30pt} Tw = (3 + i)w, \hspace{30pt} \norm{v} = \norm{w} = 1.  
+\end{align*}
+
+\begin{proof}
+	We first evaluate as much as we can: 
+	\begin{gather*}
+		\norm{T(v - w)} = \norm{Tv - Tw)} = \sqrt{\brac{Tv - Tw, Tv - Tw}} \\
+		\brac{Tv, Tv} - \brac{Tw, Tv} - \brac{Tv, Tw} + \brac{Tw, Tw} \\
+		\brac{iv, iv} - \brac{Tw, Tv} - \brac{Tv, Tw} + \brac{(3 + i)w, (3 + i)w} \\
+		1 - \brac{Tw, Tv} - \brac{Tv, Tw} + 10 \\
+		11 - \brac{Tw, Tv} - \brac{Tv, Tw}
+	\end{gather*}
+	but now we rewrite the cross terms and observe what happens between $w, v$:
+	\begin{gather*}
+		11 - (3 + i)(-i)\brac{w, v} - (i)(3 - i)\brac{Tv, Tw} 
+	\end{gather*}
+	But notice that $v, w$ are eigenvectors of $T$ which is a normal operator, so as they correspond to different eigenvalues, the vectors are orthogonal. The cross terms become 0. Therefore, the norm is $\sqrt{11}$.
+\end{proof}
+\textbf{Exercise 6}: Suppose $T$ is normal. Prove that, for any $\lambda \in \mathbb{F}$ and any $k \in \mathbb{N}$,
+\begin{equation*}
+	\ker{(T - \lambda I)^{k}} = \ker{(T - \lambda I)}
+\end{equation*}
+\begin{proof}
+
+\end{proof}
+
+$\right\lVert$
+\end{document}

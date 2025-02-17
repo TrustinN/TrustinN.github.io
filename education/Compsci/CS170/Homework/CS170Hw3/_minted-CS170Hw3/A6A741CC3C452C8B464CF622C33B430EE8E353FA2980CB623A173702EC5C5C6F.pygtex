@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+        function POSTVISIT(u, v)
+            L[u] = max(L[u], max(L[v], M[v]))
+\end{Verbatim}

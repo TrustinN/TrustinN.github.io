@@ -1,0 +1,173 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Stat134/Homework/Stat134Hw8/Stat134Hw8.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Stat134Hw8}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Professor Smith gives his lectures in T-shirts of three colors: gray, red, and blue. For each lecture (independently of others), he chooses gray with probability $0.5$, red with probability $0.3$, and blue with probability $0.2$. There are $9$ lectures in April.
+    \begin{itemize}
+        \item [(a)] What is the probability that he wears T-shirts of each color three times in April?
+            \begin{answer}
+                We can represent this event as $(0.5x + 0.3y + 0.2z)^{9}$. Then the probability is given by the coefficient of $x^{3}y^{3}z^{3}$. This is 
+                    \begin{align*}
+                        \dbinom{9}{3, 3, 3}(0.5)^{3}(0.3)^{3}(0.2)^{3} &= \dfrac{9!}{3!3!3!}(0.125)(0.027)(0.008) \\
+                        &= 7!(0.125)(0.027)(0.008) = 0.13608
+                    \end{align*}
+            \end{answer}
+
+        \item [(b)] What is the probability that he wears a gray T-shirt exactly $8$ times in April?
+            \begin{answer}
+                This turns into a binomial dist, with gray being $0.5$, and not gray as $0.5$. So the probability is
+                    \begin{equation*}
+                        \dbinom{9}{8}(0.5)^{8} = 9 * (0.5)^{8}
+                    \end{equation*}
+            \end{answer}
+    \end{itemize}
+
+\newpage
+
+\textbf{Exercise 2}: $(X, Y)$ is a uniformly random point inside the triangle with vertices $(0, 0), (2, 0), (0, 1)$.
+    \begin{itemize}
+        \item [(a)] Find the marginal probability density functions for $X$ and $Y$.
+            \begin{answer}
+                The area under the triangle is $1$. So for the pdf of $X$, we take the hypotenuse line as the function:
+                    \begin{equation*}
+                        p_{X}(x) = \begin{cases}
+                            1 - \dfrac{1}{2}x &\text{ if } 0 \leq x \leq 2 \\
+                            0 &\text{ if } otherwise           
+                        \end{cases}
+                    \end{equation*}
+                And do the same for $Y$:
+                    \begin{equation*}
+                        p_{Y}(y) = \begin{cases}
+                            2 - 2y    &\text{ if } 0 \leq y \leq 1 \\
+                            0 &\text{ if } otherwise   
+                        \end{cases}
+                    \end{equation*}
+            \end{answer}
+
+        \item [(b)] Are $X$ and $Y$ independent? 
+            \begin{answer}
+                No since if $x = 0$, $y = 1$. This means that $P(X = 0, Y \neq 1) = 0 \neq P(X = 0) \cdot P(Y \neq 1)$
+            \end{answer}
+    \end{itemize}
+
+\newpage
+
+\textbf{Exercise 3}: For $(X, Y)$ from Problem $2$, compute $\mathbb{E}[XY]$.
+    \begin{answer}
+        By definition, we need to compute:
+            \begin{equation*}
+                \int_{0}^{1} \int_{0}^{2 - 2y} xyp_{X}(x)p_{Y}(y) \, \dd{x}  \, \dd{y} 
+            \end{equation*}
+        We have:
+            \begin{align*}
+                \int_{0}^{1} \int_{0}^{2 - 2y} xy(1 - x/2)(2 - 2y) \, \dd{x}  \, \dd{y} &= \int_{0}^{1} \int_{0}^{2 - 2y} xy(2 - x - 2y + xy) \, \dd{x}  \, \dd{y}  \\
+                &= \int_{0}^{1} \int_{0}^{2 - 2y} 2xy - x^{2}y - 2xy^{2} + x^{2}y^{2} \, \dd{x}  \, \dd{y}  \\
+                &= \int_{0}^{1} (x^{2}y - \dfrac{x^{3}y}{3} - x^{2}y^{2} + \dfrac{x^{3}y^{2}}{3})\eval_{0}^{2 - 2y} \, \dd{y} \\
+                &= \int_{0}^{1} (2 - 2y)^{2}y - (2 - 2y)^{3}\dfrac{y}{3} - (2 - 2y)^{2}y^{2} + (2 - 2y)^{3}\dfrac{y^{2}}{3} \, \dd{y} \\
+                &= \dfrac{1}{9}
+            \end{align*}
+    \end{answer}
+
+\newpage
+
+\textbf{Exercise 4}: Suppose that $X$ and $Y$ are jointly continuous with probability density function 
+    \begin{equation*}
+        f(x, y) = \begin{cases}
+            6e^{-(2x + 3y)} &\text{ if } x > 0, y > 0 \\
+            0 &\text{ if }  otherwise        
+        \end{cases}
+    \end{equation*}
+Are $X$ and $Y$ independent?
+    \begin{answer}
+        We first get the marginal distributions of $X$ and $Y$ by integrating along the other variables:
+            \begin{align*}
+                p_{X}(x) &= \int_{-\infty}^{\infty} 6e^{-(2x + 3y)} \, \dd{y} \\
+                &= \int_{0}^{\infty} 6e^{-(2x + 3y)} \, \dd{y} \\
+                &= \left(-2e^{-(2x + 3y)}\right)\eval_{0}^{\infty} \\
+                &= 0 - (-2e^{-(2x)}) = 2e^{-2x}
+            \end{align*}
+        and for the other:
+            \begin{align*}
+                p_{Y}(y) &= \int_{-\infty}^{\infty} 6e^{-(2x + 3y)} \, \dd{x}  \\
+                         &= \int_{0}^{\infty} 6e^{-(2x + 3y)} \, \dd{x}        \\
+                         &= \left(-3e^{-(2x + 3y)}\right)\eval_{0}^{\infty}    \\
+                         &= 0 - (-3e^{-(3y)}) = 3e^{-3y}                         
+            \end{align*}
+        Now we check that the product gives us the pdf. For $x > 0, y > 0$:
+            \begin{equation*}
+                p_{X}(x) \cdot p_{Y}(y) = 2e^{-2x} \cdot 3e^{-3y} = 6e^{-2x - 3y} = f(x, y)
+            \end{equation*}
+        For when $x \leq 0$ or $y \leq 0$, we still get $p_{X}(x) \cdot p_{Y}(y) = 0 = f(x, y)$. So indeed, the variables are independent.
+    \end{answer}
+
+\newpage
+
+\textbf{Exercise 5}: We celebrate the solar eclipse on April $8$ by establishing a remarkable fact about spheres, known already to Archimedes. We let a random vector $(X, Y, Z)$ be uniformly distributed on the unit sphere in $\mathbb{R}^{3}$. Equivalently, denoting $S$ to the sphere, $S = \{(x, y, z) \in \mathbb{R}^{3} : x^{2} + y^{2} + z^{2} = 1\}$, the distribution of $(X, Y, Z)$ is given by setting
+    \begin{equation*}
+        P((X, Y, Z) \in A) = \dfrac{Area(A)}{Area(S)}, \, A \subseteq S
+    \end{equation*}
+    \begin{itemize}
+        \item [(a)] For each $t$, compute the area of the subset of $S$ given by
+            \begin{equation*}
+                \{(x, y, z) \in \mathbb{R}^{3} : x \leq t, x^{2} + y^{2} + z^{2} = 1\}.
+            \end{equation*}
+            \textbf{Hint}: You can use without a proof the following fact from multivariate calculus: If a surface in three-dimensional space is obtained by revolving the graph of function $y = f(x), a \leq x \leq b$, around the $x$-axis, then its area is computed as 
+                \begin{equation*}
+                    2\pi \int_{a}^{b} f(x)\sqrt{1 + (f^{\prime}(x))^{2}} \, \dd{x} .
+                \end{equation*}
+            \begin{answer}
+                We want to revolved a function $y  = f(x )$ around the $x$-axis, so first, set $z = 0$:
+                    \begin{equation*}
+                        x^{2} + y^{2} = 1
+                    \end{equation*}
+                Now, we know that $-1 \leq x \leq t$, so we just plug in $f(x) = \sqrt{1 - x^{2}}$, $f^{\prime}(x) = \frac{1}{2}(-2x)(1 - x^{2})^{-1/2} = \frac{-x}{\sqrt{1 - x^{2}}}$:
+                    \begin{align*}
+                        2\pi \int_{-1}^{t} \sqrt{1 - x^{2}}\sqrt{1 + (f^{\prime}(x))^{2}} \, \dd{x} &= 2\pi \int_{-1}^{t} \sqrt{1 - x^{2}}\sqrt{1 + \left(\dfrac{x^{2}}{1 - x^{2}}\right)} \, \dd{x}  \\
+                        &= 2\pi \int_{-1}^{t} \sqrt{1 - x^{2}}\sqrt{\dfrac{1}{1 - x^{2}}} \, \dd{x}  \\
+                        &= 2\pi \int_{-1}^{t} 1 \, \dd{x} \\
+                        &= 2\pi (t + 1)
+                    \end{align*}
+            \end{answer}
+
+        \item [(b)] Use $(a)$ to compute the CDF of $X$ and show that the marginal distribution of $X$ is uniform, i.e. $X \sim Uniform[-1, 1]$
+            \begin{answer}
+                We know that $P((X, Y, Z) \in A)$ is the area of $A$ over $S$. So we compute the area of $S$ by setting $t = 1$. We get 
+                    \begin{equation*}
+                        SurfaceArea(S) = 2\pi(2) = 4\pi 
+                    \end{equation*}
+                Now the CDF for $-1 \leq x \leq 1$:
+                    \begin{equation*}
+                        \dfrac{2\pi(t + 1)}{4\pi} = \dfrac{t + 1}{2}
+                    \end{equation*}
+                To get the pdf, take the derivative:
+                    \begin{equation*}
+                        \dfrac{1}{2}
+                    \end{equation*}
+                which shows that $x$ is uniformly distributed between $-1, 1$.
+            \end{answer}
+    \end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

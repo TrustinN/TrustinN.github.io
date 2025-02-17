@@ -1,0 +1,287 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math128a/Homework/Math128Hw2/Math128Hw2.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math128aHw2}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\section*{Exercise Set 2.2}
+\hrule
+
+\textbf{Exercise 1}: Use algebraic manipulation to show that each of the following functions has a fixed point at $p$ precisely when $f(p) = 0$, where $f(x) = x^{4} + 2x^{2} - x - 3$.
+    \begin{itemize}
+        \item [c.] $g_{3}(x) = \left(\frac{x + 3}{x^{2} + 2}\right)^{1/2}$.
+            \begin{answer}
+                If $f(p) = 0$, then
+                    \begin{equation*}
+                        0 = p^{4} + 2p^{2} - p - 3 \implies p + 3 = p^{4} + 2p^{2}
+                    \end{equation*}
+                Then
+                    \begin{equation*}
+                        g(p) = \left(\dfrac{p + 3}{p^{2} + 2}\right)^{1/2} = \left(\dfrac{p^{4} + 2p^{2}}{p^{2} + 2}\right)^{1/2} = (p^{2})^{1/2} = p
+                    \end{equation*}
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 8}: Use a fixed-point iteration method to determine a solution accurate to within $10^{-2}$ for $x^{3} - x - 1 = 0$ on $[1, 2]$. Use $p_{0} = 1$
+    \begin{answer}
+        We first have 
+            \begin{equation*}
+                g(x) = x + hf(x)
+            \end{equation*}
+        and require the two conditions:
+            \begin{align*}
+                g(x)                        &\in                                 [1, 2] \text{ if } x \in [1, 2] \\
+                \lvert g^{\prime}(x) \rvert &\leq k < 1 \text{ if } x \in [1, 2]                                   
+            \end{align*}
+        We first see if $g(x)$ has achieves a max or min in $(1, 2)$:
+            \begin{equation*}
+                g^{\prime}(x) = 3hx^{2} - h + 1
+            \end{equation*}
+        and solving for the roots:
+            \begin{align*}
+                3hx^{2} &= h - 1                    \\
+                x^{2}   &= \dfrac{h - 1}{3h}        \\
+                x       &= \sqrt{\dfrac{h - 1}{3h}}   
+            \end{align*}
+        We will show that $h - 1 < 0$ and therefore, no minimum or maximum is achieved in the interval $(1, 2)$. We have that 
+            \begin{align*}
+                g(1) &= 1 - h  \\
+                g(2) &= 5h + 2   
+            \end{align*}
+        Since $g(c) \in [1, 2]$, we can solve inequalities to get: $\frac{-1}{5} \leq h \leq 0$. So $h - 1 < 0$. The derivative $3hx^{2} - h + 1$ is strictly decreasing on the interval $[1, 2]$. So we need to check that the endpoints are $\leq k < 1$:
+            \begin{align*}
+                g^{\prime}(1) &= 2h + 1  \\
+                g^{\prime}(2) &= 11h + 1   
+            \end{align*}
+        Let $h = \frac{-1}{10}$. Then clearly, the second condition for fixed point iteration to converge is satisfied. Here is the code:
+            \inputminted{matlab}{fixed_point/myfunc1.m}
+            \inputminted{matlab}{fixed_point/fixed_point.m}
+            \inputminted{matlab}{fixed_point/script.m}
+        and the answer is $1.3225067925568798621327459841268$.
+    \end{answer}
+
+\textbf{Exercise 19}: Let $g \in C^{1}[a, b]$ and $p$ be in $(a, b)$ with $g(p) = p$ and $\lvert g^{\prime}(p) \rvert > 1$. Show that there exists a $\delta > 0$ such that if $0 < \lvert p_{0} - p \rvert < \delta$, then $\lvert p_{0} - p\rvert < \lvert p_{1} - p \rvert$. Thus, no matter how close the initial approximation $p_{0}$ is to $p$, the next iterate $p_{1}$ is farther away, so that fixed-point iteration does not converge if $p_{0} \neq p$.
+    \begin{answer}
+        From $\lvert g^{\prime}(p) \rvert > 1$, we get:
+            \begin{align*}
+                \left\lvert \lim\limits_{x \to p} \dfrac{g(x) - g(p)}{x - p} \right\rvert    &= k > 1                                         \\
+                \lim\limits_{x \to p} \dfrac{\lvert g(x) - g(p) \rvert}{\lvert x - p \rvert} & = k > 1                                        
+            \end{align*}
+        This means that for any sequence $p_{n}$ that converges to $p$, we know that there exists an $N$ such that for all $n > N$, 
+            \begin{equation*}
+                \left\lvert \left\lvert \dfrac{g(x) - g(p)}{x - p} \right\rvert - k \right\rvert < \delta
+            \end{equation*}
+        for some $\delta > 0$. Therefore:
+            \begin{align*}
+                -\delta                         &< \left\lvert \left\lvert \dfrac{g(x) - g(p)}{x - p} \right\rvert - k \right\rvert < \delta \\
+                k - \delta                      &< \left\lvert \dfrac{g(x) - p}{x - p} \right\rvert < k + \delta                             \\
+                (k - \delta)\lvert x - p \rvert &< \lvert g(x) - p \rvert                                                                      
+            \end{align*}
+        If we choose $\delta$ such that $k - \delta > 1$, which is possible because $k > 1$, then we have that:
+            \begin{equation*}
+                \lvert x - p \rvert < \lvert g(x) - p \rvert
+            \end{equation*}
+        where $x = p_{n}$. So there is a $\varepsilon$ such that if $\lvert x - p \rvert < \varepsilon$, then $\lvert x - p \rvert < \lvert g(x) - p \rvert$, which completes the proof.
+    \end{answer}
+
+\textbf{Exercise 20}: Let $A$ be a given positive constant and $g(x) = 2x - Ax^{2}$.
+    \begin{itemize}
+        \item [a.] Show that if fixed-point iteration converges to a nonzero limit, then the limit is $p = 1 / A$, so the inverse of a number can be found using only multiplications and subtractions.
+            \begin{answer}
+                We see that if $f(x) = Ax^{2} - x$, then $g(x) = x - f(x)$. Since fixed point iteration converges:
+                    \begin{equation*}
+                        \lim\limits_{x \to p} g(x) = \lim\limits_{x \to p}x - f(x) = p - f(p) = g(p)
+                    \end{equation*}
+                But $g(p) = p$, so $f(p) = 0$. Then $Ap^{2} - p = 0, p(Ap - 1) = 0$. So $p = 0, \frac{1}{A}$. Since $g(p) \neq 0$ and therefore $p \neq 0$, $p = 1/A$.
+            \end{answer}
+
+        \item [b.] Find an interval about $1 / A$ for which fixed-point iteration converges, provided $p_{0}$ is in that interval. 
+            \begin{answer}
+                We first require that $\lvert g^{\prime}(x) \rvert \leq k < 1$ in the interval. Let us denote the interval as $[\frac{1}{A} - \delta, \frac{1}{A} + \delta]$. Then  
+                    \begin{align*}
+                        g^{\prime}(x)                                &= 2 - 2Ax   \\
+                        g^{\prime}\left(\dfrac{1}{A} - \delta\right) &= 2A\delta  \\
+                        g^{\prime}\left(\dfrac{1}{A} + \delta\right) &= -2A\delta   
+                    \end{align*}
+                Since $g^{\prime}$ is either strictly increasing or decreasing on the interval, we just require the endpoints to be bounded:
+                    \begin{align*}
+                        \lvert 2A\delta \rvert &\leq k < 1 \\
+                        \lvert \delta \rvert & \leq \dfrac{k}{2A}
+                    \end{align*}
+                Now we plug in $\delta = \frac{k}{2A}$ and require that $g(c) \in [\frac{1}{A} - \delta, \frac{1}{A} + \delta]$:
+                    \begin{align*}
+                        g\left(\dfrac{2 + k}{2A}\right) &= \dfrac{2 + k}{A} - \dfrac{4 + 4k + k^{2}}{4A} \\
+                                                        &= \dfrac{4 - k^{2}}{4A}                         \\
+                        g\left(\dfrac{2 - k}{2A}\right) &= \dfrac{2 - k}{A} - \dfrac{4 - 4k + k^{2}}{4A} \\
+                                                        &= \dfrac{4 - k^{2}}{4A}                           
+                    \end{align*}
+                $g$ achieves its max/min at the endpoints and $1/A$. At $1/A$, $g = 1/A$which is in the interval. Now for the endpoints:
+                    \begin{align*}
+                        \dfrac{2 - k}{2A} &\leq \dfrac{4 - k^{2}}{4A} \leq \dfrac{2 + k}{2A} \\
+                        4 - 2k            &\leq  4 - k^{2} \leq 4 + 2k                       \\
+                        2                 &\geq k \geq -2                                      
+                    \end{align*}
+                This means that $k$ can be anything in $(1, 0)$. We can let $k = \frac{1}{2}$, the interval for the iteration be $[\frac{3}{4A}, \frac{5}{4A}]$.
+
+            \end{answer}
+    \end{itemize}
+
+\newpage
+\section*{Exercise Set 2.3}
+\hrule
+
+\textbf{Exercise 6}: Use Newton's method to find solutions accurate to within $10^{-5}$ for the following problems.
+    \begin{itemize}
+        \item [c.] $2x\cos{2x} - (x - 2)^{2} = 0$ for $2 \leq x \leq 3$ and $3 \leq x \leq 4$.
+            \begin{answer}
+                Here is the matlab code:
+                \inputminted{matlab}{newton/newton.m}
+                \inputminted{matlab}{newton/myfunc1.m}
+                \inputminted{matlab}{newton/script1.m}
+                And this gives:
+                    \begin{align*}
+                        x_{1} &= 2.370687825747464 \\
+                        x_{2} &= 3.722112773106613
+                    \end{align*}
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 8}: Repeat Exercise $6$ using the Secant method.
+    \begin{answer}
+        Here is the matlab code:
+        \inputminted{matlab}{secant/secant.m}
+        \inputminted{matlab}{secant/myfunc1.m}
+        \inputminted{matlab}{secant/script.m}
+        And this gives:
+            \begin{align*}
+                x_{1} &= 2.370686187519918 \\
+                x_{2} &= 3.722113027769073   
+            \end{align*}
+    \end{answer}
+
+\textbf{Exercise 16}: The equation $x^{2} - 10 \cos{x} = 0$ has two solutions, $\pm 1.3793646$. Use Newton's method to approximate the solutions to within $10^{-5}$ with the following values of $p_{0}$.
+    \begin{itemize}
+        \item [a.] $p_{0} = -100$
+            \begin{answer}
+                \inputminted{matlab}{newton/myfunc2.m}
+                \inputminted{matlab}{newton/script2.m}
+                which gave:
+                    \begin{equation*}
+                        x = -1.379370269507622
+                    \end{equation*}
+            \end{answer}
+
+        \item [d.] $p_{0} = 25$
+            \begin{answer}
+                From the same part above, I got:
+                    \begin{equation*}
+                        x = -1.379368417659703
+                    \end{equation*}
+            \end{answer}
+    \end{itemize}
+
+\newpage
+\section*{Exercise Set 2.4}
+\hrule
+
+\textbf{Exercise 2}: Use Newton's method to find solutions accurate to within $10^{-5}$ for the following problems.
+    \begin{itemize}
+        \item [c.] $\sin{3x} + 3e^{-2x}\sin{x} - 3e^{-x}\sin{2x} - e^{-3x} = 0$, for $3 \leq x \leq 4$.
+            \begin{answer}
+                \inputminted{matlab}{newton/newton.m}
+                \inputminted{matlab}{newton/myfunc3.m}
+                \inputminted{matlab}{newton/script3.m}
+                which gave:
+                    \begin{equation*}
+                        x = 3.141567877980774
+                    \end{equation*}
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 8}: 
+    \begin{itemize}
+        \item [a.] Show that the sequence $p_{n} = 10^{-2^{n}}$ converges quadratically to $0$.
+            \begin{answer}
+                Since the limit is $0$, we must show that:
+                    \begin{equation*}
+                        \lim\limits_{n \to \infty} \left\lvert \dfrac{p_{n + 1}}{(p_{n})^{2}} \right\rvert = \lambda
+                    \end{equation*}
+                for $\lambda > 0$. Substitute:
+                    \begin{equation*}
+                        \lim\limits_{n \to \infty} \left\lvert \dfrac{10^{-2^{n + 1}}}{(10^{-2^{n}})^{2}} \right\rvert = \lim\limits_{n \to \infty} \left\lvert \dfrac{10^{-2^{n + 1}}}{10^{-2^{n + 1}}} \right\rvert = 1
+                    \end{equation*}
+                So the convergence is quadratic.
+            \end{answer}
+
+        \item [b.] Show that the sequence $p_{n} = 10^{-n^{k}}$ does not converge quadratically to $0$ regardless of the size of the exponent $k > 1$.
+            \begin{answer}
+                The setup:
+                    \begin{equation*}
+                        \lim\limits_{n \to \infty} \left\lvert \dfrac{10^{-(n + 1)^{k}}}{10^{-2 * n^{k}}} \right\rvert = \lim\limits_{n \to \infty} \left\lvert 10^{-(n + 1)^{k} + 2n^{k}} \right\rvert = \lim\limits_{n \to \infty}\lvert 10^{n^{k} + \ldots} \rvert
+                    \end{equation*}
+                which diverges. So it does not converge quadratically.
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 9}: 
+    \begin{itemize}
+        \item [a.] Construct a sequence that converges to $0$ of order $3$.
+            \begin{answer}
+                Taking inspiration from the previous question, let $p_{n} = 10^{-3^{n}}$. This converges to $0$. Also:
+                    \begin{equation*}
+                        \lim\limits_{n \to \infty} \left\lvert \dfrac{10^{-3^{n + 1}}}{(10^{-3^{n}})^{3}} \right\rvert = \lim\limits_{n \to \infty} \left\lvert \dfrac{10^{-3^{n + 1}}}{10^{-3^{n + 1}}} \right\rvert = 1
+                    \end{equation*}
+                    
+            \end{answer}
+
+        \item [b.] Suppose $\alpha > 1$. Construct a sequence that converges to $0$ of order $\alpha$.
+            \begin{answer}
+                We can generalize to $p_{n} = 10^{-\alpha^{n}}$
+                    \begin{equation*}
+                        \lim\limits_{n \to \infty} \left\lvert \dfrac{10^{-\alpha^{n + 1}}}{(10^{-\alpha^{n}})^{\alpha}} \right\rvert = \lim\limits_{n \to \infty} \left\lvert \dfrac{10^{-\alpha^{n + 1}}}{10^{-\alpha^{n + 1}}} \right\rvert = 1
+                    \end{equation*}
+            \end{answer}
+    \end{itemize}
+
+\newpage
+\textbf{Extra}:
+\begin{itemize}
+    \item The speed at which the sequence generated by an iterative method converges is called the methods ORDER of convergence. There are many types of orders of convergence: linear, superlinear, sublinear, quadratic, cubic, and so on. Discuss how a linearly convergent sequence could be accelerated.
+        \begin{answer}
+            One idea is to run the linear method for a couple iterations before switching to a faster method, since order of convergence is measured as a limit. Another would be to make a better guess at the solution at each iteration, for example, using the previous sequence terms to approximate a `derivative' (where $p_{n}$ is itself a function wrt $n$) and perform a line search. 
+        \end{answer}
+
+    \item Show that the sequence $\{p_{n}\}$ for $p_{n} = 1/n^{2}$, converges sublinearly to $p = 0$, in that 
+        \begin{equation*}
+            \lim\limits_{n \to \infty}\dfrac{\lvert p_{n + 1} - p \rvert}{\lvert p_{n} - p \rvert^{\alpha}} = \infty \text{ for } \alpha > 1
+        \end{equation*}
+    and that there does not exist a $0 < \lambda < 1$ such that 
+        \begin{equation*}
+            \lim\limits_{n \to \infty} \dfrac{\lvert p_{n + 1} - p \rvert}{\lvert p_{n} - p \rvert} = \lambda
+        \end{equation*}
+    How large must $n$ be before $\lvert p_{n} - p \rvert \leq 5 \times 10^{-2}$?
+    \begin{answer}
+        We have:
+            \begin{equation*}
+                \lim\limits_{n \to \infty} \dfrac{\lvert 1 / (n + 1)^{2} \rvert}{\lvert 1 / n^{2} \rvert^{\alpha}} = \lim\limits_{n \to \infty}\dfrac{n^{2\alpha}}{(n + 1)^{2}} = \infty
+            \end{equation*}
+        since $2\alpha > 2$. If $\alpha = 1$, then the limit is $1$, because $2\alpha = 2$. So there is no $0 < \lambda < 1$. Finally, 
+            \begin{equation*}
+                \left\lvert \dfrac{1}{n^{2}} \right\rvert \leq 5 \times 10^{-2}
+            \end{equation*}
+        when $n^{2} \geq \frac{1}{5 \times 10^{-2}} = \frac{100}{5} = 20$. So $n \geq 5$.
+    \end{answer}
+\end{itemize}
+    
+\end{document}

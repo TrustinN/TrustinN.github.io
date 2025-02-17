@@ -1,0 +1,252 @@
+%! TeX root = Downloads/Berkeley/Math/Math128a/Homework/Math128aHw3/Math128aHw3.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math128aHw3}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\section*{Exercise Set 2.5}
+\hrule
+
+\textbf{Exercise 2}: Consider the function $f(x) = e^{6x} + 3(\ln{2})^{2}e^{2x} - (\ln{8})e^{4x} - (\ln{2})^{3}$. Use Newton's method with $p_{0} = 0$ to approximate a zero of $f$. Generate terms until $\lvert p_{n + 1} - p_{n} \rvert < 0.0002$. Construct the sequence $\lvert \hat{p}_{n} \rvert$. Is the convergence improved?
+    \begin{answer}
+        * The code is below
+        Using newton's method, I got $x = -0.1534$. The convergence is improved, and the calculated zero is at:
+            \begin{equation*}
+                x = -0.1861550957
+            \end{equation*}
+        When we evaluate the function with the linearly convergent sequence, we get:
+            \begin{equation*}
+                f(x) =  0.000077450866
+            \end{equation*}
+        but with Aitken's method we get:
+            \begin{equation*}
+                f(x) = -0.00000006432390177
+            \end{equation*}
+        Here is the code:
+        \inputminted{matlab}{code/newton/newton.m}
+        \inputminted{matlab}{code/Aitken.m}
+        \inputminted{matlab}{code/myfunc1.m}
+        \inputminted{matlab}{code/script1.m}
+    \end{answer}
+
+\textbf{Exercise 4}: Let $g(x) = 1 + (\sin{x})^{2}$ and $p_{0}^{(0)} = 1$. Use Steffensen's method to find $p_{0}^{(1)}$ and $p_{0}^{(2)}$.
+    \begin{answer}
+        I got $p_{0}^{1} = 2.1529$ and $p_{0}^{(2)} = 1.8735$. And also:
+            \begin{equation*}
+                g(p_{0}^{1}) = 1.6977 \hspace{30pt} g(p_{0}^{2}) = 1.9112
+            \end{equation*}
+        Here is the code:
+        \inputminted{matlab}{code/steffensen/steffensen.m}
+        \inputminted{matlab}{code/Aitken.m}
+        \inputminted{matlab}{code/myfunc2.m}
+        \inputminted{matlab}{code/script2.m}
+    \end{answer}
+
+\textbf{Exercise 7}: Use Steffensen's method to find, to an accuracy of $10^{-4}$, the root of $x^{3} - x - 1 = 0$ that lies in $[1, 2]$ and compare this to the results of Exercise $8$ of Section $2.2$.
+    \begin{answer}
+        I got:
+            \begin{equation*}
+                x = 1.324717994 \hspace{30pt} f(x) = 0.0000008245189529
+            \end{equation*}
+        Here is the code:
+        \inputminted{matlab}{code/steffensen/steffensen.m}
+        \inputminted{matlab}{code/Aitken.m}
+        \inputminted{matlab}{code/myfunc3.m}
+        \inputminted{matlab}{code/script3.m}
+    \end{answer}
+
+\textbf{Exercise 14}: A sequence $\{p_{n}\}$ is said to be \textbf{superlinearly convergent} to $p$ if
+    \begin{equation*}
+        \lim\limits_{n \to \infty} \dfrac{\lvert p_{n + 1} - p \rvert}{\lvert p_{n} - p \rvert} = 0
+    \end{equation*}
+    \begin{itemize}
+        \item [a.] Show that if $p_{n} \rightarrow p$ of order $\alpha$ for $\alpha > 1$, then $\{p_{n}\}$ is superlinearly convergent to $p$
+            \begin{proof}
+                Since $p_{n} \rightarrow p$ of order $\alpha$, we know that
+                    \begin{equation*}
+                        \lim\limits_{n \to \infty} \dfrac{\lvert p_{n + 1} - p \rvert}{\lvert p_{n} - p \rvert^{\alpha}} = \lambda
+                    \end{equation*}
+                for some $\lambda > 0$ constant. Since our sequence $s_{n} = \frac{\lvert p_{n + 1} - p \rvert}{\lvert p_{n} - p \rvert^{\alpha}}$ is nonzero for sufficiently high $n > N$, we can let another sequence $t_{n} = \{1\}_{n \geq 0}$. Then we have:
+                    \begin{equation*}
+                        \lim\limits_{n \to \infty} \dfrac{t_{n}}{s_{n}} = \dfrac{\lim\limits_{n \to \infty} 1}{\lim\limits_{n \to \infty} s_{n}} = \dfrac{1}{\lambda}
+                    \end{equation*}
+                Now we can take the product of our sequence $t_{n} / s_{n}$ with $s^{\prime}_{n} = \frac{\lvert p_{n + 1} - p \rvert}{\lvert p_{n} - p \rvert}$ to get:
+                    \begin{equation*}
+                        \lim\limits_{n \to \infty} \dfrac{t_{n}}{s_{n}} \cdot s^{\prime}_{n} = \lim\limits_{n \to \infty} \dfrac{\lvert p_{n} - p \rvert^{\alpha}}{\lvert p_{n + 1} - p \rvert} \cdot \dfrac{\lvert p_{n + 1} - p \rvert}{\lvert p_{n} - p \rvert} = \lim\limits_{n \to \infty} \lvert p_{n} - p \rvert^{\alpha - 1} = 0 = \lim\limits_{n \to \infty} \dfrac{t_{n}}{s_{n}} \cdot \lim\limits_{n \to \infty} s^{\prime}_{n}
+                    \end{equation*}
+                So either $\lim\limits_{n \to \infty}t_{n} / s_{n} = 0$ or $\lim\limits_{n \to \infty} s^{\prime}_{n} = 0$. But $\lim\limits_{n \to \infty} \frac{t_{n}}{s_{n}} = \frac{1}{\lambda} \neq 0$. So $\lim\limits_{n \to \infty} s^{\prime}_{n} = 0$ which completes the proof.
+            \end{proof}
+
+        \item [b.] Show that $p_{n} = \frac{1}{n^{n}}$ is superlinearly convergent to $0$ but does not converge to $0$ of order $\alpha$ for any $\alpha > 1$.
+            \begin{proof}
+                Part(I) We see that $\lim\limits_{n \to \infty} n^{n} = \infty$ so $\lim\limits_{n \to \infty} \frac{1}{n^{n}} = 0$. Now we calculate:
+                    \begin{equation*}
+                        \lim\limits_{n \to \infty} \dfrac{\left\lvert \frac{1}{(n + 1)^{n + 1}} \right\rvert}{\left\lvert \frac{1}{n^{n}} \right\rvert} = \lim\limits_{n \to  \infty} \dfrac{n^{n}}{(n + 1)^{n + 1}} = \lim\limits_{n \to \infty} \dfrac{n^{n}}{(n + 1)^{n}} \cdot \lim\limits_{n \to \infty} \dfrac{1}{n + 1} = \dfrac{1}{e} \cdot 0 = 0
+                    \end{equation*}
+                which shows that it is superlinearly convergent.
+
+                Part(II) Now to show that it doesn't converge to any order $\alpha$ for $\alpha > 1$:
+                    \begin{equation*}
+                        \lim\limits_{n \to \infty} \dfrac{\left\lvert n^{\alpha n} \right\rvert}{\left\lvert (n + 1)^{n + 1} \right\rvert} = \lim\limits_{n \to \infty} \left\lvert \dfrac{n}{n + 1} \right\rvert^{n} \cdot \lim\limits_{n \to \infty} \dfrac{n^{\alpha}}{n + 1} = \dfrac{1}{e} \cdot \infty
+                    \end{equation*}
+                so it does not converge, since we compare the highest power in the denominator and the numerator: $\alpha > 1$
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 15}: Suppose that $\{p_{n}\}$ is superlinearly convergent to $p$. Show that  
+    \begin{equation*}
+        \lim\limits_{n \to \infty} \dfrac{\lvert p_{n + 1} - p_{n} \rvert}{\lvert p_{n} - p \rvert} = 1.
+    \end{equation*}
+        \begin{proof}
+            We see that by triangle inequality:
+                \begin{align*}
+                    \lim\limits_{n \to \infty} \dfrac{\lvert p_{n + 1} - p_{n} \rvert}{\lvert p_{n} - p \rvert} - \lim\limits_{n \to \infty} \dfrac{\lvert p_{n + 1} - p \rvert}{\lvert p_{n} - p \rvert} &\leq \lim\limits_{n \to \infty} \dfrac{\lvert p_{n} - p \rvert}{\lvert p_{n} - p \rvert} = 1 \\
+                    \lim\limits_{n \to \infty} \dfrac{\lvert p_{n + 1} - p_{n} \rvert}{\lvert p_{n} - p \rvert} \leq 1
+                \end{align*}
+            Another operation:
+                \begin{align*}
+                    \lim\limits_{n \to \infty} \dfrac{\lvert p_{n + 1} - p_{n} \rvert}{\lvert p_{n} - p \rvert} &\geq \lim\limits_{n \to \infty} \dfrac{\lvert p_{n + 1} - p \rvert}{\lvert p_{n} - p \rvert} + \lim\limits_{n \to \infty} \dfrac{\lvert p - p_{n} \rvert}{\lvert p_{n} - p \rvert} \\
+                    \lim\limits_{n \to \infty} \dfrac{\lvert p_{n + 1} - p_{n} \rvert}{p_{n} - p}               &\geq 1                                                                                                                                                                               
+                \end{align*}
+            By the two inequalities:
+                \begin{equation*}
+                    \lim\limits_{n \to \infty} \dfrac{\lvert p_{n + 1} - p_{n} \rvert}{\lvert p_{n} - p \rvert} = 1
+                \end{equation*}
+        \end{proof}
+
+\newpage
+\section*{Exercise Set 2.6}
+\hrule
+
+\textbf{Exercise 2}: Find approximations to within $10^{-5}$ to all the zeros of each of the following polynomials by first finding the real zeros using Newton's method and then reducing the polynomials of lower degree to determine any complex zeros.
+    \begin{itemize}
+        \item [b.] $f(x) = x^{4} - 2x^{3} - 12x^{2} + 16x - 40$
+            \begin{answer}
+                Running Newton's method at $p0 = -5$ gave $x = -3.548232899$ and another iteration at $p0 = 5$ gave $x = 4.381113445$. Run the original polynomial through two divisions:
+                    \begin{align*}
+                        \dfrac{x^{4} - 2x^{3} - 12x^{2} + 16x - 40}{x - 4.4} &\approx x^{3} + 2.4x^{2} -1.44x + 9.664 \\
+                        \dfrac{x^{3} + 2.4x^{2} - 1.44x + 9.664}{x + 3.55}   &\approx x^{2} - 1.15x + 2.6425            
+                    \end{align*}
+                Now solve using the quadratic formula:
+                    \begin{align*}
+                        x &=       \dfrac{1.15 \pm \sqrt{(1.15)^{2} - 4(2.6425)}}{2} \\
+                          &=       \dfrac{1.15 \pm \sqrt{1.3225 - 10.57}}{2}         \\
+                          &=       \dfrac{1.15 \pm \sqrt{-9.2475}}{2}                \\
+                          &\approx .575 \pm 1.52i                                      
+                    \end{align*}
+            \end{answer}
+
+        \item [e.] $f(x) = 16x^{4} + 88x^{3} + 159x^{2} + 76x - 240$ 
+            \begin{answer}
+                Running Newton's method with $p0 = .5$, I got $x = 0.8467425876$, and for $p0 = -3$, I got $x = -3.358044481$. Then run the polynomial through two divisions:
+                    \begin{align*}
+                        \dfrac{16x^{4} + 88x^{3} + 159x^{2} + 76x - 240}{x - 0.85} &\approx 16x^{3} + 101.6x^{2} + 245.36x + 284.556 \\
+                        \dfrac{16x^{3} + 101.6x^{2} + 245.36x + 284.556}{x + 3.36} &\approx 16x^{2} + 47.84x + 84.6176                 
+                    \end{align*}
+                Finally, solve using the quadratic formula:
+                    \begin{align*}
+                        x &= \dfrac{-47.84 \pm \sqrt{(47.84)^{2} - 4(16)(84.6176)}}{32} \\
+                          &= \dfrac{-47.84 \pm \sqrt{2288.6656 - 5415.5264}}{32}        \\
+                          &= \dfrac{-47.84 \pm \sqrt{-3126.8608}}{32}                   \\
+                          &= \dfrac{-47.84 \pm 55.9i}{32}                                 
+                    \end{align*}
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 4}: Repeat Exercise 2 using Muller's method.
+    \begin{itemize}
+        \item [b.] $f(x) = x^{4} - 2x^{3} - 12x^{2} + 16x - 40$
+            \begin{answer}
+                Using Muller's method, I got $x = 0.5836 \pm 1.4942i$ as a root for an initial approximation of $p0, p1, p2 = .5, .55, .6$. I received the same real roots compared to Newton's method as well.
+
+                Here is the code:
+                \inputminted{matlab}{code/muller/muller.m}
+                \inputminted{matlab}{code/myfunc6.m}
+                \inputminted{matlab}{code/script6.m}
+            \end{answer}
+
+        \item [e.] $f(x) = 16x^{4} + 88x^{3} + 159x^{2} + 76x - 240$ 
+            \begin{answer}
+                Using initial values $p0, p1, p2 = -1.2, -1.3, -1.4$, I got an imaginary solution as $x = -1.4943 \pm 1.7442i$. The real solutions were the same from Newton's method.
+
+                Here is the code:
+                \inputminted{matlab}{code/muller/muller.m}
+                \inputminted{matlab}{code/myfunc7.m}
+                \inputminted{matlab}{code/script7.m}
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 7}: Use each of the following methods to find a solution in $[0.1, 1]$ accurate to within $10^{-4}$ for 
+    \begin{equation*}
+        600x^{4} - 550x^{3} + 200x^{2} - 20x - 1 = 0
+    \end{equation*}
+    \begin{itemize}
+        \item [a.] Bisection method
+            \begin{answer}
+                I got $x = 0.2323577881$ in $15$ iterations.
+            \end{answer}
+
+        \item [b.] Newton's method
+            \begin{answer}
+                I got $x = 0.2323578624$ in $4$ iterations with an initial guess of $.5$.
+            \end{answer}
+
+        \item [c.] Secant method
+            \begin{answer}
+                I got $x = 0.2323529651$ in $8$ iterations with two initial guesses as $.5, .8$.
+            \end{answer}
+
+        \item [e.] Muller's method 
+            \begin{answer}
+                I got $x = 0.3600766973 + 0.2654917388i$ in $11$ iterations with the three initial guesses as $.3, .4, .5$.
+            \end{answer}
+    \end{itemize}
+    Here is the code:
+    \inputminted{matlab}{code/bisection/bisection.m}
+    \inputminted{matlab}{code/newton/newton.m}
+    \inputminted{matlab}{code/secant/secant.m}
+    \inputminted{matlab}{code/muller/muller.m}
+    \inputminted{matlab}{code/script8.m}
+    \inputminted{matlab}{code/myfunc8.m}
+
+\textbf{Exercise 9}: A can in the shape of a right circular cylinder is to be constructed to contain $1000\text{ cm}^{3}$. The circular top and bottom of the can must have a radius of $0.25$ cm more than the radius of the can so that the excess can be used to form a seal with the side. The sheet of material being formed into the side of the can must also be $0.25 \text{cm}$ longer than the circumference of the can so that a seal can be formed. Find, to within $10^{-4}$, the minimal amount of material needed to construct the can.
+    \begin{answer}
+        We have an expression giving the amount of material needed:
+            \begin{align*}
+                \text{material for caps} + \text{material for side} &= \text{material for can} \\
+                2\pi(r + 0.25)^{2} + h(.25 + 2\pi r)                &= \text{material for can}   
+            \end{align*}
+        There is also the restriction that  
+            \begin{equation*}
+                \pi r^{2} h = 1000
+            \end{equation*}
+        or
+            \begin{equation*}
+                h = \dfrac{1000}{\pi r^{2}}
+            \end{equation*}
+        Plugging this into the materials equation:
+            \begin{equation*}
+                2\pi (r + 0.25)^{2} + \dfrac{1000}{\pi r^{2}}(.25 + 2\pi r) = f
+            \end{equation*}
+        and to find the minimum, we find the zeros of the derivative of $f$. I got a radius of $r = 5.363857879$ and the total material needed was $m = 573.6490$.
+
+        Here is the code:
+        \inputminted{matlab}{code/newton/newton.m}
+        \inputminted{matlab}{code/script9.m}
+    \end{answer}
+
+
+
+
+\end{document}

@@ -1,0 +1,2993 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math143/Notes/Math143Notes.tex
+
+\documentclass{report}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/report}
+\graphicspath{{./figures/}}
+
+\title{Math143Notes}
+\author{Trustin Nguyen}
+
+\begin{document}
+\newgeometry{
+    total={150mm,235mm},
+}
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+
+\tableofcontents
+\restoregeometry
+
+\reversemarginpar
+
+\chapter{Week 1}
+
+\begin{topic}
+    \section{Algebra and Geometry}
+\end{topic}
+
+\begin{examples}
+    Algebra equations:
+        \begin{example}
+            This is a line
+                \begin{equation*}
+                    y = 2x + 1
+                \end{equation*}
+        \end{example}
+        \begin{example}
+            This is a circle:
+                \begin{equation*}
+                    x^{2} + y^{2} = 1
+                \end{equation*}
+        \end{example}
+
+        \begin{example}
+            And this:
+                \begin{equation*}
+                    y^{2} = x^{3}
+                \end{equation*}
+        \end{example}
+    How does algebra of equations relate to geometry of solution? Relate systems of polynomial equations to the geometry of solutions.
+\end{examples}
+
+\textbf{Foundations of Geometry}: Let $k$ be a field, and typically, $k = \mathbb{R}$ or $\mathbb{C}$. A few examples are $\mathbb{C}, \mathbb{R}, \mathbb{F}_{p}, \mathbb{Q}$
+
+\begin{definition}{Affine Space} 
+    Affine space over $k$ is $\mathbb{A}^{n} = k^{n} = \{(a_{1}, a_{2}, \ldots, a_{n}) : a_{i} \in k\}$
+\end{definition}
+
+\begin{definition}{Polynomials}
+    A polynomial in $X_{1}, \ldots, X_{n}$ over $k$ is a finite sum:
+        \begin{equation*}
+            f = \sum_{\alpha = (\alpha_{1}, \ldots, \alpha_{n})} c_{\alpha}x_{1}^{\alpha_{1}} \cdots x_{n}^{\alpha_{n}}
+        \end{equation*}
+    where the coefficient lies in $\mathbb{A}$. We define the degree to be the max of the sum of the degrees:
+        \begin{equation*}
+            \text{deg}(f) = \max(\{\alpha_{1} + \ldots + \alpha_{n}: c_{\alpha} \neq 0\})
+        \end{equation*}
+\end{definition}
+
+\begin{definition}{Polynomial space}
+    $k[X_{1}, \ldots, X_{n}]$ is the ring of polynomials in $X_{1}, \ldots, X_{n}$.
+\end{definition}
+
+    Given $f \in k[X_{1}, \ldots, X_{n}]$, we get a function $\mathbb{A}^{n} \rightarrow k$ by:
+        \begin{equation*}
+            (a_{1}, \ldots, a_{n}) = p \mapsto f(a_{1}, \ldots, a_{n}) = f(p)
+        \end{equation*}
+
+\begin{definition}{Hypersurfaces}
+    Write $V(f) = \{p \in \mathbb{A}^{n}: f(p) = 0\}$. This is called a hypersurface. \st{The degree of $V)(f)$ is $\text{deg}(f)$}. For example, the hypersurface of a circle of radius 1 would be $V(x^{2} + y^{2} - 1)$
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        $V(x^{2} + y^{2} - z^{2} - 1)$: Start in 3 dimensional space but 2d set of solutions.
+    \end{example}
+
+    \begin{example}
+        $x^{3} + y^{3} + z^{2} + 1 - (x + y + z + 1)^{3}$
+    \end{example}
+\end{examples}
+
+\begin{definition}{Affine Algebraic Set}
+    Given $S \subseteq  k[X_{1}, \ldots, X_{n}]$ define
+        \begin{equation*}
+            V(S) = \{p \in \mathbb{A}^{n} : f(p) = 0 \, \forall f \in S\} = \bigcap_{f \in S}^{} V(f)
+        \end{equation*}
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        $f_{1} = y - x^{2}, f_{2} = y - 2$. Intersection: $V(f_{1}, f_{2}) = \{(\sqrt{2}, 2), (-\sqrt{2}, 2)\}$
+    \end{example}
+\end{examples}
+
+\textbf{Warning:} An intersection could be empty over $\mathbb{R}$, but non-empty over $\mathbb{C}$.
+
+\begin{examples}
+    \begin{example}
+        $f_{1} = y - x^{2}, f_{2} = y + 1$ has solutions in $\mathbb{C}$ but not $\mathbb{R}$
+    \end{example}
+\end{examples}
+
+\begin{definition}{Algebraically Closed}
+    A field $k$ is algebraically closed if every polynomial in $k[X]$ has a root in $k$. Equivalently, every $f \in k[X]$ factors into linear factors $f = (x - r_{1}) \cdots (x - r_{d})$.
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        $\mathbb{C}$ is algebraically closed: Fundamental Theorem of Algebra.
+    \end{example}
+    \begin{example}
+        $\mathbb{R}$ is not algebraically closed because $x^{2} + 1$ has no real roots.
+    \end{example}
+\end{examples}
+
+\begin{examples}
+    \begin{example}
+        Is $\emptyset$ an algebraic set? In $\mathbb{R}$, the nonzero polynomial has solution set $\emptyset$
+    \end{example}
+    \begin{example}
+        $\mathbb{A}^{n} = V(0)$
+    \end{example}
+    \begin{example}
+        A non algebraic set of $\mathbb{A}$: $\mathbb{R}_{+} \subseteq \mathbb{A}$. This is because $\mathbb{V}(f)$ is a finite set. So every algebraic set of $A$ is finite or all of $\mathbb{A}$ or $\emptyset$.
+    \end{example}
+    \begin{example}
+        Every finite subset in $\mathbb{A}$ is algebraic because you can put them as $(x - r)$ factors in a polynomial
+    \end{example}
+\end{examples}
+
+\textbf{Intersections and Unions}: 
+
+Intersection of algebraic sets is an algebraic set:
+    \begin{equation*}
+        \bigcap_{i \in I}^{} V(S_{i}) = V(\bigcup_{i \in I}^{} S_{i})
+    \end{equation*}
+What about unions?
+    \begin{equation*}
+        V(f) \cup  V(g) = V(fg)
+    \end{equation*}
+    \begin{equation*}
+        V(x, y) \cup  V(z) = (V(x) \cap V(y)) \cup  V(z) = (V(x) \cup  V(z)) \cap  (V(y) \cup  V(z))
+    \end{equation*}
+    This s $V(xz, yz)$
+We have:
+    \begin{equation*}
+        \bigcup_{i \in I}^{} V(S_{i}) \text{ is algebraic if $\lvert I \rvert$ is finite}
+    \end{equation*}
+
+\chapter{Week 2}
+
+\begin{topic}
+    \section{Ideals}
+\end{topic}
+
+\begin{definition}{Ideal}
+    Let $R$ be a commutative ring. An ideal $I \subseteq R$ is a subset which is closed under addition and satisfies $r : a \in I$ for all $a \in I, r \in R$.
+\end{definition} 
+
+Let $S \subseteq k[X_{1}, \ldots, X_{n}]$ and let $I$ be the ideal generated by $S$. So $I$ is the set of all finite sums of the form $\sum_{}^{} h_{i}s_{i}$ where $h_{i} \in k[X_{1}, \ldots, X_{n}]$ and $s_{i} \in S$.
+
+\textbf{Proposition}: $V(S) = V(I)$.
+    \begin{proof}
+        We have that $V(I) \subseteq V(S)$. Suppose that $p \in V(S)$. Then $f(p) = 0$ for all $f \in I$. This means that $V(S) \subseteq V(I)$.
+    \end{proof}
+
+So this means that every algebraic set is $V(I)$ for some ideal $I$.
+
+\begin{definition}{Ideal of $X$}
+    Given a subset $X \subseteq \mathbb{A}^{n}$, we have that:
+        \begin{equation*}
+            I(X) = \{f \in k[X_{1}, \ldots, X_{n}]: f(p) = 0 \forall p \in X\}
+        \end{equation*}
+\end{definition}
+
+\textbf{Lemma}: $I(X) \subseteq k[X_{1}, \ldots, X_{n}]$ is an ideal.
+    \begin{proof}
+        If $f, g \in I(X)$, then 
+            \begin{equation*}
+                (f + g)(p) = f(p) + g(p) = 0 \forall p \in X
+            \end{equation*}
+        which means that $f + g \in I(X)$.
+
+        Now if $h \in k[X_{1}, \ldots, X_{n}]$, then 
+            \begin{equation*}
+                (hf)(p) = h(p) \cdot f(p) = 0 \forall p \in X
+            \end{equation*}
+        which means that $hf \in I(X)$.
+    \end{proof}
+
+\begin{examples}
+    \begin{example}
+        $X = \{(1, 2)\} \subseteq \mathbb{A}^{2}$: $I(X) = (x - 1, y - 2)$. Notice that $X = V(I(X))$, and that this is always true when $X$ is an algebraic set. 
+    \end{example}
+    \begin{example}
+        We say that $X = \{(a, 0) :  a\in \mathbb{Z}\} \subseteq \mathbb{A}^{2}$ and that $I(X) = (y)$. In other words, $V(I(X)) = \{(x, y) : y = 0\}$ and this is the smallest algebraic set containing $X$.
+    \end{example}
+    \begin{example}
+        \begin{itemize}
+            \item $I(\emptyset) = k[X_{1}, \ldots, X_{n}]$ because this equates to saying that if $x \in \emptyset$, then $f(x) = 0$. So since the first part is false, then the second part is automatically true for all $p \in k[X_{1}, \ldots, X_{n}]$.  
+
+            \item $I(\mathbb{A}^{n}) = (0)$ because the only polynomial that vanishes at all points in $\mathbb{A}^{n}$ is the $0$ polynomial.  
+        \end{itemize}
+    \end{example}
+\end{examples}
+So we have this relation between $V$ and $I$:
+    \begin{center}
+        \begin{tikzcd}
+            \{\text{ideals in $k[X_{1}, \ldots, X_{n}]$}\} \ar[r, "V", shift left = 1] & \{\text{algebraic sets in $\mathbb{A}^{n}$}\}\ar[l, "I", shift left = 1]   
+        \end{tikzcd}
+    \end{center}
+
+\textbf{Basic Properties}:
+    \begin{align*}
+        I \subseteq J &\implies  V(I) \supseteq V(J) \\
+        X \subseteq Y &\implies  I(X) \supseteq I(Y)   
+    \end{align*}
+
+\textbf{Lemma}: If $X$ is an algebraic set, then $V(I(X)) = X$. 
+    \begin{proof}
+        We have that $X \subseteq V(I(X))$. Since $X = V(S)$ is algebraic, if $p \notin X$, then $\exists f \in S \subseteq I(X)$ such that $f(p) \neq 0$, so $p \notin V(I(X))$
+    \end{proof}
+
+\textbf{Question}: If $J$ is an ideal, then is $I(V(J)) = J$?
+    \begin{examples}
+        \begin{example}
+            Not necessarily:
+                \begin{align*}
+                    J       &= (x^{2}) \subseteq k[x] \\
+                    V(J)    &= \{0\}                  \\
+                    I(V(J)) &= (x) \neq J               
+                \end{align*}
+            The Nullstellensatz says that this issue with powers is the only part that goes wrong. This tells us how ideals and algebraic sets are related.
+        \end{example}
+    \end{examples}
+
+\begin{definition}{Radical}
+    An ideal $I$ is radical if $f^{r} \in I \implies f \in I$.
+\end{definition}
+
+\textbf{Lemma}: $I(X)$ is radical
+    \begin{proof}
+        If $f^{r}(p) = 0$, then for any $p$ in $X$, $f(p) = 0$ for all $p \in X$ which means that $f \in I(X)$.
+    \end{proof}
+
+\begin{definition}{Radical of an Ideal}
+    Let $I \subseteq R$ be an ideal. The radical of $I$ is:
+        \begin{equation*}
+            \sqrt{I} = \{f \in R : f^{n} \in I \text{for some} n\}
+        \end{equation*}
+\end{definition}
+
+\textbf{Proposition}: The radical of $I$ is an ideal.
+    \begin{examples}
+        \begin{example}
+            $(x^{2})$ is not radical since $x \notin I$. Observe that taking the radical of an ideal enlarges it: $\sqrt{(x^{2})} = (x)$ and could be used to solve our problem with $I(V(J)) = J$ when only $\supseteq $ holds in general.
+        \end{example}
+    \end{examples}
+
+\begin{theorem}{Nullstellensatz}
+    If $k$ is algebraically closed and $J \subseteq k[X_{1}, \ldots, X_{n}]$ is any ideal, then $I(V(J)) = \sqrt{J}$.
+\end{theorem}
+We will prove this later, since more algebra is needed.
+
+\begin{topic}
+    \section{Hilbert Basis Theorem}
+\end{topic}
+
+We will show that it is always possible to define an algebraic set with a finite number of polynomials.
+
+\begin{definition}{Noetherian}
+    A ring is Noetherian if every ideal is finitely generated.
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        Fields are Noetherian, since the only ideals are $(0), (1)$
+    \end{example}
+
+    \begin{example}
+        $\mathbb{Z}$ is Noetherian because it is a PID
+    \end{example}
+\end{examples}
+
+\begin{theorem}{Noetherian and Polynomial Rings}
+    $k[X_{1}, \ldots, X_{n}]$ is Noetherian.
+\end{theorem}   
+    \begin{proof}
+        We know this because $k$ is a field, so we have the Euclidean Domain on the polynomial ring. Now this means that every ideal can be reduced to a principle ideal.
+    \end{proof}
+
+The Geometric Interpretation is that every algebraic set is the intersection of a finite number of hypersurfaces. The idea behind this is that $V(S) = V(I)$, where $I$ is some ideal, and this becomes the problem of showing that every ideal is finitely generated.
+
+\begin{theorem}{Hilbert Basis Theorem}
+    If $R$ is a  Noetherian ring, then the polynomial ring $R[x]$ is Noetherian.
+\end{theorem}
+    \begin{proof}
+        Let $I \subseteq R[x]$. We should find a finite set of generators for $I$. We write each $f \in R[x]$ as $f = a_{d}x^{d} + a_{d - 1}x^{d - 1} + \ldots + a_{1}x + a_{0}$. Call $a_{d}$ the leading coefficient: $LC(F) = a_{d}$, and let:
+            \begin{equation*}
+                J = \{LC(F): F \in I\} \subseteq R
+            \end{equation*}
+        We claim that $J \subseteq R$ is an ideal. 
+            \begin{itemize}
+                \item If $a = LC(f), b = LC(g)$, and wlog $\text{deg}(f) \leq \text{deg}(g)$, then we have:
+                    \begin{equation*}
+                        a + b = LC(fx^{n} + g) \hspace{30pt} n = \text{deg}(g) - \text{deg}(f)
+                    \end{equation*}
+
+                \item  If $a = LC(f)$ and $r \in R$, then $ra = LC(rf)$. 
+            \end{itemize}
+        So we know that $J$ is finitely generated:
+            \begin{equation*}
+                J = \langle LC(F_{1}), \ldots, LC(F_{r}) \rangle
+            \end{equation*}
+        Let $N$ be an integer $> \text{deg}(F_{i})$. For each $m \leq N$, let:
+            \begin{equation*}
+                J_{m} = \{LC(F): F \in I \text{ and deg}(F) \leq m\}
+            \end{equation*}
+        which is also an ideal of $R$. Since $R$ is Noetherian, $J_{m}$ is finitely generated, so there are $F_{mj} \in I$ of degree $\leq m$ such that $J_{m} = \langle LC(F_{mj}) \rangle$. Let
+            \begin{equation*}
+                I^{\prime} = \langle F_{i}, F_{m,j} \rangle_{m \leq N} \subseteq R[x]
+            \end{equation*}
+        \textbf{Claim}: $I = I^{\prime}$.
+            \begin{itemize}
+                \item Certainly, $I^{\prime} \subseteq I$. Suppose that they are not equal and let $G \in I$ be an element of lowest degree that is not in $I^{\prime}$
+
+                \item If $\text{deg}(G) > N$ then there is a $Q_{i} \in R[x]$ such that $\sum_{}^{} Q_{i}F_{i}$ and $G$ have the same leading term and same degree.  Since $LC(F_{i})$ generates $J$, there is a $q_{i} \in R$ such that $LC(G) = \sum_{}^{} q_{i}LC(F_{i})$. Now set $Q_{i} = q_{i}x^{\text{deg}(G) - \text{deg}(F_{i})}$. Then 
+                    \begin{align*}
+                        LC(\sum_{}^{} Q_{i}F_{i}) &= \sum_{}^{} LC(Q_{i}F_{i})     \\
+                                                  &= \sum_{}^{} LC(Q_{i})LC(F_{i}) \\
+                                                  &= \sum_{}^{} q_{i}LC(F_{i})     \\
+                                                  &= LC(G)                           
+                    \end{align*}
+                So $G - \sum_{}^{} Q_{i}F_{i}$ has a lower degree than $G$. But $G$ was minimal degree among the elements of $I$ not in $I^{\prime}$, therefore, we get that $G \in I^{\prime}$.
+
+                \item If $\text{deg}(G) = m \leq N$ then $\exists Q_{j} \in R[x]$ such that $\sum_{}^{} Q_{j}F_{m, j}$ and $g$ have the same leading term. Then $G - \sum_{}^{} Q_{j}F_{mj} \in I^{\prime} \implies G \in I^{\prime}$.
+            \end{itemize}
+    \end{proof}
+\textbf{Corollary}: $k[X_{1}, \ldots, X_{n}]$ is Noetherian. We note that the infinite polynomial ring is not Noetherian however. So we can use this to prove the minuteness of algebraic sets.
+
+\chapter{Week 3}
+
+\begin{topic}
+    \section{The Nullstellensatz}
+\end{topic}
+
+Recall:
+    \begin{center}
+        \begin{tikzcd}
+            \{\text{ideals}\}\ar[r, "V", shift left] & \{\text{algebraic sets}\}\ar[l, "I", shift left]   
+        \end{tikzcd}
+    \end{center}
+
+These are inclusion reversing. Nullstellensatz: $I(V(J)) = \sqrt{J}$ if $k$ is algebraically closed. We consider the fact that the smallest algebraic set should correspond to the largest ideal. So the weak Nullstellensatz is that we have a bijection between $\emptyset$ and the entire ring $k[X_{1}, \ldots, X_{n}]$. 
+    \begin{examples}
+        \begin{example}
+            If we have $k = \mathbb{R}$, $I = (x^{2} + 1)$, then the vanishing of $I$ is $\emptyset$ but $I \neq \mathbb{R}[x]$. Other examples are $(x^{2} + 3)$ and $(x^{2} + y^{2} + 1)$.
+        \end{example}
+    \end{examples}
+
+\begin{theorem}{Weak Nullstellensatz 1}
+    Assume $k$ is algebraically closed. If $V(I) = \emptyset$, then $I = k[X_{1}, \ldots, X_{n}]$. Equivalently, if $I \subset k[X_{1}, \ldots, X_{n}]$, then $V(I) \neq \emptyset$.
+\end{theorem} 
+
+Nullstellensatz: If $G$ vanishes on $V(J)$, then $\exists $ an equation:
+    \begin{equation*}
+        G^{N} = A_{1}F_{1} + \ldots + A_{r}F_{r} \text{ for } A_{i} \in k[X_{1}, \ldots, X_{n}]
+    \end{equation*}
+where $F_{r}$ are generators of $(J)$.
+
+We need to prove that $\sqrt{J} \subseteq I(V(J))$ and $I(V(J)) \subseteq \sqrt{J}$.
+    \begin{proof}
+        ($\sqrt{J} \subseteq I(V(J))$) For the first inclusion, we have $F \in \sqrt{J}$ means that $F^{n} \in J$ and that for any $p \in V(J)$, we have $F^{n}(p) = 0$. Therefore, $F(p) = 0$. So $F \in I(V(P))$.
+
+        ($I(V(I)) \subseteq \sqrt{I}$) Suppose that $I = \langle F_{1}, \ldots, F_{r} \rangle$ and $G \in I(V(I))$. Let $J = \langle F_{1}, \ldots, F_{r}, x_{n + 1}G - 1 \rangle \subseteq k[X_{1}, \ldots, X_{n}, X_{n + 1}]$. Claim: $V(J) = \emptyset$. If $p \in \mathbb{A}^{n + 1}$, and $F_{i}(p) = 0$, then $(x_{n + 1}G - 1)(p) = x_{n + 1}G(p) - 1 = -1 \neq 0$. So there is no point where all the polynomials vanish. If the point is where the first $r$ vanish, the last $x_{n + 1}G - 1$ does not. Now the weak Nullstellensatz says that $J = k[X_{1}, \ldots, X_{n}]$ which contains the element $1$. This means:
+            \begin{equation*}
+                1 = \sum_{}^{} A_{i}(X_{1}, \ldots, X_{n}, X_{n + 1})F_{i} + B(X_{1}, \ldots, X_{n + 1})(X_{n + 1}G - 1)
+            \end{equation*}
+        Let $Y = \frac{1}{x_{n + 1}}$. If we sub in $x_{n + 1} = \frac{1}{Y}$. We get:
+            \begin{equation*}
+                1 = \sum_{}^{} A_{i}(X_{1}, \ldots, X_{n}, \dfrac{1}{Y})F_{i} + B(X_{1}, \ldots, \dfrac{1}{Y})(\dfrac{1}{Y}G - 1)
+            \end{equation*}
+        we have denominators in $Y$. There $\exists N > 0$ such that if we multiply the expression by $Y^{N}$, we can clear out the denominators. 
+            \begin{equation*}
+                Y^{N} = \sum_{}^{} C_{i}(X_{1}, \ldots, X_{n}, Y)F_{i} + D(X_{1}, \ldots, X_{n}, Y)(G - Y)
+            \end{equation*}
+        Substitute $Y = G$. We have:
+            \begin{equation*}
+                G^{N} = \sum_{}^{} G_{i}(X_{1}, \ldots, X_{n}, G)F_{i} + D(X_{1}, \ldots, X_{n})(G - G)
+            \end{equation*}
+        Therefore, $G^{N} \in I$ therefore, $G \in \sqrt{I}$.
+    \end{proof}
+
+To prove WN1, we fix the bijection one step larger:
+    \begin{center}
+        \begin{tikzcd}
+            \{\text{radical ideals}\}\ar[r, "V", bend left = 20] & \{\text{algebraic sets}\}\ar[l, "I"', bend left = 20] \\
+            k[X_{1}, \ldots, X_{n}]\ar[r, "\text{WN1}"]          & \emptyset \ar[l, ""]                                     
+        \end{tikzcd}
+    \end{center} 
+The next smallest algebraic sets are single points:
+    \begin{center}
+        \begin{tikzcd}
+            \text{largest proper ideals}\ar[r, ""] & (a_{1}, \ldots, a_{n}) \in \mathbb{A}^{n}   
+        \end{tikzcd}
+    \end{center}
+\begin{definition}{Maximal}
+    An ideal $I \subseteq R$ is called maximal if $I \neq R$ and if $I \subseteq J \subset R$, then $I = J$.
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        $(p) \subseteq \mathbb{Z}$, $(x) \subseteq k[x]$. If we take the quotient, we get fields: $\mathbb{Z}/(p) = \mathbb{F}_{p}$ and $k[X]/(x) = k$
+    \end{example}
+\end{examples}
+
+An ideal $I$ is maximal $\iff $ $R/I$ is a field. Last time, we had that $I$ is prime $\iff $ $R/I$ is a domain. Maximal ideals are prime ideals.
+
+\textbf{Key Example}: Say $p = (a_{1}, \ldots, a_{n}) \in \mathbb{A}^{n}$. Then $I(p) = (x_{1} - a_{1}, \ldots, x_{n} - a_{n})$ is claimed to be maximal. Why? Consider the map:
+    \begin{equation*}
+        k[X_{1}, \ldots, X_{n}] \rightarrow k
+    \end{equation*}
+by the evaluation map at $p$. The map is surjective and the kernel is the $I(p)$. This means that $k[x_{1}, \ldots, x_{n}]/I(p) = k$. Note: $I(p)$ is maximal then $I(p)$ is prime. So $p$ is irreducible.
+
+Now we need to prove that every maximal ideal is the ideal of some point. 
+    \begin{examples}
+        \begin{example}
+            What is an ideal in $\mathbb{R}[x]$ that is maximal but not $I(P)$ for any $P \in \mathbb{R}$? We have $(x^{2} + 1) \subseteq \mathbb{R}[x]$ is maximal because $\mathbb{R}[x]/(x^{2} + 1) \cong \mathbb{C}$. But $(x^{2} + 1)$ is not $I(p)$ for any $p \in \mathbb{R}$.
+        \end{example} 
+    \end{examples}
+
+\begin{theorem}{Weak Nullstellensatz 2}
+    If $k$ is algebraically closed, then every maximal ideal in $k[X_{1}, \ldots, X_{n}]$ is $I(p)$ for some $p \in \mathbb{A}^{n}$.
+\end{theorem}
+
+Now we will show that WN2 $\implies $ WN1.
+
+\textbf{Lemma}: In a Noetherian ring, every ideal is contained in a maximal ideal.
+    \begin{proof}
+        Suppose for contradiction that $I$ is not contained in any maximal ideal. Then we some $I_{1}$ such that $I \subset I_{1} \subset \ldots$. Where none of the $I_{n}$ are maximal. So we get an infinite chain that is ascending. This is a contradiction.
+    \end{proof}
+
+Now suppose that $I \subset k[X_{1}, \ldots, X_{n}]$. By the lemma, $I$ is contained in some maximal ideal. Assuming WN2, that ideal is the ideal of a point. So $I \subseteq I(p)$.
+ But now by reverse inclusion, $V(I) \supseteq V(I(p)) \ni p$. So $V(I) \neq \emptyset$. So we proved WN1 by contrapositive.
+
+\begin{topic}
+    \section{Nullstellensatz Day 2}
+\end{topic}
+
+Last class, we've shown:
+    \begin{equation*}
+        \text{WN2} \implies \text{WN1} \implies \text{Nullstellensatz}
+    \end{equation*}
+
+\textbf{Weak Nullstellensatz 2}: If $k$ is algebraically closed, then every maximal ideal in $k[X_{1}, \ldots, X_{n}]$ is $I(p)$ for some $p \in \mathbb{A}^{n}$. There is a bijection between maximal ideals and points.
+
+Suppose that $m \subseteq k[X_{1}, \ldots, X_{n}]$ is a maximal ideal. Then we have the quotient:
+    \begin{equation*}
+        k[X_{1}, \ldots, X_{n} ] \rightarrow k[X_{1}, \ldots, X_{n}]/m = L
+    \end{equation*}
+for $L$, a field that contains $k$. In general, an inclusion $k \subseteq L$ of fields is called a field extension.
+    \begin{examples}
+        \begin{example}
+            If $k = \mathbb{R}$, consider $\mathbb{R} \subseteq \mathbb{R}[X] \rightarrow \mathbb{R}[X]/(X^{2} + 1) \cong \mathbb{R} \oplus \mathbb{R}x \cong \mathbb{C}$.
+        \end{example}
+        \begin{example}
+            Let $k = \mathbb{Q}$. Consider $\mathbb{Q} \subseteq \mathbb{Q}[X] \rightarrow \mathbb{Q}[X]/(x^{2} - 2) \cong \mathbb{Q} \oplus \mathbb{Q}x \cong \mathbb{Q}[\sqrt{2}]$
+        \end{example}
+        \begin{example}
+            $\mathbb{R} \subseteq \mathbb{C}$ is a field extension and $\mathbb{Q} \subseteq \mathbb{Q}[\sqrt{2}]$ is also a field extension.
+        \end{example}
+    \end{examples}
+Note that the larger field is a vector space over the smaller field.
+
+\begin{definition}{Field of Rational Functions}
+    The field of rational functions over $k$ is
+        \begin{equation*}
+            k(x) = \{\dfrac{f(x)}{g(x)} : f(x), g(x) \in k[x] \land  g(x) \neq 0\}
+        \end{equation*}
+\end{definition}
+
+An example is $\mathbb{R}(x)$ which contains:
+    \begin{equation*}
+        \dfrac{x^{2} + 1}{3x^{2} + 7x + 5}
+    \end{equation*}
+
+\begin{definition}{Field of Fractions}
+    If $R$ is an integral domain, then 
+        \begin{equation*}
+            \text{Frac}(R) = \{\dfrac{a}{b}: a, b \in R \land b \neq 0\}/(\dfrac{a}{b} \sim \dfrac{c}{d} \text{ when } ad = bc \in R)
+        \end{equation*}
+\end{definition}
+
+An example would be how $\mathbb{Q} = \text{Frac}(\mathbb{Z})$ and $k(x) = \text{Frac}(k[x])$. We have:
+    \begin{equation*}
+        k(X_{1}, \ldots, X_{n}) = \text{Frac}(k[X_{1}, \ldots, X_{n}]) 
+    \end{equation*}
+where an element would look like:
+    \begin{equation*}
+        \dfrac{x_{1}^{2} + x_{2}}{3x_{1}x_{3}}
+    \end{equation*}
+
+\begin{definition}{Finite Extensions}
+    Suppose $k \subseteq L$ is a field extension. We say $L$ is a finite extension of $k$ if $L$ is a finite dimensional vector space over $k$.
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        $\mathbb{Q}[\sqrt{2}, \sqrt{3}]$ is a field extension with a basis $1, \sqrt{2}, \sqrt{3}, \sqrt{6}$.
+    \end{example}
+\end{examples}
+
+More generally, if we have:
+    \begin{equation*}
+        (a \cdot 1 + b\sqrt{2} + c \sqrt{3} + d\sqrt{6})(a^{\prime} \cdot 1j + b^{\prime} \sqrt{2} + c^{\prime} \sqrt{3} + d^{\prime} \sqrt{6})
+    \end{equation*}
+is again a linear combination of $1,\sqrt{2}, \sqrt{3}, \sqrt{6}$.
+
+If $k \subseteq k(x)$ finite? Now because with the denominator as $1$, we have $1, x, x^{2}, x^{3}, \ldots$.
+
+\begin{definition}{Algebraic over $k$}
+    An element $\alpha$ of $L$ is called algebraic over $k$ if there exists a polynomial $f \in k[x]$ such that $f(\alpha) = 0$ where $f \neq 0$.
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        $\sqrt{2}$ is algebraic over $\mathbb{Q}$ since $x^{2} - 2 = 0$. $\pi$ is not algebraic over $\mathbb{Q}$. If we had any field $k$, and $L = k(x)$, then $x$ is not algebraic over $k$
+    \end{example}
+\end{examples}
+
+\begin{definition}{Algebraic Extension}
+    If every element of $L$ is algebraic over $k$, then $L$ is called an algebraic extension of $k$.
+\end{definition}
+
+\textbf{Lemma}: If $k \subseteq L$ is a finite extension, then $k \subseteq L$ is an algebraic extension.
+    \begin{proof}
+        Suppose that $L$ has dimension $n$ as a vector space over $k$. Now take an $\alpha \in L$, We need to show that $\alpha$ satisfies a polynomial in $k[x]$. Consider $1, \alpha, \alpha^{2}, \ldots, \alpha^{n} \in L$. This is a list of $n + 1$ elements. So we have that one of the elements can be written as a linear combination of the others. So we have a polynomial that kills $\alpha$.
+    \end{proof}
+
+Counterexample for the converse: If we let $k = \mathbb{F}_{p}$, then for each $n$, take $\mathbb{F}_{p^{n}}$ which is finite but their union is not a finite extension of $\mathbb{F}_{p}$. You can also take $k = \mathbb{Q}$ but $\mathbb{Q}[\sqrt{2}, \sqrt{3}, \ldots]$ which is not a finite extension.
+
+Is $\mathbb{Q}(\pi)$ a finite extension over $\mathbb{Q}$? No since $\pi$ is not algebraic, so it is not finite by the converse of what was shown for the first lemma.
+
+\textbf{Lemma}. If $\varphi : k[X_{1}, \ldots, X_{n}] \rightarrow L$ and $\varphi(x_{i}) = a_{i} \in L$ is algebraic over $k$, then $L$ is a finite extension of $k$.
+    \begin{proof}
+        To say that $\varphi$ is surjective is to say every element in $L$ can be written as a polynomial in the $a_{i}$ with coefficients in $k$. By assumption, each $a_{i}$ is algebraic over $k$, so there is an $n_{i}$ where we can write $a_{i}^{n_{i}} = \sum_{j \leq n_{i}}^{} c_{ij}a_{i}^{j}$
+
+        Claim: Every polynomial in $a_{1}, \ldots, a_{n}$ is equal to a linear combination of $\{a_{1}^{e_{1}} \ldots a_{n}^{e_{n}} : e_{i} < n_{i}\}$. But this is a finite set. So we are done. 
+    \end{proof}
+
+\begin{theorem}{Weak Nullstellensatz 3}
+    Let $k$ be a field, and let $m$ be a maximal ideal in $k[x_{1}, \ldots, x_{n}]$. Then $k[x_{1}, \ldots, x_{n}]/m = L$ is a finite extension of $k$.
+\end{theorem}
+
+\begin{proof}
+    (WN3 $\implies$ WN2) If $k$ is algebraically closed and $L$ is a finite extension of $k$, then since $L$ is algebraic over $k$, we must have $L = k$. Every element of $L$ is a solution of $k$. But $k$ is algebraically closed, so that element is in $k$.
+\end{proof}
+
+\chapter{Week 4}
+
+\begin{topic}
+    \section{Nullstellensatz Day 3}
+\end{topic}
+
+Recall the statements of weak nullstellensatz 2 and nullstellensatz 3.
+
+\textbf{WN2}: If $k$ is algebraically closed, then every maximal ideal in $k[x_{1}, \ldots , x_{n}]$ is $I(p)$ for some $p\in \mathbb{A}^{n}$.
+
+\textbf{WN3}: Suppose $m \subseteq k[x_{1}, \ldots , x_{n}]$ is a maximal ideal. Then $L = k[x_{1}, \ldots , x_{n}]/m$ is a finite extension of $k$.
+
+We will see why weak nullstellensatz 3 implies weak nullstellensatz 2. 
+    \begin{proof}
+        Suppose that $m \subseteq k[x_{1}, \ldots , x_{n}]$ is a maximal ideal. Consider the quotient $k[x_{1}, \ldots , x_{n}]/m = L$. By weak nullstellensatz 3, $L$ is a finite extension of $k$. We know that $L$ is an algebraic extension. We assume that $k$ is algebraically closed, so any element of $L$ is in $k$. So we see $L = k$. Now let $a_{i} = \varphi(x_{i})$. Then $(x_{1} - a_{1}, \ldots , x_{n} - a_{n})$. This is in the kernel of $\varphi$. But this ideal is of a point which is maximal. So it is equal to the kernel of $\varphi$ which is maximal. So every maximal ideal is the ideal of a point.
+    \end{proof}
+
+Now we will prove Weak Nullstellensatz 3:
+    \begin{proof}
+        Let $\varphi : k[x_{1}, \ldots , x_{n}] \rightarrow k[x_{1}, \ldots , x_{n}]/m = L$. First suppose that $a_{i} = \varphi(a_{i}) \in L$ is algebraic over $k$. Then $L$ is a finite extension of $k$ by a lemma from last class. Suppose for contradiction that some $a_{i} = \varphi(x_{i})$ is not algebraic over $k$. Assume that $a_{1}$ is not algebraic over $k$. In this case, we have the following inclusions: 
+            \begin{center}
+                \begin{tikzcd}
+                    k \subseteq & k(\alpha_{1}) \subseteq                        & L &                                                                                            \\
+                                & \text{field of rational functions} \ar[u, ""] &   & \ar[ul, "\text{if}"] \frac{f_{1}(a_{1})}{g_{1}(a_{1})} = \frac{f_{2}(a_{1})}{g_{2}(a_{1})}   
+                \end{tikzcd}
+            \end{center}
+        Then clearing denominators, we get:
+            \begin{equation*}
+                f_{1}(a_{1})g_{2}(a_{1}) - g_{1}(a_{1})g_{2}(a_{1}) = 0
+            \end{equation*}
+        So these two rational functions are the same rational function. This shows an injective mapping from the field of rational functions on $a_{1}$ to $L$. If $L$ is  a finite extension of $k(a_{1})$, then set $k^{\prime} = k$ and we have $k^{\prime} \subseteq k^{\prime}(a) \subseteq L$ where $L$ is finite over $k^{\prime}(a)$. If $L$ is not a finite extension of $k(a_{1})$, then there is some $a_{i}$ which is not algebraic over $k(a_{1})$. Then we get $k \subseteq k(a_{1}) \subseteq k(a_{1}, a_{2}) \subseteq L$. If $L$ is finite over $k(a_{1}, a_{2})$, set $k^{\prime} = k(a_{1})$. Then we have the situation:
+            \begin{equation*}
+                k^{\prime} \subseteq k^{\prime}(a) \subseteq L
+            \end{equation*}
+        where $L$ is a finite extension. Continuing in this way, we can assume we have $k^{\prime} \subseteq k^{\prime}(a) \subseteq L$ with $L$ finite extension of $k^{\prime}(a)$. Since $L$ is finite, we can choose a basis for $L$ as a vector space over $k^{\prime}(a)$.  Call that basis $e_{0} = 1, \ldots , e_{n}$. Now let $c_{ijk} \in k^{\prime}(a)$ be elements such that
+            \begin{equation*}
+                e_{i}e_{j} = \sum_{}^{} c_{ijk}e_{k}
+            \end{equation*}
+        There are finitely many $c_{ijk}$ because we have finitely many $e_{i}e_{j}$ multiplication pairings. Let $t \in k^{\prime}(a)$ be a common denominator for all $c_{ijk}$s. Now, let $d_{ij} \in k^{\prime}(a)$ be elements such that 
+            \begin{equation*}
+                a_{i} = \varphi(x_{i}) = \sum_{}^{} d_{ij} \cdot e_{j} 
+            \end{equation*}
+        We only have a finite number of $d_{ij}$s that are required to do this. So we can find a common denominator of all $d_{ij}$. Let $s \in k^{\prime}[a]$ be this common denominator. Now suppose $F(a_{1}, \ldots , a_{n})$ is any polynomial. Then, there exists $N, M$ so that 
+            \begin{equation*}
+                s^{N}t^{M} \cdot F(a_{1}, \ldots , a_{n}) \hspace{30pt} \text{has no denominators}
+            \end{equation*}
+        So any element in the image of $\varphi$ which is of the form $\alpha = F(a_{1}, \ldots , a_{n})$ such that $s^{N}t^{M}\alpha$ has no denominators. Let $u \in k^{\prime}[a]$ be an irreducible element that is not a factor in $s, t$. Then $\frac{1}{u} \in k^{\prime}(a) \subseteq  L$. We claim that $\frac{1}{u} \notin \Im{\varphi}$. This is because $u$ is not a factor in $s$ or $t$, so there is no $M, N$ such that $s^{N}t^{M} \cdot \frac{1}{u} \in k^{\prime}[\alpha]$. This is a contradiction since $\varphi$ was the surjective quotient map.
+    \end{proof}
+
+\textbf{Corollary}: If $I \subseteq k[x_{1}, \ldots , x_{n}]$ is a radical ideal, then $I(V(I)) = I$. We also have the following bijections:
+    \begin{center}
+        \begin{tikzcd}
+            \{\text{radical ideals}\} \ar[r, "V", bend left = 20, shift left] & \{\text{algebraic sets}\} \ar[l, "I", bend left = 20, shift left] \\
+            k[x_{1}, \ldots , x_{n}] \ar[r, "\text{WN1}", leftrightarrow ]    & \emptyset                                                     \\
+            \text{maximal ideals} \ar[r, "", leftrightarrow ]                 & \text{points}                                                 \\
+            \text{radical principal ideals} \ar[r, "", leftrightarrow ]       & \text{hypersurfaces}                                            
+        \end{tikzcd}
+    \end{center} 
+
+If $I = (f)$, then $V(I) = V(f)$. If $X = V(f),$ then $I(X) = \sqrt{(f)} = (f_{1}, \ldots , f_{r})$ for $f = f_{1}^{e_{1}}\cdots f_{r}^{e_{r}}$. Note that $X = V(f_{1}) \cup  \cdots \cup V(f_{r})$ is a decomposition of the algebraic set into irreducible components.
+
+We have that WN3 says that if $m$ is maximal, then $k[x_{1}, \ldots , x_{n}]/m$ is a finite extension. 
+
+\textbf{Question}: If $I$ is an ideal and $k[x_{1}, \ldots , x_{n}]/I$ is finite extension, is $I$ maximal?
+    \begin{answer}
+        Counterexample. Take $I = (x^{2})$ and have $k[x]/(x^{2})$ is a finite $k$-vector space. But $(x^{2})$ is not maximal.
+    \end{answer}
+
+\begin{theorem}{Finite Extension Results}
+    Let $I \subseteq k[x_{1}, \ldots , x_{n}]$. Assume $k$ is algebraically closed. Then $X = V(I)$ is a finite set if and only if $k[x_{1}, \ldots , x_{n}]/I$ is a finite dimensional $k$-vector space. Moreover, $\lvert V(I) \rvert \leq \text{dim}_{k}(k[x_{1}, \ldots , x_{n}])/I$.
+\end{theorem}
+    \begin{proof}
+        ($\rightarrow $) Assume that $k[x_{1}, \ldots , x_{n}]/I$ is finite dimensional. Suppose $p_{1}, \ldots , p_{r}$ are distinct points in $V(I)$. We want to show that $r \leq \text{dim}_{k}(k[x_{1}, \ldots , x_{n}]/I)$ .
+
+        Claim 1: $\exists F_{1}, \ldots , F_{r}$ such that 
+            \begin{equation*}
+                F_{i}(P_{j}) = \begin{cases}
+                    0 & \text{if $i \neq j$} \\
+                    1 & \text{if $i = j$}
+                \end{cases}
+            \end{equation*}
+
+        Claim 2: With $F_{i}$ as above, 
+            \begin{equation*}
+                F_{1}, \ldots , F_{r} \in k[x_{1}, \ldots , x_{n}]/I
+            \end{equation*}
+        are linearly independent.
+
+        We will prove claim 2. Suppose that there is a relation $\sum_{}^{} \lambda_{i} \overline{F}_{i} = 0 \in k[x_{1}, \ldots , x_{n}]/I$ for $\lambda_{i} \in k$. This means that
+            \begin{equation*}
+                \sum_{}^{} \lambda_{i}F_{i} \in I
+            \end{equation*}
+        Now $\lambda_{j} = \sum_{}^{} \lambda_{i}F_{i}(P_{j}) = 0$. This means that $F_{1}, \ldots , F_{r}$ are $0$, so $\overline{F}_{i}$ are independent. So we are done.
+
+        ($\leftarrow $) Now assume that $V(I)$ is a finite set. We need to show that the quotient is finite dimensional. Let $P_{i} = \{a_{i_{1}}, \ldots , a_{i_{n}}\}$. For each $j \in \{1, \ldots , n\}$, define $f_{j} = (s_{j} - a_{1_{j}})(x_{j} - a_{2_{j}}) \cdots (x_{j} - a_{i_{j}})$. So $f_{j}(p_{i}) = 0$ for all $i, j$. So $f_{j} \in I(V(I)) = \sqrt{I}$. Therefore, there is an $f_{j}^{n_{j}} \in I$. Then, in $k[x_{1}, \ldots , x_{n}]/I$, $\overline{x}_{j}^{n_{j}r}$ is a $k$-linear combination of lower degree terms. So 
+            \begin{equation*}
+                \{\overline{x}_{1}^{e_{1}} \cdots  \overline{x}_{n}^{e_{n}}: e_{j} < n_{j}r\}
+            \end{equation*}
+        spans $k[x_{1}, \ldots , x_{n}]/I$.
+    \end{proof} 
+
+\begin{examples}
+    \begin{example}
+        If $I = (0) \subseteq k[x]$, then $V(I) = \mathbb{A}^{1}$ which is infinite. We have $k[x]/(0) = k[x]$ which is an infinite dimensional vector space.
+    \end{example}
+    \begin{example}
+        If $f \in k[x]$ is a polynomial of degree $d$, then $\text{dim}_{k}(k[x]/(f)) = d$. A basis of the quotient is given by the images $1, x, \ldots , x^{d - 1}$.
+    \end{example}
+\end{examples}
+
+\begin{topic}
+    \section{Polynomial Functions and Polynomial Maps}
+\end{topic}
+
+Let $X \subseteq \mathbb{A}^{n}$ be an algebraic set and let $\mathcal{F}(x, k)$ be the set of all functions $X \rightarrow k$. It has the structure of a ring. Suppose that $f, g \in \mathcal{F}(X, k)$. Then 
+    \begin{align*}
+        (f + g)(p) &= f(p)+ g(p) \\
+        (fg)(p)    &= f(p)g(p)     
+    \end{align*}
+The additive identity is the $0(p) = 0$ map. The multiplicative identity is the constant function $1(p) = 1$.
+
+\begin{definition}{Polynomial Function}
+    A function $f : X \rightarrow k$ is a polynomial function is $\exists F \in k[x_{1}, \ldots , x_{n}]$ such that $f(p) = F(p)$. If $P(a_{1}, \ldots , a_{n}) \in \mathbb{A}^{n}$, then $f(p) = F(a_{1}, \ldots , a_{n})$. 
+\end{definition}
+    \begin{itemize}
+        \item Polynomial functions form a subring of $\mathcal{F}(X, k)$
+    \end{itemize}
+
+\begin{definition}{Subring of Polynomial Functions}
+    The subring of polynomial functions is called the coordinate ring of $X$ which is denoted $\Gamma(x) \subseteq \mathcal{F}(X, k)$.
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        $\Gamma(\mathbb{A}^{n}) = k[x_{1}, \ldots , x_{n}]$. We just consider the functions on $\mathcal{F}(\mathbb{A}^{n}, k)$. All functions from $\mathbb{A}^{n}$ to $k$ can be expressed as an element in $k[x_{1},\ldots , x_{n}]$. Therefore, $\Gamma(\mathbb{A}^{n}) = k[x_{1}, \ldots , x_{n}]$.
+    \end{example}
+    \begin{example}
+         $X = V(y- x^{2})$
+    \end{example}
+\end{examples}
+
+There is a natural map $k[x_{1}, \ldots , x_{n}] \rightarrow \Gamma(x)$.
+
+If $F, G \in k[x_{1}, \ldots , x_{n}]$, then $F$ and $G$ define the same polynomial function on $X \iff F - G \in I(X)$.
+
+\begin{definition}{Coordinate Ring}
+    The coordinate ring of $X$ is $\Gamma(X) = \frac{k[x_{1}, \ldots , x_{n}]}{I(x)}$.
+\end{definition}
+
+If $x$ is irreducible, then $\Gamma(X)$ is an integral domain.
+
+\begin{definition}{Varieties}
+    A variety is an irreducible algebraic set.
+\end{definition}
+
+\begin{definition}{Polynomial Maps}
+    Let $X \subseteq \mathbb{A}^{n}$ and $Y \subseteq \mathbb{A}^{m}$ be algebraic sets. A map $X \rightarrow Y$ is called a polynomial map or morphism if $\exists T_{1}, \ldots , T_{m} \in k[x_{1}, \ldots , x_{n}]$ such that $\varphi(p) = (T_{1}(p), \ldots , T_{m}(p))$.
+\end{definition} 
+
+\begin{examples}
+    \begin{example}
+        Define a map $\varphi: \mathbb{A}^{1} \rightarrow \mathbb{A}^{2}$ by
+            \begin{equation*}
+                t \mapsto (t, t^{2})
+            \end{equation*}
+        The image is $V(y - x^{2}) = 0$. Note: A polynomial map from $X \rightarrow \mathbb{A}^{1}$ is the same as a polynomial function. A polynomial map $X \rightarrow \mathbb{A}^{m}$ is determined by $m$ polynomial functions.
+    \end{example}
+\end{examples}
+
+HW: A composition of polynomial maps is again a polynomial map:
+    \begin{center}
+        \begin{tikzcd}
+            X \ar[r, "\varphi"] & Y \ar[r, "\psi"] & Z   
+        \end{tikzcd}
+    \end{center}
+
+How are polynomial maps between algebraic sets related to coordinate rings. Suppose $\varphi: X \rightarrow Y$ is a polynomial map. We can define a map on coordinate rings $\varphi^{*}: \Gamma(Y) \rightarrow \Gamma(X)$ as follows:
+    \begin{equation*}
+        p \mapsto g(\varphi(p)) \in \Gamma(X)
+    \end{equation*}
+We now have
+    \begin{align*}
+        \varphi^{*}(g) &= g \circ \varphi \\
+        (\varphi^{*}g)(p) &= (g \circ \varphi)(p) = g(\varphi(p))
+    \end{align*}
+$\varphi^{*}$ is called the pullback map. $\varphi^{*}$ is a polynomial map because composition of polynomial maps are polynomial maps. We also use the fact that polynomial maps to $\mathbb{A}^{1}$ are polynomial functions and vice versa.
+
+\begin{examples}
+    \begin{example}
+        $\varphi: \mathbb{A}^{3} \rightarrow \mathbb{A}^{2}$ with
+            \begin{equation*}
+                (x, y, z) \mapsto (x^{2}y, x - z) 
+            \end{equation*}
+        The pullback map:
+            \begin{equation*}
+                \varphi^{*} : \Gamma(\mathbb{A}^{2}) \rightarrow \Gamma(\mathbb{A}^{3})
+            \end{equation*}
+        Let elements of $\mathbb{A}^{2}$ be defined as $k[u, v]$ and $k[x, y, z]$ for $\mathbb{A}^{3}$. We have $\varphi^{*}(u) = x^{2}y$. We also have $v \in \Gamma(\mathbb{A}^{2})$ which is the projection of the $v$-coordinate on $k$. So $\varphi^{*}(v) = x - z$.
+    \end{example}
+    \begin{example}
+        If $\varphi: X \actson \mathbb{A}^{n}$. Then $\varphi^{*}: \Gamma(\mathbb{A}^{n}) = k[x_{1}, \ldots , x_{n}] \rightarrow k[x_{1}, \ldots , x_{n}]/I(x) = \Gamma(x)$.
+    \end{example}
+    \begin{example}
+        $i: X \subseteq Y \subseteq \mathbb{A}^{n}$, then $I(Y) \subseteq I(X)$. Describe the pullback map from $\Gamma(Y) \rightarrow \Gamma(X)$: $k[x_{1}, \ldots , x_{n}]/I(Y) \rightarrow k[x_{1}, \ldots , x_{n}]/I(X)$. It is a quotient mapping: $k[x_{1}, \ldots , x_{n}]/I(Y)/I(X)/I(Y)$.
+    \end{example}
+\end{examples}
+
+\textbf{Proposition}: Let $X \subseteq \mathbb{A}^{n}$ and $Y \subseteq \mathbb{A}^{m}$ be algebraic sets. There is a one-to-one correspondence between $\{\text{polynomial maps $X \rightarrow Y$}\} \text{ and } \{\text{homomorphisms } \Gamma(Y) \rightarrow \Gamma(X)\}$. We get this by sending $\varphi \mapsto \varphi^{*}$.
+    \begin{proof}
+        Given a map $\alpha: \Gamma(Y) \rightarrow \Gamma(X)$, we want to construct a polynomial map $\varphi : X \rightarrow Y$ such that $\alpha = \varphi^{*}$. Suppose that
+            \begin{equation*}
+                \Gamma(Y) = k[y_{1}, \ldots , y_{m}]/I(Y) \text{ and } \Gamma(X) = k[x_{1}, \ldots , x_{n}]/I(X)
+            \end{equation*}
+        First, construct a map $X \rightarrow \mathbb{A}^{m}$. Then show that the image is contained in $Y$. Let $\psi_{i} = \alpha(\overline{y}_{i}) \in \Gamma(X)$. So $\psi_{i}: X \rightarrow k$ is a polynomial function. Build a map $\psi : X \rightarrow \mathbb{A}^{m}$:
+            \begin{equation*}
+                p \mapsto (\psi_{1}(p), \ldots , \psi_{m}(p))
+            \end{equation*}
+        Claim 1: If $p \in X$, then $\psi(p) \in Y$. 
+
+        Suppose $f \in I(Y)$. Then $f(\psi(p)) = f((\psi_{1}(p), \ldots , \psi_{m}(p))) = f(\psi_{1}, \ldots , \psi_{m})(p)$:
+            \begin{equation*}
+                f(\alpha(\overline{y}_{1}), \ldots , \alpha(\overline{y}_{m}))(p)
+            \end{equation*}
+        We have $f(\psi(p)) = \alpha(f(\overline{y}_{1}, \ldots , \overline{y}_{m}))(p)$. The $f$ part is occurring in $\Gamma(Y)$. Since $f \in I(Y)$, $f = 0$. So $f$ is $0$ whenever $f$ is in the ideal of $Y$. So $\psi(p) \in V(I(Y)) = Y$. So we have $\psi: X \rightarrow Y$.
+
+        Claim 2: $\alpha = \psi^{*}$. For $f \in \Gamma(Y)$, we have
+            \begin{equation*}
+                (\psi^{*}f)(p) = f(\psi(p))
+            \end{equation*}
+        This should describe a function in $\Gamma(X)$. This is
+            \begin{equation*}
+                \alpha(f(\overline{y}_{1}, \ldots , \overline{y}_{m}))(p) = f(\alpha(\overline{y}_{1})(p), \ldots , \alpha(\overline{y}_{m})(p))
+            \end{equation*}
+
+        Uniqueness: If $\varphi^{*} = \psi^{*}$, then $\varphi = \psi$. Suppose for contradiction that $\varphi^{*} = \psi^{*}$ but $\varphi \neq \psi$. Then there is some $p \in x$ such that $\varphi(p) \neq \psi(p) \in Y \subseteq \mathbb{A}^{m}$. Let $\varphi(p) = (a_{1}, \ldots , a_{m})$, $\psi(p) = (b_{1}, \ldots , b_{n})$. So there $\exists j$ such that $a_{j} \neq b_{j}$. We have $f = x_{j} - a_{j}$ is a polynomial function $\overline{f} \in \Gamma(Y)$ such that
+            \begin{align*}
+                \varphi^{*}\overline{f}(p) = (\varphi(p)) &= 0 \\
+                \psi^{*}\overline{f}(p) = \overline{f}(\psi(p)) &\neq 0
+            \end{align*}
+    \end{proof}
+
+\begin{topic}
+    \section{Last Class Continued}
+\end{topic}
+
+\textbf{Last Class}: Let $X$ be an algebraic set.
+    \begin{itemize}
+        \item \textbf{Coordinate Ring}: $\Gamma(X) = \{\text{polynomial functions $X \rightarrow k$}\} = k[x_{1}, \ldots , x_{n}]/I(X)$ 
+
+        \item \textbf{Polynomial maps/Morphisms}: $\varphi : X \rightarrow Y$
+
+        \item \textbf{Pullback}: $\varphi^{*} : \Gamma(Y) \rightarrow \Gamma(X)$. 
+    \end{itemize}
+
+There is a bijection between
+    \begin{center}
+        \begin{tikzcd}
+            \{\text{polynomial maps} X \rightarrow Y\} f & \{\text{homomorphisms $\Gamma(Y) \rightarrow \Gamma(X)$}\}\ar[l, ""]   
+        \end{tikzcd}
+    \end{center}
+This is between $\varphi$ and its pullback.
+
+\begin{examples}
+    \begin{example}
+        Suppose $r \leq n$. What polynomial map of what algebraic sets corresponds to the inclusion of rings $k[x_{1}, \ldots , x_{r}] \actson k[x_{1}, \ldots , x_{n}]$? We want $k[x_{1}, \ldots , x_{r}] = \Gamma(Y)$ and $k[x_{1}, \ldots , x_{n}] = \Gamma(X)$. We have $\varphi : X = \mathbb{A}^{n} \rightarrow Y = \mathbb{A}^{r}$ This is a projection map. Suppose that you do not know the map. We consider $\varphi(p) = (b_{1}, \ldots , b_{r})$. We have $b_{i} = X_{i}(\varphi(p))= (\varphi^{*}X_{i})(p) = X_{i}(p) = a_{i}$ where $p = (a_{1}, \ldots , a_{n})$.
+    \end{example}
+    \begin{example}
+        Let $X = V(u - v^{3}) \subseteq \mathbb{A}^{2}$ Consider $\Gamma(\mathbb{A}^{3}) \rightarrow \Gamma(X)$:
+            \begin{equation*}
+                k[x, y, z] \rightarrow \dfrac{k[u, v]}{(u - v^{3})}
+            \end{equation*}
+        with mapping $x \mapsto u, y \mapsto 2u, z \mapsto 3u$. What is the polynomial map corresponding the this pullback?
+    \end{example}
+\end{examples}
+
+\begin{definition}{}
+    A polynomial map $\varphi : X \rightarrow Y$ is an isomorphism if $\exists  \psi : Y \rightarrow X$ a polynomial map such that $\psi \circ \varphi = \text{id}_{X}$ and $\varphi \circ \psi = \text{id}_{Y}$.
+\end{definition}
+
+\textbf{Lemma}: $\varphi : X \rightarrow Y$ is an isomorphism if and only if $\varphi^{*} : \Gamma(Y) \rightarrow \Gamma(X)$ is an isomorphism of rings.
+    \begin{proof}
+        Suppose that $\varphi^{*}$ is an isomorphism. Then it has an inverse $(\varphi^{*})^{-1}$ The inverse:
+            \begin{equation*}
+                (\varphi^{*})^{-1} : \Gamma(X) \rightarrow \Gamma(Y)
+            \end{equation*}
+        which corresponds to a mpa $\psi : Y \rightarrow X$. Now consider the composition $\psi \circ \varphi$ which we want to show is the identity on $X$. This is true if and only if $(\psi \circ \varphi)^{*} = \text{id}_{X}^{*} = \text{id}_{\Gamma(X)}$. We have $(\psi \circ \varphi)^{*} = \varphi^{*} \circ \psi^{*}$ which is indeed the identity.
+    \end{proof}
+
+\begin{examples}
+    \begin{example}
+        $\varphi : \mathbb{A}^{1} \rightarrow V(y - x^{2}) \subseteq \mathbb{A}^{2}$ where $t \mapsto (t, t^{2})$. The inverse map is the projection map of $(t, t^{2}) \rightarrow t$. You can also look at the map on the coordinate rings. Consider $\varphi^{*} : \frac{k[x, y]}{(y - x^{2})} \rightarrow k[t]$.
+    \end{example}
+\end{examples}
+
+\begin{definition}{Coordinate Changes}
+    A coordinate change is a type of polynomial map. When $T : \mathbb{A}^{n} \rightarrow \mathbb{A}^{n}$ given by
+        \begin{equation*}
+            p \rightarrow (T_{1}(p), \ldots , T_{m}(p))
+        \end{equation*}
+    is a bijection and all $T_{i}$ are degree $1$ polynomials, then $T$ is called a coordinate change. In this case, $T = T^{\prime\prime} \circ T^{\prime}$ where $T^{\prime}$ is a $k$ -linear map and $T^{\prime\prime}$ is a translation. This is always an isomorphism because $T^{\prime}$ has an inverse and so does $T^{\prime\prime}$.
+\end{definition} 
+
+\begin{examples}
+    \begin{example}
+        $T : \mathbb{A}^{2} \rightarrow \mathbb{A}^{2}$ where
+            \begin{equation*}
+                (x, y) \mapsto (2x + 1, x + y + 2)
+            \end{equation*}
+        This is 
+            \begin{equation*}
+                (x, y) \mapsto (2x, x + y) \rightarrow (2x + 1, x + y + 2)
+            \end{equation*}
+    \end{example}
+\end{examples}
+
+If $T : \mathbb{A}^{n} \rightarrow \mathbb{A}^{n}$, is an isomorphism, then for any algebraic set $X \subseteq \mathbb{A}^{n}$, then $T \eval_{X} : X \rightarrow \Gamma(X)$ is also an isomorphism. The inverse is given by $T^{-1}\eval_{T(X)}$.
+
+Returning to an example form Lecture $1$: 
+
+\begin{equation*}
+    V(x^{2} + y^{2} - 1) \subseteq \mathbb{A}^{2} \hspace{30pt} V(x^{2} - y^{2} - 1) \subseteq \mathbb{A}^{2}
+\end{equation*}
+
+The coordinate change is:
+    \begin{equation*}
+        (x, y) \mapsto (x, iy)
+    \end{equation*}
+
+\chapter{Week 5}
+
+\begin{topic}
+    \section{Algebraic Subset}
+\end{topic}
+
+\begin{definition}{Algebraic Subset}
+    Let $X \subseteq \mathbb{A}^{n}$ be an algebraic set. Given $\overline{f} \in \Gamma(X)$, we write $V(\overline{f}) = \{p \in X : \overline{f}(p) = 0\} \subseteq X$. We claim that $V(\overline{f})$ is an algebraic set in $X$.
+\end{definition}
+    \begin{proof}
+        We have $k[x_{1}, \ldots , x_{n}] \rightarrow \Gamma(X)$ is surjective and suppose $f \in k[x_{1}, \ldots , x_{n}]$ is sent to $\overline{f} \in \Gamma(X)$ under the quotient map. Then $V(\overline{f}) = V(f) \cap X$. Every algebraic set $Z \subseteq X$ is of this form because if $Z = V(f_{1}, \ldots  f_{r})$ for $f_{i} \in k[x_{1}, \ldots , x_{n}]$, then $Z = V(\overline{f}_{1}, \ldots , \overline{f}_{r})$
+    \end{proof}.
+
+\begin{topic}
+    \section{Images and Preimages}
+\end{topic}
+
+\textbf{Lemma}: Let $X \subseteq \mathbb{A}^{n}$ and $Y \subseteq \mathbb{A}^{m}$ be algebraic sets and suppose $\varphi : X \rightarrow Y$ is a polynomial map. If $Z \subseteq Y$ is an algebraic set, then $\varphi^{-1}(Z) \subseteq X$ is an algebraic set.
+    \begin{proof}
+        $Z = V(f_{1}, \ldots , f_{r}) $ for $f_{i} \in k[y_{1}, \ldots , y_{m}]$. Each defines a polynomial function $\overline{f}_{i} \in \Gamma(Y) = k[y_{1}, \ldots , y_{m}/I(Y)]$. 
+    \end{proof}
+
+\begin{examples}
+    \begin{example}
+        Suppose $\varphi : \mathbb{A}^{2} \rightarrow \mathbb{A}^{3}$ where
+            \begin{equation*}
+                (u, v) \mapsto (-u, v, u^{2} + v^{2})
+            \end{equation*}
+        where $\varphi : X \rightarrow Y$ by $X = V(u - v)$ and $Y = V(x^{2} + y^{2} - z)$.
+    \end{example}
+\end{examples}
+
+Question: If $A \subseteq X$ is an algebraic set and $\varphi : X \rightarrow Y$ is a polynomial map, is $\varphi(A) \subseteq Y$ an algebraic set?
+
+\textbf{Lemma}: let $\varphi : X \rightarrow Y$ be a morphism. Suppose $Z \subseteq Y$ is an algebraic set. If $\varphi^{-1}(Z)$ is irreducible, then $Z$ is irreducible.
+    \begin{proof}
+        Suppose for contradiction that $\varphi^{-1}(Z)$ is irreducible by $Z = A \cup B$ with $A, B \subset Z$ algebraic subsets. Then $\varphi^{-1}(Z) = \varphi^{-1}(A) \cup \varphi^{-1}(B)$. Since $\varphi^{-1}(Z)$ is irreducible, $\varphi^{-1}(Z) = \varphi^{-1}(A)$ or $\varphi^{-1}(B)$. Without loss of generality, assume $\varphi^{-1}(Z) = \varphi^{-1}(A)$. But then $Z = \varphi(\varphi^{-1}(Z)) = \varphi(\varphi^{-1}(Z)) = A$. 
+    \end{proof}
+
+Question: IF $\varphi(A)$ is irreducible, is $A$ irreducible?
+
+\begin{topic}
+    \section{Injectivity and Surjectivity}
+\end{topic}
+
+\textbf{Lemma}: Suppose that $\varphi : X \rightarrow Y$ is surjective. Then $\varphi^{*} : \Gamma(Y) \rightarrow \Gamma(X)$ is injective.
+    \begin{proof}
+        Let $f \in \Gamma(Y)$ and suppose that $\varphi^{*}f = 0$. We want to show that $f = 0$. 
+            \begin{center}
+                \begin{tikzcd}
+                    X \ar[rr, "\varphi^{*}f = 0", bend left = 20]\ar[r, "\varphi"] & Y \ar[r, "f"] & k   
+                \end{tikzcd}
+            \end{center}
+        Suppose that $q \in Y$ is any point. Because $\varphi$ is surjective, there is a $p \in X$ such that $q = \varphi(p)$. Then $f(q) = f(\varphi(p)) = \varphi^{*}f(p) = 0$. Then $f(q) = 0$ for all $q \in Y$ so $f = 0$.
+    \end{proof}
+
+\begin{examples}
+    \begin{example}
+        Projection map $\mathbb{A}^{n} \rightarrow \mathbb{A}^{r}$ corresponds to $k[x_{1}, \ldots , x_{r}] \rightarrow k[x_{1}, \ldots , x_{n}]$ 
+    \end{example}
+\end{examples}
+
+Question: If $\varphi^{*}$ is injective, is $\varphi$ surjective. No.
+
+\begin{definition}{Dominant}
+    A morphism $\varphi : X \rightarrow Y$ is dominant if $I(\varphi(X)) = I(Y)$.
+\end{definition}
+
+Applying the vanishing:
+    \begin{equation*}
+        V(I(\varphi(X))) = V(I(Y)) = Y
+    \end{equation*}
+and $V(I(\varphi(X)))$ is the closure of $X$, the smallest algebraic set that contains $X$.
+
+The example $V(xy - 1)$ to the projection on $\mathbb{A}$ by $y$ is dominant but not surjective.
+
+\textbf{Proposition}: Let $\varphi : X \rightarrow Y$ be a morphism. Then $\varphi^{*}$ is injective iff $\varphi$ is dominant.
+    \begin{proof}
+        ($\rightarrow $) Assume that $\varphi^{*}$ is injective. Since $\varphi(X) \subseteq Y$, we have $I(\varphi(X)) \supseteq I(Y)$. Let $Y \subseteq \mathbb{A}^{m}$ and $X \subseteq \mathbb{A}^{n}$. Let $f \in I(\varphi(X)) \subseteq k[y_{1}, \ldots , y_{m}]$. Then $\Gamma(\overline{f})(p)$ for $p \in X$. We get $f(\varphi(p)) = 0$ since $f \in I(\varphi(X))$ so $f$ vanishes on points in $\Im{\varphi}$. So $\varphi^{*}(\overline{f}) = 0$ meaning $\overline{f} = 0$. So $f \in I(Y)$.
+
+        ($\leftarrow $) Now suppose that $\varphi$ is dominant. Suppose $\overline{f} \in \Gamma(Y)$ and $\varphi^{*}(\overline{f}) = 0$. For all $p \in X$, we have $0 = (\varphi^{*}\overline{f}(p)) = \overline{f}(\varphi(p))$. Suppose $f \in k[y_{1}, \ldots , y_{m}]$ has image $\overline{f} \in \Gamma(Y)$. Then $\overline{f}(\varphi(p)) = f(\varphi(p)) \implies f \in I(\varphi(p))$. So $f \in I(Y)$. So $\overline{f}= 0$. 
+    \end{proof} 
+
+\chapter{Week 6}
+
+\begin{topic}
+    \section{More on Morphisms}
+\end{topic}
+
+Last class, we showed that $\varphi : X \rightarrow Y$ is dominant iff $\varphi^{*}$ is injective.
+
+\textbf{Proposition}: Let $\varphi : X \rightarrow Y$ be a morphism of algebraic sets.
+    \begin{equation*}
+        \varphi^{*}: \Gamma(Y) \rightarrow \Gamma(X)
+    \end{equation*}
+is surjective iff $\varphi(X)$ is an algebraic set and $X  \rightarrow \varphi(X)$ is an isomorphism.
+    \begin{proof}
+        $(\leftarrow )$ Suppose that $\varphi$ is an isomorphism onto $\varphi(X) = Y^{\prime} \subseteq Y$ where $Y^{\prime}$ is an algebraic set.
+            \begin{center}
+                \begin{tikzcd}
+                    X \ar[d, "\sim "] \ar[dr, "\varphi"] &   &  & \Gamma(X) \ar[d, "\sim "] &                                                \\
+                    Y^{\prime} \subseteq                 & Y &  & \Gamma(Y^{\prime})        & \Gamma(Y)\ar[ul, "\varphi^{\prime}"]\ar[l, ""]   
+                \end{tikzcd}
+            \end{center}
+        $(\rightarrow )$ Suppose $\varphi^{*} : \Gamma(Y) \rightarrow \Gamma(X)$ is surjective. Let $Y^{\prime} \subseteq Y$ be defined by $Y^{\prime} = V(\ker{\varphi^{*}})$. Now we claim that $\varphi(X) \subseteq Y^{\prime}$. Suppose that $\varphi(p) \in \varphi(X)$. If $\overline{f} \in \ker{\varphi^{*}}$,
+            \begin{equation*}
+                \overline{f}(\varphi(p)) = (\varphi^{*}\overline{f})(p) = 0
+            \end{equation*}
+        which because $\overline{f} \in \ker{\varphi^{*}}$. So we have that $\varphi(p) \in V(\ker{\varphi^{*}})$.
+
+        Claim 2: $X \cong Y^{\prime}$. Consider the maps:
+            \begin{center}
+                \begin{tikzcd}
+                    \Gamma(Y) \ar[r, "\varphi^{*}"]\ar[d, ""]                          & \Gamma(X) \\
+                    \Gamma(Y^{\prime}) = \Gamma(Y)/\ker{\varphi^{*}} \ar[ur, "\cong "] &             
+                \end{tikzcd}
+            \end{center}
+        Since we have $\Gamma(Y^{\prime}) \cong \Gamma(X)$ means that $Y^{\prime} \cong X$.
+    \end{proof}
+
+\begin{examples}
+    \begin{example}
+        Consider the inclusion $\mathbb{A}^{2} \rightarrow \mathbb{A}^{3}$ which sends $(u, v) \mapsto (u, v, 0)$. The pullback $k[x, y, z] = \Gamma(\mathbb{A}^{3}) \rightarrow \Gamma(\mathbb{A}^{2}) = k[u, v]$. We have $f(x, y, z) \mapsto \overline{f}(u, v, 0)$. So $k[x, y, z] \rightarrow k[x, y, z]/(z) = k[u, v]$. We have that $\ker{\varphi^{*}} = (z)$ and the image of $\varphi$ is $V(\ker{\varphi})$
+    \end{example}
+\end{examples}
+
+\begin{topic}
+    \section{Classical Topology}
+\end{topic}
+
+Recall open and closed intervals on $\mathbb{R}$. We have
+    \begin{equation*}
+        (a, b) = \{r \in \mathbb{R} : a < r < b\}
+    \end{equation*}
+and closed intervals:
+    \begin{equation*}
+        [a, b] = \{r \in \mathbb{R} : a \leq r \leq b\}
+    \end{equation*}
+More generally, given a subset $U \subseteq \mathbb{R}^{n}$, we say that $U$ is open in the classical topology if $\forall x \in U$, $\exists \varepsilon > 0$ such that 
+    \begin{equation*}
+        B_{\varepsilon}(x) = \{y : \lVert y - x \rVert <  \varepsilon\} \subseteq U
+    \end{equation*}
+We will check that open intervals are open with this definition. If $x \in (a, b)$. Then $a < x < b$ so $\exists \varepsilon > 0$ such that $\varepsilon < b - x, x - a$. Then $B_{\varepsilon}(x) \subseteq (a, b)$. For $\mathbb{R}^{1}$, $B_{\varepsilon}(x) = (x - \varepsilon, x + \varepsilon)$.
+
+\begin{definition}{Closed Sets}
+    We say $Z \subseteq \mathbb{R}^{n}$ is closed (in the classical topology) if the complement $Z^{c} \subseteq \mathbb{R}^{n}$ is open. 
+\end{definition}
+
+We can check that the closed intervals are closed. We have that $[a, b]^{c} = (-\infty, a) \cup (b, \infty)$.
+
+\textbf{Properties}: If $U_{i}$ are open, then 
+    \begin{equation*}
+        \bigcup_{i \in I}^{} U_{i} \text{ is an open set}
+    \end{equation*}
+and
+    \begin{equation*}
+        \bigcap_{i \in I}^{n} U_{i} \text{ is an open set}
+    \end{equation*}
+        \begin{proof}
+            Suppose that $x \in \bigcup_{i \in I}^{}  U_{i}$. Then $x \in U_{i}$ for some $i$. Because $U_{i}$ is open, $\exists \varepsilon > 0$ such that $B_{\varepsilon}(x) \subseteq U_{i} \subseteq \bigcup_{i \in I}^{} U_{i}$.
+
+            If $x \in \bigcap_{i \in I}^{n} U_{i}$. Then $x \in U_{i} \forall i$. So for each $i$, $\exists \varepsilon_{i} > 0$ such that $B_{\varepsilon_{i}}(x) \subseteq U_{i}$. Set $\varepsilon = \min(\varepsilon_{1}, \ldots , \varepsilon_{n})$, then $B_{\varepsilon}(x) \subseteq U_{i} \forall i$. So $B_{\varepsilon}(x) \subseteq \bigcap_{i \in I}^{} U_{i}$.
+        \end{proof}
+
+Note that in general, an infinite intersection of open sets need not be open. One example is $\bigcap_{i = 1}^{\infty} (1 - \frac{1}{i}, 1 + \frac{1}{i}) = \{1\}$.
+
+These open sets define the classical topology on $\mathbb{R}^{n}$. We can similarly define open sets in $\mathbb{C}^{n} \cong \mathbb{R}^{2n}$.
+
+\begin{definition}{Topology}
+    A topology on a space, $X$ is a collection $\mathcal{U}$ of subsets of $X$ that we call ``open sets'' satisfying 
+        \begin{itemize}
+            \item [(a)] If $U_{i} = \mathcal{U}$, then $\bigcup_{i \in I}^{} U_{i} \in \mathcal{U}$
+
+            \item [(b)] If $U_{i} \in \mathcal{U}$, then $\bigcap_{i = 1}^{n} U_{1} \in \mathcal{U}$
+
+            \item [(c)] $\emptyset, X \in \mathcal{U}$. 
+        \end{itemize}
+\end{definition}
+
+\begin{definition}{}
+    If $\mathcal{U}$ is a topology on $X$, we call a subset $Z \subseteq X$ closed if $Z^{c} \in \mathcal{U}$.
+\end{definition}
+
+A topology can also be defined by its closed sets. If $\mathcal{C}$ is the collection of closed sets in a topology, then the collection of open sets in $\mathcal{U} = \{Z^{c} : Z \in \mathcal{C}\}$.
+
+\textbf{Properties of Closed Sets}:
+    \begin{itemize}
+        \item [(a)] If $C_{i} \in \mathcal{C}$, then $\bigcup_{i = 1}^{n} C_{i} \in \mathcal{C}$. This is because $(\bigcup_{i = 1}^{n} C_{i})^{c} = \bigcap_{i = 1}^{n} C_{i}^{c} \in \mathcal{U}$.
+
+        \item [(b)] If $C_{i} \in \mathcal{C}$, then $\bigcap_{i \in I}^{} C_{i} \in \mathcal{C}$. We have $(\bigcap_{i \in I}^{} C_{i})^{c} = \bigcup_{i \in I}^{} C_{i}^{c} \in \mathcal{U}$.
+
+        \item $\emptyset, X \in \mathcal{C}$.
+    \end{itemize}
+
+A finite union of algebraic sets is an algebraic set. An arbitrary intersection of algebraic sets is an algebraic set. We also have $\mathbb{A}^{n}, \emptyset$ are algebraic sets. This says that the set of all algebraic sets satisfies the rules to be the closed sets of a topology.
+
+\begin{definition}{Zariski Topology}
+    We define the Zariski topology to be the topology on $\mathbb{A}^{n}$ where the closed set $\mathcal{C} = \{\text{algebraic sets in $\mathbb{A}^{n}$}\}$. Equivalently, the Zariski topology in $\mathbb{A}^{n}$ is the topology where the collection of open sets is $\mathcal{U} = \{Z^{c} : Z \subseteq \mathbb{A}^{n} \text{ is an algebraic set}\}$.
+\end{definition}
+
+\begin{definition}{}
+    We call an algebraic set $Z \subseteq X$ a closed set and a subset $U \subseteq X$ is called an open set if $U^{c}$ is a closed set
+\end{definition}
+    \begin{examples}
+        \begin{example}
+            $\mathbb{A}^{1}\backslash\{0\}$ is an open set in $\mathbb{A}^{1}$.
+        \end{example}
+        \begin{example}
+            $\mathbb{A}^{2} \backslash V(x^{2} + y^{2} + 1)$ is an open set in $\mathbb{A}^{2}$.
+        \end{example}
+        \begin{example}
+            $\{(x, y) : x \neq 0, y = 0\}$ is not open in $\mathbb{A}^{2}$ but $\{(x, y) : s \neq 0, y = 0\} \subseteq V(y)$ is an open set.
+        \end{example}
+    \end{examples}
+
+\begin{definition}{Closure}
+    Given a subset $A$ of a set $X$ with a topology $\mathcal{U}$, the closure of $A$ is the smallest closed set containing $A$.
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        In $\mathbb{R}$ with the Euclidean topology, the closure of the open interval $(-1, 2)$ is the closed interval $[-1, 2]$. But in $\mathbb{R}$ with the Zariski topology, the closure of $(-1, 2)$ is all of $\mathbb{R}$.
+    \end{example}
+\end{examples}
+
+\begin{topic}
+    \section{More on Closure and Continuity}
+\end{topic}
+
+Recall: Suppose $X$ is a set with a topology. Given a subset $A \subseteq  X$, the closure of $A$ is the smallest closed set containing $A$. This is often denoted as $\overline{A}$.
+    \begin{equation*}
+        \overline{A} = \bigcap_{Z \supseteq A, Z \text{ is closed }}^{} Z
+    \end{equation*}
+
+\textbf{Lemma}: Let $X$ be an algebraic set with the Zariski topology. If $A \subseteq X$ is any subset, the closure of $A$ is $V(I(A))$.
+    \begin{proof}
+        We have $V(I(A)) \supseteq A$ is a closed set. Now we need to show that it is contained in every closed set that contains $A$. Suppose that $V(S) \supseteq A$ is another closed set that contains $A$. So $S \subseteq I(A)$ and $V(S) \supseteq V(I(A))$.
+    \end{proof}
+
+Warning: Open sets in the Zariski topology are very big.
+
+Hw: If $X$ is an irreducible algebraic set, and $U \subseteq X$ is open, then $\overline{U} = X$.
+
+\textbf{Lemma}: Suppose $X$ is an irreducible algebraic set (aka a variety). If $U_{1}, U_{2} \subseteq X$ are non-empty open subsets, then $U_{1} \cap U_{2} \neq \emptyset$.
+
+A topology is ``Hausdorff'' if $\forall x, y \in X$ with $x \neq y$, $\exists U \ni x$ and $V k\ni y$ open sets such that $U \cap V = \emptyset$. This means that for every point, you can find spheres containing them that do not intersect. The lemma says that the Zariski topology is not Hausdorff.
+    \begin{proof}
+        Suppose for contradiction that $U_{1} \cap U_{2} = \emptyset$. Then $(U_{1} \cap U_{2})^{c} = X$ and $U_{1}^{c} \cup U_{2}^{c}$ So $X$ is a union of two closed sets, which are algebraic sets. So $X$ is  $U_{i}^{c}$ which means $U_{i} = \emptyset$.
+    \end{proof}
+
+The Zariski topology is very coarse where there are not many open subsets. Suppose $X$ has two topologies $\mathcal{U}$ and $\mathcal{V}$. We say $\mathcal{U}$ is coarser than $\mathcal{V}$ if $\mathcal{U} \subseteq \mathcal{V}$. We say $\mathcal{V}$ is finer than $\mathcal{U}$. The coarsest topology on $X$ is $\{\emptyset, X\}$. The finest topology on $X$ is $\{\text{all subsets of $X$}\}$.
+
+\begin{definition}{Continuity}
+    Suppose that $X$ and $Y$ are topological spaces. Then we say a map $\varphi : X \rightarrow Y$ is continuous if for any open set $U \subseteq Y$, $\varphi^{-1}(U) \subseteq X$ is an open subset in $X$. Equivalently, if for every closed set $Z \subseteq Y$, the preimage $\varphi^{-1}(Z) \subseteq X$ is a closed subset of $X$. These are equivalent because $\varphi^{-1}(Z^{c}) = (\varphi^{-1}(Z))^{c}$ 
+\end{definition}
+
+This definition generalizes continuous functions from $f : \mathbb{R} \rightarrow \mathbb{R}$ if we use the classical topology. The definition of continuity:
+    \begin{equation*}
+        f: \mathbb{R} \rightarrow \mathbb{R} \text{ is continuous if } \lim\limits_{x \to y} f(x) = f(y)
+    \end{equation*}
+A function if continuous if $\forall  \varepsilon > 0, \exists \delta > 0 $ such that if $\lvert x - y \rvert < \delta$, then $\lvert f(x) - f(y) \rvert < \varepsilon$. If $U \subseteq \mathbb{R}$ is open, why does this mean $f^{-1}(U)$ is open? Suppose $x \in f^{-1}(U)$. We must show that $\exists \delta > 0$ such that $B_{\delta}(x) \subseteq f^{-1}(U)$. Since $U$ is open and $f(x) \in U$, $\exists \varepsilon$ such that $B_{\varepsilon}(f(x)) \subseteq U$. So $\exists \delta$ such that $B_{\delta}(x) \subseteq f^{-1}(B_{\varepsilon}(f(x))) \subseteq f^{-1}(U)$.
+
+Now for the other direction. If $f^{-1}(U)$ is open for all $U$ open, why is $f$ continuous by the calculus definition? We have
+    \begin{equation*}
+        \forall \varepsilon > 0, B_{\varepsilon}(f(x)) \text{ is open}
+    \end{equation*}
+so $f^{-1}(B_{\varepsilon}(f(x)))$ is open. Now this means that $x \in f^{-1}(B_{\varepsilon}(f(x)))$. Sin the ball is open, $\exists  \delta > 0$ such that $B_{\delta}(x) \subseteq f^{-1}(B_{\varepsilon}(f(x)))$.
+
+We have already shown that morphisms are continuous in the Zariski topology. In fact, the Zariski topology is the coarsest topology such that
+    \begin{itemize}
+        \item A point $\in \mathbb{A}^{1}$ is closed
+
+        \item Polynomial maps are continuous.
+    \end{itemize}
+
+\begin{topic}
+    \section{Rational Maps}
+\end{topic}
+
+Let $X$ be a variety (irreducible algebraic set). The $\Gamma(X)$ is an integral domain.
+
+\begin{definition}{Field of Rational Functions}
+    The field of rational functions on $X$ is 
+        \begin{equation*}
+            k(X) = \mathop{Frac}(\Gamma(X)) = \left\{\dfrac{f}{g} : f, g \in \Gamma(X), g \neq 0\right\}/ \dfrac{f_{1}}{g_{1}} \sim \dfrac{f_{2}}{g_{2}} \iff f_{2}g_{1} = f_{1}g_{2}
+        \end{equation*}
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        $X = \mathbb{A}^{1}, \Gamma(X) = k[x]$, $k(X) = k(x)$.
+
+        $k(\mathbb{A}^{n}) = \mathop{Frac}(k[x_{1}, \ldots , x_{n}]) = k(x_{1}, \ldots , x_{n})$.
+    \end{example}
+    \begin{example}
+        $X = V(xy - z^{2}) \subseteq \mathbb{A}^{3}$. The rational function $\frac{x}{z}$ is the same as $\frac{z}{y}$ because $\frac{x}{z} \sim \frac{z}{y}$ as $z^{2} = xy$.
+    \end{example}
+\end{examples}
+
+\begin{definition}{Defined at $p$}
+    We say that a rational function $f \in k(X)$ is defined at $p \in X$ if $\exists a, b \in \Gamma(X)$ such that $f = \frac{1}{b}$ and $b(p) \neq 0$.
+\end{definition} 
+
+\begin{examples}
+    \begin{example}
+        It is not always clear where a rational function is defined. Is $\frac{x}{z}$ defined at $(0, 1, 0)$? Yes because there is a representative where the point is defined. In fact, it is defined at $(x, y, z)$ whenever $z \neq 0$ or $y \neq 0$. The pole set of $\frac{x}{z}$ is $V(z, y)$.
+    \end{example}
+\end{examples}
+
+\begin{definition}{Pole}
+    Let $f \in k(X)$ be a rational function. If $f$ is not defined at $p \in X$, then we say $p$ is a pole of $f$.
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        $\mathbb{A}^{2} \rightarrow \mathbb{A}^{1}$ as a projection from the origin onto $x = 1$. It sends $(x, y) \mapsto \frac{y}{x}$. This is not defined at $V(x)$.
+    \end{example}
+\end{examples}
+
+\textbf{Proposition}: The pole set of a rational function $f \in k(X)$ is an algebraic subset of $X$.
+    \begin{proof}
+        Let $J_{f} = \{g \in \Gamma(X) : fg \in \Gamma(X)\}$ you can verify that it is an ideal. The claim is that $V(J_{f}) = \text{pole set of } f$. A point $p$ is not a pole of $f$ iff $\exists a, b \in \Gamma(X)$ such that $f = \frac{a}{b}$ where $b(p) \neq 0$. That means that there is $b \in J_{f}$ so that $b(p) \neq 0$. This means that $p \not\in V(J_{f})$.
+    \end{proof} 
+
+\chapter{Week 7}
+
+Plan for today:
+    \begin{itemize}
+        \item Local ring at a point
+
+        \item Local rings (general definition)
+
+        \item Pullbacks on local rings 
+    \end{itemize}
+
+Last Class: Let $X$ be a variety (irreducible algebraic set). Then
+    \begin{equation*}
+        k(X) = \mathop{Frac}(\Gamma(X)) \text{ is the field of rational functions on $X$}
+    \end{equation*}
+
+\begin{topic}
+    \section{Local Rings}
+\end{topic}
+
+We say $f \in k(X)$ is defined at $P$ if $\exists a, b \in \Gamma(X)$  where $f = \frac{a}{b}$ and $b(P) \neq 0$.
+
+\begin{definition}{Local Ring at a Point}
+    The local ring of $X$ at $P$ is denoted $\mathcal{O}_{p}(X)$ is the subring $\mathcal{O}_{p}(X) = \{f \in k(X) : f \text{ is defined at $P$}\} \subseteq k(X)$.
+\end{definition}
+
+Caution: $\mathcal{O}_{p}(X)\neq k(P)$ 
+
+\begin{examples}
+    \begin{example}
+        $X = \mathbb{A}^{1}$. Consider $P = V(x)$. Then $k(P) = \text{Frac}(\Gamma(P)) = \text{Frac}(k) = k$
+
+        Meanwhile, $k(X) = k(\mathbb{A}^{1}) = k(x)$. 
+            \begin{equation*}
+                \mathcal{O}_{p}(X) = \{\frac{f}{g} : f, g \in k[x]\text{ and constant term of $g \neq 0$}\}
+            \end{equation*}
+        Although $x \in k(X)$ vanishes at $p = 0$, the function $x$ is not the zero function in $k(X)$.
+    \end{example}
+\end{examples}
+
+We have $k \subseteq \Gamma(X) \subseteq \mathcal{O}_{p}(X) \subseteq k(X)$.
+
+\textbf{Proposition}: Let $k$ be algebraically closed and let $X$ be a variety. Then $\Gamma(X) = \bigcap_{p \in X}^{} \mathcal{O}_{p}(X)$.
+    \begin{proof}
+        We have the containment of $\Gamma(X) \subseteq \bigcap_{p \in X}^{} \mathcal{O}_{p}(X)$. Suppose that $f \in \bigcap_{p \in X}^{} \mathcal{O}_{p}(X)$. Then $f$ is defined every where so if $J_{f} = \{g \in \Gamma(X) : g\cdot f \in \Gamma(X)\}$, then $V(J_{f}) = \emptyset$. Recall $\pi : k[x_{1}, \ldots , x_{n}] \rightarrow k[x_{1}, \ldots , x_{n}] /I(X) = \Gamma(X) \supseteq J_{f}$. We have $V(\pi^{-1}(J_{f})) = V(J_{f}) = \emptyset$. Now apply WN1 to say that $\pi^{-1}(J_{f}) = k[x_{1}, \ldots , x_{n}]$. So $J_{f} = \Gamma(X)$. Since $1 \in J_{f}$, we have $1 \cdot f \in \Gamma(X)$.
+    \end{proof}
+
+If $f \in \mathcal{O}_{p}(X)$ then there is an evaluation of $f$ at $p$.
+    \begin{itemize}
+        \item So choose $a, b \in \Gamma(X)$ such that $b(P) \neq 0$ and $f = \frac{a}{b}$. The $f(P) = \frac{a(P)}{b(P)}$.
+
+
+        \item If $a^{\prime}, b^{\prime} \in \Gamma(X)$ satisfy $b^{\prime}(P) \neq 0$ and $f = \frac{a^{\prime}}{b^{\prime}}$, then we have
+            \begin{equation*}
+                \dfrac{a^{\prime}}{b^{\prime}} = \dfrac{a}{b} \iff a^{\prime}b = b^{\prime}a \in \Gamma(X)
+            \end{equation*}
+        This means that:
+            \begin{equation*}
+                a^{\prime}(P)b(P) = b^{\prime}(P)a
+            \end{equation*}
+        so 
+            \begin{equation*}
+                \dfrac{a^{\prime}(P)}{b^{\prime}(P)} = \dfrac{a(P)}{b(P)}
+            \end{equation*}
+        which makes evaluation well-defined.
+    \end{itemize}
+
+Evaluation at $p$ gives a map $\mathcal{O}_{p}(X) \rightarrow k$ which is a surjective map. This means that the kernel is a maximal ideal which we denote as $m_{p}(X) = \{f \in \mathcal{O}_{p}(X) : f(P) = 0\}$. Claim: This is the set of $\{\text{non-units in $\mathcal{O}_{p}(X)$}\}$. In other words, if $g \notin m_{p}(X)$, then $g$ is a unit of $\mathcal{O}_{p}(X)$. If $g \notin m_{p}(X)$, the $g = \frac{a}{b}$ where $b(P) \neq 0$, $a(P) \neq 0$. So $\frac{b}{a} \in \mathcal{O}_{p}(X)$.
+
+\begin{definition}{Local Ring}
+    We call a ring $R$ a local ring if one of the following equivalent conditions is satisfied:
+        \begin{itemize}
+            \item  $\{\text{non-units in $R$}\} \subseteq R$ is an ideal
+
+            \item  $R$ has a unique maximal ideal. 
+        \end{itemize}
+\end{definition}
+    \begin{proof}
+        ($1 \rightarrow 2$) Let $m = \{\text{non-units in $R$}\}$ is an ideal. Every proper ideal $I \subset R$ is contained in $m$. If $I \subset m$, then $I$ has a unit making $I = R$. So $m$ is the unique maximal ideal since any other maximal ideal must be in $m$.
+
+        ($2 \rightarrow 1$) Suppose that $R$ has a unique maximal ideal. The claim is that $m$ is the set of non-units. If $a \in R$ that is not a unit, then the ideal generated by this element is not $R$. So $(a) \subseteq m$. So $m$ is the set of all non-units.
+    \end{proof}
+
+\begin{examples}
+    \begin{example}
+        Let $R = \{\frac{a}{b} : a, b \in \mathbb{Z}, b \text{ is odd}\} \subseteq \mathbb{Q}$. An element $c \in \mathbb{R}$ is a unit iff $c = \frac{2a}{b} \in (\frac{2}{1})$.
+    \end{example}
+    \begin{example}
+        Non-example. $k[x]$ is not a local ring: $(x), (x + 1)$ are non-units but $x - x + 1 = 1$ is a unit. The ideals $(x) \neq (x + 1)$ are maximal.
+    \end{example}
+    \begin{example}
+        Let $R = \{\frac{a}{b} \in k(x) : a, b \in k[x], b_{0} \neq 0\} = \mathcal{O}_{0}(\mathbb{A}^{1})$. This is a local ring with a unique maximal ideal $(\frac{x}{1})$.
+    \end{example}
+\end{examples}
+
+\textbf{Proposition}: $\mathcal{O}_{p}(X)$ is Noetherian.
+    \begin{proof}
+        Suppose that $I \subseteq \mathcal{O}_{p}(X)$ is an ideal. Consider $J = I \cap \Gamma(X)$. $J$ is an ideal in $\Gamma(X)$ and $\Gamma(X)$ is Noetherian. It follows that $J = (f_{1}, \ldots , f_{r})$. Consider $f = \frac{a}{b} \in I \subseteq \mathcal{O}_{p}(X)$, $a, b \in \Gamma(X)$ and $b(P) \neq 0$. Then $a = fb \in \mathcal{O}_{p}(X)$ and $a \in \Gamma(X), a \in I$, so $a \in J$. This means that 
+            \begin{equation*}
+                a = a_{1}f_{1} + \cdots +a_{r}f_{r} \text{ for $a_{i} \in \Gamma(X)$}
+            \end{equation*}
+        So we divide through by $b$:
+            \begin{equation*}
+                f = \dfrac{a}{b} = \left(\dfrac{a_{1}}{b}\right)f_{1} + \cdots  + \left(\dfrac{a_{r}}{b}\right)f_{r} \in (f_{1}, \ldots , f_{r})
+            \end{equation*}
+        so $I = (f_{1}, \ldots , f_{r})$.
+    \end{proof}
+
+\begin{topic}
+    \section{Local rings and Pullbacks}
+\end{topic}
+
+Suppose $\varphi : X \rightarrow Y$ is a morphism of varieties. Then 
+    \begin{center}
+        \begin{tikzcd}
+            \Gamma(Y)\ar[d, "", hook] \ar[r, "\varphi^{*}"] & \Gamma(X)\ar[d, "", hook] \\
+            k(Y) \ar[r, "?"]                                     & k(X)                             
+        \end{tikzcd}
+    \end{center}
+If it extends, then $\frac{f}{g} \mapsto \frac{\varphi^{*}f}{\varphi^{*}g}$. If $g \in \ker{\varphi^{*}}$, then this does not work.
+
+Let $p \in X$ and let $Q = \varphi(p) \in Y$. Suppose $f \in \mathcal{O}_{Q}(Y)$. Then $\exists g, h \in \Gamma(Y)$ so that $f = \frac{g}{h}$ and $h(Q) \neq 0$. Then
+    \begin{equation*}
+        (\varphi^{*}h)(p) = h(\varphi(p)) = h(Q) \neq 0
+    \end{equation*}
+So $\frac{\varphi^{*}g}{\varphi^{*}h}$ is defined at $P$. This induces a well-defined map 
+    \begin{center}
+        \begin{tikzcd}
+            \mathcal{O}_{Q}(Y)\ar[r, "\varphi^{*}"] & \mathcal{O}_{p}(X)   
+        \end{tikzcd}
+    \end{center}
+If $f = \frac{g^{\prime}}{h^{\prime}}$, where $h^{\prime}(Q) \neq 0$, then 
+    \begin{equation*}
+        \dfrac{g}{h} = \dfrac{g^{\prime}}{h^{\prime}} \iff  h^{\prime}g = g^{\prime}h
+    \end{equation*}
+which means
+    \begin{equation*}
+        \varphi^{*}h^{\prime}\varphi^{*}g = \varphi^{*}g^{\prime}\varphi^{*}h
+    \end{equation*}
+Since $\varphi^{*}h$, $\varphi^{*}h^{\prime} \neq 0$,
+    \begin{equation*}
+        \dfrac{\varphi^{*}g}{\varphi^{*}h} = \dfrac{\varphi^{*}g^{\prime}}{\varphi^{*}h^{\prime}}
+    \end{equation*}
+
+\begin{topic}
+    \section{Tangent Spaces}
+\end{topic}
+
+\textbf{Recall}: It is not always possible to pullback rational functions along $\varphi : X  \rightarrow Y$. If $p \in X$, $Q = \varphi(p) \in Y$, then $\mathcal{O}_{Q}(Y) \rightarrow \mathcal{O}_{p}(X)$
+
+\begin{examples}
+    \begin{example}
+            \begin{center}
+                \begin{tikzpicture}
+                    \begin{axis}[xmax=9,ymax=9, samples=50]
+                        \addplot[blue, thick] {0};
+                    \end{axis}
+                \end{tikzpicture}
+                \begin{tikzpicture}
+                    \begin{axis}[xmax=9,ymax=9, samples=50]
+                        \addplot[blue, thick] ({x^2}, {x^3});
+                    \end{axis}
+                \end{tikzpicture}
+            \end{center}
+        We have $\mathcal{O}_{1}(\mathbb{A}^{1}) = \{\frac{a}{b} : a, b \in k[t], b(1) \neq 0\}$ and $\mathcal{O}_{(1, 1)}(Y) = \{\frac{g}{b} : g , h \in \frac{k[x, y]}{(y^{2} - x^{3}}, h(1, 1) \neq 0\}$. Since $x$ does not vanish at $(1, 1)$, we have $\frac{y}{x} \rightarrow t$.
+
+        (Onto) We have $\frac{g(t)}{h(t)} \leftarrow \frac{g(\frac{y}{x})}{h(\frac{y}{x})}$.
+
+        (Injective) If $0 = \frac{\varphi^{*}g}{\varphi^{*}h}$,  then $\varphi^{*}g= 0$. This means $g(t^{2}, t^{3}) = 0$ and $g$ vanishes on $Y$. Also possible to show that $\varphi$ is dominant which implies that $\varphi^{*}$ is injective. 
+
+        On the other hand the map: $\mathcal{O}_{0}(\mathbb{A}^{n}) =  \{\frac{a}{b} : a, b \in k[t], b \neq 0\} \leftarrow \mathcal{O}_{(0, 0)}(Y) = \{\frac{f}{g} : f, g \in \frac{k[x, y]}{(x^{3}) - y^{2}}, g(0, 0) \neq 0\}$ is not an isomorphism.
+
+        Claim: $t \in \mathcal{O}_{0}(\mathbb{A}^{1})$ is not in the image. Suppose that $\frac{f(x, y)}{g(x, y)}$ where $\varphi^{*}\frac{f(x, y)}{g(x, y)} = t$. So $f(t^{2}, t^{3}) = g(t^{2}, t^{3})t$. So $t \divides f(t^{2}, t^{3})$ and $t^{2} \divides f(t^{2}, t^{3})$. So $t \divides g(t^{2}, t^{3})$ and $g(0, 0) = 0$.
+    \end{example}
+    \begin{example}
+        For $f = x^{2} + y^{2} - 1 = 0$, $V(f)$.
+            \begin{align*}
+                f_{x} &= \dv{x} = 3x \\
+                f_{y} &= \dv{y} = 2y   
+            \end{align*}
+        and $f_{x}(p) = -\sqrt{2}$, $f_{y}(p) = \sqrt{2}$. Tangent line to $V(f)$ at $p = (\frac{-\sqrt{2}}{2}, \frac{\sqrt{2}}{2})$ is
+            \begin{equation*}
+                f_{x}(p) (x - x_{0}) + f_{y}(p)(y - y_{0}) = 0\implies  y = x + \sqrt{2}
+            \end{equation*}
+    \end{example}
+\end{examples}
+
+\begin{definition}{Singular vs Smooth Points}
+    If $f_{x}(p) = 0$ and $f_{y}(p) = 0$, then $p$ is a singular point of $V(f)$. Otherwise, $p$ is a smooth point.
+\end{definition}
+
+Remark: This works when $f$ has no repeated factors or $(f)$ is radical.
+
+\begin{definition}{Smooth vs Singular Sets}
+    We say that $v(f)$ is smooth if $V(f)$ is smooth at every point $p \in V(f)$. Otherwise, we call $V(f)$ singular.
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        $f(x, y) = y^{2} - x^{3} + x$.
+    \end{example}
+    \begin{example}
+        $f = (y - x^{2})(y + 1) = y^{2} + y - x^{2}y - x^{2}$ is smooth over reals but not over the complex numbers. 
+            \begin{align*}
+                f_{x} &= -2xy - 2x      \\
+                f_{y} &= 2y + 1 - x^{2}   
+            \end{align*}
+        $0 = 2x(y + 1)$ and $x^{2} = 2y + 1$. Cases:
+            \begin{itemize}
+                \item $x = 0$: Then $2y + 1 = 0$, $y = \frac{-1}{2}$.
+
+                \item $y = -1$: Then $x^{2} = -1$. These points are singular on $V(f)$. So $V(f)$ is singular.
+            \end{itemize}
+    \end{example}
+    \begin{example}
+        $V(y^{2} - x^{3})$.
+    \end{example}
+\end{examples}
+
+\begin{definition}{Forms/Homogeneous Polynomials}
+    Given a polynomial $f \in k[x, y]$, We can always write
+        \begin{equation*}
+            f = f_{0} + f_{1} + f_{2} + \cdots + f_{d}
+        \end{equation*}
+    where $f_{i}$ is a linear combination of monomials with degree $i$.
+\end{definition}
+
+\textbf{Claim}: If $f_{1} \neq 0$, then $V(f_{1})$ is the tangent line to $V(f)$ at $(0, 0)$. If $f_{1} = 0$, then $V(f)$ is singular at $(0, 0)$.
+
+In either case, we define the tangent space to $V(f)$ at $(0, 0)$ to be $V(f_{1})$ denoted $T_{(0, 0)}V(f) = V(f_1)$.
+
+\chapter{Week 8}
+
+\begin{topic}
+    \section{Tangent Cones}
+\end{topic}
+
+Given $0 \neq f \in k[x, y]$, we defined $f_{i}$ homogeneous parts of degree $i$.
+
+\textbf{Claim}: If $f_{1} \neq 0$, then $V(f_{1})$ is the tangent line to $V(f)$ at $(0, 0)$. If $f_{1} = 0$, then $V(f)$ is singular at $(0, 0)$.
+
+In either case, we define the tangent space to $V(f)$ at $(0, 0)$ to be $V(f_{1})$ denoted $T_{(0, 0)}V(f) = V(f_1)$.
+    \begin{proof}
+        \begin{itemize}
+            \item [(a)] If $f_{1} \neq 0$ and $f = ax + by + \cdots $, then $f_{x} = a + \cdots $ and $f_{y} = b + \cdots $ so $f_{x}(0, 0)= a$, $f_{y}(0, 0) = b$. The tangent line is $f_{x}(p)(x - x_{0}) + f_{y}(p)(y - y_{0}) = 0$. So we have $ax + by = 0$.
+
+            \item [(b)] If $f_{1} = 0$, we have $f = cx^{2} + d xy + ey^{2} + \cdots $. Now $f_{x} = 2cx + dy + \cdots $, $f_{y} = d x + 2ey + \cdots $. Plug in: $f_{x}(0, 0) = 0, f_{y}(0, 0) = 0$. So $V(f)$ is singular at $(0, 0)$. 
+        \end{itemize}
+    \end{proof}
+
+If $f_{1} = 0$, the next best thing is to look at $f_{2}$.
+
+\begin{examples}
+    \begin{example}
+        $f = y^{2} - x^{2} - x^{3}$.
+    \end{example}
+\end{examples}
+
+\begin{definition}{Tangent Cone}
+    Suppose that $f_{0} = 0$, so $(0, 0) \in V(f)$. Let $m$ be the minimal number so that $f_{m} \neq 0$. Then $V(f_{m})$ is called the tangent cone to $V(f)$ at $(0, 0)$. Denoted $TC_{(0, 0)}V(f)$. Here, $m$ is called the multiplicity of $(0, 0)$.
+\end{definition}
+
+If $(0, 0) \in V(f)$ has multiplicity $1$, then the tangent cone is a line, and it is smooth at $(0, 0)$. If it is greater than $1$, it is a union of lines contained in tangent space.
+
+\textbf{Proposition}: Suppose $F \in k[x, y]$ is homogeneous of degree $m$. Assuming $k$ is algebraically closed, $F$ factors into $m$ linear factors.
+
+If $G(x, y)$ is dehomogenized: $G(x, 1)$, the form cannot be recovered unless the degree is known.
+    \begin{proof}
+        Say $F(x, y)$ is homogeneous. Write $F(x, y) = y^{r}G(x, y)$ where $y \ndivides G$. Consider $G(x, y) = a_{d}x^{d} + a_{d - 1}x^{d - 1}y + \cdots +a_{1}xy^{d - 1} + a_{0}y^{d}j$. And $G(x, 1)k= a_{d}x^{d} + \cdots  + a_{1}x + a_{0}$. Because $k$ is algebraically closed, $G(x, 1)$ factors to linear factors. $G(x, 1) = a_{d} \prod_{i = 1}^{d} (x - \lambda_{i})$. So $G(x, y) = a_{d} \prod_{i = 1}^{} (x - \lambda_{i}y)$.
+    \end{proof}
+
+Let $\varphi : \mathbb{A}^{2} \rightarrow \mathbb{A}^{2}$ be the map such that 
+    \begin{equation*}
+        \varphi((a, b)) = (x + a, y + b)
+    \end{equation*}
+
+We also have:
+    \begin{align*}
+        \varphi^{*} &: \Gamma(\mathbb{A}^{2}) \rightarrow \gamma          \\
+        f(x, y)               &\mapsto  f(x + a, y + b)  \\
+    \end{align*}
+If $(a, b) \in V(f)$, then $(0, 0) \in V(\varphi^{*}f) = \varphi^{-1}(V(f))$. Define the multiplicity of $(a, b) \in V(f)$ to be the multiplicity of $(0, 0) \in V(\varphi^{*}f)$. Define the tangent cone to $X$ at $(a, b)$ to be $\varphi(\text{tangent cone of $V(\varphi^{*}f)$ at $(0, 0)$})$.
+
+Suppose $X$ is an algebraic set in $\mathbb{A}^{n}$. The tangent space to $X$ at $(0, \ldots , 0)$ is $T_{(0, \ldots , 0)}X = V(\{f_{1} : f \in I(X)\})$. The tangent cone to $X$ at $(0, \ldots , 0)$ to be 
+    \begin{equation*}
+        TC_{(0, \ldots , 0)}X = V(\{f_{m} :  f\in I(X)\})
+    \end{equation*}
+
+Extend this to arbitrary points in $\mathbb{A}^{n}$ using translation.
+
+For any algebraic set $X$, we say $X$ is smooth iff $dim T_{p}X= dim X$ for all $p \in X$.
+
+\textbf{Relationship with the local ring}: Let $I, J$ be ideals in a ring $R$. Then 
+    \begin{equation*}
+        IJ = \langle ab : a \in I, b \in J \rangle
+    \end{equation*}
+And for powers of ideals:
+    \begin{equation*}
+        I^{n} = \langle a_{1}\cdots a_{n} : a_{i}\in I \rangle
+    \end{equation*}
+Suppose $P \in X$. Consider $m_{p} = m_{p}(X) \subseteq  \mathcal{O}_{p}(X)$. 
+
+\begin{definition}{Zariski Tangent Space}
+    The Zariski tangent space of $X$ at $P$ is the dual vector space of $ m_{p}/mp^{2}$ which is the space of linear maps $m_{p}/mp^{2} \rightarrow k$.
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        Suppose $f = y - 3x + x^{3}$. 
+    \end{example}
+\end{examples}
+
+\chapter{Week 9}
+
+Let $X$ be an algebraic set in $\mathbb{A}^{n}$ and suppose $(0, \ldots , 0) \in x$. Then $T_{(0, \ldots , 0)}X = V(\{f_{1} : f \in I(X)\})$.
+
+Suppose $p \in X$ any point. Recall that $m_{p}(X) \subseteq \mathcal{O}_{p(X)}$ to be the ideal of functions that vanish at $p$. The more abstract definition of the tangent space is the definition of the Zariski Tangent Space.
+
+\begin{examples}
+    \begin{example}
+        Suppose that $f = y - 3x + x^{3}$ and $p = (0, 0) \in V(f) = X$. Then $m_{p}(X) = (\frac{x}{1}, \frac{y}{1})$. We also know that $y= 3x - x^{3}$ so $m_{p}(X) = (\frac{x}{1})$. So $m_{p}(X)^{2} = (\frac{x^{2}}{1})$. 
+
+        Claim: $m_{p}(X)/m_{p}(X)^{2}$ is a one dimensional vector space spanned by $\frac{x}{1}$. 
+            \begin{proof}
+                If $\frac{g}{h} \in m_{p}(X)$. Then $\frac{g}{h} = \frac{g_{1} + \cdots }{h_{0} + h_{1} + \cdots }$. 
+                    \begin{equation*}
+                        \dfrac{g_{1}}{h_{0}} + g_{1}\left(\dfrac{1}{h} - \dfrac{1}{h_{0}}\right) + \dfrac{g - g_{1}}{h}
+                    \end{equation*}
+                We have $g_{1} \in m_{p}(X)$ and 
+                    \begin{equation*}
+                        \dfrac{1}{h} - \dfrac{1}{h_{0}} = \dfrac{h_{0} - h}{hh_{0}} \in m_{p}(X)
+                    \end{equation*}
+                So the quotient is a one-dimensional vector space.
+
+                In $m_{p}/m_{p}^{2}$, $\overline{y} = 3\overline{x}$. Then we have linear maps $m_{p}/m_{p}^{2} \rightarrow k$  as $\overline{x} \mapsto a$, $\overline{y} \mapsto 3a$. This determines a vector $(a, 3a)$ which lies in the tangent space.
+            \end{proof}
+    \end{example}
+\end{examples}
+
+Consider the case where $X = \mathbb{A}^{n} = V(0)$, $p = (0, \ldots , 0)$. What is $T_{p}(\mathbb{A}^{n})$. In this case, $T_{p}(\mathbb{A}^{n}) = \mathbb{A}^{n}$. We also have:
+    \begin{equation*}
+        \mathcal{O}_{p}(\mathbb{A}^{n}) = \{\dfrac{g}{h} : g, h \in k[x_{1}, \ldots , x_{n}], h(p) \neq 0\}
+    \end{equation*}
+and
+    \begin{equation*}
+        m_{p}(\mathbb{A}^{n}) = (\dfrac{x_{1}}{1}, \ldots , \dfrac{x_{n}}{1}), m_{;}(\mathbb{A}^{n})^{2} = \left(\dfrac{x_{1}^{2}}{1}, \ldots , \dfrac{x_{i}x_{j}}{1}\ldots , \dfrac{x_{n}^{2}}{1}\right)
+    \end{equation*}
+Claim: $m_{p}(\mathbb{A}^{n})/m_{p}(\mathbb{A}^{n})^{2}$ has basis $x_{1}/1, \ldots , x_{n}/1$. Each of these define a linear form on $\mathbb{A}^{n} \rightarrow k$. 
+
+We say that:
+    \begin{equation*}
+        x_{i}(a_{1}, \ldots , a_{n}) \mapsto a_{i}
+    \end{equation*}
+
+So $m_{p}/m_{p}^{2}$ is the dual to $T_{p}(\mathbb{A}^{n})$. And $(m_{p}/m_{p}^{2})^{v}$ is $((T_{p}(\mathbb{A}^{n}))^{v})^{v} \cong T_{p}\mathbb{A}^{n}$.
+
+In general, suppose $X = V(I)$. Then $T_{p}(X) = V(\{f_{1}: f \in I(X)\})$. Notice that $\{f_{1} : f \in I(X)\}$ forms a vector space. Choose a basis $L_{1}, \ldots , L_{r}$ for this vector space, so $T_{p}(X) = V(L_{1}, \ldots , L_{r})$
+
+Now $m_{p}(X)$ is $(\frac{x_{1}}{1}, \ldots , \frac{x_{n}}{1})$, but in $m_{p}(X) \subseteq \mathcal{O}_{p}(X)$, we have $L_{i}(\frac{x_{1}}{1}, \ldots , \frac{x_{n}}{1}) + (\text{higher degree terms}) \in I(X)$. In $m_{p}/m_{p}^{2}$, we have $L_{i}(\frac{x_{1}}{1}, \ldots , \frac{x_{n}}{1}) = 0$. In fact, we have a short exact sequence of vector spaces:
+    \begin{equation*}
+        0 \rightarrow \Span{L_{1}, \ldots , L_{r}} \rightarrow \Span{X_{1}, \ldots , X_{n}} \rightarrow m_{p}/m_{p}^{2} \rightarrow 0
+    \end{equation*}
+Take duals:
+    \begin{equation*}
+        0 \leftarrow \Span{L_{1}, \ldots , L_{r}}^{v} \leftarrow \Span{X_{1}, \ldots , X_{n}}^{v} \leftarrow (m_{p}/m_{p}^{2})^{v} \leftarrow 0
+    \end{equation*}
+
+So we have $\Span{x_{1}, \ldots , x_{n}}^{v} = ((T_{p}(\mathbb{A}^{n}))^{v})^{v} = \mathbb{A}^{n}$ and in the dual map, i
+    \begin{equation*}
+        (a_{1}, \ldots , a_{n}) \rightarrow \begin{bmatrix}
+            L_{1}(a_{1}, \ldots , a_{n}) \\
+            L_{2}(a_{1}, \ldots , a_{n}) \\
+            \vdots                       \\
+            L_{r}(a_{1}, \ldots , a_{n})   
+        \end{bmatrix}
+    \end{equation*}
+
+So the dual of $m_{p}/m_{p}^{2}$ map to $k$ is the kernel of the mapping to the tangent space. 
+
+\begin{topic}
+    \section{Intersection Multiplicity}
+\end{topic}
+
+\begin{definition}{Intersection Multiplicity}
+    Given $f, g \in k[x, y]$, we define 
+        \begin{equation*}
+            I_{p}(f, g) = dim_{k}\left(\dfrac{\mathcal{O}_{p}(\mathbb{A}^{2})}{(\dfrac{f}{1}), \dfrac{g}{1}}\right)
+        \end{equation*}
+\end{definition}
+
+\textbf{Properties of $I_{p}(f, g)$}:
+    \begin{itemize}
+        \item If $V(f)$ and $V(g)$ have a common component passing through $p$, then $I_{p}(f, g) = \inf$. Otherwise, $I_{p}(f, g) < \inf$.
+            \begin{examples}
+                \begin{example}
+                    Consider $V(xy), V(x(y - x^{3}))$. Then $\frac{\mathcal{O}_{(0, 0)}(\mathbb{A}^{2})}{(\frac{xy - x^{4}}{1}, \frac{xy}{1})}$. We claim that $1, \overline{y}, \overline{y}^{2}, \ldots $ are linearly independent. Suppose there is dependence in the powers of $\overline{y}$. Then there is a polynomial in $y$ that lies in $(\frac{xy - x^{4}}{1}, \frac{xy}{1})$.
+
+                    On the other hand, if $V(f), V(g)$ have no common component, then $V(f, g)$ is finite. This means $\frac{k[x, y]}{(g, f)}$ is finite dimensional. Additionally:
+                        \begin{equation*}
+                            \dfrac{k[x, y]}{(f, g)} = \bigoplus_{p_{i} \in V(f, g)} \dfrac{\mathcal{O}_{p_{i}}\mathbb{A}^{2}}{(f, g)}
+                        \end{equation*}
+                \end{example}
+            \end{examples}
+
+        \item $I_{p}(f, g) = 0$ iff $p \notin V(f) \cap V(g)$. 
+            \begin{proof}
+                If $p \notin V(f) \cap V(g) = V(f, g)$ means that there is an $h \in (f, g) \subseteq k[x, y]$ such that $h(p) \neq 0$. Then $h$ is a unit in $(f, g) \subseteq \mathcal{O}_{p}(\mathbb{A}^{2})$. So $(f, g) = \mathcal{O}_{p}(\mathbb{A}^{2})$, and the quotient is $0$.
+            \end{proof}
+
+            We also have that $I_{p}(f, g)$ depends only on the components of $V(f), V(g)$ that pass through $p$.
+                \begin{proof}
+                    If $p \notin V(f_{2})$, then $f_{2}(p) \neq 0$. So $f_{2}$ is a unit in $\mathcal{O}_{p}(\mathbb{A}^{2})$. So $(f, g) = (f_{1}f_{2}, g) = (f_{1}, g)$.
+                \end{proof}
+
+        \item If $\varphi: \mathbb{A}^{2} \rightarrow \mathbb{A}^{2}$ is a change of coordinates (i.e. Translation) with $\varphi(p) = q$, then $I_{q}(f, g) = I_{p}(\varphi^{*}f, \varphi^{*}g)$.
+
+        \item $I_{p}(f, g) = I_{p}(g, f)$
+
+        \item Let $\mathop{mult}_{(0, 0)(f)} = $ smallest $m$ such that $f_{m} \neq 0$. Then $I_{p}(f, g) \geq \mathop{mult}_{p}(f)\mathop{mult}_{p}(g)$. Equality holds iff the tangent cones of $V(f)$ and $V(g)$ have no lines in common.
+            \begin{examples}
+                \begin{example}
+                    Consider $I_{P}(y^{2} - x^{2} - x^{3} , y^{2} - x^{3})$. $TC_{P}(V(f)) = V(y - x) \cup V(y + x)$ while $TC_{P}(V(g)) = V(y^{2}) = V(y)$. $I_{P}(f, g) = \mathop{multi}_{P}(f) \mathop{multi}_{P}(g) = 2 \cdot 2 = 4$
+                \end{example}
+            \end{examples}
+
+        \item If $f = \prod f_{i}^{r_{i}}, g = \prod g_{j}^{s_{j}}$, then $I_{P}(f, g) = \sum_{i, j}r_{i}s_{j}I_{P}(f_{i}, g_{j})$.
+            \begin{examples}
+                \begin{example}
+                    $I_{P}(x^{2}, y^{3})$:
+                        \begin{align*}
+                            I_{P}(x^{2}, y^{3}) &= \dim_{k}\left(\dfrac{\mathcal{O}_{(0, 0)}(\mathbb{A}^{2})}{(x^{2}, y^{3})}\right) \\
+                                                &= \dim_{k}(\Span{1, x, y, xy, y^{2}, xy^{2}})                                     \\
+                                                &= 6                                                                                   
+                        \end{align*}
+                    Alternatively:
+                        \begin{align*}
+                            \dim_{k}\left(\dfrac{\mathcal{O}_{(0, 0)}(\mathbb{A}^{2})}{(x^{2}, y^{3})}\right) &= 2 \cdot 3 \cdot I_{P}(x, y) \\
+                                                                                                              &= 6                             
+                        \end{align*}
+                \end{example}
+                \begin{example}
+                    Another way to think about it: $I_{P}(x^{2} - \varepsilon, y(y^{2} - \varepsilon))$. Then $V(x^{2} - \varepsilon) = V(x - \sqrt{\varepsilon}) \cup V(x + \sqrt{\varepsilon})$ with the same for $V(y(y^{2} - \varepsilon))$. So there are $3$ y-axis lines meeting 2 x-axis lines at $(0, 0)$, which counts for multiplicity $6$.
+                \end{example}
+            \end{examples}
+
+        \item For any $a \in k[x, y]$, we have $I_{P}(f, g) = I_{P}(f, g + af)$. Using the definition:
+            \begin{equation*}
+                \dfrac{\mathcal{O}_{P}(\mathbb{A}^{2})}{(f, g)} = \dfrac{\mathcal{O}_{P}(\mathbb{A}^{2})}{(f, g + af)}
+            \end{equation*}
+                \begin{examples}
+                    \begin{example}
+                        $I_{P}(y, y - x^{2}) \rightarrow I_{P}(y, y - x^{2} + (3y^{2} + x)y)$.
+                    \end{example}
+                \end{examples}
+    \end{itemize}
+
+\begin{topic}
+    \section{Computing $I_{P}(f, g)$}
+\end{topic}
+
+\begin{examples}
+    \begin{example}
+        $P = (0, 0), I_{P}(y^{3} - y^{2}x^{3}, y - x^{2})$. Since $V(f) = V(y^{2}) \cup V(y - x^{3})$. 
+            \begin{itemize}
+                \item Step 1: Translate the point to the origin. Compute the pullback of $f, g$.
+
+                \item Step 2: Check if $f$ and $g$ have a common factor that vanishes at $P$.
+
+                \item Step 3: Check if $P \in V(f) \cap V(g)$. If not $I_{P}(f, g) = 0$.
+
+                \item Step 4: Find the tangent cones $TC_{P}(V(f)), TC_{P}(V(g))$. If $TC_{P}(V(f)), TC_{P}(V(g))$ have no lines in common, then $I_{P}(f, g) = \mathop{mult}_{P}(f) \mathop{mult}_{P}(g)$.
+
+                \item Step 5: Choose a common line in $TC$. Do a change of coordinates so that the common line is $V(y)$. Consider $f(x, 0), g(x, 0)$. We have $f = 0, g= -x^{2}$.
+
+                \item Step 6: Case 1 (one of $f(x, 0), g(x, 0) = 0$): $y^{r} \divides f(x, y)$.
+                    \begin{align*}
+                        I_{P}(f, g) &= I_{P}(y^{r}, g) + I_{P}(h, g)                        \\
+                                    &= I_{P}(y^{2}, y - x^{2}) + I_{P}(y - x^{3}, y- x^{2}) \\
+                                    &= 2I_{P}(y, y - x^{2}) + I_{P}(y - x^{3}, y - x^{2})   \\
+                                    &= 4 + I_{P}(y - x^{3}, y - x^{2})                        
+                    \end{align*}
+                And repeat the process on the other part. In general for $I_{P}(y^{r}, g)$, write $g(x, 0) = x^{m}(a_{0} + a_{1}x  + \cdots )$. So $g(x, y) = x^{m}A + yB$. Then compute $I_{P}(y^{r}, g) = rm + I_{P}(y, Ax) = rm (I_{P}(y, A) + I_{P}(y, x)) = rm(0 + 1)$.
+
+                \item Step 6: Case 2 (neither $f(x, 0), g(x, 0) = 0$): Consider $h = f - x^{r - s}g$ where $f(x, 0) = x^{r} + \cdots $, $g(x, 0) = x^{s} + \cdots$. In our example, we get $(y - x^{3}) - x(y - x^{2}) = y - xy$. So $I_{P}(y - x^{3}, y - x^{2}) = I_{P}(y - xy, y - x^{2})$. Now go back to the beginning.
+                    \begin{align*}
+                        I_{P}(y - x^{3}, y - x^{2}) &= I_{P}(y - xy, y - x^{2})                      \\
+                                                    &= I_{P}(y(1 - x), y - x^{2})                    \\
+                                                    &= I_{P}(y, y - x^{2}) + I_{P}(1 - x, y - x^{2}) \\
+                                                    &= I_{P}(y, -x^{2}) + 0                          \\
+                                                    &=  2I_{P}(y, -x) = 2                              
+                    \end{align*}
+
+                \item Add them all up. We have
+                    \begin{equation*}
+                        I_{P}(f, g) = I_{P}(y^{2}, g) + I_{P}(h, g) = 4 + 2 = 6
+                    \end{equation*}
+            \end{itemize}
+    \end{example}
+\end{examples}
+
+\chapter{Week 10}
+
+\begin{topic}
+    \section{Projective Space}
+\end{topic}
+
+Does the total intersection number 
+    \begin{equation*}
+        \sum_{p \in \mathbb{A}^{2}} I_{p}(f, g)
+    \end{equation*}
+satisfy some nice properties? Does it depend only on the degree of $f$ and $g$.
+
+Intersection ``runs off to $\infty$''.
+
+Example:
+    \begin{figure}
+        \centering
+        \def\svgwidth{\columnwidth}
+        \import{./figures/}{10ex2.pdf_tex}
+    \end{figure}
+
+Vertical lines only meet once. Other point meets at infinity.
+
+\begin{definition}{Projective Space}
+    Projective space $\mathbb{P}^{n}$ is an enlargement of $\mathbb{A}^{n}$ made by taking $\mathbb{A}^{n} \cup $ ``points at $\infty$'' or ``points on the horizon''.
+\end{definition}
+
+\begin{figure}
+    \centering
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{tikz3.pdf_tex}
+\end{figure}
+
+For every line through $(0, 0)$, we have a corresponding point that meets on $\{(x, 1)\}$ except $V(y)$. We call the set of all lines through the origin $\mathbb{P}^{1}$. This looks like a circle for $\mathbb{P}_{\mathbb{R}}^{1}$. $\mathbb{P}_{\mathbb{C}}^{1}$ over the complex numbers looks like a sphere with a point at infinity.
+
+Now for $\mathbb{A}^{2} \subseteq \mathbb{P}^{2}$. Consider $\{(x, y, 1)\} \subseteq \mathbb{A}^{3}$. For each point on the plane $(x, y, 1)$, we can associate with it a line through $(0, 0, 0)$. The lines in $\mathbb{A}^{3}$ that do not meet the plane are lines in $V(z)$. So
+    \begin{equation*}
+        \mathbb{P}^{2} = \{\text{all lines in $\mathbb{A}^{3}$ through $(0, 0, 0)$}\} = \mathbb{A}^{2} \cup \{\text{lines in $V(z)$}\} = \mathbb{A}^{2} \cup \mathbb{P}^{1}
+    \end{equation*}
+
+In general, define $\mathbb{P}^{n}$ to be $\{\text{lines through the origin in $\mathbb{A}^{n + 1}$}\}$.
+
+What is $\mathbb{P}^{0}?$ A single point.
+
+Any point $(x_{1}, \ldots, x_{n + 1}) \in \mathbb{A}^{n}$ $\neq (0, \ldots, 0)$ determines a line through the origin determines the line $\{(\lambda x_{1}, \ldots, \lambda x_{n + 1}): \lambda \in k\}$.
+
+Two points $(x_{1}, \ldots, x_{n + 1})$ and $(y_{1}, \ldots, y_{n + 1})$ determine the same line iff $(x_{1}, \ldots, x_{n + 1}) = (\lambda y_{1}, \ldots, \lambda y_{n + 1})$. Define two such points to be equivalent.
+
+\textbf{Alternate Definition}: $\mathbb{P}_{k}^{n} = \mathbb{A}^{n + 1}\backslash (0, \ldots, 0) / (x \sim\lambda x \lambda \neq 0)$
+
+We write points in $\mathbb{P}^{n}$ as $[x_{1} : \cdots:x_{n + 1}]$ where the values of $x_{i}$ is not well defined. However, if $x_{i} \neq 0$, then $x_{i}/x_{j}$ is well-defined.
+
+If $x_{n + 1} \neq 0$, then we can rescale:
+    \begin{equation*}
+        U_{n + 1} \cong\{[x_{1} : \cdots: x_{n + 1}] : s_{n + 1} \neq 0\} = \{[x_{1}/x_{n + 1} : \cdots: x_{n}/ x_{n + 1} : 1]\} = \mathbb{A}^{n}
+    \end{equation*}
+So:
+    \begin{equation*}
+        \mathbb{P}^{n} = U_{n + 1} \cup\{[x_{1} : \cdots:x_{n}: 0]\} = U_{n + 1} \cup \mathbb{P}^{n - 1}
+    \end{equation*}
+So we see that as $x_{n + 1} \rightarrow \infty$, the points of $U_{n + 1}$ tend to infinity.
+
+Iterating this procedure, 
+    \begin{equation*}
+        \mathbb{P}^{n} = \mathbb{A}^{n} \cup \mathbb{A}^{n - 1} \cdots \mathbb{A}^{1} \cup \text{pt}.
+    \end{equation*}
+Why just use the last coordinate? For any $i$, we define $U_{i} = \{[x_{1} : \cdots: x_{n + 1}]: x_{i} \neq 0\}$. For each point $p \in U_{i}$, we can write $p = [x_{1} : \cdots: x_{i - 1} : 1 : \cdots x_{n + 1}]$ with no restrictions on the other $x_{j}$. These $U_{i} \cong \mathbb{A}^{n} \subseteq \mathbb{P}^{n}$ are called affine charts. So $\mathbb{P}^{n} = \bigcup_{i = 1}^{n + 1}U_{i}$.
+
+\begin{examples}
+    \begin{example}
+        Affine charts on $\mathbb{P}^{1}$. We have $U_{2} = \{[x_{1} : x_{2}] : x_{2} \neq 0\}$. And $U_{1} = \{[x_{1}: x_{2}] : x_{1} \neq 0\}$.
+    \end{example}
+    \begin{example}
+        In $\mathbb{P}^{2}$, we have $3$ affine charts. 
+            \begin{align*}
+                U_{1} &= \{[1: x_{2} : x_{3}]\} \ni [1 : 2: 0]            \\
+                U_{2} &= \{[x_{1} : 1 : x_{3}]\} \ni [\dfrac{1}{2}: 1 :0] \\
+                U_{3} &= \{[x_{1} : x_{2} : 1]\} \not\ni [1 : 2 : 0]        
+            \end{align*}
+    \end{example}
+\end{examples}
+
+\begin{topic}
+    \section{Projective Algebraic Sets}
+\end{topic}
+
+Recall: $\mathbb{P}^{n} = \{\text{lines through $(0, \ldots, 0)$ in $\mathbb{A}^{n + 1}$}\}$ = $\mathbb{A}^{n + 1}\backslash\{(0, \ldots, 0)\} / \text{scalar}$. $[x_{1} : \cdots : x_{n + 1}] \in \mathbb{P}^{n}$. We defined
+    \begin{equation*}
+        U_{i} = \{[x_{1}: \cdots: x_{n + 1}] \in \mathbb{P}^{n} : x_{i} \neq 0\} = \mathbb{A}^{n}
+    \end{equation*}
+We focus on $U_{n + 1} \subseteq \mathbb{P}^{n}$ where we call the complement the hyperplane at $\infty$ or $H_{\infty}$.
+%
+\begin{examples}
+    \begin{example}
+        Consider $L = V(y - mx - b) \subseteq \mathbb{A}^{2}$. Identify $\mathbb{A}^{2} \cong U_{3} \hookrightarrow \mathbb{P}^{2}$ where $(x, y) \rightarrow [x : y : 1]$. Then
+            \begin{equation*}
+                L = \{(x, y) \in \mathbb{A}^{2} : y = mx + b\} = \{[x : y : 1] : y = mx + b\}
+            \end{equation*}
+        If we choose another representative:
+            \begin{equation*}
+                [\lambda x : \lambda y: \lambda] \rightarrow\lambda y = m\lambda x + b ?
+            \end{equation*}
+        Instead:
+            \begin{equation*}
+                \{[x : y : z] : y = mx + bz\} \cap U_{3}
+            \end{equation*}
+        Notice that
+            \begin{equation*}
+                y = mx + bz
+            \end{equation*}
+        is homogeneous. Let
+            \begin{equation*}
+                L^{\prime} = \{x : y : z \in \mathbb{P}^{2} : y = mx + bz\}
+            \end{equation*}
+        Then $L = L^{\prime} \cap U_{3}$. What is $L^{\prime} \cap H_{\infty}$? This is
+            \begin{equation*}
+                \{[x : y : 0] : y = mx\} = \{[1 : m : 0]\}
+            \end{equation*}
+    \end{example}
+    \begin{example}
+        Parallel Lines: Consider $V(y - 1), V(y) \subseteq \mathbb{A}^{2}$. Corresponding lines in $\mathbb{P}^{2}$:
+            \begin{equation*}
+                \{[x : y : z] : y = z\} \text{ and } \{[x : y : z] : y = 0\}
+            \end{equation*}
+        These meet in $[1 : 0 : 0]$
+    \end{example}
+\end{examples}
+
+\textbf{Recall}: $F \in k[x_{1}, \ldots, x_{n + 1}]$ is homogeneous of degree $d$ if $F$ is a linear combination of monomials of degree $d$. If $F$ is homogeneous of degree $d$, then $F(\lambda x_{1}, \ldots, \lambda x_{n + 1}) = \lambda^{d}F(x, \ldots, x_{n + 1})$. This means that homogeneous polynomials have well defined vanishings in $\mathbb{P}$. 
+
+\begin{definition}{Projective Hypersurface}
+    For $F \in k[x_{1}, \ldots, x_{n}]$ homogeneous, let 
+        \begin{equation*}
+            \mathbb{V}(F) = \{[x_{1} : x_{2} : \cdots : x_{n + 1}] \in \mathbb{P}^{n} : F(x_{1}, \ldots, x_{n + 1}) = 0\}
+        \end{equation*}
+\end{definition}
+
+Given any set $S \subseteq k[x_{1}, \ldots, x_{n + 1}]$ of homogeneous polynomials, the projective algebraic set is
+    \begin{equation*}
+        \mathbb{V}(S) =  \bigcap_{F \in S}\mathbb{V}(F)
+    \end{equation*}
+
+\begin{examples}
+    \begin{example}
+        Consider $x^{2}y - y^{3} \in k[x, y]$. We have:
+            \begin{equation*}
+                V(x^{2}y - y^{3})  \subseteq \mathbb{A}^{2}
+            \end{equation*}
+        Instead,
+            \begin{equation*}
+                \mathbb{V}(x^{2}y - y^{3}) = \{[-1 : 1], [1 : 1], [1 : 0]\}
+            \end{equation*}
+    \end{example}
+    \begin{example}
+        Consider $V(x^{2} - y^{2} - 1) \subseteq \mathbb{A}^{2}$ which is a hyperbola. Corresponding algebraic subset of $\mathbb{P}^{2}$ is 
+            \begin{fixedfigure}
+                \centering
+                \def\svgwidth{\columnwidth}
+                \import{./figures/}{hyperbola.pdf_tex}
+            \end{fixedfigure}
+            \begin{equation*}
+                \mathbb{V}(x^{2} - y^{2} - z^{2}) = \{[x : y : z] : x^{2} - y^{2} - z^{2} = 0\}
+            \end{equation*}
+        What is $\mathbb{V}(x^{2} - y^{2} - z^{2}) \cap H_{\infty}$? = $\{[x : y : z] : x^{2} - y^{2} = 0, z = 0\} = \{[1 : 1 : 0], [1: - 1 : 0]\}$. The way that it meets the point at infinity is based on the higher degree terms.
+
+        We can also take $V(x^{2} - y^{2} - z^{2}) \subseteq \mathbb{A}^{3}$ which is a cone. Then the usual $V(x^{2} - y^{2} - 1) = V(x^{2} - y^{2} - z^{2}) \cap V(z - 1)$ and $\mathbb{V}(x^{2} - y^{2} - z^{2}) \cap H_{\infty}$ is the cone intersected at $z = 0$
+            \begin{fixedfigure}
+                \centering
+                \def\svgwidth{\columnwidth}
+                \import{./figures/}{coneintersections.pdf_tex}
+            \end{fixedfigure}
+
+        We have $V(x^{2} - y^{2} - 1) = \mathbb{V}(x^{2} - y^{2} - z^{2}) \cap U_{3}$. But what does $\mathbb{V}(x^{2} - y^{2} -z^{2}) \cap U_{1}$ look like? It is a circle. This is
+            \begin{equation*}
+                \{[x : y : z] : x^{2} = y^{2} + z^{2} \land x \neq 0\} = \{[1 : y : z] : y^{2} + z^{2} = 1\}
+            \end{equation*}
+    \end{example}
+\end{examples}
+%
+\begin{definition}{Affine Cone}
+    Given a projective algebraic set, $X \subseteq \mathbb{P}^{n}$, we define the affine cone over $X$ to be 
+        \begin{equation*}
+            C(X) = \{(x_{1}, \ldots, x_{n + 1}) \subseteq \mathbb{A}^{n + 1} : [x_{1} : \cdots : x_{n + 1} \in X \text{ or } (x_{1}, \ldots, x_{n + 1}) = (0, \ldots, 0)]\}
+        \end{equation*}
+    Note: If $X = \mathbb{V}(F_{1}, \ldots, F_{r})$ with $F_{i} \in k[x_{1}, \ldots, x_{n}]$ homogeneous, then $C(X) = V(F_{1}, \ldots, F_{r}) \subseteq \mathbb{A}^{n + 1}$.
+\end{definition}
+
+More generally, an algebraic set $Y \subseteq \mathbb{A}^{n + 1}$ is called a cone if $\forall (x_{1}, \ldots, x_{n + 1}) \in Y$, we have $(\lambda x_{1}, \ldots, \lambda x_{n + 1}) \in Y$
+
+We have
+    \begin{center}
+        \begin{tikzcd}
+            \{\text{homogeneous poly in $k[x_{1}, \ldots, x_{n + 1}]$}\}\ar[d, "\mathbb{V}"]\ar[r, "V"] & \{\text{cones in $\mathbb{A}^{n + 1}$}\}\ar[dl, "\text{projectivize}", bend left = 20] \\
+            \{\text{algebraic sets in $\mathbb{P}^{n}$}\} \ar[ur, "C"]                                  &                                                                                          
+        \end{tikzcd}
+    \end{center}
+
+\begin{definition}{Homogeneous Ideals}
+    Given $X \subseteq \mathbb{P}^{n}$ a projective algebraic set, define $\mathbb{I}(X) \subseteq k[x_{1}, \ldots, x_{n + 1}]$ to be the ideal generated by $\{\text{homogeneous $F \in k[x_{1}, \ldots, x_{n}] : F(x_{1}, \ldots, x_{n + 1}) = 0$ for $[x_{1} : \cdots : x_{n + 1}] \in X$}\}$
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        What is $\mathbb{I}(\{[1 : 2], [3 : 4]\})$? It is $y - 2x$ and $3y - 4x$ so $((y - 2x)(3y - 4x)) = \mathbb{I}(\{[1 : 2], [3 : 4]\})$.
+    \end{example}
+\end{examples}
+
+\begin{definition}{}
+    An ideal $I \subseteq k[x_{1}, x_{n + 1}]$ is called homogeneous if it satisfies either of the following equivalent conditions:
+        \begin{itemize}
+            \item  $I$ is generated by homogeneous polynomials
+
+            \item  $\forall f \in I$, if $f = f_{0} + f_{1} + \cdots + f_{d}$ where each $f_{i}$ is homogeneous, of degree $i$, then $f_{i} \in I$. 
+        \end{itemize}
+\end{definition}
+    \begin{proof}
+        ($2 \rightarrow 1$) If $I = (f^{(1)}, \ldots, f^{(s)})$ and $2$ holds, then $f_{j}^{(i)} \in I$, so $I = \{f_{j}^{(i)}\}$.
+
+        ($1 \rightarrow 2$) Suppose that $I = (\{F^{(\alpha)}\})$ is generated by homogeneous polynomials with degree $F^{(\alpha)}$ equal to $d_{\alpha}$. Given $f \in I$ with $f = f_{m} + f_{d}$. First show that $f_{m} \in I$. Write $f = \sum A^{(\alpha)} F^{ (\alpha)}$ and consider the degree $m$ terms.
+            \begin{equation*}
+                f_{m} = \sum A^{(\alpha)}_{m - d_{\alpha}} F^{(\alpha)} \in I
+            \end{equation*}
+        Now $f - f_{m} \in I$. Now write $f - f_{m} = f_{m + 1} + \cdots + f_{d}$ and repeat.
+    \end{proof}
+
+\chapter{Week 11}
+
+\begin{topic}
+    \section{Projective Algebraic Sets}
+\end{topic}
+
+\textbf{Recall}: An ideal in $k[x_{1}, \ldots, x_{n + 1}]$ is called homogeneous if it is generated by homogeneous polynomials $I = (\{F^{(\alpha)}\})$. If $f \in I$ and we write
+    \begin{equation*}
+        f = f_{0} + f_{1} + \cdots + f_{d}
+    \end{equation*}
+with $f_{i}$ homogeneous of degree $i$, then each $f_{i} \in I$.
+
+It makes sense to take $\mathbb{V}(I)$ when $I$ is homogeneous:
+    \begin{equation*}
+        \mathbb{V}(I) = \mathbb{V}(\{F^{(\alpha)}\})
+    \end{equation*}
+Diagram:
+    \begin{center}
+        \begin{tikzcd}
+            \{\text{homogeneous ideals in $k[x_{1}, \ldots, x_{n + 1}]$}\}\ar[r, "\mathbb{V}"]\ar[dr, "V", bend right= 20] & \{\text{projective algebraic sets in $\mathbb{P}^{n}$}\}\ar[l, "\mathbb{I}", bend right= 20]\ar[d, "C", bend left = 20] \\
+                                                                                                                                       & \{\text{cone in $\mathbb{A}^{n + 1}$}\}\ar[u, "\text{projectivize}", bend left]\ar[ul, "I"]                                                                               
+        \end{tikzcd}
+    \end{center}
+
+Given $X \subseteq \mathbb{P}^{n}$ a projective algebraic set, $\mathbb{V}(\mathbb{I}(X)) = X$.
+    \begin{proof}
+        Suppose $X = \mathbb{V}(F_{1}, \ldots, F_{r})$. Then 
+            \begin{equation*}
+                \mathbb{I}(X) = (\{\text{homogeneous $F$ : $F(P) = 0 \forall P \in X$}\}) \supseteq (F_{1}, \ldots, F_{r})
+            \end{equation*}
+        so
+            \begin{equation*}
+                X \subseteq \mathbb{V}(\mathbb{I}(X)) \subseteq \mathbb{V}(F_{1}, \ldots, F_{r}) = X
+            \end{equation*}
+    \end{proof}
+
+What about $\mathbb{I}(\mathbb{V}(J))$ for $J$ homogeneous? We have $\mathbb{I}(\mathbb{V}(J)) = \sqrt{J}$.
+
+\textbf{Proposition}: Assume $k$ is an infinite field. If $X \subseteq \mathbb{P}^{n}$ is nonempty, then 
+    \begin{equation*}
+        \mathbb{I}(X) = I(C(X))
+    \end{equation*}
+    \begin{proof}
+        ($I(C(X)) \subseteq \mathbb{I}(X)$) Suppose that $f \in k[x_{1}, \ldots, x_{n + 1}]$ such that
+            \begin{equation*}
+                f(\lambda a_{1}, \ldots, \lambda a_{n + 1}) = 0
+            \end{equation*}
+        for all $[a_{1} : \cdots : a_{n + 1}] \in X$. If 
+            \begin{equation*}
+                f = f_{1} + f_{1} + \cdots + f_{d}
+            \end{equation*}
+        then $f_{i}(a_{1}, \ldots, a_{n + 1}) =0$. So $f_{i} \in \mathbb{I}(X)$. So $f \in \mathbb{I}(X)$.
+
+        ($\mathbb{I}(X) \subseteq I(C(X))$) Since $\mathbb{I}(X)$ is generated by homogeneous polynomials, it is enough to show that if $F \subseteq \mathbb{I}(X)$ is homogeneous, then $F \in I(C(X))$. Suppose $F(x_{1}, \ldots, x_{n + 1}) = 0$ for all $[x_{1} : \cdots : x_{n + 1}] \in X$. This means that
+            \begin{equation*}
+                F(\lambda x_{1}, \ldots, \lambda x_{n + 1}) = \lambda^{d}F(x_{1}, \ldots, x_{n + 1}) = 0
+            \end{equation*}
+        for all $\lambda \in k \backslash \{0\}$. Since $X$ is non-empty, so $\deg F > 0$, so $F(0, \ldots, 0) = 0$. So $F \in I(C(X))$.
+    \end{proof}
+
+\begin{theorem}{Projective Nullstellensatz}
+    Let $J \subseteq k[x_{1}, \ldots, x_{n + 1}]$ be a homogeneous ideal. Let $k$ be algebraically closed. 
+        \begin{itemize}
+            \item  $\mathbb{V}(J) = \emptyset$ if and only if $\exists N$ such that $J \supseteq (x_{1}, \ldots, x_{n + 1})^{N}$. $J$ contains all homogeneous polynomials of degree $ \geq N$.
+
+            \item  If $\mathbb{V}(J) \neq  \emptyset$, then $\mathbb{I}(\mathbb{V}(J)) = \sqrt{J}$.
+        \end{itemize}
+\end{theorem}
+
+\begin{examples}
+    \begin{example}
+        Nullstellensatz pt1: $\mathbb{V}(x^{3}, x^{2}y, xy^{2}, y^{3}) \subseteq \mathbb{V}(x^{3}, y^{3}) = \mathbb{V}(x, y) = \emptyset \subseteq \mathbb{P}^{1}$, because there is no $[0 : 0] \in \mathbb{P}^{1}$.
+    \end{example}
+\end{examples}
+
+\begin{proof}
+    (Part I) $\mathbb{V}(J) = \emptyset$ iff $V(J) \subseteq \{(0, \ldots, 0)\}$ iff $I(V(J)) \supseteq I(\{0, \ldots,0\}) = (x_{1}, \ldots, x_{n + 1})$. By usual Nullstellensatz, $\sqrt{J}  \supseteq I(\{0, \ldots, 0\}) = (x_{1}, \ldots, x_{n + 1})$.
+
+    (Part II) $\mathbb{I}(\mathbb{V}(J)) = I(C(\mathbb{V}(J))) = I(V(J)) = \sqrt{J}$
+\end{proof}
+
+So we have a bijection: 
+    \begin{center}
+        \begin{tikzcd}
+            \{\text{radical homogeneous ideals in $k[x_{1}, \ldots, k_{n + 1}]$ besides $(x_{1}, \ldots, x_{n + 1})$}\} \ar[r, "\mathbb{V}", bend left = 20] & \{\text{projective algebraic sets in $\mathbb{P}^{n}$}\}\ar[l, "\mathbb{I}", bend left = 20]   
+        \end{tikzcd}
+    \end{center}
+
+Sometimes, $(x_{1}, \ldots, x_{n + 1})$ is called irrelevant ideal.
+
+\begin{topic}
+    \section{Projective Zariski Topology}
+\end{topic}
+
+\begin{definition}{Irreducible Projective Algebraic Sets}
+    A projective algebraic set $X \subseteq \mathbb{P}^{n}$ is irreducible if it is not a union of two smaller projective algebraic sets. If $X = X_{1} \cup X_{2}$, then $X = X_{i}$. An irreducible projective algebraic set is called a projective variety.
+\end{definition}
+
+\begin{definition}{Zariski Topology}
+    The Zariski Topology on $\mathbb{P}^{n}$ to be the topology whose closed sets are the projective algebraic sets.
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        $U_{i} = \mathbb{P}^{n} \backslash \mathbb{V}(x_{i})$ is open. Hw: $X \subseteq \mathbb{P}^{n}$ is closed iff $X \cap U_{i}$ is closed.
+    \end{example} 
+\end{examples}
+
+\begin{definition}{Zariski Topology on $X$}
+    Given $X \subseteq \mathbb{P}^{n}$ a projective algebraic set, we define the Zariski Topology on $X$ to be the topology whose closed sets are the projective algebraic subsets of $X$.
+\end{definition}
+
+\textbf{Projective Closure}: Given an algebraic set $X \subseteq \mathbb{A}^{n} \cong U_{n + 1} \subseteq \mathbb{P}^{n}$, define the projective closure $\overline{X} \subseteq \mathbb{P}^{n}$ to be the smallest projective algebraic set that contains $X$. It is the closure of $X$ in the Zariski Topology on $\mathbb{P}^{n}$.
+
+\begin{examples}
+    \begin{example}
+        Suppose $V(y^{2} - x^{3} + x) \subseteq \mathbb{A}^{2} \cong U_{3} \hookrightarrow \mathbb{P}^{2}$.
+            \begin{fixedfigure}
+                \incfig{Projectiveclosure}
+            \end{fixedfigure}
+        The projective closure is $\mathbb{V}(y^{2}z - x^{3} + xz^{2})$. This meets $\mathbb{V}(z)$ in $\{[0 : 1 : 0]\}$.
+    \end{example}
+\end{examples}
+
+Given $f \in k[x_{1}, \ldots, x_{n}]$, let $H(f) \in k[x_{1}, \ldots, x_{n + 1}]$ be the homogeneous polynomial of the same degree.
+    \begin{equation*}
+        H(y^{2} - x^{3} + x) = y^{2}z - x^{3} + xz^{2}
+    \end{equation*}
+
+Note: $\mathbb{V}(H(f)) \cap U_{n +1} = V(f)$.
+
+Given an ideal $I \subseteq k[x_{1}, \ldots, x_{n}]$, let $H(I) = (\{H(f) : f \in I\}) \subseteq k[x_{1}, \ldots, x_{n + 1}]$.
+
+\textbf{Lemma}: Suppose $X \subseteq \mathbb{A}^{n} \cong U_{n + 1} \hookrightarrow \mathbb{P}^{n}$ is an algebraic set. The projective closure of $X$ is $\overline{X} = \mathbb{V}(H(I(X)))$.
+    \begin{proof}
+        We have $\mathbb{V}(H(I(X))) \cap U_{n + 1} = V(I(X)) = X$. So $X \subseteq \mathbb{V}(H(I(X)))$. Now show that if $Y \subseteq \mathbb{P}^{n} \supseteq X$, then $Y \supseteq \mathbb{V}(H(I(X)))$. We have $\mathbb{I}(Y) \subseteq \mathbb{I}(X)$. Now $\mathbb{I}(X) = H(I(X))$. Clearly, $H(I(X)) \subseteq  \mathbb{I}(X)$. Suppose $F \in \mathbb{I}(X)$ homogeneous. Then $F(x_{1}, \ldots, x_{n}, 1) \in I(X)$. We can recover the homogeneous form up to powers of $x_{n + 1}$. So $F(x_{1}, \ldots, x_{n + 1}) = x_{n + 1}^{\alpha} H(F(x_{1}, \ldots, x_{n}, 1)) \in H(I(X))$. So $\mathbb{I}(X) = H(I(X))$ and applying $\mathbb{V}$, we have
+            \begin{equation*}
+                \mathbb{V}(\mathbb{I}(X)) = \mathbb{V}(H(I(X))) \subseteq \mathbb{V}(\mathbb{I}(Y)) = Y
+            \end{equation*}
+    \end{proof}
+
+Here is an overview of the following interactions between affine space and projective space:
+    \begin{center}
+        \begin{tikzcd}[row sep = huge, column sep = huge] 
+            \ar[d, "\mlnode{set $x_{n + 1} = 1$}", bend left = 20]\left\{\mlnode{radical \\ homogeneous ideals \\ in $k[x_{1}, \ldots, x_{n + 1}]$}\right\} \ar[r, "\mathbb{V}"', bend left = 20] & \ar[d, "\mlnode{$\cap U_{n + 1}$}", bend left = 20]\left\{\mlnode{projective algebraic \\ sets in $\mathbb{P}^{n}$}\right\}\ar[l, "\mathbb{I}"', bend left = 20] \\
+            \left\{\mlnode{ideals in \\ $k[x_{1}, \ldots, x_{n}]$}\right\}\ar[u, "H", bend left = 20]\ar[r, "V"', bend left = 20]           & \left\{\mlnode{algebraic sets in $\mathbb{A}^{n}$}\right\}\ar[u, "\mlnode{projective \\ closure \\ $\overline{(\cdot)}$}", bend left = 20]\ar[l, "I"', bend left = 20]
+        \end{tikzcd}
+    \end{center}
+
+Note that taking the projective closure of an algebraic set and taking its intersection with $U_{n + 1}$ gives back the algebraic set: If $X \subseteq \mathbb{A}^{n}$, then $X^{-} \cap U_{n + 1} = X$. 
+
+\begin{examples}
+    \begin{example}
+        Consider $\mathbb{V}(x_{n + 1}) \subseteq \mathbb{P}^{n}$. Then $\mathbb{V}(x_{n + 1}) \cap U_{n + 1} = \emptyset$. Then $\overline{\mathbb{V}(x_{n + 1}) \cap U_{n + 1}} = \emptyset \neq \mathbb{V}(n + 1)$.
+    \end{example}
+    \begin{example}
+        Take the ideal $(x_{n + 1}) \subseteq k[x_{1}, \ldots, x_{n + 1}]$. Set $x_{n + 1}$ to be $1$, we get: $(1) = k[x_{1}, \ldots, x_{n}]$. Then $H((1)) = (1) \neq (x_{n + 1})$.
+    \end{example}
+    \begin{example}
+        $V(y^{2} - x^{3} + x) \subseteq \mathbb{A}^{2}$. If we homogenize to higher degree, $\mathbb{V}(y^{2}z^{2} - x^{3}z + xz^{3})$, then we get: $\mathbb{V}(z) \cup \mathbb{V}(y^{2}z - x^{3} + xz^{2})$. 
+    \end{example}
+\end{examples}
+
+\textbf{Proposition}: If $I = (f) \subseteq k[x_{1}, \ldots, x_{n}]$, then $H(I)$ is $(H(f))$.
+    \begin{proof}
+        We have $(H(f)) \subseteq H(I)$. To show the other containment, consider
+            \begin{align*}
+                \{H(g) : g \in (f)\} &= \{H(af) : a \in k[x_{1}, \ldots, x_{n}]\} \\
+                                     &= \{H(a) H(f) : a \in k[x_{1}, \ldots, x_{n}]\} \subseteq (H(f))
+            \end{align*}
+        So $H(I) \subseteq (H(f))$.
+    \end{proof}
+
+Warning: In general, if $I = (f_{1}, \ldots, f_{r})$, then $H(I) \neq (H(f_{1}), \ldots, H(f_{r}))$.
+
+\begin{examples}
+    \begin{example}
+        Let $I = (y - x^{2}, x) \ni y$, so $y \in H(I)$. However, $(H(y - x^{2}), H(x)) = (yz - x^{2}, x) \not\ni y$. What went wrong?
+            \begin{fixedfigure}
+                \incfig{homogenization}
+            \end{fixedfigure}
+    \end{example}
+    \begin{example}
+        Let $X = \{(t, t^{2}, t^{3}) : t \in k\} \subseteq \mathbb{A}^{3}$. What is $\overline{X} \subseteq \mathbb{P}^{3}$? 
+
+        Let $x = t, y = t^{2}, z = t^{3}$. Take:
+            \begin{equation*}
+                I(X) = (y - x^{2}, z - x^{3})
+            \end{equation*}
+        If we homogenize generators, we have $H(y - x^{2}) = yw - x^{2}$ and $H(z - x^{3}) = zw^{2} - x^{3}$. Consider $\mathbb{V}(yw - x^{2}) \cap \mathbb{V}(zw^{2} - x^{3}) = \mathbb{V}(w, x) \cup X \subseteq \mathbb{P}^{3}$. 
+            \begin{fixedfigure}
+                \incfig{projectiveclosure2}
+            \end{fixedfigure}
+        We claim $\overline{X} = Y = \mathbb{V}(wy - x^{2}, xz - y^{2}, zw - xy)$.
+
+        Check if $w \neq 0$, then set $w = 1$ to get: $y = x^{2}, xz = y^{2}, z = xy = x^{3}$. So
+            \begin{equation*}
+                Y \cap U_{4} = \{[x : x^{2} : x^{3} : 1]\} = X \subseteq U_{4}
+            \end{equation*}
+        Now check $V \cap \mathbb{V}(w) = \mathbb{V}(w, x, y) = \{[0 : 0 : 1 : 0]\}$. Suffices to show that any projective algebraic set that contains $X$ contains $[0: 0 : 1 : 0]$.
+
+        Consider $X \cap U_{3} = \{[t : t^{2} : t^{3} : 1] : t^{3} \neq 0\}$. Then this is the same as:
+            \begin{equation*}
+                \{t^{-2}: t^{-1} : 1 : t^{-3}\} = \{[s^{2} : s : 1 : s^{3}] : s \neq 0\}
+            \end{equation*}
+        Suppose $F(s^{2}, s, 1, s^{3}) = 0$ for all $s \neq 0$. Then $F(s^{2}, s, 1, s^{3}) \in k[s]$ has infinitely many roots, so it is the zero polynomial. So $F(0, 0, 1, 0) = 0$. So if $\mathbb{V}(F) \subseteq X$, then $\mathbb{V}(F) \ni \{[0 : 0 : 1 : 0]\}$ so any algebraic set containing $X$ contains $\{[0 : 0 : 1 : 0]\}$.
+    \end{example}
+\end{examples}
+
+\begin{topic}
+    \section{Homogeneous Coordinate Rings}
+\end{topic}
+
+\begin{definition}{Homogeneous Coordinate Ring}
+    Given a projective algebraic set $X \subseteq \mathbb{P}^{n}$, we define the homogeneous coordinate ring to be
+        \begin{equation*}
+            \Gamma_{h}(X) = \dfrac{k[x_{1}, \ldots, x_{n + 1}]}{I(X)} = \dfrac{k[x_{1}, \ldots, x_{n + 1}]}{I(C(X))} =  \Gamma (C(X))
+        \end{equation*}
+\end{definition}
+
+Warning: Elements of $\Gamma_{k}(X)$ are not functions on $X$. For example, take $X = \mathbb{P}^{1}$, $\Gamma_{h}(\mathbb{P}^{1}) = k[x, y]$, $f = x + y \in k[x, y]$ is not a function on $\mathbb{P}^{1}$, because $f([1 : 2]) = 3 \neq 6 = f([2 : 4])$
+
+\begin{definition}{Forms}
+    Suppose $I \subseteq k[x_{1}, \ldots, x_{n + 1}]$ is a homogeneous ideal and let $\Gamma = \frac{k[x_{1}, \ldots, x_{n + 1}]}{I}$. We say that $0 \neq f \in \Gamma$ is a form of degree $d$ if $\exists F \in k[x_{1}, \ldots, x_{n + 1}]$ that is homogeneous of degree $d$ such that $\overline{F} = f  \in \Gamma$.
+\end{definition}
+
+Check that the degree is well-defined: Suppose $F, G$ both satisfy that $\overline{F}, \overline{G} = f$. If this holds, then $F - G \in I$. If $\deg F \neq \deg G$, then since $I$ is homogeneous, then $F, G \in I$. So this means that $\overline{G}, \overline{F} = 0$.
+
+\textbf{Proposition}: Every $f \in \Gamma$ can be written uniquely as $f = f_{0} + \cdots + f_{d}$ where $f_{i}$ is a form of degree $i$.
+    \begin{proof}
+        Suppose $f = g_{0} + \cdots + g_{d}$ is another representation of $f$ with $g_{i}^{\prime}s $ a form of degree $i$. Then $\exists F_{i}, G_{i} \in k[x_{1}, \ldots, x_{n + 1}]$ that are homogeneous of degree $i$ so that $\overline{F_{i}} = f_{i}, \overline{G_{i}} = g_{i}$. We have that
+            \begin{equation*}
+                \sum \overline{F_{i}} = f = \sum \overline{G_{i}}
+            \end{equation*}
+        Then $\sum F_{i} - \sum G_{i} = \sum (F_{i} - G_{i}) \in I$. Since $I$ is homogeneous, each $F_{i} - G_{i} \in I$ which means that $f_{i} = g_{i}$.
+    \end{proof}
+
+\begin{topic}
+    \section{Morphisms of Projective Algebraic Sets}
+\end{topic}
+
+\begin{examples}
+    \begin{example}
+        $\mathbb{P}^{1} \rightarrow \mathbb{P}^{2}$ by:
+            \begin{align*}
+                [s, t]                 &\mapsto  [s^{2}: st : t^{2}]                                  \\
+                [\lambda s, \lambda t] &\mapsto  [\lambda^{2}s^{2}: \lambda^{2}st : \lambda^{2}t^{2}]   
+            \end{align*}
+        This morphism is well-defined because a scaling of the input gives a scaling of the output.
+    \end{example}
+\end{examples}
+
+\begin{definition}{Morphism}
+    Let $X \subseteq \mathbb{P}^{n}$ and $Y \subseteq \mathbb{P}^{m}$ be projective algebraic sets. A map $\varphi : X \rightarrow Y$ is called a morphism if for every point $P \in X,$ there exists an open set $U \subseteq X$ where $P \in U$, and there are homogeneous polynomials $F_{1}, \ldots, F_{m + 1}$ of the same degree such that $\varphi \mid_{U}$ agrees with the map 
+        \begin{align*}
+            U &\rightarrow  \mathbb{P}^{m}                     \\
+            Q &\mapsto      [F_{1}(Q) : \cdots : F_{m + 1}(Q)]   
+        \end{align*}
+\end{definition}
+
+In the previous example, for each point $P \in \mathbb{P}^{1}$, take the open set $U = \mathbb{P}^{1}$. Then the polynomials that define the map are $F_{1} = s^{2}$, $F_{2} = st$, $F_{3} = t^{2}$.
+
+Let $Y = \mathbb{V}(zx - y^{2})$. Then consider $\varphi : Y \rightarrow \mathbb{P}^{2}$ defined by
+    \begin{equation*}
+        [x : y : z] \mapsto
+             \begin{cases}
+                 [x : y] &  \text{ if } x \neq 0 (U_{1} \cap Y) \\
+                 [y : z] & \text{ if } z \neq 0 (U_{3} \cap Y)  \\
+             \end{cases}
+    \end{equation*}
+This is well defined because if $[x : y : z] \in U_{1} \cap U_{3} \cap Y$, $x , z \neq 0$. So $y \neq 0$. So
+    \begin{equation*}
+        [x : y] = [xy : y^{2}] = [xy : xz] = [y : z]
+    \end{equation*}
+
+\chapter{Week 12}
+
+\begin{topic}
+    \section{Morphisms Continued}
+\end{topic}
+
+\begin{definition}{Isomorphism of Projective Algebraic Sets}
+    If $X$ and $Y$ are projective algebraic sets and $\varphi : X \rightarrow Y$ is a morphism we call $\varphi$ an isomorphism if $\exists \psi : Y \rightarrow X$ such that $\varphi \circ \psi = id_{Y}, \psi \circ \varphi = id_{X}$ for $\psi$ a morphism.
+\end{definition} 
+
+\begin{examples}
+    \begin{example}
+        $\varphi : \mathbb{P}^{1} \rightarrow \mathbb{P}^{2}$ where:
+            \begin{equation*}
+                \varphi ([s: t]) \mapsto [s^{2} : st : t^{2}]
+            \end{equation*}
+        So $\varphi : \mathbb{P}^{1} \rightarrow \mathbb{V}(xz - y^{2}) = Y$. The inverse map $Y \rightarrow \mathbb{P}^{1}$ is defined by
+            \begin{align*}
+                 [x : y : z] \mapsto
+                     \begin{cases}
+                         [x : y] & x \neq 0 \text{ on $U_{1} \cap Y$} \\
+                         [y : z] & z \neq 0 \text{ on $U_{3} \cap Y$}  
+                     \end{cases}
+            \end{align*}
+        Why is $(U_{1} \cap Y)\cup (U_{3} \cap Y)$? If $x = z = 0$, then $y = 0$, so the complement of the union is empty. If $[x : y : z] \in U_{1} \cap U_{3} \cap Y$, then $xz \neq 0 \implies y \neq 0$
+            \begin{equation*}
+                [x : y] = [xy : y^{2}] = [xy : xz] = [y: z]
+            \end{equation*}
+        So if an element lies in both, then the preimage is equal. It is the inverse:
+            \begin{equation*}
+                [s : t] \mapsto [s^{2} : st : t^{2}] \mapsto
+                     \begin{cases}
+                         [s^{2} : st] = [s : t] & s \neq 0 \\
+                         [st : t^{2}]  = [s : t]          & t \neq 0   
+                     \end{cases}
+            \end{equation*}
+        The other composition is also the identity on $Y$.
+    \end{example}
+\end{examples}
+
+\textbf{Warning}: $X$ and $Y$ projective algebraic sets, isomorphic, do not necessarily have isomorphic $\Gamma_{h}(X) \cong \Gamma_{h}(Y)$.
+
+In fact, $\Gamma_{h}(X) = \Gamma (C(X))$. So the coordinate rings are isomorphic iff the cones of $C(X) \cong C(Y)$.
+
+We have:
+    \begin{align*}
+        C(\mathbb{P}^{1}) &= \mathbb{A}^{2} \\
+        C(Y)              &= V(xz - y^{2})    
+    \end{align*}
+
+But the coordinate rings are not isomorphic:
+    \begin{align*}
+        \Gamma_{h}(\mathbb{P}^{1}) &= k[x, y]                          \\
+        \Gamma_{h}(Y)              &= \dfrac{k[x, y, z]}{(xz - y^{2})}   
+    \end{align*}
+
+\textbf{Lemma}: If $\varphi : X \rightarrow Y$ is a morphism of projective algebraic sets, then $\varphi$ is continuous in the Zariski topology.
+    \begin{proof}Q
+        Suppose that $Z \subseteq Y$ is a closed set, $Z = \mathbb{V}(G_{1}, \ldots, G_{r})$. We must show that $\varphi^{-1}(Z) \subseteq X$ is closed. We can write $X =  \bigcup_{\alpha} U_{\alpha}$ with $U_{\alpha}$ open such that $\varphi_{U_{\alpha}}$ is given by $Q \mapsto [F_{1}^{\alpha} (Q), \ldots, F_{m}^{\alpha} (Q) ]$. Then 
+            \begin{equation*}
+                \varphi^{-1}(Z) \cap U_{\alpha} = \varphi^{-1}_{U_{\alpha}} (Z) = \mathbb{V}(G_{1}(F_{1}^{\alpha}, \ldots, F^{\alpha}_{m + 1}), \ldots, G_{r}(F^{\alpha}_{1}, \ldots, F_{m + 1}^{\alpha})) \cap U_{\alpha} = Z_{\alpha} \subseteq \mathbb{P}^{n}
+            \end{equation*}
+        Claim: $U_{\alpha} \backslash (\varphi^{-1}(Z) \cap U_{\alpha}) \subseteq X$ is an open subset. Indeed, the complement is $[U_{\alpha} \backslash (Z_{\alpha} \cap U_{\alpha})]^{c} = (Z_{\alpha} \cap X) \cup U_{\alpha}^{c}$ has closed components. We have $X \backslash \varphi^{-1}(Z) = \bigcup_{\alpha} U_{\alpha}\backslash (\varphi^{-1}(Z) \cap U_{\alpha})$ is a union of open sets, hence it is open. So $\varphi^{-1}(Z)$ is closed.
+    \end{proof}
+
+\textbf{Lemma}: Let $X$ be a projective algebraic set. If $X = \bigcup_{\alpha \in A}U_{\alpha}$ is a union of open sets, then $\exists$ a finite subset $A^{\prime} \subseteq A$ so that $X = \bigcup_{\alpha \in A^{\prime}}U_{\alpha}$. In other words, $X$ is compact in the Zariski Topology.
+    \begin{proof}
+        Suppose for contradiction that no finite subset $A^{\prime} \subseteq A$ exists. Then we can build an infinite ascending chain of open sets:
+            \begin{equation*}
+                W_{1} \subset W_{1} \subset \cdots \subset X
+            \end{equation*}
+        Take complements in $X$: 
+            \begin{equation*}
+                X \supset Z_{1} \supset \cdots \supset Z_{1}
+            \end{equation*}
+        Infinite descending chain of closed sets. Now apply $\mathbb{I}$:
+            \begin{equation*}
+                \mathbb{I}(A) \subset \mathbb{I}(Z_{1}) \subset \cdots \subset \mathbb{I}(X) \subset k[X_{1}, \ldots, X_{n + 1}]
+            \end{equation*}
+        So this is an infinite ascending chain in a Noetherian ring, which is a contradiction. This also works for algebraic sets in $\mathbb{A}^{n}$.
+    \end{proof}
+
+\begin{topic}
+    \section{Projective Change of Coordinates}
+\end{topic}
+
+Suppose $T : \mathbb{A}^{n + 1} \rightarrow \mathbb{A}^{n + 1}$ invertible linear transformation with $T(0, \ldots, 0) = (0, \ldots, 0)$. Then $T$ sends line through the origin to lines through the origin. So it induces a morphism from $\mathbb{P}^{n} \rightarrow \mathbb{P}^{n}$. Since $T$ is invertible, there is $T^{-1}$ which induces an isomorphism from $\mathbb{P}^{n} \rightarrow \mathbb{P}^{n}$.
+
+We call this isomorphism $\mathbb{P}^{n} \rightarrow \mathbb{P}^{n}$ a projective change of coordinates. Note that $\lambda T$ defines the same map.
+
+\begin{definition}{$GL_{n + 1}$ and $PGL_{n + 1}$}
+    The group of invertible linear transformations is called $GL_{n + 1}$. The quotient group of $GL_{n + 1}/k\{I\}$ is called $PGL_{n + 1}$, the projective general linear group.
+\end{definition}
+
+In fact, $PGL_{n + 1}$ is the group of all automorphisms of $\mathbb{P}^{n}$.
+
+\begin{definition}{Projective Equivalence}
+    $X, Y \subseteq \mathbb{P}^{n}$ are projectively equivalent if $\exists$ a projective change of coordinates $\mathbb{P}^{n} \rightarrow \mathbb{P}^{n}$ that restricts to an isomorphism $X \rightarrow Y$.  
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        We have $\mathbb{V}(x) \subseteq \mathbb{P}^{2}$ and $\mathbb{V}(y) \subseteq \mathbb{P}^{2}$ are projectively equivalent. The projective change of coordinates inducing the equivalence is $[x : y : z] \mapsto [y : x : z]$ with the corresponding matrix as:
+            \begin{equation*}
+                \begin{bmatrix}
+                    0 & 1 & 0 \\
+                    1 & 0 & 0 \\
+                    0 & 0 & 1   
+                \end{bmatrix}
+            \end{equation*}
+    \end{example}
+\end{examples}
+
+\textbf{Note}: If $T : \mathbb{A}^{n + 1} \rightarrow \mathbb{A}^{n + 1}$ is an invertible linear transformation inducing change of coordinates $\mathbb{P}^{n} \rightarrow \mathbb{P}^{n}$ by $p \mapsto [T_{1}(p) : T_{2}(p) : \cdots : T_{n + 1}(p)]$, then 
+    \begin{equation*}
+        T^{-1}(\mathbb{V}(F_{1}, \ldots, F_{r})) = \mathbb{V}(F_{1}(T_{1}, \ldots, T_{n + 1}), \ldots, F_{r}(T_{1}, \ldots, T_{n + 1}))
+    \end{equation*}
+When $X, Y$ are projectively equivalent, $C(X) \cong C(Y)$ so there is an isomorphism $\Gamma_{h}(X) \cong \Gamma_{h}(Y)$.
+
+\begin{topic}
+    \section{Examples of Morphisms}
+\end{topic}
+
+\textbf{Rational Normal Curves}: A morphism $\mathbb{P}^{1} \rightarrow \mathbb{P}^{2}$ with $[s : t] \mapsto [s^{2} : st : t^{2}]$. Image in $\mathbb{P}^{2}$ is $\mathbb{V}(x_{1}x_{3} - x_{2}^{2})$. 
+
+Twisted Cubic Example: Consider $\mathbb{P}^{1} \rightarrow \mathbb{P}^{3}$ with
+    \begin{equation*}
+        [s : t] \mapsto [s^{3} : s^{2}t : st^{2} : t^{3}]
+    \end{equation*}
+Image: $\mathbb{V}(x_{1}x_{3} - x^{2}_{2}, x_{2}x_{4} - x_{3}^{2}, x_{1}x_{4} - x_{2}x_{3})$. Consider the matrix:
+    \begin{equation*}
+        \begin{bmatrix}
+            x_{1} & x_{2} & x_{3} \\
+            x_{2} & x_{3} & x_{4}   
+        \end{bmatrix}
+    \end{equation*}
+
+Veronese embedding $v_{1, d}$: Consider $\mathbb{P}^{1} \rightarrow \mathbb{P}^{d}$. 
+    \begin{equation*}
+        [s : t] \mapsto [s^{d} : s^{d - 1}t : \cdots : st^{d - 1} : t^{d}]
+    \end{equation*}
+Claim: The image is:
+    \begin{equation*}
+        Y = \{[x_{1} : \cdots : x_{d + 1}]  \in \mathbb{P}^{d} : \mathop{rank}\begin{bmatrix}
+            x_{1} & x_{2} & \ldots &  x_{d}     \\
+            x_{2} & x_{3} & \cdots &  x_{d + 1}   
+        \end{bmatrix} \leq 1\} = \mathbb{V}(\text{2 $\times$ 2 minors}) = \mathbb{V}(\{x_{1}x_{j} - x_{j - 1}xx_{i + 1}\})
+    \end{equation*}
+
+\begin{proof}
+    We have that the image of the map is in $Y$ because:
+        \begin{equation*}
+            \begin{bmatrix}
+                s^{d}      & s^{d - 1}t & \ldots &  st^{d - 1} \\
+                s^{d - 1}t & s^{d - 2}t & \ldots &  t^{d}        
+            \end{bmatrix}
+        \end{equation*}
+    has linearly dependent rows if $t = 0$ and if $t \neq 0$, the top row is $\frac{s}{t}$ times the bottom one.
+
+    For $Y \subseteq $ Image, we have $v_{1, d}([0 : 1]) $ corresponds to first row is all zero. If $1$st row is non-zero the second row is a multiple of it. $x_{2} = ux_{1}, x_{3} = ux_{2}$, $\ldots, x_{4} = ux_{3}, \ldots$. So $[x_{1} : x_{2} : \cdots : x_{d + 1}] = [x_{1}  : ux_{1} : \cdots : xu^{d}x_{1}]$. This is $[1 : u : u^{2} : \cdots : u^{d}]$. This is the image of $v_{1, d}([1 : u])$.
+\end{proof}
+
+Veronese embedding $v_{2, 2}$: $\mathbb{P}^{2} \rightarrow \mathbb{P}^{5}$:
+    \begin{equation*}
+        [x : y : z] \mapsto [x^{2} : xy : xz : y^{2} : yz : z^{2}]
+    \end{equation*}
+$ v_{2, 2}$ is an isomorphism onto its image.
+    \begin{proof}
+        The inverse morphism is:
+            \begin{equation*}
+                [x_{1} : x_{2} : x_{3} : x_{4} : x_{5} : x_{6}] \mapsto \begin{cases}
+                    [x_{1} : x_{2} : x_{3}] &\text{if } x_{1} \neq 0 \\
+                    [x_{2} : x_{4} : x_{5}] &\text{if } x_{4} \neq 0 \\
+                    [x_{3} : x_{5} : x_{6}] &\text{if } x_{6} \neq 0   
+                \end{cases}
+            \end{equation*}
+        For the first case, since $x_{1} \neq 0$, then $x \neq0$ and we can rescale by $x$. If $x_{4} \neq 0$, then $y \neq 0$ and you can rescale by $y$. Check that $v_{2, 2}(\mathbb{P}^{2}) \subseteq U_{1} \cup U_{4} \cup U_{6}$. This is because at least one of $x, y, z$ is non-zero.
+    \end{proof}
+The image can be described as 
+    \begin{equation*}
+        \{[x_{1} : x_{2}  : \cdots : x_{6}] \in \mathbb{P}^{5} : \mathop{rank}\begin{bmatrix}
+            x_{1} & x_{2} & x_{3} \\
+            x_{2} & x_{4} & x_{5} \\
+            x_{3} & x_{5} & x_{6}   
+        \end{bmatrix} \leq 1\} = \mathbb{V}(\{2 \times 2 \text{ minors of } M \})
+    \end{equation*}
+If we restrict $v_{2, 2}$ to $\mathbb{P}^{1} = \mathbb{V}(x) \subseteq \mathbb{P}^{2}$, it sends 
+    \begin{equation*}
+        [0 : y : z] \mapsto [0 : 0 : 0 : y^{2} : yz : x^{2}]
+    \end{equation*}
+So it resembles the rational normal curve in $\mathbb{V}(x_{1}, x_{2}, x_{3}) \cong \mathbb{P}^{2} \subseteq \mathbb{P}^{5}$.
+
+What is the preimage $v_{2, 2}^{-1}(\mathbb{V}(x_{2} + 2x_{4} - x_{6}))$? $\mathbb{V}(xy + 2y^{2} - z^{2})$
+
+What about $v_{2,2}^{1}(\mathbb{V}(a_{1}x_{1} + a_{2}x_{2} + \cdots + a_{6}x_{6}))$ for $[x : y : z] \mapsto [x^{2} : xy : xz : y^{2} : yz : z^{2}]$? $\mathbb{V}(a_{1}x^{2} + a_{2}xy + a_{3}xz + a_{4}y^{2} + a_{5}yz + a_{6}z^{2})$.
+
+As we vary over $a_{i}$, we get all degree $2$ equations in $\mathbb{P}^{2}$. The set 
+    \begin{equation*}
+        \{\text{hyperplanes $\mathbb{V}(a_{1}x_{1} + \cdots + a_{6}x_{6})$}\subseteq \mathbb{P}^{5}\} 
+    \end{equation*}
+is a copy of $\mathbb{P}^{5}$:
+    \begin{equation*}
+        \{(a_{1}, \ldots, a_{6}) : (a-1), \ldots, a_{6} \neq 0\} /(a_{1}, \ldots, a_{6}) \sim (\lambda a_{1}, \ldots, \lambda a_{6})
+    \end{equation*}
+which is $\{[a_{1} : \cdots : a_{6}] \in \mathbb{P}^{5}\}$. This copy of $\mathbb{P}^{5}$ is the dual projective space. Each $[a_{1}, \ldots, a_{6}] \iff \mathbb{V}(a_{1}x^{2} + a_{2}xy+ \cdots + a_{6}z^{2})$. This $\mathbb{P}^{5}$ is the moduli space of plane conics.
+
+The Veronese embedding $v_{2, d}$:
+    \begin{equation*}
+        v_{2, d} : \mathbb{P}^{2} \hookrightarrow \mathbb{P}^{N - 1}
+    \end{equation*}
+where
+    \begin{equation*}
+        [x : y : z] \mapsto [x^{d} : x^{d - 1}y : \cdots : z^{d}]
+    \end{equation*}
+where $N$ is the number of degree $d$ monomials in $x, y, z$.
+
+Veronese Embedding $v_{n, d}$:
+    \begin{align*}
+        v_{n, d}                     &:       \mathbb{P}^{n} \rightarrow \mathbb{P}^{N - 1} \\
+        [x_{1} : \cdots : x_{n + 1}] &\mapsto  [\cdots]                                       
+    \end{align*}
+
+\chapter{Week 13}
+
+\begin{topic}
+    \section{Segre Embedding}
+\end{topic}
+
+\textbf{The Segre embedding $ \sigma_{1, 1}$}: 
+    \begin{align*}
+        \sigma_{1, 1}                        &:       \mathbb{P}^{1} \times \mathbb{P}^{1} \rightarrow \mathbb{P}^{3} \\
+        [x_{1} : x_{2}] \times [y_{1}: y_{2}] &\mapsto  [x_{1}y_{1} : x_{1}y_{2} : x_{2} y_{1} : x_{2}y_{2}]             
+    \end{align*}
+Well Defined:
+    \begin{align*}
+        [\lambda x_{1} : \lambda x_{2}] \times [\mu y_{1} : \mu y_{2}] &\mapsto  [\lambda \mu x_{1}y_{1} : \lambda \mu x_{2}y_{1} ; \lambda \mu x_{2}y_{1} : \lambda \mu x_{2}y_{2}]   
+    \end{align*}
+What equations define the image? $\mathbb{V}(z_{1}z_{4} - z_{2}z_{3}) \supseteq \sigma_{1, 1}(\mathbb{P}^{1}\times \mathbb{P}^{1})$. Prove:
+    \begin{equation*}
+        \mathbb{V}(z_{1}z_{4} - z_{2}z_{3}) = \{[z_{1} : z_{2} : z_{3} : z_{4}] \in \mathbb{P}^{3} : \mathop{rank}\begin{bmatrix}
+            z_{1} & z_{2} \\
+            z_{3} & z_{4}   
+        \end{bmatrix} \leq 1\}
+    \end{equation*}
+This is a determinantal variety. The surface $\sigma_{1, 1}(\mathbb{P}^{1} \times \mathbb{P}^{1})$ contains a lot of lines. For each $[a_{1} : a_{2}] \in \mathbb{P}^{1}$, 
+    \begin{equation*}
+        \sigma_{1, 1}([a_{1} : a_{2}] \times \mathbb{P}^{1}) = \{[a_{1}y_{1} : a_{1}y_{2} : a_{2}y_{1} : a_{2}y_{2}]\} = \mathbb{V}(a_{2}z_{1} - a_{1}z_{3}, a_{2}z_{2} - z_{1}z_{4})
+    \end{equation*}
+If we look in the chart $z_{4} \neq 0$ which is $U_{4}$, then $\mathbb{V}(z_{1}z_{4} - z_{2}z_{3}) \cap U_{4} = V(z_{1} - z_{2}z_{3}) \subseteq \mathbb{A}^{3}$. Then a projective change of coordinates on $\mathbb{P}^{3}$. Replace $z_{1} = w_{1} + w_{2}$, $z_{4} = w_{1} - w_{2}$, $z_{2} = w_{3} + w_{4}$, $z_{3} = w_{3} - w_{4}$. We have
+    \begin{equation*}
+        (w_{1} + w_{2})(w_{1} - w_{2}) - (w_{3} + w_{4})(w_{3} - w_{4}) = w_{1}^{2} - w_{2}^{2} - (w_{3}^{2} - w_{4}^{2}) = w_{1}^{2} + w_{4}^{2} - w_{2}^{2} - w_{3}^{2}
+    \end{equation*}
+Now look in the chart where $w_{4} \neq 0$: $V(w_{1}^{2} + 1 - w_{2}^{2} - w_{3}^{2})$.
+
+Recall that the image of the twisted cubic $ \nu_{1, 3}$ was
+    \begin{equation*}
+        \nu_{1, 3}(\mathbb{P}^{1}) = \{[z_{1} : z_{2} : z_{3} : z_{4}] \in \mathbb{P}^{3} : \mathop{rank}\begin{bmatrix}
+            z_{1} & z_{2} & z_{3} \\
+            z_{2} & z_{3} & z_{4}   
+        \end{bmatrix}\leq 1\} = \mathbb{V}(z_{1}z_{3} - z_{2}^{2}, z_{1}z_{4} - z_{2}z_{3}, z_{2}z_{4} - z_{3}^{2})
+    \end{equation*}
+Notice that
+    \begin{equation*}
+        \mathbb{V}(z_{1}z_{3} - z_{2}^{2}, z_{1}z_{4} - z_{2}z_{3}, z_{2}z_{4} - z_{3}^{2}) \subseteq \mathbb{V}(z_{1}z_{4} - z_{2}z_{4}) = \sigma_{1, 1}(\mathbb{P}^{1} \times \mathbb{P}^{1})
+    \end{equation*}
+What is $\sigma_{1, 1}^{-1}(\mathbb{V}(z_{2}^{2} - z_{1}z_{3})) = \mathbb{V}((x_{1}y_{2})^{2} - (x_{1}y_{1})(x_{2}y_{1}))$. This is homogeneous of bidegree $(2, 2)$.
+    \begin{align*}
+        \mathbb{V}((x_{1}y_{2}^{2}) - (x_{1}y_{1})(x_{2}y_{1})) &= \mathbb{V}(x_{1}(x_{1}y^{2}_{2} - y_{1}^{2}x_{2})) \\
+                                                                &= \mathbb{V}(x_{1}) \cup \mathbb{V}(x_{1}y_{2}^{2} - y_{1}^{2} x_{2})
+    \end{align*}
+The segre embedding $\sigma_{m, n}$
+    \begin{align*}
+        \sigma_{m, n}                                                    &:       \mathbb{P}^{m} \times \mathbb{P}^{n} \rightarrow \mathbb{P}^{(m + 1)(n + 1) - 1} \\
+        [x_{1} : \cdots : x_{m + 1}] \times [y_{1} : \cdots : y_{n + 1}] &\mapsto  [x_{1}y_{1} : x_{1}y_{2} : \cdots : x_{i}y_{j} : \cdots : x_{m + 1}y_{n + 1}]     
+    \end{align*}
+
+\begin{topic}
+    \section{Rational Functions}
+\end{topic}
+
+Let $X \subseteq \mathbb{P}^{n}$ be a projective variety.
+
+\begin{definition}{Homogeneous Function Field}
+    The homogeneous function field of $X$ is 
+        \begin{equation*}
+            k_{h}(X) = \Frac{\Gamma(X)}
+        \end{equation*}
+\end{definition}
+
+Most elements of $k_{h}(X)$ do not determine functions on an open subset of $X$. However, if we take ratios of forms of the same degree in $\Gamma (X)$, then we get a function. If $F, G \in k[x_{1}, \ldots, x_{n + 1}]$ are homogeneous of degree $d$, then $\overline{F}, \overline{G} \in \Gamma (X)$ are forms of degree $d$. Furthermore, $\frac{\overline{F}(\lambda a_{1}, \ldots, \lambda a_{n + 1})}{\overline{G}(\lambda a_{1}, \ldots, \lambda a_{n + 1})} = \frac{\lambda^{d}(\overline{F}(a_{1}, \ldots, a_{n + 1}))}{\lambda^{d}\overline{G}(a_{1}, \ldots, a_{n + 1})}$. So $\overline{F}/\overline{G}$ defined a function on $X \backslash \mathbb{V}(G)$.
+
+\begin{examples}
+    \begin{example}
+        $\frac{x_{1}}{x_{2}}$ is a rational function on $\mathbb{P}^{2}$ that is defined on $U_{2}$.
+    \end{example}
+\end{examples}
+
+\begin{definition}{Field of Rational Functions}
+    The field of rational functions on $X \subseteq \mathbb{P}^{n}$ is 
+        \begin{equation*}
+            k(X) = \left\{z \in k_{h}(X) : z = \dfrac{\overline{F}}{\overline{G}} \text{ for $F, G$ homogeneous of the same degree}, \overline{G} \neq 0\right\}
+        \end{equation*}
+\end{definition}
+
+Note: $k\subseteq k(X) \subseteq k_{h}(X)$ by $\lambda \mapsto \frac{\lambda}{ 1}$ but typically $\Gamma (X) \not\subseteq k(X)$ because $f \mapsto\frac{f}{1}$.
+
+\begin{examples}
+    \begin{example}
+        What is $k(\mathbb{P}^{1})$? There is a map from $k(\mathbb{P}^{1}) \rightarrow k(\mathbb{A}^{1}) = k(X)$. Think of $\mathbb{A}^{1}$ as $U_{2}$.
+            \begin{align*}
+                k(\mathbb{P}^{1})        &\rightarrow  k(\mathbb{A}^{1})       \\
+                \dfrac{F(x, y)}{G(x, y)} &\mapsto     \dfrac{F(x, 1)}{G(x, 1)}   
+            \end{align*}
+
+    \end{example}
+\end{examples}
+
+\begin{topic}
+    \section{Local Ring}
+\end{topic}
+
+\begin{definition}{}
+    Let $X \subseteq \mathbb{P}^{n}$ be a projective variety. Let $P \in X$, $\alpha \in k(X)$. Then we say that $\alpha$ is defined at $P$ if $\exists \overline{F}, \overline{G} \in \Gamma (X)$ of the same degree with $\overline{G}(P) \neq 0$ and $\alpha = \frac{\overline{F}}{\overline{G}}$.
+\end{definition}
+
+\begin{definition}{Local Ring}
+    The local ring of $X$ at $P$ is $\mathcal{O}_{P}(X) = \{\alpha \in k(X) : \alpha \text{ is defined at } P\}$.
+\end{definition}
+
+If $P \in U_{i}$ any affine chart $U_{i} \subseteq \mathbb{P}^{n}$, then $\mathcal{O}_{P}(X) = \mathcal{O}_{P}(X \cap U_{i})$. The map $\mathcal{O}_{P}(X) \rightarrow \mathcal{O}_{P}(X \cap U_{i})$:
+    \begin{equation*}
+        \dfrac{F(x_{1}, \ldots, x_{n + 1})}{G(x_{1} , \ldots, x_{n + 1})} \mapsto\dfrac{F(x_{1}, \ldots, x_{i - 1}, 1, x_{i + 1}, \ldots, x_{n + 1})}{G(x_{1}, \ldots, x_{i - 1}, 1, x_{i + 1}, \ldots, x_{n + 1})}
+    \end{equation*}
+
+\begin{examples}
+    \begin{example}
+        Let $P = [0 : 0 : 1] \in \mathbb{P}^{2}$.
+            \begin{align*}
+                \mathcal{O}_{P}(\mathbb{P}^{2}) &= \left\{\dfrac{F}{G} : F, G \in k[x, y, z] \text{homogeneous, same degree}, G(0, 0, 1) \neq 0\right\} \\
+                                                &= \left\{\dfrac{F}{H + z^{d}} : \text{ $F, H$ homogeneous of degree $d$}\right\}                         
+            \end{align*}
+        Consider $U_{3} \subseteq \mathbb{P}^{2}$. Our point $P \in U_{3} \cong \mathbb{A}^{2}$ is the origin $(0, 0)$. Then
+            \begin{align*}
+                \mathcal{O}_{P}(\mathbb{P}^{2}) &\rightarrow  \mathcal{O}_{(0, 0)}(\mathbb{A}^{2}) \\
+                \dfrac{F}{H + z^{d}}            &\mapsto     \dfrac{F(x, y, 1)}{H(x, y, 1)  + 1}     
+            \end{align*}
+        (Injective) $\frac{F}{H + z^{d}}$ is in the kernel iff $F(x, y, 1) = 0$ iff $F \in (z - 1)$. But $F$ is homogeneous, so this happens if $F = 0$.
+
+        (Surjective) Given any $f/g \in \mathcal{O}_{(0, 0)}(\mathbb{A}^{2})$, consider $H(f)$ and $H(g)$. If they are of the same degree, then $f/g$ is the image of $H(f)/H(g)$. If they are not of the same degree, we can multiply one of them with powers of $z$ until they are of the same degree. 
+    \end{example}
+\end{examples}
+
+Alternative description of $k(X)$: Let $X \subseteq \mathbb{P}^{n}$ be a projective variety.
+    \begin{equation*}
+        S = \{(U, \alpha) : \text{$U \subseteq X$ open } \alpha : U \rightarrow k \text{ st $\exists F, G \in k[x_{1}, \ldots, x_{n + 1}]$ homogeneous of same degree, $\alpha (P) = F(P)/G(P) \forall P \in U$}\} /\sim
+    \end{equation*}
+Where $(U, \alpha) \sim (U^{\prime}, a^{\prime})$ if $\alpha (P) = \alpha^{\prime}(P) \forall P \in U\cap U^{\prime}$.
+
+We can make $S$ into a ring by
+    \begin{equation*}
+        [(U, \alpha)] + [(U^{\prime}, \alpha^{\prime})] = [(U \cap U^{\prime}, \alpha \mid_{U \cap U^{\prime}} + \alpha^{\prime}\mid_{U \cap U^{\prime}})]
+    \end{equation*}
+and multiplication by:
+    \begin{equation*}
+        [(U, \alpha)] [(U^{\prime}, \alpha^{\prime})] = [(U \cap U^{\prime}), \alpha \mid_{U \cap U^{\prime}} \alpha^{\prime}\mid_{U \cap U^{\prime}}]
+    \end{equation*}
+The inverse is defined as: If $(U, \alpha)$ where $\alpha \neq 0$, then $\alpha = \frac{F}{G}$, $F \neq 0$ homogeneous polynomials $F, G$. Then $[(U \backslash \mathbb{V}(F), \frac{G}{F})] [(U, \frac{F}{G})] = [(U \backslash \mathbb{V}(F), 1)]$. And $[(U \backslash \mathbb{V}(F), 1)] = [(X, 1)]$.
+\begin{examples}
+    \begin{example}
+        $X = \mathbb{P}^{2}, (U_{1}, \frac{x_{2}}{x_{1}}) + (U_{2}, \frac{x_{1}}{x_{3}})$ is $(U_{1} \cap U_{3}, \frac{x_{2}x_{3} + x_{1}^{2}}{x_{1}x_{3}})$. The inverse of $[(U_{1}, \frac{x_{2}}{x_{1}})]$ is $[(U_{1} \cap U_{2}, \frac{x_{1}}{x_{2}})]  = [(U_{2}, \frac{x_{1}}{x_{2}})]$.
+    \end{example}
+\end{examples}
+
+There is a map $k(X) \rightarrow S$ where $\alpha \rightarrow (U, \alpha)$ where $U$ is the set where $\alpha$ is defined. This map is surjective.
+
+\textbf{Proposition}: If $\alpha, \alpha^{\prime} \in k(X)$, and $(U, \alpha) \sim (U^{\prime}, \alpha^{\prime})$, then $\alpha = \alpha^{\prime}$. 
+    \begin{proof}
+        Suppose $\alpha = \frac{\overline{F}}{\overline{G}}$, $\alpha^{\prime} = \frac{\overline{F^{\prime}}}{a\overline{G^{\prime}}}$. Since $(U, \alpha) \sim (U^{\prime}, \alpha^{\prime})$, This means that $\frac{\overline{F}}{\overline{G}}(P) = \frac{\overline{F^{\prime}}}{\overline{G^{\prime}}}(P)$ for all $P \in U \cap U^{\prime}$. Clearing denominators: $(\overline{F}\overline{G^{\prime}}) - \overline{F^{\prime}}\overline{G} (P) = 0$. So $(FG^{\prime} - F^{\prime}G)(P) = 0$ because they differ by a polynomial that vanishes on $X$.
+
+        $\mathbb{V}(FG^{\prime} - F^{\prime}G) \supseteq U \cap U^{\prime}$ means that $\mathbb{V}(FG^{\prime} - F^{\prime}G = X$. $FG^{\prime} - F^{\prime}G \in \mathbb{I}(X)$ So $\overline{F}\overline{G^{\prime}} - \overline{F^{\prime}}\overline{G} = 0$
+    \end{proof}
+
+Let $X, Y$ be irreducible algebraic sets. Suppose that $\varphi : X \rightarrow Y$ is dominant, $\overline{\varphi (X)} = Y$. Then there is a well-defined pull-back map $\varphi^{*} : k(Y) \rightarrow k(X)$. If $\varphi: X \rightarrow Y$ is dominant, then for any $U \subseteq Y$ open, we have $\varphi^{-1}(U) \subseteq X$ is non-empty.
+
+So we can define the pullback by
+    \begin{equation*}
+        (U, \alpha) \mapsto (\varphi^{-1}(U), \alpha \circ \varphi)
+    \end{equation*}
+Algebraically, suppose $\varphi : X \rightarrow Y$ is given on some open subset $W \subseteq X$ by
+    \begin{equation*}
+        P \rightarrow [f_{1}(P) : \cdots : f_{m + 1}(P)]
+    \end{equation*}
+for $f_{i}$ homogeneous of the same degree. Then we can define the pullback $\varphi^{*}: k(Y) \rightarrow k(X)$:
+    \begin{equation*}
+        (U, \alpha) \mapsto (\varphi^{-1}(U) \cap W, \alpha \circ \varphi)
+    \end{equation*}
+
+Note: If $\alpha = \frac{F}{G}$, then $(\alpha \circ \varphi) (P) = F(f_{1}(P), \ldots, f_{m + 1}(P))/G(f_{1}(P), \ldots, f_{m + 1}(P))$.
+
+\textbf{Lemma}: If $\varphi : X \rightarrow Y$ is an isomorphism, then $\varphi^{*}: k(Y) \rightarrow k(X)$ is also an isomorphism.
+    \begin{proof}
+        Let $\psi : Y \rightarrow X$ be the inverse morphism. Check that $\psi^{*} : k(X) \rightarrow k(Y)$ is the inverse. If we have $(U, \alpha) \in k(Y)$, we have
+            \begin{center}
+                \begin{tikzcd}
+                    (U, \alpha) \ar[r, "\varphi^{*}"] & (U^{\prime}, \alpha \circ \varphi) \ar[r, "\psi^{*}"] & (U^{\prime\prime}, \alpha \circ \varphi \circ  \psi ) \sim (U, \alpha)   
+                \end{tikzcd}
+            \end{center}
+         Above, $U^{\prime} \subseteq \varphi^{-1}(U)$ on which $\varphi$ is described by polynomial and $U^{\prime\prime} \subseteq \psi^{-1}(U^{\prime})$ where $\psi$ is described by polynomials.
+    \end{proof}
+
+\begin{examples}
+    \begin{example}
+        $\mathbb{P}^{1} \rightarrow \mathbb{V}(xz - y^{2}) \subseteq \mathbb{P}^{2}$ by 
+            \begin{equation*}
+                [s : t] \mapsto [s^{2}: st : t^{2}]
+            \end{equation*}
+        $k(\mathbb{P}^{1}) = k(\frac{s}{t}), k(\mathbb{V}(xz - y^{2})) \cong k(V(\frac{x}{z} - (\frac{y}{z})^{2}))$. With
+            \begin{equation*}
+                \dfrac{F(x, y, z)}{G(x, y, z)} \mapsto\dfrac{F(\dfrac{x}{z} ,\dfrac{y}{z}, 1)}{G(\dfrac{x}{z}, \dfrac{y}{z}, 1)}
+            \end{equation*}
+        Then we have $\Frac{\frac{k[\frac{x}{z}, \frac{y}{z}]}{(\frac{x}{z} - (\frac{y}{z})^{2})}} = \Frac{k[\frac{y}{z}]} = k(\frac{y}{z})$. The pullback sends $\frac{y}{z} \mapsto\frac{st}{t^{2}} = \frac{s}{t}$.
+    \end{example}
+\end{examples}
+
+\begin{definition}{Local Ring}
+    Given $X \subseteq \mathbb{P}^{n}$, the local ring of $X$ at $P \in X$ is the subring $\mathcal{O}_{P}(X) \subseteq k(X)$ of functions defined at $P$. Or just $\{(U, \alpha) : P \in U\}$.
+\end{definition}
+
+If $P \in U_{i}$ an affine chart, then $\mathcal{O}_{P}(X) = \mathcal{O}_{P}(X \cap U_{i})$.
+
+\begin{examples}
+    \begin{example}
+        Let $P = [1 : 0 : 1] \in \mathbb{P}^{2}$. What is the tangent line to $C = \mathbb{V}(yz^{2} - x^{3} + x^{2}z)$ at $P$? We have $P \in U_{3}$, and $C \cap U_{3} = V(y - x^{3} + x^{2}) \subseteq \mathbb{A}^{2}$.Take $f_{x}, f_{y}$: 
+            \begin{align*}
+                f_{x} &= -3x^{2} + 2x & f_{x}(P) &= -1 \\
+                f_{y} &= 1            & f_{y}(P) &= 1    
+            \end{align*}
+        Tangent line:
+            \begin{equation*}
+                T_{P}(C \cap U_{3}) = V(-(x - 1) + y) = V(y - x + 1) \subseteq U_{3}
+            \end{equation*}
+        And
+            \begin{equation*}
+                \mathbb{T}_{P}(C) = \mathbb{V}(y - x + z) \subseteq \mathbb{P}^{2}
+            \end{equation*}
+        If $P \in U_{1}$, then we have $C \cap U_{1} = V(yz^{2} - 1 + z)$. Then 
+            \begin{align*}
+                f_{y} &= z^{2}         & f_{y}(P) &= 1 \\
+                f_{z} &= 2yz + 1       & f_{z}    &= 1   
+            \end{align*}
+        Then
+            \begin{equation*}
+                T_{P}(C \cap U_{1}) = V(y + z - 1) \subseteq U_{1}
+            \end{equation*}
+        so
+            \begin{equation*}
+                \mathbb{T}_{P}(C \cap U_{1}) = \mathbb{V}(y + z - x)
+            \end{equation*}
+    \end{example}
+\end{examples}
+
+\chapter{Week 14}
+
+\begin{definition}{Projective Tangent Space}
+    Let $X \subseteq \mathbb{P}^{n}$ be a projective algebraic set and let $P \in X$, where $P \in U_{i}$. The projective tangent space to $X$ at $P$ to be the projective closure of $T_{P}(X \cap U_{i})$. This is denoted as $\mathbb{T}_{P}(X)$.
+\end{definition}
+
+The projective tangent cone to $X$ at $P$ is the projective closure of $TC_{P}(X \cap U_{i})$. It is denoted $\mathbb{T}C_{P}(X)$.
+
+\begin{examples}
+    \begin{example}
+        What is the projective tangent cone to $\mathbb{V}(x^{3}yz + 2x^{2}yz^{2} + y^{2}x^{3}) \subseteq \mathbb{P}^{2}$ at $P = [1 : 0 : 0]$? Claim: $\mathbb{T}C_{P} = \mathbb{V}(yz + y^{2})$.
+            \begin{align*}
+                \mathbb{V}(yz + 2yz^{2} + y^{2}x^{3}) \cap U_{1} &= V(yz + 2yz^{2} + y^{2}) \subseteq U_{1} \\
+                  TC_{P}                                         &= V(yz + y^{2})                             
+            \end{align*}
+    \end{example}
+\end{examples}
+
+\begin{definition}{Singular}
+    Given $P \in U_{i}$, we say $X$ is singular at $P$ if $X \cap U_{i}$ is singular at $P$.
+\end{definition}
+
+\begin{definition}{Multiplicity}
+    The multiplicity of a homogeneous polynomial $F \in k[x, y, z]$ at $P \in U_{i}$ is the multiplicity of $f$ at $P$ where $f$ is the dehomogenization of $F$ with respect to the $i$-th coordinate.
+\end{definition}
+
+\begin{examples}
+    \begin{example}
+        What is the multiplicity of $xz^{2} + y^{2}z$ at $[1 : 1 : 0]$?
+
+        In $U_{2}$, dehomogenize $f = z^{2}x + z$. Want to find $\mult_{(1, 0)}(f)$. Let $x^{\prime} = x - 1$ so that $x^{\prime} = 0$ iff $x = 1$. So $x = x^{\prime} + 1$. We have:
+            \begin{equation*}
+                f = z^{2}(x^{\prime} + 1) + z
+            \end{equation*}
+        So $TC_{P} = V(z) \subseteq U_{2}$. Take the closure $\mathbb{T}C_{[1 : 1 : 0]} = \mathbb{V}(z)$.
+    \end{example}
+\end{examples}
+
+\begin{definition}{Intersection Multiplicity}
+    Let $F, G \in k[x, y, z]$ be homogeneous polynomials and let $P \in U_{i}$. Let $f, g$ be the dehomogenizations of $F, G$ with respect to the $i$-th coordinate. Then, 
+        \begin{equation*}
+            I_{P}(F, G) = I_{P}(f, g)
+        \end{equation*}
+\end{definition}
+    \begin{proof}
+        Independent of Affine Chart: Suppose that $P$ is in $U_{1}$ and $U_{2}$. In $U_{1}$, we have that $I_{P}(F, G)$ is $\dim_{k}(\frac{\mathcal{O}_{P}(\mathbb{A}^{2})}{(F(1, y, z), G(1, y, z))})$. Suppose $\deg F = m$, $\deg G = n$. We claim that this equals $\dim_{k}(\frac{\mathcal{O}_{P}(\mathbb{P}^{2})}{(\frac{F}{x^{m}}, \frac{G}{x^{n}})})$. Indeed, there is an isomorphism $\mathcal{O}_{P} (\mathbb{P}^{2}) \rightarrow \mathcal{O}_{P}(\mathbb{A}^{2})$:
+            \begin{equation*}
+                \dfrac{a}{b} \mapsto\dfrac{a(1, y, z)}{b(1 , y, z)}
+            \end{equation*}
+        This gives an isomorphism of the above two quotients by $(\frac{F}{x^{m}}, \frac{G}{x^{n}}) \mapsto F(1, y, z), G(1, y, z)$. We have the same argument switching the roles of $x, y$ we get that 
+            \begin{align*}
+                I_{P}(F, G) &= \dim_{k}\left(\dfrac{\mathcal{O}_{:}(\mathbb{P}^{2})}{\left(\dfrac{F}{y^{m}}, \dfrac{G}{y^{n}}\right)}\right)   
+            \end{align*}
+        Since $P \in U_{1} \cap U_{2}$, it follows that $\frac{x}{y} \in \mathcal{O}_{P}(\mathbb{P}^{2})$ is a unit. Then 
+            \begin{equation*}
+                \left(\dfrac{F}{x^{m}}, \dfrac{G}{x^{n}}\right) = \left(\dfrac{x^{m}F}{x^{m}y^{m}}, \dfrac{x^{n}G}{x^{n}y^{n}}\right) = \left(\dfrac{F}{y^{m}}, \dfrac{G}{y^{n}}\right)
+            \end{equation*}
+    \end{proof}
+
+\begin{theorem}{Bezout's Theorem}
+    Let $k$ be algebraically closed and suppose that $F, G \in k[x, y, z]$ homogeneous polynomials of degree $m, n$. If $\mathbb{V}(F, G)$ is a finite set, then
+        \begin{equation*}
+            \sum_{P \in \mathbb{P}^{2}}I_{P}(F, G) = mn
+        \end{equation*}
+    Note: $\mathbb{V}(F, G)$ is finite iff $F, G$ have no common factors.
+\end{theorem}
+    \begin{proof}
+        (Setup) Since $\mathbb{V}(F, G)$ is a finite set of points, $\exists$ a change of coordinates so that none of the points lie on $\mathbb{V}(z)$. Let $f = F(x, y, 1)$ and $g = G(x, y, 1)$ be the dehomogenizations. Then $\mathbb{V}(F, G) \cap U_{3} = V(f, g) = \mathbb{V}(F, G)$. It follows that 
+            \begin{equation*}
+                \sum_{P \in \mathbb{P}^{2}} I_{P}(F, G) = \sum_{P \in \mathbb{A}^{2} \cong U_{3}}I_{P}(f, g)
+            \end{equation*}
+
+        \textbf{Lemma}: $\sum_{P \in \mathbb{A}^{2}}I_{P}(f, g) = \dim_{k}\left(\frac{k[x, y]}{(f, g)}\right)$:
+
+        Proposition $6$ in 2.9 says that there is an isomorphism of rings 
+            \begin{equation*}
+                k[x, y]/(f, g) \cong \bigoplus_{P_{i} \in V(f, g)}\dfrac{\mathcal{O}_{P_{i}}(\mathbb{A}^{2})}{\left(\dfrac{f}{1}, \dfrac{g}{1}\right)}
+            \end{equation*}
+
+        Let $\Gamma = \frac{k[x, y, z]}{(F, G)}$. Because we quotient by a homogeneous ideal, $\Gamma$ has the added structure of forms of degree $d$. Let $\Gamma_{d}$ be the vector space of forms of degree $d$. 
+
+        \textbf{Claim}: When $d \geq m + n$, we have 
+            \begin{itemize}
+                \item [(a)] $\dim_{k}(\Gamma_{d}) = mn$
+
+                \item [(b)] $\dim_{k}(\Gamma_{d}) = \dim_{k}\frac{k[x, y]}{(f, g)}$ 
+            \end{itemize}
+        Let $R = k[x, y, z]$. Let $R_{d}$ be the vector space of homogeneous polynomials of degree $d$. Let $\pi : R \rightarrow \Gamma$ be the quotient map. So $\ker{\pi} = (F, G) = \{AF + BG : A, B \in k[x, y, z]\}$. Let $\varphi : R \times R \rightarrow R$ defined by $(A, B) \mapsto AF + BG$. We have that $ \Im{\varphi} = \ker{\pi}$. What is $\ker{\varphi}$. If $AF + BG = 0$, $AF = -BG$, so $F \divides BG$. But $F, G$ have no common factor, so $F \divides B$. Similarly, $G \divides A$. Moreover, if $C = \frac{A}{G}$, then $\frac{B}{F} = \frac{-A}{G} = -C$. Hence
+            \begin{equation*}
+                \ker{\varphi} = \{(A, B) : A = CG, B = -CF\}
+            \end{equation*}
+        In other words, $\ker{\varphi} = \Im{\psi} : R \rightarrow R \times R$ by $C \mapsto (CG, - CF)$.
+    \end{proof}
+
+\chapter{Week 15}
+
+\textbf{Last Lecture}: Recall Bezout's Theorem: Let $F, G \in k[ x, y, z]$ be homogeneous of degrees $m$ and $n$. Suppose that $\mathbb{V}(F, G)$ is finite. Then
+    \begin{equation*}
+        \sum_{ p \in \mathbb{P}^{2}} I_{P}(F, G) = mn
+    \end{equation*}
+We also defined $I_{P}(F, G)$ to be $I_{P}(f, g)$ when $P \in U_{ i}$ and $f, g$ are dehomogenized of $F, G$ on $i$-th coordinate.
+
+\begin{examples}
+    Want to find $\sum_{ p \in \mathbb{A}^{2}_{\mathbb{C}}} I_{P}(ax + by + c, y - x^{2})$. This is equal to $\sum_{ P \in \mathbb{ P}^{2}} I_{P}(ax + by + cz , yz - x^{2}) - \sum_{ p \in \mathbb{V}(z)}I_{P}(ax + by + cz, yz - x^{2})$. We have
+        \begin{equation*}
+            =\begin{cases}
+                \infty &\text{ if }  a = b = c = 0 \\
+                0 &\text{ if } a = b = 0, c \neq 0 \\
+                1 &\text{ if } b = 0, a \neq 0 \\
+                2 &\text{ if } b \neq 0   
+            \end{cases}
+        \end{equation*}
+    We have $\mathbb{V}(yz - x^{2}) \cap \mathbb{ V}(z) = \mathbb{V}(x, z) = \{[0 : 1 : 0]\}$. We have that $[0 : 1 : 0] \in \mathbb{ V}(ax + by + cz)$ iff $b = 0$. We compute that:
+        \begin{equation*}
+            I_{[0 : 1 : 0]}(ax + cz, yz - x^{2}) = I_{P}(ax + cz, z - x^{2}) = \begin{cases}
+                1            &\text{ if } b = 0, a \neq 0 \\
+                2 &\text{ if } b = 0, a = 0   
+            \end{cases}
+        \end{equation*}
+\end{examples}
+
+\begin{proof}
+    Following notation from before, let $R = k[x, y, z]$ and $\Gamma = \frac{ R}{(F, G)}$. Let $R_{d}$ be the vector space of homogeneous polynomials of degree $d$. Let $\Gamma_{ d}$ be the vector space of forms of degree $d$ in $\Gamma$. Last class, it was needed to be shown that for $d$ large enough, 
+        \begin{itemize}
+            \item $\dim \Gamma_{ d} = mn$
+
+            \item $\dim \Gamma_{ d} = \dim_{ k}\left(\frac{k[x, y]}{(f, g)}\right)$. This holds when $\mathbb{V}(F, G) \cap \mathbb{ V}(z) = \emptyset$.  
+        \end{itemize}
+    (Part a) Consider the following sequence of maps:
+        \begin{center}
+            \begin{tikzcd}
+                R \ar[r, "\psi"]     & R \times R \ar[r, "\varphi"] & R\ar[r, "\pi"] &  \Gamma \ar[r, ""] & 0 \\
+                                     &  (A, B) \ar[r, "maps to"]    & AF + BG        &                    &   \\
+                 C \ar[r, "maps to"] & (CG, - CF)                   &                &                    &     
+            \end{tikzcd}
+        \end{center}
+    We have $\ker{\varphi} = \Im{\psi}$, $\Im{\varphi} = \ker{\pi}$ and $\ker{\psi} = 0$. For forms in degree $d$:
+        \begin{center}
+            \begin{tikzcd}
+                0 \ar[r, ""] & R_{d - m - n} \ar[r, "\psi"] & R_{d - m} \times R_{ d - n} \ar[r, " \varphi"] & R_{d} \ar[r, "\pi"] & \Gamma_{ d} \ar[r, ""] & 0   
+            \end{tikzcd}
+        \end{center}
+    Recall that for any linear map of vector spaces, $V \rightarrow W$, we know that $\dim ( \ker{T}) + \dim ( \Im{T}) = \dim V$. Putting this all together:
+
+    We have:
+        \begin{align*}
+            \dim \Gamma_{ d} &= \dim \Im{ \pi} \\
+                             &= \dim R_{ d} - \dim \ker{ \pi} \\
+                             &= \dim R_{ d} - \dim \Im{ \varphi} \\
+                             &= \dim R_{ d} - (\dim R_{ d - m} \times R_{ d - n} - \dim \ker{ \varphi}) \\
+                             &= \dim R_{ d} - (\dim R_{ d - m} \times R_{ d - n} - \dim \Im{ \psi}) \\
+                             &= \dim R_{ d} - (\dim R_{ d - m} \times R_{ d - n} - (\dim R_{ d - m - n} - \dim \ker{ \psi})) \\
+                             &= \dbinom{d + 2}{2} - \dbinom{d - m + 2}{2} - \dbinom{d - n + 2}{2} + \dbinom{d - m - n + 2}{2} \\
+                             &= mn
+        \end{align*}
+
+    (Part b) Show that for $d \geq m + n$, a basis for $\Gamma_{ d}$ dehomogenizes to form a basis for $k[x, y] /(f, g)$. 
+
+    \textbf{Lemma}: For $d \geq m + n$, the map $\alpha : \Gamma_{ d} \rightarrow \Gamma_{ d + 1}$ defined by 
+        \begin{equation*}
+            \alpha (\overline{H}) = \overline{z}\overline{H} 
+        \end{equation*}
+    is an isomorphism of vector spaces. 
+
+    (Proof of Lemma) $\alpha$ is a linear map between vector spaces of the same dimension. So it is enough to show that $\ker{\alpha} = 0$. If $\alpha ( \overline{H}) = 0$, then $\overline{H} = 0$. So $\overline{z}\overline{H} = 0$ and $zH \in ( F, G)$. So $zH = AF + BG$ for homogeneous polynomials $A, B \in k[ x, y, z]$. Plug in $z = 0$:
+        \begin{equation*}
+            0 = A(x, y, 0)F(x, y, 0) + B(x, y, 0) G(x, y, 0) = A_{0}F_{0} + B_{0}G_{0}
+        \end{equation*}
+    Recall that $\mathbb{V}(F, G) \cap \mathbb{ V}(z) = \emptyset$. Then $F_{0}, G_{0}$ have no common factor. Then $-A_{0}F_{0} = B_{0}G_{0}$. So $F_{0} \divides B_{ 0}$ and $G_{0} \divides A_{ 0}$. If $C = \frac{B_{0}}{F_{0}} = \frac{-A_{0}}{G_{0}}$, we have
+        \begin{equation*}
+            B_{0} = CF_{0}, A_{0} = -CG_{0}
+        \end{equation*}
+    Let $A_{1} = A + CG$ and $B_{1} = CF$. So when we set $z = 0$, $A_{1} = B_{1} = 0$. So $A_{1} = zA^{\prime}$, $B_{1} = zB^{\prime}$. Consider $A_{1}F + B_{1}G = AF + CGF + BG - CFG = AF + BG = zH$. So $zA^{\prime}F = zB^{\prime}G = zH$, we have $k[x, y, z]$ is a domain, we have $H = A^{\prime}F + B^{\prime}G \in (F, G)$.
+
+    Final Step: Let $A_{1}, \ldots, A_{ mn} \in k[ x, y, z]$ be homogeneous of degree $d$ so that $\overline{A_{1}}, \ldots, \overline{ A_{mn}}$ is a basis for $\Gamma_{ d}$. Show that
+        \begin{equation*}
+            \{\overline{A_{i}(x, y, 1)}\}
+        \end{equation*}
+    forms a basis for $\frac{k[x, y]}{ (f, g)}$. By the lemma, $\cdot z : \Gamma_{ d} \rightarrow \Gamma_{ d + 1}$ is an isomorphism. We have
+        \begin{equation*}
+            \{\overline{z^{r}A_{i}}\}
+        \end{equation*}
+    is a basis for $\Gamma_{d + r}$ for all $r \geq 0$. Let $a_{i} = \overline{A_{i}(x, y, 1)}$. 
+        \begin{itemize}
+            \item $a_{i}$ span $\frac{k[x, y]}{(f, g)}$. Suppose that $\overline{h} \in k[ x, y]/(f, g)$ with $h \in k[ x, y]$. We can homogenize to $H(h)$. For some $N >>  0$, $z^{N}H(h)$ has degree $d + r$, $r \geq 0$. So we have $z^{N}(H(h)) = \sum \lambda_{ i}z^{r}A_{i} + BF + CG$. Set $z = 1$, we have $h = \sum \lambda_{ i}A_{i}(x, y, 1) + B(x, y, 1)f + C(x, y, 1)f$ which shows that $\overline{h} \in \Span{ a_{i}}$.
+
+            \item Linear Independent.
+        \end{itemize}
+\end{proof}
+
+\begin{theorem}{Bezout's Theorem in $\mathbb{P}^{n}$}
+    Let $F_{1}, \ldots, F_{ n} \in k[ x_{1}, \ldots, x_{ n + 1}]$ be homogeneous of degrees $d_{1}, \ldots, d_{ n}$. If $\mathbb{V}(F_{1}, \ldots, F_{n})$ is finite, then 
+        \begin{equation*}
+            \sum_{ P \in \mathbb{P}^{n}} I_{P}(F_{1}, \ldots, F_{n}) = d_{1}d_{2} \cdots d_{ n}
+        \end{equation*}
+\end{theorem}
+
+\begin{topic}
+    \section{Circles of Apollonius}
+\end{topic}
+
+Question: Given $3$ fixed circles, how many circles are tangent to all $3$?
+
+\begin{definition}{}
+    Given $2$ smooth curves $C, C^{\prime}$, we say that $C$ and $C^{\prime}$ are tangent at $P$ if $P \in C$, $P \in C^{\prime}$ and $T_{P}(C) = T_{P}(C^{\prime})$. Equivalently, $I_{P}(C, C^{\prime}) \geq 2$. If the tangent lines are distinct, then $I_{P}(C, C^{\prime}) = \mult_{ P}(C)\mult_{ P}(C^{\prime}) = 1$.
+\end{definition}
+
+Typically, two circles meet in $2$ points or not at all. Suppose we have a circle $C : (x - x_{0})^{2} + (y - y_{0})^{2} - r^{2} = 0$. The projective closure:
+    \begin{equation*}
+        \overline{C}: (x - x_{0}z)^{2} + (y - y_{0}z)^{2} - r^{2}z^{2} = 0
+    \end{equation*}
+And $\overline{C} \cap \mathbb{ V}(z) = \mathbb{V}(z, x^{2} + y^{2}) = \{[1 : i : 0], [1 : -i : 0]\}$. 
+
+$C, C^{\prime}$ are tangent iff they meet in a single point (mult 2). There are also concentric circles, which do not meet in $\mathbb{A}^{2}_{\mathbb{C}}$. 
+
+Moduli Spaces: We saw that the moduli space of conics:
+    \begin{equation*}
+        [a : b :c : d : e : f] \iff \mathbb{V}(ax^{2} + bxy + cxz + dy^{2} + eyz + fz^{2}) \subseteq \mathbb{ P}^{2}
+    \end{equation*}
+\begin{definition}{}
+    Define the moduli space of complex projective circles as $\mathbb{V}(b, a - d) \subseteq \mathbb{ P}^{5}$.
+\end{definition}
+This is isomorphic to $\mathbb{P}^{3}$:
+    \begin{equation*}
+        [a : c : e : f] \iff \mathbb{ V}(a(x^{2} + y^{2}) + cxz + eyz + fz^{2}) \subseteq \mathbb{ P}^{2}
+    \end{equation*}
+As $a \rightarrow 0$, we get a line. If $a \neq 0$, we can rescale to make $a = 1$. Now compare it with
+    \begin{equation*}
+        (x - x_{0}z)^{2} + (y - y_{0}z)^{2} - r^{2}z^{2} 
+    \end{equation*}
+We have
+    \begin{align*}
+        \dfrac{c}{a} &= -2x_{0}                       \\
+        \dfrac{e}{a} &= -2y_{0}                       \\
+        \dfrac{f}{a} &= x_{0}^{2} + y_{0}^{2} - r^{2}   
+    \end{align*}
+and
+    \begin{align*}
+        x_{0} &= \dfrac{-c}{2a}                                                                                        \\
+        y_{0} &= \dfrac{-e}{2a}                                                                                        \\
+        r^{2} &= x_{0}^{2} + y_{0}^{2} - \dfrac{f}{a}                                                                  \\
+              &= \dfrac{1}{4}\left(\left(\dfrac{c}{a}\right)^{2} + \left(\dfrac{e}{a}\right)^{2}\right) - \dfrac{f}{a}   
+    \end{align*}
+After a projective change of coordinates, 
+    \begin{align*}
+        x & \mapsto  x - x_{0}z \\
+        y &\mapsto   y - y_{0}z \\
+        z &\mapsto   r_{0}z       
+    \end{align*}
+We can bring the first fixed circle to the unit circle. 
+    \begin{equation*}
+        V(x^{2} + y^{2} - 1) \rightarrow \mathbb{ V}(x^{2} + y^{2} - z^{2}) \iff [ 1 : 0 : 0 : -1]
+    \end{equation*}
+When is a circle with center $(\alpha, \beta)$ and radius $r$ tangent to the unit circle? Using the Pythagorean theorem,
+    \begin{equation*}
+        \alpha^{ 2} + \beta^{ 2} = (1 + r)^{2} = r^{2} + 2r + 1
+    \end{equation*}
+so
+    \begin{equation*}
+        \alpha^{ 2} + \beta^{ 2} - r^{2} = 2r + 1
+    \end{equation*}
+If the circle is internally tangent, we have
+    \begin{equation*}
+        \alpha^{ 2} + \beta^{ 2} = (1 - r)^{2} = r^{2} - 2r + 1
+    \end{equation*}
+so
+    \begin{equation*}
+        \alpha^{ 2} + \beta^{ 2} - r^{2} = -2r + 1
+    \end{equation*}
+Recall that the LHS is $\frac{f}{a}$, so we need either $\frac{f}{a} - 1 - 2r = 0$ or $\frac{f}{a} - 1 + 2r = 0$. Take the product
+    \begin{equation*}
+        (\dfrac{f}{a} - 1 - 2r)(\dfrac{f}{a} - 1 + 2r) = \left(\dfrac{f}{a} - 1\right)^{2} - 4r^{2}
+    \end{equation*}
+Plug in 
+    \begin{equation*}
+        \dfrac{1}{4}\left(\left(\dfrac{c}{a}\right)^{2} + \left(\dfrac{e}{a}\right)^{2}\right)  - \dfrac{f}{a} = r^{2}
+    \end{equation*}
+We get
+    \begin{equation*}
+        \left(\dfrac{f}{a} - 1\right)^{2} - \left(\left(\dfrac{c}{a}\right)^{2} + \left(\dfrac{e}{a}\right)^{2} - \dfrac{4f}{a}\right) 
+    \end{equation*}
+So
+    \begin{equation*}
+        \left(\dfrac{f}{a} + 1\right)^{2} - \left(\left(\dfrac{c}{a}\right)^{2} + \left(\dfrac{e}{a}\right)^{2}\right) = 0
+    \end{equation*}
+Take the projective closure: $(f + a)^{2} - (c^{2} + e^{2}) = 0$ in $\mathbb{P}^{3}$. We have the intersection of three cones in $\mathbb{P}^{3}$, and if this intersection is finite, then the number of intersections is $d_{1} \cdot d_{ 2}\cdot d_{ 3} = 8$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

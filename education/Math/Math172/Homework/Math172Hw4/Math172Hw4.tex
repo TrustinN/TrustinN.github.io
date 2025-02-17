@@ -1,0 +1,127 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math172/Homework/Math172Hw4/Math172Hw4.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+
+\title{Math172Hw4}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Find a closed expression for the Stirling number $S(n, n - 1)$.
+    \begin{proof}
+        Notice that we have a recursive formula for the Stirling numbers which is given by:
+            \begin{equation*}
+                S(n, k) = S(n - 1, k - 1) + k \cdot S(n - 1, k)
+            \end{equation*}
+        Now plugging in $k = n - 1$, we get:
+            \begin{equation*}
+                S(n, n - 1) = S(n - 1, n - 2) + k \cdot S(n - 1, n - 1)
+            \end{equation*}
+        But we have that $S(n - 1, n - 1)$ is the number of partition of $n - 1$ objects into $n - 1$ indistinguishable groups. Then there is only $1$ way to do so:
+            \begin{equation*}
+                S(n, n - 1) = S(n - 1, n - 2) + k
+            \end{equation*}
+        We start with $S(1, 0) = 0$ and $S(2, 1) = 1$. By the recursive formula, we have
+            \begin{align*}
+                S(1, 0)     &=       0 \\
+                S(2, 1)     &=       1 \\
+                S(3, 2)     &=       3 \\
+                S(4, 3)     &=       6 \\
+                            &\vdots    \\
+                S(n, n - 1) &=       ?   
+            \end{align*}
+        But we notice that we just add $k$ for each step and these are just the triangle numbers. We have $\frac{n(n + 1)}{2}$ partitions.
+    \end{proof}
+
+\textbf{Exercise 2}: Recall that $p_{k}(n)$ is the number of partitions of $n$ with $k$ non-zero parts. Show that for any positive integers $n, k$ we have
+    \begin{equation*}
+        p_{1}(n) + p_{2}(n) + p_{3}(n) + \cdots + p_{k}(n) = p_{k}(n + k)
+    \end{equation*}
+by considering the operation of removing the first column from a Young diagram of a partition of $n + k$ with $k$ parts.
+    \begin{proof}
+        If we start with $n + k$ as a number to partition into $k$ groups, we subtract out the first column. Now all that is left is to count the number of partitions of $n + k - k$ into parts of size $\leq k$. This is just the sum that is shown above:
+            \begin{equation*}
+                p_{1}(n) + p_{2}(n) + p_{3}(n) + \cdots + p_{k}(n) = p_{k}(n + k)
+            \end{equation*}
+        which completes the proof.
+    \end{proof}
+
+\textbf{Exercise 3}: Show that the number of strict partitions of $n$ with $k$ distinct parts is equal to $p_{k}\left(n - \frac{k(k - 1)}{2}\right)$.
+    \begin{proof}
+        We first establish a strict partition with $k$ parts where the $i$-th row starting from the top has $k - i - 1$ blocks. The number of blocks that we use up is $\frac{k(k + 1)}{2}$. So now we count the number of ways to partition $n - \frac{k(k + 1)}{2}$. This is just:
+            \begin{equation*}
+                p_{1}(n - \frac{k(k + 1)}{2}) + p_{2}(n - \frac{k(k + 1)}{2}) + \cdots +p_{k}(n - \frac{k(k + 1)}{2})
+            \end{equation*}
+        to which we get:
+            \begin{equation*}
+                p_{k}\left(n - \dfrac{k(k + 1)}{2} + k\right) = p_{k}\left(n + \dfrac{k(2 - k - 1)}{2}\right) = p_{k}\left(n + \dfrac{k(-k + 1)}{2}\right) = p_{k}\left(n - \dfrac{k(k - 1)}{2}\right)
+            \end{equation*}
+        which is what was wanted. 
+    \end{proof}
+
+\textbf{Exercise 4}: Show that for any permutation $\sigma$ of $[n]$ we have $\sigma^{n!} = e$ where $e$ is the identity permutation $123\ldots n$.
+    \begin{proof}
+        By a fact proved in class, we have that for any $\sigma$ on $[n]$ and each $x_{i} \in [n]$, there is some $k_{i} \in [n]$ such that:
+            \begin{equation*}
+                \sigma^{k_{i}}(x_{i}) = x_{i}
+            \end{equation*}
+        The we take the lcm over the $k_{i}^{\prime}s$:
+            \begin{equation*}
+                \sigma^{\lcm(k_{1}, \ldots ,  k_{n})}
+            \end{equation*}
+        since each $k_{i} \divides \lcm(k_{1}, \ldots , k_{n})$, we have $k_{i} \cdot d = \lcm(k_{1}, \ldots , k_{n})$. Therefore, for the corresponding $x_{i} \in [n]$, we have:
+            \begin{equation*}
+                \sigma^{k_{i} \cdot d}(x_{i}) = x_{i}
+            \end{equation*}
+        since the power $k_{i}$ fixes $x_{i}$. We apply this $d$ times and it will still fix $x_{i}$. Notice that our choice of $i$ for $k_{i}, x_{i}$ is arbitrary. So $\sigma^{n!}$ fixes all elements as $\lcm(k_{1}, \ldots , k_{n}) \divides n!$. So we are done.
+    \end{proof}
+
+\textbf{Exercise 5}: An inversion of a permutation $\sigma$ of $[n]$ is a pair of integers $(i, j)$ such that $i, j \in [n], i < j$ and $\sigma(i) > \sigma(j)$. Show that $\sigma$ and $\sigma^{-1}$ have the same number of inversions.
+    \begin{proof}
+        We will construct a bijection between the set of inversions on $\sigma$ denoted $I(\sigma)$ and the set of inversions on $\sigma^{-1}$ denoted $I(\sigma^{-1})$. 
+
+        We will show that $\varphi: I(\sigma) \rightarrow I(\sigma^{-1})$ is bijective, given by:
+            \begin{equation*}
+                \varphi((g_{1}, g_{2})) \mapsto (\sigma(g_{2}), \sigma(g_{1}))
+            \end{equation*}
+        We need to show that the image is indeed in $I(\sigma^{-1})$. 
+            \begin{itemize}
+                \item Since we have $\sigma(g_{2}) < \sigma(g_{1})$, it agrees with the first part of the definition of an inversion.
+
+                \item  Now we take $\sigma^{-1}\sigma(g_{1}) = g_{1}$ and $\sigma^{-1}\sigma(g_{2}) = g_{2}$, which we can do because permutations are bijection. But now $g_{2} > g_{1}$. So indeed the image of $\varphi$ is a subset of $I(\sigma^{-1})$.
+            \end{itemize}
+
+        (Surjectivity) Let $(i, j) \in I(\sigma^{-1})$. Then consider $(\sigma^{-1}(j), \sigma^{-1}(i))$. This is an inversion in $I(\sigma)$ because 
+            \begin{itemize}
+                \item $\sigma^{-1}(j) < \sigma^{-1}(i)$
+
+                \item $\sigma\sigma^{-1}(j) = j > i = \sigma\sigma^{-1}(i)$ 
+            \end{itemize}
+        and notice that in the second condition check, we have $(\sigma^{-1}(j), \sigma^{-1}(i)) \in I(\sigma)$ such that:
+            \begin{equation*}
+                \varphi((\sigma^{-1}(j), \sigma^{-1}(i))) = (i, j)
+            \end{equation*}
+        
+        (Injectivity) Suppose that $\varphi(i_{1}, j_{1}) = \varphi(i_{2}, j_{2})$. Then that means that $(\sigma(j_{1}), \sigma(i_{1})) = (\sigma(j_{2}), \sigma(i_{2}))$. Considering component wise:
+            \begin{align*}
+                \sigma(j_{1})            &= \sigma(j_{2})            & \sigma(i_{1})            &= \sigma(i_{2})            \\
+                \sigma^{-1}\sigma(j_{1}) &= \sigma^{-1}\sigma(j_{2}) & \sigma^{-1}\sigma(i_{1}) &= \sigma^{-1}\sigma(i_{2}) \\
+                j_{1}                    &= j_{2}                    & i_{1}                    &= i_{2}                      
+            \end{align*}
+        which shows that $(i_{1}, j_{1}) = (i_{2}, j_{2})$ therefore proving injectivity. So we have a bijection and $\sigma$ has the same number of inversions as $\sigma^{-1}$.
+    \end{proof}
+
+
+
+
+
+
+
+\end{document} 

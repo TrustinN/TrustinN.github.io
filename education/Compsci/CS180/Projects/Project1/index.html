@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Images of the Russian Empire</title>
+    <link href="/css/style.css" rel="stylesheet" />
+    <script src="/common.js" defer></script>
+    <script
+      id="MathJax-script"
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+  </head>
+  <body>
+    <div class="page-container include-sidebar">
+      <header></header>
+
+      <div class="banner">
+        <h1>Project 1: Images of the Russian Empire</h1>
+      </div>
+
+      <div class="sidebar-container">
+        <div class="sidebar-nav"></div>
+      </div>
+
+      <main>
+        <section>
+          <article id="Exhaustive Search">
+            <h2>Aligning Images with Exhaustive Search</h2>
+            <p>
+              Using an exhaustive search given a window \([-z, z]\), the
+              algorithm loops over the \(x\) and \(y\) axis to determine a shift
+              \((dx, dy)\) such that \(dx, dy\) are in \([-z, z]\). The ideal
+              shift is chosen by a given metric, two of which I used for the
+              project are sum of squared differences and the zero-normalized
+              correlation coefficient. The ZNCC metric is useful for varying
+              brightnesses in the channels, as the images are first normalized
+              before maximizing their dot product. The exhaustive search is
+              effective for small images such as the jpg files.
+            </p>
+            <div class="centered">
+              <div class="image-container">
+                <img
+                  src="./media/exhaustive_ex/tobolsk.jpg"
+                  alt="tobolsk"
+                  width="300"
+                  height="300"
+                />
+                <img
+                  src="./media/exhaustive_ex/monastery.jpg"
+                  alt="monastery"
+                  width="300"
+                  height="300"
+                />
+                <img
+                  src="./media/exhaustive_ex/cathedral.jpg"
+                  alt="cathedral"
+                  width="300"
+                  height="300"
+                />
+              </div>
+            </div>
+
+            <aside>
+              <details>
+                <summary>
+                  <emph>Runtime Data</emph>
+                </summary>
+                The output format is:
+                <code>image_name (ag_disp, ar_disp, runtime)</code>.
+                <ul style="list-style-type: none">
+                  <li style="clear: both">
+                    <div style="float: left; min-width: 80px">
+                      <code>image_name</code>
+                    </div>
+                    <span style="float: left">&nbsp:&nbsp</span>
+                    <div style="float: left; width: 80%">Name of the image</div>
+                  </li>
+
+                  <li style="clear: both">
+                    <div style="float: left; min-width: 80px">
+                      <code>ag_disp</code>
+                    </div>
+                    <span style="float: left">&nbsp:&nbsp</span>
+                    <div style="float: left; width: 80%">
+                      Displacement of the green channel to align with the blue
+                      channel. This is a tuple of the form \((dx, dy)\) such
+                      that
+                      <code class="nobr">np.roll(g, ag_disp, (1, 0))</code> is
+                      the realigned green channel.
+                    </div>
+                  </li>
+
+                  <li style="clear: both">
+                    <div style="float: left; min-width: 80px">
+                      <code>ar_disp</code>
+                    </div>
+                    <span style="float: left">&nbsp:&nbsp</span>
+                    <div style="float: left; width: 80%">
+                      Displacement of the red channel to align with the blue
+                      channel. This is a tuple of the form \((dx, dy)\) such
+                      that
+                      <code class="nobr">np.roll(r, ar_disp, (1, 0))</code> is
+                      the realigned red channel.
+                    </div>
+                  </li>
+
+                  <li style="clear: both">
+                    <div style="float: left; min-width: 80px">
+                      <code>runtime</code>
+                    </div>
+                    <span style="float: left">&nbsp:&nbsp</span>
+                    <div style="float: left; width: 80%">
+                      Runtime in seconds.
+                    </div>
+                  </li>
+                </ul>
+                <div class="centered">
+                  <div
+                    class="image-container"
+                    style="--grid-cols: repeat(1, 1fr)"
+                  >
+                    <embed
+                      src="./media/exhaustive_ex/data.txt"
+                      alt="runtime data"
+                    />
+                  </div>
+                </div>
+              </details>
+            </aside>
+          </article>
+        </section>
+
+        <section>
+          <article id="Image Pyramid">
+            <h2>Image Pyramid</h2>
+            <p>
+              For larger images, larger windows will slow down the result. Using
+              an image pyramid, we can recursively downsample the image (by a
+              factor of 2) to a given depth, at each step, aligning the image
+              and returning the shift. Propagation upwards will account for the
+              total displacement of the image, which we can use to shift the
+              image. This makes the process much faster, as at a depth \(d\),
+              determining the ideal displacement is fastest, and accounts for
+              \begin{equation*} (\#\text{ pixel shifts}) \cdot 2^{d}
+              \end{equation*} of the displacement. Although faster, this
+              algorithm struggles with the borders that are present in some
+              images. This affects the metric used, making the result
+              inaccurate, especially on train.tif, lady.tif, and emir.tif.
+            </p>
+            <div class="centered">
+              <div class="image-container" style="--grid-cols: repeat(4, 1fr)">
+                <img
+                  src="./media/img_pyramid_ex/emir.jpg"
+                  alt="emir"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/img_pyramid_ex/monastery.jpg"
+                  alt="monastery"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/img_pyramid_ex/train.jpg"
+                  alt="train"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/img_pyramid_ex/harvesters.jpg"
+                  alt="harvesters"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            <aside>
+              <details>
+                <summary>
+                  <emph>Runtime Data</emph>
+                </summary>
+                The output format is:
+                <code>image_name (ag_disp, ar_disp, runtime)</code>.
+                <ul style="list-style-type: none">
+                  <li style="clear: both">
+                    <div style="float: left; min-width: 80px">
+                      <code>image_name</code>
+                    </div>
+                    <span style="float: left">&nbsp:&nbsp</span>
+                    <div style="float: left; width: 80%">Name of the image</div>
+                  </li>
+
+                  <li style="clear: both">
+                    <div style="float: left; min-width: 80px">
+                      <code>ag_disp</code>
+                    </div>
+                    <span style="float: left">&nbsp:&nbsp</span>
+                    <div style="float: left; width: 80%">
+                      Displacement of the green channel to align with the blue
+                      channel. This is a tuple of the form \((dx, dy)\) such
+                      that
+                      <code class="nobr">np.roll(g, ag_disp, (1, 0))</code> is
+                      the realigned green channel.
+                    </div>
+                  </li>
+
+                  <li style="clear: both">
+                    <div style="float: left; min-width: 80px">
+                      <code>ar_disp</code>
+                    </div>
+                    <span style="float: left">&nbsp:&nbsp</span>
+                    <div style="float: left; width: 80%">
+                      Displacement of the red channel to align with the blue
+                      channel. This is a tuple of the form \((dx, dy)\) such
+                      that
+                      <code class="nobr">np.roll(r, ar_disp, (1, 0))</code> is
+                      the realigned red channel.
+                    </div>
+                  </li>
+
+                  <li style="clear: both">
+                    <div style="float: left; min-width: 80px">
+                      <code>runtime</code>
+                    </div>
+                    <span style="float: left">&nbsp:&nbsp</span>
+                    <div style="float: left; width: 80%">
+                      Runtime in seconds.
+                    </div>
+                  </li>
+                </ul>
+                <div class="centered">
+                  <div
+                    class="image-container"
+                    style="--grid-cols: repeat(1, 1fr)"
+                  >
+                    <embed
+                      src="./media/img_pyramid_ex/data.txt"
+                      alt="runtime data"
+                      height="240"
+                    />
+                  </div>
+                </div>
+              </details>
+            </aside>
+          </article>
+        </section>
+
+        <section>
+          <article id="Edge Detection">
+            <h2>Edge Detection for Alignment</h2>
+            <p>
+              One improvement is to use the sobel filter to detect edges in the
+              image. We can preprocess the image with the filter, feed this into
+              our alignment algorithm and obtain a result more resistant to
+              border colors. The filter uses the kernel matrix \begin{equation*}
+              \begin{bmatrix} 1 & 0 & -1 \\ 2 & 0 & -2 \\ 1 & 0 & -1
+              \end{bmatrix} \end{equation*} derived from adjustments to the
+              discrete form of the derivative: \begin{equation*} f_{x}(x, y) =
+              \dfrac{f(x + 1, y) - f(x - 1, y)}{2} \end{equation*} The kernel is
+              convolved with the image matrix to produce the \(x\) component of
+              the gradient. The same is done for the \(y\) component, and the
+              normalized euclidean distance between both images is used to
+              obtain the edges. Here are some examples of using
+              <code>scipy.signal.convolve2d</code> to do the convolution then
+              finding the magnitude:
+            </p>
+            <div class="centered">
+              <div class="image-container">
+                <img
+                  src="./media/edges_ex/cathedral.png"
+                  alt="cathedral"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/edges_ex/train.png"
+                  alt="train"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/edges_ex/onion_church.png"
+                  alt="onion_church"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <p>And here is the result using <code>sk.filters.sobel</code>:</p>
+            <div class="centered">
+              <div class="image-container" style="--grid-cols: repeat(4, 1fr)">
+                <img
+                  src="./media/sobel_ex/emir.jpg"
+                  alt="emir"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/sobel_ex/monastery.jpg"
+                  alt="monastery"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/sobel_ex/train.jpg"
+                  alt="train"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/sobel_ex/harvesters.jpg"
+                  alt="harvesters"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <aside>
+              <details>
+                <summary>
+                  <emph>Runtime Data</emph>
+                </summary>
+                The output format is:
+                <code>image_name (ag_disp, ar_disp, runtime)</code>.
+                <ul style="list-style-type: none">
+                  <li style="clear: both">
+                    <div style="float: left; min-width: 80px">
+                      <code>image_name</code>
+                    </div>
+                    <span style="float: left">&nbsp:&nbsp</span>
+                    <div style="float: left; width: 80%">Name of the image</div>
+                  </li>
+
+                  <li style="clear: both">
+                    <div style="float: left; min-width: 80px">
+                      <code>ag_disp</code>
+                    </div>
+                    <span style="float: left">&nbsp:&nbsp</span>
+                    <div style="float: left; width: 80%">
+                      Displacement of the green channel to align with the blue
+                      channel. This is a tuple of the form \((dx, dy)\) such
+                      that
+                      <code class="nobr">np.roll(g, ag_disp, (1, 0))</code> is
+                      the realigned green channel.
+                    </div>
+                  </li>
+
+                  <li style="clear: both">
+                    <div style="float: left; min-width: 80px">
+                      <code>ar_disp</code>
+                    </div>
+                    <span style="float: left">&nbsp:&nbsp</span>
+                    <div style="float: left; width: 80%">
+                      Displacement of the red channel to align with the blue
+                      channel. This is a tuple of the form \((dx, dy)\) such
+                      that
+                      <code class="nobr">np.roll(r, ar_disp, (1, 0))</code> is
+                      the realigned red channel.
+                    </div>
+                  </li>
+
+                  <li style="clear: both">
+                    <div style="float: left; min-width: 80px">
+                      <code>runtime</code>
+                    </div>
+                    <span style="float: left">&nbsp:&nbsp</span>
+                    <div style="float: left; width: 80%">
+                      Runtime in seconds.
+                    </div>
+                  </li>
+                </ul>
+                <div class="centered">
+                  <div
+                    class="image-container"
+                    style="--grid-cols: repeat(1, 1fr)"
+                  >
+                    <embed
+                      src="./media/sobel_ex/data.txt"
+                      alt="runtime data"
+                      height="240"
+                    />
+                  </div>
+                </div>
+              </details>
+            </aside>
+          </article>
+        </section>
+
+        <section>
+          <article id="Results">
+            <h2>Naive Cropping and Results</h2>
+            <p>
+              To achieve stronger results, cropping the image by 15% on all
+              sides can remove the issue. This is the final improvement of the
+              program and here are all results listed:
+            </p>
+            <div class="centered">
+              <div
+                class="image-container"
+                style="--grid-cols: repeat(4, 1fr); --grid-rows: repeat(4, 1fr)"
+              >
+                <img
+                  src="./media/border_crop_ex/emir.jpg"
+                  alt="emir"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/border_crop_ex/monastery.jpg"
+                  alt="monastery"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/border_crop_ex/church.jpg"
+                  alt="church"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/border_crop_ex/three_generations.jpg"
+                  alt="three_generations"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/border_crop_ex/melons.jpg"
+                  alt="melons"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/border_crop_ex/onion_church.jpg"
+                  alt="onion_church"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/border_crop_ex/train.jpg"
+                  alt="train"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/border_crop_ex/tobolsk.jpg"
+                  alt="tobolsk"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/border_crop_ex/icon.jpg"
+                  alt="icon"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/border_crop_ex/cathedral.jpg"
+                  alt="cathedral"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/border_crop_ex/self_portrait.jpg"
+                  alt="self_portrait"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/border_crop_ex/harvesters.jpg"
+                  alt="harvesters"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/border_crop_ex/sculpture.jpg"
+                  alt="sculpture"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/border_crop_ex/lady.jpg"
+                  alt="lady"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <aside>
+              <details>
+                <summary>
+                  <emph>Runtime Data</emph>
+                </summary>
+                The output format is:
+                <code>image_name (ag_disp, ar_disp, runtime)</code>.
+                <ul style="list-style-type: none">
+                  <li style="clear: both">
+                    <div style="float: left; min-width: 80px">
+                      <code>image_name</code>
+                    </div>
+                    <span style="float: left">&nbsp:&nbsp</span>
+                    <div style="float: left; width: 80%">Name of the image</div>
+                  </li>
+
+                  <li style="clear: both">
+                    <div style="float: left; min-width: 80px">
+                      <code>ag_disp</code>
+                    </div>
+                    <span style="float: left">&nbsp:&nbsp</span>
+                    <div style="float: left; width: 80%">
+                      Displacement of the green channel to align with the blue
+                      channel. This is a tuple of the form \((dx, dy)\) such
+                      that
+                      <code class="nobr">np.roll(g, ag_disp, (1, 0))</code> is
+                      the realigned green channel.
+                    </div>
+                  </li>
+
+                  <li style="clear: both">
+                    <div style="float: left; min-width: 80px">
+                      <code>ar_disp</code>
+                    </div>
+                    <span style="float: left">&nbsp:&nbsp</span>
+                    <div style="float: left; width: 80%">
+                      Displacement of the red channel to align with the blue
+                      channel. This is a tuple of the form \((dx, dy)\) such
+                      that
+                      <code class="nobr">np.roll(r, ar_disp, (1, 0))</code> is
+                      the realigned red channel.
+                    </div>
+                  </li>
+
+                  <li style="clear: both">
+                    <div style="float: left; min-width: 80px">
+                      <code>runtime</code>
+                    </div>
+                    <span style="float: left">&nbsp:&nbsp</span>
+                    <div style="float: left; width: 80%">
+                      Runtime in seconds.
+                    </div>
+                  </li>
+                </ul>
+                <div class="centered">
+                  <div
+                    class="image-container"
+                    style="--grid-cols: repeat(1, 1fr)"
+                  >
+                    <embed
+                      src="./media/border_crop_ex/data.txt"
+                      alt="runtime data"
+                      height="240"
+                    />
+                  </div>
+                </div>
+              </details>
+            </aside>
+          </article>
+        </section>
+      </main>
+
+      <footer></footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,204 @@
+%! TeX root = 	
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/MyStyle/mystyle}
+
+\title{Math113Hw5}
+\author{Trustin Nguyen}
+
+
+\begin{document}
+\maketitle
+\reversemarginpar
+
+\begin{topic}
+	\section*{Homework 5}
+\end{topic}
+
+\textbf{Exercise 1}: Calculate the size of the conjugacy class of $(1 \, 2 \, 3)$ as an element of $S_{4}, S_{5}, S_{6}$. Find the size of its centraliser in each case. Hence, to otherwise, calculate the size of the conjugacy class of $(1 \, 2\, 3)$ in $A_{4}, A_{5}, A_{6}$.
+
+\begin{proof}
+	Since conjugation does not change cycle type, the conjugacy class has order $2\binom{4}{3} = 8$ in $S_{4}$, $2\binom{5}{3} = 20$ in $S_{5}$ and $2\binom{6}{3} = 40$ in $S_{6}$. By orbit-stabilizer, the size of the centralizer for $S_{4}$ for $(1 \, 2 \, 3)$ is 3. The size of the centralizer for $S_{5}$ is 6, and the size of the centralizer for $S_{6}$ is $720/40 = 18$.
+
+	We can find an odd permutation that commutes with $(1 \, 2\, 3)$ in both $S_{5}$ and $S_{6}$:
+	\begin{equation*}
+		(4 \, 5)
+	\end{equation*}
+	so the size of $\abs{C_{G_{A_{n}}}((1 \, 2 \, 3))} = \dfrac{1}{2}\abs{D_{G_{S_{n}}}}((1 \, 2 \, 3))$. The conjugacy class of $(1 \, 2 \, 3)$ does not split in $A_{5}, A_{6}$.
+
+	Now for the $A_{4}$ case, using the orbit-stabilizer theorem,
+	\begin{equation*}
+		\abs{C_{G}((1 \,2 \, 3))} = 3
+	\end{equation*}
+	and since the center cannot split, the conjugacy classes must split. So $\text{ccl}((1 \, 2 \, 3))$ splits in $A_{4}$.
+\end{proof}
+
+\textbf{Exercise 2}: Show that $D_{2n}$ has one conjugacy class of reflections if $n$ is odd, and two conjugacy classes of reflections if $n$ is even.
+
+\textbf{Exercise 3}:
+\begin{enumerate}
+	\item Let $G$ be a finite group and let $H$ be a subgroup of index $n \neq 1$ in $G$. Suppose that $\abs{G}$ does not divide $n!$. Show that $H$ contains a non-trivial normal subgroup of $G$.
+		\begin{proof}
+			Let $G \actson G$ by left multiplication of the cosets of $H$ where $\abs{G : H} = n$:
+			\begin{equation*}
+				\varphi: G \rightarrow S_{n}
+			\end{equation*}
+			The kernel is a subset of $H$. We have that the kernel is a subgroup of $G$ also, so
+			\begin{equation*}
+				\abs{G : \ker{(\varphi)}} \divides n!
+			\end{equation*}
+			by the isomorphism theorem where the quotient group of $G$ and the kernel is isomorphic to some subgroup of $S_{n}$. But
+			\begin{equation*}
+				\abs{G} \ndivides n!
+			\end{equation*}
+			and by Lagrange, 
+			\begin{equation*}
+				\abs{G : \ker{(\varphi)}}\abs{\ker{(\varphi)}} \ndivides n!
+			\end{equation*}
+			So we cannot have $\ker{(\varphi)} = 1$. Therefore, the kernel is non-trivial and must contain more elements than just $e$.
+		\end{proof}
+
+	\item Show that if $G$ is of order $28$, and has a normal subgroup of order $4$, then $G$ is abelian.
+		\begin{proof}
+			Let $G \actson H$ by conjugation. Observe that the normal subgroup $H$ is made of a union of conjugacy classes. The identity element is its own conjugacy class. Then there are three elements left. The size of the conjugacy class divides order of $G$ by orbit stabilizer so either we have $H$ is made of conjugacy classes of size $1, 1, 1, 1$ or $1, 1, 2$. In the first case, if $H$ is a subgroup of the center of $G$, then we take $G/H$ and observe that since the group is cyclic and partitions $G$, generator $\brac{gH}$, every element can be written as 
+			\begin{equation*}
+				g^{i}h^{j} = h^{j}g^{i}
+			\end{equation*}
+			so $G$ is abelian. In the case of $1, 1, 2$ size conjugacy classes in $H$. Let 
+			\begin{equation*}
+				\abs{\text{ccl}(h)}  = 2
+			\end{equation*}
+			and 
+			\begin{equation*}
+				\text{ccl}(h) = \{\sigma, \tau\}
+			\end{equation*}
+			for some $h \in H$. If $g \sigma g^{-1} = \tau$, for $g \notin H$ then
+			\begin{align*}
+				g \sigma g^{-1} &= \tau \\
+				g^{2} \sigma g^{-2} &= \sigma \\
+						    &\vdots \\
+				g^{6} \sigma g^{-6} &= \sigma \\
+				g^{7} \sigma g^{-7} = \tau &= e \sigma e^{-1} = \sigma
+			\end{align*}
+			contradiction. $H$ is made of conjugacy classes of order 1 and $G$ is therefore abelian.
+		\end{proof}
+\end{enumerate}
+\textbf{Exercise 4}: Let $G$ be a non-abelian group of order $p^{3}$, where $p$ is a prime number. 
+\begin{enumerate}
+	\item Show that the center of $Z(G)$ has order $p$.
+		\begin{proof}
+			Since the grouphas order $p^{a}$, the center is non-trivial and must divide $p^{3}$. Also, the center cannot have order $p^{3}$, since the group is non-abelian. If $\abs{Z(G)} = p^{2}$, then $\abs{G/Z(G)} = p$ and the quotient group is cyclic: $\brac{gH}$. So the cosets of the center partition the group, where every element in $G$ can then be written as 
+			\begin{equation*}
+				g^{i}z^{j} = z^{j}g^{i}
+			\end{equation*}
+			with $z \in Z(G)$ which shows that $G$ is abelian. So $\abs{Z(G)} = p$.
+		\end{proof}
+
+	\item Show that if $g \notin Z(G)$, then the centralizer $C(g)$ has order $p^{2}$.
+		\begin{proof}
+			Since
+			\begin{equation*}
+				Z(G) = \bigcap_{g \in G}^{} C_{G}(g)
+			\end{equation*}
+			if $g \notin Z(G)$, then $\abs{Z(G)} < \abs{C_{G}(g)}$ since $Z(G) \subseteq  C_{G}(g)$. The centralizer is a group so its order must divide $p^{3}$. But the centralizer cannot have the size $p^{3}$ otherwise, $g$ commutes with every element and actually belongs in the center. So we must have $\abs{C_{G}(g)} = p^{2}$.
+		\end{proof}
+
+	\item Find the number and sizes of the conjugacy classes in $G$.
+		\begin{proof}
+			We must have that the elements of the center have conjugacy classes of size 1 and that there are $p$ of them. Since the conjugacy classes partition the group, we must have that the sum of the rest of the conjugacy classes's order must be ewual to $p^{3} - p = (p^{2} - 1)p$. Since the sizes of the centralizers for elements not in $Z(G)$ is $p^{2}$, by orbit stabilizer, the size of their conjugacy class is $p$. That means there are $p^{2} - 1$ conjugacy classes with $p$ elements:
+			\begin{center}
+				\begin{tabular}{ c c c }
+				 & Size = 1 & Size = $p$ \\
+				Count & $\abs{\text{ccl}(g)} = 1$ & $\abs{\text{ccl}(g)} = p$ \\
+				Count & $p$ & $p^{2} - 1$ \\
+				\end{tabular}
+			\end{center}	
+		\end{proof}
+\end{enumerate}
+
+\textbf{Exercise 5}: Let $G$ be a finite group acting on a set $X$. For $g \in G$. Let 
+\begin{equation*}
+	\text{Fix}(g) = \{x \in x : gx = x\}
+\end{equation*}
+be the set of fixed points of $g$. Counting the set
+\begin{equation*}
+	\{(g, x) \in G \times X : gx = x\}
+\end{equation*}
+in two ways and using the orbit-stabilizer theorem, or otherwise, show that the number of orbits is given by 
+\begin{equation*}
+	\dfrac{1}{\abs{G}}\sum_{g \in G}^{}\abs{\text{Fix}(g)}
+\end{equation*}
+Show that if $G$ acts transitively on $X$ and $\abs{X} > 1$, there is $g \in G$ with no fixed points.
+\begin{proof}
+	Take an arbitrary stabilizer of our group action:
+	\begin{equation*}
+		\text{Stab}(x) = \{e, g_{1}, g_{2}, \ldots\}
+	\end{equation*}
+	notice that for every element in the stabilizer of $x,$ $x$ belongs to the elements' fix set. So
+	\begin{equation*}
+		\sum_{x \in X}^{}\abs{\text{Stab}(x)} = \sum_{g \in G}^{}\abs{\text{Fix}(g)}
+	\end{equation*}
+	Now take an arbitrary orbit:
+	\begin{equation*}
+		\text{Orb}(x) = \{x_{1}, x_{2}, x_{3}, \ldots, x_{n}\}
+	\end{equation*}
+	and notice that 
+	\begin{equation*}
+		\text{Orb}(x_{1}) = \text{Orb}(x_{2}) = \cdots = \text{Orb}(x_{n})
+	\end{equation*}
+	so
+	\begin{equation*}
+		\dfrac{1}{\text{Orb}(x_{1})} + \dfrac{1}{\abs{\text{Orb}(x_{2})}} + \cdots + \dfrac{1}{\text{Orb}(x_{n})} = 1
+	\end{equation*}
+	by orbit stabilizer theorem,
+	\begin{align*}
+		\abs{G} &= \abs{\text{Orb}(x)}\abs{\text{Stab}(x)} \\
+		\dfrac{\abs{\text{Stab}(x)}}{\abs{G}} &= \dfrac{1}{\abs{\text{Orb}(x)}} \\
+		\sum_{x \in X}^{}\dfrac{\abs{\text{Stab}(x)}}{\abs{G}} &= \sum_{x \in X}^{}\dfrac{1}{\abs{\text{Orb}(x)}} \\
+		\dfrac{1}{\abs{G}}\sum_{g \in G}^{}\abs{\text{Fix}(g)} &= \sum_{x \in X}^{}\dfrac{1}{\abs{\text{Orb}(x)}}
+	\end{align*}
+	But since the sum of the reciprocal of the orbits counts the number of unique orbits there are, we are done.
+\end{proof}
+
+\begin{proof}
+	If $G$ acts transitively, we have
+	\begin{equation*}
+		\sum_{g \in G}^{}\abs{\text{Fix}(g)} = 1 \cdot \abs{G}
+	\end{equation*}
+	We first single out $\text{Fix}(e)$ which has a cardinality of $\abs{X} > 1$ by definition. Suppose there are no non-zero $\abs{\text{Fix}(g)}$'s. Then the minimum value of $\sum_{g \in G}^{}\abs{\text{Fix}(g)}$ is
+	\begin{equation*}
+		\abs{G} - 1 + \abs{\text{Fix}(e)} = \abs{G} + 1
+	\end{equation*}
+	which is impossible. There must be an element that fixes nothing. 
+\end{proof}
+
+
+
+
+
+
+
+\{}\}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

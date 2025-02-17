@@ -1,0 +1,243 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Compsci/CS170/Homework/CS170Hw8/CS170Hw8.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{CS170Hw8}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\section*{Study Group}
+\hrule
+
+\section*{Knightmare}
+\hrule
+
+Give a dynamic programming algorithm to find the number of ways you can place knights on an $X$ by $Y$ ($X > Y$) chessboard such that no two knights can attack each other (there can be any number of knights on the board, including zero knights). Knights can move in a $2 \times 1$ shape pattern in any direction.
+
+\textbf{Provide a 4-part solution. Your algorithm's runtime should be} $\mathcal{O}(2^{3Y}XY)$\textbf{, and return your answer mod 1789}.
+
+\section*{Max Independent Set Again}
+\hrule
+
+You are given a connected tree $T$ with $n$ nodes and a designated root $r$, where every vertex $v$ has a weight $W[v]$. A set of nodes $S$ is a $k$-independent set of $T$ if $\lvert S \rvert = k$ and no two nodes in $S$ have an edge between them in $T$. The weight of such a set is given by adding up the weights of all the nodes in $S$, i.e.
+    \begin{equation*}
+        W(S) = \sum_{v \in S} W[v]
+    \end{equation*}
+Given an integer $k \leq n$, your task is to find the maximum possible weight of any $k$-independent set of $T$. We will first tackle the problem in the special case that $T$ is a binary tree, and then generalize our solution to a general tree $T$.
+    \begin{itemize}
+        \item [(a)] Assume that $T$ is a binary tree, i.e. every node has at most $2$ children. Describe an $\mathcal{O}(nk^{2})$ algorithm that solves this special case, and analyze its runtime. Proof of correctness and space complexity analysis are not required.
+            \begin{answer}
+                Run DFS on the graph, split the nodes into two groups, bipartite. Do an exhaustive search in each group 
+            \end{answer}
+
+        \item [(b)] Now, consider any arbitrary tree $T$, with no restrictions on the number of children per node. Describe how we can add up to $\mathcal{O}(n)$ ``dummy'' nodes (i.e. nodes with weight $0$) to $T$, as well as some edges, so that the resulting tree is a binary tree $T_{b}$.
+
+        \item [(c)] Describe an $\mathcal{O}(nk^{2})$ algorithm to solve the general case (i.e. when $T$ is any arbitrary tree), and analyze its runtime. Proof of correctness and space complexity analysis are not required.
+    \end{itemize}
+
+\newpage
+\section*{Canonical Form LP}
+\hrule
+
+Recall that any linear program can be reduced to a more constrained \textit{canonical form} where all variables are non-negative, the constraints are given by $\leq$ inequalities, and the objective is the maximization of a cost function.
+
+More formally, our variables are $x_{i}$. Our objective is $\max(c^{T}x) = \max(\sum_{i} c_{i}x_{i})$ for some constants $c_{i}$. The $j$th constraint is $\sum_{i} a_{ij}x_{i} \leq b_{j}$ for some constants $a_{ij}, b_{j}$. Finally, we also have the constraints $x_{i} \geq 0$.
+
+An example canonical form LP:
+    \begin{align*}
+                          &\text{maximize } 5x_{1} + 3x_{2}  \\
+        \text{subject to} &\begin{cases}
+            x_{1} + x_{2} + x_{3} &\leq 1 \\
+            -(x_{1} + x_{2} - x_{3}) &\leq -1 \\
+            -x_{1} + 2x_{2} + x_{4} &\leq 0 \\
+            -(-x_{1} + 2x_{2} + x_{4}) &\leq 5 \\
+            x_{1}, x_{2}, x_{3}, x_{4} &\geq 0   
+        \end{cases}                      
+    \end{align*}
+For each of the subparts below, describe how we should modify it to so that it satisfies canonical form. If it is impossible to do so, justify your reasoning.
+
+Note that the subparts are independent of one another. Also, you may assume that variables are non-negative unless otherwise specified. 
+    \begin{itemize}
+        \item [(a)] Min Objective: $\min{\sum_{i}c_{i} x_{i}}$
+            \begin{answer}
+                Change the min to a max and negate the cost function:
+                    \begin{equation*}
+                        \max{-\sum_{i}c_{i}x_{i}}
+                    \end{equation*}
+            \end{answer}
+
+        \item [(b)] Lower Bound on Variable: $x_{1} \geq b-1$
+            \begin{answer}
+                We have
+                    \begin{equation*}
+                        x_{1} - b + 1 \geq 0
+                    \end{equation*}
+                So change of variables $x_{1}^{\prime} = x_{1} - b + 1$. Now the condition is $x_{1}^{\prime}, x_{2}, x_{3}, x_{4} \geq 0$, and substitute all instances of $x_{1}$ with $x_{1}^{\prime} + b - 1$.
+            \end{answer}
+
+        \item [(c)] Bounded Variable: $b_{1} \leq x_{1} \leq b_{2}$
+            \begin{answer}
+                Another change of variables: $0 \leq x_{1} - b_{1} \leq b_{2} - b_{1}$. Have $x^{\prime}_{1} = x_{1} - b_{1}$. Now the condition is $x_{1}^{\prime}, x_{2}, x_{3}, x_{4} \geq 0$, and substitute all instances of $x_{1}$ with $x_{1}^{\prime} + b_{1}$. We also need to account for $x_{1}^{\prime} \leq b_{2} - b_{1}$, so add that in as a new equation.
+            \end{answer} 
+
+        \item [(d)] Equality Constraint: $x_{2} = b_{2}$
+            \begin{answer}
+                Remove the constraint $x_{2} \geq 0$, substitute all values of $x_{2}$ in the LP to $b_{2}$. In your maximize function, you can just remove the term associated with $x_{2}$ now because it is constant.
+            \end{answer}
+
+        \item [(e)] More Equality Constraint: $x_{1} + x_{2} + x_{3} = b_{3}$
+            \begin{answer}
+                Add in the two constraints $x_{1} + x_{2} + x_{3} \leq b_{3}$ and $x_{1} + x_{2} + x_{3} \geq b_{3}$.
+            \end{answer}
+
+        \item [(f)] Absolute Value Constraint: $\lvert x_{1} + x_{2} \rvert \leq b_{2}$ where $x_{1}, x_{2} \in \mathbb{R}$
+            \begin{answer}
+                This means $-b_{2} \leq x_{1} + x_{2} \leq b_{2}$ or $0 \leq x_{1} + x_{2} + b_{2} \leq 2b_{2}$. Then we can add in two constraints:
+                    \begin{align*}
+                        x_{1} + x_{2} + b_{2} &\geq 0      \\
+                        x_{1} + x_{2} + b_{2} &\leq 2b_{2}   
+                    \end{align*}
+            \end{answer}
+
+        \item [(g)] Another Absolute Value Constraint: $\lvert x_{1} + x_{2} \rvert \geq b_{2}$ where $x_{1}, x_{2} \in \mathbb{R}$
+            \begin{answer}
+                It is required that $x_{1} + x_{2} \geq b_{2}$ or $x_{1} + x_{2} \leq -b_{2}$. If we are allowed to create multiple LP problems, we can append $x_{1} + x_{2} \geq b_{2}$ constraint to one LP problem and $x_{1} + x_{2} \leq -b_{2}$ constraint to the same, but duplicated LP problem. Solve both, and return the one that gives the optimal solution between them. Otherwise, it is impossible to accommodate this because these two conditions are contradictory.
+            \end{answer}
+
+        \item [(h)] Min Max Objective: $\min{\max{x_{1}, x_{2}, x_{3}, x_{4}}}$
+            \begin{answer}
+                Consider the maximum on only two variables, $x_{1}, x_{2}$. This is given by
+                    \begin{equation*}
+                        \dfrac{x_{1} + x_{2}}{2} + \dfrac{\lvert x_{1} - x_{2} \rvert}{2}
+                    \end{equation*}
+                We can use another variable $c_{1} \geq \frac{\lvert x_{1} - x_{2} \rvert}{2}$. Recall that from part $f$, there is a canonical form fitting the absolute value constraint. Then the minimizing function becomes $\min{c_{1} + \frac{x_{1} +  x_{2}}{2}}$. We can repeat this pairwise with the remaining $x_{3}, x_{4}$. At the end, turn the objective to maximizing the function by taking the negative of the loss function, and get rid of fractions by multiplying by some constant.
+            \end{answer}
+    \end{itemize}
+
+\newpage
+\section*{Baker}
+\hrule
+
+You are a baker who sells batches of brownies and cookies (unfortunately no brookies... for now). Each brownie batch takes $4$ kilograms of chocolate and $2$ eggs to make; each cookie batch takes $1$ kilogram of chocolate and $3$ eggs to make. You have $80$ kilograms of chocolate and $90$ eggs. You make a profit of $60$ dollars per brownie batch you sell and $30$ dollars per cookie batch you sell, and want to figure out how many batches of brownies and cookies to produce to maximize your profits.
+    \begin{itemize}
+        \item [(a)] Formulate this problem as a linear programming problem; in other words, write a linear program (in canonical form) whose solution gives you the answer to this problem. Draw the feasible region, and find the solution using Simplex.
+            \begin{answer}
+                We have the table
+                    \begin{center}
+                        \begin{tabular}{ c c c }
+                            \hline         & Chocolate & Eggs \\
+                            \hline Brownie & 4         & 2    \\
+                            \hline Cookie  & 1         & 3      
+                        \end{tabular}
+                    \end{center}
+                Then if $X$ is the number of brownies and $Y$ is the number of cookies, then
+                    \begin{equation*}
+                        \begin{cases}
+                            4X + Y &\leq 80  \\
+                            2X + 3Y &\leq 90 \\
+                            X & \geq 0 \\
+                            Y & \geq 0
+                        \end{cases}
+                    \end{equation*}
+                Here is the region:
+                    \begin{fixedfigure}
+                        \incfig{Simplex5}
+                    \end{fixedfigure}
+                So we start at $(20, 0)$ and see which vertex gives the max profit, which is given by $60X + 30Y = 30(2X + Y)$. The current profit is $30(40) = 1200$. The vertex $(12, 20)$ gives: $30(24 + 20) = 30(44) = 1320$. The last vertex gives $30(30) = 900$. Then the max profit is from the batch of $12$ brownies and $20$ cookies.
+            \end{answer}
+
+        \item [(b)] Suppose instead that the profit per brownie batch is $P$ dollars and the profit per cookie batch remains at $30$ dollars. For each vertex you listed in the previous part, give the range of $P$ values for which that vertex is the optimal solution.
+            \begin{answer}
+                The profit equation becomes
+                    \begin{equation*}
+                        PX + 30Y
+                    \end{equation*}
+                Plugging all of our batch numbers in:
+                    \begin{align*}
+                        (0, 0) &\rightarrow (0 + 0)      \\
+                        (20, 0) &\rightarrow (20P + 0)    \\
+                        (12, 20) &\rightarrow (12P + 600)  \\
+                        (0, 30) &\rightarrow (0P + 900)     
+                    \end{align*}
+                For $(0, 0)$ it is never optimal because the point $(0, 30)$ will yield more profit for any $P$.
+
+                For $(20, 0)$, we require it to be more optimal than $(12, 20), (0, 30)$:
+                    \begin{equation*}
+                        20P > 12P + 600 \implies 8P > 600 \implies P > 600 / 8 = 75
+                    \end{equation*}
+                and
+                    \begin{equation*}
+                        20P > 900 \implies P > 900 / 20 = 45
+                    \end{equation*}
+                So $P \geq 75$ for $(20, 0)$.
+
+                For $(12, 20)$:
+                    \begin{align*}
+                        12P + 600 &> 20P \\
+                        75        &> P   \\
+                        12P + 600 &> 900 \\
+                        12P       &> 300 \\
+                        P         &> 25    
+                    \end{align*}
+                or $20 \leq P \leq 75$.
+
+                Finally for $(0, 30)$:
+                    \begin{align*}
+                        900 &> 20P \\
+                        45  &> P     
+                    \end{align*}
+                and from the last inequality, $P < 25$. So $(0, 30)$ is optimal for $P \leq 25$
+            \end{answer}
+    \end{itemize}
+
+\newpage
+\section*{Simply Simplex}
+\hrule
+
+Consider the following linear program:
+    \begin{align*}
+                          &\max(5x + 4y)  \\
+        \text{subject to} &\begin{cases}
+            x + 3y &\leq 15 \\
+            3x - 2y &\leq 12 \\
+            4x + 4y &\geq 16 \\
+            x &\geq 0 \\
+            y &\geq 0   
+        \end{cases}    
+    \end{align*}
+    \begin{itemize}
+        \item [(a)] Sketch the feasible region. Make sure to clearly label your axes and vertices
+            \begin{answer}
+                \begin{fixedfigure}
+                    \incfig{Simplex6}
+                \end{fixedfigure}
+
+            \end{answer}
+
+        \item [(b)] Run the Simplex algorithm on this LP starting at $(0, 4)$. What are the vertices visited? \textbf{Please show your work.}
+            \begin{answer}
+                Starting at $(0, 4)$, the neighboring vertices are $(4, 0)$ and $(0, 5)$. The objective function is $5x + 4y$. We evaluate at the three points:
+                    \begin{align*}
+                        (0, 4) &\rightarrow 5(0) + 4(4) = 16 \\
+                        (0, 5) &\rightarrow 5(0) + 4(5) = 20 \\
+                        (4, 0) &\rightarrow 5(4) + 4(0) = 20   
+                    \end{align*}
+                Since the two points are equal, consider $(4, 0)$ first. The neighbor of $(4, 0)$ is $(6, 3)$:
+                    \begin{align*}
+                        (6, 3) &\rightarrow 5(6) + 4(3) = 42   
+                    \end{align*}
+                It increased. Now we are back to $(0, 5)$, which results in a decrease from $42$. So the $x$ and $y$ returned are $(6, 3)$. The vertices visited are $(4, 0), (5, 0), (0, 4), (6, 3)$.
+            \end{answer}
+    \end{itemize}
+
+
+\end{document}

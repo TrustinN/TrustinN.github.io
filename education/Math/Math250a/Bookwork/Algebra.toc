@@ -1,0 +1,8 @@
+\contentsline {chapter}{\numberline {1}Rings}{2}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Rings and Homomorphisms}{2}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Commutative Rings}{9}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Polynomials and Group Rings}{13}{section.1.3}%
+\contentsline {chapter}{\numberline {2}Modules}{15}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Basic Definitions}{15}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Algebras}{18}{section.2.2}%
+\contentsline {section}{\numberline {2.3}The Group of Homomorphisms}{18}{section.2.3}%

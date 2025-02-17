@@ -1,0 +1,265 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math143/Homework/Math143Hw5/Math143Hw5.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+
+\title{Math143Hw5}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Let $k = \mathbb{C}$. Let $Y = V(x^{3} - y^{2}) \subseteq \mathbb{A}^{2}$. Consider the morphism $\psi : \mathbb{A}^{1} \rightarrow Y$ given by $\psi(t) = (t^{2}, t^{3})$.
+    \begin{itemize}
+        \item [(a)] Show that $\psi$ is a bijection but not an isomorphism.
+            \begin{proof}
+                (Surjectivity) Suppose that $(a, b) \in Y$. Then we must have that 
+                    \begin{equation*}
+                        a^{3} - b^{2} = 0
+                    \end{equation*}
+                or in other words:
+                    \begin{equation*}
+                        a^{3} = b^{2} \implies a = (\sqrt[3]{b})^{2}
+                    \end{equation*}
+                Now take $t = \sqrt[3]{b}$. So we have:
+                    \begin{equation*}
+                        \psi(\sqrt[3]{b}) = ((\sqrt[3]{b})^{2}, b) = (a, b)
+                    \end{equation*}
+                so it is surjective. 
+
+                (Injectivity) Suppose that $\psi(t_{1}) = \psi(t_{2})$. Then $(t_{1}^{2}, t_{1}^{3}) = (t_{2}^{2}, t_{2}^{3})$. So $t_{1}^{2} = t_{1}^{3}$ and $t_{2}^{2} = t_{2}^{3}$ which means $t_{1} = t_{2}$.
+
+                (Not Isomorphism) For there to be an isomorphism, we require that:
+                    \begin{equation*}
+                        \psi^{-1}(\psi(t)) = t
+                    \end{equation*}
+                of for there to be a polynomial map $Y \rightarrow \mathbb{A}^{1}$. Such that:
+                    \begin{equation*}
+                        \psi^{-1}((t^{2}, t^{3})) = t
+                    \end{equation*}
+                The right hand side can be viewed as a polynomial with respect to $t$ with degree $1$. And $\psi^{-1}$ will be a polynomial on two variables such that evaluation at $t^{2}, t^{3}$ gives a polynomial in $1$ variable with degree $1$. There does not exist such a polynomial because any with degree $\geq 1$ will contain $t^{k}$ for $k \geq 2$. And $\psi^{-1}$ cannot be the constant map. So this is not an isomorphism.
+            \end{proof}
+
+        \item [(b)] Show that $Y$ is not isomorphic to $\mathbb{A}^{1}$ (Note: in $(a)$ you might have shown that $\psi$ is not an isomorphism. Now you should show there does not exist any isomorphism.)
+            \begin{proof}
+                We can show that there does not exist an isomorphism in the pullback map $\psi^{*}$. We have
+                    \begin{align*}
+                        \psi^{*}    &: \dfrac{k[x, y]}{(x^{3} - y^{2})} \rightarrow k[t] \\
+                        \psi^{*}(x) &= t^{k_{1}}                                         \\
+                        \psi^{*}(y) &= t^{k_{2}}                                           
+                    \end{align*}
+                We first require injectivity or $0 \mapsto 0$. So 
+                    \begin{equation*}
+                        \psi^{*}(x^{3}) - \psi^{*}(y^{2}) = t^{3k_{1}} - t^{2k_{2}} = 0
+                    \end{equation*}
+                So 
+                    \begin{equation*}
+                        3k_{1} = 2k_{2}
+                    \end{equation*}
+                This means that $2 \divides k_{1}$ and $3 \divides k_{2}$ for positive $k_{1}, k_{2}$. But this does not yield a surjection, as there is no linear combination of products of $t^{k_{1}}, t^{k_{2}}$ that would hit $t$ in the image.
+            \end{proof}
+
+        \item [(c)] Draw a picture of $Y$. (This is of course just a picture of the real points.) What do you notice about it?
+            \begin{center}
+                \begin{tikzpicture}
+                    \begin{axis}[xmin = -1, xmax=60,ymin = -30, ymax=30, samples=50]
+                        \addplot[blue, thick] ({x^2}, {x^3});
+                    \end{axis}
+                \end{tikzpicture}
+            \end{center}
+        There is a point at $(0, 0)$ where the graph is non-differentiable.
+
+        \item [(d)] Find $\psi^{*} : \Gamma(Y) \rightarrow \Gamma(\mathbb{A}^{1})$. Let $f = 3x^{2} + y + 5$ and let $\overline{f} \in \Gamma(Y)$ be the corresponding polynomial function. What is $\psi^{*}\overline{f} \in \Gamma(\mathbb{A}^{1}) = k[t]$?
+            \begin{answer}
+                We have by the mapping $\psi : \mathbb{A}^{1} \rightarrow Y$ given by:
+                \begin{equation*}
+                    \psi(t) = (t^{2}, t^{3})
+                \end{equation*}
+            So now we take $f_{1}(x, y) = x + (x^{3} - y^{2})$, $f_{2}(x, y) = y + (x^{3} - y^{2})$, and $f_{3}(x, y) = 1 + (x^{3} - y^{2})$ which span $\Gamma(Y)$. We observe that:
+                \begin{align*}
+                    (\psi^{*}f_{1})(t) &= (f_{1} \circ \psi)(t) & (\psi^{*}f_{2})(t) &= (f_{2} \circ \psi)(t) & (\psi^{*}f_{3})(t) &= (f_{3} \circ \psi)(t) \\
+                                  &= t^{2}                     &               &= t^{3}                       &               &= 1                         
+                \end{align*}
+            This uniquely determines $\psi^{*}$.
+
+            If $f = 3x^{2} + y + 5$, we have $\overline{f} = 3x^{2} + y + 5 + (x^{3} - y^{2})$:
+                \begin{equation*}
+                    \psi^{*}\overline{f} = (\overline{f} \circ \psi)(t) = 3t^{4} + t^{3} + 5 
+                \end{equation*}
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 2}: Let $k = \mathbb{C}$. Consider the morphism $\psi: \mathbb{A}^{1} \rightarrow \mathbb{A}^{2}$ given by $\psi(t) = (t^{2} - 1, t(t^{2} - 1))$. 
+    \begin{itemize}
+        \item [(a)] Find $\psi^{*} : \Gamma(\mathbb{A}^{2}) \rightarrow \Gamma(\mathbb{A}^{1})$. What is $\psi^{*}(y)$.
+            \begin{answer}
+                We have $\psi(t) = (t^{2} - 1, t(t^{2} - 1))$. So the image is an algebraic set, to which we want to find the ideal of. Let $x = t^{2} - 1$ and $y = t(t^{2} - 1)$. Notice that $y^{2} - (x + 1)x^{2} = 0$ so the image of the map is the algebraic set $V(y^{2} - x^{3} - x^{2})$. We clearly have that everything in $\Im{\psi} \subseteq V(y^{2} - x^{3} - x^{2})$. To prove the other containment, suppose $x, y$ satisfy:
+                    \begin{equation*}
+                        y^{2} - x^{3} - x^{2} = 0
+                    \end{equation*}
+                or
+                    \begin{align*}
+                        y^{2} &= x^{2}(x + 1) \\
+                        y     &= \pm x\sqrt{x + 1}
+                    \end{align*}
+                We take 
+                    \begin{equation*}
+                        x = t^{2} - 1 \text{ or } t = \pm\sqrt{x + 1}
+                    \end{equation*}
+                So we have $\psi(\sqrt{x + 1}) = (x, x\sqrt{x + 1})$  and $\psi(-\sqrt{x + 1}) = (x, -x\sqrt{x + 1})$. So in both situations in whether $y$ is positive or negative, we have found a $t$ such that $\psi(t) = (x, y)$. So $\Im{\psi} = V(y^{2} - x^{3} - x^{2})$. Since $(y^{3} - x^{3} - x^{2})$ is prime, it is a radical ideal, so we have:
+                    \begin{align*}
+                        \psi^{*} &:  k[x, y]/(y^{2} - x^{3} - x^{2}) \rightarrow k[t] \\
+                        \psi^{*} &:= 1 \mapsto 1                                      \\
+                                 &:= x \mapsto t^{2} - 1                              \\
+                                 &:= y \mapsto t(t^{2} - 1)                             
+                    \end{align*}
+                So we have $\psi^{*}(y) = t(t^{2} - 1)$.
+            \end{answer}
+
+        \item [(b)] Find $\psi^{-1}(V(y)) \subseteq \mathbb{A}^{1}$.
+            \begin{answer}
+                We have $V(y)$ is just when $y = 0$. So we take:
+                    \begin{equation*}
+                        t(t^{2} - 1) = 0
+                    \end{equation*}
+                and find that $t = 0, t = -1, t = 1$. So our algebraic set is $\{-1, 0, 1\}$.
+            \end{answer}
+
+        \item [(c)] Let $Y = V(y^{2} - x^{2}(x + 1)) \subseteq \mathbb{A}^{2}$. Show that $\psi$ is one-to-one and onto $Y$, except that $\psi(1) = \psi(-1)$.
+            \begin{proof}
+                We have shown a surjection in part $(a)$. Now to prove injectivity, suppose that $\psi(t_{1}) = \psi(t_{2})$. Then we have:
+                    \begin{equation*}
+                        (t_{1}^{2} - 1, t_{1}(t_{1}^{2} - 1)) = (t_{2}^{2} - 1, t_{2}(t_{2}^{2} - 1))
+                    \end{equation*}
+                So 
+                    \begin{align*}
+                        t_{1}^{2} &=         t_{2}^{2} & t_{1}(t_{1}^{2} - 1) &= t_{2}(t_{2}^{2} - 1) \\
+                        t_{1}     &=         \pm t_{2} & t_{1}^{3} - t_{1}    &= t_{2}^{3} - t_{2}    \\
+                                  &\implies            & t_{1}                &= t_{2}                  
+                    \end{align*}
+                which shows injectivity for $t_{1} \neq \pm 1$. When $t_{1} = \pm 1$, we have $\psi(1) = (0, 0), \psi(-1) = (0, 0)$.
+            \end{proof}
+
+        \item [(d)] Draw a picture of $Y$. Also draw $V(y)$. (Again, this is just a picture of the real points.) Use this picture and part $(c)$ to explain your answer to $(b)$. 
+            \begin{answer}
+                Here is the picture:
+                    \begin{center}
+                        \begin{tikzpicture}
+                            \begin{axis}[xmin = -5, xmax=5,ymin = -5, ymax=5, samples=50]
+                                \addplot[blue, thick] ({x^2 - 1}, {x*(x^2 - 1)});
+                            \end{axis}
+                        \end{tikzpicture}
+                    \end{center}
+                To look at the vanishing of $y$, we restrict our focus to only the y-levels of the graph. And taking the pre-image of that, we trace along the curve until we hit the first $y = 0$ level, at which $t = -1$. Since we know that $\psi(-1) = \psi(1)$, we know that $y = 0$ when $t = 1$ also. Finally, the curve at $t = 0$ also has a y-level of $0$. So that is our pre-image.
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 3}: Suppose $X \subseteq \mathbb{A}^{n}$ and $Y \subseteq \mathbb{A}^{m}$ are algebraic sets.
+    \begin{itemize}
+        \item [(a)] Prove that $X \times Y \subseteq \mathbb{A}^{n + m}$ is an algebraic set.
+            \begin{proof}
+                Since $X \subseteq \mathbb{A}^{n}$ is an algebraic set, we have that $X = V(f_{1}) \cup \cdots \cup V(f_{i})$ for $f_{i} \in k[x_{1}, \ldots , x_{n}]$ and $Y = V(g_{1}) \cup  \cdots \cup V(g_{j})$ for $g_{j} \in k[y_{1}, \ldots , y_{m}]$. Then now we take
+                    \begin{equation*}
+                        W = (V(f_{1}) \cap Y) \cup \cdots \cup (V(f_{i}) \cap Y)
+                    \end{equation*}
+                Suppose that $(p_{1}, p_{2}) \in X \times Y$. Then 
+                    \begin{equation*}
+                        f_{i}((p_{1}, ?)) = 0 \text{ for some $f_{i} \in I(X)$}
+                    \end{equation*}
+                and 
+                    \begin{equation*}
+                        g_{j}((?, p_{2})) = 0 \text{ for some $g_{j} \in I(Y)$}
+                    \end{equation*}
+                That means that $(p_{1}, p_{2}) \in V(f_{i}) \cap V(g_{j})$, so $(p_{1}, p_{2}) \in W$. Now suppose that $p \in W$. Then $p \in V(f_{k}) \cap Y$ for some $k$ wlog. So
+                    \begin{equation*}
+                        f_{k}(p) = 0 \land g_{l}(p) = 0
+                    \end{equation*}
+                Therefore, if $p = (a_{1}, \ldots , a_{n}, a_{n + 1}, \ldots , a_{n + m})$, we know that $f_{k}(a_{1}, \ldots , a_{n}) = 0$ and $g_l(a_{n + 1}, \ldots , a_{n + m}) = 0$. So $p \in X \times Y$. We know that the finite intersection and union of algebraic sets is algebraic. Therefore, $X \times Y = W$ which is algebraic.
+            \end{proof}
+
+        \item [(b)] Prove that the projection maps $X \times Y \rightarrow X$ and $X \times Y \rightarrow Y$ are morphisms.
+            \begin{proof}
+                We just need to show this for one of them wlog. It will be show that $X \times Y \rightarrow X$ is a morphism. We see that this map acts as the identity on each component $p_{1}, \ldots , p_{n}$ of a point $p \in X \times Y$, where $p = (p_{1}, \ldots , p_{n}, p_{n + 1}, \ldots , p_{n + m})$. So for $\varphi : X \times Y \rightarrow X$, define $\varphi_{i} \in k[x_{1}, \ldots , x_{n + m}]$ to be:
+                    \begin{align*}
+                        \varphi(p)     &= (\varphi_{1}(p), \ldots , \varphi_{n}(p)) \\
+                        \varphi_{i}(p) &= p_{i}                                       
+                    \end{align*}
+                Each $\varphi_{i}$ is a polynomial function to $\mathbb{A}^{1}$ and therefore a morphism. So we have found the $\varphi_{i}$ polynomial maps that turn this into a morphism.
+            \end{proof}
+
+        \item [(c)] Prove that if $X \times Y$ is irreducible then $X$ and $Y$ are irreducible.
+            \begin{proof}
+                We know that if the pre-image of a mapping is irreducible, then the image is irreducible. So if $X \times Y$ is irreducible, by the projection map $X \times Y \rightarrow X$, $X$ is the image and is therefore irreducible. The same goes for $Y$ as we can create a projection map onto $Y$.
+            \end{proof}
+
+        \item [(d)] (extra credit) Prove that if $X$ and $Y$ are irreducible, then $X \times Y$ is irreducible. (Hint: Suppose that $X \times Y = A \cup B$ and consider the sets $X_{A} := \{p \in X : p \times Y \subseteq A\}$ and $X_{B} := \{p \in X : p \times Y \subseteq B\}$.)
+            \begin{proof}
+                Suppose for contradiction that $X \times Y$ is reducible. Then $X \times Y = A \cup B$ where $A, B$ are algebraic sets. Then we know that $X_{A} \cup X_{B} = X$ and $X_{A}, X_{B}$ are proper subsets of $X$. Since $A, B$ are algebraic sets, we can consider $I(A)$ and $I(B) \in \Gamma(X \times Y)$. This means that $X_{A} = V(I(X)) \cap V(I(A))$, so it is an algebraic set and the same for $X_{B}$. So that is a contradiction.
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 4}: Let $V \subseteq \mathbb{A}^{n}$ be a non-empty variety (i.e. irreducible algebraic set). Show that the following are equivalent:
+    \begin{itemize}
+        \item [(i)] $V$ is a point
+
+        \item [(ii)] $\Gamma(V) = k$
+
+        \item [(iii)] $\mathop{dim}_{k}\Gamma(V) < \infty$ 
+    \end{itemize}
+You may assume $k$ is algebraically closed if you wish, but it is true over any field.
+    \begin{proof}
+        First is $(i) \rightarrow (ii)$. Now assuming $k$ is algebraically closed, since $V$ is a point, $I(V)$ is maximal by Nullstellensatz. This also means that $k[x_{1}, \ldots , x_{n}]/I(V) = k$ because the ideal is generated by linear factors in $n$ variables.
+
+        We have $(ii) \rightarrow (iii)$ because the dimension of $\Gamma(V)$ would be $1 < \infty$ as $1$ generates $k$. 
+
+        Finally, for $(iii) \rightarrow (i)$ we have that $\Gamma(V)$ is a finite extension of $k$. So this is an algebraic extension, and therefore, the roots of $f \in I(V)$ are in $k$. Since it is irreducible, We cannot write $V$ as a union of algebraic sets. Suppose that $V = V(f_{1}, \ldots , f_{n})$. Then we will show that each $f_{i}$ are linear factors. We know that if $V$ is irreducible, $I(V)$ is prime. So if we have a $f_{i}$ that has more than one linear factor, we can claim a smaller subset of those factors must be in $V$ and by induction, we have that each $f_{i}$ are linear. And therefore, $V$ is a point as maximal ideals are in bijection with points.
+
+        Since we have proved $(i) \rightarrow (ii) \rightarrow (iii) \rightarrow (i)$, we have shown equivalence.
+    \end{proof}
+
+\textbf{Exercise 5}: Assume that $k$ is algebraically closed. Prove that the algebraic subsets of $X$ are in bijection with the radical ideals in $\Gamma(X)$.
+    \begin{proof}
+        We know that there is a bijection between the radical ideals of $\Gamma(X)$ and the radical ideals of $k[x_{1}, \ldots , x_{n}]$ by:
+            \begin{equation*}
+                k[x_{1}, \ldots , x_{n}] \rightarrow k[x_{1},\ldots ,x_{n}]/I(X) = \Gamma(X)
+            \end{equation*}
+        by the homomorphism $J \subseteq k[x_{1}, \ldots , x_{n}] \mapsto J/I(X)$ which was proved in question 1 of homework 3. By the Nullstellensatz, we now also know that $V(I(V(Y)))$ for some $Y \subseteq X$ is $Y$ and $I(V(J)) = J$ for $J \subseteq k[x_{1}, \ldots , x_{n}]$. So this is the bijection between radical ideals of $k[x_{1}, \ldots , x_{n}]$ and the algebraic sets of $X$.
+    \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,273 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math143/Homework/Math143Hw9/Math143Hw9.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math143Hw9}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Homogeneous polynomials. Assume $k$ is an infinite field.
+    \begin{itemize}
+        \item [(a)] Let $f \in k[x_{1}, \ldots, x_{n + 1}]$ and write $f = f_{0} + f_{1} + \cdots + f_{d}$ where $f_{i}$ is homogeneous of degree $i$. Prove that if $f(\lambda a_{1}, \ldots, \lambda a_{n + 1}) = 0$ for all non-zero scalars $\lambda \in k^{\times}$, then $f_{i}(a_{1}, \ldots, a_{n + 1}) = 0$ for all $i  = 0, \ldots, d$.
+            \begin{proof}
+                Let $p = (a_{1}, \ldots, a_{n + 1})$. We have
+                    \begin{equation*}
+                        f(p) = f_{0}(p) + \lambda f_{1}(p) + \lambda^{2}f_{2}(p) + \cdots + \lambda^{d}f_{d}(p) = 0
+                    \end{equation*}
+                Now each of the $f_{i}(p) \in k$. So we can think of this as a polynomial in $k[\lambda]$, where $\lambda$ is a variable:
+                    \begin{equation*}
+                        k_{0} + k_{1}\lambda + k_{2}\lambda^{2} + \cdots + k_{d}\lambda^{d} = 0
+                    \end{equation*}
+                But we know that the vanishing of a polynomial that is not a line must intersect the line at most $\deg f$ times by some problem from Homework $1$. But it is $0$ at infinitely many $\lambda \in k$. So we know all the coefficients must be $0$. But since $0 = k_{i} = f_{i}(p)$, we have as desired.
+            \end{proof}
+
+        \item [(b)] Conclude that if $Y \subseteq \mathbb{A}^{n + 1}$ is a cone, then $I(Y) \subseteq k[x_{1}, \ldots, x_{n + 1}]$ is homogeneous ideal.
+            \begin{proof}
+                If $Y \subseteq \mathbb{A}^{n + 1}$ is a cone and $f \in I(Y)$, then we have for a $p \in Y$, $\lambda p \in Y$ also. Then 
+                    \begin{equation*}
+                        f = f_{0} + f_{1} + \cdots + f_{d}
+                    \end{equation*}
+                and since $f \in I(Y)$, $f(\lambda p) = 0$ for any $\lambda \in k$. Therefore, by the previous problem, $f_{i}(p) = 0$, then that means that each of the $f_{i} \in I(Y)$. So we have shown that if we have a polynomial of any degree, it can be written as a sum of homogeneous polynomials of smaller degree each in the ideal. So homogeneous polynomials generate the ideal.
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 2}: The projective plane $\mathbb{P}^{2}$. Let $U_{1}, U_{2}, U_{3}$ be the affine charts on $\mathbb{P}^{2}$.
+    \begin{itemize}
+        \item [(a)] Let $L_{i}$ be the complement of $U_{i}$. Find the intersections $L_{1} \cap L_{2}, L_{1} \cap L_{3}, L_{2} \cap L_{3}$. Let $k = \mathbb{R}$ and draw a picture of three lines that meet in this way; label the lines and intersections points.
+            \begin{proof}
+                We have
+                    \begin{align*}
+                        L_{1} &= \{[0 : y : z] \in \mathbb{P}^{2}\} \\
+                        L_{2} &= \{[x : 0 : z] \in \mathbb{P}^{2}\} \\
+                        L_{3} &= \{[x : y : 0] \in \mathbb{P}^{2}\}   
+                    \end{align*}
+                Then we see that:
+                    \begin{align*}
+                        L_{1} \cap L_{2} &= \{[0 : 0 : z] \in \mathbb{P}^{2}\} \\
+                        L_{2} \cap L_{3} &= \{[x : 0 : 0] \in \mathbb{P}^{2}\} \\
+                        L_{3} \cap L_{1} &= \{[0 : y : 0] \in \mathbb{P}^{2}\}   
+                    \end{align*}
+                Or
+                    \begin{align*}
+                        L_{1} \cap L_{2} &= \{[0 : 0 : 1]\}  \\
+                        L_{2} \cap L_{3} &= \{[1 : 0 : 0]\}  \\
+                        L_{3} \cap L_{1} &= \{[0 : 1 : 0]\}   
+                    \end{align*}
+                As for the projective lines that intersect like this, we can take:
+                    \begin{fixedfigure}
+                        \incfig{Exercise2}
+                    \end{fixedfigure}
+            \end{proof}
+
+        \item [(b)] Which points in $\mathbb{P}^{2}$ belong to all three affine charts?
+            \begin{answer}
+                These are the points where none of the coordinates are $0$: 
+                    \begin{equation*}
+                        \{[x : y : z] \in \mathbb{P}^{2}: x, y, z \neq 0\}
+                    \end{equation*}
+
+            \end{answer}
+
+        \item [(c)] Which points in $\mathbb{P}^{2}$ belong to only one affine chart? 
+            \begin{proof}
+                Suppose that a point is in $U_{1}$, but not $U_{2}, U_{3}$ wlog. Then it must be in the complement of $U_{2}, U_{3}$, or in $L_{2} \cap L_{3}$. Since it is also in $U_{1}$, we have that these are the points in 
+                    \begin{equation*}
+                        U_{1} \cap L_{2} \cap L_{3} = \{[x : 0 : 0] \in \mathbb{P}^{2}\} = L_{2} \cap L_{3}
+                    \end{equation*}
+                since $[0 : 0 : 0] \notin \mathbb{P}^{2}$. Then we just take the union of these sets:
+                    \begin{equation*}
+                        (L_{1} \cap L_{2}) \cup (L_{2} \cap L_{3}) \cup (L_{3} \cap L_{1})
+                    \end{equation*}
+                which is:
+                   \begin{equation*}
+                        \{[1 : 0 : 0], [0 : 1 : 0], [0 : 0 : 1]\}
+                    \end{equation*}
+                which is the answer.
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 3}: Consider $V(x - y^{2}) \subseteq \mathbb{A}^{2}$. Let $k = \mathbb{R}$ or $\mathbb{C}$.
+    \begin{itemize}
+        \item [(a)] What is the corresponding projective algebraic set in $\mathbb{P}^{2}$? Write your answer as $\mathbb{V}(F)$ for $F \in k[x, y, z]$.
+            \begin{proof}
+                We have:
+                    \begin{equation*}
+                        V(x - y^{2}) = \{(x, y) \in k^{2}: x = y^{2}\}
+                    \end{equation*}
+                and we have the mapping $(x, y) \mapsto [x : y : 1]$. And so the set is:
+                    \begin{equation*}
+                        \mathbb{V}(F) = \{[\lambda x : \lambda y : \lambda] : \lambda x = y^{2}\} = \{[x : y : z] : zx = y^{2}\}
+                    \end{equation*}
+                So it is $\mathbb{V}(y^{2} - xz)$.
+            \end{proof}
+
+        \item [(b)]What is the intersection of the set in part $(a)$ with the line at infinity? (Recall the line at infinity is $\mathbb{V}(z)$)
+            \begin{proof}
+                We have
+                    \begin{equation*}
+                        \mathbb{V}(z) = \{[x : y : z] : z = 0\}
+                    \end{equation*}
+                and
+                    \begin{equation*}
+                        \mathbb{V}(y^{2} - xz) = \{[x : y : z] : y^{2} = xz\}
+                    \end{equation*}
+                Then the intersection is
+                    \begin{equation*}
+                        \mathbb{V}(z) \cap \mathbb{V}(F) = \{[x : y : z] : y^{2} = 0\} = \{[x : 0 : 0]\} = \{[1 : 0 : 0]\}
+                    \end{equation*}
+                which is the intersection at infinity.
+            \end{proof}
+
+        \item [(c)] Describe the intersection of the set in part $(a)$ with each of the affine charts $U_{1}, U_{2}, U_{3}$. Draw a picture for each. Also draw $\mathbb{V}(z) \cap U_{i}$ in each. 
+            \begin{proof}
+                For each of the intersections, we just plug in $x = 1, y = 1, $ or $z = 1$. So:
+                    \begin{align*}
+                        \mathbb{V}(y^{2} - xz) \cap U_{1} &= V(y^{2} - z) \\
+                        \mathbb{V}(y^{2} - xz) \cap U_{2} &= V(1 - xz)    \\
+                        \mathbb{V}(y^{2} - xz) \cap U_{3} &= V(y^{2} - x)   
+                    \end{align*}
+                The first and third intersections are parabolas. The second intersection looks like a rotated hyperbola. Figures below:
+                    \begin{fixedfigure}
+                        \incfig{Exercise3}
+                    \end{fixedfigure}
+                and each individually:
+                    \begin{fixedfigure}
+                        \incfig{exercise3x}
+                    \end{fixedfigure}
+                And for $\mathbb{V}(z) \cap U_{i}$:
+                    \begin{fixedfigure}
+                        \incfig{VcapUi}
+                    \end{fixedfigure}
+                where $\mathbb{V}(z) \cap U_{1}$ is the line $V(x - 1, z)$, $\mathbb{V}(z) \cap U_{2}$ is the line $V(y - 1, z)$ and $\mathbb{V}(z) \cap U_{3}$ is the plane $V(z)$
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 4}: Homogeneous ideals. Let $I$ be a homogeneous ideal in $k[x_{1}, \ldots, x_{n + 1}]$.
+    \begin{itemize}
+        \item [(a)] Show that $I$ is prime if and only if the following condition is satisfied. For every pair of homogeneous polynomials $F$ and $G$, if $FG \in I$, then $F \in I$ or $G \in I$. (In other words, it is enough to check the usual condition just for homogeneous polynomials.)
+            \begin{proof}
+                ($\rightarrow$) If $I$ is prime, then if we have $FG \in I$, by definition, either $F \in I$ or $G \in I$. 
+
+                ($\leftarrow$) Now suppose that if $FG \in I$ for homogeneous polynomials $F, G$, then $F \in I$ or $G \in I$. Let $f$ be a polynomial of degree $d$ and $g$ be one of degree $h$. Then
+                    \begin{align*}
+                        g &= g_{0} + g_{1} + g_{2} + \cdots + g_{h} \\
+                        f &= f_{0} + f_{1} + f_{2} + \cdots + f_{d}   
+                    \end{align*}
+                and their product:
+                    \begin{equation*}
+                        fg = \sum_{i = 0}^{d}\sum_{j = 0}^{h} f_{i}g_{j}
+                    \end{equation*}
+                Now each homogeneous form in the sum above must lie in $I$ because $I$ is a homogeneous ideal. Then we take homogeneous form with the lowest degree. This is 
+                    \begin{equation*}
+                        f_{0}g_{0} \in I
+                    \end{equation*}
+                Then either $f_{0}$ or $g_{0}$ is in $I$. Suppose wlog that $f_{0} \in I$. Then we can say that the modified sum:
+                    \begin{equation*}
+                        (f - f_{0})g = \sum_{i = 1}^{d}\sum_{j = 0}^{h}f_{i}g_{j}
+                    \end{equation*}
+                is in $I$ also by subtracting off each factor that contains $f_{0}$. We continue this process. In each step of the process, we claim that the homogeneous form of the lowest degree will be exactly one term of the form $f_{i}g_{j}$. We see this because if we have a modified product of the form:
+                    \begin{equation*}
+                        \sum_{i = k_{1}}^{d}\sum_{j = k_{2}}^{h}f_{i}g_{j}
+                    \end{equation*}
+                Then the lowest degree will be $k_{1}k_{2}$. But that corresponds to exactly the $f_{k_{1}}g_{k_{2}}$ term. Repeating this process, one of the big summations will eventually disappear. But that will mean that we have concluded that $f_{0}, \ldots, f_{d} \in I$ or $g_{0}, \ldots, g_{h} \in I$, to which we conclude that either $f \in I$ or $g \in I$. This finishes the proof.
+            \end{proof}
+
+        \item [(b)] Show that the radical of $I$ is also a homogeneous ideal.
+            \begin{proof}
+                Suppose $I$ is homogeneous. We need to show that $\sqrt{I}$ is homogeneous also. Let
+                    \begin{equation*}
+                        f = f_{0} + f_{1} + f_{2} + \cdots + f_{d}
+                    \end{equation*}
+                Then we have:
+                    \begin{equation*}
+                        f^{m} = \sum_{i_{1} = 0}^{d}\sum_{i_{2} = 0}^{d}\cdots \sum_{i_{m} = 0}^{d}f_{i_{1}}f_{i_{2}}\cdots f_{i_{m}}
+                    \end{equation*}
+                Suppose that $f^{m} \in I$. Then we know that $f \in \sqrt{I}$. We want to prove that as a result, each $f_{i} \in \sqrt{I}$, making $\sqrt{I}$ homogeneous.
+
+                Consider the lowest degree homogeneous form. This is $f_{0}^{m}$ which is in $I$ because $I$ is homogeneous. Then we know that $f_{0} \in \sqrt{I}$. This means that we can eliminate all terms with $f_{0}$ and the result will still be in $\sqrt{I}$. So:
+                    \begin{equation*}
+                        f^{\prime} = \sum_{i_{1} = 1}^{d}\sum_{i_{2} = 1}^{d}\cdots \sum_{i_{m} = 1}^{d}f_{i_{1}}f_{i_{2}}\cdots f_{i_{m}} \in \sqrt{I}
+                    \end{equation*}
+                Then we take the next homogeneous form of lowest degree. This will be $f_{1}^{m}$ which might not lie in $I$. But we do know that $f^{\prime} \in \sqrt{I}$, so $f^{\prime m^{\prime}} \in I$ for some $m^{\prime}$ (*see after proof). Then we know that $f_{1}^{m m^{\prime}} \in I$. So $f_{1} \in \sqrt{I}$. This process repeats until we find that all $f_{i} \in \sqrt{I}$, so $\sqrt{I}$ is homogeneous also.
+
+                (*) Quick proof of this if needed. This is because if $f = \sum a_{i} \in \sqrt{I}$, we know that $\sqrt{I}$ is generated by the base powers of polynomials in $I$. So we have $a_{1}^{i_{1}}, a_{2}^{i_{2}}, \ldots, a_{n}^{i_{n}} \in I$. Then we have $(a_{1} + \cdots + a_{n})^{\max(i_{1}, \ldots, i_{n})} \in I$ and therefore, $f^{m^{\prime}} \in I$ for some power $m^{\prime}$.
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 5}: (Spooky Halloween trick?) Let $f \in \mathbb{R}[x, y]$ be an irreducible degree $2$ polynomial, and let $F \in \mathbb{R}[x, y, z] \subseteq \mathbb{C}[x, y, z]$  be its homogenization of degree $2$. Prove that $V(f) \subseteq \mathbb{A}_{\mathbb{R}}^{2}$ is a circle (its center could be anywhere) if and only if $\mathbb{V}(F) \subseteq \mathbb{P}^{2}_{\mathbb{C}}$ meets the line at infinity in $\{[1 : i : 0], [1 : -i : 0]\}$ and $V(f) \subseteq \mathbb{A}_{\mathbb{R}}^{2}$. (These points are classically called the ``circular points at infinity.'')
+    \begin{proof}
+        ($\rightarrow$) Suppose that $V(f)$ is a circle of radius $r$ centered at $(a, b)$. Then we know that $f$ is of the form:
+            \begin{equation*}
+                (x - a)^{2} + (y - b)^{2} = r^{2}
+            \end{equation*}
+        or $f = (x - a)^{2} + (y - b)^{2} - r^{2}$. The we expand:
+            \begin{align*}
+                f &= (x - a)^{2} + (y - b)^{2} - r^{2}                             \\
+                  &= x^{2} - 2ax + a^{2} + y^{2} - 2by + b^{2} - r^{2}             \\
+                F &= x^{2} - 2axz + a^{2}z^{2} + y^{2} - 2byz + b^{2} - r^{2}z^{2}   
+            \end{align*}
+        Then we find its intersection with the hyperplane at infinity, or $\mathbb{V}(z)$. Then we take $F$ and plug in $0$ for $z$ to get:
+            \begin{equation*}
+                F(x, y, 0) = x^{2} + y^{2}
+            \end{equation*}
+        Take the vanishing:
+            \begin{align*}
+                0 &= x^{2} + y^{2}    \\
+                  &= (x + iy)(x - iy) \\
+            \end{align*}
+        Now fix $x = 1$, since we are in projective space, only scaling matters. Then $y = \pm i$. So $\mathbb{V}(F)$ meets the line at infinity at 
+            \begin{equation*}
+                \{[1 : i : 0], [1 : -i : 0]\}
+            \end{equation*}
+
+        ($\leftarrow$) We first start by taking the ideal of 
+            \begin{equation*}
+                \{[1 : i : 0], [1 : -i : 0]\}
+            \end{equation*}
+        which is 
+            \begin{equation*}
+                F(x, y, 0) \in ((x - iy)(x + iy)) = (x^{2} + y^{2})
+            \end{equation*}
+        Then we see that 
+            \begin{equation*}
+                F(x, y, z) = a_{1}x^{2} + a_{1}y^{2} + a_{2}xz + a_{3}yz + a_{4}z^{2}
+            \end{equation*}
+        and dehomogenize by plugging in $z = 1$:
+            \begin{equation*}
+                F(x, y, 1) = a_{1}x^{2} + a_{1}y^{2} + a_{2}x + a_{3}y + a_{4} = f(x, y)
+            \end{equation*}
+        Now we want to see the vanishing of $f$:
+            \begin{equation*}
+                \{(x, y): x^{2} + y^{2} + a_{1}x + a_{2}y + a_{3} = 0\}
+            \end{equation*}
+        Solving by perfect squares, we get:
+            \begin{equation*}
+                \left(x - \dfrac{z_{1}}{2}\right)^{2} + \left(y - \dfrac{z_{2}}{2}\right)^{2} + r = 0
+            \end{equation*}
+        Observe that $r \leq 0$, otherwise, we see that $(i\sqrt{r} + \frac{z_{1}}{2}, \frac{z_{2}}{2})$ is a solution that lies in $\mathbb{C}^{2}$which is not what we want. Then we have
+            \begin{equation*}
+                \left(x - \dfrac{z_{1}}{2}\right)^{2} + \left(y - \dfrac{z_{2}}{2}\right)^{2} = (\sqrt{-r})^{2}
+            \end{equation*}
+        So the vanishing of $f$ is a circle.
+    \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
