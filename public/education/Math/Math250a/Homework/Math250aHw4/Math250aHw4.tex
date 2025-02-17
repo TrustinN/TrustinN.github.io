@@ -1,0 +1,279 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math250a/Homework/Math250aHw4/Math250aHw4.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+
+\title{Math250aHw4}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Let $R$ be a ring. In the following, ``module'' means left $R$-module, and maps are homomorphisms of left $R$-modules
+
+Definition: A module $P$ is projective if for every short exact sequence of modules
+    \begin{center}
+        \begin{tikzcd}
+            0 \ar[r, ""] & M^{\prime} \ar[r, "a"] & M \ar[r, "b"] & M^{\prime\prime} \ar[r, ""] & 0   
+        \end{tikzcd}
+    \end{center}
+and every map $c : P \rightarrow M^{\prime\prime}$ there exists a map $d : P \rightarrow M$ making the diagram
+    \begin{center}
+        \begin{tikzcd}
+                         &                        &               & P \ar[dl, "d"'] \ar[d, "c"]  &   \\
+            0 \ar[r, ""] & M^{\prime} \ar[r, "a"] & M \ar[r, "b"] & M^{\prime\prime} \ar[r, ""] & 0   
+        \end{tikzcd}
+    \end{center}
+commute, that is, $bd = c$.
+
+\begin{itemize}
+    \item [(a)] Prove that every free module is projective.
+        \begin{proof}
+            We know that the mapping $c$ is determined by its action on the generators in $f_{i} \in P$. So suppose:
+                \begin{equation*}
+                    c(f_{i}) = m_{i} \in M^{\prime\prime}
+                \end{equation*}
+            Now because $b$ is surjective, we have some $x_{i} \in M$ such that
+                \begin{equation*}
+                    b(x_{i}) = m_{i}
+                \end{equation*}
+            Then define the module homomorphism such that
+                \begin{equation*}
+                    d(f_{i}) = x_{i}
+                \end{equation*}
+            Now we just need to prove that $d$ is a module homomorphism. For $f_{i}, f_{j}$:
+                \begin{center}
+                    \begin{tikzcd}
+                        f_{i} + f_{j} \ar[rr, "c"', bend right = 20] \ar[r, "?"] & x_{i} + x_{j} \ar[r, "b"] & m_{i} + m_{j}   
+                    \end{tikzcd}
+                \end{center}
+            Since $f_{i} + f_{j} \neq 0$ as we are in a free module, we can define $d(f_{i} + f_{j}) = x_{i} + x_{j}$. Now if $r \in R$, we have that $rf_{i} \neq 0$ because it is a free module. Similarly, we can define $d(rf_{i}) = rd(f_{i})$. These two make $d$ into a module homomorphism. So we are done as $bd = c$.
+        \end{proof}
+
+    \item [(b)] Prove that every projective module is a direct summand of a free module, and conversely, every direct summand of a free module is projective. 
+        \begin{proof}
+            $(\rightarrow )$ If our module is projective, then consider the direct sequence with a mapping from a free module $F$ to a projective module $P$:
+                \begin{center}
+                    \begin{tikzcd}
+                                     &                       &              & P \ar[dl, ""]\ar[d, ""] &     \\
+                        0 \ar[r, ""] & M^{\prime} \ar[r, ""] & F \ar[r, ""] & P \ar[r, ""] & 0   
+                    \end{tikzcd}
+                \end{center}
+            Since there is a splitting, we have $F = M^{\prime} \oplus P$.
+
+            $(\leftarrow )$ Suppose that we have a direct summand of a free module $F$ as $F = N \oplus M$. Then we have that by definition, we can always find a $d_{1}$ for any homomorphism $c$ that makes the diagram:
+                \begin{center}
+                    \begin{tikzcd}
+                                     &                        &               & F \ar[dl, "d_{1}"'] \ar[d, "c"]  &   \\
+                        0 \ar[r, ""] & M^{\prime\prime\prime} \ar[r, ""] & M^{\prime} \ar[r, ""] & M^{\prime\prime} \ar[r, ""] & 0   
+                    \end{tikzcd}
+                \end{center}
+            Now we want to show that for any homomorphism $c^{\prime} : M \rightarrow M^{\prime\prime}$, we can find a $d$ that makes the diagram commute.
+                \begin{center}
+                    \begin{tikzcd}
+                        0 \ar[r, ""] & M \ar[dr, "d"'] \ar[r, "\text{id}", shift left] & F \ar[d, "d_{1}"] \ar[dr, "c"'] \ar[l, "\text{proj}", shift left] \ar[r, "\text{proj}", shift left] & N \ar[l, "\text{id}", shift left] \ar[r, ""] & 0 \\
+                        0 \ar[r, ""] & M^{\prime\prime\prime} \ar[r, ""]               & M^{\prime} \ar[r, ""]                                                                                         & M^{\prime\prime} \ar[r, ""]                  & 0   
+                    \end{tikzcd}
+                \end{center}
+            But we can just consider that $c^{\prime} = c \circ \text{id}$ and we compose the mappings $d_{1} \circ \text{id} = d$. So we have found a mapping.
+        \end{proof}
+\end{itemize}
+
+\textbf{Exercise 2}: Reversing the direction of all the arrows, a module $E$ is called \textit{injective} if for every short exact sequence of modules
+    \begin{center}
+        \begin{tikzcd}
+            0 & M^{\prime} \ar[l, ""] & M \ar[l, "a"'] & M^{\prime\prime} \ar[l, "b"'] & \ar[l, ""] 0   
+        \end{tikzcd}
+    \end{center}
+and every map $c : M^{\prime\prime} \rightarrow E$ there exists a map $d : M \rightarrow E$ making the diagram
+    \begin{center}
+        \begin{tikzcd}
+              &                       &                            & E                                        &              \\
+            0 & M^{\prime} \ar[l, ""] & \ar[l, "a"'] M \ar[ur, "d"] & \ar[l, "b"'] M^{\prime\prime} \ar[u, "c"'] & \ar[l, ""] 0   
+        \end{tikzcd}
+    \end{center}
+commute, that is, $bd = c$.
+
+Prove that a module is injective if and only if it has the apparently weaker property: 
+
+(*): If
+    \begin{center}
+        \begin{tikzcd}
+            0 & \ar[l, ""] M^{\prime} & \ar[l, "a"'] M & \ar[l, "b"'] E & \ar[l, ""] 0   
+        \end{tikzcd}
+    \end{center}
+is a short exact sequence, then there is a map $d : M \rightarrow E$ such that $db$ is the identity map of $E$ (and thus $M \cong E \oplus M^{\prime}$) -- the special case where the map $c$ is the identity.
+
+Hint: Let $N = E \oplus M/(\Delta(M^{\prime\prime}))$ where $\Delta(e) = (c(e), b(e))$, called the \textit{pushout} of $(c, b)$. Let $b^{\prime}: E \rightarrow N$ be the map sending $e$ to $(e, 1) \mod{\Delta(M^{\prime\prime})}$. Show that
+    \begin{center}
+        \begin{tikzcd}
+            0 & M^{\prime}\ar[l, ""] & \ar[l, "a"']N & \ar[l, "b^{\prime}"']E & \ar[l, ""]0   
+        \end{tikzcd}
+    \end{center}
+is also a short exact sequence, and use the property $(*)$.
+    \begin{proof}
+        ($\rightarrow $) Suppose that we have
+            \begin{center}
+                \begin{tikzcd}
+                      &                       &                            & E                                        &              \\
+                    0 & M^{\prime} \ar[l, ""] & \ar[l, "a"'] M \ar[ur, "d"] & \ar[l, "b"'] M^{\prime\prime} \ar[u, "c"'] & \ar[l, ""] 0   
+                \end{tikzcd}
+            \end{center}
+        where $E$ is injective. Then let $M^{\prime\prime} = E$ and $c = \text{id}$.
+            \begin{center}
+                \begin{tikzcd}
+                      &                      &                           & E                                 &              \\
+                    0 & \ar[l, ""]M^{\prime} & \ar[l, "a"]M \ar[ur, "d"] & \ar[l, "b"] E \ar[u, "\text{id}"'] & \ar[l, ""] 0   
+                \end{tikzcd}
+            \end{center}
+        So we have the diagram commuting and $db = \text{id}$.
+
+        ($\leftarrow $) Consider the hint and the diagram we get from it:
+            \begin{center}
+                \begin{tikzcd}
+                    0 & \ar[l, ""]M^{\prime}                                                  & \ar[l, "a"'] M \ar[d, "i_{2}"] & \ar[l, "b"'] M^{\prime\prime} \ar[dl, "\Delta"] \ar[d, "c"] & \ar[l, ""] 0 \\
+                    0 & \ar[l, ""] E \oplus M/(\Delta(M^{\prime\prime})) \ar[ur, "\pi"']\ar[u, "a^{\prime}"] & \ar[l, ""] E \oplus M         & \ar[l, "i_{1}"] E \ar[ll, "b^{\prime}", bend left = 20]    & \ar[l, ""] 0   
+                \end{tikzcd}
+            \end{center}
+        We will show that 
+            \begin{center}
+                \begin{tikzcd}
+                    0 & M^{\prime}\ar[l, ""] & \ar[l, "a"']N & \ar[l, "b^{\prime}"']E & \ar[l, ""]0   
+                \end{tikzcd}
+            \end{center}
+        is an exact sequence. 
+
+        (Injectivity) By definition, the kernel of $b^{\prime}$ are elements $e \in E$ such that $(e, 0) \in \Delta(M^{\prime\prime})$. So we see that since $M^{\prime\prime}$ is injective, we conclude that only $0 \in M^{\prime\prime} \mapsto 0$ from the action of $b$. Therefore, there can only be one element in the kernel of $b^{\prime}$ which is $0$. So $b^{\prime}$ is injective. Now the image of $b^{\prime}$ are just copies of $e$ in $E \oplus M/(\Delta(M^{\prime\prime}))$ since $b^{\prime}$ is injective. 
+
+        (Surjectivity) Now we take the mapping $\pi: E \oplus M/(\Delta(M^{\prime\prime}))$ to be the projection of $E \oplus M/(\Delta(M^{\prime\prime}))$ onto $M$. This is a surjective mapping, and because $a: M \rightarrow M^{\prime}$ is also surjective, we have $a^{\prime} = a \circ \pi$ is surjective.
+
+        ($\Im{b^{\prime}} = \ker{a^{\prime}}$) Clearly, by our mapping of $\pi$, the kernel is the copy of $E$ in $E \oplus M/(\Delta(M^{\prime\prime}))$. We also have that $\Im{b}$ should be the kernel of $a^{\prime}$. But the image is 0 in the quotient $E \oplus M/(\Delta(M^{\prime\prime}))$. Therefore, $\Im{b^{\prime}} = \ker{a^{\prime}}$ as desired.
+
+        (*): Since we have a direct sequence, we conclude that there is a $d^{\prime}$ such that $d^{\prime}b^{\prime} = \text{id}$:
+            \begin{center}
+                \begin{tikzcd}
+                    & &  & \ar[dll, "", bend right = 21]M \ar[dr, "d"]& M^{\prime\prime}\ar[l, ""]\ar[d, ""] &  \ar[l, ""]0 \\
+                    0 & M^{\prime}\ar[l, ""] & \ar[l, "a"']N\ar[ur, "\pi"]\ar[rr, "d^{\prime}", shift left] & & \ar[ll, "b^{\prime}", shift left]E & \ar[l, ""]0   
+                \end{tikzcd}
+            \end{center}
+        Therefore, for some $n_{i} \in N$, we have $d^{\prime}(n_{i}) = e_{i}^{\prime} \in E$. And by $\pi$, $\pi((e_{i}, m_{i}) + \Delta(M^{\prime\prime})) = m_{i}$. So now we take $d: m_{i} \mapsto e^{\prime}_{i}$ which makes the diagram commute?
+    \end{proof}
+
+Group Theory:
+
+\textbf{Exercise 1}: Show that if $G$ is a group such that $g^{2} = 1$ for all $g \in G$, then $G$ is abelian.
+    \begin{proof}
+        Since $g^{2} = e$, we have $g = g^{-1}$. Now consider the element 
+            \begin{equation*}
+                ghg^{-1}h^{-1} = ghgh = (gh)^{2} = e
+            \end{equation*}
+        Since the commutator subgroup is a normal subgroup, we take the quotient to get an abelian group. So $G/\{e\} = G$ is abelian.
+    \end{proof}
+
+\textbf{Exercise 2}: Show that the group of automorphisms of the cyclic group $\mathbb{Z}/n\mathbb{Z}$ is the multiplicative group of integers relatively prime to $n$, modulo $n$. Show that this group is cyclic if $n$ is prime (Hint: $\mathbb{Z}/p\mathbb{Z}$ is a field), and find a decomposition of this group into cyclic groups in case $n = 9$.
+    \begin{proof}
+        (Part I) Notice that all automorphisms of $\mathbb{Z}/n\mathbb{Z}$ are of the form
+            \begin{equation*}
+                n \mapsto  an
+            \end{equation*}
+        for some $a \in \mathbb{Z}$. For this map to be an isomorphism, we just require a surjection or for there to be an inverse for $a$. We will show that $a$ is invertible iff it is relatively prime to $n$.
+
+        If $b$ is relatively prime to $n$, we have that $(b) \subseteq \mathbb{Z}$ an ideal of the integers is a PID, and that $(b, n) = \mathbb{Z}$. Therefore, we have that
+            \begin{equation*}
+                1 = ab + nc
+            \end{equation*}
+        for some $a, c \in \mathbb{Z}$. Indeed 
+            \begin{equation*}
+                ab + nc \equiv ab \equiv 1 \pmod{n}
+            \end{equation*}
+        so we have found an inverse $a$. Now we need to show that this inverse is also relatively prime to $n$. We can do this by proving the converse of the previous statement. Suppose we have $a, b$ such that
+            \begin{equation*}
+                ab \equiv 1 \pmod{n}
+            \end{equation*}
+        Suppose for contradiction that $\gcd(a, n) = p$ where $p \neq 0, n$, otherwise the above expression is false. Then
+            \begin{align*}
+                pk_{1} &= n \\
+                pk_{2} &= a  
+            \end{align*}
+        So we have 
+            \begin{equation*}
+                pk_{2}b \equiv 1 \pmod{n}
+            \end{equation*}
+        or 
+            \begin{equation*}
+                pk_{1}k_{2}b \equiv k_{1} \equiv 0 \pmod{n}
+            \end{equation*}
+        which is a contradiction. So elements that have inverses are exactly the ones that are relatively prime to $n$. So all automorphisms are determined by
+            \begin{equation*}
+                1 \mapsto a
+            \end{equation*}
+        where $a$ is relatively prime to $n$, so the multiplicative group on $\mathbb{Z}/n\mathbb{Z}$ is isomorphic to the group of automorphisms on $\mathbb{Z}/n\mathbb{Z}$ by choosing $a$ to be our representative of the automorphism.
+
+        Since we have a composition of $\mathbb{Z}/p\mathbb{Z}$ into a direct sum of cyclic groups, each of order dividing the next, we have
+            \begin{equation*}
+                \mathbb{Z}/p\mathbb{Z} \cong \bigoplus_{i}\mathbb{Z}/q_{i}\mathbb{Z}
+            \end{equation*}
+        for $q_{1} \divides q_{2} \divides \cdots \divides q_{n}$. If $d$ is the largest order of an element of the group, then we know that for all $g \in\mathbb{Z}/p\mathbb{Z}$, 
+            \begin{equation*}
+                g^{d} = 1
+            \end{equation*}
+        Also, $x^{d} - 1 = 0$ has at most $d$ solutions and can be factored as
+            \begin{equation*}
+                (x - r_{1}) \cdots (x - r_{d}) = 0
+            \end{equation*}
+        Otherwise, if we have more solutions, we get that all factors, non-zero multiply to $0$. But $\mathbb{Z}/p\mathbb{Z}$ is an integral domain, which is a contradiction. So since $d$ is the power such that 
+            \begin{equation*}
+                x^{d} - 1 = 0
+            \end{equation*}
+        for any $x \in \mathbb{Z}/p\mathbb{Z}$, If $d \neq p - 1$, then we find out that the equation has $p - 1 > d$ solutions, contradiction. So $d = p - 1$. There is an element of order $p - 1$, the order of the group. So $\mathbb{Z}/p\mathbb{Z}$ is cyclic.
+
+        (Part III) We have that
+            \begin{equation*}
+                \mathbb{Z}/9\mathbb{Z} = \{1, 2, 4, 5, 7, 8\}
+            \end{equation*}
+        Now we find the orders of each element:
+            \begin{equation*}
+                1, 6, 3, 6, 3, 2
+            \end{equation*}
+        so for primes $p = 2, 3$, we follow the decomposition steps:
+            \begin{equation*}
+                \mathbb{Z}/p\mathbb{Z} \cong \{1, 8\} \oplus \{1, 4, 7\}
+            \end{equation*}
+        which is the decomposition.
+    \end{proof}
+
+\textbf{Exercise 3}: Show that if $H < G$ is a subgroup of a finite group $G$, and $G : H = p$ where $p$ is the smallest prime dividing $\lvert G \rvert$, then $H$ is normal (the case $p = 2$ is done in Lang.)
+    \begin{proof}
+        Consider the action of $G$ on the permutations of the cosets of $G$ by left multiplication:
+            \begin{align*}
+                \varphi : G &\actson  \text{Aut}(G/H)  \\
+                \varphi : g &\mapsto  (rH \mapsto grH)   
+            \end{align*}
+        Notice that the kernel is a subgroup of $H$. Using the fact that
+            \begin{equation*}
+                \lvert G : \ker{\varphi} \rvert = \lvert G : H \rvert \lvert H : \ker{\varphi} \rvert
+            \end{equation*}
+        we consider the fact that $G/\ker{\varphi}$ gives us an injective and surjective mapping into the image of $\varphi$ which is a subgroup of the group of automorphisms on $G/H$. Then the order of this group divides $p!$. Furthermore, we have $\lvert G : H \rvert = p$. Therefore:
+            \begin{equation*}
+                \lvert H : \ker{\varphi} \rvert \divides (p - 1)!
+            \end{equation*}
+        to which we conclude that $\lvert H : \ker{\varphi} \rvert = 1$, otherwise, we can find a smaller prime that divides $H/\ker{\varphi}$ and therefore, $G$.
+    \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document} 

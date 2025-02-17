@@ -1,0 +1,41 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math172/Homework/Math172Hw1/Math172Ex1.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+
+\title{Math172Ex1}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+
+\reversemarginpar
+
+\textbf{Exercise 7}: Prove that there exists an integer $n$ such that the distance from $n\sqrt{1013}$ to the closest integer is less than $10^{-6}$ ($\sqrt{1013}$ here can actually be replaced by any irrational number.)
+    \begin{proof}
+        Suppose we divided each space between the integers into $10^{6}$ segments of distances $10^{-6}$. We will denote these segments as:
+            \begin{equation*}
+                (0, 10^{-6}], (10^{-6}, 2(10^{-6})], \ldots, ((10^{-6} - 1)10^{-6}, 1]
+            \end{equation*}
+
+        We have this list:
+            \begin{equation*}
+                \sqrt{1013}, 2\sqrt{1013}, 3\sqrt{1013}, \ldots, (10^{6} + 1)\sqrt{1013}
+            \end{equation*}
+        Now consider only the decimal part of each number $s$ given by $\text{dec}(s_{i}) = s - \lfloor s \rfloor$. By the pigeonhole principle, we must have an interval $(n(10^{-6}), (n + 1)10^{-6}]$ such that it contains $\text{dec}(s_{i}) \text{ and } \text{dec}(s_{j})$ for $i \neq j$. Suppose wlog that $s_{i} >  s_{j}$. We also have that:
+        \begin{equation*}
+            \lvert \text{dec}(s_{i}) - \text{dec}(s_{j}) \rvert < 10^{-6}
+        \end{equation*}         
+        Therefore, $s_{i} - s_{j}$ will have a decimal part that is within $10^{-6}$ of some integer as desired.
+    \end{proof}
+
+
+
+\end{document}
+

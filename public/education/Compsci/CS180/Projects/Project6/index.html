@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Poor Man's Augmented Reality</title>
+    <script src="/common.js" defer></script>
+    <script
+      id="MathJax-script"
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+      defer
+    ></script>
+    <link href="/css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="page-container include-sidebar">
+      <header></header>
+
+      <div class="banner">
+        <h1>Project 6: Poor Man's Augemented Reality</h1>
+      </div>
+
+      <div class="sidebar-container">
+        <div class="sidebar-nav"></div>
+      </div>
+
+      <div class="content-container">
+        <main>
+          <section>
+            <article id="Tracking 2D Points">
+              <h2>Tracking 2D Points</h2>
+              <p>
+                To add objects to a video that seem 3D, we need to establish a
+                correspondence between the 2D points in the video with their 3D
+                points in world coordinates. To begin, we initalize a tracker
+                for every reference point that we set in the first frame of the
+                video:
+              </p>
+              <div class="centered">
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(1, 1fr);
+                    --image-container-width: 40rem;
+                  "
+                >
+                  <img src="./media/tracked.jpg" alt="tracked points" />
+                </div>
+              </div>
+              <p>
+                For every point marked, we also instantiate a list of their
+                corresponding points in 3D.
+              </p>
+            </article>
+          </section>
+          <section>
+            <article id="Updating Tracked Points">
+              <h2>Updating Tracked Points</h2>
+              <p>
+                For every frame after the first, we update each tracker and
+                check if the previous position has changed significantly. If it
+                has, we set that tracker as invalid.
+              </p>
+              <div class="centered">
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(1, 1fr);
+                    --image-container-width: 40rem;
+                  "
+                >
+                  <img src="./media/update.gif" alt="updated points" />
+                </div>
+              </div>
+              <p>
+                This means for every frame, we have a list of 2D points and
+                their corresponding 3D points. We index into each of them by a
+                boolean array based on if the points are valid or not.
+              </p>
+            </article>
+          </section>
+          <section>
+            <article id="Camera Calibration">
+              <h2>Camera Calibration</h2>
+              <p>
+                The mapping of 3D coordinates to points in the image is done by
+                a series of two matrices, one of which account for the rotation
+                and translation of points in 3D space, and the other based on
+                camera intrinsics.
+              </p>
+              <p>
+                Solving for this matrix involves solving for some matrix $M$
+                which minimizes the error of: \begin{equation*} \begin{bmatrix}
+                mu \\ mv \\ m \end{bmatrix} = M \begin{bmatrix} x \\ y \\ z \\ 1
+                \end{bmatrix} \end{equation*} for every point $\begin{bmatrix} x
+                & y & z \end{bmatrix}$ and its corresponding point
+                $\begin{bmatrix} u & v \end{bmatrix}$ in the image. The
+                calculation is done by least squares since the system is
+                over-determined after $6$ points and is very similar to the
+                homography matrix calculation.
+              </p>
+            </article>
+          </section>
+          <section>
+            <article id="Adding To the Scene">
+              <h2>Adding To the Scene</h2>
+              <p>
+                Now that we have the matrix sending 3D points to 2D points in
+                the image, we can build structures like a cube:
+              </p>
+              <div class="centered">
+                <div
+                  class="image-container"
+                  style="
+                    --grid-cols: repeat(2, 1fr);
+                    --image-container-width: 40rem;
+                  "
+                >
+                  <img src="./media/axes.gif" alt="axes added" />
+                  <img src="./media/cube.gif" alt="cube added" />
+                </div>
+              </div>
+            </article>
+          </section>
+        </main>
+      </div>
+      <footer></footer>
+    </div>
+  </body>
+</html>

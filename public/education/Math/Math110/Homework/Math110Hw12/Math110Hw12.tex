@@ -1,0 +1,218 @@
+%! TeX root = 	
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/MyStyle/mystyle}
+
+\title{Math110Hw12}
+\author{Trustin Nguyen}
+
+
+\begin{document}
+
+\maketitle
+
+\section*{Math110Hw12}
+\hrule
+
+\textbf{Exercise 1}: Let $T$ be a self-adjoint operator on a finite-dimensional inner product space (real or complex) such that $\lambda_{1}, \lambda_{2}, \lambda_{3} \in \mathbb{R}$ are the only eigenvalues of $T$. Prove that $p(T) = 0$ where $p(\lambda) := (\lambda - \lambda_{1})(\lambda - \lambda_{2})(\lambda - \lambda_{3})$. Give a counterexample to this statement for an operator which is not self-adjoint.
+
+\begin{proof}
+	Since $T$ is self-adjoint, we can say that $T$ is diagonalizable, as all of its eigenvalues are in $\mathbb{R}$. Since the minimal polynomial contains exactly the eigenvalues of $T$ and $T$ is diagonalizable, $p_{\text{min}}$ splits into linear factors of multiplicity 1. So $p(z) = (z - \lambda_{1})(z - \lambda_{2})(z - \lambda_{3})$ and that $p(z)$ is the minimal polynomial.
+
+	For our counter example, we take any operator with multiple of the same eigenvalue but with entries outside the diagonal that would force the minimal polynomial factors to have more than a multiplicity of 1:
+	\begin{align*}
+		\begin{bmatrix}
+		1 & 1 & 0 & 0 & 0 & 0 \\
+		0 & 1 & 0 & 0 & 0 & 0 \\
+		0 & 0 & 2 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 2 & 0 & 0 \\
+		0 & 0 & 0 & 0 & 3 & 0 \\
+		0 & 0 & 0 & 0 & 0 & 3 \\
+		\end{bmatrix}
+	\end{align*}
+	It is not self-adjoint because it is not equal to its conjugate transpose. it has 3 eigenvalues. Notice that for the top block:
+	\begin{align*}
+		\begin{bmatrix}
+		1 & 1 \\
+		0 & 1 \\
+		\end{bmatrix}
+	\end{align*}
+	we would need the minimal polynomial to have $(z - 1)^{2}$ to kill the matrix. So $p(z) = (z - 1)(z - 2)(z - 3)$ and $p(T) \neq 0$.
+\end{proof}
+
+\textbf{Exercise 2}: Let $T \in \mathcal{L}(V)$. Show that 
+\begin{equation*}
+	\langle v, u \rangle_{T} := \langle Tv, u \rangle
+\end{equation*}
+is an inner product on $V$ if and only if $T$ is positive (per our definiton of positivity).
+
+\begin{proof}
+	$(\rightarrow)$ Suppose that $\langle v, u \rangle_{T} := \langle Tv, u \rangle$ is an inner product. Then we need to show that $T$ is positive. We can use the semi-positive property of inner products:
+	\begin{equation*}
+		0 \leq \langle v, v \rangle_{T} := \langle Tv, v \rangle
+	\end{equation*}
+	Also, if we restrict the $v$ to be non-zero, we have that 
+	\begin{equation*}
+		0 < \langle v, v \rangle_{T} = \langle Tv, v \rangle
+	\end{equation*}
+	Which tells us that $T$ is positive. 
+
+	$(\leftarrow)$ Suppose that $T$ is positive. We know by the previous that $0 \leq \langle v, v \rangle_{T}$ since that small part is an iff condition. We now check that $0 = \langle v, v \rangle = \langle Tv, v \rangle \iff Tv = v = 0$. The $(\leftarrow)$ direction is immediate. For $(\rightarrow)$ since $T$ is positive, outside of the domain $v = 0$, we must have that both $\langle Tv, v \rangle = 0$ and that $\langle Tv, v \rangle > 0$ which is impossible. So we must have $v = 0$ and therefore, $Tv = 0$. To show that it is linear:
+	\begin{align*}
+		\langle v + w, u \rangle_{T} &= \langle Tv + Tw, u \rangle \\
+				    &= \langle Tv, u \rangle + \langle Tw, u \rangle \\
+				    &= \langle v, u \rangle_{T} + \langle w, u \rangle_{T}
+	\end{align*}
+	And now suppose that $\lambda \in V$. Then 
+	\begin{align*}
+		\langle \lambda{v}, u \rangle_{T} &= \langle \lambda Tv, u \rangle \\
+					 &= \lambda\langle Tv, u \rangle \\
+					 &= \lambda\langle v, u \rangle_{T}
+	\end{align*}
+	Now for conjugation:
+	\begin{align*}
+		\langle v, u \rangle_{T} &= \langle Tv, u \rangle \\
+		\langle Tv, u \rangle &= \overline{\langle u, Tv \rangle} = \overline{\langle T^{*}u, v \rangle} \\
+		\text{Since } T^{*} &= T \\
+				    &= \overline{\langle Tu, v \rangle} = \overline{\langle u,v \rangle}_{T}
+	\end{align*}
+	as desired.
+\end{proof}
+
+\textbf{Exercise 3}: Show that the operator $T = -D^{2}$ is nonnegative on the space $V:= \Span\{1, \cos{x}, \sin{x}\}$ over $\mathbb{R}$, with the inner product
+\begin{equation*}
+	\langle f, g \rangle := \int_{-\pi}^{\pi} f(x)g(x) \,\dd{x}.
+\end{equation*}
+
+\begin{proof}
+	We take a general vector of the space $V$ and verify that $\langle Tv,v \rangle \geq 0$. We have $v = \lambda_{1} + \lambda_{2}\cos{x} + \lambda_{3}\sin{x}$:
+	\begin{gather*}
+		\langle T(\lambda_{1} + \lambda_{2}\cos{x} + \lambda_{3}\sin{x}), \lambda_{1} + \lambda_{2}\cos{x} + \lambda_{3}\sin{x} \rangle \\
+		\langle \lambda_{2} \cos{x} + \lambda_{3}\sin{x}, \lambda_{1} + \lambda_{2}\cos{x} + \lambda_{3}\sin{x} \rangle \\
+		\begin{split}
+			\langle \lambda_{2}\cos{x}, \lambda_{1} \rangle + \langle \lambda_{2}\cos{x}, \lambda_{2}\cos{x} \rangle &+ \langle \lambda_{2}\cos{x}, \lambda_{3}\sin{x} \rangle + \langle \lambda_{3}\sin{x}, \lambda_{1} \rangle \\
+													       &+ \langle \lambda_{3}\sin{x}, \lambda_{2}\cos{x} \rangle + \langle \lambda_{3}\sin{x}, \lambda_{3}\sin{x} \rangle \\
+		\end{split} \\
+		\langle \lambda_{2}\cos{x}, \lambda_{2}\cos{x} \rangle + \langle \lambda_{3}\sin{x}, \lambda_{3}\sin{x} \rangle \geq 0
+	\end{gather*}
+	Using the fact that $\{1, \sin{x}, \cos{x}\}$ form an orthogonal basis in $V$.
+\end{proof}
+
+Find
+\begin{enumerate}
+	\item [(a)] its square root operator $\sqrt{T}$;
+		\begin{proof}
+			We write down the matrix representation of $T$:
+			\begin{align*}
+				\begin{split}
+					1 \mapsto 0 \\
+					\cos{x} \mapsto \cos{x} \\
+					\sin{x} \mapsto \sin{x}
+				\end{split} 
+			\hspace{30pt} 
+				T = 		
+				\begin{bmatrix}
+				0 & 0 & 0 \\
+				0 & 1 & 0 \\
+				0 & 0 & 1 \\
+				\end{bmatrix}
+			\end{align*}
+			This tells us that we just take the square root of the entries in the diagonals. So
+			\begin{equation*}
+				\sqrt{T} =
+				\begin{bmatrix}
+				0 & 0 & 0 \\
+				0 & 1 & 0 \\
+				0 & 0 & 1 \\
+				\end{bmatrix}
+			\end{equation*}
+			as desired.
+		\end{proof}
+
+	\item [(b)] an example of a self-adjoint operator $R \neq \sqrt{T}$ such that $R^{2} = T$;
+		\begin{proof}
+			We can use the fact that $T = -D^{2}$ and notice that $D$ is almost self-adjoint. We have
+			\begin{align*}
+				D = 
+				\begin{bmatrix}
+				0 & 0 & 0 \\
+				0 & 0 & 1 \\
+				0 & -1 & 0 \\
+				\end{bmatrix}
+			\hspace{30pt} 
+				R = 	
+				\begin{bmatrix}
+				0 & 0 & 0 \\
+				0 & 0 & 1 \\
+				0 & 1 & 0 \\
+				\end{bmatrix}
+			\end{align*}
+			Notice that $R$ is self-adjoint as it is equal to its negative transpose and that $R^{2} = T$.
+		\end{proof}
+
+	\item [(c)] an example of a non-self-adjoint operator $S$ such that $S^{*}S = T$.
+		\begin{proof}
+			Referencing $3(b)$, we said that $D$ was almost self-adjoint, since $D^{*} = -\overline{D^{T}}= -D$. But now, $D^{*}D = -DD = -D^{2} = T$
+		\end{proof}
+\end{enumerate}
+
+\textbf{Exercise 4}: Let $T_{1}$ and $T_{2}$ be the normal operators on an $n$-dimensional inner product space $V$. Suppose both have $n$ distinct eigenvalues $\lambda_{1}, \ldots, \lambda_{n}$. Show that there is an isometry $S \in \mathcal{(V)}$ such that $T_{1} = S^{*}T_{2}S$.
+
+\begin{proof}
+	Since we have $n$ distinct eigenvalues, we have $n$ linearly independent eigenvectors, so this forms an eigenbasis of $V$, $\{v_{1}, v_{2}, \ldots, v_{n}\}$. We turn this into an orthonormal eigenbasis. Let these be the basis vectors in the matrix representation of $T_{2}$. The problem is that these might not be the same eigenvectors for $T_{1}$. Let $\{v_{1}^{\prime}, v_{2}^{\prime}, \ldots, v_{n}^{\prime}\}$ be the orthonormal eigenvectors corresponding to $T_{1}$. So we must have some action such that
+	\begin{align*}
+		S^{*}
+		:= \begin{split}
+			v_{1} &\mapsto v_{1}^{\prime} \\
+			v_{2} &\mapsto v^{\prime}_{2} \\
+			&\vdots \\
+			v_{n} &\mapsto v^{\prime}_{n}
+		\end{split}
+	\end{align*}
+	where $v_{i}$ and $v_{i}^{\prime}$ share the same eigenvalue. Clearly, this map is linear. We almost have $T_{1} = S^{*}T_{2}$. We note that $S^{*}$ is an isometry since it maps orthonormal basis vectors to orthonormal basis vectors so $S^{-1*} = S$. Since $T_{1}$ is a diagonal matrix wrt the basis $\{v_{1}^{\prime}, v_{2}^{\prime}, \ldots, v_{n}^{\prime}\}$, we get $T_{1}$ by taking $S^{*}TS$ so the mapping goes something like this:
+	\begin{align*}
+		S^{*}TSv := 
+		\begin{split}
+			v_{1}^{\prime} &\mapsto v_{1} \mapsto \lambda_{1}v_{1} \mapsto \lambda_{1}v_{1}^{\prime} \\
+			v_{2}^{\prime} &\mapsto v_{2} \mapsto \lambda_{2}v_{2} \mapsto \lambda_{2}v_{2}^{\prime} \\
+				       &\vdots \\
+			v_{n}^{\prime} &\mapsto v_{n} \mapsto \lambda_{n}v_{n} \mapsto \lambda_{n}v_{n}^{\prime} 
+		\end{split}
+	\end{align*}
+\end{proof}
+
+\textbf{Exercise 5}: Find the singular values of the operator $T \in \mathcal{P}_{2}(\mathbb{C}): p(x) \mapsto 2xp^{\prime}(x) - x^{2}p^{\prime\prime}(x)$ if the inner product on $\mathcal{P}_{2}(\mathbb{C})$ is defined as 
+\begin{equation*}
+	\langle p, q \rangle := \int_{-1}^{1} p(x)\overline{q(x)} \,\dd{x}.
+\end{equation*}
+
+\begin{proof}
+	Take a basis for the space: $\{1, x, x^{2}\}$. Now determine the action of the operator on the basis vectors:
+	\begin{gather*}
+		T(1) = 0 \\
+		T(x) = 2x \\
+		T(x^{2}) = 4x^{2} - 2x^{2} = 2x^{2}
+	\end{gather*}
+	So our matrix representation of $T$ is 
+	\begin{align*}
+		T = 
+		\begin{bmatrix}
+		0 & 0 & 0 \\
+		0 & 2 & 0 \\
+		0 & 0 & 2 \\
+		\end{bmatrix}
+	\end{align*}
+	The adjoint is the conjugate transpose so we get that the eigenvalues of $T^{*}T$ are $4, 0$. Therefore, the singular values are $2, 2, 0$.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

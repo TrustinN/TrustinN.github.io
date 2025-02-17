@@ -1,0 +1,31 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math172/Homework/Math172Hw11/Math172Ex11.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math172Ex11}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 6}: Let $G = (V, E)$ be a simple connected graph with $n$ vertices. Number its vertices using numbers from $[n]$ and let $x_{1}, \ldots, x_{n}$ be $n$ real variables. Define the function $f_{G}(x_{1}, \ldots, x_{n})$ as follows:
+    \begin{equation*}
+        f_{G}(x_{1}, \ldots, x_{n}) = \sum_{i = 1}^{n}x_{i}^{2} - \sum_{(i, j) \in E}x_{i}x_{j}
+    \end{equation*}
+In other words, each vertex $i$ contributes $x_{i}^{2}$ and each edge $(i, j)$ contributes $-x_{i}x_{j}$ to this function $f_{G}(x_{1}, \ldots, x_{n})$ is called \textit{non-negative definite} if $f_{G}(x_{1}, \ldots, x_{n}) \geq 0$ for all real numbers $x_{1}, \ldots, x_{n}$, and it is called \textit{positive definite} if in addition $f_{G}(x_{1}, \ldots, x_{n}) > 0$ for all choice of $x_{1}, \ldots, x_{n}$ with the only exception $x_{1} = x_{2} = \cdots = x_{n} = 0$.
+    \begin{itemize}
+        \item Classify, up to isomorphism, all connected graphs $G$ such that $f_{G}$ is positive definite.
+
+        \item Classify, up to isomorphism, all connected graphs $G$ such that $f_{G}$ is non-negative definite. 
+    \end{itemize}
+
+
+\end{document}
+

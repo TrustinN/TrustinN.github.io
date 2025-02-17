@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{function}\PYG{+w}{ }out\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nf}{steffensen}\PYG{p}{(}f, p, tol\PYG{p}{)}
+\PYG{+w}{    }\PYG{n}{out}\PYG{p}{.}\PYG{n}{x}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{p}{[}\PYG{n}{p}\PYG{p}{];}
+\PYG{+w}{    }\PYG{n}{out}\PYG{p}{.}\PYG{n}{y}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{p}{[}\PYG{n}{f}\PYG{p}{(}\PYG{n}{p}\PYG{p}{)];}
+\PYG{+w}{    }\PYG{k}{while}\PYG{+w}{ }\PYG{l+m+mi}{1}
+\PYG{+w}{        }\PYG{n}{p0}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{(}\PYG{n}{p}\PYG{p}{);}
+\PYG{+w}{        }\PYG{n}{p1}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{(}\PYG{n}{p0}\PYG{p}{);}
+\PYG{+w}{        }\PYG{n}{aitk}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{Aitken}\PYG{p}{([}\PYG{n}{p}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{p0}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{p1}\PYG{p}{]);}
+\PYG{+w}{        }\PYG{n}{out}\PYG{p}{.}\PYG{n}{x}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{p}{[}\PYG{n}{out}\PYG{p}{.}\PYG{n}{x}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{vpa}\PYG{p}{(}\PYG{n}{aitk}\PYG{p}{)];}
+\PYG{+w}{        }\PYG{n}{out}\PYG{p}{.}\PYG{n}{y}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{p}{[}\PYG{n}{out}\PYG{p}{.}\PYG{n}{y}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{vpa}\PYG{p}{(}\PYG{n}{f}\PYG{p}{(}\PYG{n}{aitk}\PYG{p}{))];}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{n+nb}{abs}\PYG{p}{(}\PYG{n}{p}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{aitk}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{tol}
+\PYG{+w}{            }\PYG{k}{break}
+\PYG{+w}{        }\PYG{k}{end}
+\PYG{+w}{        }\PYG{n}{p}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{aitk}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{end}
+\PYG{+w}{    }
+\PYG{k}{end}
+\end{Verbatim}

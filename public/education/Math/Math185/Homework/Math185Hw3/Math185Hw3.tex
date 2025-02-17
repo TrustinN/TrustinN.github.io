@@ -1,0 +1,319 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math185/Homework/Math185Hw3/Math185Hw3.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math185Hw3}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Let $f$ be a holomorphic function on an open set $D \subseteq \mathbb{C}$. Assuming that $f$ is twice continuously differentiable, show that the complex derivative $df/dz$ is also holomorphic in $D$.
+    \begin{proof}
+        Using the definition:
+            \begin{equation*}
+                \pdv{f}{z} = \dfrac{1}{2} \left(\pdv{f}{x} - i \pdv{f}{y}\right)
+            \end{equation*}
+        and that 
+            \begin{equation*}
+                f = \begin{bmatrix}
+                    u(x, y) \\
+                    v(x, y)   
+                \end{bmatrix}
+            \end{equation*}
+        We can compute the real and imaginary components of $\pdv{f}{z}$:
+            \begin{align*}
+                \pdv{f}{z} &= \dfrac{1}{2}\left(\begin{bmatrix}
+                    u_{x} \\
+                    v_{x}   
+                \end{bmatrix} - i \begin{bmatrix}
+                    u_{y} \\
+                    v_{y}   
+                \end{bmatrix}\right) \\
+                           &= \dfrac{1}{2}\left(\begin{bmatrix}
+                               u_{x} \\
+                               v_{x}   
+                           \end{bmatrix} + \begin{bmatrix}
+                               v_{y}  \\
+                               -u_{y}   
+                           \end{bmatrix}\right) \\
+                           &= \dfrac{1}{2}\begin{bmatrix}
+                               u_{x} + v_{y} \\
+                               v_{x} - u_{y}   
+                           \end{bmatrix}         
+            \end{align*}
+        Now we check $CR$:
+            \begin{equation*}
+                J = \begin{bmatrix}
+                    u_{xx} + v_{xy} & u_{xy} + v_{yy} \\
+                    v_{xx} - u_{xy} & v_{xy} - u_{yy}   
+                \end{bmatrix}
+            \end{equation*}
+        Since $f$ is holomorphic, $u_{x} = v_{y}$, $u_{y} = -v_{x}$. So:
+            \begin{equation*}
+                u_{xx} + v_{xy} = v_{xy} + v_{xy} = v_{xy} - u_{yy}
+            \end{equation*}
+        and
+            \begin{equation*}
+                u_{xy} + v_{yy} = u_{xy} + u_{xy} = -v_{xx} + u_{xy} = -(v_{xx} - u_{xy})
+            \end{equation*}
+        so the new partials satisfy the CR equations and $\pdv{f}{z}$ is holomorphic.
+    \end{proof}
+
+\newpage
+
+\textbf{Exercise 2}: If $u$ is twice continuously differentiable in $D \subseteq \mathbb{C}$, show that the complex function $u_{x} - i \cdot u_{y}$ is holomorphic in $D$ if and only if $u$ is harmonic.
+    \begin{proof}
+        ($\rightarrow$) Suppose that $u_{x} - i \cdot u_{y}$ is holomorphic. Then by $CR$, 
+            \begin{align*}
+                u_{xx} &= -u_{yy}    \\
+                u_{xy} &= -(-u_{xy})   
+            \end{align*}
+        From the top equation, we immediately get: $u_{xx} + u_{yy} = 0$, so $u$ is harmonic. 
+
+        ($\leftarrow$) Suppose that $u$ is harmonic. Then $u_{xx} + u_{yy} = 0$. Check CR:
+            \begin{equation*}
+                J = \begin{bmatrix}
+                    u_{xx}  & u_{xy}  \\
+                    -u_{xy} & -u_{yy}   
+                \end{bmatrix}
+            \end{equation*}
+        Indeed, it satisfies $CR$ as $u_{xy} = -(-u_{xy})$ and $u_{xx} = -u_{yy}$ from the harmonic constraint.
+    \end{proof}
+
+\newpage
+
+\textbf{Exercise 3}: Show that a (homogeneous) linear isomorphism from $\mathbb{R}^{n}$ to itself which preserves orthogonality of vectors (that is, sends a pair of mutually orthogonal vectors to a mutually orthogonal pair) must be the composite of an orthogonal transformation with a scaling. In particular, it preserves absolute values of angles.
+
+\textit{Hint}: Check what happens to the standard basis, and to the diagonals of the squares built on vectors in the standard basis.
+
+\textit{Remark}: Reflections also preserve the absolute values of angles, but in $\mathbb{R}^{2}$, reflection about a line changes the sign of the angles so is not conformal in the sense we defined.
+    \begin{proof}
+        Suppose that our isomorphism is given by a matrix:
+            \begin{equation*}
+                A = \begin{bmatrix}
+                    \divides & \divides & \cdots & \divides \\
+                    v_{1}    & v_{2}    & \cdots & v_{n}    \\
+                    \divides & \divides & \cdots & \divides   
+                \end{bmatrix}
+            \end{equation*}
+        Then looking at the image of $e_{i}, e_{j}$, we see that 
+            \begin{equation*}
+                Ae_{i} \cdot Ae_{j} = 0
+            \end{equation*}
+        because orthogonality is preserved. So that means that $v_{i}, v_{j}$ are orthogonal, as $Ae_{i} = v_{i}$, $Ae_{j} = v_{j}$. Now we need to show that each $v_{i}$ has the same norm. Consider orthogonal vectors $w_{i, j, -}, w_{i, j, +}$, where 
+            \begin{equation*}
+                w_{i, j, -} = \begin{bmatrix}
+                    0      \\
+                    \vdots \\
+                    1      \\
+                    \vdots \\
+                    -1     \\
+                    \vdots \\
+                    0        
+                \end{bmatrix}, \, w_{i, j, -} = \begin{bmatrix}
+                    0      \\
+                    \vdots \\
+                    1      \\
+                    \vdots \\
+                    1      \\
+                    \vdots \\
+                    0        
+                \end{bmatrix}
+            \end{equation*}
+        Where $w_{i, j, -}$ has all $0$'s except the $i$, $j$-th entry, and $1$ in the i-th and $-1$ in the j-th entry. Also, say that $w_{i, j, +}$ has all $0$'s except the $i, j$-th entry, which will contain $1$ instead. These vectors are orthogonal. Furthermore, 
+            \begin{equation*}
+                Aw_{i, j, -} \cdot Aw_{i, j, +} = 0
+            \end{equation*}
+        because orthogonality is preserved. So $Aw_{i, j, -} = v_{i} - v_{j}$ and $Aw_{i, j, +} = v_{i} + v_{j}$. So
+            \begin{equation*}
+                (v_{i} - v_{j}) \cdot (v_{i} + v_{j}) = \lVert v_{i} \rVert - \lVert v_{j} \rVert = 0
+            \end{equation*}
+        And therefore, 
+            \begin{equation*}
+                \lVert v_{i} \rVert = \lVert v_{j} \rVert
+            \end{equation*}
+        which concludes the proof.
+    \end{proof}
+
+\newpage
+
+\textbf{Exercise 4}: Show that the image under $z \mapsto \cos{z}$ of a horizontal line is an ellipse, and the image of a vertical line is a hyperbola. There are some exceptional cases: discuss those.
+    \begin{proof}
+        (Horizontal line) Any point on a horizontal line is of the form $x + ic$ for $c$ constant and $x \in \mathbb{R}$. So if $z = x + ic$, then 
+            \begin{equation*}
+                \cos{z} = \cos{x + ic} = \cos{x}\cosh{c} - i\sin{x}\sinh{c}
+            \end{equation*}
+        Since $\cosh{c}, \sinh{c}$ are real number, constants, let:
+            \begin{align*}
+                \alpha &= \cosh{c} \\
+                \beta  &= \sinh{c}   
+            \end{align*}
+        Then 
+            \begin{equation*}
+                \cos{z} = \alpha\cos{x} - i\beta\sin{x}
+            \end{equation*}
+        Let $u$ denote the real axis and $v$ denote the imaginary. Then we have that:
+            \begin{align*}
+                u &= \alpha\cos{x} \\
+                v &= -\beta\sin{x}   
+            \end{align*}
+        and therefore the relation:
+            \begin{equation*}
+                \dfrac{u^{2}}{\alpha^{2}} + \dfrac{v^{2}}{\beta^{2}} = 1
+            \end{equation*}
+        which is the equation of an ellipse.
+
+        (Vertical line) Any point on the vertical line is of the form $c + iy$ for $c$ constant and $y \in \mathbb{R}$. So if $z = c + iy$, 
+            \begin{align*}
+                \cos{z} = \cos{c + iy} &= \cos{c}\cosh{y} - i\sin{c}\sinh{y}                                   \\
+                                       &= \alpha \dfrac{e^{y} + e^{-y}}{2} - i \beta \dfrac{e^{y} - e^{-y}}{2}   
+            \end{align*}
+        Now setting $u = \alpha \frac{e^{y} + e^{-y}}{2}$ and $v = -\beta \frac{e^{y} - e^{-y}}{2}$, after some computation:
+            \begin{equation*}
+                e^{-y} = \dfrac{2v}{\beta} + e^{y}
+            \end{equation*}
+        and solving the quadratic using $y = \ln(x)$:
+            \begin{align*}
+                1 &= \dfrac{2v}{\beta}e^{y} + e^{2y}                         \\
+                0 &= e^{2y} + \dfrac{2v}{\beta}e^{y} - 1                     \\
+                  &= x^{2} + \dfrac{2v}{\beta}x - 1                          \\
+                x &= -\dfrac{v}{\beta} + \sqrt{\dfrac{v^{2}}{\beta^{2}} + 1}   
+            \end{align*}
+        Plugging this into $u$:
+            \begin{align*}
+                u                                                    &= \dfrac{\alpha}{2}\left(e^{y} + e^{-y}\right)                              \\
+                                                                     &= \dfrac{\alpha}{2}\left(e^{\ln(x)} + \dfrac{2v}{\beta} + e^{\ln(x)}\right) \\
+                                                                     &= \alpha\sqrt{\dfrac{v^{2}}{\beta^{2}} + 1}                                 \\
+                \dfrac{u}{\alpha}                                    &= \sqrt{\dfrac{v^{2}}{\beta^{2}} + 1}                                       \\
+                \dfrac{u^{2}}{\alpha^{2}} - \dfrac{v^{2}}{\beta^{2}} &= 1                                                                           
+            \end{align*}
+        which is the equation of a hyperbola.
+
+        The other cases are when $\cos{c} = 0, \sin{c} = 0, \sinh{c} = 0, \text{ or } \cosh{c} = 0$. The first two cases concern vertical lines, while the second two are tied to horizontal lines. If $\cos{c} = 0$ or $\sin{c} = 0$, then $c \in \frac{\pi}{4}\mathbb{Z}$. On the other hand, $\cosh{c}$ is never $0$ from the formula $\frac{e^{x} + e^{-x}}{2}$. We have $\sinh{c}$ is $0$ when $c = 0$.
+    \end{proof}
+
+\newpage
+
+\textbf{Exercise 5}: Compute $\sum_{n = 0}^{\infty}\frac{1}{n^{2} + 3n + 2}$.
+    \begin{answer}
+        First partial fraction decomposition:
+            \begin{equation*}
+                \dfrac{1}{n^{2} + 3n + 2} = \dfrac{1}{n + 1} - \dfrac{1}{n + 2}
+            \end{equation*}
+        Then compute:
+            \begin{equation*}
+                \sum_{n = 0}^{\infty}\dfrac{1}{n + 1} - \dfrac{1}{n + 2} = 1
+            \end{equation*}
+    \end{answer}
+
+\newpage
+
+\textbf{Exercise 6}: Does the series $\sum_{n = 1}^{\infty}\frac{i^{n}}{n}$ converge? Is the convergence absolute? Explain why or why not.
+    \begin{answer}
+        The series can be expanded to:
+            \begin{equation*}
+                \sum_{n = 1}^{\infty}\dfrac{i^{n}}{n} = i - \dfrac{1}{2} - \dfrac{i}{3} + \dfrac{1}{4} + \dfrac{i}{5} - \dfrac{1}{6} - \cdots
+            \end{equation*}
+        And collecting the real and imaginary parts:
+            \begin{equation*}
+                \sum_{n = 1}^{\infty} \dfrac{i^{n}}{n} = \dfrac{1}{2} \sum_{n = 1}^{\infty}\dfrac{(-1)^{n}}{n} + i\sum_{n = 1}^{\infty} \dfrac{(-1)^{n + 1}}{2n - 1}
+            \end{equation*}
+        Since the series for the real component $\sum_{n = 1}^{\infty} \frac{(-1)^{n}}{n}$ converges and the series for the imaginary component $\sum_{n = 1}^{\infty}\frac{(-1)^{n + 1}}{2n - 1}$ converges by the alternating series test, the series converges.
+    \end{answer}
+
+\newpage
+
+\textbf{Exercise 7}: For which real values of $x$ do the following power series converge? (You must also check the borderline cases which the ratio test fails to settle.)
+    \begin{itemize}
+        \item [(a)] $\sum_{n \geq 0}\frac{x^{n}}{n^{2}}$;
+            \begin{answer}
+                Using the ratio test, we require:
+                    \begin{equation*}
+                        \left\lvert \dfrac{a_{n + 1}}{a_{n}} \right\rvert = \left\lvert \dfrac{x(n^{2})}{(n + 1)^{2}} \right\rvert < 1
+                    \end{equation*}
+                So $\lvert x \rvert < \frac{(n + 1)^{2}}{n^{2}}$. So for any $x$, we just take a large enough $n$. So this converges for all $x \in \mathbb{R}$.
+            \end{answer}
+
+        \item [(b)] $\sum_{n \geq 0} \frac{x^{n}}{2^{n}}$;
+            \begin{answer}
+                Using the ratio test, we require:
+                    \begin{equation*}
+                        \left\lvert \dfrac{a_{n + 1}}{a_{n}} \right\rvert = \left\lvert \dfrac{x}{2} \right\rvert < 1 \implies \lvert x \rvert < 2
+                    \end{equation*}
+                Now check the boundary cases:  
+                    \begin{align*}
+                        \sum_{n \geq 0} 1^{n}    &= \text{diverges} \\
+                        \sum_{n \geq 0} (-1)^{n} &= \text{diverges}   
+                    \end{align*}
+                So the interval of convergence is $(-2, 2)$.
+            \end{answer}
+
+        \item [(c)] $\sum_{n \geq 0}\frac{x^{n}}{\sqrt{n!}}$;
+            \begin{answer}
+                Using the ratio test, we require that
+                    \begin{equation*}
+                        \left\lvert \dfrac{a_{n + 1}}{a_{n}} \right\rvert = \left\lvert x\sqrt{\dfrac{1}{n + 1}} \right\rvert < 1
+                    \end{equation*}
+                So $\lvert x \rvert < \sqrt{n + 1}$. So if we choose a large enough $n$, we have that the condition is satisfied. So it converges for all $x \in \mathbb{R}$.
+            \end{answer}
+
+        \item [(d)] $\sum_{n \geq 0} \sqrt{n!} \cdot x^{n}$. 
+            \begin{answer}
+                Using the ratio test, we require that
+                    \begin{equation*}
+                        \left\lvert \dfrac{a_{n + 1}}{a_{n}} \right\rvert = \left\lvert x\sqrt{n} \right\rvert < 1
+                    \end{equation*}
+                So $\lvert x \rvert < 1/\sqrt{n}$. We see that for any $x$ we choose, for $n$ sufficiently large, the inequality does not hold. So it does not converge for any $x$ except for $x = 0$.
+            \end{answer}
+    \end{itemize}
+
+\newpage
+
+\textbf{Exercise 8}: Find the radii of convergence of $\sum n^{n}z^{n}$ and of $\sum n^{2}z^{n}$. Sum the second series in closed form.
+    \begin{proof}
+        The radius of convergence of $\sum n^{n}z^{n}$, using the geometric series test is when 
+            \begin{equation*}
+                \lvert nz \rvert < 1
+            \end{equation*}
+        So $\lvert z \rvert < \frac{1}{n}$. This holds for all $n$ only when $z = 0$. So the radius of convergence is $0$. For $\sum n^{2}z^{n}$, using the ratio test, we require:
+            \begin{equation*}
+                \left\lvert \dfrac{a_{n + 1}}{a_{n}} \right\rvert = \left\lvert \dfrac{z(n + 1)^{2}}{n^{2}} \right\rvert < 1
+            \end{equation*}
+        So $\lvert z \rvert < \frac{n^{2}}{(n + 1)^{2}}$. Since the limit of the RHS is $1$, the radius of convergence is $1$. It does not converge on the boundary points. We can get the closed form by computation:
+            \begin{equation*}
+                S = \sum n^{2}z^{n} = z + 4z^{2} + 9z^{3} + 16z^{5} + \cdots
+            \end{equation*}
+        Subtract:
+            \begin{equation*}
+                S - zS = z + 3z^{2} + 5z^{3} + 7z^{4} + \cdots
+            \end{equation*}
+        Subtract again:
+            \begin{equation*}
+                S - zS - z(S - zS) = z + 2z^{2} + 2z^{3} + 2z^{4} + \cdots
+            \end{equation*}
+        So
+            \begin{equation*}
+                S - zS - zS + z^{2}S = z + 2z^{2}\sum_{n \geq 0} z^{n}
+            \end{equation*}
+        So we solve for $S$:
+            \begin{align*}
+                S(1 - 2z + z^{2}) &= z + \dfrac{2z^{2}}{1 - z}                 \\
+                S(1 - 2z + z^{2}) &= \dfrac{z + z^{2}}{1 - z}                  \\
+                S                 &= \dfrac{z(1 + z)}{(1 - z)(1 - 2z + z^{2})} \\
+                S                 &= \dfrac{z(1 + z)}{(1 - z)^{3}}               
+            \end{align*}
+        And we are done.
+    \end{proof}
+
+
+
+
+\end{document}

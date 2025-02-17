@@ -1,0 +1,121 @@
+%! TeX root = Math250aHw13.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math250aHw13}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Let $K$ be a subfield of $\mathbb{C}$ and $a, b$ elements in $K^{\times}$. Show equivalence between
+    \begin{itemize}
+        \item $K(\sqrt{a}) = K(\sqrt{b})$.
+
+        \item There exists $c \in K^{\times}$ with $a = bc^{2}$.
+    \end{itemize}
+    \begin{proof}
+        ($2 \rightarrow 1$) Suppose that there is a $c \in K^{\times}$ such that $a = bc^{2}$. Then $c^{-1} \in K^{\times}$ and
+            \begin{equation*}
+                K(\sqrt{a}) = K(\sqrt{bc^{2}}) = K(c\sqrt{b}) = K(\sqrt{b})
+            \end{equation*}
+        ($1 \rightarrow 2$) Suppose that $K(\sqrt{a}) = K(\sqrt{b})$. Then we have that
+            \begin{equation*}
+                \dfrac{\sqrt{a}}{\sqrt{b}} = \sqrt{\dfrac{a}{b}} \in K(\sqrt{a})
+            \end{equation*}
+        Fields have inverses, so we have
+            \begin{equation*}
+                \dfrac{\sqrt{a}}{\sqrt{b}}c = 1
+            \end{equation*}
+        Therefore, 
+            \begin{equation*}
+                ac^{2} = b \text{ or } a = b(c^{-1})^{2}
+            \end{equation*}
+    \end{proof}
+
+\textbf{Exercise 4}: Let $E/K$ be a finite field extension. Prove that if $E : K$ is a prime number, $E/K$ has no proper intermediate fields, and for each $\alpha \in E$ such that $\alpha \notin K$ we therefore have $E = K(\alpha)$.
+    \begin{proof}
+        Suppose that $K \subseteq F \subseteq E$ is a field extension. Then 
+            \begin{equation*}
+                [E : K] = [E : F][F : K] 
+            \end{equation*}
+        Since $[E : K]$ is prime/irreducible in $\mathbb{Z}$, we have that either $[E : F]$ or $[F : K]$ is $1$. Then $F \cong K$ or $F \cong E$.
+    \end{proof}
+
+\textbf{Exercise 6}: Let $K$ be an infinite field and $E$ an extension of degree $n > 1$ over $K$. Show that the quotient group $E^{\times}/K^{\times}$ of the multiplicative groups of $E$ and $K$ is infinite. 
+    \begin{proof}
+        We have the extension $K \subseteq E$. Let $n = [E : K] > 1$ and therefore, $1, \alpha_{1}, \ldots, a_{n - 1}$ be a basis for $E$ over $K$. Then any element of $E^{\times}$ can be represented as
+            \begin{equation*}
+                \lambda_{0} + \lambda_{1}\alpha_{1} + \cdots + \lambda_{n - 1}\alpha_{n - 1}
+            \end{equation*}
+        For $\lambda_{i} \in K$. We send this under the quotient map to $E^{\times}/K^{\times}$. Notice that at least one of the $\lambda_{i}$ are not $0$, because $0  \notin E^{\times}$. Then wlog, say we can divide through by this $\lambda_{i}$:
+            \begin{equation*}
+                \left(\dfrac{\lambda_{0}}{\lambda_{i}} + \dfrac{\lambda_{1}}{\lambda_{i}}\alpha_{1} + \cdots +  \alpha_{i} + \cdots + \dfrac{\lambda_{n - 1}}{\lambda_{i}}a_{n - 1}\right) \cdot K^{\times}
+            \end{equation*}
+        is the image of the quotient map to $E^{\times}/K^{\times}$. Then each element of $E^{\times}/K^{\times}$ is in correspondence to a ratio between the coefficients, $\lambda_{0}, \ldots, \lambda_{n - 1}$, points in projective space. We fix an element to be $1$ while varying another coordinate over elements of our field to get infinitely many points in projective space. So we are done.
+    \end{proof}
+
+\textbf{Exercise 7}: Let the circle of radius $1$ centered at $z_{1} = 1$ intersect $S$ at $z_{2}$ and $z_{3}$. Let $z_{4}$ be the intersection of the line through $z_{2}$ and $z_{3}$ with the line through $0$ and $z_{1}$. Beginning at $z_{1}$, mark off the distance $\lvert z_{4} - z_{2} \rvert$ against the circle $S$, seven times in succession.
+
+Does this mean that Gauss's statement (see F12 in chapter $5$) that $e^{2\pi i/7} \notin \compass\{0, 1\}$ is an error? Show that the points obtained according to the procedure above are the powers $z, z^{2}, \ldots, z^{7}$ of the complex number $z = \frac{5}{8} + \frac{1}{8}\sqrt{39}i$. It follows that $65536z^{7} = 65530 - 142\sqrt{39}i$.
+    \begin{proof}
+        Let $z_{5} = a + bi$ be the first mark with distance $\lvert z_{4} - z_{2} \rvert$ away from $z_{1}$.
+            \begin{fixedfigure}
+                \incfig{exercise7}
+            \end{fixedfigure}
+        We first have that $\lvert z_{4} - z_{2} \rvert = \sqrt{3}/2$. This is because we have that the triangle formed by $0, z_{1}, z_{2}$ is equilateral, $z_{2} - z_{4}$ is a perpendicular bisector, so it is the height of the triangle. We take $(\frac{1}{2})^{2} + h^{2} = 1$ and we get $h = \frac{\sqrt{3}}{2}$. Therefore, $\lVert  z_{5} \rVert = \frac{\sqrt{3}}{2}$. So we now have the system of equations:
+            \begin{align*}
+                a^{2} + b^{2}       &= 1            \\
+                (1 - a)^{2} + b^{2} &= \dfrac{3}{4}   
+            \end{align*}
+        So 
+            \begin{align*}
+                a^{2} + b^{2}          &= 1             \\
+                1 - 2a + a^{2} + b^{2} &= \dfrac{3}{4}  \\
+                2 - 2a                 &= \dfrac{3}{4}  \\
+                -2a                    &= \dfrac{-5}{4} \\
+                a                      &= \dfrac{5}{8}    
+            \end{align*}
+        Then using 
+            \begin{equation*}
+                a^{2} + b^{2} = 1
+            \end{equation*}
+        we have $\frac{25}{64} + b^{2} = 1$, $b^{2} = \frac{39}{64}$. Therefore, $b = \frac{\sqrt{39}}{8}$. So we have $z_{5} = \frac{5}{8} + \frac{\sqrt{39}}{8}i$ and $65536z^{7} = 65530 - 142\sqrt{39}i$. So $z^{7} \neq 1$ and it is not a heptagon.
+    \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,323 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math185/Homework/Math185Hw8/Math185Hw8.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math185Hw8}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Prove that if a holomorphic function $f$ has an isolated singularity at $0$, then the principal part of its Laurent expansion converges everywhere on $\mathbb{C} \backslash \{0\}$.
+    \begin{answer}
+        It was shown in class that a holomorphic function converges to its Laurent expansion on the punctured disk around its singularity. So since it converges to its Laurent series, then the principal part must converge for $\mathbb{C} \backslash \{0\}$.
+    \end{answer}
+
+\textbf{Exercise 2}: Find the Laurent series of the function $f(z) = (z^{2} - 1) \sin{\frac{1}{z^{2}}}$ which converges in the region $0 < \lvert z \rvert < \infty$.
+    \begin{answer}
+        The Taylor series for $\sin{z}$ centered at $z = 0$ is
+            \begin{equation*}
+                \sum_{n \geq 0} \dfrac{(-1)^{n}z^{2n + 1}}{(2n + 1)!}
+            \end{equation*}
+        Now plugging in $\frac{1}{z^{2}}$, we get:
+            \begin{equation*}
+                \sum_{n \geq 0} \dfrac{(-1)^{n}}{(2n + 1)!z^{4n + 2}}
+            \end{equation*}
+        Finally, multiply by $(z^{2} - 1)$:
+            \begin{align*}
+                (z^{2} - 1)\sin{\dfrac{1}{z^{2}}} &= (z^{2} - 1)\sum_{n \geq 0}\dfrac{(-1)^{n}}{(2n + 1)!}z^{4n + 2}                                         \\
+                                                  &= \sum_{n \geq 0}\dfrac{(-1)^{n}}{(2n + 1)!z^{4n}} - \sum_{n \geq 0}\dfrac{(-1)^{n}}{(2n + 1)!z^{4n + 2}} \\
+                                                  &= \sum_{n \geq 0}\dfrac{(-1)^{\lfloor (n + 1)/2 \rfloor}}{(2\lfloor n/2 \rfloor + 1)!}z^{-2n}               
+            \end{align*}
+        which is the Laurent series for $f(z)$.
+    \end{answer}
+
+\textbf{Exercise 3}: Find the residues of the following functions at each of their isolated singularities:
+    \begin{itemize}
+        \item [(a)] $\frac{z^{p}}{1 - z^{q}}$ for $(p, q \in \mathbb{Z}_{> 0})$
+            \begin{answer}
+                The singularities are at $e^{ik\pi/q}$. The for each singularity, define $h(z) = -(z - e^{ik\pi/q})f(z)$ where $f(z) = \frac{z^{p}}{1 - z^{q}}$. So to evaluate $(e^{ik\pi/q} - e^{ik\pi/q})/(z^{q} - 1)$, use L'Hopital to get:
+                    \begin{equation*}
+                        \lim\limits_{z \to e^{ik\pi/q}}\dfrac{z - e^{ik\pi/q}}{z^{q} - 1} = \dfrac{1}{qz^{q - 1}} = \dfrac{1}{qe^{ik\pi(q - 1)/q}}
+                    \end{equation*}
+                So for a singularity $e^{ik\pi/q}$, the residue is 
+                    \begin{equation*}
+                        -\dfrac{e^{ikp\pi/q}}{qe^{-ik\pi/q}} = \dfrac{e^{ik(p + 1)\pi/q}}{q}
+                    \end{equation*}
+            \end{answer}
+
+        \item [(b)] $\frac{z^{5}}{(z^{2} - 1)^{2}}$
+            \begin{answer}
+                We define the holomorphic function $h(z) = (z + 1)^{2}\frac{z^{5}}{(z^{2} - 1)^{2}} = \frac{z^{5}}{(z - 1)^{2}}$. Then the residue at $-1$ is $Res_{z = -1}f(z) = \frac{1}{(2 - 1)!}h^{2 - 1}(-1)$. So 
+                    \begin{equation*}
+                        h^{\prime}(z) = \dfrac{(z - 1)^{2}\cdot 5z^{4} - z^{5} \cdot 2 (z - 1)}{(z - 1)^{4}}
+                    \end{equation*}
+                and 
+                    \begin{align*}
+                        h^{\prime}(-1) &= \dfrac{4 \cdot 5 - (-1) \cdot 2 (-2)}{(-2)^{4}} \\
+                                       &= \dfrac{20 - 4}{16}                              \\
+                                       &= 1                                                 
+                    \end{align*}
+                So the residue at $z = -1$ is $1$. Now for the residue at $z = 1$, we define $h(z) = (z - 1)^{2}\frac{z^{5}}{(z^{2} - 1)^{2}} = \frac{z^{5}}{(z + 1)^{2}}$. The residue at $z = 1$ is $Res_{z = 1} \frac{1}{(2 - 1)!}h^{2 - 1}(1)$. And
+                    \begin{equation*}
+                        h^{\prime}(z) = \dfrac{(z + 1)^{2} \cdot 5z^{4} - z^{5} \cdot 2(z + 1)}{(z + 1)^{4}}
+                    \end{equation*}
+                Now evaluating at $z = 1$:
+                    \begin{align*}
+                        h^{\prime}(1) &= \dfrac{2^{2} \cdot 5 - 2 \cdot 2}{2^{4}} \\
+                                      &= \dfrac{16}{16}                           \\
+                                      &= 1                                          
+                    \end{align*}
+                So the residue at $z = 1$ is also $1$.
+            \end{answer}
+
+        \item [(c)] $\frac{\cos{z}}{1 + z + z^{2}}$ 
+            \begin{answer}
+                It has singularities at $z = e^{2i\pi/3}, e^{4i\pi/3}$. So let $h(z) = (z - e^{2i\pi/3})f(z)$ where $f(z) = \frac{\cos{z}}{1 + z + z^{2}}$. Now we calculate $h(e^{2i\pi/3})$ which is 
+                    \begin{equation*}
+                        \dfrac{\cos{z}}{(z - e^{4\pi i / 3})} = \dfrac{\cos{e^{2i\pi/3}}}{i\sqrt{3}}
+                    \end{equation*}
+                which is the contribution at $e^{2i\pi/3}$. Now for the contribution at $e^{4i\pi/3}$, use $h(z) = (z - e^{4i\pi/3})h(z)$ and evaluate at $z = e^{4i\pi/3}$:
+                    \begin{equation*}
+                        \dfrac{\cos{z}}{(z - e^{2\pi i / 3})} = \dfrac{\cos{e^{4i\pi/3}}}{-i\sqrt{3}}
+                    \end{equation*}
+                which is the contribution at $e^{4i\pi/3}$.
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 4}: Give a formula for the residue at $0$ of the function $\sin{z + z^{-1}}$.
+    \begin{answer}
+        We have
+            \begin{equation*}
+                \sin{z} = \sum_{n \geq 0} \dfrac{z^{2n + 1}(-1)^{n}}{(2n + 1)!}
+            \end{equation*}
+        So 
+            \begin{equation*}
+                \sin{z + z^{-1}} = \sum_{n \geq 0} \dfrac{(z + z^{-1})^{2n + 1}(-1)^{n}}{(2n + 1)!}
+            \end{equation*}
+        We can use binomial expansion:
+            \begin{equation*}
+                (z + z^{-1})^{2n + 1} = \sum_{m \geq 0}\dbinom{2n + 1}{m}z^{-m} z^{2n + 1 - m} = \sum_{m \geq 0}\dbinom{2n + 1}{m}z^{2n - 2m + 1}
+            \end{equation*}
+        and the residue is obtained precisely when $m = n + 1$. So we get the $z^{-1}$ term is
+            \begin{equation*}
+                \dbinom{2n + 1}{n + 1}z^{-1}
+            \end{equation*}
+        Plugging this back into our $\sin{z + z^{-1}}$ formula, we get the formula:
+            \begin{equation*}
+                \sum_{n \geq 0}\dfrac{\dbinom{2n + 1}{n + 1}(-1)^{n}}{(2n + 1)!} = \sum_{n \geq 0} \dfrac{1}{(n + 1)!(n)!}(-1)^{n}
+            \end{equation*}
+        as the coefficient of $z^{-1}$, and it converges by alternating series test.
+    \end{answer}
+
+\textbf{Exercise 5}: Determine $\int_{C}^{} \frac{\exp(iz)}{z^{3}} \, \dd{z} $ around the circle $C$ $\lvert z \rvert = 1$.
+    \begin{answer}
+        Using Cauchy's formula for derivatives, we have:
+            \begin{equation*}
+                (\exp(iz))^{''} = \dfrac{2!}{2\pi i} \int_{C}^{} \dfrac{\exp(iz)}{z^{3}} \, \dd{z} 
+            \end{equation*}
+        So 
+            \begin{equation*}
+                \pi i \cdot (\exp(iz))^{\prime\prime} = -i\pi\exp(iz)\eval_{z = 0} = -i\pi
+            \end{equation*}
+    \end{answer}
+
+\textbf{Exercise 6}: Determine $\int_{C}^{}  \frac{\exp(tz)}{(z^{2} + 1)^{2}} \, \dd{z} $ when $t > 0$ and $C$ is the circle $\lvert z \rvert = 2$.
+    \begin{answer}
+        We have two singularities, one at $z = i$, the other, $z = -i$. So the integral is the sum of the contributions:
+            \begin{equation*}
+                \int_{C}^{} \dfrac{\dfrac{\exp(tz)}{(z - i)^{2}}}{(z + i)^{2}} \, \dd{z} + \int_{C}^{} \dfrac{\dfrac{\exp(tz)}{(z + i)^{2}}}{(z - i)^{2}} \, \dd{z}
+            \end{equation*}
+        Now for each, we can use Cauchy's integral formula for derivatives:
+            \begin{align*}
+                \left(\dfrac{\exp(tz)}{(z - i)^{2}}\right)^{\prime}\eval_{z = -i} &= \dfrac{1}{2\pi i} \int_{C}^{} \dfrac{\dfrac{\exp(tz)}{(z - i)^{2}}}{(z + i)^{2}} \, \dd{z}  \\
+                \left(\dfrac{\exp(tz)}{(z + i)^{2}}\right)^{\prime}\eval_{z = i}  &= \dfrac{1}{2\pi i} \int_{C}^{} \dfrac{\dfrac{\exp(tz)}{(z - i)^{2}}}{(z + i)^{2}} \, \dd{z}    
+            \end{align*}
+        So compute both derivatives:
+            \begin{align*}
+                \left(\dfrac{\exp(tz)}{(z - i)^{2}}\right)^{\prime} &= \dfrac{(z - i)^{2}t\exp(tz) - \exp(tz)2(z - i)}{(z - i)^{4}} \\
+                \left(\dfrac{\exp(tz)}{(z + i)^{2}}\right)^{\prime} &= \dfrac{(z + i)^{2}t\exp(tz) - \exp(tz)2(z + i)}{(z + i)^{4}}   
+            \end{align*}
+        Evaluate both at $z = -i$, $z = i$:
+            \begin{align*}
+                \left(\dfrac{\exp(tz)}{(z - i)^{2}}\right)^{\prime}\eval_{z = -i} &= \dfrac{-4 \cdot t \exp(-it) - \exp(-it)(-4i)}{(-2i)^{4}} \\
+                                                                                  &= \dfrac{(-4t + 4i)\exp(-it)}{16} \\
+                \left(\dfrac{\exp(tz)}{(z + i)^{2}}\right)^{\prime}\eval_{z = i}  &= \dfrac{-4 t \exp(it) - \exp(it)(4i)}{(2i)^{4}} \\
+                                                                                  &= \dfrac{(-4t - 4i)\exp(it)}{16}
+            \end{align*}
+        Multiplying both by $2\pi i$:
+            \begin{align*}
+                 &\rightarrow \dfrac{\pi i \cdot (-t + i)\exp(-it)}{2} \\
+                 &=           \dfrac{(-\pi i t - \pi)\exp(-it)}{2}       
+            \end{align*}        
+        and 
+            \begin{align*}
+                 &\rightarrow \dfrac{\pi i (- t - i)\exp(it)}{2}  \\
+                 &=           \dfrac{(-\pi i t + \pi)\exp(it)}{2}   
+            \end{align*}
+        So the answer is
+            \begin{equation*}
+                \dfrac{(-\pi i t + \pi)\exp(it)}{2} + \dfrac{(-\pi i t - \pi)\exp(-it)}{2}
+            \end{equation*}
+    \end{answer}
+
+\textbf{Exercise 7}: Show that, for any circle enclosing the point $z = -1$,
+    \begin{equation*}
+        \int_{C}^{} \dfrac{ze^{tz}}{(z + 1)^{3}} \, \dd{z}  = (t - t^{2}/2)e^{-t}
+    \end{equation*}
+        \begin{answer}
+            Use Cauchy's formula for derivatives:
+                \begin{equation*}
+                    (ze^{tz})^{\prime\prime}\eval_{z = -1} = \dfrac{2!}{2\pi i}\int_{C}^{} \dfrac{ze^{tz}}{(z + 1)^{3}} \, \dd{z} 
+                \end{equation*}
+            So we get:
+                \begin{align*}
+                    (ze^{tz})^{\prime}       &= e^{tz} + tze^{tz}              \\
+                    (ze^{tz})^{\prime\prime} &= te^{tz} + t(e^{tz} + tze^{tz}) \\
+                                             &= te^{tz} + te^{tz} + t^{2}ze^{tz}   \\
+                                             &= 2te^{tz} + t^{2}ze^{tz}              
+                \end{align*}
+            and evaluate at $z = -1$ to get:
+                \begin{equation*}
+                    2te^{-t} - t^{2}e^{-t} = 2te^{-t} - t^{2}e^{-t} = (2t - t^{2})e^{-t}
+                \end{equation*}
+            Then we divide by $2$:
+                \begin{equation*}
+                    (t - \frac{t^{2}}{2})e^{-t}
+                \end{equation*}
+        \end{answer}
+
+\textbf{Exercise 8}: By choosing two different annuli, both centered at $0$, in which the function below is holomorphic, find two different Laurent expansions for it in powers of $z$. Describe their regions of convergence.
+    \begin{equation*}
+        f(z) = \dfrac{1}{z^{2}(1 - z)}
+    \end{equation*}
+        \begin{answer}
+            We can have one annuli as $0 < \lvert z \rvert < 1$ and the other $1 < \lvert z \rvert$. Then on one annuli, we have that $1 - z = \sum_{n \geq 0}z^{n}$. So the Laurent series is
+                \begin{equation*}
+                    \dfrac{1}{z^{2}} \sum_{n \geq 0}z^{n}
+                \end{equation*}
+            which is
+                \begin{equation*}
+                    \sum_{n \geq -2}z^{n}
+                \end{equation*}
+            And for the other, we have that $\lvert \frac{1}{z} \rvert < 1$. This means we can expand:
+                \begin{equation*}
+                    \dfrac{1/z}{z^{2}\left(\dfrac{1}{z} - 1\right)} = -\dfrac{1}{z^{3}(1 - 1/z)}
+                \end{equation*}
+            This turns into
+                \begin{equation*}
+                    \dfrac{-1}{z^{3}} \cdot \sum_{n \geq 0}\left(\dfrac{1}{z}\right)^{n} = -\sum_{n \geq 3} \left(\dfrac{1}{z}\right)^{n}
+                \end{equation*}
+        \end{answer}
+
+\textbf{Exercise 9}: Expand $f(z) = \frac{z}{(z - 1)(2 - z)}$ in Laurent series convergent for:
+    \begin{itemize}
+        \item [(a)] $\lvert z \rvert < 1$;
+            \begin{answer}
+                We can use partial fraction decomposition to get:
+                    \begin{equation*}
+                        \dfrac{z}{(z - 1)(2 - z)} = \dfrac{1}{z - 1} + \dfrac{2}{2 - z}
+                    \end{equation*}
+                Then since $\lvert z \rvert < 1$ and $\lvert \frac{z}{2} \rvert < 1$, we have the sum of two geometric series:
+                    \begin{equation*}
+                        -\sum_{n \geq 0}z^{n} + \sum_{n \geq 0}\left(\dfrac{z}{2}\right)^{n}
+                    \end{equation*}
+            \end{answer}
+
+        \item [(b)] $1 < \lvert z \rvert < 2$;
+            \begin{answer}
+                Using the same decomposition:
+                    \begin{equation*}
+                        \dfrac{z}{(z - 1)(2 - z)} = \dfrac{1}{z - 1} + \dfrac{2}{2 - z}
+                    \end{equation*}
+                Since $1 < \lvert z \rvert$, $\left\lvert \frac{1}{z} \right\rvert < 1$, so we can expand $\frac{1 / z}{1 - 1/z}$ instead:
+                    \begin{equation*}
+                        \dfrac{1}{z} \cdot \sum_{n \geq 0}\left(\dfrac{1}{z}\right)^{n} + \sum_{n \geq 0}\left(\dfrac{z}{2}\right)^{n}
+                    \end{equation*}
+            \end{answer}
+
+        \item [(c)] $\lvert z \rvert > 2$;
+            \begin{answer}
+                Using the same decomposition:
+                    \begin{equation*}
+                        \dfrac{z}{(z - 1)(2 - z)} = \dfrac{1}{z - 1} + \dfrac{2}{2 - z}
+                    \end{equation*}
+                We instead can expand $-\frac{2/z}{1 - 2/z}$ instead for the second fraction:
+                    \begin{equation*}
+                        \dfrac{1}{z}\sum_{n \geq 0}\left(\dfrac{1}{z}\right)^{n} - \sum_{n \geq 0}\left(\dfrac{2}{z}\right)^{n + 1}
+                    \end{equation*}
+            \end{answer}
+
+        \item [(d)] $\lvert z - 1 \rvert > 1$;
+            \begin{answer}
+                Let $w = z - 1$. Then the $f(z) = -\frac{w + 1}{w(w - 1)}$. This is 
+                    \begin{equation*}
+                        -\dfrac{w + 1}{w^{2} - w} = -\dfrac{w + 1}{w^{2}(1 - 1/w)}
+                    \end{equation*}
+                Since $\lvert \frac{1}{w} \rvert < 1$, we can expand:
+                    \begin{equation*}
+                        -\dfrac{w + 1}{w^{2}} \cdot \sum_{n \geq 0}\left(\dfrac{1}{w}\right)^{n}
+                    \end{equation*}
+                and re-substitute $w = z - 1$:
+                    \begin{equation*}
+                        -\dfrac{z}{(z - 1)^{2}} \cdot \sum_{n \geq 0}\left(\dfrac{1}{z - 1}\right)^{n} = -z \cdot \sum_{n \geq -2} \left(\dfrac{1}{z - 1}\right)^{n}
+                    \end{equation*}
+            \end{answer}
+
+        \item [(e)] $0 < \lvert z - 2 \rvert < 1$. 
+            \begin{answer}
+                Using $w = z - 2$, we have:
+                    \begin{equation*}
+                        f(z) = \dfrac{z}{(z - 1)(2 - z)} = \dfrac{w + 2}{(w + 1)(-w)} = - \dfrac{w + 2}{w(w + 1)}
+                    \end{equation*}
+                So we can expand $(w + 1)^{-1}$ as 
+                    \begin{equation*}
+                        -\dfrac{w + 2}{w} \cdot \sum_{n \geq 0}(-w)^{n}
+                    \end{equation*}
+                Now re-substitute in $w = z - 2$:
+                    \begin{equation*}
+                        -\dfrac{z}{z - 2} \cdot \sum_{n \geq 0}(2 - z)^{n} = z \cdot \sum_{n \geq -1}(2 - z)^{n}
+                    \end{equation*}
+            \end{answer}
+    \end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

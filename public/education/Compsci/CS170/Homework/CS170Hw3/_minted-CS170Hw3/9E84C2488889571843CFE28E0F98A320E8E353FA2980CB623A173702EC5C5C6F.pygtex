@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+        function PREVISIT(u, v)
+            M[u] = M[u] + 1
+            M[v] = 1
+\end{Verbatim}

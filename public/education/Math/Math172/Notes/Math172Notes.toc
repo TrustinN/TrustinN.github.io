@@ -1,0 +1,55 @@
+\contentsline {chapter}{\numberline {1}Week 1}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Pigeon-hole Principle}{3}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Mathematical Induction}{4}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Week 2}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Strong Induction}{7}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Basic Counting Problems}{8}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Functions}{9}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Counting with Binomial Coefficients}{11}{section.2.4}%
+\contentsline {chapter}{\numberline {3}Week 3}{13}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Binomial Theorem}{13}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Multinomial Theorem}{14}{section.3.2}%
+\contentsline {chapter}{\numberline {4}Week 4}{17}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Identical Objects, Different Boxes}{17}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Different Objects, Identical Boxes}{17}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Stirling Numbers Continued}{18}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Identical Objects, Identical Boxes}{19}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Permutations Continued}{20}{section.4.5}%
+\contentsline {chapter}{\numberline {5}Week 5}{22}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Cycles and Permutations}{22}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Stirling Numbers of the First Kind}{23}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Inclusion Exclusion Principle}{25}{section.5.3}%
+\contentsline {chapter}{\numberline {6}Week 6}{28}{chapter.6}%
+\contentsline {section}{\numberline {6.1}PIE in permutations}{28}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Formal Power Series}{29}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Linear Recurrence Relations}{32}{section.6.3}%
+\contentsline {chapter}{\numberline {7}Week 7}{35}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Binomial Theorem}{35}{section.7.1}%
+\contentsline {chapter}{\numberline {8}Week 8}{38}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Catalan Numbers}{38}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Catalan Numbers Continued}{39}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Partitions}{40}{section.8.3}%
+\contentsline {chapter}{\numberline {9}Week 9}{43}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Partitions Continued}{43}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Exponential Generating Functions}{44}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Graph Theory}{46}{section.9.3}%
+\contentsline {chapter}{\numberline {10}Week 10}{49}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Trees}{50}{section.10.1}%
+\contentsline {chapter}{\numberline {11}Week 11}{52}{chapter.11}%
+\contentsline {chapter}{\numberline {12}Week 12}{56}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Graph Colorings}{56}{section.12.1}%
+\contentsline {section}{\numberline {12.2}Matchings}{57}{section.12.2}%
+\contentsline {chapter}{\numberline {13}Week 13}{60}{chapter.13}%
+\contentsline {section}{\numberline {13.1}Hall's Theorem Examples}{60}{section.13.1}%
+\contentsline {section}{\numberline {13.2}Extensions to Non-bipartite Graphs}{60}{section.13.2}%
+\contentsline {section}{\numberline {13.3}Chromatic Number}{61}{section.13.3}%
+\contentsline {section}{\numberline {13.4}Planar Graphs}{62}{section.13.4}%
+\contentsline {chapter}{\numberline {14}Week 14}{65}{chapter.14}%
+\contentsline {section}{\numberline {14.1}More on Planar Graphs}{65}{section.14.1}%
+\contentsline {chapter}{\numberline {15}Week 15}{66}{chapter.15}%
+\contentsline {section}{\numberline {15.1}Chromatic Number of Planar Graphs}{66}{section.15.1}%
+\contentsline {section}{\numberline {15.2}Polyhedral}{67}{section.15.2}%
+\contentsline {section}{\numberline {15.3}Platonic Solids}{68}{section.15.3}%
+\contentsline {section}{\numberline {15.4}Other Surfaces}{69}{section.15.4}%
+\contentsline {chapter}{\numberline {16}Week 16}{70}{chapter.16}%
+\contentsline {section}{\numberline {16.1}Review: Counting Problems}{70}{section.16.1}%

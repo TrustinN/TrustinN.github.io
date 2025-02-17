@@ -1,0 +1,36 @@
+{
+  "name": "personalweb",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "generate-pdf-list": "node scripts/pdfList.js",
+    "dev": "npm run generate-pdf-list && next dev",
+    "build": "npm run generate-pdf-list && next build && touch ./out/.nojekyll",
+    "start": "next start",
+    "lint": "next lint",
+    "deploy": "gh-pages -d out -n"
+  },
+  "dependencies": {
+    "better-react-mathjax": "^2.1.0",
+    "mathjax": "^3.2.2",
+    "mathjax-full": "^3.2.2",
+    "next": "15.1.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^3.0.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/mathjax": "^0.0.40",
+    "@types/node": "^20",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9",
+    "eslint-config-next": "15.1.6",
+    "gh-pages": "^6.3.0",
+    "postcss": "^8.5.2",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5"
+  }
+}

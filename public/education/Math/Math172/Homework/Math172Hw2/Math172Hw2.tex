@@ -1,0 +1,183 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math172/Homework/Math172Hw2/Math172Hw2.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+
+\title{Math172Hw2}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Let $n \geq k \geq 0$ be integers. Find the number of $k$-element subsets $S \subseteq [2n]$ for which there are no two elements $x, y \in S$ satisfying $x + y = 2n + 1$.
+    \begin{proof}
+        We can place our elements of $[2n]$ into pairs $(x, y)$ such that $x + y = 2n + 1$. For each element $\leq  n$, there is a unique element $> n$ such that their sum is $2n + 1$. So we have $1, \ldots, n$ pairs. So our subset satisfies the condition if and only if we choose at most $1$ number from each of these pairs. So the number of $k$-element subsets is $\binom{n}{k}$.
+    \end{proof}
+
+\textbf{Exercise 2}: 
+    \begin{itemize}
+        \item In how many ways can the elements of $[n]$ be permuted if $1$ is to precede $2$ and $3$ is to precede 4 in our permutation? (Precede does not mean immediately precede)
+            \begin{proof}
+                Notice that if we consider one case at a time, we have an easier problem. We have a bijection between the sets in which $1$ precedes $2$ and $2$ precedes $1$. This is given by just switching the places of $1$ and $2$ in our permutation. Now we know that the number of sets where $1$ precedes $2$ is just half of the total permutation count of $n!$, so $\frac{n!}{2}$. Now we establish the same bijection on these $\frac{n!}{2}$ sets since we can just swap the position of $3$ and $4$. So we divide in half again giving us $\frac{n!}{4}$.
+            \end{proof}
+
+        \item In how many ways can the elements of $[n]$ be permuted if $1$ is to precede both $2$ and $3$ in our permutation? 
+            \begin{proof}
+                We can see that this is similar to the last question. We can ignore the elements $1, 2, 3$ and replace them with $0$ for example. Then we count the number of permutations of the multiset $\{0, 0, 0\} \cup \{4, \ldots, n\}$. This is just
+                    \begin{equation*}
+                        \dfrac{n!}{3!}
+                    \end{equation*}
+                But now we can choose how many ways to replace the 0s of our distinct $\frac{n!}{3!}$ sets. We want want the label $1$ to go first. So in the number of permutations of $1, 2, 3$, there are $2!$ permutations in which the $1$ is first, since we fix $1$ and assign the rest. So we have $\frac{(2!)(n!)}{3!}$ permutations.
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 3}: Let $P$ be a convex $n$-gon such that no three diagonals intersect in a single point. How many intersection points do diagonals of $P$ have?
+    \begin{proof}
+        We can consider only $6$ vertices on the $n$-gon at a time. This is because every six vertices we consider will have three diagonals to which we can consider how many intersections are generated. Notice that to find the number of intersections within $3$ lines, we can see that each line is obtained from two points. So for every four points we select, it will add $1$ to the intersection. So there are $\binom{6}{4} = 15$ points per 6 points we choose on our $n$-gon. There are $\binom{n}{6}$ ways to choose $6$ points on our $n$-gon. So we have $15 \cdot \binom{n}{6}$ points, with overcount. The count is duplicated because each point is determined uniquely by two chosen lines, or four points on our $n$-gon. Now we can choose the rest of the two points and notice that the same points appears multiple times in the construction. So we divide the total by $\binom{n}{4} \cdot \binom{n - 4}{2}$. The answer is:
+            \begin{equation*}
+                \dfrac{15 \cdot \dbinom{n}{6}}{\dbinom{n}{4} \cdot \dbinom{n - 4}{2}}
+            \end{equation*}
+    \end{proof}
+
+\textbf{Exercise 4}: Prove that for all positive integers $n$ we have
+    \begin{equation*}
+        \dbinom{2n}{n} = \sum_{k = 0}^{n} \dbinom{n}{k}^{2}
+    \end{equation*}
+    \begin{proof}
+        We can count $\binom{2n}{n}$ in a different way. Consider the set $[2n]$ split into two sets $[n]$ and $[n^{\prime}]$. We will count how many ways to choose $n$ elements from these two sets. We can choose $0$ elements from $[n]$ and $n$ elements from $[n^{\prime}]$, $1$ element from $[n]$ and $n - 1$ elements from $[n^{\prime}]$, $\ldots$ and so on. This gives us the count:
+            \begin{equation*}
+                \dbinom{n}{0}\dbinom{n}{n} + \dbinom{n}{1}\dbinom{n}{n - 1} + \cdots + \dbinom{n}{n - 1}\dbinom{n}{1} + \dbinom{n}{n}\dbinom{n}{0}
+            \end{equation*}
+        But we note that $\binom{n}{k} = \binom{n}{n - k}$. Therefore, we can rewrite it as:
+            \begin{equation*}
+                \sum_{k = 0}^{n} \dbinom{n}{k}^{2}
+            \end{equation*}
+        which completes our proof.
+    \end{proof}
+
+\textbf{Exercise 5}: Prove that for all positive integers $n$ we have
+    \begin{equation*}
+        \sum_{\substack{k = 0 \\ k \text{ even}}}^{n} \dbinom{n}{k}2^{k} = \dfrac{3^{n} + (-1)^{n}}{2}
+    \end{equation*}
+    \begin{proof}
+        We see that:
+            \begin{equation*}
+                \sum_{k = 0}^{n} \dbinom{n}{k}2^{k} + \sum_{k = 0}^{n} \dbinom{n}{k}(-2)^{k} = 2\sum_{\substack{k = 0 \\ k \text{ even}}}^{n} \dbinom{n}{k}2^{k}
+            \end{equation*}
+        So by the binomial theorem, we have:
+            \begin{equation*}
+                \sum_{\substack{k = 0 \\ k \text{ even}}}^{n} \dbinom{n}{k}2^{k} = \dfrac{(2 + 1)^{n} + (-2 + 1)^{n}}{2} = \dfrac{3^{n} + (-1)^{n}}{2}
+            \end{equation*}
+        And we are done.
+    \end{proof}
+
+\textbf{Exercise 6}: Prove for all positive integers $n \geq k$ that
+    \begin{equation*}
+        \sum_{i = 0}^{k} \dbinom{n}{i}(-1)^{i} = \dbinom{n - 1}{k}(-1)^{k}.
+    \end{equation*}
+\begin{proof}
+    We have two cases. Either $k$ is even or $k$ is odd. If $k$ is even, we have that the number of ways to count the number of even sized subsets of $[n]$ that have size less than or equal to $k$ as:
+        \begin{equation*}
+            \sum_{\substack{i = 0 \\ i \text{ is even}}}^{k} \dbinom{n}{i}
+        \end{equation*}
+    Now we count this another way. Consider the set $[n - 1]$. We can count the number of even sized subsets of size less than or equal to $k$ and this will also be even sized subsets of $[n]$:
+        \begin{equation*}
+            \sum_{\substack{i = 0 \\ i \text{ is even}}}^{k} \dbinom{n - 1}{i}
+        \end{equation*}
+    But now we need to count the number of even sized subsets that contain $n$. So assume $n$ is in our set and count the number of odd sized subsets less than or equal to $k - 1$:
+        \begin{equation*}
+            \sum_{\substack{i = 0 \\ i \text{ is odd}}}^{k - 1} \dbinom{n - 1}{i}
+        \end{equation*}
+    But now we get the equality:
+        \begin{equation*}
+            \sum_{\substack{i = 0 \\ i \text{ is even}}}^{k} \dbinom{n}{i} = \sum_{\substack{i = 0 \\ i \text{ is even}}}^{k} \dbinom{n - 1}{i} + \sum_{\substack{i = 0 \\ i \text{ is odd}}}^{k} \dbinom{n - 1}{i} \implies \sum_{\substack{i = 0 \\ i \text{ is even}}}^{k} \dbinom{n}{i} = \sum_{i = 0}^{k} \dbinom{n - 1}{i}
+        \end{equation*}
+    By the theorem that:
+        \begin{equation*}
+            \dbinom{n - 1}{i} + \dbinom{n - 1}{i + 1} = \dbinom{n}{i + 1}
+        \end{equation*}
+    we can simplify to:
+        \begin{equation*}
+            \sum_{i = 0}^{k} \dbinom{n}{i}(-1)^{i} = \dbinom{n - 1}{k}
+        \end{equation*}
+    An analogous proof for when $k$ is odd will be of the same steps but with a small change using the substitution $\binom{n}{0} = \binom{n - 1}{0}$. Left as an exercise to the grader.
+\end{proof}
+
+\textbf{Exercise 7}: Prove that for any positive integer $n$ we can select at least $2^{n}/n$ subsets of $[n]$ in a way such that no chosen subset is fully contained in another chosen subset.
+    \begin{proof}
+        We will only count the subsets of $[n]$ with size $k$. This is because if two sets have equal cardinality and one contains the other, then that means that the sets are actually equal. Observe that this will be of the form $\binom{2k}{k}$ or $\binom{2k + 1}{k}$. Note that the bottom choice for the binomial coefficient can be whatever we choose to be convenient. We will show by induction that they are both at least $2^{n}/n$.
+
+        Base Case: $n = 2$. Clearly, we have $2^{2}/2 \leq \binom{2(1)}{1}$ and for $n = 3$, $\binom{2(1) + 1}{1} = \binom{3}{1} \geq 2^{3}/3 = \frac{8}{3} = 2.666666$.
+
+        Inductive Case: Suppose that the number of subsets that are pairwise not proper subsets of each other from $[j]$ is at least $2^{j}/j$. We will show that this is true for $[j + 1]$. 
+            \begin{itemize}
+                \item If $j + 1$ is even, then $j$ is odd or $j = 2i + 1$ and
+            \begin{align*}
+                \dbinom{2i + 1}{i} \geq \dfrac{2^{2i + 1}}{2i + 1} \\
+            \end{align*}
+        so we just multiply both sides by $\frac{2i + 2}{i + 1}$ to see that:
+            \begin{align*}
+                \left(\dfrac{2i + 2}{i + 1}\right)\left(\dfrac{(2i + 1)!}{i!(i + 1)!}\right) = \dbinom{(2i + 2)!}{(i + 1)!(i + 1)!} = \dbinom{2i + 2}{i + 1} &\geq \dfrac{2^{2i + 1}}{2i + 1}\left(\dfrac{2i + 2}{i + 1}\right) = \dfrac{2^{2i + 2}}{2i + 1} \geq \dfrac{2^{2i + 2}}{2i + 2}\\
+                \dbinom{j + 1}{i + 1} &\geq \dfrac{2^{j + 1}}{j + 1}
+            \end{align*}
+
+                \item If $j + 1$ is odd, then we have $j$ is even and $j = 2i$. We have by the inductive hypothesis:
+                    \begin{equation*}
+                        \dbinom{2i}{i} \geq \dfrac{2^{2i}}{2i}
+                    \end{equation*}
+                So we can multiply both sides by $\frac{2i + 1}{i + 1}$:
+                    \begin{align*}
+                        \dfrac{2i + 1}{i + 1}\left(\dfrac{(2i)!}{i!i!}\right) = \dfrac{(2i + 1)!}{i!(i + 1)!} = \dbinom{2i + 1}{i} \geq \dfrac{2^{2i}}{2i}\left(\dfrac{2i + 1}{i + 1}\right)
+                    \end{align*}
+                We require that 
+                    \begin{equation*}
+                        \dfrac{4i}{2i + 1} \leq \dfrac{2i + 1}{i + 1}
+                    \end{equation*}
+                And solving for $i$:
+                    \begin{align*}
+                        \dfrac{4i}{2i + 1} &\leq  \dfrac{2i + 1}{i + 1} \\
+                        4i^{2} + 4i        &\leq  4i^{2} + 4i + 1         
+                    \end{align*}
+                which is true for all $i$. Therefore:
+                    \begin{align*}
+                        \dbinom{2i + 1}{i} = \dbinom{j + 1}{i} &\geq \dfrac{2^{2i}}{2i}\left(\dfrac{2i + 1}{i + 1}\right) \geq \dfrac{2^{2i}}{2i}\left(\dfrac{4i}{2i + 1}\right) = \dfrac{2^{2i + 1}}{2i + 1} = \dfrac{2^{j + 1}}{j + 1} \\
+                        \dbinom{j + 1}{i} &\geq \dfrac{2^{j + 1}}{j + 1}
+                    \end{align*}
+            \end{itemize}
+        so we are done.
+    \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CS180 Portfolio</title>
+    <link href="/css/style.css" rel="stylesheet" />
+    <script src="/common.js" defer></script>
+    <script
+      id="MathJax-script"
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+  </head>
+
+  <body>
+    <div class="page-container">
+      <header></header>
+
+      <div class="banner">
+        <h1>Image Processing/Computer Vision</h1>
+      </div>
+
+      <main>
+        <div class="content-container">
+          <section class="overview">
+            <article id="project1">
+              <h2>Project 1: Images of the Russian Empire</h2>
+              <p>
+                The project focused on methods of aligning images and
+                understanding techniques that are fundamental to image
+                processing such as application of gaussian and lapalcian stacks
+                and image pyramids.
+              </p>
+              <p>
+                Image alignment is an important topic in computer vision, and
+                arises in many problems such as image transformation, stitching,
+                and registration.
+              </p>
+            </article>
+            <div class="explore">
+              <a href="./Projects/Project1/index.html">&#x27A7;</a>
+            </div>
+          </section>
+          <section class="overview">
+            <article id="project2">
+              <h2>Project 2: Fun With Filters and Frequencies</h2>
+              <p>
+                Filters are effective tools for edge detection and separating
+                frequencies. They are powerful because they line up closely with
+                how people process visual data. In convoluting a filter with an
+                image, we are essentially finding points in the image where the
+                filter matches the image, a form of template matching. Our
+                brains essentially does the same process, and contains neurons
+                dedicated to detecting certain features in an image, such as an
+                oriented edge/pattern.
+              </p>
+              <p>
+                In this project, I explore using filters to separate frequencies
+                between images to do cool things such as blending.
+              </p>
+            </article>
+            <div class="explore">
+              <a href="./Projects/Project2/index.html">&#x27A7;</a>
+            </div>
+          </section>
+          <section class="overview">
+            <article id="project3">
+              <h2>Project 3: Face Morphing and Modeling a Photo Collection</h2>
+              <p>
+                Filters act on the pixels of an image, but we can also consider
+                transformations on the positions of these pixels. If we think of
+                images as a function from \(I: \mathbb{R}^{2} \rightarrow
+                \mathbb{R}\), where the position of a pixel is mapped to a
+                value, there there is a class of transformations \(T\) that
+                augment the pixel locations. \begin{equation*} I(T(x)) = y
+                \end{equation*} This project explores these transformations,
+                specifically affine transformations, and their use in mapping
+                triangles to triangles for face morphing.
+              </p>
+            </article>
+            <div class="explore">
+              <a href="./Projects/Project3/index.html">&#x27A7;</a>
+            </div>
+          </section>
+          <section class="overview">
+            <article id="project4">
+              <h2>Project 4: Image Warping and Mosaicing</h2>
+              <p>
+                The previous project looks at a euclidean mapping (rotation
+                followed by displacement), but if we want to account for shifts
+                in perspective, this is not enough. This is where homographies
+                come in, which allows us to map quadrilaterals to
+                quadrilaterals.
+              </p>
+              <p>
+                With this, we can create panoramas by taking multiple pictures,
+                processing with a perspective warp, and stitching them together.
+                This project also explores automatic image alignment to make the
+                stitching process easier.
+              </p>
+            </article>
+            <div class="explore">
+              <a href="./Projects/Project4/index.html">&#x27A7;</a>
+            </div>
+          </section>
+          <section class="overview">
+            <article id="project5">
+              <h2>Project 5: Fun With Diffusion Models!</h2>
+              <p>
+                Many image processing techniques for removing noise are not
+                effective. We can use linear/nonlinear filters to get different
+                results depending on the input image, but these are not flexible
+                when dealing with a lot of noise.
+              </p>
+              <p>
+                Training a denoiser helps us with this complex task of denoising
+                and also offers an interesting way to generate new images. We
+                can start with pure noise and itereatively denoise this to
+                obtain a clean image that looks realistic. Combined with several
+                other techniques, we can obtain a wide range of images.
+              </p>
+            </article>
+            <div class="explore">
+              <a href="./Projects/Project5/index.html">&#x27A7;</a>
+            </div>
+          </section>
+          <section class="overview">
+            <article id="project6">
+              <h2>Project 6: Poor Man's Augmented Reality</h2>
+              <p>
+                By establishing the correspondences between points in the image
+                with those in 3D space, we can map arbitrary points from 3D
+                space into the image.
+              </p>
+            </article>
+            <div class="explore">
+              <a href="./Projects/Project6/index.html">&#x27A7;</a>
+            </div>
+          </section>
+          <section class="overview">
+            <article id="project7">
+              <h2>Project 7: Tour into the Picture</h2>
+              <p>
+                Using homographies, we and reconstruct the 3d scene of the
+                image.
+              </p>
+            </article>
+            <div class="explore">
+              <a href="./Projects/Project7/index.html">&#x27A7;</a>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer></footer>
+    </div>
+  </body>
+</html>

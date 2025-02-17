@@ -1,0 +1,281 @@
+%! TeX root = 	
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/MyStyle/mystyle}
+
+\title{Final Review}
+\author{Trustin Nguyen}
+
+
+\begin{document}
+\maketitle
+\reversemarginpar
+
+
+\begin{topic}
+	\section*{Review 1}
+\end{topic}
+
+\begin{enumerate}
+	\item \textbf{Groups and Homomorphisms}: Binary operations, Definition of groups, Order of Group, Aberlian Group, Subgroups
+
+	Results: 
+	\begin{enumerate}
+		\item [(a)] Identity is unique, Inverses are unique, $(a^{-1})^{-1} = a$, $(ab)^{-1} = b^{-1}a^{-1}$.
+		
+		\item [(b)] Subgroup criteria I and II
+
+		\item [(c)] Subgroups of $(\mathbb{Z}, +)$ are in $n\mathbb{Z}$.
+	\end{enumerate}
+
+	\item \textbf{Homomorphisms}: Functions, Composition, injective, surjective, bijective, definition of homomorphisms, isomorphisms, image, and kernel.
+
+	Results:
+	\begin{enumerate}
+		\item [(a)] $f(e_{G}) = e_{H}$, $f(a^{-1}) = f(a)^{-1}$
+
+		\item [(b)] Compositions of homomorphisms is a homomorphism
+
+		\item [(c)] Inverse of an Isomorphism is an Isomorphsim
+
+		\item [(d)] Image and kernel are subgroups
+
+		\item [(e)] If $a \in G$, $k \in \ker{f}$, then $ak^{-1}a \in \ker{f}$.
+
+		\item [(f)] Injective iff $\ker{f} = \{e\}$
+
+		\item [(g)] Surjective iff $\Im{f} = H$ where $f : G \rightarrow H$
+	\end{enumerate}
+
+	\item \textbf{Cyclic Groups}: Definiton of a cyclic, $C_{n}$, order of an element, exponent of a group, 
+	
+	Results:
+	\begin{enumerate}
+		\item [(a)] $\forall a \in G: \text{ord}(a) = \lvert \langle a \rangle \rvert$ 
+
+		\item [(b)] Cyclic $\rightarrow$ Abelian.
+	\end{enumerate}
+	
+	\item \textbf{Dihedral Groups}: Definition of dihedral groups $D_{2n}$ (Symmetries of a regular $n$-gon).
+
+	\item \textbf{Direct Product of Groups}: Definition of direct products
+
+	\begin{enumerate}
+		\item [(a)] $C_{m} \times C_{n} \cong C_{nm}$ iff $\gcd(n,m) = 1$
+
+		\item [(b)] Direct Product Theorem
+	\end{enumerate}
+
+	\item \textbf{Symmetric groups}: Permutations, Symmetric group of a set $X$, Row and cycle notation, $k-$cycles and transpositions, cycle type/shape, sign of permutations, Alternating subgroups.
+
+	Results:
+	\begin{enumerate}
+		\item [(a)] Sym $X$ is a group
+
+		\item [(b)] Disjoint cycles commute
+
+		\item [(c)] Any $\sigma \in S_{n}$ is uniquely a product of disjoint cycles.
+
+		\item [(d)] $\text{ord}(\sigma)$, $\sigma \in S_{n}$ is the lcm of the lengths in the disjoint cycle representation of $\sigma$.
+
+		\item [(e)] Every $\lambda \in S_{n}$ is a product of transpositions.
+
+		\item [(f)] The number of transpositions is always either even or odd in the result above.
+
+		\item [(g)] $\forall n \geq 2$, $\text{sgn} : S_{n}\rightarrow \{\pm 1\}$ is a homomorphism.
+
+		\item [(h)] $\sigma$ is an even permutation $\text{sgn}(\sigma) = 1$ iff the number of cycles of even length is even.
+
+		\item [(i)] Every subgroup of $S_{n}$ contains either no odd permutations or exactly half.
+	\end{enumerate}
+
+	\item \textbf{Lagrange}: Cosets, Partitions of a set, Index of subgroups, equivalence relations and equivalence classes, Euler totient function
+
+	Results:
+	\begin{enumerate}
+		\item [(a)] Lagrange's Theorem
+
+		\item [(b)] Left cosets partition $G$ and all cosets have the same size
+
+		\item [(c)] $\text{ord}(a) \divides \abs{G}$
+
+		\item [(d)] $\forall a \in G : a^{\abs{G}} = e$
+
+		\item [(e)] Groups of prime order are cyclic
+
+		\item [(f)] Fermat-Euler Theorem
+
+		\item [(g)] Every group of order $4$ is either $C_{4}$ or $C_{2} \times C_{2}$
+
+		\item [(h)] Any group of order 6 is either cyclic or dihedral.
+	\end{enumerate}
+
+	\item \textbf{Quotient Groups}: Normal subgroups, quotient groups, simple groups
+
+	Results:
+	\begin{enumerate}
+		\item [(a)] Index of $2$ implies that the group is a normal subgroup
+
+		\item [(b)] Subgroups of abelian groups are normal
+
+		\item [(c)] Kernals are normal 
+	
+		\item [(d)] If $K \triangleleft G$, left cosets of $K$ form a group
+
+		\item [(e)] Natural projection $G \rightarrow G/K$ is a surjective group homomorphism
+
+		\item [(f)] Quotient of cyclic is cyclic
+
+		\item [(g)] Isomorphism theorem: $G/\ker{f} \cong \Im{f}$
+
+		\item [(h)] Any cyclic group is $\mathbb{Z}$ or $\mathbb{Z}/n\mathbb{Z}$
+	\end{enumerate}
+
+	\item \textbf{Group Actions}: Group action, Kernel of action, faithful action, orbit, stabilizer, transitive action, conjugation of an element, conjugacy classes, centralizers, center, normalizer.
+
+	Results:
+	\begin{enumerate}
+		\item [(a)] Criteria for group actions
+
+		\item [(b)] Stabilizer of $X$ is a subgroup
+
+		\item [(c)] Orbits partition your set $X$
+
+		\item [(d)] Orbit-Stablizer Theorem: $\abs{\text{Orb}(x)}\abs{\text{Stab}(x)} = \abs{G}$
+
+		\item [(e)] Important Actions: Left regular action, Conjugation action, Cayley's Theorem, Normal subgroups are unions of conjugacy classes, $G$ acts on its subgroups
+
+		\item [(f)] Stabilizers of elements in the same orbit are conjugate
+
+		\item [(g)] Cauchy's Theorem
+	\end{enumerate}
+\end{enumerate}
+
+\begin{topic}
+	\section*{Review 2}
+\end{topic}
+
+\begin{enumerate}
+	\item \textbf{Rings}: Rings, commutative rings, subrings, unit in a ring, field, product of rings, polynomials, polynomial rings, degree of a polynomial, monic poly, power series, Laurent series and polys.
+
+	Results:
+	\begin{enumerate}
+		\item [(a)] equivalents from group theory
+	\end{enumerate}
+
+	\item \textbf{Homomorphisms, Ideals, Quotients, Isomorphisms}: Homomorphisms of rings, isomorphisms, kernels, images, ideals, proper ideals, generators of ideals, principle ideals, quotient rings, characteristic
+
+	Results:
+	\begin{enumerate}
+		\item [(a)] $\varphi : R_{1} \rightarrow R_{2}$ injective iff $\ker{\varphi} = \{0\}$
+
+		\item [(b)] surjective iff $\Im{\varphi} = R_{2}$
+
+		\item [(c)] $\ker{\varphi}$ is an ideals
+
+		\item [(d)] the quotient is a ring $R/I$ and the projection $\pi : R \rightarrow R/I$ is a surjective homomorphism with $\ker{\pi} = I$.
+
+		\item [(e)] Euclidean division algorithm for polynomials over a field. Euclidean function is the degree.
+
+		\item [(f)] First isomorphism theorem: $\varphi : R_{1} \rightarrow R_{2}$ and $R_{1}/\ker{\varphi} \cong \Im{\varphi}$
+
+		\item [(g)] Second isomorphism thoerem: $R \leq S$, $J \triangleleft S$, then $J \cap R \triangleleft R$ and $ \frac{R + J}{J} \leq \frac{S}{J}$
+			\begin{align*}
+				\dfrac{R + J}{J} \cong \dfrac{R}{ R \cap J}
+			\end{align*}
+		\item [(h)] Third isomorphism thoerem: $I \triangleleft R$, $J \triangleleft R$, $I \subseteq J$:
+			\begin{align*}
+				J/I \triangleleft R/I
+			\end{align*}
+			and 
+			\begin{equation*}
+				(R / I )/(J /I) \cong R/J
+			\end{equation*}
+	\end{enumerate} 
+
+	\item \textbf{Integral domains, Field of fractions, Maximal ideals}: Integral domain, zero divisor, field of fractions, maximal ideals, prime ideals
+
+	Results:
+	\begin{enumerate}
+		\item [(a)] finite ID $\rightarrow$ field
+
+		\item [(b)] R ID $\rightarrow$ $R[x]$ is an ID
+
+		\item [(c)] every ID has a field of fractions
+
+		\item [(d)] $R \neq \{0\}$ is a field iff the only ideals are $\{0\}$ and $R$.
+
+		\item [(e)] $I \triangleleft R$ is maximal iff $R/I$ is a field
+
+		\item [(f)] $I \triangleleft R$ is prime iff $R/I$ is an ID	
+
+		\item [(g)] Every maximal ideal is prime 
+
+		\item [(h)] characteristic is $0$ or prime
+	\end{enumerate}
+
+	\item \textbf{Factorization in IDs}: Units, division, associates, irreducibles, primes, euclidean functions, euclidean domains, principal ideal domains, unique factorization domains, ascending chain condition, noetherian rings, greatest common divisor 
+
+	Results:
+	\begin{enumerate}
+		\item [(a)] $(r)$ is prime iff $r = 0$ or $r$ is prime	
+
+		\item [(b)] prime $\rightarrow$ irreducible but the converse is not always true in an ID 
+
+		\item [(c)] Euclidean domain $\rightarrow$ PID 
+
+		\item [(d)] In PIDs irreducibles $\rightarrow$ prime 
+
+		\item [(e)] PIDs satisfy the ascending chain condition (ACC) 
+
+		\item [(f)] So PID $\rightarrow$ UFD 
+
+		\item [(g)] In UFDs, gcds exists and is unique up to associates 
+	\end{enumerate}
+
+	\item \textbf{Factorization in Polynomial Rings}: Content, primitive polynomials, polynomials in several variables 
+
+	Results:
+	\begin{enumerate}
+		\item [(a)] $R$ is a UFD, $f, g$ are primitive, then $fg$ is primitive	
+
+		\item [(b)] $c(f)c(g)$ is an associated of $c(fg)$ 
+
+		\item [(c)] Gauss's lemma 
+
+		\item [(d)] $R$ is a UFD $\rightarrow$ $R[x]$ is a UFD 
+
+		\item [(e)] Eisenstein's criterion for irreducibility.
+	\end{enumerate}
+
+	\item \textbf{Gaussian integers}: $\mathbb{Z}[i] = \{a + bi : a, b \in \mathbb{Z}\} \subseteq \mathbb{C}$
+	
+	Results:
+	\begin{enumerate}
+		\item [(a)] A prime $p$ in $\mathbb{Z}$ is prime in $\mathbb{Z}[i]$ iff $p \neq a^{2} + b^{2}, a, b \in \mathbb{Z}\backslash\{0\}$.
+
+		\item [(b)] If $p$ is prime, in $\mathbb{Z}$, and $F_{p} = \mathbb{Z}/p\mathbb{Z}$, then $F^{*}_{p} = F_{p}\backslash\{0\}$ is cyclic of order $p - 1$
+
+		\item [(c)] Primes in $\mathbb{Z}[i]$ up to associates
+
+		\item [(d)] We have $p$ is prime, $p \equiv 3 \pmod{4}$
+
+		\item [(e)] $z \in \mathbb{Z}[i]$, $N(z) = z \overline{z} = p$ for some prime $p$, $p = 2$ or $p \equiv 1 \pmod{4}$
+
+		\item [(f)] A non-negative $n \in \mathbb{Z}$ is a sum of squares iff $n = \prod_{}^{} p_{i}^{n_{i}}$, $p_{i}$ are distinct, then $p_{i} \equiv 3 \pmod{4} \rightarrow n_{i}$ is even.
+	\end{enumerate}
+
+	\item \textbf{Algebraic Integers}: Algebraic integers, $\mathbb{Z}(\alpha)$ for algebraic integers $\alpha$, minimal polynomial 
+
+	Results:
+	\begin{enumerate}
+		\item [(a)] $\ker{(ev_{\alpha})} \triangleleft \mathbb{Z}[x]$ is principal, generated by the minimal polynomial
+
+		\item [(b)] $\alpha \in \mathbb{Q}$ is algebraic $\rightarrow \alpha \in \mathbb{Z}$
+	\end{enumerate}
+\end{enumerate}
+
+
+
+
+\end{document}

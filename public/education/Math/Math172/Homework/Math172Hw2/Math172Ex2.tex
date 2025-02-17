@@ -1,0 +1,28 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math172/Homework/Math172Hw2/Math172Ex2.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+
+\title{Math172Ex2}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 8}: What digits are exactly to the left and to the right of the decimal point of $(\sqrt{10} + \sqrt{11})^{1000}$. (Explain your answer without using calculator to compute powers of $(\sqrt{10} + \sqrt{11})$. You can use calculators to estimate $\sqrt{10}$ and $\sqrt{11}$).
+    \begin{proof}
+        We have by the binomial theorem that:
+            \begin{equation*}
+                (\sqrt{10} + \sqrt{11})^{1000} = \sum_{i = 0}^{1000} \dbinom{1000}{i}(\sqrt{10})^{i}(\sqrt{11})^{1000 - i}
+            \end{equation*}
+    \end{proof}
+
+
+
+\end{document}
+

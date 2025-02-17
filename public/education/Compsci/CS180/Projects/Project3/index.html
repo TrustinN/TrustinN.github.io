@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Face Morphing and Modeling a Photo Collection</title>
+    <script src="/common.js" defer></script>
+    <script
+      id="MathJax-script"
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+    <link href="/css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="page-container include-sidebar">
+      <header></header>
+
+      <div class="banner">
+        <h1>Project 3: Face Morphing and Modeling a Photo Collection</h1>
+      </div>
+
+      <div class="sidebar-container">
+        <div class="sidebar-nav"></div>
+      </div>
+
+      <main>
+        <section>
+          <article id="Defining Correspondences">
+            <h2>Defining Correspondences</h2>
+            <p>
+              To morph one image to another, I would need to define keypoints in
+              both images such that one image's keypoints map to the other. I
+              used python's ginput function from matplotlib to define the
+              keypoints:
+            </p>
+            <img src="./media/KeyPointsPart1.png" alt="keypoints" width="600" />
+            <p>
+              In selecting the keypoints, I had to make sure that close
+              keypoints were not colinear to ensure that there was a
+              triangulation. Also important was ensuring that the resulting
+              triangles well partitioned the image such that no two different
+              elements were in the same triangle. For example, if a triangle
+              corresponding to the first image captured some of the hair and the
+              background while the other did not, a fragment of the hair would
+              morph inconsitantly with the rest of the hair. Finally, keypoints
+              were set in the corners to ensure that the entire image was
+              morphed and not just the head.
+            </p>
+            <img src="./media/morphDelaunay.png" alt="keypoints" width="600" />
+          </article>
+        </section>
+        <section>
+          <article id="The Midway Face">
+            <h2>Computing the Midway Face</h2>
+            <div>
+              <p>
+                To get the midway face, the average of the keypoints were first
+                calculated to determine the keypoints on the midway face.
+                Delauney triangulation gave triangles that indexed into both the
+                keypoints for the midway face along with the keypoints for the
+                two images to be morphed. Using this, the affine transformation
+                for mapping the midway triangle's vertices on each of the two
+                image's triangle's vertices could be computed. This allowed me
+                to pull the rgb pixel values from both the source images,
+                interpolated, to set in the midway image's triangle. As for the
+                details of the implementation, I created an
+                <code
+                  >inverseWarp(source, sourceTri, dest, destTri,
+                  color=True)</code
+                >
+                function which uses the pixel values in the source image located
+                at the sourceTriangle. Using scipy's griddata method, I used
+                this data to interpolate the values for the destination
+                triangle. With skimage's polygon method, I could get the indices
+                for the destination triangle
+                <code>destRR, destCC = polygon(destTri)</code> such that
+                <code>dest[destRR, destCC] = res</code>, where
+                <code>res</code> is the interpolated data. I used the
+                <code>inverseWarp</code> function over all the simplices in the
+                triangulation to get two morphs from the original images to the
+                midway face.
+              </p>
+            </div>
+            <img src="./media/MidwayFace.png" alt="midwayFace" loading="lazy" />
+          </article>
+        </section>
+
+        <section>
+          <article id="Morph Sequence">
+            <h2>The Morph Sequence</h2>
+            <img
+              style="float: right; width: 30%; margin-left: 1rem"
+              src="./media/morphSequence.gif"
+              alt="morphSequence"
+              loading="lazy"
+            />
+            <p>
+              All that is left is to calculate frames between image1 and the
+              midway face and between the midway face and image2 to get a morph
+              sequence from image1 to image2. This was done by first setting the
+              start and target images for the current frame such that the
+              current frame's image was somewhere between the start and target
+              images. Then I used linear interpolation to determine where the
+              keypoints lie in the current frame. This is determined by
+              <code>warpFrac</code> which lies between 0 and 1, 0 being the
+              start of the morph and 1 being the end. Then the current keypoints
+              are given by
+              <code>startKp + warpFrac * (targetKp - startKp)</code> if
+              <code>warpFrac < 0.5</code>. If <code>warpFrac > 0.5</code>, I
+              used <code>2 * warpFrac - 1</code>. After warping the start and
+              target images to the new keypoints, a dissolve fraction was used
+              to determine the blend of the two results for the current frame in
+              a similar manner to the warp fraction.
+            </p>
+          </article>
+        </section>
+
+        <section>
+          <article id="Population Mean Face">
+            <h2>Population Mean Face</h2>
+            <p>
+              To get the mean face, I used the faces from the FEI database.
+              Getting the mean face is adding all the images and dividing by the
+              number of images.
+            </p>
+            <div class="centered">
+              <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
+                <img
+                  src="./media/AverageNeutralFace.png"
+                  alt="AverageNeutralFace"
+                  width="45%"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/AverageSmilingFace.png"
+                  alt="AverageSmilingFace"
+                  width="45%"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <p>
+              To morph a given face, f, and its keypoints, f_k, to the average
+              face, I used the same method for computing the midway face. Using
+              the average keypoints computed for the average face, I got data
+              for it by interpolating from the data given on the triangles
+              <code>f[f_k[simplex]]</code>. Here are some results, where the
+              images are shown in pairs. The left image is the original and the
+              right is the image morphed to the average:
+            </p>
+            <img src="./media/SampleMorphedToAvg.png" alt="SampleMorphs" />
+            <p>
+              Using the annotatations for the image, I labeled my face with
+              keypoints in the same order. I noticed that there were some
+              keypoints missing for the top of the forehead, so I added them to
+              get more accurate results. Here are pictures of my face morphed to
+              the average and the average morphed to my face:
+            </p>
+
+            <div class="centered">
+              <div class="image-container" style="--grid-cols: repeat(2, 1fr)">
+                <img
+                  src="./media/AvgAndMyFaceKp.png"
+                  alt="AverageAnyMyFaceKp"
+                  width="45%"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/NewAvgAndMyFaceKp.png"
+                  alt="NewAverageAnyMyFaceKp"
+                  width="45%"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/NewAvgAndMyFaceDelaunay.png"
+                  alt="NewAverageAnyMyFaceDelaunay"
+                  width="45%"
+                  loading="lazy"
+                />
+                <img
+                  src="./media/MyFaceAvgMorphs.png"
+                  alt="MyFaceAvgMorphs"
+                  width="45%"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </article>
+        </section>
+        <section>
+          <article id="Caricature">
+            <h2>Caricature</h2>
+            <img
+              style="float: right; width: 30%"
+              src="./media/Caricature1.png"
+              alt="Caricature1"
+              loading="lazy"
+            />
+            <p>
+              To get a caricature I extrapolated data from the mean. I took a
+              difference <code>myface - mean = diff</code> and for
+              <code>alpha > 1</code> or <code>alpha <0 </code>, I computed
+              <code> alpha * mean + (1 - alpha) * myface</code>.
+            </p>
+          </article>
+        </section>
+      </main>
+
+      <footer></footer>
+    </div>
+  </body>
+</html>

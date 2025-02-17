@@ -1,0 +1,144 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math104/Practice/Midterm2.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math104Midterm2}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Define $f(x) = \frac{x^{2}}{x - 1}$ when $x < 0$ and $f(x) = \sin{x}$ when $x > 0$.
+    \begin{itemize}
+        \item Use $\varepsilon - \delta$ to prove that $f(x)$ is continuous on $(0, \infty)$; you can directly use the facts that $\lvert \sin{x} \rvert \leq \lvert x \rvert$ and $\sin{x} - \sin{y} = \cos{\frac{x + y}{2}}\sin{\frac{x - y}{2}}$ for any $x, y$.
+            \begin{proof}
+                We want to show that $\forall \varepsilon> 0$, $\exists \delta > 0$ such that if for $x, x_{0} \in (0, \infty)$,
+                    \begin{equation*}
+                        \lvert x - x_{0} \rvert < \delta
+                    \end{equation*}
+                then 
+                    \begin{equation*}
+                        \lvert \sin{x} - \sin{x_{0}} \rvert <  \varepsilon
+                    \end{equation*}
+                First take $\delta = x_{0}$. Then $x > 0$. Now consider the hint:
+                    \begin{align*}
+                        \lvert  \sin{x} - \sin{x_{0}} \rvert &=     \lvert \cos{\dfrac{x + y}{2}}\sin{\dfrac{x - y}{2}} \rvert                 \\
+                                                             &=     2\lvert \cos{\dfrac{x + y}{2}} \rvert \lvert \sin{\dfrac{x - y}{2}} \rvert \\
+                                                             &\leq  2\lvert \sin{\dfrac{x - y}{2}} \rvert                                      \\
+                                                             & \leq  2\lvert \dfrac{x - y}{2} \rvert                                           \\
+                                                             &=     \delta                                                                       
+                    \end{align*}
+                Then if we take $\delta = \min(x_{0}, \varepsilon)$, then we have as desired. So $f(x)$ is continuous on $(0, \infty)$.
+            \end{proof}
+
+        \item Can you define $f(0)$ so that $f$ is continuous at $0$? Explain why. 
+            Yes, since the limits
+                \begin{equation*}
+                    \lim\limits_{x \to 0^{+}} f(x) = \lim\limits_{x \to 0^{+}}\sin{x} = 0
+                \end{equation*}
+            and
+                \begin{equation*}
+                    \lim\limits_{x \to 0^{-}}f(x) = \lim\limits_{x \to 0^{-}}\dfrac{x^{2}}{x - 1} = 0
+                \end{equation*}
+            are equal and exist, then for $f$ to be continuous at $0$, we just require $\lim\limits_{x \to 0}f(x) = f(0)$. So the limit must be equal to the RHS and LHS limits which is $0$. So $f(0) = 0$.
+    \end{itemize}
+
+\textbf{Exercise 2}: Consider a subset $E$ on the $x$-coordinate of $\mathbb{R}^{2} = (x, y), E = \{(x, 0) : x \in (-1, 0) \cup (0, 1)\}$.
+    \begin{itemize}
+        \item Prove that $E$ is disconnected.
+            \begin{proof}
+                Consider the open sets $U_{1} = (-1, 0)$ and $U_{2} = (0, 1)$. Then we note that $U_{1} \cap E \neq \emptyset$, $U_{2} \cap E \neq \emptyset$. We also see that 
+                    \begin{equation*}
+                        (U_{1} \cap E) \cap (U_{2} \cap E) = \emptyset
+                    \end{equation*} 
+                and
+                    \begin{equation*}
+                        (U_{1} \cap E) \cup (U_{2} \cap E) = E
+                    \end{equation*}
+                So $E$ is disconnected.
+
+                (Alternate Definition) Consider $A = (-1, 0)$ and $B = (0, 1)$. We note that they are non empty. Also, we have
+                    \begin{equation*}
+                        A^{-} \cap B = [-1, 0] \cap (0, 1) = \emptyset
+                    \end{equation*}
+                and
+                    \begin{equation*}
+                        A \cap B^{-} = (-1, 0) \cap [0, 1] = \emptyset
+                    \end{equation*}
+                Since $A \cup B = E$, we have that $E$ is disconnected.
+            \end{proof}
+
+        \item Find a real-valued function $f : E \rightarrow \mathbb{R}$ which is continuous on $E$ but not uniformly continuous on $E$; no proof required. 
+            \begin{answer}
+                We can choose $y = \frac{1}{x}$. Not uniformly continuous because it grows too fast for small $x$. We can take a Cauchy sequence $(\frac{1}{n})$ which converges to $0$ but we have that $f((\frac{1}{n})) = n$ which diverges. Uniformly continuous functions take cauchy sequences to cauchy ones.
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 3}: Let $f : \mathbb{R} \rightarrow \mathbb{R}$ be a continuous function on $[0, 1]$ such that  $f(0) = 0$ and $f(1) = 1/2$.
+    \begin{itemize}
+        \item Find a sequence $(x_{n}) \subseteq (0, 1)$ such that $\sum f(x_{n})$ converges absolutely.
+            \begin{proof}
+                Consider the sequence $(\frac{1}{n^{2}})$ where the series $\sum\frac{1}{n^{2}}$ converges absolutely. We can take the sequence $x_{n} \subseteq (0,1 )$ such that $f(x_{n})  \leq (\frac{1}{n^{2}})$ pointwise. This will give us a convergent series by the comparison test, because $\lvert f(x_{n}) \rvert \leq\frac{1}{n^{2}}$ for each $n$. So the series converges absolutely. 
+            \end{proof}
+
+        \item Prove that $f([0, 1])$ is bounded and closed interval.
+            \begin{proof}
+                Continuous functions take compact sets to compact sets. It also takes connected sets to connected ones, which means that the image is an interval.
+            \end{proof}
+
+        \item Prove that there exists $s \in (0, 1)$ such that $f(x) = s - 1/4$.
+            \begin{proof}
+                Take $g(s) = f(s) - s + \frac{1}{4}$. We know that $g(0) = \frac{1}{4}$ and $g(1) = -\frac{1}{4}$. By the intermediate value theorem, there is some value $s \in (0, 1)$ such that $f(s) = 0$.
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 4}: True or False. No proof is needed.
+    \begin{itemize}
+        \item Assume a sequence $(s_{n})$ converges to $0$ absolutely, then $\sum (-1)^{n}s_{n}$ converges.
+            \begin{answer}
+                False. Take $(-1)^{n}\frac{1}{n}$ which converges to $0$ absolutely, but $\sum\frac{1}{n}$ does not converge.
+            \end{answer}
+
+        \item Assume $f : \mathbb{R} \rightarrow \mathbb{R}$ is uniformly continuous on $\mathbb{R}$, and $E$ is a compact subset of $\mathbb{R}$, then $f^{-1}(E)$ must be compact.
+            \begin{answer}
+                False. Take any constant function. Then we know that $E$ is compact because $[c]$ is closed, bounded. But $f^{-1}(E) = \mathbb{R}$ which is not bounded.
+            \end{answer}
+
+        \item If $E$ is a connected subset of a metric space $(S, d)$, then $E$ is path-connected.
+            \begin{answer}
+                False. Counterexample shown in lecture.
+            \end{answer}
+
+        \item Any function from integers to real numbers, $f : \mathbb{Z} \rightarrow \mathbb{R}$ is uniformly continuous.
+            \begin{answer}
+                True. Take $\delta = 1$. Then we have
+                    \begin{equation*}
+                        \lvert x - y \rvert < \delta
+                    \end{equation*}
+                means
+                    \begin{equation*}
+                        \lvert f(x) - f(y) \rvert < \varepsilon
+                    \end{equation*}
+                which is true because $x - y$ is less than delta when $x = y$ in the integers. So indeed $\lvert f(x) - f(y) \rvert = 0 < \varepsilon$.
+            \end{answer}
+
+        \item $x^{2} + x^{5} - 1 = 0$ has a solution on $(0, 1)$. 
+            \begin{answer}
+                True. The sum of continuous functions is continuous. We know the functions takes a value of $-1$ at $0$ and $1$ at $1$. By IVT, it takes on the value $0$ somewhere in between.
+            \end{answer}
+    \end{itemize}
+
+
+
+
+
+
+
+\end{document}

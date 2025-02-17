@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+        function PREVISIT(u, v)
+            L[v] = max(L[u], wt(u, v))
+\end{Verbatim}

@@ -1,0 +1,149 @@
+%! TeX root = 	
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/MyStyle/mystyle}
+
+\title{Math110Hw10}
+\author{Trustin Nguyen}
+
+
+\begin{document}
+
+\maketitle
+
+\section*{Homework 10}
+\hrule
+\textbf{Exercise 1}: find a polynomial $p \in \mathcal{P}_{2}(\mathbb{R})$ such that 
+\begin{equation*}
+	q'(1) = \int_{0}^{1} p(t)q(t) \,\dd{t} \hspace{30pt} \text{for all $q \in \mathcal{P}_{2}(\mathbb{R})$} 
+\end{equation*}
+\begin{proof}
+	From class, it was proved that we can represent any linear function as an inner product with a fixed second entry. So to represent $q'(1)$, we have
+	\begin{equation*}
+		\varphi_{1} := q'(1) = \brac{\cdot, p_{\varphi_{1}}(t)}
+	\end{equation*}
+	where $p_{\varphi_{1}}(t)$ is the function:
+	\begin{equation*}
+		p_{\varphi_{1}}(t) = \varphi_{1}(e_{1})e_{1} + \ldots + \varphi_{1}(e_{n})e_{n}
+	\end{equation*}
+	for an orthonormal basis $e_{1}, \ldots, e_{n}$. Starting with the basis $\{1, x, x^{2}\}$, use Gram-Schmidt and orthogonalize:
+	\begin{align*}
+		v_{2} &= x - \dfrac{\brac{1, x}}{\brac{1, 1}} \\
+			&= x - \dfrac{\int_{0}^{1} x \,\dd{x}}{\int_{0}^{1} 1 \,\dd{x}} \\
+			&= x - \dfrac{1}{2}
+	\end{align*}
+	So our basis vectors are $\{1, x - \frac{1}{2}\}$. Now to orthogonalize $x^{2}$ to this:
+	\begin{align*}
+		v_{3} &= x^{2} - \dfrac{\brac{x^{2}, x - \frac{1}{2}}}{x - \frac{1}{2}, x - \frac{1}{2}}\left(x - \dfrac{1}{2}\right) - \dfrac{\brac{x^{2}, 1}}{\brac{1,1}} \\
+		      &= x^{2} - \dfrac{\int_{0}^{1}x^{3} - \frac{x^{2}}{2} \,\dd{x}}{\int_{0}^{1} x^{2} - x + \frac{1}{4} \,\dd{x}}\left(x - \dfrac{1}{2}\right) - \dfrac{\int_{0}^{1} x^{2} \,\dd{x}}{\int_{0}^{1} 1 \,\dd{x}} \\
+		      &= x^{2} - \dfrac{\frac{1}{12}}{\frac{1}{12}}\left(x - \dfrac{1}{2}\right) - \dfrac{1}{3} \\
+		      &= x^{2} - x + \dfrac{1}{6}
+	\end{align*}
+	to normalize:
+	\begin{align*}
+		\int_{0}^{1} \left(x^{2} - x + \dfrac{1}{6}\right) \,\dd{x} &= \int_{0}^{1} x^{4} + x^{2} + \dfrac{1}{36} - 2x^{3} + \dfrac{1}{3}x^{2} - \dfrac{1}{3}x \,\dd{x} \\
+									    &= \dfrac{1}{5} + \dfrac{1}{3} + \dfrac{1}{36} - \dfrac{1}{2} + \dfrac{1}{9} - \dfrac{1}{6} \\
+									    &= \dfrac{1}{5} + \dfrac{1}{36} - \dfrac{18}{36} + \dfrac{5}{36} + \dfrac{6}{36}\\
+									    &= \dfrac{1}{5} - \dfrac{7}{36} = \dfrac{1}{180}
+	\end{align*}
+	So the orthonormal basis is $\{1, \sqrt{12}x - \frac{\sqrt{12}}{s}, 6x^{2}\sqrt{5} - 6x\sqrt{5} + \sqrt{5}\}$. So all that is left is to take $\varphi_{1}$ of each basis vector:
+	\begin{align*}
+		\varphi_{1}(e_{1}) = 0, \varphi_{1}(e_{2}) = \sqrt{12}, \varphi_{1}(e_{3}) = 12\sqrt{5} - 6\sqrt{5} = 6\sqrt{5}
+	\end{align*}
+	Therefore, the $p$ that we want is 
+	\begin{align*}
+		p &= 12x - 6 + 180x^{2} - 180x + 30 \\
+		  &= 180x^{2} - 168x + 24
+	\end{align*}
+\end{proof}
+
+\textbf{Exercise 2}: Let $V$ be the vector space $\mathbb{R}^{3}$ equipped with the standard inner product. Prove or disprove: any linear operator $P \in \mathcal{L}(V)$ such that $P^{2} = P$ is an orthogonal projector.
+\begin{proof}
+	Take the linear operator $T$ such that 
+	\begin{align*}
+		T: \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} \mapsto \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix} \\
+		T: \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} \mapsto \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} \\
+		T: \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} \mapsto \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}
+	\end{align*}
+	we can take a vector say $\begin{bmatrix} 1 \\ 3 \\ 2 \end{bmatrix}$ and observe that under the transformation, we get $\begin{bmatrix} 2 \\ 3 \\ 2 \end{bmatrix}$, and if we do it again, we get $\begin{bmatrix} 2 \\ 3 \\ 2 \end{bmatrix}$ but notice that it is not orthogonal because if we take the original vector minus the projected vector, we get $\begin{bmatrix} -1 \\ 0 \\ 0 \end{bmatrix}$, and then the dot product with the projection:
+	\begin{align*}
+		\begin{bmatrix} -1 \\ 0 \\ 0 \end{bmatrix} \cdot \begin{bmatrix} 2 \\ 3 \\ 2 \end{bmatrix} = 3
+	\end{align*}
+\end{proof}
+\textbf{Exercise 3}: Suppose that $e_{1}, \ldots, e_{n}$ is a list of vectors in $V$ of length 1 (i.e., $\norm{e_{k}} = 1$ for all $k = 1, \ldots, n$) such that
+\begin{align*}
+	\norm{v} = \abs{\brac{v, e_{1}}}^{2} + \cdots + \abs{\brac{v, e_{n}}}^{2} \hspace{30pt} \text{for all $v \in V$}
+\end{align*}
+Prove that $e_{1}, \ldots, e_{n}$ is an orthonormal basis of $V$.
+
+\begin{proof}
+	Let $v$ be one of the vectors say $e_{1}$. Then 
+	\begin{align*}
+		\norm{e_{1}} = \abs{\brac{e_{1}, e_{1}}}^{2} + \cdots + \abs{\brac{e_{1}, e_{n}}}^{2} \\
+		1 = 1 + \abs{\brac{e_{1}, e_{2}}}^{2} + \cdots + \abs{\brac{e_{1}, e_{n}}}^{2}
+	\end{align*}
+	since the perfect squares are greater than or equal to o, they must be o. So $e_{1}$ is orthogonal to the other vectors. We can repeat this for all the $e_{i}$. So $e_{1}, \ldots, e_{n}$ are orthonormal. Now let $v$ be arbitrary in $V$. If we compute the projection
+	\begin{align*}
+		P_{\{e_{1}, \ldots, e_{n}\}}(v) = \brac{v, e_{1}}e_{1} + \cdots + \brac{v, e_{n}}e_{n}
+	\end{align*}
+	we find that the norm of this projection squared is 
+	\begin{align*}
+		\norm{P_{\{e_{1}, \ldots, e_{n}\}}(v)}^{2} = \abs{\brac{v, e_{1}}}^{2} + \cdots + \abs{\brac{v, e_{n}}}^{2} = \norm{v}
+	\end{align*}
+	but by the fact that 
+	\begin{equation*}
+		\norm{P_{\{e_{1}, \ldots, e_{n}\}}(v)}^{2} + \norm{v - P_{\{e_{1}, \ldots, e_{n}\}}(v)}^{2} = \norm{v}^{2}	
+	\end{equation*}
+	since the projection and $v$ minus the projection are orthogonal, we must have that 
+	\begin{align*}
+		\norm{v - P_{\{e_{1}, \ldots, e_{n}\}}(v)}^{2} = 0 \\
+		\brac{v - P_{\{e_{1}, \ldots, e_{n}\}}(v), v - P_{\{e_{1}, \ldots, e_{n}\}}(v)} = 0
+	\end{align*}
+	telling us that $v$ is equal to its projection. So $v$ is in the span of $e_{1}, \ldots, e_{n}$. Since the list is linearly independent, spanning, and orthonormal, it is an orthonormal basis. 
+\end{proof}
+\textbf{Exercise 4}: Let $V = C[-\pi, \pi]$ with the inner product
+\begin{equation*}
+	\brac{f, g} := \int_{-\pi}^{\pi} f(t)\overline{g(t)} \,\dd{t}.
+\end{equation*}
+Determine the orthogonal projection of the function $h(x) = e^{2ix}$ on the subspace
+\begin{enumerate}
+	\item $\Span\{1, \cos{x}, \sin{x}\}$
+
+	\item $\Span\{1, \cos{x}, \sin{x}, \cos{2x}, \sin{2x}\}$
+
+	\item $\Span\{1, \cos{x}, \sin{x}, \ldots, \cos{nx}, \sin{nx}\}$ for $n > 2$
+\end{enumerate}
+\textbf{Exercise 5}: Find $p \in \mathcal{P}_{3}(\mathbb{R})$ such that $p(-1) = 0$, $p'(-1) = 0$, and the following is minimized:
+\begin{equation*}
+	\int_{0}^{1} \abs{1 - 5x - p(x)}^{2} \,\dd{x}.
+\end{equation*}
+\begin{proof}
+	Suppose that $p(x) = ax^{3} + bx^{2} + cx + d$. We will minimize the integral first. Let 
+	\begin{equation*}
+		\int_{0}^{1} f(x)g(x) \,\dd{x}
+	\end{equation*}
+	be the inner product. If we consider the stuff inside, the integral is finding the norm of this, so we minimize the norm by taking it as a projection. Observe that 
+	\begin{equation*}
+		p(x) + 5x - 1
+	\end{equation*}
+	is $p(x) - (5x + 1)$ if we take $5x + 1$ to be the projection, we can find the projection by solving the system of equations with the formula:
+	\begin{equation*}
+		\brac{P_{5x + 1}(p(x)), u \in \Span\{5x + 1\}} = \brac{p(x), u \in \Span\{5x + 1\}}
+	\end{equation*}
+	so here are the calculations:
+	\begin{align*}
+		\int_{0}^{1} p(x)(-5x + 1) \,\dd{x} = \brac{-5x + 1, -5x + 1} \\
+		52 = -9a - 11b - 8c - 29d
+	\end{align*}
+	Now we solve for the other variables using the imposed conditions:
+	\begin{align*}
+		p(-1) = -a + b - c + d = 0\\
+		p'(-1) = 3a - 2b + c = 0
+	\end{align*}
+	In the system of equations, $a$ is free, so we can take $a = 1$ to get:
+	\begin{equation*}
+		p(x) = x^{3} + \left(\dfrac{73}{56} - \dfrac{13}{14}\right)x^{2} + \left(-\dfrac{11}{28} - \dfrac{13}{7}\right)x + \left(-\dfrac{39}{56} - \dfrac{13}{14}\right)
+	\end{equation*}
+\end{proof}
+
+\end{document}

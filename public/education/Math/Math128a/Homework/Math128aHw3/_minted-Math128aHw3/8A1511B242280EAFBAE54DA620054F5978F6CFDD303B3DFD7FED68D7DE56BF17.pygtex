@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{out}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{newton}\PYG{p}{(@}\PYG{n}{myfunc1}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{2.5}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{@}\PYG{n}{out\PYGZus{}error}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{0.0002}\PYG{p}{)}
+\PYG{n}{x}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{out}\PYG{p}{.}\PYG{n}{x}
+\PYG{n}{y}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{out}\PYG{p}{.}\PYG{n}{y}
+\PYG{n}{p\PYGZus{}hat}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{out}\PYG{p}{.}\PYG{n}{p\PYGZus{}hat}
+\PYG{n}{y\PYGZus{}hat}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{out}\PYG{p}{.}\PYG{n}{y\PYGZus{}hat}
+\PYG{n}{iter}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nb}{size}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{)}
+\end{Verbatim}

@@ -1,0 +1,67 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Stat134/Homework/Stat134Hw2/Stat134Hw2.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Stat134Hw2}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: We break a stick at a uniformly chosen random location. Find the probability that the shorter piece is less than $1/4$th of the original.
+    \begin{proof}
+        If we break the stick into two pieces of length $d$ and $l - d$, then $\frac{d}{l - d} < \frac{1}{4}$ when $d < \frac{l}{5}$. If instead, $l - d$ was the shorter one, we have $\frac{l - d}{d} < \frac{1}{4}$ when $d > \frac{4l}{5}$. So the area in which we break over the total area is the probability. It is:
+            \begin{equation*}
+                \dfrac{\dfrac{l}{5} + \dfrac{l}{5}}{l} = \dfrac{2}{5}
+            \end{equation*}
+    \end{proof}
+
+\textbf{Exercise 2}: We throw a dart at a square shaped board of side length $20$ inches. 
+Assume that the dart hits the board at a uniformly chosen random point.
+    \begin{itemize}
+        \item [(a)] Describe a probability space for this experiment.
+            \begin{answer}
+                This is 
+                    \begin{equation*}
+                        \Omega = \{(x, y) : 0 \leq x, y \leq 20\}
+                    \end{equation*}
+            \end{answer}
+
+        \item [(b)] Find the probability that the dart is within $2$ inches of the center of the board. 
+            \begin{answer}
+                The area in the center of the board is $4\pi$. The total area of the board is $400$. So the probability is $\pi/100$.
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 3}: The statement 
+    \begin{equation*}
+        \text{SOME DOGS ARE BROWN}
+    \end{equation*}
+has $16$ letters. Choose one of the $16$ letters uniformly at random. Let $X$ denote the length of the word containing the chosen letter. Determine the possible values and probability mass function of $X$.
+    \begin{answer}
+        
+    \end{answer}
+
+\textbf{Exercise 4}: Let $X$ be geometric random variable with parameter $1/2$ as in Lecture $1$, so that 
+    \begin{equation*}
+        P(X = k) = 2^{-k}, k = 1, 2, 3, \ldots
+    \end{equation*}
+    \begin{itemize}
+        \item [(a)] find the conditional probability of the even ``$X$ is divisible by $2$'' given the event ``$X$ is divisible by $3$''.
+
+        \item [(b)] Find the conditional probability of the even ``$X$ is divisible by $3$ '' given the even ``$X$ is divisible by $2$''. 
+    \end{itemize}
+
+\textbf{Exercise 5}: Three married couples ($6$ guests altogether) attend a dinner party. They sit at a round table randomly in such a way that each outcome is equally likely. What is the probability that somebody sits next to his or her spouse?
+
+
+
+
+\end{document}

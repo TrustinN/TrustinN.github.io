@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{function}\PYG{+w}{ }y\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nf}{myfunc2}\PYG{p}{(}x\PYG{p}{)}
+\PYG{+w}{    }\PYG{n}{y}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nb}{sin}\PYG{p}{(}\PYG{n}{x}\PYG{p}{))}\PYGZca{}\PYG{l+m+mi}{2}\PYG{p}{;}
+\PYG{k}{end}
+\end{Verbatim}

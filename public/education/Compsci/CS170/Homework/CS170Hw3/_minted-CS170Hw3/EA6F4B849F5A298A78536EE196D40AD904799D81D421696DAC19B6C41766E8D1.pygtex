@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+    Input: Undirected connected tree \PYG{esc}{$G$} and positive weights \PYG{esc}{$wt(u, v)$} for each edge \PYG{esc}{$(u, v) \in E$}
+
+    Initialization:
+    \PYG{esc}{$visited[v] \leftarrow False$} for all vertices \PYG{esc}{$v$}.
+    \PYG{esc}{$L[v] \leftarrow 0$} and \PYG{esc}{$M[v] \leftarrow 0$} for all vertices \PYG{esc}{$v$}.
+
+    function EXPLORE(Vertex u)
+    \PYG{esc}{$visited[u] \leftarrow True$}
+    for each edge \PYG{esc}{$(u, v)$} in \PYG{esc}{$E$} do
+        if NOT \PYG{esc}{$visited[v]$} then
+            PREVISIT(u, v)
+            EXPLORE(v)
+            POSTVISIT(u, v)
+\end{Verbatim}

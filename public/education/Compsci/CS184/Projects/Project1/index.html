@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tour into the Picture</title>
+    <script src="/common.js" defer></script>
+    <script src="/carousel.js" defer></script>
+    <script
+      id="MathJax-script"
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+      defer
+    ></script>
+    <link href="/css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="page-container include-sidebar">
+      <header></header>
+
+      <div class="banner">
+        <h1>Project 1: The Rendering Pipeline</h1>
+      </div>
+
+      <div class="sidebar-container">
+        <div class="sidebar-nav"></div>
+      </div>
+
+      <main>
+        <section>
+          <article id="Drawing Triangles">
+            <h2>Drawing Triangles</h2>
+            <p>
+              Triangles are both simple and flexible making them important when
+              it comes to drawing to the screen. The first method of drawing a
+              triangle involves checking for each pixel, whether it lies inside
+              or outside of the triangle we want to draw.
+            </p>
+            <p>
+              We do this through the half-plane point in polygon test. Given
+              three points $p_{1}, p_{2}, p_{3}$ oriented counter clockwise, we
+              want to see if $p$ lies inside the triangle. We can first compute
+              the normals $n_{1}, n_{2}, n_{3}$:
+            </p>
+            <div class="centered">
+              <div
+                class="image-container"
+                style="
+                  --grid-cols: repeat(1, 1fr);
+                  --image-container-width: 40rem;
+                "
+              >
+                <img
+                  src="./media/part1/point_in_poly.svg"
+                  alt="point_in_poly"
+                />
+              </div>
+            </div>
+            <p>
+              We also calculate the vectors going towards point $p$. So we just
+              have to check if $p$ lies on the left of each oriented half-plane
+              given by the requirement that: \begin{equation*} v_{i} \cdot n_{i}
+              &le; 0 \end{equation*} This means that drawing triangles to the
+              frame buffer starts by computing the bounding box, and iterating
+              through the rows and columns to perform this check. Here are some
+              results:
+            </p>
+            <div class="centered">
+              <div
+                class="image-container"
+                style="
+                  --grid-cols: repeat(2, 1fr);
+                  --image-container-widht: 50rem;
+                "
+              >
+                <img src="./media/part1/dragon.png" alt="dragon" />
+                <img src="./media/part1/triangles.png" alt="triangles" />
+                <img src="./media/part1/cube.png" alt="cube" />
+                <img src="./media/part1/petals.png" alt="petals" />
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section>
+          <article id="Supersampling">
+            <h2>Supersampling</h2>
+            <p>
+              Two of the images in the previous section contain a major flaw
+              related to aliasing. Because we do not sample at a high enough
+              rate, jaggies on the triangles and edges of the cube are visible:
+            </p>
+            <div class="centered">
+              <div
+                class="image-container"
+                style="
+                  --grid-cols: repeat(2, 1fr);
+                  --image-container-widht: 60rem;
+                "
+              >
+                <img
+                  src="./media/part2/triangle_jaggies.png"
+                  alt="triangles jaggies"
+                />
+                <img src="./media/part2/cube_jaggies.png" alt="cube jaggies" />
+              </div>
+            </div>
+            <p>
+              To fix this, we increase the sample rate from 1 sample per pixel.
+              This means expanding the sample buffer, to account for our new
+              samples, running the point in triangle check, and downsampling by
+              averaging the values in each pixel to go from sample buffer to
+              frame buffer:
+            </p>
+            <div class="centered">
+              <div
+                class="image-container"
+                style="
+                  --grid-cols: repeat(1, 1fr);
+                  --image-container-widht: 40rem;
+                "
+              >
+                <img
+                  src="./media/part2/supersampling.svg"
+                  alt="supersampling"
+                />
+              </div>
+            </div>
+            <p>
+              The resulting edges of the triangles are smoother and jaggies
+              become less of an issue:
+            </p>
+            <div class="centered">
+              <div
+                class="image-container"
+                style="
+                  --grid-cols: repeat(4, 1fr);
+                  --image-container-widht: 60rem;
+                "
+              >
+                <img
+                  src="./media/part2/triangle_jaggies.png"
+                  alt="triangle_jaggies"
+                />
+                <img
+                  src="./media/part2/triangle_super_4.png"
+                  alt="triangle_super_4"
+                />
+                <img
+                  src="./media/part2/triangle_super_9.png"
+                  alt="triangle_super_9"
+                />
+                <img
+                  src="./media/part2/triangle_super_16.png"
+                  alt="triangle_super_16"
+                />
+                <img src="./media/part2/cube_jaggies.png" alt="cube_jaggies" />
+                <img src="./media/part2/cube_super_4.png" alt="cube_super_4" />
+                <img src="./media/part2/cube_super_9.png" alt="cube_super_9" />
+                <img
+                  src="./media/part2/cube_super_16.png"
+                  alt="cube_super_16"
+                />
+              </div>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

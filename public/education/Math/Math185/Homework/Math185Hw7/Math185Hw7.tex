@@ -1,0 +1,364 @@
+%! TeX root = Berkeley/Math/Math185/Homework/Math185Hw7/Math185Hw7.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math185Hw7}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Determine $\oint_{C}^{} \frac{e^{3z}}{z - \pi i} \, \dd{z} $ if $C$ is:
+    \begin{itemize}
+        \item [(a)] the circle $\lvert z - 1 \rvert = 4$;
+            \begin{answer}
+                We have that 
+                    \begin{equation*}
+                        \lvert i\pi - 1 \rvert = \sqrt{\pi^{2} + 1} < 4
+                    \end{equation*}
+                So by Cauchy's theorem, since $e^{3z}$ is holomorphic in the region, the integral evaluates to $2i e^{3i \pi} = -2i$.
+            \end{answer}
+
+        \item [(b)] the ellipse $\lvert z - 2 \rvert + \lvert z + 2 \rvert = 6$. 
+            \begin{answer}
+                Plugging in $z = \pi i$, we get:
+                    \begin{equation*}
+                        \lvert \pi i - 2 \rvert + \lvert \pi i + 2 \rvert = 2\sqrt{\pi^{2} + 4} > 6
+                    \end{equation*}
+                Since the function is holomorphic within the region, the integral evaluates to $0$. 
+            \end{answer}
+    \end{itemize}
+
+\newpage
+
+\textbf{Exercise 2}: Determine $\oint_{C}^{} \frac{\cos{\pi z}}{z^{2} - 1} \, \dd{z} $ around the rectangles with vertices at:
+    \begin{itemize}
+        \item [(a)] $2 \pm i$, $-2 \pm i$;
+            \begin{answer}
+                There are two singular points $z = 1, z = -1$. By cauchy, the contribution of $z = 1$ and $z = -1$ are:
+                    \begin{align*}
+                        2\pi i \cdot \dfrac{\cos{\pi \cdot z}}{z + 1} &= 2\pi i \cdot \dfrac{\cos{\pi}}{2}   \\
+                                                                      &= 2\pi i \cdot \dfrac{-1}{2}          \\
+                                                                      &= -\pi i                              \\
+                        2\pi i \cdot \dfrac{\cos{\pi \cdot z}}{z - 1} &= 2\pi i \cdot \dfrac{\cos{-\pi}}{-2} \\
+                                                                      &= 2\pi i \cdot \dfrac{1}{2}           \\
+                                                                      &= \pi i                                 
+                    \end{align*}
+                So the integral is the sum of their contributions which is $0$.
+            \end{answer}
+
+        \item [(b)] $\pm i, 2 \pm i$ 
+            \begin{answer}
+                From the previous part, we can just take the contribution at the point $z = 1$ because minus that point, the function is holomorphic in the area bounded by $C$. So the integral is $-\pi i$.
+            \end{answer}
+    \end{itemize}
+
+\newpage
+
+\textbf{Exercise 3}: Evaluate $\int_{0}^{\pi} \frac{\cos{\theta}}{5 + 4 \cos{\theta}} \, \dd{\theta} $.
+    \begin{answer}
+        Using the fact that $z = \cos{\theta} + i\sin{\theta}$, we have
+            \begin{align*}
+                z              &= e^{i\theta}         \\
+                dz             &= ie^{i\theta}d\theta \\
+                \dfrac{i}{z}dz &= d\theta               
+            \end{align*}
+        Now the bottom $\cos{\theta} = (z + \frac{1}{z})/2$. So the integral is the real part of for the half circle on the upper plane:
+            \begin{equation*}
+                \int_{C}^{} \dfrac{i}{5 + 2z + \dfrac{2}{z}} \, \dd{z}  = i\int_{C}^{} \dfrac{1}{2z^{2} + 5z + 2} \, \dd{z}
+            \end{equation*}
+        Solving for the roots, we get:
+            \begin{equation*}
+                z = \dfrac{-5 \pm \sqrt{25 - 16}}{4} = \dfrac{-5 \pm 3}{4} = -2, \dfrac{-1}{2}
+            \end{equation*}
+        We have that $-1/2$ is a singularity in the region. So the integral over the half circle in the top two quadrants is 
+            \begin{equation*}
+                i\int_{C}^{} \dfrac{\frac{1}{z + 2}}{(z + \frac{1}{2})} \, \dd{z}
+            \end{equation*}
+        By cauchy, we get:
+            \begin{equation*}
+                -2\pi (\dfrac{2}{3}) = \dfrac{4}{3}\pi
+            \end{equation*}
+    \end{answer}
+
+\newpage
+
+\textbf{Exercise 4}: Apply Cauchy's formula to a first quadrant quarter-disk and take the radius $R \rightarrow \infty$ to show, for a fixed real number $a > 0$,
+    \begin{equation*}
+        \int_{0}^{\infty} \dfrac{1}{x^{4} + a^{4}} \, \dd{x}  = \dfrac{\pi}{2\sqrt{2}a^{3}}, \text{ and } \int_{0}^{\infty} \dfrac{x}{x^{4} + a^{4}} \, \dd{x} = \dfrac{\pi}{4a^{2}}
+    \end{equation*}
+        \begin{answer}
+            We have
+                \begin{equation*}
+                    \int_{C}^{} \dfrac{1}{z^{4} + a^{4}} \, \dd{z} = \int_{Q_{R}}^{} \dfrac{1}{z^{4} + a^{4}} \, \dd{z}  + \int_{0}^{R} \dfrac{1}{z^{4} + a^{4}} \, \dd{z} + \int_{R}^{0} \dfrac{1}{z^{4} + a^{4}} \, \dd{z} 
+                \end{equation*}
+            The quarter circle integral goes to $0$ because the integral is at most 
+                \begin{equation*}
+                    \left\lvert \dfrac{1}{z^{4} + a^{4}} \cdot R \cdot \dfrac{\pi}{2} \right\rvert = \dfrac{1}{R^{4} + a^{4}} \cdot R\pi / 2
+                \end{equation*}
+            which goes to $0$ as $R$ goes to $\infty$.
+
+            The integral 
+                \begin{equation*}
+                    \int_{R}^{0} \dfrac{1}{z^{4} + a^{4}} \, \dd{z} 
+                \end{equation*}
+            would be parametrized by 
+                \begin{align*}
+                    z   &= -ix   \\
+                    dz  &= -id x 
+                \end{align*}
+            So we have
+                \begin{equation*}
+                    i\int_{R}^{0} \dfrac{1}{x^{4} + a^{4}} \, \dd{z} 
+                \end{equation*}
+            And:
+                \begin{equation*}
+                    \int_{0}^{R} \dfrac{1}{x^{4} + a^{4}} \, \dd{x} - i \int_{0}^{R} \dfrac{1}{x^{4} + a^{4}} \, \dd{x}  = (1 - i)\int_{0}^{R} \dfrac{1}{x^{4} + a^{4}} \, \dd{x}  = \int_{C}^{} \dfrac{1}{z^{4} + a^{4}} \, \dd{z} 
+                \end{equation*}
+            The roots of $z^{4} + a^{4} = 0$ are 
+                \begin{equation*}
+                    ae^{i\pi/4}, ae^{3i \pi/4}, ae^{5\pi i / 4}, ae^{7i \pi/4}
+                \end{equation*}
+            or
+                \begin{equation*}
+                    a(\dfrac{\sqrt{2}}{2} + i\dfrac{\sqrt{2}}{2}), a(\dfrac{-\sqrt{2}}{2} + i \dfrac{\sqrt{2}}{2}), a(\dfrac{-\sqrt{2}}{2} - i \dfrac{\sqrt{2}}{2}), a(\dfrac{\sqrt{2}}{2} - i \dfrac{\sqrt{2}}{2})
+                \end{equation*}
+            There is a singularity at $\sqrt[4]{a}e^{i\pi/4}$. So by cauchy, the integral evaluates to:
+                \begin{equation*}
+                    \int_{C}^{} \dfrac{1}{z^{4} + a^{4}} \, \dd{z}  = 2\pi i (\dfrac{1}{(ae^{i\pi/4} - ae^{3i\pi/4})(ae^{i\pi/4} - ae^{5i\pi/4})(ae^{i\pi/4} - ae^{7i\pi/4})})
+                \end{equation*}
+            or
+                \begin{equation*}
+                    \dfrac{2\pi i}{a^{3}(\sqrt{2})(\sqrt{2} + i\sqrt{2})(i\sqrt{2})} = \dfrac{\pi}{a^{3}(\sqrt{2} + i\sqrt{2})} = (1 - i)\int_{0}^{\infty} \dfrac{1}{x^{4} + a^{4}} \, \dd{x} 
+                \end{equation*}
+            Now:
+                \begin{equation*}
+                    \dfrac{\pi}{a^{3}(\sqrt{2} + i\sqrt{2})} \cdot \dfrac{1}{1 - i} = \dfrac{\pi}{a^{3}(\sqrt{2} - i\sqrt{2} + i\sqrt{2} + \sqrt{2})} = \dfrac{\pi}{a^{3}2\sqrt{2}}
+                \end{equation*}
+            So that is the first integral.
+
+            For the second, we have:
+                \begin{equation*}
+                    \int_{C}^{} \dfrac{z}{z^{4} + a^{4}} \, \dd{z} = \int_{0}^{\infty} \dfrac{z}{z^{4} + a^{4}} \, \dd{z}  + \int_{Q_{R}}^{} \dfrac{z}{z^{4} + a^{4}} \, \dd{z}  + \int_{R}^{0} \dfrac{z}{z^{4} + a^{4}} \, \dd{z} 
+                \end{equation*}
+            We see that the quarter circle arc integral vanishes as $R \rightarrow\infty$ because it is bounded by
+                \begin{equation*}
+                    \left\lvert \dfrac{z}{z^{4} + a^{4}} \right\rvert \cdot R \cdot \dfrac{\pi}{4} = \dfrac{R^{2}}{R^{4} + a^{4}}
+                \end{equation*}
+            which goes to $0$. For the parametrization, we can use
+                \begin{equation*}
+                    z = -ix, \, dz = -id x
+                \end{equation*}
+            again. So we get:
+                \begin{equation*}
+                    \int_{R}^{0} \dfrac{z}{z^{4} + a^{4}} \, \dd{z} = -\int_{R}^{0} \dfrac{x}{x^{4} + a^{4}} \, \dd{x} 
+                \end{equation*}
+            So in total,
+                \begin{equation*}
+                    \int_{C}^{} \dfrac{z}{z^{4} + a^{4}} \, \dd{z}  = 2\int_{0}^{R} \dfrac{x}{x^{4} + a^{4}} \, \dd{x} 
+                \end{equation*}
+            The right hand side's denominator has the same roots:
+                \begin{equation*}
+                    ae^{i\pi/4}, ae^{3i \pi/4}, ae^{5\pi i / 4}, ae^{7i \pi/4}
+                \end{equation*}
+            So:
+                \begin{equation*}
+                    \int_{C}^{} \dfrac{z}{z^{4} + a^{4}} \, \dd{z}  = 2\pi i (\dfrac{ae^{i\pi/4}}{(ae^{i\pi/4} - ae^{3i\pi/4})(ae^{i\pi/4} - ae^{5i\pi/4})(ae^{i\pi/4} - ae^{7i\pi/4})})
+                \end{equation*}
+            which is 
+                \begin{equation*}
+                    \dfrac{\pi e^{i\pi/4}}{a^{2}(\sqrt{2} + i\sqrt{2})} = \dfrac{\pi e^{i\pi/4}}{a^{2}2e^{i\pi/4}} = \dfrac{\pi}{2a^{2}}
+                \end{equation*}
+            In total:
+                \begin{equation*}
+                    \int_{C}^{} \dfrac{z}{z^{4} + a^{4}} \, \dd{z}  = \dfrac{\pi}{2z^{2}} = 2 \int_{0}^{\infty} \dfrac{z}{z^{4} + a^{4}} \, \dd{z} 
+                \end{equation*}
+            and
+                \begin{equation*}
+                    \int_{0}^{\infty} \dfrac{z}{z^{4} + a^{4}} \, \dd{z}  = \dfrac{\pi}{4a^{2}}
+                \end{equation*}
+        \end{answer}
+
+\newpage
+
+\textbf{Exercise 5}: Apply Cauchy's formula to an upper half-disk and the function $\exp(iz)/(z^{4} + 4)$ and take the radius $R \rightarrow \infty$ to find the value of 
+    \begin{equation*}
+        \int_{0}^{\infty} \dfrac{\cos{x}}{x^{4} + 4} \, \dd{x} 
+    \end{equation*}
+    \begin{answer}
+        Using the upper half disk, we can integrate
+            \begin{equation*}
+                \int_{C}^{} \dfrac{e^{iz}}{z^{4} + 4} \, \dd{z} = \int_{H_{R}}^{} \dfrac{e^{iz}}{z^{4} + 4} \, \dd{z}  + \int_{-\infty}^{\infty} \dfrac{e^{iz}}{z^{4} + 4} \, \dd{z} 
+            \end{equation*},
+        Now the half circle arc contribution is $0$ because the integral is bounded by
+            \begin{equation*}
+                \left\lvert \dfrac{e^{iz}}{z^{4} + 4} \right\rvert \cdot R\pi = \dfrac{e^{-y}}{R^{4}} \cdot \pi R
+            \end{equation*}
+        As $R \rightarrow \infty$, we are on the upper circle, so $e^{-y} \rightarrow 0$ and the whole quantity goes to $0$. This means
+            \begin{equation*}
+                \int_{C}^{} \dfrac{e^{iz}}{z^{4} + 4} \, \dd{z}  = \int_{-\infty}^{\infty} \dfrac{e^{iz}}{z^{4} + 4} \, \dd{z} 
+            \end{equation*}
+        Now we can apply cauchy to the left side. The singularities are at $z = \sqrt{2}e^{i\pi / 4}$ and $z = \sqrt{2}e^{3i\pi/4}$. So cauchy says that we get a total contribution of 
+            \begin{align*}
+                \int_{C}^{} \dfrac{e^{iz}}{z^{4} + 4} \, \dd{z}  &= 2\pi i (\dfrac{e^{i(1 + i)}}{(\sqrt{2}e^{i\pi/4} - \sqrt{2}e^{3i\pi/4})(\sqrt{2}e^{i\pi/4} - \sqrt{2}e^{5i\pi/4})(\sqrt{2}e^{i\pi/4} - \sqrt{2}e^{7i\pi/4})}) \\
+                &+ 2\pi i (\dfrac{e^{i(-1 + i)}}{(\sqrt{2}e^{3i\pi/4} - \sqrt{2}e^{i\pi/4})(\sqrt{2}e^{3i\pi/4} - \sqrt{2}e^{5i\pi/4})(\sqrt{2}e^{3i\pi/4} - \sqrt{2}e^{7i\pi/4})}) 
+            \end{align*}
+        This is
+            \begin{equation*}
+                \dfrac{\pi e^{i - 1}}{2\sqrt{2}(\sqrt{2} + i\sqrt{2})} + 2\pi i \dfrac{e^{-i - 1}}{2\sqrt{2}(-\sqrt{2})(i\sqrt{2})(-\sqrt{2} + i\sqrt{2})} = \dfrac{\pi e^{i - 1}}{2\sqrt{2}(\sqrt{2} + i\sqrt{2})} + \dfrac{\pi e^{-i - 1}}{2\sqrt{2}(\sqrt{2} - i\sqrt{2})}
+            \end{equation*}
+        We can factor out a $\pi e^{-1}/ \sqrt{2}$:
+            \begin{equation*}
+                \dfrac{\pi e^{-1}}{\sqrt{2}} \cdot \left(\dfrac{e^{i}}{\sqrt{2} + i\sqrt{2}} + \dfrac{e^{-i}}{\sqrt{2} - i\sqrt{2}}\right)
+            \end{equation*}
+        Normalize the denominator of each:
+            \begin{equation*}
+                \dfrac{\pi e^{-1}}{2\sqrt{2}} \cdot \left(\dfrac{(\sqrt{2} - i\sqrt{2})e^{i}}{4} + \dfrac{(\sqrt{2} + i\sqrt{2})e^{-i}}{4}\right)
+            \end{equation*}
+        or
+            \begin{equation*}
+                \dfrac{\pi}{2e} \cdot \left(\dfrac{e^{i} + e^{-i} - ie^{i} + ie^{-i}}{4}\right)
+            \end{equation*}
+        which is
+            \begin{equation*}
+                \dfrac{\pi}{4e} (\cos{1} + \sin{1})
+            \end{equation*}
+    \end{answer}
+
+\newpage
+
+\textbf{Exercise 6}: Prove that $\int_{0}^{\pi} \log{\sin{\theta}} \, \dd{\theta} = -\pi \log{2}$.
+
+\newpage
+
+\textbf{Exercise 7}: By integrating the function $\exp(-z^{2})$ around the circular sector of radius $R$, centered at $0$, and bounded by the rays $arg{z} = 0$ and $arg{z} = \pi/8$, and letting $R \rightarrow \infty$, show that 
+    \begin{equation*}
+        \int_{0}^{\infty} e^{-t^{2}}\cos{t^{2}} \, \dd{t} = \dfrac{1}{4}\sqrt{\pi}\sqrt{1 + \sqrt{2}}
+    \end{equation*}
+Explain why the contribution of the circular arc vanishes as $R \rightarrow \infty$. \textit{Note}: $\int_{0}^{\infty} e^{-t^{2}} \, \dd{t} = \sqrt{\pi}/2$. Try to recall the 2-variable calculus trick that computes that one.
+    \begin{answer}
+        We see that if we use $z = e^{i\pi/8}x$, the integral of $e^{-z^{2}}$ along the line of angle $\frac{\pi}{8}$ gives:
+            \begin{equation*}
+                \int_{0}^{\pi/2} \int_{0}^{\infty} re^{i\pi/4}e^{e^{i\pi/4}r^{2}} \, \dd{r}  \, \dd{\theta} 
+            \end{equation*}
+        which will be the same as when we evaluate the integral
+            \begin{equation*}
+                \int_{0}^{\infty} e^{-x^{2}} \, \dd{x} 
+            \end{equation*}
+        Since the function $e^{-z^{2}}$ is holomorphic, the integral along the circular sector goes to $0$, so the integral of the circular arc vanishes for this one. Then we can conclude that the integral for the circular arc vanishes for $e^{-z^{2}}\cos{z^{2}}$ along the eighth circle arc because the magnitude of the integrand is smaller:
+            \begin{equation*}
+                \left\lvert e^{-z^{2}} \right\rvert \geq \left\lvert e^{-z^{2}}\cos{z^{2}} \right\rvert
+            \end{equation*}
+
+        To integrate, we have
+            \begin{align*}
+                e^{-z^{2}}\cos{z^{2}} &= \dfrac{e^{-z^{2} + iz^{2}} + e^{-z^{2} + iz^{2}}}{2} \\
+                                      &= \dfrac{e^{z^{2}(-1 + i)} + e^{z^{2}(-1 - i)}}{2}       
+            \end{align*}
+        Now using the fact
+            \begin{align*}
+                z  &= -e^{i\pi/8}x   \\
+                dz &= -e^{i\pi/8}d x   
+            \end{align*}
+        we have
+            \begin{equation*}
+                \int_{C}^{} e^{-z^{2}}\cos{z^{2}} \, \dd{z} = \int_{0}^{\infty} e^{-x^{2}}\cos{x^{2}} \, \dd{x}  - \int_{L}^{} e^{-z^{2}}\cos{z^{2}} \, \dd{z} 
+            \end{equation*}
+        where $L$ represents the line going to infinity at angle $e^{i\pi/8}$. Since the function is holomorphic, we just have
+            \begin{equation*}
+                \int_{0}^{\infty} e^{-z^{2}}\cos{z^{2}} \, \dd{z}  = \int_{L}^{} e^{-z^{2}}\cos{z^{2}} \, \dd{z} 
+            \end{equation*}
+        Now we can expand:
+            \begin{align*}
+                \int_{L}^{} e^{-z^{2}}\cos{z^{2}} \, \dd{z}                               &= -\int_{0}^{\infty} e^{e^{-i\pi/4}x^{2}(-1 + i)}e^{i\pi/8} + e^{-e^{i\pi/4}x^{2}(-1 - i)}e^{i\pi/8} \, \dd{x}  \\
+                (\int_{0}^{\infty} e^{-e^{i\pi/4}x^{2}(-1 + i)}e^{i\pi/8} \, \dd{x} )^{2} &= \int_{0}^{\infty} \int_{0}^{\infty} e^{-e^{i\pi/4}r^{2}(-1 + i)}e^{i\pi/4} \, \dd{x}  \, \dd{y}              \\
+                                                                                          &= \int_{0}^{\pi/2} \int_{0}^{\infty} e^{-e^{i\pi/4}r^{2}(-1 + i)}e^{i\pi/4}r \, \dd{r}  \, \dd{\theta}         \\
+                                                                                          &= \int_{0}^{\pi/2} \left(\dfrac{e^{-\sqrt{2}r^{2}}}{(-1 + i) \cdot 2}\right)\eval_{0}^{\infty} \, \dd{\theta} 
+                                                                                         \\
+                                                                                         &= \left(\dfrac{1}{(-1 + i) \cdot 2}\right)\eval_{0}^{\pi/2} \\
+                                                                                         &= \dfrac{\pi}{4 (-1 + i)}
+            \end{align*}
+        Doing the same for the other integral yields 
+            \begin{equation*}
+                \dfrac{\pi}{4(-1 - i)}
+            \end{equation*}
+        So the integral will evaluate to 
+            \begin{equation*}
+                \dfrac{1}{2}\left(\sqrt{\dfrac{-\pi}{4(- 1 + i)}} + \sqrt{\dfrac{-\pi}{4(-1 - i)}}\right)
+            \end{equation*}
+        Let $C = \sqrt{\frac{-\pi}{4(-1 + i)}} + \sqrt{\frac{-\pi}{4(-1 - i)}}$. Then
+            \begin{align*}
+                C^{2} &= \dfrac{-\pi}{4(-1 + i)} + \dfrac{-\pi}{4(-1 - i)} + 2\sqrt{\dfrac{\pi^{2}}{16(-1 + i)(-1 - i)}} \\
+                      &= \dfrac{-\pi(-1 - i)}{8} + \dfrac{-\pi(-1 + i)}{8} + \dfrac{\pi}{2\sqrt{2}}                      \\
+                      &= \dfrac{2\pi + 2\sqrt{2}\pi}{8}                                                                \\
+                      &= \dfrac{(1 + \sqrt{2})\pi}{4}                                                                    
+            \end{align*}
+        Then $C = \frac{\sqrt{\pi}\sqrt{1 + \sqrt{2}}}{2}$ and therefore, we take $\frac{1}{2}$ of that to get:
+            \begin{equation*}
+                \dfrac{\sqrt{\pi}\sqrt{1 + \sqrt{2}}}{4}
+            \end{equation*}
+    \end{answer}
+
+\newpage
+
+\textbf{Exercise 8}: Apply Cauchy's formula to the function $ze^{iz}/(z^{4} + 4)$ on a large $(R \rightarrow \infty)$ upper half-disk to show that 
+    \begin{equation*}
+        \int_{0}^{\infty} \dfrac{x\sin{x}}{x^{4} + 4} \, \dd{x} = \dfrac{\pi}{4e}\sin{1}
+    \end{equation*}
+    \begin{answer}
+        So we have:
+            \begin{equation*}
+                \int_{C}^{} \dfrac{ze^{iz}}{z^{4} + 4} \, \dd{z}  = \int_{H_{R}}^{} \dfrac{ze^{iz}}{z^{4} + 4} \, \dd{z}  + \int_{-\infty}^{\infty} \dfrac{ze^{iz}}{z^{4} + 4} \, \dd{z} 
+            \end{equation*}
+        We know that the half arc integral goes to $0$ by Jordan's Theorem. Then by cauchy, we have that the lhs is equal to 
+            \begin{align*}
+                \int_{C}^{} \dfrac{ze^{iz}}{z^{4} + 4} \, \dd{z}  &= 2\pi i (\dfrac{\sqrt{2}e^{i\pi/4}e^{i(i + 1)}}{(\sqrt{2}e^{i\pi/4} - \sqrt{2}e^{3i\pi/4})(\sqrt{2}e^{i\pi/4} - \sqrt{2}e^{5i\pi/4})(\sqrt{2}e^{i\pi/4} - \sqrt{2}e^{7i\pi/4})}) \\
+                &+ 2\pi i (\dfrac{\sqrt{2}e^{3i\pi/4} e^{i(i - 1)}}{(\sqrt{2}e^{3i\pi/4} - \sqrt{2}e^{i\pi/4})(\sqrt{2}e^{3i\pi/4} - \sqrt{2}e^{5i\pi/4})(\sqrt{2}e^{3i\pi/4} - \sqrt{2}e^{7i\pi/4})}) 
+            \end{align*}
+        which is 
+            \begin{equation*}
+                \dfrac{\pi e^{i - 1}e^{\pi i /4}}{2(\sqrt{2} + i\sqrt{2})} + \dfrac{\pi e^{-i - 1} e^{3\pi i /4}}{2(\sqrt{2} - i\sqrt{2})} = \dfrac{\pi e^{-1}}{2}\left(\dfrac{e^{i}\left(\dfrac{\sqrt{2}}{2} + i\dfrac{\sqrt{2}}{2}\right)}{\sqrt{2} + i\sqrt{2}} + \dfrac{e^{-i} \left(\dfrac{-\sqrt{2}}{2} + i\dfrac{\sqrt{2}}{2}\right)}{\sqrt{2} - i\sqrt{2}}\right)
+            \end{equation*}
+        which simplifies to
+            \begin{equation*}
+                \dfrac{\pi e^{-1}}{16}\left(2e^{i} - 2e^{-i}\right)
+            \end{equation*}
+        which is
+            \begin{equation*}
+                \dfrac{\pi}{4e} \sin{1}
+            \end{equation*}
+    \end{answer}
+
+\newpage
+
+\textbf{Exercise 9}: Let $z_{0}$ be a fixed complex number and let the complex function $f$ be defined and continuous in the disk $\lvert z - z_{0} \rvert < R$, and let $C_{r}$ be the circle of radius $r < R$ centered at $z_{0}$. Show that 
+    \begin{equation*}
+        \lim\limits_{r \to 0} \oint_{C_{r}}^{} \dfrac{f(z)}{z - z_{0}} \, \dd{z}  = 2\pi i \cdot f(z_{0})
+    \end{equation*}
+\textit{Note}: We do not assume that $f$ is holomorphic, or even real-differentiable.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

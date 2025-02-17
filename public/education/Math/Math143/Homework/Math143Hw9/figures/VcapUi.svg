@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="150mm"
+   height="90mm"
+   viewBox="0 0 240 120"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.3 (0e150ed, 2023-07-21)"
+   sodipodi:docname="VcapUi.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible"
+       id="marker4"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Dart arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         transform="scale(-0.5)"
+         id="path4" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="DartArrow"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Dart arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         transform="scale(-0.5)"
+         id="path6" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.0000689"
+     inkscape:cx="295.97961"
+     inkscape:cy="222.48467"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showborder="true"
+     width="200mm"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="2520"
+     inkscape:window-height="995"
+     inkscape:window-x="20"
+     inkscape:window-y="65"
+     inkscape:window-maximized="1"
+     inkscape:showpageshadow="2"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid815"
+       units="mm"
+       spacingx="10"
+       spacingy="10"
+       empspacing="4"
+       dotted="false"
+       originx="0"
+       originy="0"
+       visible="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-177)">
+    <path
+       style="fill:#000000;stroke:#000000;stroke-width:0.354899;marker-start:url(#DartArrow);marker-end:url(#marker4)"
+       d="m 116.72851,287.84857 7.37141,-115.86973"
+       id="path1"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:#000000;stroke:#000000;stroke-width:0.354899;marker-start:url(#marker4);marker-end:url(#DartArrow)"
+       d="m 45.274898,215.76075 165.975562,36.0257"
+       id="path2" />
+    <path
+       style="fill:#000000;stroke:#000000;stroke-width:0.354899;marker-start:url(#DartArrow);marker-end:url(#marker4)"
+       d="M 61.486464,276.23247 168.78343,195.4193"
+       id="path3"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:5.77849px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';fill:#000000;stroke:#000000;stroke-width:0.354899"
+       x="131.47928"
+       y="175.3605"
+       id="text4"><tspan
+         sodipodi:role="line"
+         id="tspan4"
+         style="stroke-width:0.354899"
+         x="131.47928"
+         y="175.3605">$z$</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.354899"
+         x="131.47928"
+         y="182.58362"
+         id="tspan5" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:5.77849px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';fill:#000000;stroke:#000000;stroke-width:0.354899"
+       x="67.404968"
+       y="281.89368"
+       id="text6"><tspan
+         sodipodi:role="line"
+         id="tspan6"
+         style="stroke-width:0.354899"
+         x="67.404968"
+         y="281.89368">$x$</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.354899"
+         x="67.404968"
+         y="289.11679"
+         id="tspan7" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:5.77849px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';fill:#000000;stroke:#000000;stroke-width:0.354899"
+       x="207.64789"
+       y="258.99161"
+       id="text8"><tspan
+         sodipodi:role="line"
+         id="tspan8"
+         style="stroke-width:0.354899"
+         x="207.64789"
+         y="258.99161">$y$</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.354899"
+         x="207.64789"
+         y="266.21472"
+         id="tspan9" /></text>
+    <path
+       style="fill:#000000;fill-opacity:0;stroke:#000080;stroke-width:0.354899;stroke-dasharray:0.709799, 0.354899;stroke-dashoffset:0"
+       d="M 159.16191,298.10672 239.26855,210.87005 103.79359,191.36604 -7.9612009,247.11144 Z"
+       id="path9"
+       sodipodi:nodetypes="ccccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:5.77849px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';fill:#000000;fill-opacity:1;stroke:#2b0000;stroke-width:0.354899;stroke-dasharray:0.709797, 0.354899;stroke-dashoffset:0"
+       x="188.12398"
+       y="216.69072"
+       id="text10"><tspan
+         sodipodi:role="line"
+         id="tspan10"
+         style="fill:#000000;fill-opacity:1;stroke:#2b0000;stroke-width:0.354899"
+         x="188.12398"
+         y="216.69072">$\mathbb{V}(z) \cap U_{3}$</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#000000;fill-opacity:1;stroke:#2b0000;stroke-width:0.354899"
+         x="188.12398"
+         y="223.91383"
+         id="tspan11" /></text>
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#ff0000;stroke-width:0.354899;stroke-dasharray:0.709797, 0.354899;stroke-dashoffset:0;marker-start:url(#marker4);marker-end:url(#DartArrow)"
+       d="m 80.15016,284.13913 105.88549,-88.5013"
+       id="path11" />
+    <text
+       xml:space="preserve"
+       style="font-size:5.77849px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.354899;stroke-dasharray:0.709797, 0.354899;stroke-dashoffset:0"
+       x="58.251854"
+       y="293.81839"
+       id="text12"><tspan
+         sodipodi:role="line"
+         id="tspan12"
+         style="stroke:#000000;stroke-width:0.354899"
+         x="58.251854"
+         y="293.81839">$\mathbb{V}(z) \cap U_{2}$</tspan><tspan
+         sodipodi:role="line"
+         style="stroke:#000000;stroke-width:0.354899"
+         x="58.251854"
+         y="301.0415"
+         id="tspan13" /></text>
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#008000;stroke-width:0.354899;stroke-dasharray:0.709797, 0.354899;stroke-dashoffset:0;marker-start:url(#marker4);marker-end:url(#DartArrow)"
+       d="m 28.3927,222.89939 173.84185,44.25066"
+       id="path13" />
+    <text
+       xml:space="preserve"
+       style="font-size:5.77849px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.354899;stroke-dasharray:0.709797, 0.354899;stroke-dashoffset:0"
+       x="-15.546644"
+       y="217.8201"
+       id="text14"><tspan
+         sodipodi:role="line"
+         id="tspan14"
+         style="stroke:#000000;stroke-width:0.354899"
+         x="-15.546644"
+         y="217.8201">$\mathbb{V}(z) \cap U_{1}$</tspan><tspan
+         sodipodi:role="line"
+         style="stroke:#000000;stroke-width:0.354899"
+         x="-15.546644"
+         y="225.04321"
+         id="tspan15" /></text>
+  </g>
+</svg>

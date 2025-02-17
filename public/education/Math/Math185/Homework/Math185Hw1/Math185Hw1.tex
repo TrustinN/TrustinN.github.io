@@ -1,0 +1,425 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math185/Homework/Math185Hw1/Math185Hw1.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{Math185Hw1}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+
+\textbf{Exercise 1}:
+    \begin{itemize}
+        \item Let $\omega = \frac{-1}{2} + i \frac{\sqrt{3}}{2}$. Check that $\omega^{3} = 1$.
+            \begin{answer}
+                We have that 
+                    \begin{equation*}
+                        \omega = \dfrac{(-1 + i \sqrt{3})}{2}
+                    \end{equation*}
+                so
+                    \begin{align*}
+                        \omega^{3} &= \dfrac{(-1 + i\sqrt{3})^{3}}{8} \\
+                                   &= \dfrac{(-1)^{3} + 3(i \sqrt{3}) - 3(i \sqrt{3})^{2} + (i \sqrt{3})^{3}}{8} \\
+                                   &= \dfrac{-1 + 3i\sqrt{3} + 9 - 3i\sqrt{3}}{8} \\
+                                   &= 8/8 = 1
+                    \end{align*}
+            \end{answer}
+
+        \item If $\Delta := q^{2} - p^{3} > 0$, let $r_{\pm}$ be the real cube roots of the real numbers $q \pm \sqrt{\Delta}$. Show that $r_{+} + r_{-}$ is the real solution of the cubic equation in Q1, whereas $\omega r_{+} + \omega^{2} r_{-}$ and $\omega^{2}r_{+} + \omega r_{-}$ form a complex conjugate pair of solutions.
+            \begin{proof}
+                It was already shown in class that for $p < 0$, $\Delta > 0$ means that there is one real root, $r_{+} + r_{-}$. First, we can show that the imaginary roots are conjugate.
+                    \begin{align*}
+                        (\omega r_{+} + \omega^{2} r_{-})(\omega^{2}r_{+} + \omega r_{-}) &= r_{+}^{2} + r_{-}^{2} + \omega^{2}r_{+}r_{-} + \omega r_{+}r_{-} \\
+                                                                                          &= r_{+}^{2} + r_{-}^{2} + (\omega^{2} + \omega)r_{+}r_{-}          \\
+                                                                                          &= r_{+}^{2} - r_{+}r_{-} + r_{-}^{2}                                 
+                    \end{align*}
+                Also notice that:
+                    \begin{align*}
+                        (x - (\omega r_{+} + \omega^{2}r_{-}))(x - (\omega^{2}r_{+} + \omega r_{-})) &= x^{2} - (\omega + \omega^{2})(r_{+} + r_{-})x + r_{+}^{2} - r_{+}r_{-} + r^{2}_{-} \\
+                                                                                                     &= x^{2} + (r_{+} + r_{-})x + r^{2}_{+} - r_{+}r_{-} + r_{-}^{2}                        
+                    \end{align*}
+                Now we get:
+                    \begin{equation*}
+                        (x - (r_{+} + r_{-}))(x^{2} + (r_{+} + r_{-})x + r_{+}^{2} - r_{+}r_{-} + r_{-}^{2})
+                    \end{equation*}
+                We will expand to show that it evaluates to $x^{3} + 3px - 2q$:
+                    \begin{itemize}
+                        \item The $x^{3}$ coefficient is $1$
+
+                        \item The $x^{2}$ coefficient is $0$.
+
+                        \item The $x$ coefficient is 
+                            \begin{align*}
+                                (r_{+}^{2} - r_{+}r_{-} + r_{-}^{2} - (r_{+} + r_{-})^{2})x &=  3r_{+}r_{-}                                                 \\
+                                                                                            &=  3(\sqrt[3]{q + \sqrt{\Delta}})(\sqrt[3]{q - \sqrt{\Delta}}) \\
+                                                                                            &=  3(\sqrt[3]{q^{2} - (q^{2} - p^{3})})                        \\
+                                                                                            &= 3p                                                            
+                            \end{align*}
+
+                        \item The constant term is 
+                            \begin{align*}
+                                -(r_{+} + r_{-})(r_{+}^{2} - r_{+}r_{-} + r_{-}^{2}) &= -(r_{+}^{3} + r_{-}^{3})                 \\
+                                                                                     &= -(q + \sqrt{\Delta} + q - \sqrt{\Delta}) \\
+                                                                                     &= -2q                                        
+                            \end{align*}
+                    \end{itemize}
+                Since we found the linear factors, that shows that $r_{+} + r_{-}, \omega^{2}r_{+} + \omega r_{-}, \omega r_{+} + \omega^{2} r_{-}$ are the roots of $x^{3} + 3px - 2q$.
+            \end{proof}
+
+        \item If $\Delta < 0$, let $r_{+}$ be a complex cube root of $q + i \sqrt{ -\Delta}$ and $r_{-}$ the complex conjugate of $r_{+}$. Show that the equation has the three real solutions $r_{+} + r_{-}, \omega r_{+} + \omega^{2}r_{-}$ and $\omega^{2}r_{+} + \omega r_{-}$. 
+            \begin{proof}
+                It was shown in class that $r_{+} + r_{-}$ was always a solution. To show that it is a real solution, we have that $r_{+}, r_{-}$ are complex conjugates. Now:
+                    \begin{align*}
+                        \mathop{arg}(\omega r_{+}) &= \mathop{arg}(\omega)\mathop{arg}(r_{+})      \\
+                                                   &= -\mathop{arg}(\omega^{2})\mathop{arg}(r_{-}) \\
+                                                   &= -\mathop{arg}(\omega^{2} r_{-})                
+                    \end{align*}
+                And since $\lvert \omega r_{+} \rvert = \lvert r_{+} \rvert = \lvert r_{-} \rvert = \lvert \omega^{2} r_{-} \rvert$, we see that $\omega r_{+}$ and $\omega^{2} r_{-}$ are complex conjugate. The same procedure shows that $\omega^{2} r_{+} + \omega r_{-}$ is also real. To show that these are solutions, we can reuse the same idea in the problem above. We just need to check that the coefficients remain the same:
+                    \begin{itemize}
+                        \item Coefficient for $x$ term:
+                            \begin{align*}
+                                (r_{+}^{2} - r_{+}r_{-} + r_{+}^{2} - (r_{+} + r_{-})^{2}) &= 3r_{+}r_{-}                                                      \\
+                                                                                           &= 3(\sqrt[3]{q + i \sqrt{-\Delta}})(\sqrt[3]{q - i\sqrt{-\Delta}}) \\
+                                                                                           &= 3(\sqrt[3]{q^{2} - \Delta})                                      \\
+                                                                                           &= 3(\sqrt[3]{p^{3}})                                               \\
+                                                                                           &= 3p                                                                 
+                            \end{align*}
+
+                        \item The constant term is:
+                            \begin{align*}
+                                -(r_{+}^{3} + r_{-}^{3}) &= -(q + i\sqrt{-\Delta} + q - i\sqrt{-\Delta}) \\
+                                                         &= -2q                                            
+                            \end{align*}
+                    \end{itemize}
+                which concludes the proof.
+            \end{proof}
+    \end{itemize}
+
+\newpage
+
+\textbf{Exercise 2}: For integers $k$ and $n > 0$, show that $\cos{\frac{2k\pi}{n}} + i \sin{\frac{2k \pi}{n}}$ is a \textit{primitive} $n$-th root of unity if $k$ and $n$ are coprime. For \textit{irrational number} $\alpha$, show that $\cos{2\pi\alpha} + i \sin{ 2\pi\alpha}$ is \textit{not} a root of unity.
+    \begin{proof}
+        (Part I) For $\cos{\frac{2k\pi}{n}} + i \sin{\frac{2k\pi}{n}}$ to be a primitive root of unity, we require that there are no $0 < j < n$ such that 
+            \begin{equation*}
+                \cos{\dfrac{2kj\pi}{n}} + i \sin{\dfrac{2kj\pi}{n}} = e^{2ijk\pi/n} = 1
+            \end{equation*}
+        This is true when:
+            \begin{equation*}
+                2ijk\pi/n = 2\pi i \cdot m \implies j k = mn \implies j \cdot k \equiv 0 \pmod{n}
+            \end{equation*}
+        If $k$ and $n$ are coprime, then $k$ has a multiplicative inverse mod $n$. So if we solve for 
+            \begin{equation*}
+                j \cdot k \equiv 0 \pmod{n}
+            \end{equation*}
+        we get:
+            \begin{equation*}
+                j \equiv 0 \pmod{n}
+            \end{equation*}
+
+        (Part II) Suppose for contradiction that $e^{2\pi i \alpha}$ is a root of unity. Then for some $n \in \mathbb{N}$, it is a root of 
+            \begin{equation*}
+                x^{n} - 1 = 0
+            \end{equation*}
+        So
+            \begin{equation*}
+                e^{2\pi i  \alpha n} - e^{2 \pi i m} = 0 \\
+            \end{equation*}
+        and for some $m$, 
+            \begin{equation*}
+                \alpha n = m
+            \end{equation*}
+        which is impossible.
+    \end{proof}
+
+\newpage
+
+\textbf{Exercise 3}: Find all the cube roots of the number $i$. Are they also roots of unity? Find $(1 + i)^{1000}$. 
+    \begin{answer}
+        We want to solve the equation $x^{3} = i$ or $x^{3} - i = 0$. Since $\lvert i \rvert = 1$, the cube roots are on the unit circle. This means that the unique possible solutions are of the form:
+            \begin{equation*}
+                e^{i\theta}
+            \end{equation*}
+        for $0 \leq \theta \leq 2\pi$. The unique possible values for $x^{3}$ are of the form:
+            \begin{equation*}
+                e^{3i\theta}
+            \end{equation*}
+        for $0 \leq 3\theta \leq 6\pi$. Also,
+            \begin{equation*}
+                i = e^{i\pi/2}, e^{5i\pi/2}, e^{9i\pi/2}, e^{13i\pi/2}, \ldots
+            \end{equation*}
+        Since $x^{3} = i$, we see that:
+            \begin{align*}
+                3\theta &= \pi/2  \\
+                3\theta &= 5\pi/2 \\
+                3\theta &= 9\pi/2   
+            \end{align*}
+        This means that the roots are $e^{i\pi/6}, e^{5i\pi/6}, e^{9i\pi/6}$. This method shows that there are only $3$ roots. 
+
+        They are all roots of unity because raised to the $12$-th power they are $1$. 
+
+        We have $\mathop{arg}(1 + i) = 2\pi/8$, $\lvert 1 + i \rvert = 1$. Therefore,
+            \begin{equation*}
+                (1 + i)^{1000} = \lvert 1 + i \rvert^{1000}(\cos{1000 \cdot \dfrac{2\pi}{8}} + i \sin{1000 \cdot \dfrac{2\pi}{8}})
+            \end{equation*}
+        This evaluates to:
+            \begin{align*}
+                1^{1000}(\cos{250\pi} + i\sin{250\pi}) &= 1   
+            \end{align*}
+    \end{answer}
+
+\newpage
+
+\textbf{Exercise 4}: By taking real and imaginary parts in the geometric sum formula
+    \begin{equation*}
+        1 + z + \cdots + z^{n} = \dfrac{z^{n + 1} - 1}{z - 1},
+    \end{equation*}
+and using de Moivre's formulas, show that 
+    \begin{align*}
+        \dfrac{1}{2} + \cos{\theta} + \cos{2\theta} + \cdots + \cos{n\theta} &= \dfrac{\sin{((n + 1)\theta/2)}}{2\sin{\theta/2}},                          \\
+        \sin{\theta} + \sin{2\theta} + \cdots + \sin{n\theta}                &= \dfrac{\cos{\theta/2} - \cos{\dfrac{(n + 1)\theta}{2}}}{2 \sin{\theta/2}}   
+    \end{align*}
+\textit{Hint}: Rewrite $(z^{n + 1} - 1)/(z - 1)$ as $(z^{n + 1/2} - z^{-1/2})/(z^{1/2} - z^{-1/2})$. You must commit to a choice of square root of $z$ for the formula to be well-defined: explain why the choice does not matter.
+    \begin{proof}
+        By de Moivre's formulas, if $z = \cos{\theta} + i\sin{\theta}$,
+            \begin{equation*}
+                z^{k} = \cos{k\theta} + i\sin{k\theta}
+            \end{equation*}
+        So
+            \begin{equation*}
+                1 + z + \cdots + z^{n} = 1 + (\cos{\theta} + i\sin{\theta}) + \cdots + (\cos{n\theta} + i\sin{n\theta})
+            \end{equation*}
+        On the other hand, $1 + z + \cdots + z^{n} = \frac{z^{n + 1} - 1}{z - 1} = \frac{z^{\frac{n + 1}{2}} - z^{-\frac{1}{2}}}{z^{\frac{1}{2}} - z^{-\frac{1}{2}}}$. Now plug in $z = \cos{\theta} + i \sin{\theta}$:
+            \begin{align*}
+                \dfrac{z^{\dfrac{n + 1}{2}} - z^{\dfrac{-1}{2}}}{z^{\dfrac{1}{2}} - z^{\dfrac{-1}{2}}} &= \dfrac{\cos{\dfrac{n + 1}{2}\theta + i\sin{\dfrac{n + 1}{2}\theta} - \cos{-\dfrac{1}{2}\theta} - i\sin{\dfrac{-1}{2}\theta}}}{\cos{\dfrac{1}{2}\theta} + i\sin{\dfrac{1}{2}\theta} - \cos{\dfrac{-1}{2}\theta} - i\sin{\dfrac{-1}{2}\theta}} \\
+             &= \dfrac{\cos{\dfrac{n + 1}{2}\theta} - \cos{\dfrac{1}{2}\theta} + i \sin{\dfrac{n + 1}{2}\theta} + i \sin{\dfrac{1}{2}\theta}}{2i \sin{\dfrac{1}{2}\theta}} \\
+                &= \dfrac{i \cos{\dfrac{n + 1}{2}\theta} - i \cos{\dfrac{1}{2}\theta}}{-2 \sin{\dfrac{1}{2}\theta}} + \dfrac{\sin{\dfrac{n + 1}{2}\theta} + \sin{\dfrac{1}{2}\theta}}{2 \sin{\dfrac{1}{2}\theta}} \\
+                &= \dfrac{i \cos{\dfrac{1}{2}\theta} - i \cos{\dfrac{n + 1}{2}\theta}}{2 \sin{\dfrac{1}{2}\theta}} + \dfrac{\sin{\dfrac{n + 1}{2}\theta}}{2 \sin{\dfrac{1}{2}\theta}} + \dfrac{1}{2} \\
+                &= 1 + (\cos{\theta} + i\sin{\theta}) + \cdots + (\cos{n\theta} + i\sin{n\theta})
+            \end{align*}
+        Now splitting between imaginary and real components, we find that:
+            \begin{align*}
+                1 + \cos{\theta} + \cos{2\theta} + \cdots + \cos{n\theta}            &= \dfrac{\sin{\dfrac{n + 1}{2}\theta}}{2 \sin{\dfrac{1}{2}\theta}} + \dfrac{1}{2} \\
+                \dfrac{1}{2} + \cos{\theta} + \cos{2\theta} + \cdots + \cos{n\theta} &= \dfrac{\sin{\dfrac{n + 1}{2}\theta}}{2 \sin{\dfrac{1}{2}\theta}}                  
+            \end{align*}
+        and
+            \begin{align*}
+                i\sin{\theta} + \cdots + i\sin{n\theta} &= \dfrac{i\cos{\dfrac{1}{2}\theta} - i\cos{\dfrac{n + 1}{2}\theta}}{2 \sin{\dfrac{1}{2}\theta}} \\
+                \sin{\theta} + \cdots + \sin{n\theta}   &= \dfrac{\cos{\dfrac{1}{2}\theta} - \cos{\dfrac{n + 1}{2}\theta}}{2 \sin{\dfrac{1}{2}\theta}}     
+            \end{align*}
+        so we are done. As for the second part, we rewrote:
+            \begin{equation*}
+                (z^{n + 1} - 1)/(z - 1) \rightarrow (z^{n + 1/2} - z^{-1/2})/(z^{1/2} - z^{-1/2})
+            \end{equation*}
+        by the operation:
+            \begin{equation*}
+                \dfrac{(z^{n + 1} - 1) \cdot \dfrac{1}{\sqrt{z}}}{(z - 1) \cdot \dfrac{1}{\sqrt{z}}}
+            \end{equation*}
+        Although square roots are not unique, it does not matter which one is chosen because the proof is an angle argument on the unit circle. So one angle just needs to be consistently chosen for $\mathop{arg}(z)$.
+    \end{proof}
+
+\newpage
+
+\textbf{Exercise 5}: Verify that the map $z \mapsto 1/z$ acts on circles and lines as follow:
+    \begin{itemize}
+        \item circles that do not pass through $0 \iff $ circles that do not pass through $0$
+            \begin{proof}
+                We can find the center of the new circle by drawing tangent lines from the origin:
+                    \begin{fixedfigure}
+                        \incfig{exercise5a}
+                    \end{fixedfigure}
+                and guess the center of the new circle by taking the image of both tangent vectors under the map $z \mapsto \frac{1}{z}$. We have the equality:
+                    \begin{align*}
+                        \lVert z_{1} \rVert + r^{2} &= \lVert c \rVert         \\
+                        \lVert z_{1} \rVert         &= \lVert c \rVert - r^{2}   
+                    \end{align*}
+                Under the map, we see that 
+                    \begin{align*}
+                        z_{1} &\mapsto \dfrac{\overline{z_{1}}}{\lVert z_{1} \rVert}     \\
+                              &=       \dfrac{\overline{z_{1}}}{\lVert c \rVert - r^{2}}   
+                    \end{align*}
+                So we see that the triangle $0, c, z_{1}$ is scaled down by a factor of $\frac{1}{\lVert c \rVert - r^{2}}$. We obtain the center by scaling $\overline{c}$ by the same factor. Now all that is left is to prove that 
+                    \begin{equation*}
+                        \left\lVert \dfrac{1}{z} - \dfrac{\overline{c}}{\lVert c \rVert - r^{2}} \right\rVert = {r^{\prime}}^{2}
+                    \end{equation*}
+                for some constant $r^{\prime}$. We have:
+                    \begin{align*}
+                        \left\lVert \dfrac{1}{z} - \dfrac{\overline{c}}{\lVert c \rVert - r^{2}} \right\rVert &= \left\lVert \dfrac{\overline{z}}{\lVert z \rVert} - \dfrac{\overline{c}}{\lVert c \rVert - r^{2}} \right\rVert                                                                                                           \\
+                                                                                                              &= \left(\dfrac{\overline{z}}{\lVert z \rVert} - \dfrac{\overline{c}}{\lVert c \rVert - r^{2}}\right)\left(\dfrac{z}{\lVert z \rVert} - \dfrac{c}{\lVert c \rVert - r^{2}}\right)                                           \\
+                                                                                                              &= \dfrac{1}{\lVert z \rVert} - \dfrac{\overline{c}z}{\lVert z \rVert(\lVert c \rVert - r^{2})} - \dfrac{c \overline{z}}{\lVert z \rVert(\lVert c \rVert - r^{2})} + \dfrac{\lVert c \rVert}{(\lVert c \rVert - r^{2})^{2}} \\
+                                                                                                              & (\text{Using the fact that } \lVert z - c \rVert = r^{2}) \\
+                                                                                                              & (\text{we get } -c\overline{z} - \overline{c}z = r^{2} - \lVert z \rVert - \lVert c \rVert) \\
+                                                                                                              &= \dfrac{1}{\lVert z \rVert} + \dfrac{r^{2} - \lVert z \rVert - \lVert c \rVert}{\lVert z \rVert(\lVert c \rVert - r^{2})} + \dfrac{\lVert c \rVert}{(\lVert c \rVert - r^{2})^{2}}                                        \\
+                                                                                                              &= \dfrac{\lVert c \rVert - r^{2} + r^{2} - \lVert z \rVert - \lVert c \rVert}{\lVert z \rVert (\lVert c \rVert - r^{2})} + \dfrac{\lVert c \rVert}{(\lVert c \rVert - r^{2})^{2}}                                          \\
+                                                                                                              &= \dfrac{-1}{\lVert c \rVert - r^{2}} + \dfrac{\lVert c \rVert}{(\lVert c \rVert - r^{2})}                                                                                                                                 \\
+                                                                                                              &= \dfrac{r^{2}}{(\lVert c \rVert - r^{2})^{2}}                                                                                                                                                                               
+                    \end{align*}
+                which is a constant, non dependent on $z$.
+            \end{proof}
+
+
+        \item circles that pass through $0 \iff$ lines that do not pass through zero
+            \begin{proof}
+                Draw the circle and the image of $2c$ under the map: $z \mapsto \frac{1}{z}$:
+                    \begin{fixedfigure}
+                        \incfig{exercise5b}
+                    \end{fixedfigure}
+                Then a guess for the equation of the image of the circle would be the dashed line or:
+                    \begin{equation*}
+                        \dfrac{c}{\sqrt{\lVert c \rVert}}\dfrac{1}{z} + \dfrac{\overline{c}}{\sqrt{\lVert c \rVert}}\dfrac{1}{\overline{z}} = \dfrac{1}{\sqrt{\lVert c \rVert}}
+                    \end{equation*}
+                We can get this from the equation:
+                    \begin{align*}
+                        \lVert z - c \rVert                                                                                           &= \lVert c \rVert            \\
+                        \lVert z \rVert - z\overline{c} - \overline{z}c                                                               &= 0                          \\
+                        \overline{c}z + c\overline{z}                                                                                 &= \lVert z \rVert            \\
+                        \dfrac{\overline{c}z}{\lVert c \rVert\lVert z \rVert} + \dfrac{c\overline{z}}{\lVert c \rVert\lVert z \rVert} &= \dfrac{1}{\lVert c \rVert} \\
+                        \overline{c}\dfrac{z}{\lVert z \rVert} + c \dfrac{\overline{z}}{\lVert z \rVert}                              &= 1                          \\
+                        \overline{c}\dfrac{1}{\overline{z}} + c \dfrac{1}{z}                                                          &= 1                            
+                    \end{align*}
+                which concludes the proof.
+            \end{proof}
+
+        \item lines passing through $0 \iff$ lines passing through $0$. 
+            \begin{proof}
+                Points on a line that which passes through $0$ follow the equation:
+                    \begin{equation*}
+                        \alpha z + \overline{\alpha z} = 0
+                    \end{equation*}
+                because we take the line $z + \overline{z} = 0$ and rotate it. Under the map $z \mapsto \frac{1}{z}$, we need to show:
+                    \begin{equation*}
+                        \alpha \dfrac{\overline{z}}{\lVert z \rVert} + \overline{\alpha}\dfrac{z}{\lVert z \rVert} = 0
+                    \end{equation*}
+                Using the fact that $z + \overline{z} = 0$, we have:
+                    \begin{equation*}
+                        (\alpha + \overline{\alpha})(z + \overline{z}) = 0
+                    \end{equation*}
+                and therefore:
+                    \begin{equation*}
+                        az + \alpha\overline{z} + \overline{\alpha}z + \overline{\alpha z} = \alpha \overline{z} + \overline{\alpha}z = 0
+                    \end{equation*}
+                So dividing by $\lVert z \rVert \neq 0$, we get
+                    \begin{equation*}
+                        \alpha\dfrac{\overline{z}}{\lVert z \rVert} + \overline{\alpha}\dfrac{z}{\lVert z \rVert} = 0
+                    \end{equation*}
+            \end{proof}
+    \end{itemize}
+
+\newpage
+
+\textbf{Exercise 6}: At which points in $\mathbb{C}$ are the following functions complex-differentiable?
+    \begin{itemize}
+        \item [(a)] $f(z) = \mathop{Re}(z)$
+            \begin{answer}
+                We have the mappings for $z = x + iy$:
+                    \begin{align*}
+                        x &\mapsto x \\
+                        y &\mapsto 0   
+                    \end{align*}
+                So for $u(x, y) = x, v(x, y) = 0$, the Jacobian is given by $\begin{bmatrix}
+                    1 & 0 \\
+                    0 & 0   
+                \end{bmatrix}$. Since $u_{x} \neq v_{y}$, it is nowhere complex differentiable.
+            \end{answer}
+
+        \item [(b)] $f(z) = \overline{z}$
+            \begin{answer}
+                The map is:
+                    \begin{equation*}
+                        (x, y) \mapsto (x, -y)
+                    \end{equation*}
+                so the jacobian matrix for $u(x, y) = x, v(x, y) = -y$ is $\begin{bmatrix}
+                    1 & 0  \\
+                    0 & -1   
+                \end{bmatrix}$. It is nowhere complex differentiable.
+            \end{answer}
+
+        \item [(c)] $f(z) = \overline{z}(z^{2} - 1)$
+            \begin{answer}
+                Fully expand for $z = x + iy$:
+                    \begin{align*}
+                        f(x, y) &= (x - iy)((x + iy)^{2} - 1)                 \\
+                                &= (x^{2} + y^{2})(x + iy) - x + iy           \\
+                                &= x^{3} + xy^{2} + ix^{2}y + iy^{3} - x + iy \\
+                                &= x^{3} + xy^{2} - x + (x^{2}y + y^{3} + y)i   
+                    \end{align*}
+                So
+                    \begin{align*}
+                        u(x, y) &= x^{3} + xy^{2} - x \\
+                        v(x, y) &= x^{2}y + y^{3} + y   
+                    \end{align*}
+                The Jacobian is
+                    \begin{equation*}
+                        \begin{bmatrix}
+                            3x^{2} + y^{2} - 1 & 2xy                \\
+                            2xy                & x^{2} + 3y^{2} + 1   
+                        \end{bmatrix}
+                    \end{equation*}
+                We require that $2xy = -2xy$, so $4xy = 0$ and either $x = 0$ or $y = 0$. Cases:
+                    \begin{itemize}
+                        \item $x = 0$. Then 
+                            \begin{equation*}
+                                y^{2} - 1 = 3y^{2} + 1
+                            \end{equation*}
+                        by CR. So $2y^{2} = -2$, $y^{2} = -1$. Then $y = \pm i$ and $f$ is differentiable for $z = \pm 1$.
+
+                        \item $y = 0$. Then 
+                            \begin{equation*}
+                                3x^{2} - 1 = x^{2} + 1
+                            \end{equation*}
+                        so $2x^{2} = 2$ and $x^{2} = 1$. We also get $z = \pm 1$ for this case.
+                    \end{itemize}
+                Since we cannot have $x = y = 0$, as the matrix would be $\begin{bmatrix}
+                    -1 & 0 \\
+                    0  & 1   
+                \end{bmatrix}$, $f$ is complex-differentiable for $z = \pm 1$.
+            \end{answer}
+
+        \item [(d)] $f(z) = \overline{z}/\lvert z \rvert^{2}, f(0) = 0$ 
+            \begin{answer}
+                For $z = x + iy$, we have:
+                    \begin{equation*}
+                        f(z) = \dfrac{x - iy}{x^{2} + y^{2}} = \dfrac{x}{x^{2} + y^{2}} - \dfrac{iy}{x^{2} + y^{2}}
+                    \end{equation*}
+                So $u(x, y) = \frac{x}{x^{2} + y^{2}}$ and $v(x, y) = \frac{-y}{x^{2} + y^{2}}$. Take the partial derivatives:
+                    \begin{align*}
+                        u_{x} &= \dfrac{(x^{2} + y^{2}) - x(2x)}{(x^{2} + y^{2})^{2}}     \\
+                              &= \dfrac{-x^{2} + y^{2}}{(x^{2} + y^{2})^{2}}              \\
+                        u_{y} &= \dfrac{-2xy}{(x^{2} + y^{2})^{2}}                        \\
+                        v_{x} &= \dfrac{2xy}{(x^{2} + y^{2})^{2}}                         \\
+                        v_{y} &= \dfrac{-(x^{2} + y^{2}) - (-y)(2y)}{(x^{2} + y^{2})^{2}} \\
+                              &= \dfrac{-x^{2} + y^{2}}{(x^{2} + y^{2})^{2}}                
+                    \end{align*}
+                So the Jacobian matrix is
+                    \begin{equation*}
+                        \begin{bmatrix}
+                            \dfrac{-x^{2} + y^{2}}{(x^{2} + y^{2})^{2}} & \dfrac{-2xy}{(x^{2} + y^{2})^{2}}           \\
+                            \dfrac{2xy}{(x^{2} + y^{2})^{2}}            & \dfrac{-x^{2} + y^{2}}{(x^{2} + y^{2})^{2}}   
+                        \end{bmatrix}
+                    \end{equation*}
+                We see that it satisfies CR for all points except $0$, because it is not real-differentiable there.
+            \end{answer}
+    \end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

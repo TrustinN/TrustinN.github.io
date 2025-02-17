@@ -1,0 +1,26 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+        \PYG{k}{def} \PYG{n+nf}{query}\PYG{p}{(}\PYG{n}{p0}\PYG{p}{,} \PYG{n}{p1}\PYG{p}{):}
+            \PYG{n}{p0\PYGZus{}response} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{response}\PYG{p}{(}\PYG{n}{p0}\PYG{p}{,} \PYG{n}{p1}\PYG{p}{,} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}T\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}F\PYGZsq{}}\PYG{p}{\PYGZcb{})}
+            \PYG{n}{p1\PYGZus{}response} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{response}\PYG{p}{(}\PYG{n}{p1}\PYG{p}{,} \PYG{n}{p0}\PYG{p}{,} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}T\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}F\PYGZsq{}}\PYG{p}{\PYGZcb{})}
+            \PYG{k}{return} \PYG{p}{(}\PYG{n}{p0\PYGZus{}response}\PYG{p}{,} \PYG{n}{p1\PYGZus{}response}\PYG{p}{)}
+
+        \PYG{k}{def} \PYG{n+nf}{is\PYGZus{}truth}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{players}\PYG{p}{):}
+            \PYG{n}{count} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{l+m+mi}{0}
+            \PYG{k}{for} \PYG{p}{(}\PYG{n}{p} \PYG{o+ow}{in} \PYG{n}{players}\PYG{p}{):}
+                \PYG{k}{if} \PYG{n}{x} \PYG{o}{!=} \PYG{n}{p} \PYG{o+ow}{and} \PYG{n}{query}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{p}\PYG{p}{)} \PYG{o}{==} \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}T\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}T\PYGZsq{}}\PYG{p}{):}
+                    \PYG{n}{count} \PYG{o}{+=} \PYG{l+m+mi}{1}
+            \PYG{k}{return} \PYG{n}{count} \PYG{o}{\PYGZgt{}=} \PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{players}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{)} \PYG{o}{//} \PYG{l+m+mi}{2}
+
+        \PYG{k}{def} \PYG{n+nf}{get\PYGZus{}truth\PYGZus{}p}\PYG{p}{(}\PYG{n}{players}\PYG{p}{):}
+            \PYG{k}{if} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{players}\PYG{p}{)} \PYG{o}{==} \PYG{l+m+mi}{1}\PYG{p}{:}
+                \PYG{k}{return} \PYG{n}{players}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
+
+            \PYG{n}{num\PYGZus{}players} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{players}\PYG{p}{)}
+            \PYG{n}{truth\PYGZus{}p0} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{get\PYGZus{}truth\PYGZus{}p}\PYG{p}{(}\PYG{n}{players}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{:}\PYG{n}{num\PYGZus{}players}\PYG{p}{])}
+            \PYG{n}{truth\PYGZus{}p1} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{get\PYGZus{}truth\PYGZus{}p}\PYG{p}{(}\PYG{n}{players}\PYG{p}{[}\PYG{n}{num\PYGZus{}players}\PYG{p}{:])}
+
+            \PYG{k}{if} \PYG{n}{is\PYGZus{}truth}\PYG{p}{(}\PYG{n}{truth\PYGZus{}p0}\PYG{p}{,} \PYG{n}{players}\PYG{p}{):}
+                \PYG{k}{return} \PYG{n}{truth\PYGZus{}p0}
+            \PYG{k}{else}\PYG{p}{:}
+                \PYG{k}{return} \PYG{n}{truth\PYGZus{}p1}
+\end{Verbatim}

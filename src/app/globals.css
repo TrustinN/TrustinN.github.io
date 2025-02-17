@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #ffffff;
+    --foreground: #ededed;
+  }
+}
+
+@layer base {
+  p {
+    @apply my-4;
+  }
+
+  h1 {
+    @apply font-bold;
+    @apply text-3xl;
+  }
+  h2 {
+    @apply font-bold;
+    @apply text-xl;
+  }
+  h3 {
+    @apply font-bold;
+    @apply text-xl;
+  }
+  h4 {
+    @apply font-bold;
+    @apply text-xl;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+}

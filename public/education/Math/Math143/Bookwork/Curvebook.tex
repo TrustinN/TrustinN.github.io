@@ -1,0 +1,95 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math143/Bookwork/Curvebook.tex
+
+\documentclass{report}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/report}
+
+\title{Curvebook}
+\author{Trustin Nguyen}
+
+\begin{document}
+\newgeometry{
+    total={150mm,235mm},
+}
+
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+\tableofcontents
+\restoregeometry
+
+\reversemarginpar
+
+\chapter{Affine Algebraic Sets}
+
+\begin{topic}
+    \section{The Ideal of a Set of Points}
+\end{topic}
+
+If we consider a subset of $\mathbb{A}^{n}(k)$, we notice that the polynomials that vanish on $X$ form an ideal called the ideal of $X$ or $I(X)$. The formal definition is:
+    \begin{equation*}
+        I(X) = \{f \in k[X_{1}, \ldots, X_{n}] : F(a_{1}, a_{2}, \ldots, a_{n}) \forall (a_{1}, a_{2}, \ldots, a_{n}) \in X\}
+    \end{equation*}
+Here are some properties to verify:
+    \begin{itemize}
+        \item If $X \subseteq Y$, then $I(Y) \subseteq I(X)$.
+            \begin{proof}
+                Suppose that $I(Y)$ is not a subset of $I(X)$ for contradiction. That means that there is some polynomial $y \in I(Y)$ such that $y(p)$ for $p \in X$ such that $p(y) \neq 0$. But we have that $p \in X \implies p \in Y$ also. Therefore, $y(p) = 0$. But that is impossible. Contradiction.
+            \end{proof}
+
+        \item  $I(\emptyset) = k[X_{1}, \ldots, X_{n}]$; $I(\mathbb{A}^{n}(k)) = (0)$ if $k$ is an infinite field; $I(\{(a_{1}, \ldots, a_{n})\}) = (X_{1} - a_{1}, \ldots, X_{n} - a_{n}) \text{ for } a_{1}, \ldots, a_{n} \in k$.
+            \begin{proof}
+                Indeed, we have that for every point in $\emptyset$, $p(x) \in k[X_{1}, \ldots, X_{n}] = 0$. It is vacuously true. Now if the solution set is the whole space, then we see that $0$ is part of that ideal $I(\mathbb{A}^{n}(k))$ because $0 = 0$ for any point. For the second question, we need to show that a polynomial that fits the solution set can be factored into those irreducible elements. `The rest of the proof would then be trivial. As for the other way around, we see that elements with those factors indeed satisfy the condition that $f(a_{1}, \ldots, a_{n}) = 0$. For the first, we can argue by contradiction, saying that since $k$ is a field, $k[X]$ is a Euclidean domain. So if we have som $f(x) \in I(\{(a_{1}, \ldots, a_{n})\})$ that does not lie in the ideal, then there is some $(X_{i} - a_{i})$ such that it does not divide our polynomial. That means that:
+                    \begin{equation*}
+                        f(x) = g(x)(X_{i} - a_{i}) + r
+                    \end{equation*}
+                where $r \neq 0$. But We see that
+                    \begin{equation*}
+                        f((a_{1}, \ldots, a_{n})) = r \neq 0
+                    \end{equation*}
+                contradiction. 
+            \end{proof}
+
+        \item  $I(V(S)) \supseteq S$ for any set $S$ of polynomials; $V(I(X)) \supseteq X$ for any set $X$ of points.
+            \begin{proof}
+                (Part I) Suppose that $f(x) \in S$. Then that means that 
+                    \begin{equation*}
+                        V(S) = \{(a_{1}, \ldots, a_{n}): f((a_{1}, \ldots, a_{n})) = 0\}
+                    \end{equation*}
+                But since $f(x) = 0$ for all points in $V(S)$, $f(x) \in I(V(S))$.
+
+                (Part II) Basically same proof as previous one.
+            \end{proof}
+
+        \item  $V(I(V(S))) = S$ for any set $S$ of polynomials, and $I(V(I(X))) = I(X)$ for any set $X$ of points. So if $V$ is an algebraic set, $V = V(I(V))$, and if $I$ is the ideal of an algebraic set, $I = I(V(I))$.
+            \begin{proof}
+                
+            \end{proof}
+
+        \item $I(X)$ is a radical ideal for any $X \subseteq \mathbb{A}^{n}(k)$. 
+    \end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

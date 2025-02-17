@@ -1,0 +1,184 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math143/Homework/Math143Hw2/Math143Hw2.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+
+\title{Math143Hw2}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Suppose $I, J \subseteq k[x_{1}, \ldots, x_{n}]$ are ideals.
+    \begin{itemize}
+        \item [(a)] Prove that $I + J := \{f + g : f \in I, g \in J\}$ is an ideal.
+            \begin{proof}
+                We will prove that it is an additive group. Closure under addition for $f_{1}, f_{2} \in I$ and $g_{1}, g_{2} \in J$:
+                    \begin{equation*}
+                        (f_{1} + g_{1}) + (f_{2} + g_{2}) = (f_{1} + f_{2}) + (g_{1} + g_{2})
+                    \end{equation*}
+                We note that $f_{1} + f_{2} \in I$ and $g_{1} + g_{2} \in J$. Therefore, by definition of $I + J$, $(f_{1} + g_{1}) + (f_{2} + g_{2}) \in I + J$. The sum of two elements in $I + J$ is again in $I + J$. There is the additive identity because $0 \in I, 0 \in J$ implies that $0 + 0 = 0 \in I + J$. Associativity is inherited from the ring $k[X_{1}, \ldots, X_{n}]$. 
+
+                Now we show a closure under multiplication of elements in $k[X_{1}, \ldots, X_{n}]$. Let $a \in k[X_{1}, \ldots, X_{n}]$. Then for $f + g \in I + J$, $f \in I$ and $g \in J$, we have:
+                    \begin{equation*}
+                        a(f + g) = af + ag
+                    \end{equation*}
+                but $af \in I$ and $ag \in J$, so $af + ag \in I + J$. We are done.
+            \end{proof}
+
+        \item [(b)] Prove that $V(I + J) = V(I) \cap V(J)$. 
+            \begin{proof}
+                We have one inclusion because $I \subseteq I + J$ and $J \subseteq I + J$. Suppose that $p \in V(I + J)$. Then we have that for all polynomials of the form $f + g$, 
+                    \begin{equation*}
+                        (f + g)(p) = 0
+                    \end{equation*}
+                Then we must also have the case where $f = 0$ or $g = 0$. Therefore, $p$ must be solution to all polynomials of the form:
+                    \begin{equation*}
+                        (f + 0)(p) = f(p) = 0 \text{ and } (0 + g)(p) = g(p) = 0
+                    \end{equation*}
+                So we have $V(I + J) \subseteq V(I) \cap V(J)$. Now suppose that $p \in V(I) \cap V(J)$. The we must have both:
+                    \begin{equation*}
+                        f(p) = 0 \text{ and } g(p) = 0
+                    \end{equation*}
+                for all $f \in I$ and $g \in J$. We take the sum which is also $0$:
+                    \begin{equation*}
+                        f(p) + g(p) = (f + g)(p) = 0
+                    \end{equation*}
+                Therefore $p \in V(I + J)$. So there is the other inclusion $V(I + J) \supseteq V(I) \cap V(J)$.
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 2}: This problem will practice decomposing an algebraic set into irreducible components, similar to the example in lecture.
+    \begin{itemize}
+        \item [(a)] Show that $V(y - x^{2}) \subseteq \mathbb{A}^{2}_{\mathbb{C}}$ is irreducible.
+            \begin{proof}
+                We will prove that $y - x^{2}$ is prime. Let $y - x^{2} = fg$. Then $\text{deg}(f) = \text{deg}(g) = 1$.
+
+                If this is not the case, then one of our polynomials will have degree $ \geq 2$. Then the other polynomial will have degree $0$, otherwise, we will get nonzero cross terms. If one of our factors has degree $0$, we can multiply by a unit to get $1$, therefore showing that $y - x^{2}$ divides either $f$ or $g$.
+
+                Otherwise, we have wlog:
+                    \begin{equation*}
+                        f = a_{1}x + b_{1}y + c, g = a_{2}x + b_{2}y
+                    \end{equation*}
+                So $fg$ is
+                    \begin{equation*}
+                        a_{1}a_{2}x^{2} + b_{1}b_{2}y^{2} + a_{1}b_{2}xy + a_{2}b_{1}xy + a_{2}cx + b_{2}cy
+                    \end{equation*}
+                We must have $a_{1}, a_{2} \neq 0$ but $a_{1}b_{2} = 0$ and $b_{2}c = 0$.  So this case is impossible. We conclude that $(y - x^{2})$ is a prime ideal in $\mathbb{C}[x, y]$. By what is proved in question 3, and the Nullstellensatz, we have:
+                    \begin{equation*}
+                        I(V(y - x^{2})) = \sqrt{(y - x^{2})}
+                    \end{equation*}
+                and since prime ideals are radical ideals, 
+                    \begin{equation*}
+                        I(V(y - x^{2})) = (y - x^{2})
+                    \end{equation*}
+                Therefore, since $I(V(y - x^{2}))$ is prime, $V(y - x^{2})$ is irreducible.
+            \end{proof}
+
+        \item [(b)] Decompose $V(y^{4} - x^{2}, y^{4} - x^{2}y^{2} + xy^{2} - x^{3}) \subseteq \mathbb{A}^{2}_{\mathbb{C}}$ into irreducible components. 
+            \begin{answer}
+                We want to see when 
+                    \begin{equation*}
+                        y^{4} - x^{2} = 0
+                    \end{equation*}
+                So we have the factoring
+                    \begin{equation*}
+                        (y^{2} - x)(y^{2} + x) = 0 \implies x = y^{2}, x = -y^{2}
+                    \end{equation*}
+                Now we have irreducibles $(y^{2} - x)$ and $(y^{2} + x)$. Next, plug in the conditions into the second polynomial:
+                    \begin{align*}
+                        x^{2} - x^{3} + x^{2} - x^{3} = 2x^{2} - 2x^{3} = 0 = 2x^{2}(x - 1) = 0 \\
+                        x^{2} + x^{3} -x^{2} - x^{3} = 0
+                    \end{align*}
+                So we require that $x = 1$ or $x = 0$. Therefore, we have our decomposition:
+                    \begin{equation*}
+                        V(y^{2} + x) \cup (1, 1) \cup (0, 0) \cup (1, -1)
+                    \end{equation*}
+            \end{answer}
+    \end{itemize}
+
+\textbf{Exercise 3}: Let $I$ be an ideal in a ring $R$. 
+    \begin{itemize}
+        \item [(a)] If $a^{n} \in I, b^{m} \in I$, show that $(a + b)^{n + m} \in I$.
+            \begin{proof}
+                Suppose that $a^{n} \in I$, $b^{m} \in I$. Then we consider:
+                    \begin{equation*}
+                        (a + b)^{n + m} = \sum_{i = 0}^{n + m} \dbinom{n +  m}{i}a^{i}b^{n + m - i}
+                    \end{equation*}
+                We have two cases. If $i \geq n$ then the summands at or after the first $n$ summands will have the factor $a^{n}$, so it will be in $I$. Now if $i < n$, then we have that $n + m - i > m$. Therefore, the first $n - 1$ summands will have the factor $b^{m}$. Since each summand is an element of $I$ and $I$ is an ideal, then $(a + b)^{n + m} \in I$.
+            \end{proof}
+
+        \item [(b)] Show that $\sqrt{I}$ is an ideal.
+            \begin{proof}
+                Suppose that $a \in \sqrt{I}, b \in \sqrt{I}$. Then $a^{n} \in I$ and $b^{m} \in I$. Since $(a + b)^{n + m} \in I$ also, $a + b \in \sqrt{I}$. Now let $r \in R$. Then $r^{n} \in R$. Since $I$ is an ideal, we have that $r^{n}a^{n} \in I$. Therefore, $(ra)^{n} \in I$ and we have $ra \in I$.
+            \end{proof}
+
+        \item [(c)] Show that $\sqrt{I}$ is a radical ideal.
+            \begin{proof}
+                ($\sqrt{\sqrt{I}} \subseteq I$) Suppose that $a \in \sqrt{\sqrt{I}}$. Then that means that $a^{k} \in \sqrt{I}$ for some $k > 0$. But since $a^{k} \in \sqrt{I}$, we must have $a^{kn} \in I$. Therefore, $a \in \sqrt{I}$. So we have $\sqrt{\sqrt{I}} \subseteq \sqrt{I}$.
+
+                ($\sqrt{I} \subseteq \sqrt{\sqrt{I}}$) Suppose that $a \in \sqrt{I}$. Then we have $a^{k} \in I$ for some $k > 0$. But then that means that $a^{k} \in \sqrt{I}$ since $(a^{k})^{1} \in I$. Since $a^{k} \in \sqrt{I}$, we have $a \in \sqrt{\sqrt{I}}$.
+
+                Therefore, $\sqrt{I}$ is a radical ideal.
+            \end{proof}
+
+        \item [(d)] Prove that any prime ideal is a radical ideal.
+            \begin{proof}
+                Suppose that $I$ is prime and that $a \in I$. We immediately have that $a \in \sqrt{I}$. Now suppose that $a \in \sqrt{I}$. Then $a^{k} \in I$ for some $k > 0$. If $k = 1$, then we are done. If $k > 1$, then we have that $a^{k} = a^{k - 1} \cdot a \in I$. Therefore, either $a \in I$ or $a^{k - 1}$. So by induction, we continue the decomposition until we can conclude that $a \in I$. Therefore, $I = \sqrt{I}$.
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 4}: Prove or give a counter example to the following statements.
+    \begin{itemize}
+        \item [(a)] If $X$ and $Y$ are algebraic sets, then $I(X \cup Y) = I(X) \cap I(Y)$.
+            \begin{proof}
+                ($I(X \cup Y) \subseteq I(X) \cap  I(Y)$) Suppose that $p \in X \cup Y$ as an arbitrary point, and let $f \in I(X \cup Y)$ be arbitrary also. Then we know that $f(p) = 0$. Therefore, $f \in I(X)$ and $f \in I(Y)$. So $f \in I(X) \cap I(Y)$
+
+                ($I(X) \cap I(Y) \subseteq I(X \cup  Y)$) Suppose that $f \in I(X)$ and $f \in I(Y)$. Then for any $x \in X$, $y \in Y$, we have $f(x) = 0, f(y) = 0$. So if $p \in X \cup Y$, then $p \in X \lor Y$ and $f(p) = 0$. Therefore, $f \in I(X \cup Y)$.
+            \end{proof} 
+
+        \item [(b)] If $X$ and $Y$ are algebraic sets, then $I(X \cap Y) = I(X) + I(Y)$. 
+            \begin{proof}
+                ($I(x) + I(Y) \subseteq I(X \cap Y)$) We have that if $f \in I(x) + I(y)$, then $f = g + h$ where $g(x) = 0$, $h(y) = 0$. Since $g, h \in I(X \cap Y)$, then $f \in I \cap Y$.
+
+                I don't know how to prove the other inclusion, nor can I find a counter example.
+            \end{proof}
+    \end{itemize}
+
+\textbf{Exercise 5}: In class we proved that if $R$ is Noetherian, then every ascending chain of ideals
+    \begin{equation*}
+        I_{0} \subset I_{1} \subset I_{2} \subset \cdots
+    \end{equation*}
+in $R$ is finite. Prove the converse is true. Namely, if every ascending chain of ideals
+    \begin{equation*}
+        I_{0} \subset I_{1} \subset I_{2} \subset \cdots
+    \end{equation*}
+in $R$ is finite, then $R$ is Noetherian.
+    \begin{proof}
+        Suppose for contradiction that there was an ideal $I_{0}$ that was infinitely generated by $f_{1}, f_{2}, \ldots$. Then we pick one of the generators and consider the ideal generated say $I_{1} = (f_{1})$. Then we define each ideal $I_{n}$ to be 
+            \begin{equation*}
+                I_{n} = (f_{1}, f_{2}, \cdots, f_{n})
+            \end{equation*}
+        Clearly, 
+            \begin{equation*}
+                I_{1} \subset I_{2} \subset  \cdots \subset I_{n} \subset \cdots
+            \end{equation*}
+        But this is an infinite chain. So contradiction.
+    \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

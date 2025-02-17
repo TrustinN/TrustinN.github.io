@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{syms}\PYG{+w}{ }\PYG{l+s}{s}
+
+\PYG{n}{f}\PYG{p}{(}\PYG{n}{s}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{s}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n+nb}{log}\PYG{p}{(}\PYG{n}{s}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{);}
+\PYG{n}{res}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{vpa}\PYG{p}{(}\PYG{n+nb}{double}\PYG{p}{(}\PYG{n}{CompositeTrapezoidal}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{0.5}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{0.5}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{6}\PYG{p}{)))}
+\end{Verbatim}

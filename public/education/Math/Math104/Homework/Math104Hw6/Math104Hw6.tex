@@ -1,0 +1,99 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Math/Math104/Homework/Math104Hw6/Math104Hw6.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+
+\title{Math104Hw6}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\textbf{Exercise 1}: Prove that $\sum\frac{n^{2}}{2^{n}}$ converges.
+    \begin{proof}
+        We need to find when $2^{n} > n^{4}$. Let $n = 2^{m}$:
+            \begin{equation*}
+                2^{2^{m}} > 2^{4m}
+            \end{equation*}
+        which is true when $2^{m} >  4m$ so $2^{m - 2} > m$. So we require $m \geq  5$ or $n \geq 32$. So for $n > 32$, $\frac{n^{2}}{n^{4}} = \frac{1}{n^{2}} > \frac{n^{2}}{2^{n}}$. So if we start our sum at $32$, $\lvert \frac{n^{2}}{2^{n}} \rvert = \frac{n^{2}}{2^{n}} \leq \frac{1}{n^{2}}$ so by the comparison test, our series is cauchy and converges.
+    \end{proof}
+
+\textbf{Exercise 2}: Assume that $\sum a_{k}$ converges and $(b_{n})$ is bounded. Prove that $\sum a_{k}b_{k}$ converges.
+    \begin{proof}
+        Consider $b^{\prime} = \max(\lvert \inf b_{n} \rvert, \lvert \sup b_{n} \rvert)$. Then we see that 
+            \begin{equation*}
+                b^{\prime}\left\lvert \sum_{k = m}^{n}\lvert a_{k} \rvert \right\rvert = \left\lvert \sum_{k = m}^{n}\lvert a_{k} \rvert \lvert b^{\prime} \rvert \right\rvert \geq \left\lvert \sum_{k = m}^{n}\lvert a_{k} \rvert \lvert b_{k} \rvert \right\rvert = \left\lvert \sum_{k = m}^{n}\lvert a_{k}b_{k} \rvert \right\rvert
+            \end{equation*}
+        But we see that the series $\sum a_{k}$ converges. So we have:
+            \begin{equation*}
+                 b^{\prime}\left\lvert \sum_{k = m}^{n}\lvert a_{k} \rvert \right\rvert < \varepsilon
+            \end{equation*}
+        is cauchy. Then since $\lvert a_{k}b_{k} \rvert \leq \lvert b^{\prime}a_{k} \rvert$, we know that by comparison test, $\sum \lvert a_{k}b_{k} \rvert$ converges. But absolutely converging series imply that $\sum a_{k}b_{k}$ converges also. So we are done.
+    \end{proof}
+
+\textbf{Exercise 3}: Assume $\liminf \lvert a_{n} \rvert = 0$, then there is a subsequence $(a_{n_{k}})$ of $(a_{n})$ so that $\sum a_{n_{k}}$ converges absolutely.
+    \begin{proof}
+        Take $(a_{n_{k}}) = \inf\{a_{j} : j > k\}$. Since $\liminf \lvert a_{n} \rvert = 0$, we have that $\forall \varepsilon > 0$, $\exists N$ such that $\forall n_{k} > N$, 
+            \begin{equation*}
+                \lvert a_{n_{k}} \rvert < \dfrac{\varepsilon}{h}
+            \end{equation*}
+        for any $h > 1 \in \mathbb{N}$. Then we have:
+            \begin{equation*}
+                \left\lvert \sum_{n_{k} = m}^{m + h - 1}a_{n_{k}} \right\rvert \leq \lvert a_{n_{m}} \rvert + \lvert a_{n_{m + 1}} \rvert + \cdots + \lvert a_{n_{m + h - 1}} \rvert < \dfrac{\varepsilon}{ h} + \cdots + \dfrac{\varepsilon}{ h} = \varepsilon
+            \end{equation*}
+        So our series satisfies the cauchy criterion and is therefore convergent.
+    \end{proof}
+
+\textbf{Exercise 4}: Show that $\sum_{n = 2}^{\infty}\frac{1}{\mathop{log}n}$ diverges to $\infty$.
+    \begin{proof}
+        We know that $n > \log n$. This means that $\frac{1}{n} < \frac{1}{\log n}$. By the comparison test, since $\frac{1}{n}> 0$ and $\frac{1}{\log n} > \frac{1}{n}$ for all $n > 1$, since $\sum\frac{1}{n}$ diverges, $\sum\frac{1}{\log n}$ diverges also.
+    \end{proof}
+
+\textbf{Exercise 5}: Prove that $\sum \frac{1}{n(n + 1)} = 1$
+    \begin{proof}
+        We have that $\frac{1}{n(n + 1)} = \frac{1}{n} - \frac{1}{n + 1}$. Then:
+            \begin{equation*}
+                \sum_{k = 1}^{r} \dfrac{1}{n(n + 1)} = \sum_{k = 1}^{r} \dfrac{1}{k} - \dfrac{1}{k + 1} = 1 - \dfrac{1}{r + 1}
+            \end{equation*}
+        As $r \rightarrow \infty $, we have $1 - \frac{1}{r + 1} \rightarrow 1$. So $\sum\frac{1}{n(n + 1)} = 1$.
+    \end{proof}
+
+\textbf{Exercise 6}: Give examples of
+    \begin{itemize}
+        \item $\sum a_{k}$ converges but $\sum a_{k}^{2}$ diverges
+            \begin{answer}
+                By theorem $15.3$, we have that in the series $\sum\frac{1}{\sqrt{n}}$, $\frac{1}{\sqrt{n}} > \frac{1}{\sqrt{n + 1}}$ so the series $\sum(- 1)^{n}\frac{1}{\sqrt{n}}$ converges. But we have that $((-1)^{k}\frac{1}{\sqrt{k}})^{2} = \frac{1}{k}$ which diverges.
+            \end{answer}
+
+        \item $\sum a_{k}$ diverges but $\sum a^{2}_{k}$ converges. 
+            \begin{answer}
+                We know that $\sum\frac{1}{k}$ diverges but $\sum\frac{1}{k^{2}}$ converges which was proved in class.
+            \end{answer}
+    \end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
