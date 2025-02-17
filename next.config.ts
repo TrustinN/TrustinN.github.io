@@ -8,6 +8,5 @@ const nextConfig: NextConfig = {
   },
   reactStrictMode: true,
 };
-// && mv out/_next out/next && sed -i '' -e 's/\\/_next/\\.\\/next/g' out/**.html
 
 export default nextConfig;

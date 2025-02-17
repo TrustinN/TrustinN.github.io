@@ -43,7 +43,7 @@ const pageContent: articleElem[] = [
         </p>
       </div>
     ),
-    link: "/projects/",
+    link: "/projects",
   },
   {
     id: "Education",
@@ -103,7 +103,7 @@ const pageContent: articleElem[] = [
         </aside>
       </div>
     ),
-    link: "/education/",
+    link: "/education",
   },
   {
     id: "Hobbies",
@@ -118,7 +118,7 @@ const pageContent: articleElem[] = [
         </p>
       </div>
     ),
-    link: "/hobbies/",
+    link: "/hobbies",
   },
 ];
 

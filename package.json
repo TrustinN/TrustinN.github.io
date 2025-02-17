@@ -8,7 +8,7 @@
     "build": "npm run generate-pdf-list && next build && touch ./out/.nojekyll",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "gh-pages -d out -n"
+    "deploy": "gh-pages -d out -t"
   },
   "dependencies": {
     "better-react-mathjax": "^2.1.0",
