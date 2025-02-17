@@ -36,6 +36,81 @@
     @apply font-bold;
     @apply text-xl;
   }
+  img,
+  video {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  img.flip:hover {
+    transform: rotateZ(180deg);
+  }
+
+  img.zoom-out:hover {
+    transform: scale(0.5);
+  }
+
+  img.zoom-in:hover,
+  img.zoom-in:focus-within {
+    transform: scale(2);
+    z-index: 200;
+    position: relative;
+  }
+
+  img.dissolve,
+  img.emerge {
+    position: absolute;
+    transition: all 0s;
+  }
+
+  img.dissolve {
+    opacity: 1;
+  }
+
+  img.dissolve:hover {
+    opacity: 0;
+  }
+
+  img.emerge {
+    position: relative;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  img.dissolve:hover + img.emerge {
+    opacity: 1;
+  }
+
+  figure {
+    position: relative;
+  }
+
+  figcaption {
+    text-align: center;
+    width: 100%;
+  }
+
+  figcaption.dissolve {
+    position: relative;
+    opacity: 1;
+  }
+
+  figcaption.emerge {
+    position: absolute;
+    opacity: 0;
+  }
+
+  :is(img.zoom-out, img.dissolve, img.flip):hover ~ figcaption.dissolve {
+    position: absolute;
+    opacity: 0;
+  }
+
+  :is(img.zoom-out, img.dissolve, img.flip):hover ~ figcaption.emerge {
+    position: relative;
+    opacity: 1;
+  }
 }
 
 body {

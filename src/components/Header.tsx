@@ -1,4 +1,5 @@
 import { twMerge } from "tailwind-merge";
+import Link from "next/link";
 
 const subSections: Record<string, string> = {
   Home: "/",
@@ -34,14 +35,14 @@ export const Header = () => {
             }
             return (
               <li key={content}>
-                <a
+                <Link
                   className={twMerge(
                     `block p-0 transform scale-90 transition-transform duration-250 ease-in-out text-[1.1rem] hover:scale-100 focus:scale-100 hover:text-gray-300 focus:text-gray-300 hover:bg-gray-800 w-full h-full`,
                   )}
                   href={href}
                 >
                   {inner}
-                </a>
+                </Link>
               </li>
             );
           })}
