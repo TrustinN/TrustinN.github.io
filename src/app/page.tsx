@@ -81,7 +81,7 @@ const pageContent: articleElem[] = [
             <p>A corner in Main Stacks 2nd floor</p>
           </details>
           <details>
-            <summary>Best scenary?</summary>
+            <summary>Best scenery?</summary>
             <p>Botanical Garden</p>
             <ImageContainer columns={2}>
               <Image
