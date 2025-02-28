@@ -23,6 +23,19 @@ const imgHeight = 1256;
 
 const pageContent: articleElem[] = [
   {
+    id: "Overview",
+    content: (
+      <div>
+        <h2> Overview </h2>
+        <p>
+          In this project, we explore ways of working with bezier lines/curves
+          along with understanding the data structures needed to perform mesh
+          operations.
+        </p>
+      </div>
+    ),
+  },
+  {
     id: "Bezier Curves",
     content: (
       <div>
@@ -37,11 +50,11 @@ const pageContent: articleElem[] = [
           <MathJax inline={true}>{"\\(t\\)"}</MathJax> parameter we use for
           interpolation remains constant for a given point we want to compute on
           the curve. The images below illustrate the steps for computing the
-          Bezier curve given 5 control points. Hover over the images to zoom in:
+          Bezier curve given 6 control points. Hover over the images to zoom in:
         </p>
         <ImageContainer columns={3}>
           {[1, 2, 3, 4, 5, 6].map((num) => {
-            const imagePath = path.join(mediaBase, `part1/bz${num}.png`);
+            const imagePath = path.join(mediaBase, `part1/mybz${num}.png`);
             return (
               <Figure key={num}>
                 <Image
@@ -62,7 +75,7 @@ const pageContent: articleElem[] = [
         </p>
         <ImageContainer className={"w-[35rem]"}>
           <Image
-            src={path.join(mediaBase, "part1/bzmodified.png")}
+            src={path.join(mediaBase, "part1/mybzmodified.png")}
             alt={`Bezier curve modified and scrolled`}
             width={imgWidth}
             height={imgHeight}
