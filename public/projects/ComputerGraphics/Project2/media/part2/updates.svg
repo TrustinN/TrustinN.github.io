@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="70mm"
+   viewBox="0 0 210 70"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb1, 2024-10-09)"
+   sodipodi:docname="updates.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#cccccc"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="1"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.68852153"
+     inkscape:cx="283.94174"
+     inkscape:cy="294.10845"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-size:5.29167px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke-width:0.264999"
+       x="27.350603"
+       y="18.149273"
+       id="text1"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         style="stroke-width:0.265"
+         x="27.350603"
+         y="18.149273">HalfEdge {</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.265"
+         x="27.350603"
+         y="24.763861"
+         id="tspan3">     next</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.265"
+         x="27.350603"
+         y="31.378448"
+         id="tspan4">     twin</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.265"
+         x="27.350603"
+         y="37.993034"
+         id="tspan5">     vertex</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.265"
+         x="27.350603"
+         y="44.607624"
+         id="tspan6">     edge</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.265"
+         x="27.350603"
+         y="51.22221"
+         id="tspan7">     face</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.265"
+         x="27.350603"
+         y="57.836796"
+         id="tspan8">}</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:5.29167px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke-width:0.264999"
+       x="71.231018"
+       y="18.149273"
+       id="text1-8"><tspan
+         sodipodi:role="line"
+         id="tspan1-5"
+         style="stroke-width:0.265"
+         x="71.231018"
+         y="18.149273">Face {</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.265"
+         x="71.231018"
+         y="24.763861"
+         id="tspan7-2">     halfedge</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.265"
+         x="71.231018"
+         y="31.378448"
+         id="tspan8-2">}</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:5.29167px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke-width:0.264999"
+       x="111.96964"
+       y="18.149273"
+       id="text1-8-8"><tspan
+         sodipodi:role="line"
+         id="tspan1-5-4"
+         style="stroke-width:0.265"
+         x="111.96964"
+         y="18.149273">Vertex {</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.265"
+         x="111.96964"
+         y="24.763861"
+         id="tspan7-2-0">     halfedge</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.265"
+         x="111.96964"
+         y="31.378448"
+         id="tspan8-2-4">}</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:5.29167px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;stroke-width:0.264999"
+       x="154.16176"
+       y="18.149273"
+       id="text1-8-8-7"><tspan
+         sodipodi:role="line"
+         id="tspan1-5-4-2"
+         style="stroke-width:0.265"
+         x="154.16176"
+         y="18.149273">Edge {</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.265"
+         x="154.16176"
+         y="24.763861"
+         id="tspan7-2-0-9">     halfedge</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.265"
+         x="154.16176"
+         y="31.378448"
+         id="tspan8-2-4-7">}</tspan></text>
+  </g>
+</svg>

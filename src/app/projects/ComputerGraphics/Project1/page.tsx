@@ -9,7 +9,7 @@ import {
   Section,
   Article,
 } from "@/components/ContentContainer";
-import { ImageContainer } from "@/components/ImageContainer";
+import { ImageContainer, Figure } from "@/components/ImageContainer";
 import Image from "next/image";
 import { MathJax } from "better-react-mathjax";
 import { Sidebar } from "@/components/Sidebar";
@@ -128,62 +128,114 @@ const pageContent: articleElem[] = [
         </ImageContainer>
         <p>
           The resulting edges of the triangles are smoother and jaggies become
-          less of an issue:
+          less of an issue. Hover over the images to zoom in:
         </p>
         <ImageContainer columns={4}>
+          <Figure>
+            <Image
+              className="zoom-in"
+              src={path.join(mediaBase, "/part2/triangle_jaggies.png")}
+              alt="triangle_jaggies"
+              width="1600"
+              height="1200"
+            />
+            <figcaption>Sample Rate: 1</figcaption>
+          </Figure>
+          <Figure>
+            <Image
+              className="zoom-in"
+              src={path.join(mediaBase, "/part2/triangle_super_4.png")}
+              alt="triangle_super_4"
+              width="1600"
+              height="1200"
+            />
+            <figcaption>Sample Rate: 4</figcaption>
+          </Figure>
+          <Figure>
+            <Image
+              className="zoom-in"
+              src={path.join(mediaBase, "/part2/triangle_super_9.png")}
+              alt="triangle_super_9"
+              width="1600"
+              height="1200"
+            />
+            <figcaption>Sample Rate: 9</figcaption>
+          </Figure>
+          <Figure>
+            <Image
+              className="zoom-in"
+              src={path.join(mediaBase, "/part2/triangle_super_16.png")}
+              alt="triangle_super_16"
+              width="1600"
+              height="1200"
+            />
+            <figcaption>Sample Rate: 16</figcaption>
+          </Figure>
+          <Figure>
+            <Image
+              className="zoom-in"
+              src={path.join(mediaBase, "/part2/cube_jaggies.png")}
+              alt="cube_jaggies"
+              width="1600"
+              height="1200"
+            />
+            <figcaption>Sample Rate: 1</figcaption>
+          </Figure>
+          <Figure>
+            <Image
+              className="zoom-in"
+              src={path.join(mediaBase, "/part2/cube_super_4.png")}
+              alt="cube_super_4"
+              width="1600"
+              height="1200"
+            />
+            <figcaption>Sample Rate: 4</figcaption>
+          </Figure>
+          <Figure>
+            <Image
+              className="zoom-in"
+              src={path.join(mediaBase, "/part2/cube_super_9.png")}
+              alt="cube_super_9"
+              width="1600"
+              height="1200"
+            />
+            <figcaption>Sample Rate: 9</figcaption>
+          </Figure>
+          <Figure>
+            <Image
+              className="zoom-in"
+              src={path.join(mediaBase, "/part2/cube_super_16.png")}
+              alt="cube_super_16"
+              width="1600"
+              height="1200"
+            />
+            <figcaption>Sample Rate: 16</figcaption>
+          </Figure>
+        </ImageContainer>
+      </div>
+    ),
+  },
+  {
+    id: "Transforms",
+    content: (
+      <div>
+        <h2> Transforms </h2>
+        <p>
+          To draw various triangles at different locations, we can utilize
+          transforms to rotate, scale, and translate a triangle. This is known
+          as an affine transformation and can be broken down by:{" "}
+          <MathJax>
+            {
+              "\\begin{equation*} \\begin{bmatrix} R & T \\\\ 0 & 1  \\end{bmatrix} \\end{equation*} "
+            }
+          </MathJax>
+          Where the top left matrix is the rotation matrix and to the right is
+          the translation matrix.
+        </p>
+        <ImageContainer>
           <Image
-            className="zoom-in"
-            src={path.join(mediaBase, "/part2/triangle_jaggies.png")}
-            alt="triangle_jaggies"
-            width="1600"
-            height="1200"
-          />
-          <Image
-            className="zoom-in"
-            src={path.join(mediaBase, "/part2/triangle_super_4.png")}
-            alt="triangle_super_4"
-            width="1600"
-            height="1200"
-          />
-          <Image
-            className="zoom-in"
-            src={path.join(mediaBase, "/part2/triangle_super_9.png")}
-            alt="triangle_super_9"
-            width="1600"
-            height="1200"
-          />
-          <Image
-            className="zoom-in"
-            src={path.join(mediaBase, "/part2/triangle_super_16.png")}
-            alt="triangle_super_16"
-            width="1600"
-            height="1200"
-          />
-          <Image
-            className="zoom-in"
-            src={path.join(mediaBase, "/part2/cube_jaggies.png")}
-            alt="cube_jaggies"
-            width="1600"
-            height="1200"
-          />
-          <Image
-            className="zoom-in"
-            src={path.join(mediaBase, "/part2/cube_super_4.png")}
-            alt="cube_super_4"
-            width="1600"
-            height="1200"
-          />
-          <Image
-            className="zoom-in"
-            src={path.join(mediaBase, "/part2/cube_super_9.png")}
-            alt="cube_super_9"
-            width="1600"
-            height="1200"
-          />
-          <Image
-            className="zoom-in"
-            src={path.join(mediaBase, "/part2/cube_super_16.png")}
-            alt="cube_super_16"
+            src={path.join(mediaBase, "/part3/transforms.png")}
+            alt="Transforms demo"
             width="1600"
             height="1200"
           />
@@ -267,18 +319,24 @@ const pageContent: articleElem[] = [
           the color of that pixel for our texture mapping.
         </p>
         <ImageContainer columns={2}>
-          <Image
-            src={path.join(mediaBase, "/part5/earth_flat_nearest_1.png")}
-            alt="flat earth nearest neighbor sampling"
-            width="1600"
-            height="1200"
-          />
-          <Image
-            src={path.join(mediaBase, "/part5/earth_rounded_nearest_16.png")}
-            alt="rounded earth bilinear sampling"
-            width="1600"
-            height="1200"
-          />
+          <Figure>
+            <Image
+              src={path.join(mediaBase, "/part5/earth_flat_nearest_1.png")}
+              alt="flat earth nearest neighbor sampling"
+              width="1600"
+              height="1200"
+            />
+            <figcaption>NN sampling, Sample rate: 1</figcaption>
+          </Figure>
+          <Figure>
+            <Image
+              src={path.join(mediaBase, "/part5/earth_rounded_nearest_16.png")}
+              alt="rounded earth bilinear sampling"
+              width="1600"
+              height="1200"
+            />
+            <figcaption>NN sampling, Sample rate: 16</figcaption>
+          </Figure>
         </ImageContainer>
         <h3>Bilinear Filtering</h3>
         <p>
@@ -287,18 +345,24 @@ const pageContent: articleElem[] = [
           the colors in each axis.
         </p>
         <ImageContainer columns={2}>
-          <Image
-            src={path.join(mediaBase, "/part5/earth_flat_bilinear_1.png")}
-            alt="flat earth nearest neighbor sampling"
-            width="1600"
-            height="1200"
-          />
-          <Image
-            src={path.join(mediaBase, "/part5/earth_rounded_bilinear_16.png")}
-            alt="rounded earth bilinear sampling"
-            width="1600"
-            height="1200"
-          />
+          <Figure>
+            <Image
+              src={path.join(mediaBase, "/part5/earth_flat_bilinear_1.png")}
+              alt="flat earth nearest neighbor sampling"
+              width="1600"
+              height="1200"
+            />
+            <figcaption> Bilinear filtering, Sample rate: 1 </figcaption>
+          </Figure>
+          <Figure>
+            <Image
+              src={path.join(mediaBase, "/part5/earth_rounded_bilinear_16.png")}
+              alt="rounded earth bilinear sampling"
+              width="1600"
+              height="1200"
+            />
+            <figcaption> Bilinear filtering, Sample rate: 16</figcaption>
+          </Figure>
         </ImageContainer>
       </div>
     ),
@@ -326,7 +390,7 @@ const pageContent: articleElem[] = [
           texture, while if the triangle is small wrt to the texture, we want to
           sample from a downsampled texture.
         </p>
-        <h3> implementation </h3>
+        <h3> Implementation </h3>
         <p>
           As for the implementation details, we compute the barycentric
           coordinates for{" "}
@@ -359,58 +423,80 @@ const pageContent: articleElem[] = [
           </MathJax>
         </p>
         <ImageContainer columns={2}>
-          <Image
-            src={path.join(mediaBase, "/part6/L0PN.png")}
-            alt="Level 0 Pixel sampling nearest"
-            width="1600"
-            height="1200"
-          />
-          <Image
-            src={path.join(mediaBase, "/part6/L0PL.png")}
-            alt="Level 0 Pixel sampling bilinear"
-            width="1600"
-            height="1200"
-          />
-          <Image
-            src={path.join(mediaBase, "/part6/LNPN.png")}
-            alt="Level Nearest Pixel sampling nearest"
-            width="1600"
-            height="1200"
-          />
-          <Image
-            src={path.join(mediaBase, "/part6/LNPL.png")}
-            alt="Level Nearest Pixel sampling bilinear"
-            width="1600"
-            height="1200"
-          />
+          <Figure>
+            <Image
+              src={path.join(mediaBase, "/part6/L0PN.png")}
+              alt="Level 0 Pixel sampling nearest"
+              width="1600"
+              height="1200"
+            />
+            <figcaption> Level: 0, Pixel Sampling: Nearest</figcaption>
+          </Figure>
+          <Figure>
+            <Image
+              src={path.join(mediaBase, "/part6/L0PL.png")}
+              alt="Level 0 Pixel sampling bilinear"
+              width="1600"
+              height="1200"
+            />
+            <figcaption> Level: 0, Pixel Sampling: Bilinear</figcaption>
+          </Figure>
+          <Figure>
+            <Image
+              src={path.join(mediaBase, "/part6/LNPN.png")}
+              alt="Level Nearest Pixel sampling nearest"
+              width="1600"
+              height="1200"
+            />
+            <figcaption> Level: Nearest, Pixel Sampling: Nearest</figcaption>
+          </Figure>
+          <Figure>
+            <Image
+              src={path.join(mediaBase, "/part6/LNPL.png")}
+              alt="Level Nearest Pixel sampling bilinear"
+              width="1600"
+              height="1200"
+            />
+            <figcaption> Level: Nearest, Pixel Sampling: Bilinear</figcaption>
+          </Figure>
         </ImageContainer>
         <p>
           It is difficult to see the difference across the level sampling
           methods, but the effect is more noticeable when we zoom out, as
-          aliasing becomes a problem:
+          aliasing becomes a problem. Hover over the following three images to
+          zoom in:
         </p>
         <ImageContainer columns={3}>
-          <Image
-            className="zoom-in"
-            src={path.join(mediaBase, "/part6/L0.png")}
-            alt="Level Zero"
-            width="1600"
-            height="1200"
-          />
-          <Image
-            className="zoom-in"
-            src={path.join(mediaBase, "/part6/LN.png")}
-            alt="Level Nearest"
-            width="1600"
-            height="1200"
-          />
-          <Image
-            className="zoom-in"
-            src={path.join(mediaBase, "/part6/LL.png")}
-            alt="Level linear"
-            width="1600"
-            height="1200"
-          />
+          <Figure>
+            <Image
+              className="zoom-in"
+              src={path.join(mediaBase, "/part6/L0.png")}
+              alt="Level Zero"
+              width="1600"
+              height="1200"
+            />
+            <figcaption> Level Zero </figcaption>
+          </Figure>
+          <Figure>
+            <Image
+              className="zoom-in"
+              src={path.join(mediaBase, "/part6/LN.png")}
+              alt="Level Nearest"
+              width="1600"
+              height="1200"
+            />
+            <figcaption> Level Nearest </figcaption>
+          </Figure>
+          <Figure>
+            <Image
+              className="zoom-in"
+              src={path.join(mediaBase, "/part6/LL.png")}
+              alt="Level linear"
+              width="1600"
+              height="1200"
+            />
+            <figcaption> Level Linear </figcaption>
+          </Figure>
         </ImageContainer>
       </div>
     ),
@@ -422,6 +508,7 @@ export default function Page() {
     <div>
       <Banner>
         <h1>Project 1: The Rendering Pipeline</h1>
+        <p>(https://trustinn.github.io/projects/ComputerGraphics/Project1)</p>
       </Banner>
 
       <PageContainer>

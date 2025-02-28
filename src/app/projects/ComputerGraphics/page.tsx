@@ -25,6 +25,19 @@ const pageContent: articleElem[] = [
     ),
     link: path.join(base, "Project1"),
   },
+  {
+    id: "project2",
+    content: (
+      <div>
+        <h2>Project 2: Bezier Curves and Mesh Operations</h2>
+        <p>
+          Drawing bezier curves, upsampling meshes, interpolating surface
+          normals.
+        </p>
+      </div>
+    ),
+    link: path.join(base, "Project2"),
+  },
 ];
 
 export default function Page() {
