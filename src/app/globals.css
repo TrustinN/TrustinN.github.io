@@ -62,7 +62,7 @@
   img.dissolve,
   img.emerge {
     position: absolute;
-    transition: all 0s;
+    transition: all 0.33s;
   }
 
   img.dissolve {

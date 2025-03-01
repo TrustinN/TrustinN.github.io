@@ -1,9 +1,15 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
-export const Figure = ({ children }: { children: React.ReactNode }) => {
+export const Figure = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
   return (
-    <figure className="text-center">
+    <figure className={`text-center ${className}`}>
       {React.Children.map(children, (child) => {
         if (
           React.isValidElement<{ className: string }>(child) &&

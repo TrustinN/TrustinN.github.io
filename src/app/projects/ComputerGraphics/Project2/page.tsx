@@ -30,7 +30,8 @@ const pageContent: articleElem[] = [
         <p>
           In this project, we explore ways of working with bezier lines/curves
           along with understanding the data structures needed to perform mesh
-          operations.
+          operations. It was great to learn about the data structures we can use
+          to traverse the mesh and modify parts of it locally.
         </p>
       </div>
     ),
@@ -218,15 +219,25 @@ const pageContent: articleElem[] = [
         <p>
           For halfedges, we can use the setNeighbors method to quickly update
           all its variables. Here is an application of the function on a couple
-          of edges:
+          of edges. Also, hover over the image to see the original edges:
         </p>
         <ImageContainer className="w-[35rem]">
-          <Image
-            src={path.join(mediaBase, "part2/edge_flip.png")}
-            alt="Edge Flip Teapot"
-            width={imgWidth}
-            height={imgHeight}
-          />
+          <Figure className="relative">
+            <Image
+              className="dissolve"
+              src={path.join(mediaBase, "part2/edge_flip_after.png")}
+              alt="After Edge Flip Teapot"
+              width={imgWidth}
+              height={imgHeight}
+            />
+            <Image
+              className="emerge"
+              src={path.join(mediaBase, "part2/edge_flip_before.png")}
+              alt="Before Edge Flip Teapot"
+              width={imgWidth}
+              height={imgHeight}
+            />
+          </Figure>
         </ImageContainer>
         <p>
           For debugging, it was very helpful drawing out the operations and
@@ -257,16 +268,45 @@ const pageContent: articleElem[] = [
         <p>
           We would have to create a new vertex bisecting the edge, three new
           edges to have 4 center edges, 6 new half edges for each of the 3
-          edges, and 2 new faces. Here is an application of some splits on the
-          teapot:
+          edges, and 2 new faces. Here is an application of some splits and
+          flips. Hover over the images to view the original mesh before the
+          operations.
         </p>
         <ImageContainer className="w-[35rem]">
-          <Image
-            src={path.join(mediaBase, "part2/edge_split.png")}
-            alt="Edge Split Teapot"
-            width={imgWidth}
-            height={imgHeight}
-          />
+          <Figure className="relative">
+            <Image
+              className="dissolve"
+              src={path.join(mediaBase, "part2/edge_split_after.png")}
+              alt="Edge Split Cow After"
+              width={imgWidth}
+              height={imgHeight}
+            />
+            <Image
+              className="emerge"
+              src={path.join(mediaBase, "part2/edge_split_before.png")}
+              alt="Edge Split Cow Before"
+              width={imgWidth}
+              height={imgHeight}
+            />
+            <figcaption>Cow Edge Splits</figcaption>
+          </Figure>
+          <Figure className="relative">
+            <Image
+              className="dissolve"
+              src={path.join(mediaBase, "part2/edge_split_flip_after.png")}
+              alt="Edge Split Ring After"
+              width={imgWidth}
+              height={imgHeight}
+            />
+            <Image
+              className="emerge"
+              src={path.join(mediaBase, "part2/edge_split_flip_before.png")}
+              alt="Edge Split Ring Before"
+              width={imgWidth}
+              height={imgHeight}
+            />
+            <figcaption>Ring Edge Splits and Flips</figcaption>
+          </Figure>
         </ImageContainer>
       </div>
     ),
