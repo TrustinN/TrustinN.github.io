@@ -38,6 +38,19 @@ const pageContent: articleElem[] = [
     ),
     link: path.join(base, "Project2"),
   },
+  {
+    id: "project3",
+    content: (
+      <div>
+        <h2>Project 3: Ray Tracing and Illumination</h2>
+        <p>
+          Drawing bezier curves, upsampling meshes, interpolating surface
+          normals.
+        </p>
+      </div>
+    ),
+    link: path.join(base, "Project3"),
+  },
 ];
 
 export default function Page() {

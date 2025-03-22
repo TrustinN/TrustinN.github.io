@@ -30,11 +30,11 @@
   }
   h3 {
     @apply font-bold;
-    @apply text-xl;
+    @apply text-lg;
   }
   h4 {
     @apply font-bold;
-    @apply text-xl;
+    @apply text-base;
   }
   img,
   video {
