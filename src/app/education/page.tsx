@@ -272,6 +272,27 @@ export default function Home() {
           },
         ],
       },
+      {
+        semester: "2nd",
+        courses: [
+          {
+            title: "CS 161",
+            desc: "Computer Security",
+          },
+          {
+            title: "CS 162",
+            desc: "Operating Systems and Systems Programming",
+          },
+          {
+            title: "CS 184",
+            desc: "Foundations of Computer Graphics",
+          },
+          {
+            title: "HISTART 27",
+            desc: "Visual Cultures of Africa",
+          },
+        ],
+      },
     ],
   ];
 
