@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{function}\PYG{+w}{ }y\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nf}{q4f1}\PYG{p}{(}t, funcs\PYG{p}{)}
+\PYG{n}{y}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{funcs}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mf}{0.0003}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{funcs}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mf}{0.0004}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{funcs}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{));}
+\PYG{k}{end}
+\end{Verbatim}

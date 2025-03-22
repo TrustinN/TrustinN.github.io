@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{function}\PYG{+w}{ }y\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nf}{q5fdy}\PYG{p}{(}t, y\PYG{p}{)}
+\PYG{n}{y}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{10}\PYG{p}{;}
+\PYG{k}{end}
+\end{Verbatim}

@@ -4,6 +4,22 @@
     "url": "/education/Compsci/CS170/Homework/CS170Hw1/CS170Hw1.pdf"
   },
   {
+    "name": "CS170Hw11",
+    "url": "/education/Compsci/CS170/Homework/CS170Hw11/CS170Hw11.pdf"
+  },
+  {
+    "name": "3satComp",
+    "url": "/education/Compsci/CS170/Homework/CS170Hw11/figures/3satComp.pdf"
+  },
+  {
+    "name": "gadget",
+    "url": "/education/Compsci/CS170/Homework/CS170Hw11/figures/gadget.pdf"
+  },
+  {
+    "name": "gadget3Comp",
+    "url": "/education/Compsci/CS170/Homework/CS170Hw11/figures/gadget3Comp.pdf"
+  },
+  {
     "name": "CS170Hw2",
     "url": "/education/Compsci/CS170/Homework/CS170Hw2/CS170Hw2.pdf"
   },
@@ -336,6 +352,14 @@
     "url": "/education/Math/Math128a/Homework/Math128aHw1/Math128aHw1.pdf"
   },
   {
+    "name": "Math128aHw11",
+    "url": "/education/Math/Math128a/Homework/Math128aHw11/Math128aHw11.pdf"
+  },
+  {
+    "name": "Math128aHw12",
+    "url": "/education/Math/Math128a/Homework/Math128aHw12/Math128aHw12.pdf"
+  },
+  {
     "name": "Math128Hw2",
     "url": "/education/Math/Math128a/Homework/Math128aHw2/Math128Hw2.pdf"
   },
@@ -362,6 +386,14 @@
   {
     "name": "Math128aHw7",
     "url": "/education/Math/Math128a/Homework/Math128aHw7/Math128aHw7.pdf"
+  },
+  {
+    "name": "Math128aHw8",
+    "url": "/education/Math/Math128a/Homework/Math128aHw8/Math128aHw8.pdf"
+  },
+  {
+    "name": "sd",
+    "url": "/education/Math/Math128a/Homework/Math128aHw8/figures/sd.pdf"
   },
   {
     "name": "Math143Hw1",

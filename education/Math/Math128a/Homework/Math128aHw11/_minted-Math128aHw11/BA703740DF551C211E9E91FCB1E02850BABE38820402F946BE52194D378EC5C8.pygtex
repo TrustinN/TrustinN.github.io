@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{funcs}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{p}{\PYGZob{}@}\PYG{n}{q3f1}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{@}\PYG{n}{q3f2}\PYG{p}{\PYGZcb{};}
+\PYG{n}{init}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{1000}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{500}\PYG{p}{];}
+
+\PYG{n}{approx}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{RKsystem}\PYG{p}{(}\PYG{n}{funcs}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{init}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{99}\PYG{p}{);}
+
+\PYG{n}{t}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nb}{linspace}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{100}\PYG{p}{);}
+
+\PYG{n+nb}{plot}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{approx}\PYG{p}{(:,}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{),}\PYG{+w}{ }\PYG{l+s}{\PYGZsq{}b\PYGZhy{}\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{t}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{approx}\PYG{p}{(:,}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{),}\PYG{+w}{ }\PYG{l+s}{\PYGZsq{}r\PYGZhy{}\PYGZsq{}}\PYG{p}{);}\PYG{+w}{ }\PYG{c}{\PYGZpc{} Optional: Add line styles/colors}
+\PYG{n+nb}{legend}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Prey\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZsq{}Predator\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{xlabel}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Time\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{ylabel}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Population\PYGZsq{}}\PYG{p}{);}
+\PYG{n+nb}{title}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}Prey\PYGZhy{}Predator Dynamics\PYGZsq{}}\PYG{p}{);}
+
+\end{Verbatim}
