@@ -1,0 +1,862 @@
+%! TeX root = /Users/trustinnguyen/Downloads/Berkeley/Compsci/CS189/Homework/CS189Hw2/tex/CS189HW2.tex
+
+\documentclass{article}
+\usepackage{/Users/trustinnguyen/.mystyle/math/packages/mypackages}
+\usepackage{/Users/trustinnguyen/.mystyle/math/commands/mycommands}
+\usepackage{/Users/trustinnguyen/.mystyle/math/environments/article}
+\graphicspath{{./figures/}}
+
+\title{CS189Hw2}
+\author{Trustin Nguyen}
+
+\begin{document}
+
+    \maketitle
+
+\reversemarginpar
+
+\section*{Multivariate Gaussians: A review}
+\hrule
+
+Multivariate Gaussian distributions crop up everywhere in machine learning, from priors on model parameters to assumptions on noise distributions. Being able to manipulate multivariate Gaussians also becomes important for analyzing correlations in data and preprocessing it for better regression and classification. We want to make sure to first cover the MVG fundamentals here.
+
+Note that the probability density function of a non-degenerate (i.e. the covariance matrix is positive definite and, thus, invertible) multivariate Gaussian RV with mean vector, $\mu \in \mathbb{R}^{2}$, and covariance matrix, $\Sigma \in \mathbb{R}^{2 \times 2}$, is:
+    \begin{equation*}
+        f(z) = \dfrac{1}{\sqrt{(2\pi)^{2}\lvert \Sigma \rvert}}\exp\left(-\dfrac{1}{2}(z - \mu)^{T} \Sigma^{-1} (z - \mu)\right)
+    \end{equation*}
+    \begin{itemize}
+        \item [(a)] Consider a two dimensional, zero mean random variable $Z = \begin{bmatrix}
+            Z_{1} & Z_{2}   
+        \end{bmatrix}^{T} \in \mathbb{R}^{2}$. In order for the random variable to be jointly Gaussian, a necessary and sufficient condition which we call the \textit{first characterization} is that
+            \begin{itemize}
+                \item $Z_{1}$ and $Z_{2}$ are each marginally Gaussian, and
+
+                \item $Z_{1} \mid Z_{2} = z$ is Gaussian, and $Z_{2} \mid Z_{1} = z$ is Gaussian.
+            \end{itemize}
+        A \textit{second characterization} of a jointly Gaussian zero mean RV $Z \in \mathbb{R}^{2}$ is that it can be written as $Z = AX$, where $X \in \mathbb{R}^{2}$ is a collection of i.i.d. standard normal RVs and $A \in \mathbb{R}^{2 \times 2}$ is a matrix.
+
+        Let $X_{1}$ and $X_{2}$ be i.i.d. standard normal RVs. Let $U$ denote a binary random variable uniformly that is equal to $1$ with probability $\frac{1}{2}$ and $-1$ with probability $\frac{1}{2}$, independent of everything else.
+
+        For each of the below subproblems, complete the following \textit{two} steps: (1) Using one of the characterizations given above, determine whether the RVs are jointly Gaussian. If using the second characterization, clearly specify the $A$ matrix. (2) Calculate the covariance matrix of $Z$ (regardless of whether the RVs are jointly Gaussian or not).
+            \begin{itemize}
+                \item [(i.)] $Z_{1} = X_{1}$ and $Z_{2} = X_{2}$
+                    \begin{answer}
+                        I will be using the first characterization. To show that $Z_{1}$ and $Z_{2}$ are marginally Gaussian, we need to show that:
+                            \begin{equation*}
+                                p_{Z_{2}}(z) = \int_{-\infty}^{\infty} p(Z_{1} = z^{\prime}, Z_{2} = z) \, \dd{z^{\prime}}
+                            \end{equation*}
+                        is Gaussian. Since the RVs are independent:
+                            \begin{align*}
+                                p_{Z_{2}}(z) &= \int_{-\infty}^{\infty} p(Z_{1} = z^{\prime})p(Z_{2} = z) \, \dd{z^{\prime}}  \\
+                                             &= p(Z_{2} = z) \int_{-\infty}^{\infty} p(Z_{1} = z^{\prime}) \, \dd{z^{\prime}} \\
+                                             &= p(Z_{2} = z)                                                                    
+                            \end{align*}
+                        so $p_{Z_{2}}$ is Gaussian. The other way is symmetric.
+
+                        To see that $Z_{1} \mid Z_{2} = z$ is Gaussian, we have:
+                            \begin{equation*}
+                                p(Z_{1} = z_{1} \mid Z_{2} = z) = \dfrac{p(Z_{1} = z_{1}, Z_{2} = z)}{p(Z_{2} = z)}
+                            \end{equation*}
+                        Since they are independent:
+                            \begin{equation*}
+                                p(Z_{1} = z_{1} \mid Z_{2} = z) = \dfrac{p(Z_{1} = z_{1})p(Z_{2} = z)}{p(Z_{2} = z)} = p(Z_{1} = z_{1})
+                            \end{equation*}
+                        So the distribution of $Z_{1} \mid Z_{2} = z$ is the same as that of $Z_{1}$, and is therefore Gaussian. The other case is symmetric.
+
+                        The covariance matrix of $Z$ is the variance of $Z_{1}$ along the diagonal because the distributions are independent.
+                    \end{answer}
+
+                \item [(ii.)] $Z_{1} = X_{1}$ and $Z_{2} = X_{1} + 2X_{2}$. If using the first characterization, assume that you already know $(Z_{1} \mid Z_{2} = z)$ is Gaussian.
+                    \begin{answer}
+                        It is jointly Gaussian because 
+                            \begin{equation*}
+                                \begin{bmatrix}
+                                    Z_{1} \\
+                                    Z_{2}   
+                                \end{bmatrix} = \begin{bmatrix}
+                                    1 & 0 \\
+                                    1 & 2   
+                                \end{bmatrix} \begin{bmatrix}
+                                    X_{1} \\
+                                    X_{2}   
+                                \end{bmatrix}
+                            \end{equation*}
+                        by the second classification. From lecture, the covariance matrix is given by $AA^{T}$.
+                    \end{answer}
+
+                \item [(iii.)] $Z_{1} = X_{1}$ and $Z_{2} = -X_{1}$.
+                    \begin{answer}
+                        Yes these are joint Gaussian because $Z = \begin{bmatrix}
+                            1  & 0 \\
+                            -1 & 0   
+                        \end{bmatrix} \begin{bmatrix}
+                            X_{1} \\
+                            X_{2}   
+                        \end{bmatrix}$. Same covariance matrix in the previous question: $AA^{T}$.
+                    \end{answer}
+
+                \item [(iv.)] $Z_{1} = X_{1}$ and $Z_{2} = UX_{1}$.
+                    \begin{answer}
+                        We will use the first characterization here. To show marginal Gaussian:
+                            \begin{equation*}
+                            p_{X_{1}}(z) = p(X_{1} = z) = \int_{-\infty}^{\infty} p(X_{1} = z, UX_{1} = z^{\prime}) \, \dd{z^{\prime}}
+                            \end{equation*}
+                        must be Gaussian. We know that it has non-zero values when $z^{\prime} = \pm z$:
+                            \begin{equation*}
+                                p_{X_{1}}(z) = \sum_{z^{\prime} = \pm z} p(X_{1} = z, UX_{1} = z^{\prime})
+                            \end{equation*}
+                        We can expand:
+                            \begin{equation*}
+                                p(X_{1} = z, UX_{1} = z) + p(X_{1} = z, UX_{1} = -z) = p(UX_{1} = z)p(U = 1) + p(X_{1} = z) p(U = -1)
+                            \end{equation*}
+                        we know that:
+                            \begin{equation*}
+                                p(U = \pm 1) = 1 / 2
+                            \end{equation*}
+                        So this turns out to just $p(X_{1} = z)$. So $p_{X_{1}}(z)$ is gaussian.
+
+                        Now for the other marginal:
+                            \begin{equation*}
+                                p_{UX_{1}}(z) = p(UX_{1} = z) = \int_{-\infty}^{\infty} p(X_{1} = z^{\prime}, UX_{1} = z) \, \dd{z^{\prime}}
+                            \end{equation*}
+                        Again, nonzero when $X_{1} = \pm z$:
+                            \begin{equation*}
+                                \sum_{z^{\prime} = \pm z} p(X_{1} = z^{\prime}, UX_{1} = z) = p(X_{1} = z)p(U = 1) + p(X_{1} = -z)p(U = -1)
+                            \end{equation*}
+                        which is
+                            \begin{equation*}
+                                 \dfrac{1}{2}(p(X_{1} = z) + p(X_{1} = -z))
+                            \end{equation*}
+                        Since $X_{1}$ is standard normal, this becomes $p(X_{1} = z)$ which is normal.
+
+                        Now on to the conditional probabilities. We have
+                            \begin{equation*}
+                                p(X_{1} = x \mid UX_{1} = x^{\prime}) = \dfrac{p(X_{1} = x, UX_{1} = x^{\prime})}{p(UX_{1} = x^{\prime})}
+                            \end{equation*}
+                        expand:
+                            \begin{equation*}
+                                \dfrac{p(X_{1} = x, UX_{1} = x^{\prime}) + p(X_{1} = x, UX_{1} = -x^{\prime})}{p(X_{1} = x^{\prime})(p(U = -1) + p(U = 1))}
+                            \end{equation*}
+                        which is
+                            \begin{equation*}
+                                \dfrac{p(X_{1} = x)p(X_{1} = x^{\prime})}{p(X_{1} = x^{\prime})} = p(X_{1} = x)
+                            \end{equation*}
+                        which is gaussian.
+
+                        For the other conditional:
+                            \begin{equation*}
+                                p(UX_{1} = x \mid X_{1} = x^{\prime}) = \dfrac{p(UX_{1} = x, X_{1} = x^{\prime})}{p(X_{1} = x^{\prime})}
+                            \end{equation*}
+                        expand:
+                            \begin{equation*}
+                                \dfrac{p(X_{1} = x^{\prime})(p(UX_{1} = -x) + p(UX_{1} = x))}{p(X_{1} = x^{\prime})} = p(UX_{1} = x) + p(UX_{1} = -x)
+                            \end{equation*}
+                        so this is gaussian also.
+
+                        Now for the covariance, 
+                            \begin{equation*}
+                                Cov(UX, X) = \mathbb{E}[(UX - \mathbb{E}(UX))(X)]
+                            \end{equation*}
+                        or
+                            \begin{equation*}
+                                Cov(UX, X) = \mathbb{E}[UX^{2} - X] = -\mathbb{E}[X] = 0
+                            \end{equation*}
+                        So the matrix is 
+                            \begin{equation*}
+                                \begin{bmatrix}
+                                    1 & 0       \\
+                                    0 & Var(UX)   
+                                \end{bmatrix}
+                            \end{equation*}
+                        and
+                            \begin{equation*}
+                                Var(UX) = \mathbb{E}[U^{2}X^{2}] - \mathbb{E}[UX]^{2} = \mathbb{E}[U^{2}X^{2}] = \mathbb{E}[U^{2}]\mathbb{E}[X^{2}] = \mathbb{E}[X^{2}] = 1
+                            \end{equation*}
+                    \end{answer}
+            \end{itemize}
+
+        \item [(b)] Show that two Gaussian random variables can be uncorrelated, but not independent. On the other hand, show that two uncorrelated, jointly Gaussian RVs are independent.
+            \begin{answer}
+                In part $(d)$ of last example, we computed a covariance matrix of $\begin{bmatrix}
+                    1 & 0 \\
+                    0 & 1   
+                \end{bmatrix}$ but $UX, X$ are not independent. So we see that non correlation does not mean independence.
+
+                If two Gaussians are uncorrelated, then from the joint pdf:
+                    \begin{equation*}
+                        p_{Z_{1}, Z_{2}}(z) = \dfrac{1}{\sqrt{2\pi\lvert \Sigma \rvert}}\exp\left\{-\dfrac{1}{2}(z - \mu)^{T}\Sigma^{-1}(z - \mu)\right\}
+                    \end{equation*}
+                $\Sigma$ is a diagonal matrix, so the exponent part factors into
+                    \begin{equation*}
+                        Var(z_{1}) \cdot (z_{1} - \mu_{1})^{2} + Var(z_{2}) \cdot (z_{2} - \mu_{2})^{2}
+                    \end{equation*}
+                The determinant in the denominator also factors into: $Var(z_{1})Var(z_{2})$. So the joint pdf factors into their marginal distributions:
+                    \begin{equation*}
+                        p_{Z_{1}, Z_{2}}(z) = \dfrac{1}{\sqrt{2\pi}\sigma_{1}} \exp\left\{-\dfrac{1}{2}\left(\dfrac{z_{1} - \mu_{1}}{\sigma_{1}}\right)^{2}\right\}\dfrac{1}{\sqrt{2\pi}\sigma_{2}} \exp\left\{-\dfrac{1}{2}\left(\dfrac{z_{2} - \mu_{2}}{\sigma_{2}}\right)^{2}\right\}
+                    \end{equation*}
+            \end{answer}
+
+        \item [(c)] With the setup in $(a)$, let $Z = VX$, where $V \in \mathbb{R}^{2 \times 2}$, and $Z, X \in \mathbb{R}^{2}$. What is the covariance matrix $\Sigma_{Z}$? If $X$ is not a multivariate Gaussian but has the identity matrix $I \in \mathbb{R}^{2 \times 2}$ as its covariance matrix, is your computed $\Sigma_{Z}$ still the covariance of $Z$?
+            \begin{answer}
+                Recall from the previous homework that if $Z = AX + b$, then 
+                    \begin{equation*}
+                        Var(Z) = A \Sigma A^{T}
+                    \end{equation*}
+                where $\Sigma$ is the covariance matrix of $X$. Then the covariance matrix of $Z$ is 
+                    \begin{equation*}
+                        V \Sigma V^{T}
+                    \end{equation*}
+                Here, $\Sigma$ is the identity because $X$ is standard normal. This also implies that if $X$ has an identity matrix as the covariance matrix, the computed covariance does not change.
+            \end{answer}
+
+        \item [(d)] Given a jointly Gaussian zero mean RV $Z = \begin{bmatrix}
+            Z_{1} & Z_{2}   
+        \end{bmatrix}^{T} \in \mathbb{R}^{2}$ with covariance matrix $\Sigma_{Z} = \begin{bmatrix}
+            \Sigma_{11} & \Sigma_{12} \\
+            \Sigma_{12} & \Sigma_{22}   
+        \end{bmatrix}$, derive the conditional distribution of $(Z_{1} \mid Z_{2} = z)$.
+
+        \textit{Hint}: The following identity may be useful
+            \begin{equation*}
+                \begin{bmatrix}
+                    a & b \\
+                    b & c   
+                \end{bmatrix}^{-1} = \begin{bmatrix}
+                    1             & 0 \\
+                    -\frac{b}{c} & 1   
+                \end{bmatrix} \begin{bmatrix}
+                    \left(a - \frac{b^{2}}{c}\right)^{-1} & 0            \\
+                    0                                      & \frac{1}{c}   
+                \end{bmatrix} \begin{bmatrix}
+                    1 & -\frac{b}{c} \\
+                    0 & 1               
+                \end{bmatrix}
+            \end{equation*}
+            \begin{answer}
+                The joint pdf is:
+                    \begin{equation*}
+                        \dfrac{1}{\sqrt{2\pi\lvert \Sigma \rvert}} \exp\left\{-\dfrac{1}{2}(Z - \mu)^{T}\Sigma^{-1}(Z - \mu)\right\}
+                    \end{equation*}
+                And from Bayes's rule:
+                    \begin{equation*}
+                        p_{Z_{1}}(Z_{1} = z_{1}, Z_{2} = z) = p(Z_{1} \mid Z_{2} = z) p(Z_{2} = z)
+                    \end{equation*}
+                What we want to solve for is $p(Z_{1} \mid Z_{2} = z)$ on the RHS. So the LHS is:
+                    \begin{align*}
+                        \text{LHS} &= \dfrac{1}{\sqrt{2\pi\left\lvert \begin{bmatrix}
+                            \Sigma_{11} & \Sigma_{12} \\
+                            \Sigma_{12} & \Sigma_{22}   
+                        \end{bmatrix} \right\rvert}}\exp\left\{-\dfrac{1}{2}\begin{bmatrix}
+                            z_{1} & z   
+                        \end{bmatrix} \begin{bmatrix}
+                            \Sigma_{11} & \Sigma_{12} \\
+                            \Sigma_{12} & \Sigma_{22}   
+                        \end{bmatrix}^{-1}\begin{bmatrix}
+                            z_{1} \\
+                            z       
+                        \end{bmatrix}\right\}                                                         \\
+                                   &= \dfrac{1}{\sqrt{2\pi(\Sigma_{11}\Sigma_{22} - \Sigma_{12}^{2})}}\exp\left\{-\dfrac{1}{2}\begin{bmatrix}
+                                       z_{1} & z   
+                                   \end{bmatrix}\begin{bmatrix}
+                                       1                                & 0 \\
+                                       -\frac{\Sigma_{12}}{\Sigma_{22}} & 1   
+                                   \end{bmatrix}\begin{bmatrix}
+                                       \frac{\Sigma_{22}}{\Sigma_{11}\Sigma_{22} - \Sigma_{12}^{2}} & 0                     \\
+                                       0                                                            & \frac{1}{\Sigma_{22}}   
+                                   \end{bmatrix}\begin{bmatrix}
+                                       1 & -\frac{\Sigma_{12}}{\Sigma_{22}} \\
+                                       0 & 1                                  
+                                   \end{bmatrix}\begin{bmatrix}
+                                       z_{1} \\
+                                       z       
+                                   \end{bmatrix}\right\}   
+                    \end{align*}
+                Recall that we still had the $p(Z_{2} = z)$ term on the RHS which is:
+                    \begin{equation*}
+                        p(Z_{2} = z) = \dfrac{1}{\sqrt{2\pi\Sigma_{22}}}\exp\left\{-\dfrac{1}{2}\begin{bmatrix}
+                            z_{1} & z   
+                        \end{bmatrix}\begin{bmatrix}
+                            0 & 0                     \\
+                            0 & \frac{1}{\Sigma_{22}}   
+                        \end{bmatrix}\begin{bmatrix}
+                            z_{1} \\
+                            z       
+                        \end{bmatrix}\right\}
+                    \end{equation*}
+                So when we take $p_{Z_{1}}(Z_{1} = z_{1}, Z_{2} = z) / p(Z_{2} = z)$, we would end up subtracting the exponents in the $\exp()$ term:
+                    \begin{align*}
+                        \begin{bmatrix}
+                            z_{1} & z   
+                        \end{bmatrix}\begin{bmatrix}
+                            1                                & 0 \\
+                            -\frac{\Sigma_{12}}{\Sigma_{22}} & 1   
+                        \end{bmatrix}\begin{bmatrix}
+                            \frac{\Sigma_{22}}{\Sigma_{11}\Sigma_{22} - \Sigma_{12}^{2}} & 0                     \\
+                            0                                                            & \frac{1}{\Sigma_{22}}   
+                        \end{bmatrix}\begin{bmatrix}
+                            1 & -\frac{\Sigma_{12}}{\Sigma_{22}} \\
+                            0 & 1                                  
+                        \end{bmatrix}\begin{bmatrix}
+                            z_{1} \\
+                            z       
+                        \end{bmatrix} - \begin{bmatrix}
+                            z_{1} & z   
+                        \end{bmatrix}\begin{bmatrix}
+                            0 & 0                     \\
+                            0 & \frac{1}{\Sigma_{22}}   
+                        \end{bmatrix}\begin{bmatrix}
+                            z_{1} \\
+                            z       
+                        \end{bmatrix}
+                    \end{align*}
+                and notice that:
+                    \begin{equation*}
+                        \begin{bmatrix}
+                            z_{1} & z   
+                        \end{bmatrix}\begin{bmatrix}
+                            0 & 0                     \\
+                            0 & \frac{1}{\Sigma_{22}}   
+                        \end{bmatrix}\begin{bmatrix}
+                            z_{1} \\
+                            z       
+                        \end{bmatrix} = \begin{bmatrix}
+                            z_{1} & z   
+                        \end{bmatrix}\begin{bmatrix}
+                            1                                & 0 \\
+                            -\frac{\Sigma_{12}}{\Sigma_{22}} & 1   
+                        \end{bmatrix}\begin{bmatrix}
+                            0 & 0                     \\
+                            0                                                            & \frac{1}{\Sigma_{22}}   
+                        \end{bmatrix}\begin{bmatrix}
+                            1 & -\frac{\Sigma_{12}}{\Sigma_{22}} \\
+                            0 & 1                                  
+                        \end{bmatrix}
+                    \end{equation*}
+                So subtracting yields:
+                    \begin{equation*}
+                        \begin{bmatrix}
+                            z_{1} & z   
+                        \end{bmatrix}\begin{bmatrix}
+                            1                                & 0 \\
+                            -\frac{\Sigma_{12}}{\Sigma_{22}} & 1   
+                        \end{bmatrix}\begin{bmatrix}
+                            \frac{\Sigma_{22}}{\Sigma_{11}\Sigma_{22} - \Sigma_{12}^{2}} & 0 \\
+                            0                                                            & 0   
+                        \end{bmatrix}\begin{bmatrix}
+                            1 & -\frac{\Sigma_{12}}{\Sigma_{22}} \\
+                            0 & 1                                  
+                        \end{bmatrix}\begin{bmatrix}
+                            z_{1} \\
+                            z       
+                        \end{bmatrix}
+                    \end{equation*}
+                We can simplify the matrix in the middle down to:
+                    \begin{equation*}
+                        \begin{bmatrix}
+                            \frac{\Sigma_{22}}{\lvert \Sigma \rvert}                                 & -\frac{\Sigma_{12}}{\lvert \Sigma \rvert}        \\
+                            -\frac{\Sigma_{12}}{\lvert \Sigma \rvert} & \frac{\Sigma_{12}^{2}}{\Sigma_{22}\lvert \Sigma \rvert}   
+                        \end{bmatrix}
+                    \end{equation*}
+                The rest is just algebraic manipulation.
+            \end{answer}
+    \end{itemize}
+
+\newpage
+\section*{Projections and Linear Regression}
+\hrule
+
+We are given $X \in \mathbb{R}^{n \times d}$ where $n > d$ and $rank(X) = d$. We are also given a vector $y \in \mathbb{R}^{n}$. Define the orthogonal projection of $y$ onto $range(X) $ as $P_{range(X)}(y)$.
+
+\textbf{\textit{Background on orthogonal projections}}: For any finite-dimensional subspace $W$ (here, $range(X)$) of a vector space $V$ (here, $\mathbb{R}^{n}$), any vector $v \in V$ can be decomposed as
+    \begin{equation*}
+        v = w + u, \, w \in W, \, u \in W^{\perp}
+    \end{equation*}
+where $W^{\perp}$ is the orthogonal complement of $W$. Furthermore, this decomposition is unique: if $v = w^{\prime} + u^{\prime}$ where $w^{\prime} \in W, u^{\prime} \in W^{\perp}$, then $w^{\prime} = w$ and $u^{\prime} = u$. These two facts allow us to define $P_{W}$, the orthogonal projection operator onto $W$. Given a vector $v$ with decomposition $v = w + u$, we define
+    \begin{equation*}
+        P_{W}(v) = w.
+    \end{equation*}
+It can also be shown using these two facts that $P_{W}$ is linear.
+    \begin{itemize}
+        \item [(a)] Prove that $P_{range(X)}(y) = \mathop{argmin}_{w \in \mathop{range}(X)} \lVert y - w \rVert^{2}_{2}$
+            \begin{answer}
+                We know that $y = x + w$ for $x \in \text{range}(X)$ and $w \in X^{\perp}$. So the equation becomes:
+                    \begin{equation*}
+                        \mathop{argmin}_{x^{\prime} \in \mathop{range}(X)} \lVert x + w - x^{\prime} \rVert^{2}_{2}
+                    \end{equation*}
+                The norm is:
+                    \begin{equation*}
+                        (x + w - x^{\prime}) \cdot (x + w - x^{\prime})
+                    \end{equation*}
+                a dot product:
+                    \begin{align*}
+                        ((x - x^{\prime}) + w) \cdot ((x - x^{\prime}) + w) &= (x - x^{\prime})\cdot (x - x^{\prime}) + 2 (w \cdot (x - x^{\prime})) + w \cdot w \\
+                                                                            &= \lVert x - x^{\prime} \rVert + \lVert w \rVert                                      
+                    \end{align*}
+                We want the $x^{\prime}$ which minimizes this. So $x^{\prime} = x = P_{\mathop{range}(X)}(y)$.
+            \end{answer}
+
+        \item [(b)] An orthogonal projections is a linear transformation. That is, $P_{\mathop{range}(X)}(y) = Py$ for some projection matrix $P$
+
+        Specifically, given $1 \leq d \leq n$, a matrix $P \in \mathbb{R}^{n \times n}$ is said to be a rank-$d$ orthogonal projections matrix if 
+            \begin{itemize}
+                \item $rank(P) = d$
+
+                \item $P = P^{T}$
+
+                \item $P^{2} = P$
+            \end{itemize}
+        Prove that $P$ is a rank-$d$ projection matrix if an only if there exists a $U \in \mathbb{R}^{n \times d}$ such that $P = UU^{T}$ and $U^{T}U = I$.
+            \begin{answer}
+                ($\rightarrow$) From the three statements above, $P = P^{T}P$, which means that $P$ is symmetric, there is an eigenvalue decomposition. The eigenvalues are $1$ for elements in the basis of $X$ and $0$ in the subspace $W / X$. So:
+                    \begin{equation*}
+                        P = U^{\prime}I U^{\prime T}
+                    \end{equation*}
+                but $U^{\prime}$ has $d$ non-zero vectors in its column space. So $P = UU^{T}$, $U^{T}U = I$ because $U$ consists of orthonormal vectors.
+
+                ($\leftarrow$) Since $U^{T}U = I$, $U$ is full rank. We know this because the dot products not along the diagonal are $0$, so there cant be any linear dependence. This means that the rank of $P$ is also $d$ because:
+                    \begin{equation*}
+                        U^{T}U = I \implies UU^{T}U = I \implies PU = U
+                    \end{equation*}
+                and therefore, the rank of $P$ cannot be any less. It also cannot be any more because $P = UU^{T}$ and is restricted by $rank(U)$. The other two properties of an orthogonal projection matrix can be shown by algebraic manipulation.
+            \end{answer}
+
+        \item [(c)] The Singular Value Decomposition theorem states that we can write any matrix $X$ as 
+            \begin{equation*}
+                X = \sum_{i = 1}^{\min(n, d)}\sigma_{i} u_{i} v_{i}^{T} = \sum_{i: \sigma_{i} > 0}\sigma_{i} u_{i} v_{i}^{T}
+            \end{equation*}
+        where $\sigma_{i} \geq 0$, and $\{u_{i}\}^{n}_{i = 1}$ and $\{v_{i}\}_{i = 1}^{d}$ are orthonormal bases for $\mathbb{R}^{n}$ and $\mathbb{R}^{d}$ respectively. Some of the singular values $\sigma_{i}$ may equal $0$, indicating that the associated left and right singular vectors $u_{i}$ and $v_{i}$ do not contribute to the sum, but sometimes it is still convenient to include them in the SVD so we have complete orthonormal bases for $\mathbb{R}^{n}$ and $\mathbb{R}^{d}$ to work with. Show that
+            \begin{itemize}
+                \item [(i)] $\{u_{i} : \sigma_{i} > 0\}$ is an orthonormal basis for the column space of $X$.
+                    \begin{answer}
+                        We see that the action of $X$ is equivalent to the action of $U$ on the image of $V^{T}$. Since $V$ is orthonormal, $V^{T}V = I$, $V^{T}$ has is full rank. So the image of $V^{T}$ is just the domain of $X$. Now by
+                            \begin{equation*}
+                                X = \sum_{i : \sigma_{i} > 0}\sigma_{i}u_{i}v_{i}^{T}
+                            \end{equation*}
+                        for some vector $w$:
+                            \begin{equation*}
+                                Xw = \sum_{i: \sigma_{i} > 0} \sigma_{i}u_{i}v_{i}^{T}w = \sum_{i : \sigma_{i} \geq 0} \sigma_{i} w^{\prime} u_{i}
+                            \end{equation*}
+                        So the column space of $X$ has the $u_{i} : \sigma_{i} > 0$ as a basis.
+                    \end{answer}
+
+                \item [(ii)] Similarly, $\{v_{i} : \sigma_{i} > 0\}$ is an orthonormal basis for the row space of $X$.
+                    \begin{answer}
+                        Taking the transpose, this becomes:
+                            \begin{equation*}
+                                X^{T} = \sum_{i : \sigma_{i}  > 0} \sigma_{i}v_{i}u_{i}^{T}
+                            \end{equation*}
+                        the argument is the same.
+                    \end{answer}
+            \end{itemize}
+
+        \item [(d)] Let $X \in \mathbb{R}^{n \times d}$ such that $rank(X) = d$. Prove that $X(X^{T}X)^{-1}X^{T}$ is a rank-$d$ orthogonal projection matrix.
+            \begin{answer}
+                Using the SVD of $X$, we see that 
+                    \begin{equation*}
+                        X^{T}X = \sum_{j : \sigma_{j}  > 0} \sigma_{j} v_{j}u_{j}^{T}\sum_{i : \sigma_{i} > 0} \sigma_{i} u_{i}v_{i}^{T} 
+                    \end{equation*}
+                for the cross terms, where $i \neq j$, because the columns of $U$ are orthonormal, the dot product goes to $0$. So this can be simplified to:
+                    \begin{equation*}
+                        (X^{T}X) = \sum_{i : \sigma_{i}  > 0} \sigma_{i}^{2}v_{i}v_{i}^{T} = V\Sigma V^{T}
+                    \end{equation*}
+                The inverse is:
+                    \begin{equation*}
+                        V \Sigma^{-1} V^{T}
+                    \end{equation*}
+                Now
+                    \begin{equation*}
+                        X(X^{T}X)^{-1}X^{T} = XV\Sigma^{-1}V^{T}X^{T} = (XV)\Sigma^{-1}(XV)^{T} = \Sigma U \Sigma^{-1} U^{T} = UU^{T}
+                    \end{equation*}
+            \end{answer}
+
+        \item [(e)] Prove that $X(X^{T}X)^{-1}X^{T}$ is a projection onto $\text{range}(X)$.
+            \begin{answer}
+                Suppose $z = Xw$. Then
+                    \begin{equation*}
+                        X(X^{T}X)^{-1}X^{T}(Xw) = Xw = z
+                    \end{equation*}
+                so any element in $\mathop{range}(X)$ is fixed by the above projection matrix. Formally, $\mathop{range}(X) \subseteq S$ where $S$ is the subspace $X(X^{T}X)^{-1}X^{T}$ projects on. We know that the dimension of $\mathop{range}(X)$ is $d$. So $S = \mathop{range}(X)$.
+            \end{answer}
+
+        \item [(f)] Show that $w^{*} = (X^{T}X)^{-1}X^{T}y$ is the solution to the optimization problem
+            \begin{equation*}
+                \mathop{argmin}_{w} \lVert y - Xw \rVert^{2}_{2}
+            \end{equation*}
+            \begin{answer}
+                We know that $z = Xw \in \mathop{range}(X)$. So by the first problem $(a)$,
+                    \begin{equation*}
+                        P_{\mathop{range}(X)}(y) = \mathop{argmin}_{z \in \mathop{range}(X)} \lVert y - z \rVert^{2}_{2}
+                    \end{equation*}
+                So $z = X(X^{T}X)^{-1}X^{T}y$. This means $w = (X^{T}X)^{-1}X^{T}y$ minimizes the norm.
+            \end{answer}
+    \end{itemize}
+
+\newpage
+\section*{Some MLEs}
+\hrule
+
+For this question, assume you observe $n$ (data point, label) pairs $(x_{i}, y_{i})^{n}_{i = 1}$, with $x_{i} \in \mathbb{R}^{d}$ and $y_{i} \in \mathbb{R}$ for all $i = 1, \ldots, n$. We denote $X$ as the data matrix containing all the data points and $y$ as the label vector containing all the labels:
+    \begin{equation*}
+        X = \begin{bmatrix}
+            x_{1}^{T} \\
+            \vdots    \\
+            x_{n}^{T}   
+        \end{bmatrix} \in \mathbb{R}^{ n \times d}, \hspace{30pt}  y = \begin{bmatrix}
+            y_{1}  \\
+            \vdots \\
+            y_{n}    
+        \end{bmatrix} \in \mathbb{R}^{n}
+    \end{equation*}
+    \begin{itemize}
+        \item [(a)] Ignoring $y$ for now, suppose we model the data points as coming from a $d$-dimensional Gaussian with diagonal covariance:
+            \begin{equation*}
+                \forall i = 1, \ldots, n, \, x_{i} \sim N(\mu, \Sigma); \, \Sigma = \begin{bmatrix}
+                    \sigma_{1}^{2} & \ldots & 0              \\
+                    \vdots         & \ddots & \vdots         \\
+                    0              & \ldots & \sigma^{2}_{d}   
+                \end{bmatrix}
+            \end{equation*}
+        If we consider $\mu \in \mathbb{R}^{d}$ and $(\sigma^{2}_{1}, \ldots, \sigma^{2}_{d})$, where each $\sigma^{2}_{i} > 0$, to be unknown, the parameter space here is $2d$-dimensional. When we refer to $\Sigma$ as a parameter, we are referring to the $d$-tuple $(\sigma_{1}^{2}, \ldots, \sigma^{2}_{d})$, but inside a linear algebraic expression, $\Sigma$ denotes the diagonal matrix $diag(\sigma_{1}^{2}, \ldots, \sigma^{2}_{d})$.
+
+        Solve the following problems:
+            \begin{itemize}
+                \item [(i)] Prove that log-likelihood $l(\mu, \Sigma) = \log{p(X \mid \mu, \Sigma)}$ is equal to
+                    \begin{equation*}
+                        -\dfrac{n}{2} \left(d \log{2\pi} - \sum_{j = 1}^{d} \log{ \dfrac{1}{\sigma^{2}_{j}}}\right) - \dfrac{1}{2}\sum_{i = 1}^{n}(x_{i} - \mu)^{T}\Sigma^{-1}(x_{i} - \mu)
+                    \end{equation*}
+                    \begin{answer}
+                        The log likelihood is:
+                            \begin{align*}
+                                l(\mu, \Sigma) &= \sum_{i} \log{((2\pi)^{d}\prod\sigma_{i}^{2})^{-1/2}} - \sum_{i}\dfrac{1}{2}(x_{i} - \mu)^{T}\Sigma^{-1}(x_{i} - \mu)                \\
+                                               &= -\dfrac{n}{2}\log{(2\pi)^{d}\prod\sigma_{i}^{2}} - \dfrac{1}{2}\sum_{i}(x_{i} - \mu)^{T}\Sigma^{-1}(x_{i} - \mu)                     \\
+                                               &= -\dfrac{n}{2}\left(d\log{2\pi} + \sum_{i}\log{\sigma_{i}^{2}}\right) - \dfrac{1}{2}\sum_{i}(x_{i} - \mu)^{T}\Sigma^{-1}(x_{i} - \mu)   
+                            \end{align*}
+                    \end{answer}
+
+                \item [(ii)] Find the MLE of $\mu$ assuming $\Sigma$ is known.
+                    \begin{answer}
+                        Take the partial with respect to $\mu$:
+                            \begin{equation*}
+                                -\dfrac{1}{2}\sum_{i}\pdv{\mu}(x_{i} - \mu)^{T} \Sigma^{-1}(x_{i} - \mu) = -\dfrac{1}{2}\sum_{i} -2\Sigma^{-1}(x_{i} - \mu)
+                            \end{equation*}
+                        which is
+                            \begin{equation*}
+                                \sum_{i} \Sigma^{-1}(x_{i} - \mu) = \Sigma^{-1}\sum_{i}(x_{i} - \mu) = 0
+                            \end{equation*}
+                        Solving for $\mu$:
+                            \begin{equation*}
+                                n\mu = \sum_{i} x_{i} \implies \mu = \dfrac{1}{n} \sum_{i} x_{i}
+                            \end{equation*}
+                        Computing the second partial derivative:
+                            \begin{equation*}
+                                \pdv{\mu} \sum_{i} (x_{i} - \mu) = -n\mu < 0
+                            \end{equation*}
+                        so for the $\mu$ we found, it is at a maximum.
+
+                    \end{answer}
+
+                \item [(iii)] Find the MLE of $\Sigma$ assuming $\mu$ is known.
+                    \begin{answer}
+                        Make the substitution $v_{j} = \frac{1}{\sigma_{j}^{2}}$. Then we have:
+                            \begin{equation*}
+                                \dfrac{-n}{2} \left(d\log{2\pi} - \sum_{i = 1}^{d}\log{v_{i}}\right) - \dfrac{1}{2}\sum_{i = 1}^{n}(x_{i} - \mu)^{T}\Sigma^{-1}(x_{i} - \mu)
+                            \end{equation*}
+                        Take the partial with respect to $\sigma_{j}^{2}$.
+                            \begin{align*}
+                                \pdv{\sigma_{j}^{2}}l(\mu, \Sigma) &= \dfrac{n}{2}\cdot \dfrac{1}{v_{j}}v_{j}^{2} - \dfrac{1}{2}v_{j}^{2}\sum_{i = 1}^{n}(x_{i} - \mu)^{T}(x_{i} - \mu) \\
+                                                                   &= v_{j}n - v_{j}^{2}\sum_{i = 1}(x_{i} - \mu)^{T}(x_{i} - \mu)                                                        
+                            \end{align*}
+                        Set it equal to zero and solve for $v_{j}$:
+                            \begin{align*}
+                                v_{j}n                                                                     &=         v_{j}^{2}\sum_{i = 1}(x_{i} - \mu)^{T}(x_{i} - \mu)          \\
+                                n                                                                          &=         v_{j}\sum_{i = 1}(x_{i} - \mu)^{T}(x_{i} - \mu)          \\
+                                v_{j} &=  {\dfrac{n}{\sum_{i = 1}(x_{i} - \mu)^{T}(x_{i} - \mu)}}   
+                            \end{align*}
+                        Since $v_{j} = \frac{1}{\sigma_{j}^{2}}$,
+                            \begin{equation*}
+                                \sigma_{j}^{2} = \dfrac{\sum_{i = 1}(x_{i} - \mu)^{T}(x_{i} - \mu)}{n}
+                            \end{equation*}
+                    \end{answer}
+
+                \item [(iv)] Find the joint MLE of $(\mu, \Sigma)$ in terms of the maximum likelihood estimates computed above.
+                    \begin{answer}
+                        We see that the MLE of $\mu$ does not depend on $\Sigma$. So we immediately know the MLE of $\Sigma$ from part $(iii)$. So the joint MLE is given by our answer to the previous two parts.
+                    \end{answer}
+            \end{itemize}
+
+        \item [(b)] Suppose that we have a training set $\{(x_{i}, y_{i}) : i = 1, \ldots, n\}$ of $n$ independent examples but in which the residual terms had different variances. That is, we assume
+            \begin{equation*}
+                y_{i} \sim N(w^{T}x_{i}, \sigma^{2}_{i})
+            \end{equation*}
+        Show that the MLE estimate of $w$ can be found by solving the following optimization problem
+            \begin{equation*}
+                w_{MLE} = argmin_{w} \lVert A(Xw - y) \rVert^{2}_{2}
+            \end{equation*}
+        Clearly state what the matrix $A$ equals.
+            \begin{answer}
+                By definition:
+                    \begin{equation*}
+                        w_{MLE} = argmax_{w} p(D \mid w) = \mathop{argmax}_{w} \prod p(y_{i} \mid w)
+                    \end{equation*}
+                the probability density of $y_{i}$ is given by a normal distribution:
+                    \begin{align*}
+                        \mathop{argmax}_{w} \prod p(y_{i} \mid w) &= \mathop{argmax}_{w} \prod \dfrac{1}{\sqrt{2\pi\sigma_{i}^{2}}}\exp\left\{-\dfrac{1}{2}(y_{i} - w^{T}x_{i})^{T}\dfrac{1}{\sigma_{i}^{2}}(y_{i} - w^{T}x_{i})\right\} \\
+                                                                  &= \mathop{argmax}_{w} -\dfrac{1}{2}\sum_{i}(y_{i} - w^{T}x_{i})^{T}\dfrac{1}{\sigma_{i}^{2}}(y_{i} - w^{T}x_{i})                                                      \\
+                                                                  &= \mathop{argmin}_{w} \sum_{i} (y_{i} - w^{T}x_{i})^{T}\dfrac{1}{\sigma_{i}^{2}}(y_{i} - w^{T}x_{i})                                                                  \\
+                                                                  &= \mathop{argmin}_{w} \lVert \Sigma^{-1}(y^{T} - w^{T}X)^{T} \rVert_{2}^{2}                                                                                           \\
+                                                                  &= \mathop{argmin}_{w} \lVert \Sigma^{-1}(X^{T}w - y) \rVert^{2}_{2}                                                                                                     
+                    \end{align*}
+                and we're done.
+            \end{answer}
+
+        \item [(c)] Consider the $\text{Categorical}(\theta_{1}, \theta_{2}, \ldots, \theta_{k})$ distribution. Recall, for categorical distributions, there are two constraints on $\theta_{k}$:
+            \begin{itemize}
+                \item $\theta_{k} \geq 0$ for all $k$
+
+                \item $\sum_{k = 1}^{K} \theta_{k} = 1$
+            \end{itemize}
+        The distribution describes a random process that selects one of the $K$ possible categories, with category $k$ being chosen with probability $\theta_{k}$.
+
+        Ignoring the data points $X$, suppose that for all $i$ from $1$ to $n$, we sample $y_{i}$ from a categorical distribution:
+            \begin{equation*}
+                y_{i} \sim \text{Categorical}(\theta_{1}, \ldots, \theta_{K})
+            \end{equation*}
+        Compute the MLE of $\theta = (\theta_{1}, \ldots, \theta_{K})$. Use the fact that the KL divergence is non-negative:
+            \begin{equation*}
+                KL(\pi \mid\mid \theta) = \sum_{\omega \in \Omega} \pi(\omega) \log\left(\dfrac{\pi(\omega)}{\theta(\omega)}\right) \geq 0
+            \end{equation*}
+            \begin{answer}
+                
+            \end{answer}
+
+        \item [(d)] Again consider $X$ fixed. This time, we suppose that each $y_{i}$ binary-valued $(0 \text{ or } 1)$. We choose a model $y$ as 
+            \begin{equation*}
+                y_{i} \sim Ber(s(x_{i}^{T}w)) , \, \forall i = 1, \ldots, n
+            \end{equation*}
+        where $s(z) = \frac{1}{1 + e^{-z}}$ is the \textit{sigmoid} function and $Ber(p)$ denotes the Bernoulli distribution which takes value $1$ with probability $p$ and $0$ with probability $1 - p$.
+            \begin{itemize}
+                \item [(i)] Write down the log-likelihood $l(w) = \log{p(y \mid w)}$ and show that finding the MLE of $w$ is equivalent to minimizing the cross entropy between $Ber(y_{i})$ and $Ber(s(x_{i}^{T}w))$ for each $i$:
+                    \begin{equation*}
+                        \min_{w \in \mathbb{R}^{d}}\sum_{i = 1}^{n}H(Ber(y_{i}), Ber(s(x_{i}^{T}w))).
+                    \end{equation*}
+
+                \textit{Definition of cross entropy: given two discrete probability distributions $\pi : \Omega \rightarrow [0, 1]$ and $\theta : \Omega \rightarrow [0, 1]$ on some outcome space $\Omega$, we define the cross entropy between $\pi$ and $\theta$ as}
+                    \begin{equation*}
+                        H(\pi, \theta) = \sum_{\omega \in \Omega} -\pi(\omega) \log{\theta(\omega)}
+                    \end{equation*}
+                    \begin{answer}
+                        Using the formula for MLE:
+                            \begin{equation*}
+                                MLE_{\omega} = \mathop{argmax}_{\omega}\prod p(y_{i} \mid \omega) = \mathop{argmax}_{\omega} \sum_{i} \log{p(y_{i} \mid \omega)}
+                            \end{equation*}
+                        This is equal to:
+                            \begin{equation*}
+                                \mathop{argmax}_{w} \sum_{i} \log{Ber(s(w^{T}x_{i}))(y_{i})}
+                            \end{equation*}
+                        Now consider our outcome space $\Omega = \{0, 1\}$. Notice that 
+                            \begin{equation*}
+                                Ber(y_{i})(x) = I_{y_{i}}(x) = \begin{cases}
+                                    1 &\text{ if } x = y_{i} \\
+                                    0 &\text{ otherwise }     
+                                \end{cases}
+                            \end{equation*}
+                        So we can rewrite the MLE as:
+                            \begin{equation*}
+                                \mathop{argmax}_{w} \sum_{i} \sum_{\omega \in \{0, 1\}} I_{y_{i}}(x) \log{Ber(s(w^{T}x_{i}))(x)}
+                            \end{equation*}
+                        This reduces to:
+                            \begin{equation*}
+                                \mathop{argmax}_{w} = -\sum_{i} H(Ber(y_{i}), Ber(s(w^{T}x_{i}))
+                            \end{equation*}
+                        and we can change the argmax to an argmin because of the negative sign.
+                    \end{answer}
+
+                \item [(ii)] Show that $(1)$ and therefore finding the MLE) is equivalent to the following problem:
+                    \begin{equation*}
+                        \min_{w \in \mathbb{R}^{d}} \sum_{i = 1}^{n} \log\left(1 + \exp(-z_{i} x_{i}^{T}w)\right)
+                    \end{equation*}
+                where $z_{i} = 1$ if $y_{i} = 1$ and $z_{i} = -1$ if $y_{i} = 0$.
+
+                Note: both $(1)$ and $(2)$ are referred to as logistic regression.
+                    \begin{answer}
+                        The previous statement is equivalent to:
+                            \begin{equation*}
+                                \mathop{argmin}_{w} \sum_{i}^{n} - \log{Ber(s(x_{i}^{T}w))}
+                            \end{equation*}
+                        We have the following cases:
+                            \begin{equation*}
+                                Ber(s(x_{i}^{T}w))(x) = \begin{cases}
+                                    \dfrac{1}{1 + e^{-x_{i}^{T}w}} &\text{ if } x = 1 \\
+                                    \dfrac{1}{1 + e^{x_{i}^{T}w}} &\text{ if } x = 0                            
+                                \end{cases}
+                            \end{equation*}
+                        because $1 - \frac{1}{1 + e^{-z}} = \frac{1}{1 + e^{z}}$. So the statement follows algebraically:
+                            \begin{align*}
+                                \mathop{argmin}_{w} \sum_{i}^{n} -\log{Ber(s(x_{i}^{T}w))(y_{i})} &= \mathop{argmin}_{w} \sum_{i}^{n} \log{Ber(s(x_{i}^{T}w))(y_{i})^{-1}} \\
+                                                                                                  &= \mathop{argmin}_{w} \sum_{i}^{n} \log{ 1 + \exp(-z_{i}x_{i}^{T}w)}      
+                            \end{align*}
+                    \end{answer}
+
+                \item [(iii)] Let $J(w) = \log(1 + \exp(-zx^{T}w))$ where, again, $z = 1$ if $y = 1$ and $z = -1$ if $y = 0$ (we are only considering a single $(x, y)$ pair in this subpart) Prove the following:
+                    \begin{itemize}
+                        \item [(i)] $J$ is not strictly convex
+
+                        \item [(ii)] The gradient descent update rule for minimizing $J(w)$ with learning rate $\varepsilon$ is
+                            \begin{equation*}
+                                w^{\prime} = w - \varepsilon\left(\dfrac{1}{1 + e^{-x^{T}w}} - y\right)x
+                            \end{equation*}
+                    \end{itemize}
+            \end{itemize}
+    \end{itemize}
+
+\newpage
+\section*{Geometry of Ridge Regression}
+\hrule
+
+You recently learned ridge regression and how it differs from ordinary least squares. In this question we will explore the properties of ridge regression in more depth. Recall that the ridge regression problem is given by the following optimization problem:
+    \begin{equation*}
+        \mathop{argmin}_{w} \lVert y - Xw \rVert^{2}_{2} + v \lVert w \rVert^{2}_{2}
+    \end{equation*}
+The solution to ridge regression is given by 
+    \begin{equation*}
+        \hat{w}_{r} = (X^{T}X + vI)^{-1}X^{T}y
+    \end{equation*}
+    \begin{itemize}
+        \item [(a)] One reason why we might want to have small weights $w$ has to do with the sensitivity of the predictor to its input. Let $x$ be a $d$-dimensional list of features corresponding to a new test point. Our predictor is $w^{T}x$. What is an upper bound on how much our prediction could change if we added noise $\varepsilon \in \mathbb{R}^{d}$ to a test point's features $x$, in terms of $\lVert w \rVert_{w}$ and $\lVert \varepsilon \rVert_{w}$?
+            \begin{answer}
+                Our original prediction is
+                    \begin{equation*}
+                        w^{T}x
+                    \end{equation*}
+                and the new prediction is
+                    \begin{equation*}
+                        w^{T}(x + \varepsilon)
+                    \end{equation*}
+                Taking the difference:
+                    \begin{equation*}
+                        \lVert w^{T}x - w^{T}(x + \varepsilon) \rVert = \lVert w^{T}\varepsilon \rVert \leq \lVert w^{T} \rVert \lVert \varepsilon \rVert
+                    \end{equation*}
+            \end{answer}
+
+        \item [(b)] Note that in computing $\hat{w}_{r}$, we are trying to invert the matrix $X^{T}X + vI$ instead of the matrix $X^{T}X$. If $X^{T}X$ has eigenvalues $\sigma_{1}^{2}, \ldots, \sigma_{d}^{d}$, what are the eigenvalues of $(X^{T}X + vI)^{-1}$? Comment on why adding the regularizer term $vI$ can improve the inversion operation numerically.
+            \begin{answer}
+                The new eigenvalues are $\sigma_{1}^{2} + v, \sigma_{2}^{2} + v, \ldots, \sigma_{d}^{2} + v$. This is because we have the decomposition of $X$ as $P^{T}\Sigma P$. Then:
+                    \begin{equation*}
+                        P^{T}\Sigma P + vI = P^{T}\Sigma P + vI P^{T}P = P^{T}\Sigma P + P^{T}(vI)P = P^{T}(\Sigma +  vI) P
+                    \end{equation*}
+                The regularizer term adds stability because if $\sigma$ is a small value, $\sigma^{2}$ is even smaller and taking the inverse $1/\sigma^{2}$ can be a very large number. Adding a first order term $v$ makes it so that we don't have to worry about very small values of $\sigma$.
+            \end{answer}
+
+        \item [(c)] Let the number of parameters $d = 4$ and the number of data points $n = 6$, and let the eigenvalues of $X^{T}X$ be given by $500, 10, 1$, and $0.001$. We must now choose between two regularization parameters $v_{1} = 50$ and $v_{2} = 0.1$. Which do you think is a better choice for this problem and why?
+            \begin{answer}
+                $v_{2} = 0.1$ is probably the better choice because choosing $50$ can throw off our original data. For example, choosing $50$ would result in eigenvalues of $550, 60, 51, 50.001$. Now it is apparent that there is not much of a difference in the eigenvalues $51, 50.001$. So choosing a $v$ too high might interfere with the original data.
+            \end{answer}
+
+        \item [(d)] Another advantage of ridge regression can be seen for under-determined systems. Say we have the data drawn from a $d = 5$ parameter model, but only have $n = 4$ training samples of it, i.e. $X \in \mathbb{R}^{4 \times 5}$. Now this is clearly an under determined system, since $n < d$. Show that ridge regression with $v > 0$ results in a unique solution, whereas ordinary least squares has an infinite number of solutions.
+            \begin{answer}
+                If $X$ was not full rank, then there is a vector $w^{*}$ in the null space. So notice that in another prediction:
+                    \begin{equation*}
+                        w + w^{*} \implies X(w + w^{*}) = Xw
+                    \end{equation*}
+                $w + w^{*}$ gives a projection similar to just taking $w$. So once we have one solution, we have infinitely many.
+
+                To see that the ridge regression yields a unique solution, we can take the partial derivative with respect to $w$:
+                    \begin{align*}
+                        \pdv{w} \lVert y - Xw \rVert^{2}_{2} + v \lVert w \rVert^{2}_{2} &= \pdv{w} (y - Xw)^{T}(y - Xw) + 2vw                   \\
+                                                                                         &= \pdv{w}(-y^{T}Xw - w^{T}X^{T}y + w^{T}X^{T}Xw) + 2vw \\
+                                                                                         &= -2X^{T}y + 2X^{T}Xw + 2vw                              
+                    \end{align*}
+                Now set the equation to $0$ and solve for $w$:
+                    \begin{align*}
+                        -2X^{T}y + 2X^{T}Xw + 2vw &= 0                         \\
+                        (2X^{T}X + 2vI)w          &= 2X^{T}y                   \\
+                        w                         &= (X^{T}X + 2vI)^{-1}X^{T}y   
+                    \end{align*}
+                so the solution is unique.
+            \end{answer}
+
+        \item [(e)] What will the solution to ridge regression $(4)$ converge to if you take the limit $v \rightarrow 0$? Your answer should be a simple expression in terms of $U, \Sigma, V, y$, and $v$ where $X = U\Sigma V^{T}$ is the SVD of $X$.
+            \begin{answer}
+                It will converge to the regular linear regression: $(X^{T}X)^{-1}X^{T}y$. If we write it in terms of $U, \Sigma, V, y$:
+                    \begin{equation*}
+                        (V\Sigma U^{T} U\Sigma V^{T})^{-1}(V\Sigma U^{T})y = (V\Sigma^{-2} V^{T})V\Sigma U^{T}y = V\Sigma^{-1} U^{T}y
+                    \end{equation*}
+            \end{answer}
+
+        \item [(f)] Tikhonov regularization is a general term for ridge regression, where the implicit constraint set takes the form of an ellipsoid instead of a ball. In other words, we solve the optimization problem
+            \begin{equation*}
+                w = \mathop{argmin}_{w} \lVert y - Xw \rVert^{2}_{2} + v\lVert \Gamma w \rVert^{2}_{2}
+            \end{equation*}
+        for some full rank matrix $\Gamma \in \mathbb{R}^{d \times d}$. Derive a closed form solution for $w$.
+            \begin{answer}
+                Take the partial of the constraint term with respect to $w$:
+                    \begin{equation*}
+                        \pdv{w} v \lVert \Gamma w \rVert^{2}_{2} = \pdv{w} v w^{T}\Gamma^{T}\Gamma w = 2v\Gamma^{T}\Gamma w
+                    \end{equation*}
+                Now recall that we had taken the partial of the error term with respect to $w$:
+                    \begin{equation*}
+                        \pdv{w} \lVert y - Xw \rVert_{2}^{2} = -2X^{T}y + 2X^{T}Xw
+                    \end{equation*}
+                Add both these together and solve for $w$:
+                    \begin{align*}
+                        -2X^{T}y + 2X^{T}Xw + 2v\Gamma^{T}\Gamma w &= 0                                       \\
+                        (2X^{T}X + 2v\Gamma^{T}\Gamma)w            &= 2X^{T}y                                 \\
+                        w                                          &= (X^{T}X + v\Gamma^{T}\Gamma)^{-1}X^{T}y   
+                    \end{align*}
+            \end{answer}
+    \end{itemize}
+
+\newpage
+\section*{Robotic Learning of Controls from Demonstrations and Images}
+\hrule
+
+Huey, a home robot, is learning to retrieve objects from a cupboard. The goal is to push obstacle objects out of the way to expose a goal object. Huey's robot trainer, Anne provides demonstrations via tele-operation. When tele-operating the robot, Anne can look at the images captured by the robot and provide controls to Huey remotely.
+
+During a demonstration, Huey records the RGB images of the scene for each of the $n$ timesteps, $x_{1}, \ldots, x_{n}$, where $x_{i} \in \mathbb{R}^{30 \times 30 \times 3}$ and the controls for his body for each of the $n$ timesteps, $u_{1}, \ldots, u_{n}$ where $u_{i} \in \mathbb{R}^{3}$. The controls correspond to making small changes in the $3$D pose (i.e. translation and rotation) of his body. Examples of the data are shown in the figure.
+
+Under an assumption (sometimes called the Markovian assumption) that all that matters for the current control is the current image, Huey can try to learn a linear \textit{policy} $\pi$ (where $\pi \in \mathbb{R}^{2700 \times 3}$) which linearly maps image states to controls (i.e. $\pi^{T}x = u$). We will now explore how Huey can recover this policy using linear regression.
+
+Note the dimensions in this problem! Previously, you saw linear regression in problems in which the learned weight $w^{*}$ was a vector and the predicted value $y$ was a scalar. Here, we are predicting $3$D controls. This means that the learned policy is a matrix. In essence, we are performing $3$ regressions at the same time, one for each element of the predicted control $u$.
+
+Please stick to \mintinline{python}{numpy} (and \mintinline{python}{numpy.linalg}) only or performing any computations in this assignment. We will ask that you edit the file \mintinline{python}{robotic_ridge_code.py} directly, instead of working in a Python notebook, and submit it to the Gradescope autograder after you are finished. Please don't rename the file, or change any of the function signatures!
+    \begin{itemize}
+        \item [(a)] To get familiar with the structure of the data, \textbf{please visualize the 0th, 10th and 20th images in the training dataset. Also find their corresponding control vectors}.
+
+        Note: the training and testing images are currently stored as float32 numpy arrays, with pixel values in the range [0.0, 255.0]. You may have to convert these images to the np.uint8 format to visualize them.
+
+        \item [(b)] Load the $n$ training examples from \mintinline{python}{x_train.p} and compose the matrix $X$, where $X \in \mathbb{R}^{n \times 2700}$. Note that you will need to flatten the images and reduce them to a single vector. The flattened image vector will be denoted by $\overline{x}$ (where $\overline{x} \in \mathbb{R}^{2700 \times 1}$). Next, lead the $n$ examples from \mintinline{python}{y_train.p} and compose the matrix $U$, where $U \in \mathbb{R}^{n \times 3}$. Try to perform ordinary least squares by forming the matrix $(X^{T}X)^{-1}X^{T}$ for solving
+            \begin{equation*}
+                \mathop{argmin}_{\pi}\lVert X\pi - U \rVert_{F}
+            \end{equation*}
+        in order to learn the optimal \textit{policy} $\pi^{*} \in \mathbb{R}^{2700 \times 3}$. \textbf{Report what happens as you attempt to do this and explain why}.
+
+        \item [(c)] Now try to perform ridge regression:
+            \begin{equation*}
+                \mathop{argmin}_{\pi} \lVert X \pi + U \rVert_{F}^{2} + \lambda \lVert \pi \rVert^{2}_{F}
+            \end{equation*}
+        on the data set for regularization values $\lambda = \{0.1, 1.0, 10, 100, 1000\}$. Measure the average squared Euclidean distance for the accuracy of the policy on the training data:
+            \begin{equation*}
+                \dfrac{1}{n}\sum_{i}^{n-1} \lVert \overline{x}_{i}^{T}\pi - u_{i}^{T} \rVert^{2}_{2}
+            \end{equation*}
+        In the expression above, we are taking the $l_{2}$ norm of a row vector, which here we take to mean the $l_{2}$ norm of the column vector we get by transposing it. \textbf{Report the training error results for each value of $\lambda$}.
+
+        \item [(d)] Next, we are going to try standardizing the states. For each pixel value in each data point, $\overline{x}$, perform the following operation:
+            \begin{equation*}
+                \overline{x} \mapsto \dfrac{\overline{x}}{255} \times 2 - 1
+            \end{equation*}
+        We know that the maximum pixel value is $255$, so this operation rescales the data to be in the range $[-1, 1]$. \textbf{Repeat the previous part and report the average squared training error for each value of $\lambda$}.
+
+        \item [(e)] Evaluate both \textit{policies} (i.e. with and without standardization) on the new validation data \mintinline{python}{x_test.p} and \mintinline{python}{y_test.p} for the different values of $\lambda$. \textbf{Report the average squared Euclidean loss and qualitatively explain how changing the values of $\lambda$ affects the performance in terms of bias and variance}.
+
+        \item [(f)] To better understand how standardizing improved the loss function, we are going to evaluate the \textit{condition number} $\kappa$ of the optimization problem above, which is defined as
+            \begin{equation*}
+                \kappa = \dfrac{\sigma_{\max}(X^{T}X + \lambda I)}{\sigma_{\min}(X^{T}X + \lambda I)}
+            \end{equation*}
+        or the ratio of the maximum singular value to the minimum singular value of the relevant matrix. Roughly speaking, the condition number of the optimization process measures how stable the solution will be when some error exists in the observations. More precisely, given a linear system $Ax = b$, the condition number of the matrix $A$ is the maximum ratio of the relative error in the solution $x$ to the relative error of $b$.
+
+        For the regularization value of $\lambda = 100$, \textbf{report the condition number with the standardization technique applied and without}.
+    \end{itemize}
+
+\inputminted{python}{\detokenize{./hw2/robotic_ridge_code.py}}
+
+\end{document}
