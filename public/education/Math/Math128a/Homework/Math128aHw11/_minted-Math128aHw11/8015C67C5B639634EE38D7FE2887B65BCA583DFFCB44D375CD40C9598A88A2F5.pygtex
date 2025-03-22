@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{funcs}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{p}{\PYGZob{}@}\PYG{n}{q2f1}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{@}\PYG{n}{q2f2}\PYG{p}{\PYGZcb{};}
+\PYG{n}{init}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{3}\PYG{p}{];}
+
+\PYG{n}{approx}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{RKsystem}\PYG{p}{(}\PYG{n}{funcs}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{init}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{10}\PYG{p}{)}
+
+\PYG{n}{actFuncs}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{p}{\PYGZob{}@}\PYG{n}{q2actf1}\PYG{p}{\PYGZcb{};}
+\PYG{n}{actual}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{evalAct}\PYG{p}{(}\PYG{n}{actFuncs}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{10}\PYG{p}{)}
+\end{Verbatim}

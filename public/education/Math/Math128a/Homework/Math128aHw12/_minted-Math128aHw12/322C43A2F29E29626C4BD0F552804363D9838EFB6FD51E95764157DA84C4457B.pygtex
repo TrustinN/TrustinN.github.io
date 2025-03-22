@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{A}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{p}{[}
+\PYG{+w}{    }\PYG{l+m+mi}{13}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{17}\PYG{p}{,}\PYG{+w}{  }\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{5}\PYG{p}{;}
+\PYG{+w}{    }\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{+w}{   }\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{18}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{+w}{    }\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{+w}{  }\PYG{l+m+mi}{12}\PYG{p}{,}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{];}
+
+\PYG{n}{out}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{GEBackward}\PYG{p}{(}\PYG{n}{A}\PYG{p}{);}
+\PYG{n}{out}\PYG{p}{.}\PYG{n}{flag}
+\PYG{n}{out}\PYG{p}{.}\PYG{n}{x}
+\end{Verbatim}
